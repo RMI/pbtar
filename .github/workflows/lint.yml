@@ -12,6 +12,9 @@ jobs:
   black:
     name: Run black code formatter
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./api
 
     steps:
       - uses: actions/checkout@v4
@@ -22,7 +25,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version-file: "api/pyproject.toml"
+          python-version-file: "pyproject.toml"
 
       - name: Install the project
         run: uv sync --only-dev
