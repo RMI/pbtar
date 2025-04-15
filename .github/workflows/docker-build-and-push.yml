@@ -55,7 +55,9 @@ jobs:
 
       - name: Build and start container (as backing service)
         run: |
-          cd api && docker compose up --build -d
+          cd api
+          echo pwd
+          docker compose up --build -d
 
       - name: Wait for container to be ready
         run: |
