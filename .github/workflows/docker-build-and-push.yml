@@ -89,10 +89,6 @@ jobs:
         run: |
           docker build -t ${{ steps.prepare-environment.outputs.registry-image }}:${{ steps.tag.outputs.tag }} api
 
-      - name: Push to GHCR
-        run: |
-          docker push ${{ steps.prepare-environment.outputs.registry-image }}:${{ steps.tag.outputs.tag }}
-
       - name: Clean up
         run: docker compose down
 
