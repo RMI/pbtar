@@ -87,7 +87,7 @@ jobs:
 
       - name: Build and tag image
         run: |
-          docker build -t ${{ steps.prepare-environment.outputs.registry-image }}:${{ steps.tag.outputs.tag }} .
+          docker compose build --no-cache --build-arg image=${{ steps.prepare-environment.outputs.registry-image }}:${{ steps.tag.outputs.tag }}
 
       - name: Push to GHCR
         run: |
