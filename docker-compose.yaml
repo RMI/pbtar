@@ -3,6 +3,6 @@ services:
   api:
     build: 
       context: api
-    container_name: web-api-poc-app
+    container_name: pbtar-app
     ports:
       - '80:5000'
