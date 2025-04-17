@@ -92,7 +92,7 @@ jobs:
       - name: Push to GHCR
         run: |
           docker images
-          docker push ${{ steps.prepare-environment.outputs.registry-image }}-api:${{ steps.tag.outputs.tag }}
+          docker push pbtar-api:${{ steps.tag.outputs.tag }}
 
       - name: Clean up
         run: docker compose down
