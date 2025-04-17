@@ -23,14 +23,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version-file: ".python-version"
-      
+
       - name: Install the  project
         run: uv sync --all-extras --dev
 
       - name: "Run tests"
         run: |
           set -o pipefail
-          uv run pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=src tests/ | tee pytest-coverage.txt
+          uv run --directory api pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=src tests/ | tee pytest-coverage.txt
 
       - name: "Pytest coverage comment"
         uses: MishaKav/pytest-coverage-comment@main

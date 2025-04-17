@@ -25,8 +25,8 @@ jobs:
           python-version-file: ".python-version"
 
       - name: Install the project
-        run: uv sync --only-dev
+        run: uv sync --only-dev --directory api
 
       - name: Run Black Check
-        run: uv run black --check .
+        run: uv run --directory api black --check .
 
