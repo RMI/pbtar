@@ -54,24 +54,41 @@ jobs:
           docker exec $(docker compose ps -q db) psql -U postgres -d pbtar -c "SELECT schema_name FROM information_schema.schemata WHERE schema_name = 'pbtar';"
           docker exec $(docker compose ps -q db) psql -U postgres -d pbtar -c "SELECT table_name FROM information_schema.tables WHERE table_schema = 'pbtar';"
       
-      - name: Run test_scenario.sql
-        run: |
-          cat database/test/test_scenario.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar
-          echo "✅ test_scenario.sql executed successfully"
-      
+          - name: Run test_scenario.sql
+          run: |
+            # Use -v ON_ERROR_STOP=1 to make psql exit with non-zero status on error
+            cat database/tests/test_scenario.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar -v ON_ERROR_STOP=1
+            if [ $? -ne 0 ]; then
+              echo "❌ test_scenario.sql failed"
+              exit 1
+            fi
+            echo "✅ test_scenario.sql executed successfully"
+        
       - name: Run read.sql
         run: |
-          cat database/test/read.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar
+          cat database/tests/read.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar -v ON_ERROR_STOP=1
+          if [ $? -ne 0 ]; then
+            echo "❌ read.sql failed"
+            exit 1
+          fi
           echo "✅ read.sql executed successfully"
       
       - name: Run update.sql
         run: |
-          cat database/test/update.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar
+          cat database/tests/update.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar -v ON_ERROR_STOP=1
+          if [ $? -ne 0 ]; then
+            echo "❌ update.sql failed"
+            exit 1
+          fi
           echo "✅ update.sql executed successfully"
       
       - name: Run delete.sql
         run: |
-          cat database/test/delete.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar
+          cat database/tests/delete.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar -v ON_ERROR_STOP=1
+          if [ $? -ne 0 ]; then
+            echo "❌ delete.sql failed"
+            exit 1
+          fi
           echo "✅ delete.sql executed successfully"
       
       - name: Database logs on failure
