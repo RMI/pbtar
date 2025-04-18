@@ -1,3 +1,5 @@
+SET search_path TO pbtar;
+
 -- Update the name of an organization
 UPDATE organizations
 SET name = 'Updated Test Organization'
