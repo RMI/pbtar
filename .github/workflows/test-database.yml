@@ -56,22 +56,22 @@ jobs:
       
       - name: Run test_scenario.sql
         run: |
-          cat database/tests/test_scenario.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar
+          cat database/test/test_scenario.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar
           echo "✅ test_scenario.sql executed successfully"
       
       - name: Run read.sql
         run: |
-          cat database/tests/read.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar
+          cat database/test/read.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar
           echo "✅ read.sql executed successfully"
       
       - name: Run update.sql
         run: |
-          cat database/tests/update.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar
+          cat database/test/update.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar
           echo "✅ update.sql executed successfully"
       
       - name: Run delete.sql
         run: |
-          cat database/tests/delete.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar
+          cat database/test/delete.sql | docker exec -i $(docker compose ps -q db) psql -U postgres -d pbtar
           echo "✅ delete.sql executed successfully"
       
       - name: Database logs on failure
