@@ -7,7 +7,6 @@ on:
       - 'database/**'
       - 'docker-compose.yaml'
   pull_request:
-    branches: [ main ]
     paths:
       - 'database/**'
       - 'docker-compose.yaml'
