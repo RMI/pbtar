@@ -1,7 +1,7 @@
 [project]
-name = "web-api-poc"
+name = "pbtar"
 version = "0.1.0"
-description = "POC for web API using fastapi"
+description = "Pathways-based transition assessment repository (pbtar)"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
