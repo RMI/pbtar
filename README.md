@@ -1,4 +1,4 @@
-# web-api-poc
+# pbtar
 [![Test Status](https://github.com/RMI/web-api-poc/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/RMI/web-api-poc/actions/workflows/test.yml)
 [![Docker](https://github.com/RMI/web-api-poc/actions/workflows/docker-build-and-push.yml/badge.svg?branch=main)](https://github.com/RMI/web-api-poc/actions/workflows/docker-build-and-push.yml)
 [![Lint](https://github.com/RMI/web-api-poc/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/RMI/web-api-poc/actions/workflows/lint.yml)
@@ -18,8 +18,8 @@ To install, follow the [official installation guide](https://github.com/astral-s
 1. Clone the Repo
 
 ```
-git clone https://github.com/RMI/web-api-poc
-cd web-api-poc
+git clone https://github.com/RMI/pbtar
+cd pbtar
 ```
 
 2. Create and Activate the Virtual Environment
@@ -30,7 +30,7 @@ source .venv/bin/activate # macOS/Linux
 
 3. Install Dependencies
 ```
-uv sync
+uv sync --directory api
 ```
 
 ## Running the API
@@ -38,7 +38,7 @@ uv sync
 ### Locally serve the Fast API with:
 
 ```
-uv run main.py
+uv run --directory api main.py
 ```
 
 ### Run Fast API in docker container with: 
@@ -71,13 +71,13 @@ uv add <library>
 Testing is implemented using the `pytest` library. Run all tests locally with:
 
 ```
-uv run pytest
+uv run --directory api pytest
 ```
 
 Or, you can run specific test suites with:
 ```
-uv run pytest tests/test_unit.py        # to only run unit tests
-uv run pytest tests/test_integration.py # to only run integration tests
+uv run --directory api pytest tests/test_unit.py        # to only run unit tests
+uv run --directory api pytest tests/test_integration.py # to only run integration tests
 ```
 
 For test-only dependencies, add them using:
@@ -90,8 +90,8 @@ uv add --dev <library>
 This project follows the [black](https://github.com/psf/black) code formatting standard. Lint code by running:
 
 ```
-black path/to/file.py # to lint a single file
-black .               # to lint the entire directory
+uv run --directory api black path/to/file.py # to lint a single file
+uv run --directory api black .               # to lint the entire directory
 ```
 
 Ensure that your code is properly formatted before submitting a pull request.
