@@ -1,8 +1,10 @@
 
 services:
   api:
-    build: 
+    build:
       context: api
+    environment:
+      - API_KEY
     container_name: pbtar-app
     ports:
       - '80:5000'
