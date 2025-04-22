@@ -1,4 +1,5 @@
-# pbtar
+# Pathways-based transition assessment repository (pbtar)
+
 [![Test Status](https://github.com/RMI/pbtar/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/test.yml)
 [![Docker](https://github.com/RMI/pbtar/actions/workflows/docker-build-and-push.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/docker-build-and-push.yml)
 [![Lint](https://github.com/RMI/pbtar/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/lint.yml)
