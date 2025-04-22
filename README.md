@@ -1,7 +1,7 @@
 # pbtar
-[![Test Status](https://github.com/RMI/web-api-poc/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/RMI/web-api-poc/actions/workflows/test.yml)
-[![Docker](https://github.com/RMI/web-api-poc/actions/workflows/docker-build-and-push.yml/badge.svg?branch=main)](https://github.com/RMI/web-api-poc/actions/workflows/docker-build-and-push.yml)
-[![Lint](https://github.com/RMI/web-api-poc/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/RMI/web-api-poc/actions/workflows/lint.yml)
+[![Test Status](https://github.com/RMI/pbtar/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/test.yml)
+[![Docker](https://github.com/RMI/pbtar/actions/workflows/docker-build-and-push.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/docker-build-and-push.yml)
+[![Lint](https://github.com/RMI/pbtar/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/lint.yml)
 
 This project is a proof-of-concept (POC) web API built using the FastAPI library.
 
