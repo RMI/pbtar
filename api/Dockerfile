@@ -1,5 +1,5 @@
 # Stage 1: Get uv binary
-FROM ghcr.io/astral-sh/uv:0.6.10 as uv-builder
+FROM ghcr.io/astral-sh/uv:0.6.10 AS uv-builder
 
 # Stage 2: Build the app
 FROM python:3.12.6-slim
