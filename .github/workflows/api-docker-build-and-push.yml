@@ -1,7 +1,7 @@
 name: "Docker build and push API service to ghcr.io"
 
 on:
-  schedule:
+  schedule:  # Scheduled workflows only run on the default branch
     - cron: '0 3 * * *'  # Nightly at 3 AM UTC
   push:
     branches:
