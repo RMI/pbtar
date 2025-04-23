@@ -12,7 +12,11 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  GH_REPO: ${{ github.repository }}
+  REPO: ${{ github.repository }}
+  REPO_OWNER: ${{ github.repository_owner }}
+  REPO: ${{ github.repository }}
+  EVENT: ${{ github.event_name }}
+  PR_NUM: ${{ github.event.pull_request.number }}
 
 jobs:
   build-test-and-push:
@@ -26,21 +30,21 @@ jobs:
     steps:
       - name: Set ENV vars
         run: |
-          echo "REP0=${{ github.repository }}" >> $GITHUB_ENV
-          echo "REPO_OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
-          echo "REPO_NAME=${REPO#$REPO_OWNER/}" >> $GITHUB_ENV
-          echo "EVENT=${{ github.event_name }}" >> $GITHUB_ENV
+          echo "REPO_NAME=${REPO#$REPO_OWNER/}" >> "$GITHUB_ENV"
 
           if [[ "$EVENT" == "schedule" ]]; then
-            echo "TAG=nightly" >> $GITHUB_ENV
+            echo "TAG=nightly" >> "$GITHUB_ENV"
           elif [[ "$EVENT" == "push" ]]; then
-            echo "TAG=latest" >> $GITHUB_ENV
+            echo "TAG=latest" >> "$GITHUB_ENV"
           elif [[ "$EVENT" == "pull_request" ]]; then
-            echo "TAG=pr-$PR_NUM" >> $GITHUB_ENV
+            echo "TAG=pr-$PR_NUM" >> "$GITHUB_ENV"
           else
-            echo "TAG=unknown" >> $GITHUB_ENV
+            echo "TAG=unknown" >> "$GITHUB_ENV"
           fi
 
+    steps:
+      - name: Report ENV vars
+        run: |
           echo "REGISTRY=${{ env.REGISTRY }}"
           echo "GH_REPO=${{ env.GH_REPO }}"
           echo "REP0=${{ env.REPO }}"
