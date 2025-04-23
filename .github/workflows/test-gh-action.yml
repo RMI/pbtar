@@ -44,9 +44,9 @@ jobs:
       - name: Report ENV vars
         run: |
           echo "REGISTRY=${{ env.REGISTRY }}"
-          echo "GH_REPO=${{ env.GH_REPO }}"
           echo "REP0=${{ env.REPO }}"
           echo "REPO_OWNER=${{ env.REPO_OWNER }}"
-          echo "REPO_NAME=${{ env.REPO_NAME }}"
           echo "EVENT=${{ env.EVENT }}"
+          echo "PR_NUM=${{ env.PR_NUM }}"
+          echo "REPO_NAME=${{ env.REPO_NAME }}"
           echo "TAG=${{ env.TAG }}"
