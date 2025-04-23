@@ -19,8 +19,8 @@ env:
   PR_NUM: ${{ github.event.pull_request.number }}
 
 jobs:
-  build-test-and-push:
-    name: "Build and push"
+  build-and-push:
+    name: "Docker build and push API service to ghcr.io"
     runs-on: ubuntu-latest
 
     permissions:
@@ -82,18 +82,15 @@ jobs:
           repo_owner="$(echo $REPO_OWNER | tr '[:upper:]' '[:lower:]')"
           repo_name="$(echo $REPO_NAME | tr '[:upper:]' '[:lower:]')"
           service="$(echo $SERVICE | tr '[:upper:]' '[:lower:]')"
+          image_name="$repo_name-$service"
           tag="$(echo $TAG | tr '[:upper:]' '[:lower:]')"
-          image_name_with_tag="$repo_name-$service:$tag"
-          source_image="$image_name_with_tag"
-          target_image="$registry/$repo_owner/$image_name_with_tag"
+          source_image="$image_name:latest"
+          target_image="$registry/$repo_owner/$image_name:$tag"
 
           echo "$source_image"
           echo "$target_image"
 
           docker tag $source_image $target_image
-
-          echo "$(docker images)"
-
           docker push $target_image
 
       - name: Clean up
