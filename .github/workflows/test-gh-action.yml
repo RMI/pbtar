@@ -91,6 +91,9 @@ jobs:
           echo "$target_image"
 
           docker tag $source_image $target_image
+
+          echo "$(docker images)"
+
           docker push $target_image
 
       - name: Clean up
