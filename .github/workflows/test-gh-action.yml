@@ -42,7 +42,6 @@ jobs:
             echo "TAG=unknown" >> "$GITHUB_ENV"
           fi
 
-    steps:
       - name: Report ENV vars
         run: |
           echo "REGISTRY=${{ env.REGISTRY }}"
