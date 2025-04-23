@@ -20,19 +20,21 @@ To install, follow the [official installation guide](https://github.com/astral-s
 
 1. Clone the Repo
 
-```
+```sh
 git clone https://github.com/RMI/pbtar
 cd pbtar/api
 ```
 
 2. Create and Activate the Virtual Environment
-```
+
+```sh
 uv venv .venv
 source .venv/bin/activate # macOS/Linux
 ```
 
 3. Install Dependencies
-```
+
+```sh
 uv sync
 ```
 
@@ -40,13 +42,13 @@ uv sync
 
 ### Locally serve the Fast API with:
 
-```
+```sh
 uv run main.py
 ```
 
 ### Run Fast API in docker container with: 
 
-```
+```sh
 # build the image
 docker build --tag api .
 
@@ -62,7 +64,7 @@ The API will be accessible at http://localhost.
 
 Dependencies are managed using uv. To add a new library, run:
 
-```
+```sh
 uv add <library>
 ```
 
@@ -70,18 +72,20 @@ uv add <library>
  
 Testing is implemented using the `pytest` library. Run all tests locally with:
 
-```
+```sh
 uv run pytest
 ```
 
 Or, you can run specific test suites with:
-```
+
+```sh
 uv run pytest tests/test_unit.py        # to only run unit tests
 uv run pytest tests/test_integration.py # to only run integration tests
 ```
 
 For test-only dependencies, add them using:
-``` 
+
+```sh
 uv add --dev <library>
 ```
 
@@ -89,15 +93,10 @@ uv add --dev <library>
 
 This project follows the [black](https://github.com/psf/black) code formatting standard. Lint code by running:
 
-```
+```sh
 uv run black path/to/file.py # to lint a single file
 uv run black .               # to lint the entire directory
 ```
-
-Ensure that your code is properly formatted before submitting a pull request.
-
-### Deployment
-**TODO**
 
 ## License
  This project is licensed under the [MIT License](LICENSE.txt) 
