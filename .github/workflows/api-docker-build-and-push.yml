@@ -1,4 +1,4 @@
-name: "API Docker build"
+name: "Docker build API service"
 
 on:
   schedule:
