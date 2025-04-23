@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from src.routers.health import health_router
 from src.routers.mtcars import data_output
+from src.routers.endpoints import table_router
+from src.services.db import init_db  # Import the init_db function
 import uvicorn
 import tomllib
 
@@ -14,10 +16,11 @@ try:
 except FileNotFoundError:
     print("pyproject.toml not found")
 
+# Initialize the database
+init_db()  # Ensure tables are created before querying
+
 app = FastAPI(
-    # This info goes directly into /docs
     title="RMI Web API poc",
-    # Description of API defined in docs/documentation.py for ease of reading
     description=description,
     summary="This project is a proof-of-concept (POC) web API built using the FastAPI library.",
     version="0.0.1",
@@ -40,6 +43,7 @@ async def redirect():
 
 app.include_router(health_router)
 app.include_router(data_output)
+app.include_router(table_router)
 
 
 if __name__ == "__main__":

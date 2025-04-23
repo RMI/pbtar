@@ -1,5 +1,5 @@
 [project]
-name = "web-api-poc"
+name = "pbtar"
 version = "0.1.0"
 description = "POC for web API using fastapi"
 readme = "README.md"
@@ -7,7 +7,9 @@ requires-python = ">=3.12"
 dependencies = [
     "dotenv>=0.9.9",
     "fastapi>=0.115.8",
+    "psycopg2-binary>=2.9.10",
     "pydantic>=2.10.6",
+    "sqlmodel>=0.0.24",
     "uvicorn>=0.34.0",
 ]
 
