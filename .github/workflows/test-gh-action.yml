@@ -1,0 +1,50 @@
+name: "Docker build API service"
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # Nightly at 3 AM UTC
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  REGISTRY: ghcr.io
+  GH_REPO: ${{ github.repository }}
+
+jobs:
+  build-test-and-push:
+    name: "Build, test, and push"
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write  # Needed to push to GHCR
+
+    steps:
+      - name: Set ENV vars
+        run: |
+          echo "REP0=${{ github.repository }}" >> $GITHUB_ENV
+          echo "REPO_OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
+          echo "REPO_NAME=${REPO#$REPO_OWNER/}" >> $GITHUB_ENV
+          echo "EVENT=${{ github.event_name }}" >> $GITHUB_ENV
+
+          if [[ "$EVENT" == "schedule" ]]; then
+            echo "TAG=nightly" >> $GITHUB_ENV
+          elif [[ "$EVENT" == "push" ]]; then
+            echo "TAG=latest" >> $GITHUB_ENV
+          elif [[ "$EVENT" == "pull_request" ]]; then
+            echo "TAG=pr-$PR_NUM" >> $GITHUB_ENV
+          else
+            echo "TAG=unknown" >> $GITHUB_ENV
+          fi
+
+          echo "REGISTRY=${{ env.REGISTRY }}"
+          echo "GH_REPO=${{ env.GH_REPO }}"
+          echo "REP0=${{ env.REPO }}"
+          echo "REPO_OWNER=${{ env.REPO_OWNER }}"
+          echo "REPO_NAME=${{ env.REPO_NAME }}"
+          echo "EVENT=${{ env.EVENT }}"
+          echo "TAG=${{ env.TAG }}"
