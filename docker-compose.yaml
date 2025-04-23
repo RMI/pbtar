@@ -5,7 +5,7 @@ services:
       context: api
     environment:
       - API_KEY
-    container_name: pbtar-app
+    container_name: pbtar-api
     ports:
       - '80:5000'
   db:
