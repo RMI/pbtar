@@ -1,4 +1,4 @@
-name: "Docker"
+name: "Docker build API service"
 
 on:
   schedule:
@@ -33,7 +33,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Prepare Environment
         id: prepare-environment
         env:
