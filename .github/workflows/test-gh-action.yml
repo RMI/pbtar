@@ -11,6 +11,7 @@ on:
       - main
 
 env:
+  SERVICE: api
   REGISTRY: ghcr.io
   REPO: ${{ github.repository }}
   REPO_OWNER: ${{ github.repository_owner }}
@@ -43,14 +44,7 @@ jobs:
 
       - name: Report ENV vars
         run: |
-          echo "REGISTRY=${{ env.REGISTRY }}"
-          echo "REP0=${{ env.REPO }}"
-          echo "REPO_OWNER=${{ env.REPO_OWNER }}"
-          echo "EVENT=${{ env.EVENT }}"
-          echo "PR_NUM=${{ env.PR_NUM }}"
-          echo "REPO_NAME=${{ env.REPO_NAME }}"
-          echo "TAG=${{ env.TAG }}"
-          echo "or..."
+          echo "SERVICE=$SERVICE"
           echo "REGISTRY=$REGISTRY"
           echo "REP0=$REPO"
           echo "REPO_OWNER=$REPO_OWNER"
@@ -58,3 +52,16 @@ jobs:
           echo "PR_NUM=$PR_NUM"
           echo "REPO_NAME=$REPO_NAME"
           echo "TAG=$TAG"
+
+      - name: Test generating image names
+        run: |
+          registry="$(echo $REGISTRY | tr '[:upper:]' '[:lower:]')"
+          repo_owner="$(echo $REPO_OWNER | tr '[:upper:]' '[:lower:]')"
+          repo_name="$(echo $REPO_NAME | tr '[:upper:]' '[:lower:]')"
+          service="$(echo $SERVICE | tr '[:upper:]' '[:lower:]')"
+          tag="$(echo $TAG | tr '[:upper:]' '[:lower:]')"
+          image_name_with_tag="$repo_name-$service:$tag"
+          source_image="$image_name_with_tag"
+          target_image="$registry/$repo_owner/$image_name_with_tag"
+          echo "$source_image"
+          echo "$target_image"
