@@ -3,6 +3,7 @@
     const url = "http://localhost" + path;
     try {
       const response = await fetch(url, {
+        method: "GET",
         headers: {
           'accept': 'application/json',
           'X-API-Key': api_key
