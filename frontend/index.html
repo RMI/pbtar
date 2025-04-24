@@ -1,0 +1,34 @@
+<script>
+  async function callApi(path) {
+    const url = "http://localhost" + path;
+    try {
+      const response = await fetch(url, {
+        headers: {
+          'accept': 'application/json',
+          'X-API-Key': 'abc123'
+        }
+      });
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const json = await response.json();
+      return(json);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  function arr2tbl(array){
+    const row=(obj,what,cell)=>`<tr>${Object[what](obj).map(k=>`<t${cell}>${k}</t${cell}>`).join("")}<tr>`;
+    return row(array[0],"keys","h") + array.map(o=>row(o,"values","d")).join("");
+  }
+
+  callApi("/api/dataset")
+    .then((data) => {
+      const my_table = document.querySelector("table#my_table");
+      my_table.innerHTML = arr2tbl(data);
+    });
+</script>
+
+<table id="my_table"></table>
