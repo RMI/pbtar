@@ -1,11 +1,11 @@
 <script>
-  async function callApi(path) {
+  async function callApi(path, api_key) {
     const url = "http://localhost" + path;
     try {
       const response = await fetch(url, {
         headers: {
           'accept': 'application/json',
-          'X-API-Key': 'abc123'
+          'X-API-Key': api_key
         }
       });
       if (!response.ok) {
@@ -24,11 +24,19 @@
     return row(array[0],"keys","h") + array.map(o=>row(o,"values","d")).join("");
   }
 
-  callApi("/api/dataset")
+  function loadData() {
+    callApi("/api/dataset", api_key = document.getElementById("api_key").value)
     .then((data) => {
       const my_table = document.querySelector("table#my_table");
       my_table.innerHTML = arr2tbl(data);
     });
+  }
 </script>
+
+enter API key:
+<input type="text" id="api_key">
+<button type="button" onclick="loadData()">submit</button>
+
+<hr>
 
 <table id="my_table"></table>
