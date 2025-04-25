@@ -1,5 +1,5 @@
 <script>
-  async function callApi(path, api_key) {
+  async function callApi(path, api_key = "") {
     const url = "http://localhost" + path;
     try {
       const response = await fetch(url, {
@@ -26,19 +26,28 @@
   }
 
   function loadData() {
-    callApi("/api/dataset", api_key = document.getElementById("api_key").value)
+    callApi(document.getElementById("route").value, api_key = document.getElementById("api_key").value)
     .then((data) => {
       const my_table = document.querySelector("table#my_table");
       my_table.innerHTML = arr2tbl(data);
     });
+
+    callApi("/tables")
+    .then((data) => {
+      const tables_div = document.querySelector("div#tables_div");
+      tables_div.innerHTML = "tables available: " + data.tables;
+    });
   }
 </script>
 
-enter API key:
-<input type="text" id="api_key" value="abc123">
+enter API key: <input type="text" id="api_key" value="abc123"><br>
+route: <input type="text" id="route" value="/api/dataset"><br>
 <button type="button" onclick="loadData()">submit</button>
 
 <hr>
+
+<div id="tables_div"></div>
+<br>
 
 <table id="my_table"></table>
 
