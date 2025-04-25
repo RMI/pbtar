@@ -3,6 +3,7 @@ from fastapi.responses import RedirectResponse
 from src.routers.health import health_router
 from src.routers.mtcars import data_output
 from src.routers.endpoints import table_router
+
 import uvicorn
 import tomllib
 
