@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from src.routers.health import health_router
 from src.routers.mtcars import data_output
+from src.routers.endpoints import table_router
+
 import uvicorn
 import tomllib
 
@@ -40,6 +42,7 @@ async def redirect():
 
 app.include_router(health_router)
 app.include_router(data_output)
+app.include_router(table_router)
 
 
 if __name__ == "__main__":
