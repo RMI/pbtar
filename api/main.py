@@ -3,6 +3,7 @@ from fastapi.responses import RedirectResponse
 from src.routers.health import health_router
 from src.routers.mtcars import data_output
 from src.routers.endpoints import table_router
+from fastapi.middleware.cors import CORSMiddleware
 
 import uvicorn
 import tomllib
@@ -33,6 +34,18 @@ app = FastAPI(
     },
 )
 
+origins = [
+    "http://localhost",
+    "null" # this necessary for a request from a local file
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def redirect():
