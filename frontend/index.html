@@ -29,7 +29,11 @@
     callApi(document.getElementById("route").value, api_key = document.getElementById("api_key").value)
     .then((data) => {
       const my_table = document.querySelector("table#my_table");
-      my_table.innerHTML = arr2tbl(data);
+      if (Array.isArray(data)) {
+        my_table.innerHTML = arr2tbl(data);
+      } else {
+        my_table.innerHTML = null;
+      }
     });
 
     callApi("/tables")
