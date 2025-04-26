@@ -41,6 +41,12 @@
       const tables_div = document.querySelector("div#tables_div");
       tables_div.innerHTML = "tables available: " + data.tables;
     });
+
+    callApi(document.getElementById("route").value, api_key = document.getElementById("api_key").value)
+    .then((data) => {
+      const response_div = document.querySelector("div#response_div");
+      response_div.innerHTML = JSON.stringify(data);
+    });
   }
 </script>
 
@@ -52,6 +58,14 @@ route: <input type="text" id="route" value="/api/dataset" onkeydown="if(event.ke
 
 <div id="tables_div"></div>
 <br>
+
+<hr>
+
+<h3>JSON response:</h3>
+<div id="response_div"></div>
+<br>
+
+<hr>
 
 <table id="my_table"></table>
 
