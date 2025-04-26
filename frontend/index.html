@@ -40,8 +40,8 @@
   }
 </script>
 
-enter API key: <input type="text" id="api_key" value="abc123"><br>
-route: <input type="text" id="route" value="/api/dataset"><br>
+enter API key: <input type="text" id="api_key" value="abc123" onkeydown="if(event.key === 'Enter') { loadData(); }"><br>
+route: <input type="text" id="route" value="/api/dataset" onkeydown="if(event.key === 'Enter') { loadData(); }"><br>
 <button type="button" onclick="loadData()">submit</button>
 
 <hr>
