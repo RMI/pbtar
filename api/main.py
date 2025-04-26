@@ -34,7 +34,7 @@ app = FastAPI(
     },
 )
 
-origins = ["http://localhost", "null"]  # this necessary for a request from a local file
+origins = ["http://localhost", "null"]  # "null" is necessary for a request from a local file
 
 app.add_middleware(
     CORSMiddleware,
