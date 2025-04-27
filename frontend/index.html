@@ -20,19 +20,31 @@
     }
   }
 
-  function arr2tbl(array){
-    const row=(obj,what,cell)=>`<tr>${Object[what](obj).map(k=>`<t${cell}>${k}</t${cell}>`).join("")}<tr>`;
-    return row(array[0],"keys","h") + array.map(o=>row(o,"values","d")).join("");
+  function obj2tbl(obj) {
+    var html = '<table>';
+    for (var key in obj) {
+        var value = obj[key].toString();
+        html += '<tr><td>' + key + '</td><td>' + value + '</tr>';
+    }
+    html += '</table>';
+    return html;
+  }
+
+  function arr2tbls(array) {
+    html = "";
+    array.forEach((obj) => html += obj2tbl(obj) + "<br>");
+    return html;
   }
 
   function loadData() {
     callApi(document.getElementById("route").value, api_key = document.getElementById("api_key").value)
     .then((data) => {
-      const my_table = document.querySelector("table#my_table");
+      const my_tables = document.querySelector("div#my_tables");
       if (Array.isArray(data)) {
-        my_table.innerHTML = arr2tbl(data);
+        my_tables.innerHTML = arr2tbls(data);
+        window.data = data;
       } else {
-        my_table.innerHTML = null;
+        my_tables.innerHTML = null;
       }
     });
 
@@ -53,7 +65,7 @@ route: <input type="text" id="route" value="/scenarios" onkeydown="if(event.key 
 <div id="response_div"></div>
 <br>
 
-<table id="my_table"></table>
+<div id="my_tables"></div>
 
 <script>
   loadData();
