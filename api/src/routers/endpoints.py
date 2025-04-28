@@ -8,6 +8,7 @@ from services.db import get_db, engine
 table_router = APIRouter()
 
 
+# Router to get all tables in the database
 @table_router.get("/tables")
 def get_tables(db=Depends(get_db)):
     return {"tables": get_tables_from_db()}
@@ -21,7 +22,8 @@ def get_tables_from_db():
     )  # Get table names in the 'pbtar' schema
 
 
-@table_router.get("/tables/{scenario_id}")
+# Router to get scenarios by scenario_id
+@table_router.get("/scenarios/{scenario_id}")
 def get_scenario_by_id(scenario_id: int, db: Session = Depends(get_db)):
     # Query the Scenarios table by primary key (scenario_id)
     scenario = db.query(Scenario).get(scenario_id)
