@@ -100,6 +100,7 @@ class ScenarioSectorCoverageResponse(ScenarioSectorCoverageBase):
     class Config:
         orm_mode = True
 
+
 from pydantic import BaseModel
 from typing import List, Optional
 from datetime import datetime
