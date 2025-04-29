@@ -44,6 +44,14 @@ curl -X 'GET' \
   -H 'X-API-Key: abc123'
 ```
 
+### Load a minimal frontend index.html file to test
+
+Defaults to the API key "abc123", but an alternate key (matching what is in your `.env` file) can be input and submitted on the page.
+
+```sh
+open frontend/index.html
+```
+
 ### Shutdown the docker container
 
 ```sh

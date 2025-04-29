@@ -22,6 +22,16 @@ def get_tables_from_db():
     )  # Get table names in the 'pbtar' schema
 
 
+# Router to get the entire scenarios table
+@table_router.get("/scenarios")
+def get_scenarios(db: Session = Depends(get_db)):
+    # Query the scenarios
+    scenarios = db.query(Scenario).all()
+    if not scenarios:
+        raise HTTPException(status_code=404, detail="Scenario not found")
+    return scenarios
+
+
 # Router to get scenarios by scenario_id
 @table_router.get("/scenarios/{scenario_id}")
 def get_scenario_by_id(scenario_id: int, db: Session = Depends(get_db)):
