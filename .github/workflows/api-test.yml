@@ -27,6 +27,27 @@ jobs:
       - name: Install the  project
         run: uv sync --all-extras --dev --directory api
 
+      - name: Start database service
+        run: |
+          docker compose up -d db
+
+      - name: Wait for database to be ready
+        run: |
+          attempt=1
+          max_attempts=30
+          until docker compose ps | grep "db" | grep -q "healthy" || [ $attempt -eq $max_attempts ]
+          do
+            echo "Waiting for database to be ready... (attempt $attempt/$max_attempts)"
+            sleep 2
+            attempt=$((attempt+1))
+          done
+
+          if [ $attempt -eq $max_attempts ]; then
+            echo "Database failed to become ready in time"
+            docker compose logs db
+            exit 1
+          fi
+
       - name: "Run tests"
         run: |
           set -o pipefail
