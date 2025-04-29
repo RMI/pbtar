@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 from main import app
 from models.outputs import mtcar
-from src.models import sql_models as sql
+from src.models import pydantic_models as pyd
 from services.auth import get_api_key
 
 
@@ -53,4 +53,4 @@ def test_scenarios_by_id():
     response = client.get("/scenarios/1")
     assert response.status_code == 200
     # Validate single mtcars instance against mtcar model
-    sql.Scenario.model_validate(response.json())
+    pyd.ScenarioResponse.model_validate(response.json())
