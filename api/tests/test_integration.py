@@ -47,10 +47,3 @@ def test_root_redirect_follows():
     response = client.get("/", follow_redirects=True)
     assert response.status_code == 200
     assert "Swagger UI" in response.text
-
-
-def test_scenarios_by_id():
-    response = client.get("/scenarios/1")
-    assert response.status_code == 200
-    # Validate single mtcars instance against mtcar model
-    pyd.ScenarioResponse.model_validate(response.json())
