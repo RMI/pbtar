@@ -52,7 +52,7 @@ def get_organization(db: Session = Depends(get_db)):
     return organizations
 
 
-# Router to get scenarios by scenario_id
+# Router to get organization by organization_id
 @endpoints.get("/organizations/{organization_id}")
 def get_scenario_by_id(organization_id: int, db: Session = Depends(get_db)):
     # Query the Organizations table by primary key (organization_id)
