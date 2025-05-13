@@ -45,7 +45,7 @@ def get_scenario_by_id(scenario_id: int, db: Session = Depends(get_db)):
 # Router to get the entire organizations table
 @endpoints.get("/organizations")
 def get_organization(db: Session = Depends(get_db)):
-    # Query the scenarios
+    # Query the organizations
     organizations = db.query(Organization).all()
     if not organizations:
         raise HTTPException(status_code=404, detail="Organization not found")
