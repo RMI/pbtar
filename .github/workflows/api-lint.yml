@@ -9,8 +9,8 @@ on:
       - main
 
 jobs:
-  black:
-    name: Run black code formatter
+  ruff:
+    name: Run ruff code formatter
     runs-on: ubuntu-latest
 
     steps:
@@ -27,6 +27,6 @@ jobs:
       - name: Install the project
         run: uv sync --only-dev --directory api
 
-      - name: Run Black Check
-        run: uv run --directory api black --check .
+      - name: Run Ruff Check
+        run: uvx --directory api ruff check .
 
