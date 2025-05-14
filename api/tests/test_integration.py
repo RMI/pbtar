@@ -1,7 +1,6 @@
 from fastapi.testclient import TestClient
 from main import app
 from models.outputs import mtcar
-from src.models import pydantic_models as pyd
 from services.auth import get_api_key
 
 

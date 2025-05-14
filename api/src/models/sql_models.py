@@ -5,8 +5,6 @@ from sqlalchemy import (
     Text,
     ForeignKey,
     DateTime,
-    Table,
-    UniqueConstraint,
     func,
 )
 from sqlalchemy.orm import relationship

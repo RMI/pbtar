@@ -1,5 +1,4 @@
 from fastapi import APIRouter, status, HTTPException, Depends
-from fastapi.responses import JSONResponse
 from models.outputs import mtcar
 from services.mtcars import MTCARS_DATA
 from services.auth import get_api_key
