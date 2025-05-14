@@ -91,12 +91,8 @@ uv add --dev <library>
 
 ### Linting
 
-This project follows the [black](https://github.com/psf/black) code formatting standard. Lint code by running:
+This project follows the [ruff](https://github.com/astral-sh/ruff) code formatting standard. Lint code by running:
 
 ```sh
-uv run black path/to/file.py # to lint a single file
-uv run black .               # to lint the entire directory
-```
-
-## License
- This project is licensed under the [MIT License](LICENSE.txt) 
+uvx ruff format path/to/file.py # to lint a single file
+uvx ruff format               # to lint the entire directory
