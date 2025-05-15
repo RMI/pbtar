@@ -6,6 +6,7 @@ services:
     environment:
       - API_KEY=${API_KEY:-abc123}
       - API_PORT=${API_PORT:-8080}
+      - DB_PORT=${DB_PORT:-5432}
       - PYTHONUNBUFFERED=1
     container_name: pbtar-api
     ports:
@@ -18,7 +19,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: pbtar
     ports:
-      - "5432:5432"
+      - "${DB_PORT:-5432}:${DB_PORT:-5432}"
     volumes:
       - ./database/init:/docker-entrypoint-initdb.d
       - postgres_data:/var/lib/postgresql/data
