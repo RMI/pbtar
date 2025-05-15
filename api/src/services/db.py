@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 # import .env settings
 load_dotenv()
-DB_PORT = getenv("DB_PORT", 5432)
+DB_PORT = getenv("DB_PORT", "5432")
 
 # Define database connection string
 DATABASE_URL = "postgresql://postgres:postgres@db:" + DB_PORT + "/pbtar"
