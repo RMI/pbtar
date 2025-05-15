@@ -5,6 +5,11 @@ from src.routers.mtcars import data_output
 from src.routers.endpoints import endpoints
 from fastapi.middleware.cors import CORSMiddleware
 
+from os import getenv
+from dotenv import load_dotenv
+load_dotenv()
+API_PORT = int(getenv("API_PORT", 8080))
+
 import uvicorn
 import tomllib
 
@@ -60,4 +65,4 @@ app.include_router(endpoints)
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=5008, log_level="info")
+    uvicorn.run("main:app", host="0.0.0.0", port=API_PORT, log_level="info")
