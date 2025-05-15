@@ -56,6 +56,9 @@ open frontend/index.html
 
 ```sh
 docker compose down
+
+# also delete the database volume when shutting down the container
+docker compose down --volumes
 ```
 
 ## License
