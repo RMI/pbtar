@@ -1,8 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
-import tomllib
-from pathlib import Path
 
 from .routers.health import health_router
 from .routers.endpoints import endpoints

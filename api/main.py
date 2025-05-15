@@ -1,6 +1,8 @@
 from pbtar_api import create_app
 from uvicorn import run
 from importlib.metadata import metadata
+from os import getenv
+from dotenv import load_dotenv
 
 # import .env settings
 load_dotenv()
