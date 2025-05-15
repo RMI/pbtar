@@ -17,7 +17,7 @@ cd pbtar
 
 2. Create an `.env` file to store the desired API key and (internal) port
 ```sh
-echo -e "API_KEY=abc123\\nAPI_PORT=8080" > .env
+echo -e "API_KEY=abc123\nAPI_PORT=8080" > .env
 ```
 
 ### Run the services with docker compose
