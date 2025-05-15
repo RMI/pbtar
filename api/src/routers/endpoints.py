@@ -54,7 +54,7 @@ def get_organization(db: Session = Depends(get_db)):
 
 # Router to get organization by organization_id
 @endpoints.get("/organizations/{organization_id}")
-def get_scenario_by_id(organization_id: int, db: Session = Depends(get_db)):
+def get_organization_by_id(organization_id: int, db: Session = Depends(get_db)):
     # Query the Organizations table by primary key (organization_id)
     organization = db.query(Organization).get(organization_id)
     if not organization:
