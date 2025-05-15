@@ -39,7 +39,7 @@ The API will be accessible at http://localhost.
 
 ```sh
 curl -X 'GET' \
-  'http://localhost/api/dataset' \
+  'http://localhost/scenarios' \
   -H 'accept: application/json' \
   -H 'X-API-Key: abc123'
 ```

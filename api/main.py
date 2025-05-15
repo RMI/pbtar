@@ -16,5 +16,8 @@ app = create_app(
     version=meta["version"]
 )
 
+app.include_router(health_router)
+app.include_router(endpoints)
+
 if __name__ == "__main__":
     run("main:app", host="0.0.0.0", port=API_PORT, log_level="info")
