@@ -8,7 +8,7 @@ load_dotenv()
 DB_PORT = int(getenv("DB_PORT", 5432))
 
 # Define database connection string
-DATABASE_URL = "postgresql://postgres:postgres@db:" + DB_PORT + "/pbtar"
+DATABASE_URL = "postgresql://postgres:postgres@db:" + str(DB_PORT) + "/pbtar"
 # Set up SQLAlchemy engine and session
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
