@@ -1,7 +1,7 @@
 import csv
 from pydantic import ValidationError
 from importlib import resources
-from models.outputs import mtcar
+from ..models.outputs import mtcar
 
 
 # Function to read in csv, validate using mtcar model and output mtcars data in JSON

@@ -1,5 +1,5 @@
 from fastapi import APIRouter, status
-from models.health import HealthCheck
+from ..models.health import HealthCheck
 
 
 health_router = APIRouter()
