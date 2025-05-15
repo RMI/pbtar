@@ -1,5 +1,5 @@
 import pytest
-from routers.health import get_health
+from pbtar_api.routers.health import get_health
 
 
 @pytest.mark.asyncio
