@@ -4,14 +4,14 @@ from src.routers.health import health_router
 from src.routers.mtcars import data_output
 from src.routers.endpoints import endpoints
 from fastapi.middleware.cors import CORSMiddleware
-
 from os import getenv
 from dotenv import load_dotenv
-load_dotenv()
-API_PORT = int(getenv("API_PORT", 8080))
-
 import uvicorn
 import tomllib
+
+# import .env settings
+load_dotenv()
+API_PORT = int(getenv("API_PORT", 8080))
 
 # Import pyproject toml info using tomllib
 try:
