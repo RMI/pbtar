@@ -11,9 +11,7 @@ API_PORT = int(getenv("API_PORT", 8080))
 meta = metadata("pbtar_api")
 
 app = create_app(
-    title="PBTAR API",
-    description=meta["summary"],
-    version=meta["version"]
+    title="PBTAR API", description=meta["summary"], version=meta["version"]
 )
 
 if __name__ == "__main__":
