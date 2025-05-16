@@ -11,7 +11,8 @@ def override_get_api_key():
 
 app.dependency_overrides[get_api_key] = override_get_api_key
 
-client = TestClient(app, base_url="http://testserver")
+base_url = "http://testserver"
+client = TestClient(app, base_url=base_url)
 
 
 def test_root_redirects():
@@ -35,7 +36,7 @@ def test_health_check():
 def test_health_check_redirect():
     response = client.get("/health/", follow_redirects=False)
     assert response.status_code == 307
-    assert response.headers["location"] == "http://testserver/health"
+    assert response.headers["location"] == base_url + "/health"
 
 
 def test_bad_request():
