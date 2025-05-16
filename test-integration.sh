@@ -18,7 +18,7 @@ check_url()
 
 check_url "http://localhost/" 307
 check_url "http://localhost/docs" 200
-check_url "http://localhost/docs/" 307
+check_url "http://localhost/docs/" XXX
 check_url "http://localhost/health" 200
 check_url "http://localhost/health/" 307
 check_url "http://localhost/tables" 200
