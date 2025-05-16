@@ -1,12 +1,16 @@
 {
-  "name": "frontend",
-  "version": "1.0.0",
-  "description": "",
+  "name": "pbtar_frontend",
+  "version": "0.0.1",
+  "description": "Front-end for the pathways-based transition assessment repository (pbtar)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "RMI",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
 }
