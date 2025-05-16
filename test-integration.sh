@@ -32,3 +32,32 @@ check_response_code "http://localhost/organizations/" 307
 check_response_code "http://localhost/organizations/1" 200
 check_response_code "http://localhost/organizations/1/" 307
 check_response_code "http://localhost/xxx" 404
+
+
+check_response()
+{
+  URL=$1
+  EXPECT=$2
+  RESPONSE=$( \
+  curl \
+    --silent \
+    "$URL"
+  )
+
+  echo "$URL": "${RESPONSE:0:15}"... \(expected: "$EXPECT"\)
+  if [[ "$RESPONSE" != "$EXPECT"* ]];
+  then
+    echo ❌ "$URL": "${RESPONSE:0:15}"... \(expected: "$EXPECT"\)
+    exit 1
+  else
+    echo ✅ "$URL": "${RESPONSE:0:15}"... \(expected: "$EXPECT"\)
+  fi
+}
+
+check_response "http://localhost/foo" '{"detail":"Not Found"}'
+check_response "http://localhost/health" '{"status":"OK"}'
+check_response "http://localhost/tables" '{"tables":['
+check_response "http://localhost/scenarios" '[{"id":1,"usage":'
+check_response "http://localhost/scenarios/1" '{"id":1,"usage":'
+check_response "http://localhost/organizations" '{"name":'
+check_response "http://localhost/organizations/1" '{"name":'
