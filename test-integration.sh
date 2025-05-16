@@ -13,7 +13,7 @@ check_url()
   )
 
   echo "$URL": "$RESPONSE_CODE" \(expected: "$EXPECT"\)
-  if [ "$RESPONSE_CODE" != "$EXPECT" ]; then exit $?; fi
+  if [ "$RESPONSE_CODE" != "$EXPECT" ]; then exit 1; fi
 }
 
 check_url "http://localhost/" 307
