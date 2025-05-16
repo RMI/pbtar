@@ -1,6 +1,6 @@
 #!/bin/sh
 
-check_url()
+check_response_code()
 {
   URL=$1
   EXPECT=$2
@@ -16,19 +16,19 @@ check_url()
   if [ "$RESPONSE_CODE" != "$EXPECT" ]; then exit 1; fi
 }
 
-check_url "http://localhost/" 307
-check_url "http://localhost/docs" 200
-check_url "http://localhost/docs/" 307
-check_url "http://localhost/health" 200
-check_url "http://localhost/health/" 307
-check_url "http://localhost/tables" 200
-check_url "http://localhost/tables/" 307
-check_url "http://localhost/scenarios" 200
-check_url "http://localhost/scenarios/" 307
-check_url "http://localhost/scenarios/1" 200
-check_url "http://localhost/scenarios/1/" 307
-check_url "http://localhost/organizations" 200
-check_url "http://localhost/organizations/" 307
-check_url "http://localhost/organizations/1" 200
-check_url "http://localhost/organizations/1/" 307
-check_url "http://localhost/xxx" 404
+check_response_code "http://localhost/" 307
+check_response_code "http://localhost/docs" 200
+check_response_code "http://localhost/docs/" 307
+check_response_code "http://localhost/health" 200
+check_response_code "http://localhost/health/" 307
+check_response_code "http://localhost/tables" 200
+check_response_code "http://localhost/tables/" 307
+check_response_code "http://localhost/scenarios" 200
+check_response_code "http://localhost/scenarios/" 307
+check_response_code "http://localhost/scenarios/1" 200
+check_response_code "http://localhost/scenarios/1/" 307
+check_response_code "http://localhost/organizations" 200
+check_response_code "http://localhost/organizations/" 307
+check_response_code "http://localhost/organizations/1" 200
+check_response_code "http://localhost/organizations/1/" 307
+check_response_code "http://localhost/xxx" 404
