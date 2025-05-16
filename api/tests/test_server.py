@@ -11,7 +11,7 @@ def override_get_api_key():
 
 app.dependency_overrides[get_api_key] = override_get_api_key
 
-client = TestClient(app)
+client = TestClient(app, base_url="http://testserver")
 
 
 def test_root_redirects():
