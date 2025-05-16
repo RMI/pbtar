@@ -27,6 +27,9 @@ def create_app(title, description, version):
     # Configure CORS
     origins = [
         "http://localhost",
+        "http://localhost:3000",
+        "http://0.0.0.0",
+        "http://0.0.0.0:3000",
         "null",
     ]  # "null" is necessary for a request from a local file
 
