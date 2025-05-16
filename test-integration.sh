@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 check_response_code()
 {
@@ -12,10 +12,16 @@ check_response_code()
     "$URL"
   )
 
-  echo "$URL": "$RESPONSE_CODE" \(expected: "$EXPECT"\)
-  if [ "$RESPONSE_CODE" != "$EXPECT" ]; then exit 1; fi
+  if [ "$RESPONSE_CODE" != "$EXPECT" ]
+  then
+    echo ❌ "$URL": "$RESPONSE_CODE" \(expected: "$EXPECT"\)
+    exit 1
+  else
+    echo ✅ "$URL": "$RESPONSE_CODE" \(expected: "$EXPECT"\)
+  fi
 }
 
+echo -e "\n\ntesting response code:"
 check_response_code "http://localhost/" 307
 check_response_code "http://localhost/docs" 200
 check_response_code "http://localhost/docs/" 307
@@ -44,16 +50,16 @@ check_response()
     "$URL"
   )
 
-  echo "$URL": "${RESPONSE:0:15}"... \(expected: "$EXPECT"\)
   if [[ "$RESPONSE" != "$EXPECT"* ]];
   then
-    echo ❌ "$URL": "${RESPONSE:0:15}"... \(expected: "$EXPECT"\)
+    echo ❌ "$URL": ${RESPONSE:0:15}... \(expected: "$EXPECT"\)
     exit 1
   else
-    echo ✅ "$URL": "${RESPONSE:0:15}"... \(expected: "$EXPECT"\)
+    echo ✅ "$URL": ${RESPONSE:0:15}... \(expected: "$EXPECT"\)
   fi
 }
 
+echo -e "\n\ntesting response beginnings:"
 check_response "http://localhost/foo" '{"detail":"Not Found"}'
 check_response "http://localhost/health" '{"status":"OK"}'
 check_response "http://localhost/tables" '{"tables":['
