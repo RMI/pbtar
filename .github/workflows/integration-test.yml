@@ -23,12 +23,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set ENV vars
-        run: cp example.env .env
+        shell: bash
+        run: |
+          cp example.env .env
 
       - name: Build and start container (as backing service)
-        run: docker compose up --build --detach
+        shell: bash
+        run: |
+          docker compose up --build --detach
 
       - name: Wait for container to be ready
+        shell: bash
         run: |
           RETRIES=10
           for i in `seq 1 $RETRIES`; do
@@ -45,7 +50,11 @@ jobs:
           exit 1
 
       - name: run integration tests
-        run: ./test-integration.sh
+        shell: bash
+        run: |
+          ./test-integration.sh
 
       - name: Clean up
-        run: docker compose down --volumes
+        shell: bash
+        run: |
+          docker compose down --volumes
