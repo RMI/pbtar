@@ -1,4 +1,4 @@
-name: "integration test"
+name: "Test service integration"
 
 on:
   schedule:  # Scheduled workflows only run on the default branch
