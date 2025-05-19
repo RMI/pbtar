@@ -1,0 +1,60 @@
+name: "Test service integration"
+
+on:
+  schedule:  # Scheduled workflows only run on the default branch
+    - cron: '0 3 * * *'  # Nightly at 3 AM UTC
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: "run Docker instance with docker compose and run integration tests"
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set ENV vars
+        shell: bash
+        run: |
+          cp example.env .env
+
+      - name: Build and start container (as backing service)
+        shell: bash
+        run: |
+          docker compose up --build --detach
+
+      - name: Wait for container to be ready
+        shell: bash
+        run: |
+          RETRIES=10
+          for i in `seq 1 $RETRIES`; do
+            echo "Checking health... attempt $i"
+            status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:80/health || true)
+            if [ "$status" == "200" ]; then
+              echo "✅ Health check passed!"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "❌ Health check failed after $RETRIES retries."
+          docker compose logs
+          exit 1
+
+      - name: run integration tests
+        shell: bash
+        run: |
+          ./tests/test-integration.sh
+
+      - name: Clean up
+        shell: bash
+        run: |
+          docker compose down --volumes
