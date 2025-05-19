@@ -32,7 +32,7 @@ services:
     build:
       context: frontend
     ports:
-      - "3000:80"
+      - "${PBTAR_FRONTEND_PORT:-3000}:80"
     environment:
       - VITE_API_URL=http://api:${API_PORT:-8080}
     container_name: pbtar-frontend
