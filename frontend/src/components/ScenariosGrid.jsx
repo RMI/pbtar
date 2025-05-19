@@ -51,7 +51,6 @@ const ScenariosGrid = () => {
               onKeyDown={(e) => e.key === "Enter" && loadData()}
             />
           </div>
-          // Add a button to your component
           <button
             onClick={loadData}
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
