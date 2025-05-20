@@ -1,5 +1,5 @@
 import React from "react";
-import ScenariosGrid from "./components/ScenarioGrid.jsx";
+import ScenariosGrid from "./components/ScenariosGrid.jsx";
 
 function App() {
   return (
