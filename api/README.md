@@ -53,10 +53,10 @@ uv run main.py
 docker build --tag api .
 
 # run the container in the background
-docker run --rm --detach --publish 127.0.0.1:80:5008 api
+docker run --rm --detach --publish 127.0.0.1:8000:58000 api
 ```
 
-The API will be accessible at http://localhost.
+The API will be accessible at http://localhost:8000.
 
 ## Contributing
 
