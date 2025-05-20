@@ -10,7 +10,7 @@ services:
       - PYTHONUNBUFFERED=1
     container_name: pbtar-api
     ports:
-      - "${PBTAR_API_PORT}:${PBTAR_API_PORT}"
+      - "${PBTAR_API_PORT:-8000}:${PBTAR_API_PORT:-8000}"
   db:
     image: postgres:16
     restart: always
@@ -20,7 +20,7 @@ services:
       POSTGRES_DB: pbtar
       PBTAR_DB_PORT: ${PBTAR_DB_PORT:-5432}
     ports:
-      - "${PBTAR_DB_PORT}:${PBTAR_DB_PORT}"
+      - "${PBTAR_DB_PORT:-5432}:${PBTAR_DB_PORT:-5432}"
     command: -p ${PBTAR_DB_PORT:-5432}
     volumes:
       - ./database/init:/docker-entrypoint-initdb.d
@@ -38,7 +38,7 @@ services:
       - PBTAR_API_PORT=${PBTAR_API_PORT:-8000}
       - PBTAR_API_URL=${PBTAR_API_URL:-http://api:8000}
     ports:
-      - "${PBTAR_FRONTEND_PORT}:${PBTAR_FRONTEND_PORT}"
+      - "${PBTAR_FRONTEND_PORT:-80}:${PBTAR_FRONTEND_PORT:-80}"
     container_name: pbtar-frontend
     depends_on:
       - api
