@@ -13,7 +13,6 @@ DATABASE_URL = "postgresql://postgres:postgres@db:" + PBTAR_DB_PORT + "/pbtar"
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-
 # get database session
 def get_db():
     db = SessionLocal()

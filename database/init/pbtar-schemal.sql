@@ -143,3 +143,29 @@ WHERE s.name = 'ASEAN Power Grid Integration' AND sc.name IN ('Utilities', 'Ener
 INSERT INTO scenario_sector_coverage (scenario_id, sector_coverage_id)
 SELECT s.id, sc.id FROM scenarios s, sector_coverage sc
 WHERE s.name = 'South-East Asia Energy Transition' AND sc.name IN ('Utilities', 'Energy', 'Policy', 'Infrastructure');
+
+--Add Search Capability to Organizations table 
+
+-- Add a tsvector column for full-text search
+ALTER TABLE organizations ADD COLUMN IF NOT EXISTS search_vector tsvector;
+
+-- Populate the search_vector column with data from the name field
+UPDATE organizations
+SET search_vector = to_tsvector('english', coalesce(name, ''));
+
+-- Create a GIN index on the search_vector column for efficient full-text search
+CREATE INDEX IF NOT EXISTS search_vector_idx
+ON organizations USING gin(search_vector);
+
+-- Create a trigger to automatically update the search_vector column on insert or update
+CREATE OR REPLACE FUNCTION update_search_vector()
+RETURNS trigger AS $$
+BEGIN
+    NEW.search_vector := to_tsvector('english', coalesce(NEW.name, ''));
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_search_vector_trigger
+BEFORE INSERT OR UPDATE ON organizations
+FOR EACH ROW EXECUTE FUNCTION update_search_vector();

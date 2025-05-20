@@ -1,6 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import inspect
 from sqlalchemy.orm import Session
+from sqlalchemy.sql import text
 from ..models.sql_models import Scenario, Organization
 from ..services.db import get_db, engine
 
@@ -60,3 +61,29 @@ def get_organization_by_id(organization_id: int, db: Session = Depends(get_db)):
     if not organization:
         raise HTTPException(status_code=404, detail="Organization not found")
     return organization
+
+@endpoints.get("/search", summary="Search organizations by name")
+def search_organizations_by_name(
+    q: str = Query(..., description="Free text search query"),
+    db: Session = Depends(get_db)):
+    """
+    Search for organizations by name using PostgreSQL full-text search.
+    """
+    if not q:
+        raise HTTPException(status_code=400, detail="Query parameter 'q' is required.")
+
+    # Perform the full-text search dynamically on the `name` field
+    query = text("""
+        SELECT id, name
+        FROM pbtar.organizations
+        WHERE to_tsvector('english', name) @@ to_tsquery(:query)
+        ORDER BY ts_rank(to_tsvector('english', name), to_tsquery(:query)) DESC
+    """)
+    results = db.execute(query, {"query": q}).fetchall()
+
+    # Format the results
+    items = [{"id": row.id, "name": row.name} for row in results]
+    return {
+        "total_count": len(items),
+        "items": items
+    }
