@@ -43,7 +43,7 @@ The API and API documentation (Swagger) will be accessible at http://localhost:8
 
 ```sh
 curl -X 'GET' \
-  'http://localhost/scenarios' \
+  'http://localhost:8000/scenarios' \
   -H 'accept: application/json' \
   -H 'X-API-Key: abc123'
 ```
