@@ -1,6 +1,6 @@
 import os
 from fastapi import HTTPException, Security
-from fastapi.security.PBTAR_API_KEY import APIKeyHeader
+from fastapi.security.api_key import APIKeyHeader
 from dotenv import load_dotenv
 
 # Load environment variables from a .env file
