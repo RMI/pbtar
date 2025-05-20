@@ -38,7 +38,7 @@ jobs:
           RETRIES=10
           for i in `seq 1 $RETRIES`; do
             echo "Checking health... attempt $i"
-            status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:80/health || true)
+            status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/health || true)
             if [ "$status" == "200" ]; then
               echo "✅ Health check passed!"
               exit 0
