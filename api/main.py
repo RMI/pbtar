@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 # import .env settings
 load_dotenv()
-API_PORT = int(getenv("API_PORT", 8080))
+PBTAR_API_PORT = int(getenv("PBTAR_API_PORT", 8080))
 
 meta = metadata("pbtar_api")
 
@@ -15,4 +15,4 @@ app = create_app(
 )
 
 if __name__ == "__main__":
-    run("main:app", host="0.0.0.0", port=API_PORT, log_level="info")
+    run("main:app", host="0.0.0.0", port=PBTAR_API_PORT, log_level="info")
