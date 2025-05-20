@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 # import .env settings
 load_dotenv()
-PBTAR_API_PORT = int(getenv("PBTAR_API_PORT", 8080))
+PBTAR_API_PORT = int(getenv("PBTAR_API_PORT", 8000))
 
 meta = metadata("pbtar_api")
 
