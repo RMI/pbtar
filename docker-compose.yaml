@@ -28,6 +28,16 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+  frontend:
+    build:
+      context: frontend
+    ports:
+      - "${PBTAR_FRONTEND_PORT:-3000}:80"
+    environment:
+      - VITE_API_URL=http://api:${API_PORT:-8080}
+    container_name: pbtar-frontend
+    depends_on:
+      - api
 
 volumes:
   postgres_data:

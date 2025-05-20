@@ -6,7 +6,7 @@
 [![Test service integration](https://github.com/RMI/pbtar/actions/workflows/integration-test.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/integration-test.yml)
 [![Docker](https://github.com/RMI/pbtar/actions/workflows/api-docker-build-and-push.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/api-docker-build-and-push.yml)
 
-## Running the API
+## Running the application
 
 ### Setup
 
@@ -17,9 +17,9 @@ git clone https://github.com/RMI/pbtar
 cd pbtar
 ```
 
-2. Create an `.env` file to store the desired API key, (internal) API port, and DB port
+2. Create an `.env` file to store the desired API key, (internal) API port, DB port and Frontend port
 ```sh
-echo -e "API_KEY=abc123\nAPI_PORT=8080\nDB_PORT=5432" > .env
+echo -e "API_KEY=abc123\nAPI_PORT=8080\nDB_PORT=5432\nPBTAR_FRONTEND_PORT=3000" > .env
 ```
 
 ### Run the services with docker compose
@@ -35,7 +35,9 @@ docker compose up --detach
 docker compose up --detach --build
 ```
 
-The API will be accessible at http://localhost.
+The primary web service (React) will be accessible at http://localhost:3000.
+
+The API and API documentation (Swagger) will be accessible at http://localhost:80.
 
 ### Make a request from the API
 
@@ -46,13 +48,7 @@ curl -X 'GET' \
   -H 'X-API-Key: abc123'
 ```
 
-### Load a minimal frontend index.html file to test
-
 Defaults to the API key "abc123", but an alternate key (matching what is in your `.env` file) can be input and submitted on the page.
-
-```sh
-open frontend/index.html
-```
 
 ### Shutdown the docker container
 

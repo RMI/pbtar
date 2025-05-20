@@ -17,3 +17,20 @@ wheels/
 
 #Environment Variables
 .env
+
+# Frontend: Node modules
+node_modules/
+
+# Frontend: Build output
+frontend/build/
+frontend/dist/
+
+# Frontend: Dependency directories
+/.pnp
+.pnp.js
+
+# Frontend: Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
