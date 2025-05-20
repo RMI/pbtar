@@ -21,7 +21,7 @@ services:
       PBTAR_DB_PORT: ${PBTAR_DB_PORT:-5432}
     ports:
       - "${PBTAR_DB_PORT}:${PBTAR_DB_PORT}"
-    command: -p ${PBTAR_DB_PORT}
+    command: -p ${PBTAR_DB_PORT:-5432}
     volumes:
       - ./database/init:/docker-entrypoint-initdb.d
       - postgres_data:/var/lib/postgresql/data
