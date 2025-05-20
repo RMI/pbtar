@@ -35,7 +35,9 @@ docker compose up --detach
 docker compose up --detach --build
 ```
 
-The application will be accessible at http://localhost:3000.
+The primary web service (React) will be accessible at http://localhost:3000.
+
+The API and API documentation (Swagger) will be accessible at http://localhost:80.
 
 ### Make a request from the API
 
