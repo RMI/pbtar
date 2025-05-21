@@ -47,7 +47,18 @@ npm install --save-dev <library> # for development dependencies
 Coming soon... (likely using vitest)
 
 ## Linting and Formatting
-Coming soon... (likely eslint and prettier)
+This project uses ESLint and Prettier for code consistency:
+
+```bash
+# Check code for issues
+npm run lint
+
+# Fix linting issues automatically
+npm run lint:fix
+
+# Format code with Prettier
+npm run format
+```
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file at the project root for details.
