@@ -1,13 +1,31 @@
-import eslint from 'eslint';
+import js from '@eslint/js';
 import reactPlugin from 'eslint-plugin-react';
-import prettierConfig from 'eslint-config-prettier';
 
 export default [
-  eslint.configs.recommended,
+  // Base recommended ESLint rules
+  js.configs.recommended,
+  
+  // React configuration
   {
     files: ['**/*.js', '**/*.jsx'],
     plugins: {
       react: reactPlugin,
+    },
+    languageOptions: {
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+        ecmaVersion: 2022,
+        sourceType: 'module',
+      },
+    },
+    rules: {
+      // React specific rules
+      ...reactPlugin.configs.recommended.rules,
+      // Turn off rules that are too strict
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
     },
     settings: {
       react: {
@@ -15,6 +33,4 @@ export default [
       },
     },
   },
-  // Add Prettier last to disable conflicting rules
-  prettierConfig,
 ];
