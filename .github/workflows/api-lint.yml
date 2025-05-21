@@ -6,13 +6,11 @@ on:
       - main
     paths:
       - 'api/**'
-      - 'docker-compose.yaml'
   pull_request:
     branches:
       - main
     paths:
       - 'api/**'
-      - 'docker-compose.yaml'
   workflow_dispatch:
 
 jobs:
