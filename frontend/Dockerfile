@@ -17,10 +17,15 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM nginx:stable-alpine
+FROM node:20-slim
+
+WORKDIR /app
+
+# Install serve globally
+RUN npm install -g serve
 
 # Copy built assets from the build stage
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist /app/dist
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start serve static file server
+CMD ["serve", "-s", "dist", "-l", "80"]
