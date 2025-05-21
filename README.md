@@ -1,11 +1,11 @@
 # Pathways-based transition assessment repository (pbtar)
 
-[![Test DB service](https://github.com/RMI/pbtar/actions/workflows/db-test.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/db-test.yml)
+[![Test DB service](https://github.com/RMI/pbtar/actions/workflows/db-test.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/db-test.yml)
 [![Test Status](https://github.com/RMI/pbtar/actions/workflows/api-test.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/api-test.yml)
-[![Lint Frontend service](https://github.com/RMI/pbtar/actions/workflows/frontend-lint.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/frontend-lint.yml)
-[![Test Frontend service](https://github.com/RMI/pbtar/actions/workflows/frontend-test.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/frontend-test.yml)
+[![Lint Frontend service](https://github.com/RMI/pbtar/actions/workflows/frontend-lint.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/frontend-lint.yml)
+[![Test Frontend service](https://github.com/RMI/pbtar/actions/workflows/frontend-test.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/frontend-test.yml)
 [![Lint](https://github.com/RMI/pbtar/actions/workflows/api-lint.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/api-lint.yml)
-[![Test service integration](https://github.com/RMI/pbtar/actions/workflows/integration-test.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/integration-test.yml)
+[![Test service integration](https://github.com/RMI/pbtar/actions/workflows/integration-test.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/integration-test.yml)
 [![Docker](https://github.com/RMI/pbtar/actions/workflows/api-docker-build-and-push.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/api-docker-build-and-push.yml)
 
 ## Running the application
