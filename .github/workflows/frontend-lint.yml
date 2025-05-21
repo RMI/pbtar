@@ -4,9 +4,16 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'frontend/**'
+      - 'docker-compose.yaml'
   pull_request:
     branches:
       - main
+    paths:
+      - 'frontend/**'
+      - 'docker-compose.yaml'
+  workflow_dispatch:
 
 jobs:
   lint:
