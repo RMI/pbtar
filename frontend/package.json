@@ -8,7 +8,10 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "lint": "eslint --ext .js, .jsx src",
+    "lint:fix": "eslint --ext .js, .jsx src --fix",
+    "format": "prettier --write \"src/**/*.{js,jsx}\""
   },
   "keywords": [],
   "author": "RMI",
