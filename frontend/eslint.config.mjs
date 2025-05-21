@@ -12,6 +12,12 @@ export default [
       react: reactPlugin,
     },
     languageOptions: {
+      globals: {
+        console: true,
+        document: true,
+        window: true,
+        navigator: true
+      },
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
