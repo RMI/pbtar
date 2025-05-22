@@ -1,33 +1,32 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import Header from './Header';
+import { describe, it, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import Header from "./Header";
 
-describe('Header component', () => {
+describe("Header component", () => {
   // Helper function to render Header with MemoryRouter
   const renderHeader = () => {
     return render(
       <MemoryRouter>
         <Header />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
   };
 
-  it('renders the site title', () => {
+  it("renders the site title", () => {
     renderHeader();
     // Assuming your Header has a site title text
-    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
   });
 
-  it('displays the organization name', () => {
+  it("displays the organization name", () => {
     renderHeader();
-    expect(screen.getByText('by RMI')).toBeInTheDocument();
+    expect(screen.getByText("by RMI")).toBeInTheDocument();
   });
 
-  it('renders the navigation links to Home and About pages', () => {
+  it("renders the navigation links to Home and About pages", () => {
     renderHeader();
-    expect(screen.getByText('Scenarios')).toBeInTheDocument();
-    expect(screen.getByText('About')).toBeInTheDocument();
-  })
-
+    expect(screen.getByText("Scenarios")).toBeInTheDocument();
+    expect(screen.getByText("About")).toBeInTheDocument();
+  });
 });
