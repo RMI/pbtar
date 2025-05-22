@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
         <Header />
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<h1>Home Page</h1>} />
+            <Route path="/" element={<HomePage />} />
           </Routes>
         </main>
         <Footer />
