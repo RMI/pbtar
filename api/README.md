@@ -91,8 +91,15 @@ uv add --dev <library>
 
 ### Linting
 
-This project follows the [ruff](https://github.com/astral-sh/ruff) code formatting standard. Lint code by running:
+This project uses [ruff](https://github.com/astral-sh/ruff) for code formatting and linting.
 
-```sh
+Style code by running:
+``` sh
 uvx ruff format path/to/file.py # to lint a single file
 uvx ruff format               # to lint the entire directory
+```
+
+Lint code by running:
+```sh
+uvx ruff check # check if all files pass the linter, and fix failures
+uvx ruff check --fix # this will try to automatically fix linter violations

@@ -2,7 +2,7 @@ export const callApi = async (path, apiKey = "") => {
   // For browser environment, use the public URL
   const isInBrowser = typeof window !== "undefined";
 
- // Get API port from environment variables, with fallback to 8000
+  // Get API port from environment variables, with fallback to 8000
   const apiPort = import.meta.env.PBTAR_API_PORT || "8000";
 
   // Base URL logic - use different approach for browser vs container
