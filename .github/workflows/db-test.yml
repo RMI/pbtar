@@ -5,10 +5,12 @@ on:
     branches: [ main ]
     paths:
       - 'database/**'
+      - '.github/workflows/db-test.yml'
       - 'docker-compose.yaml'
   pull_request:
     paths:
       - 'database/**'
+      - '.github/workflows/db-test.yml'
       - 'docker-compose.yaml'
   workflow_dispatch:
 
