@@ -24,7 +24,7 @@ npm install
 ```
 
 3. Running the Frontend
-   You can locally service the frontend _alone_ with:
+   You can locally serve the frontend _alone_ with:
 
 ```bash
 npm run dev # which calls vite
