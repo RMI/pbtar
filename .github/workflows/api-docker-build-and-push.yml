@@ -9,12 +9,14 @@ on:
     paths:
       - 'api/**'
       - '.github/workflows/api-docker-build-and-push.yml'
+      - 'docker-compose.yml'
   pull_request:
     branches:
       - main
     paths:
       - 'api/**'
       - '.github/workflows/api-docker-build-and-push.yml'
+      - 'docker-compose.yml'
   workflow_dispatch:
 
 env:
