@@ -1,51 +1,28 @@
 import js from '@eslint/js';
-import reactPlugin from 'eslint-plugin-react';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
 
-export default [
-  // Base recommended ESLint rules
-  js.configs.recommended,
-  
-  // React configuration
+export default tseslint.config(
+  { ignores: ['dist'] },
   {
-    files: ['**/*.js', '**/*.jsx'],
-    plugins: {
-      react: reactPlugin,
-    },
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      globals: {
-        console: true,
-        document: true,
-        window: true,
-        navigator: true,
-
-        // Timer functions
-        setTimeout: true,
-        clearTimeout: true,
-
-        // Network APIs
-        fetch: true,
-        Request: true,
-        Response: true
-      },
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-        ecmaVersion: 2022,
-        sourceType: 'module',
-      },
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+    plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
     },
     rules: {
-      // React specific rules
-      ...reactPlugin.configs.recommended.rules,
-      // Turn off rules that are too strict
-      'react/react-in-jsx-scope': 'off',
-      'react/prop-types': 'off',
+      ...reactHooks.configs.recommended.rules,
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
     },
-    settings: {
-      react: {
-        version: 'detect',
-      },
-    },
-  },
-];
+  }
+);
