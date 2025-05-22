@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import ScenarioCard from '../components/ScenarioCard';
 import { scenariosData } from '../data/scenariosData';
 
