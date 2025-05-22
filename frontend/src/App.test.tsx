@@ -5,15 +5,15 @@ import { AppContent } from "./App";
 
 // Mock child components to isolate App testing
 vi.mock("./components/Header", () => ({
-  default: () => <header data-testid="mock-header">Header</header>
+  default: () => <header data-testid="mock-header">Header</header>,
 }));
 
 vi.mock("./components/Footer", () => ({
-  default: () => <footer data-testid="mock-footer">Footer</footer>
+  default: () => <footer data-testid="mock-footer">Footer</footer>,
 }));
 
 vi.mock("./pages/HomePage", () => ({
-  default: () => <div data-testid="mock-homepage">HomePage</div>
+  default: () => <div data-testid="mock-homepage">HomePage</div>,
 }));
 
 describe("App component", () => {
@@ -21,7 +21,7 @@ describe("App component", () => {
     render(
       <MemoryRouter>
         <AppContent />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
     expect(screen.getByTestId("mock-header")).toBeInTheDocument();
   });
@@ -30,7 +30,7 @@ describe("App component", () => {
     render(
       <MemoryRouter>
         <AppContent />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
     expect(screen.getByTestId("mock-footer")).toBeInTheDocument();
   });
@@ -39,7 +39,7 @@ describe("App component", () => {
     render(
       <MemoryRouter>
         <AppContent />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
     expect(screen.getByTestId("mock-homepage")).toBeInTheDocument();
   });

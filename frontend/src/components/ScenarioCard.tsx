@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Scenario } from '../types';
-import Badge from './Badge';
-import { ChevronRight } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Scenario } from "../types";
+import Badge from "./Badge";
+import { ChevronRight } from "lucide-react";
 
 interface ScenarioCardProps {
   scenario: Scenario;
@@ -10,16 +10,20 @@ interface ScenarioCardProps {
 
 const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
   return (
-    <Link 
+    <Link
       to={`/scenario/${scenario.id}`}
       className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-gray-200"
     >
       <div className="p-5 flex flex-col h-full">
         <div className="mb-4">
-          <h2 className="text-xl font-semibold text-gray-800 mb-2">{scenario.title}</h2>
-          <p className="text-gray-600 text-sm line-clamp-2">{scenario.summary}</p>
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">
+            {scenario.title}
+          </h2>
+          <p className="text-gray-600 text-sm line-clamp-2">
+            {scenario.summary}
+          </p>
         </div>
-        
+
         <div className="mb-3">
           <Badge text={scenario.category} variant="category" />
           <div className="flex flex-wrap mt-2">
@@ -27,7 +31,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
             <Badge text={scenario.targetTemperature} variant="temperature" />
           </div>
         </div>
-        
+
         <div className="mb-3">
           <p className="text-xs font-medium text-gray-500 mb-1">Regions:</p>
           <div className="flex flex-wrap">
@@ -35,11 +39,13 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
               <Badge key={index} text={region} variant="region" />
             ))}
             {scenario.regions.length > 3 && (
-              <span className="text-xs text-gray-500 ml-1 self-center">+{scenario.regions.length - 3} more</span>
+              <span className="text-xs text-gray-500 ml-1 self-center">
+                +{scenario.regions.length - 3} more
+              </span>
             )}
           </div>
         </div>
-        
+
         <div className="mb-3">
           <p className="text-xs font-medium text-gray-500 mb-1">Sectors:</p>
           <div className="flex flex-wrap">
@@ -47,20 +53,26 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
               <Badge key={index} text={sector} variant="sector" />
             ))}
             {scenario.sectors.length > 3 && (
-              <span className="text-xs text-gray-500 ml-1 self-center">+{scenario.sectors.length - 3} more</span>
+              <span className="text-xs text-gray-500 ml-1 self-center">
+                +{scenario.sectors.length - 3} more
+              </span>
             )}
           </div>
         </div>
-        
+
         <div className="mt-auto pt-3 border-t border-gray-100">
           <div className="flex justify-between items-center">
             <div>
               <p className="text-xs text-gray-500">Publisher:</p>
-              <p className="text-sm font-medium text-gray-700">{scenario.publisher}</p>
+              <p className="text-sm font-medium text-gray-700">
+                {scenario.publisher}
+              </p>
             </div>
             <div className="text-right">
               <p className="text-xs text-gray-500">Published:</p>
-              <p className="text-sm font-medium text-gray-700">{scenario.publishedDate}</p>
+              <p className="text-sm font-medium text-gray-700">
+                {scenario.publishedDate}
+              </p>
             </div>
           </div>
           <div className="mt-2 flex justify-end">

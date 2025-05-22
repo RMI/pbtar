@@ -22,8 +22,8 @@ describe("ScenarioCard component", () => {
     dataSource: {
       description: "Mock Data Source",
       url: "https://example.com/data-source",
-      downloadAvailable: true
-    }
+      downloadAvailable: true,
+    },
   };
 
   // Helper function to render component with router context
@@ -31,43 +31,45 @@ describe("ScenarioCard component", () => {
     return render(
       <MemoryRouter>
         <ScenarioCard scenario={scenario} />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
   };
 
   it("renders the scenario title and summary", () => {
     renderScenarioCard();
-    
+
     expect(screen.getByText(mockScenario.title)).toBeInTheDocument();
     expect(screen.getByText(mockScenario.summary)).toBeInTheDocument();
   });
 
   it("links to the correct scenario detail page", () => {
     const { container } = renderScenarioCard();
-    
-    const link = container.querySelector('a');
-    expect(link).toHaveAttribute('href', `/scenario/${mockScenario.id}`);
+
+    const link = container.querySelector("a");
+    expect(link).toHaveAttribute("href", `/scenario/${mockScenario.id}`);
   });
 
   it("displays the category badge", () => {
     renderScenarioCard();
-    
+
     const categoryBadge = screen.getByText(mockScenario.category);
     expect(categoryBadge).toBeInTheDocument();
   });
 
   it("shows target year and temperature badges", () => {
     renderScenarioCard();
-    
+
     expect(screen.getByText(mockScenario.targetYear)).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.targetTemperature)).toBeInTheDocument();
+    expect(
+      screen.getByText(mockScenario.targetTemperature),
+    ).toBeInTheDocument();
   });
 
   it("displays region information with the first 3 regions", () => {
     renderScenarioCard();
-    
+
     expect(screen.getByText("Regions:")).toBeInTheDocument();
-    
+
     // Check first 3 regions are displayed
     expect(screen.getByText(mockScenario.regions[0])).toBeInTheDocument();
     expect(screen.getByText(mockScenario.regions[1])).toBeInTheDocument();
@@ -76,7 +78,7 @@ describe("ScenarioCard component", () => {
 
   it("shows '+1 more' text when there are more than 3 regions", () => {
     renderScenarioCard();
-    
+
     const moreTextElements = screen.getAllByText("+1 more");
     expect(moreTextElements.length).toBeGreaterThan(0);
   });
@@ -84,20 +86,20 @@ describe("ScenarioCard component", () => {
   it("doesn't show '+X more' text when there are exactly 3 regions", () => {
     const scenarioWithThreeRegions = {
       ...mockScenario,
-      regions: ["Global", "Europe", "North America"]
+      regions: ["Global", "Europe", "North America"],
     };
-    
+
     renderScenarioCard(scenarioWithThreeRegions);
-    
+
     const moreText = screen.queryByText("+0 more");
     expect(moreText).not.toBeInTheDocument();
   });
 
   it("displays sector information with the first 3 sectors", () => {
     renderScenarioCard();
-    
+
     expect(screen.getByText("Sectors:")).toBeInTheDocument();
-    
+
     // Check first 3 sectors are displayed
     expect(screen.getByText(mockScenario.sectors[0])).toBeInTheDocument();
     expect(screen.getByText(mockScenario.sectors[1])).toBeInTheDocument();
@@ -108,28 +110,28 @@ describe("ScenarioCard component", () => {
     renderScenarioCard();
 
     const moreTextElements = screen.getAllByText("+1 more");
-    expect(moreTextElements.length).toBeGreaterThan(0);    
+    expect(moreTextElements.length).toBeGreaterThan(0);
   });
 
   it("shows publisher information", () => {
     renderScenarioCard();
-    
+
     expect(screen.getByText("Publisher:")).toBeInTheDocument();
     expect(screen.getByText(mockScenario.publisher)).toBeInTheDocument();
   });
 
   it("shows published date information", () => {
     renderScenarioCard();
-    
+
     expect(screen.getByText("Published:")).toBeInTheDocument();
     expect(screen.getByText(mockScenario.publishedDate)).toBeInTheDocument();
   });
 
   it("displays the 'View details' text with icon", () => {
     renderScenarioCard();
-    
+
     expect(screen.getByText("View details")).toBeInTheDocument();
-    
+
     // Check if the ChevronRight icon is rendered
     const viewDetailsElement = screen.getByText("View details").closest("span");
     expect(viewDetailsElement?.querySelector("svg")).toBeInTheDocument();
@@ -138,8 +140,8 @@ describe("ScenarioCard component", () => {
   // Testing responsive layout classes
   it("has the main container classes for styling", () => {
     const { container } = renderScenarioCard();
-    
-    const link = container.querySelector('a');
+
+    const link = container.querySelector("a");
     expect(link).toHaveClass("bg-white");
     expect(link).toHaveClass("rounded-lg");
     expect(link).toHaveClass("shadow-md");
