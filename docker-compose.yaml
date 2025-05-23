@@ -6,6 +6,7 @@ services:
     environment:
       - PBTAR_API_KEY=${PBTAR_API_KEY:-abc123}
       - PBTAR_API_PORT=${PBTAR_API_PORT:-8000}
+      - PBTAR_API_LOG_LEVEL=${PBTAR_API_LOG_LEVEL:-info}
       - PBTAR_DB_PORT=${PBTAR_DB_PORT:-5432}
       - PYTHONUNBUFFERED=1
     container_name: pbtar-api
