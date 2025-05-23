@@ -35,8 +35,8 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
         <div className="mb-3">
           <p className="text-xs font-medium text-gray-500 mb-1">Regions:</p>
           <div className="flex flex-wrap">
-            {scenario.regions.slice(0, 3).map((region, index) => (
-              <Badge key={index} text={region} variant="region" />
+            {scenario.regions.slice(0, 3).map((region) => (
+              <Badge key={region} text={region} variant="region" />
             ))}
             {scenario.regions.length > 3 && (
               <span className="text-xs text-gray-500 ml-1 self-center">
