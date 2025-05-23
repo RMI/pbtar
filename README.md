@@ -24,7 +24,7 @@ cd pbtar
 
 2. Create an `.env` file to store the desired API key, (internal) API port, DB port and Frontend port
 ```sh
-echo -e "PBTAR_API_KEY=abc123\nPBTAR_API_PORT=8000\nPBTAR_DB_PORT=5432\nPBTAR_FRONTEND_PORT=80" > .env
+cp .env.example .env
 ```
 
 ### Run the services with docker compose
