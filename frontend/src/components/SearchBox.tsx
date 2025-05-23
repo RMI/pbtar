@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Search, X } from 'lucide-react';
+import React, { useState } from "react";
+import { Search, X } from "lucide-react";
 
 interface SearchBoxProps {
   value: string;
@@ -8,21 +8,24 @@ interface SearchBoxProps {
   onClear: () => void;
 }
 
-const SearchBox: React.FC<SearchBoxProps> = ({ value, onChange, onSearch, onClear }) => {
+const SearchBox: React.FC<SearchBoxProps> = ({
+  value,
+  onChange,
+  onSearch,
+  onClear,
+}) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       onSearch();
     }
   };
 
   return (
-    <div 
+    <div
       className={`flex items-center w-full max-w-2xl rounded-md border transition-all duration-200 bg-white ${
-        isFocused 
-          ? 'border-teal-400 ring-2 ring-teal-100' 
-          : 'border-gray-300'
+        isFocused ? "border-teal-400 ring-2 ring-teal-100" : "border-gray-300"
       }`}
     >
       <div className="pl-3 text-gray-400">
@@ -40,7 +43,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ value, onChange, onSearch, onClea
         maxLength={250}
       />
       {value && (
-        <button 
+        <button
           onClick={onClear}
           className="pr-3 text-gray-400 hover:text-gray-600 transition-colors duration-150"
         >

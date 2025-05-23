@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ChevronDown, X } from 'lucide-react';
+import React, { useState, useRef, useEffect } from "react";
+import { ChevronDown, X } from "lucide-react";
 
 interface FilterDropdownProps {
   label: string;
@@ -8,11 +8,11 @@ interface FilterDropdownProps {
   onChange: (value: string | null) => void;
 }
 
-const FilterDropdown: React.FC<FilterDropdownProps> = ({ 
-  label, 
-  options, 
-  selectedValue, 
-  onChange 
+const FilterDropdown: React.FC<FilterDropdownProps> = ({
+  label,
+  options,
+  selectedValue,
+  onChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -29,14 +29,17 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -45,17 +48,17 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`flex items-center justify-between min-w-32 px-3 py-2 text-sm font-medium rounded-md border ${
-          selectedValue 
-            ? 'text-teal-800 bg-teal-50 border-teal-200' 
-            : 'text-gray-700 bg-white border-gray-300 hover:bg-gray-50'
+          selectedValue
+            ? "text-teal-800 bg-teal-50 border-teal-200"
+            : "text-gray-700 bg-white border-gray-300 hover:bg-gray-50"
         } transition-colors duration-150`}
       >
         <span>{selectedValue || label}</span>
         {selectedValue ? (
-          <X 
-            size={16} 
-            className="ml-2 text-gray-500 hover:text-gray-700" 
-            onClick={handleClear} 
+          <X
+            size={16}
+            className="ml-2 text-gray-500 hover:text-gray-700"
+            onClick={handleClear}
           />
         ) : (
           <ChevronDown size={16} className="ml-2 text-gray-500" />
@@ -70,8 +73,8 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
               onClick={() => handleSelect(option)}
               className={`px-4 py-2 text-sm cursor-pointer ${
                 option === selectedValue
-                  ? 'bg-teal-50 text-teal-800'
-                  : 'text-gray-700 hover:bg-gray-50'
+                  ? "bg-teal-50 text-teal-800"
+                  : "text-gray-700 hover:bg-gray-50"
               }`}
             >
               {option}

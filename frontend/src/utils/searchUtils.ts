@@ -1,7 +1,10 @@
-import { Scenario, SearchFilters } from '../types';
+import { Scenario, SearchFilters } from "../types";
 
-export const filterScenarios = (scenarios: Scenario[], filters: SearchFilters): Scenario[] => {
-  return scenarios.filter(scenario => {
+export const filterScenarios = (
+  scenarios: Scenario[],
+  filters: SearchFilters,
+): Scenario[] => {
+  return scenarios.filter((scenario) => {
     // Category filter
     if (filters.category && scenario.category !== filters.category) {
       return false;
@@ -13,7 +16,10 @@ export const filterScenarios = (scenarios: Scenario[], filters: SearchFilters): 
     }
 
     // Target temperature filter
-    if (filters.targetTemperature && scenario.targetTemperature !== filters.targetTemperature) {
+    if (
+      filters.targetTemperature &&
+      scenario.targetTemperature !== filters.targetTemperature
+    ) {
       return false;
     }
 
@@ -28,7 +34,7 @@ export const filterScenarios = (scenarios: Scenario[], filters: SearchFilters): 
     }
 
     // Search term
-    if (filters.searchTerm && filters.searchTerm.trim() !== '') {
+    if (filters.searchTerm && filters.searchTerm.trim() !== "") {
       const searchTerm = filters.searchTerm.toLowerCase();
       const searchFields = [
         scenario.title,
@@ -41,11 +47,11 @@ export const filterScenarios = (scenarios: Scenario[], filters: SearchFilters): 
         scenario.publisher,
         scenario.publishedDate,
         scenario.overview,
-        scenario.expertRecommendation
+        scenario.expertRecommendation,
       ];
 
-      return searchFields.some(field => 
-        field.toLowerCase().includes(searchTerm)
+      return searchFields.some((field) =>
+        field.toLowerCase().includes(searchTerm),
       );
     }
 

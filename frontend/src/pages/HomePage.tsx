@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import ScenarioCard from '../components/ScenarioCard';
-import SearchSection from '../components/SearchSection';
-import { scenariosData } from '../data/scenariosData';
-import { filterScenarios } from '../utils/searchUtils';
-import { SearchFilters, Scenario } from '../types';
+import React, { useState, useEffect } from "react";
+import ScenarioCard from "../components/ScenarioCard";
+import SearchSection from "../components/SearchSection";
+import { scenariosData } from "../data/scenariosData";
+import { filterScenarios } from "../utils/searchUtils";
+import { SearchFilters, Scenario } from "../types";
 
 const HomePage: React.FC = () => {
   const [filters, setFilters] = useState<SearchFilters>({
@@ -12,10 +12,11 @@ const HomePage: React.FC = () => {
     targetTemperature: null,
     region: null,
     sector: null,
-    searchTerm: ''
+    searchTerm: "",
   });
 
-  const [filteredScenarios, setFilteredScenarios] = useState<Scenario[]>(scenariosData);
+  const [filteredScenarios, setFilteredScenarios] =
+    useState<Scenario[]>(scenariosData);
   const [isFiltering, setIsFiltering] = useState(false);
 
   useEffect(() => {
@@ -29,8 +30,11 @@ const HomePage: React.FC = () => {
     applyFilters();
   }, [filters]);
 
-  const handleFilterChange = (key: keyof SearchFilters, value: string | null) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
+  const handleFilterChange = (
+    key: keyof SearchFilters,
+    value: string | null,
+  ) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleSearch = () => {
@@ -44,7 +48,7 @@ const HomePage: React.FC = () => {
       targetTemperature: null,
       region: null,
       sector: null,
-      searchTerm: ''
+      searchTerm: "",
     });
   };
 
@@ -70,20 +74,32 @@ const HomePage: React.FC = () => {
       <div className="mb-4">
         <p className="text-sm text-gray-500">
           Found {filteredScenarios.length} scenarios
-          {(filters.searchTerm || filters.category || filters.region || filters.sector || filters.targetYear || filters.targetTemperature) && ' matching your criteria'}
+          {(filters.searchTerm ||
+            filters.category ||
+            filters.region ||
+            filters.sector ||
+            filters.targetYear ||
+            filters.targetTemperature) &&
+            " matching your criteria"}
         </p>
       </div>
 
-      <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300 ${isFiltering ? 'opacity-50' : 'opacity-100'}`}>
-        {filteredScenarios.map(scenario => (
+      <div
+        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300 ${isFiltering ? "opacity-50" : "opacity-100"}`}
+      >
+        {filteredScenarios.map((scenario) => (
           <ScenarioCard key={scenario.id} scenario={scenario} />
         ))}
       </div>
 
       {filteredScenarios.length === 0 && (
         <div className="text-center py-12">
-          <h3 className="text-lg font-medium text-gray-700 mb-2">No scenarios found</h3>
-          <p className="text-gray-500 mb-4">Try adjusting your search filters.</p>
+          <h3 className="text-lg font-medium text-gray-700 mb-2">
+            No scenarios found
+          </h3>
+          <p className="text-gray-500 mb-4">
+            Try adjusting your search filters.
+          </p>
           <button
             onClick={handleClear}
             className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors duration-200"
