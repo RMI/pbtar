@@ -9,7 +9,8 @@ describe("ScenarioCard component", () => {
   const mockScenario: Scenario = {
     id: "scenario-1",
     name: "Net Zero 2050",
-    description: "A scenario describing the path to net zero emissions by 2050.",
+    description:
+      "A scenario describing the path to net zero emissions by 2050.",
     category: "Policy",
     target_year: "2050",
     target_temperature: "1.5°C",
