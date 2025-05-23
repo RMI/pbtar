@@ -84,15 +84,15 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         <FilterDropdown
           label="Target Year"
           options={years}
-          selectedValue={filters.targetYear}
-          onChange={(value) => onFilterChange("targetYear", value)}
+          selectedValue={filters.target_year}
+          onChange={(value) => onFilterChange("target_year", value)}
         />
 
         <FilterDropdown
           label="Temperature"
           options={temperatures}
-          selectedValue={filters.targetTemperature}
-          onChange={(value) => onFilterChange("targetTemperature", value)}
+          selectedValue={filters.target_temperature}
+          onChange={(value) => onFilterChange("target_temperature", value)}
         />
 
         <FilterDropdown

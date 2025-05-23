@@ -11,14 +11,14 @@ export const filterScenarios = (
     }
 
     // Target year filter
-    if (filters.targetYear && scenario.targetYear !== filters.targetYear) {
+    if (filters.target_year && scenario.target_year !== filters.target_year) {
       return false;
     }
 
     // Target temperature filter
     if (
-      filters.targetTemperature &&
-      scenario.targetTemperature !== filters.targetTemperature
+      filters.target_temperature &&
+      scenario.target_temperature !== filters.target_temperature
     ) {
       return false;
     }
