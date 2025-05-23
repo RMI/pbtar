@@ -1,14 +1,14 @@
 export interface Scenario {
   id: string;
-  title: string;
-  summary: string;
+  name: string;
+  description: string;
   category: string;
-  targetYear: string;
-  targetTemperature: string;
+  target_year: string;
+  target_temperature: string;
   regions: string[];
   sectors: string[];
   publisher: string;
-  publishedDate: string;
+  published_date: string;
   overview: string;
   expertRecommendation: string;
   dataSource: {
@@ -53,8 +53,8 @@ export type Sector =
 
 export interface SearchFilters {
   category: ScenarioCategory | null;
-  targetYear: YearTarget | null;
-  targetTemperature: TemperatureTarget | null;
+  target_year: YearTarget | null;
+  target_temperature: TemperatureTarget | null;
   region: Region | null;
   sector: Sector | null;
   searchTerm: string;

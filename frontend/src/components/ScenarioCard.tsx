@@ -17,18 +17,18 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
       <div className="p-5 flex flex-col h-full">
         <div className="mb-4">
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
-            {scenario.title}
+            {scenario.name}
           </h2>
           <p className="text-gray-600 text-sm line-clamp-2">
-            {scenario.summary}
+            {scenario.description}
           </p>
         </div>
 
         <div className="mb-3">
           <Badge text={scenario.category} variant="category" />
           <div className="flex flex-wrap mt-2">
-            <Badge text={scenario.targetYear} variant="year" />
-            <Badge text={scenario.targetTemperature} variant="temperature" />
+            <Badge text={scenario.target_year} variant="year" />
+            <Badge text={scenario.target_temperature} variant="temperature" />
           </div>
         </div>
 
@@ -71,7 +71,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
             <div className="text-right">
               <p className="text-xs text-gray-500">Published:</p>
               <p className="text-sm font-medium text-gray-700">
-                {scenario.publishedDate}
+                {scenario.published_date}
               </p>
             </div>
           </div>

@@ -8,15 +8,15 @@ describe("ScenarioCard component", () => {
   // Mock scenario data
   const mockScenario: Scenario = {
     id: "scenario-1",
-    title: "Net Zero 2050",
-    summary: "A scenario describing the path to net zero emissions by 2050.",
+    name: "Net Zero 2050",
+    description: "A scenario describing the path to net zero emissions by 2050.",
     category: "Policy",
-    targetYear: "2050",
-    targetTemperature: "1.5°C",
+    target_year: "2050",
+    target_temperature: "1.5°C",
     regions: ["Global", "Europe", "North America", "Asia"],
     sectors: ["Energy", "Transport", "Industry", "Buildings"],
     publisher: "IEA",
-    publishedDate: "Jan 2023",
+    published_date: "Jan 2023",
     overview: "Mock",
     expertRecommendation: "Mock",
     dataSource: {
@@ -35,11 +35,11 @@ describe("ScenarioCard component", () => {
     );
   };
 
-  it("renders the scenario title and summary", () => {
+  it("renders the scenario name and description", () => {
     renderScenarioCard();
 
-    expect(screen.getByText(mockScenario.title)).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.summary)).toBeInTheDocument();
+    expect(screen.getByText(mockScenario.name)).toBeInTheDocument();
+    expect(screen.getByText(mockScenario.description)).toBeInTheDocument();
   });
 
   it("links to the correct scenario detail page", () => {
@@ -59,9 +59,9 @@ describe("ScenarioCard component", () => {
   it("shows target year and temperature badges", () => {
     renderScenarioCard();
 
-    expect(screen.getByText(mockScenario.targetYear)).toBeInTheDocument();
+    expect(screen.getByText(mockScenario.target_year)).toBeInTheDocument();
     expect(
-      screen.getByText(mockScenario.targetTemperature),
+      screen.getByText(mockScenario.target_temperature),
     ).toBeInTheDocument();
   });
 
@@ -124,7 +124,7 @@ describe("ScenarioCard component", () => {
     renderScenarioCard();
 
     expect(screen.getByText("Published:")).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.publishedDate)).toBeInTheDocument();
+    expect(screen.getByText(mockScenario.published_date)).toBeInTheDocument();
   });
 
   it("displays the 'View details' text with icon", () => {

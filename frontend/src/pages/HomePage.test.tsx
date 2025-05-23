@@ -9,7 +9,7 @@ import { Scenario } from "../types";
 vi.mock("../components/ScenarioCard", () => ({
   default: ({ scenario }: { scenario: Scenario }) => (
     <div data-testid="scenario-card" data-scenario-id={scenario.id}>
-      {scenario.title}
+      {scenario.name}
     </div>
   ),
 }));
