@@ -5,7 +5,7 @@ import { SearchFilters, ScenarioCategory, YearTarget, TemperatureTarget, Region,
 
 interface SearchSectionProps {
   filters: SearchFilters;
-  onFilterChange: (key: keyof SearchFilters, value: any) => void;
+  onFilterChange: (key: keyof SearchFilters, value: string | null) => void;
   onSearch: () => void;
   onClear: () => void;
 }

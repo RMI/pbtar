@@ -29,7 +29,7 @@ const HomePage: React.FC = () => {
     applyFilters();
   }, [filters]);
 
-  const handleFilterChange = (key: keyof SearchFilters, value: any) => {
+  const handleFilterChange = (key: keyof SearchFilters, value: string | null) => {
     setFilters(prev => ({ ...prev, [key]: value }));
   };
 
