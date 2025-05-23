@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
-import ScenarioDetailPage from './pages/ScenarioDetailPage';
+import ScenarioDetailPage from "./pages/ScenarioDetailPage";
 
 // Export the inner content for testing
 export const AppContent = () => (
