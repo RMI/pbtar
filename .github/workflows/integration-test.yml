@@ -49,6 +49,11 @@ jobs:
           docker compose logs
           exit 1
 
+      - name: Install jq
+        shell: bash
+        run: |
+          sudo apt-get install -y jq
+
       - name: run integration tests
         shell: bash
         run: |
