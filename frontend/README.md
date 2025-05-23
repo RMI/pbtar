@@ -39,7 +39,7 @@ If you want to run the frontend alongside the backend and database, you can use 
 docker-compose up --build
 ```
 
-This will start all services defined in the `docker-compose.yml` file, including the frontend, backend, and database. The frontend will be accessible at `http://localhost:3000`.
+This will start all services defined in the `docker-compose.yml` file, including the frontend, backend, and database. The frontend will be accessible at `http://localhost`.
 
 ## Contributing
 
