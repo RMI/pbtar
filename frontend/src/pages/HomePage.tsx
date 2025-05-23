@@ -8,8 +8,8 @@ import { SearchFilters, Scenario } from "../types";
 const HomePage: React.FC = () => {
   const [filters, setFilters] = useState<SearchFilters>({
     category: null,
-    targetYear: null,
-    targetTemperature: null,
+    target_year: null,
+    target_temperature: null,
     region: null,
     sector: null,
     searchTerm: "",
@@ -44,8 +44,8 @@ const HomePage: React.FC = () => {
   const handleClear = () => {
     setFilters({
       category: null,
-      targetYear: null,
-      targetTemperature: null,
+      target_year: null,
+      target_temperature: null,
       region: null,
       sector: null,
       searchTerm: "",
@@ -78,8 +78,8 @@ const HomePage: React.FC = () => {
             filters.category ||
             filters.region ||
             filters.sector ||
-            filters.targetYear ||
-            filters.targetTemperature) &&
+            filters.target_year ||
+            filters.target_temperature) &&
             " matching your criteria"}
         </p>
       </div>
