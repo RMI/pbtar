@@ -69,7 +69,7 @@ echo -e "\n\nchecking response key-value pairs:"
 check_response "http://localhost:8000/foo" '{"detail":"Not Found"}'
 check_response "http://localhost:8000/health" '{"status":"OK"}'
 check_response "http://localhost:8000/scenarios/1" '{"id":"1"}'
-check_response "http://localhost:8000/scenarios/1" '{"id":"1"}'
+check_response "http://localhost:8000/organizations/1" '{"id":"1"}'
 
 # Check that an array contains an element with specific key-value pair
 check_array_contains() {
