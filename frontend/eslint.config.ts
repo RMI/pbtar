@@ -7,7 +7,7 @@ export default tseslint.config(
   {
     extends: [
       js.configs.recommended,
-      ...tseslint.configs.recommendedTypeChecked // Add type checking rules
+      ...tseslint.configs.recommendedTypeChecked, // Add type checking rules
     ],
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
@@ -17,9 +17,9 @@ export default tseslint.config(
         projectService: true,
         tsconfigRootDir: "./",
       },
-      },
-      plugins: {
-      "@typescript-eslint": tseslint.plugin
+    },
+    plugins: {
+      "@typescript-eslint": tseslint.plugin,
     },
   },
 );
