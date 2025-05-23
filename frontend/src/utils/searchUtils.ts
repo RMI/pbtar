@@ -37,15 +37,15 @@ export const filterScenarios = (
     if (filters.searchTerm && filters.searchTerm.trim() !== "") {
       const searchTerm = filters.searchTerm.toLowerCase();
       const searchFields = [
-        scenario.title,
-        scenario.summary,
+        scenario.name,
+        scenario.description,
         scenario.category,
-        scenario.targetYear,
-        scenario.targetTemperature,
+        scenario.target_year,
+        scenario.target_temperature,
         ...scenario.regions,
         ...scenario.sectors,
         scenario.publisher,
-        scenario.publishedDate,
+        scenario.published_date,
         scenario.overview,
         scenario.expertRecommendation,
       ];

@@ -68,14 +68,14 @@ const ScenarioDetailPage: React.FC = () => {
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="bg-gradient-to-r from-teal-700 to-blue-800 p-6 text-white">
           <h1 className="text-2xl md:text-3xl font-bold mb-2">
-            {scenario.title}
+            {scenario.name}
           </h1>
-          <p className="text-teal-100 mb-4">{scenario.summary}</p>
+          <p className="text-teal-100 mb-4">{scenario.description}</p>
 
           <div className="flex flex-wrap gap-2 mb-4">
             <Badge text={scenario.category} variant="category" />
-            <Badge text={scenario.targetYear} variant="year" />
-            <Badge text={scenario.targetTemperature} variant="temperature" />
+            <Badge text={scenario.target_year} variant="year" />
+            <Badge text={scenario.target_temperature} variant="temperature" />
           </div>
 
           <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
@@ -85,7 +85,7 @@ const ScenarioDetailPage: React.FC = () => {
             </p>
             <p>
               <span className="text-teal-200">Published:</span>{" "}
-              {scenario.publishedDate}
+              {scenario.published_date}
             </p>
           </div>
         </div>
