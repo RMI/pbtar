@@ -1,5 +1,15 @@
 version: 2
 updates:
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+    groups:
+      minor-and-patch:
+        update-types:
+          - "patch"
+          - "minor"
+
   - package-ecosystem: "uv"
     directory: "/api"
     schedule:
@@ -14,6 +24,7 @@ updates:
     directories:
       - "/api"
       - "/database"
+      - "/frontend"
     schedule:
       interval: "daily"
 
