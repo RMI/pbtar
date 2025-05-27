@@ -17,10 +17,13 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM nginx:stable-alpine
+FROM node:20-slim AS production
 
 # Copy built assets from the build stage
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist /app/dist
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Install Azure SWA CLI globally
+RUN npm install -g @azure/static-web-apps-cli
+
+# Start SWA CLI
+CMD ["swa", "start", "app/dist", "--host", "0.0.0.0"]

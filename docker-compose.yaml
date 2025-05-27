@@ -35,7 +35,7 @@ services:
     build:
       context: frontend
     ports:
-      - "${PBTAR_FRONTEND_PORT:-80}:80"
+      - "${PBTAR_FRONTEND_PORT:-80}:4280"
     container_name: pbtar-frontend
 
 volumes:
