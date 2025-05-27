@@ -22,6 +22,9 @@ FROM node:20-slim AS production
 # Copy built assets from the build stage
 COPY --from=build /app/dist /app/dist
 
+# Copy Azure config file
+COPY staticwebapp.config.json /app/dist
+
 # Install Azure SWA CLI globally
 RUN npm install -g @azure/static-web-apps-cli
 
