@@ -5,15 +5,15 @@ on:
     branches:
       - main
     paths:
-       - 'frontend/pbtar_schema.json'
-       - 'frontend/src/data/scenarios_metadata.json'
+       - 'pbtar_schema.json'
+       - 'src/data/scenarios_metadata.json'
        - '.github/workflows/frontend-json.yml'
   pull_request:
     branches:
       - main
     paths:
-       - 'frontend/pbtar_schema.json'
-       - 'frontend/src/data/scenarios_metadata.json'
+       - 'pbtar_schema.json'
+       - 'src/data/scenarios_metadata.json'
        - '.github/workflows/frontend-json.yml'
   workflow_dispatch:
 
