@@ -1,7 +1,6 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    directory: "/frontend"
     schedule:
       interval: "weekly"
     groups:
@@ -11,8 +10,7 @@ updates:
           - "minor"
 
   - package-ecosystem: "docker"
-    directories:
-      - "/frontend"
+    directory: "/"
     schedule:
       interval: "daily"
 
