@@ -80,6 +80,7 @@
           "downloadAvailable": { "type": "boolean" }
         }
       }
-    }
+    },
+    "additionalProperties": false
   }
 }
