@@ -13,6 +13,7 @@ cd pbtar
 ```
 
 2. Create an `.env` file to store the desired API key, (internal) API port, DB port and Frontend port
+
 ```sh
 cp .env.example .env
 ```
@@ -39,6 +40,7 @@ docker compose down
 ```
 
 ## Development
+
 ### Set-Up
 
 This project uses Node.js and npm for dependency management.
@@ -62,7 +64,7 @@ npm run dev
 The local development service will be accessible at `http://localhost:3000`. It automatically reloads on file changes.
 
 3. Running with `docker compose`
-If you prefer to run the entire application stack using Docker, you can use the following command:
+   If you prefer to run the entire application stack using Docker, you can use the following command:
 
 ```bash
 docker compose up --build
@@ -103,4 +105,5 @@ npm run format
 ```
 
 ## License
- This project is licensed under the [MIT License](LICENSE.txt) 
+
+This project is licensed under the [MIT License](LICENSE.txt)
