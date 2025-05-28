@@ -1,5 +1,5 @@
 # Build stage
-FROM node:20-slim AS build
+FROM node:24-slim AS build
 
 # Set working directory
 WORKDIR /app
@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM node:20-slim AS production
+FROM node:24-slim AS production
 
 # Copy built assets from the build stage
 COPY --from=build /app/dist /app/dist
