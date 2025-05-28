@@ -1,14 +1,3 @@
-# Python-generated files
-__pycache__/
-*.py[oc]
-build/
-dist/
-wheels/
-*.egg-info
-
-# Virtual environments
-.venv
-
 # MacOS specific
 .DS_Store
 
@@ -22,8 +11,8 @@ wheels/
 node_modules/
 
 # Frontend: Build output
-frontend/build/
-frontend/dist/
+build/
+dist/
 
 # Frontend: Dependency directories
 /.pnp
