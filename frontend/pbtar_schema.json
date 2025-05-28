@@ -82,6 +82,20 @@
       }
     },
     "additionalProperties": false,
-  "required": ["id", "name", "description", "category", "target_year", "target_temperature", "regions", "sectors", "publisher", "published_date", "overview", "expertRecommendation", "dataSource"]
+    "required": [
+      "id",
+      "name",
+      "description",
+      "category",
+      "target_year",
+      "target_temperature",
+      "regions",
+      "sectors",
+      "publisher",
+      "published_date",
+      "overview",
+      "expertRecommendation",
+      "dataSource"
+    ]
   }
 }
