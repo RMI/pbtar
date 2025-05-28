@@ -13,7 +13,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "json:check": "ajv validate -s pbtar_schema.json src/data/scenarios_metadata.json"
   },
   "author": "RMI",
   "license": "MIT",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.27.0",
+    "@jirutka/ajv-cli": "^6.0.0",
     "@tailwindcss/postcss": "^4.1.7",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",

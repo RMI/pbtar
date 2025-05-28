@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pbtar_schema.json",
+  "title": "PBTAR Scenarios metadata Schema",
+  "description": "A schema for the scenarios metadata dataset in PBTAR",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "description": "The unique identifier for a scenario",
+        "type": "string"
+      },
+      "name": {
+        "description": "Name of the scenario",
+        "type": "string"
+      },
+      "description": {
+        "description": "Description of the scenario",
+        "type": "string"
+      },
+      "category": {
+        "description": "Category of the scenario",
+        "type": "string"
+      },
+      "target_year": {
+        "description": "Target year of the scenario",
+        "type": "string"
+      },
+      "target_temperature": {
+        "description": "Target temperature of the scenario",
+        "type": "string"
+      },
+      "regions": {
+        "description": "Regions that the scenario covers",
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "type": "string"
+        }
+      },
+      "sectors": {
+        "description": "Sectors that the scenario covers",
+        "type": "array",
+        "items": {
+          "enum": [
+            "Agriculture",
+            "Buildings",
+            "Coal",
+            "Industrial",
+            "Oil & Gas",
+            "Power",
+            "Renewables",
+            "Transport"
+          ]
+        }
+      },
+      "publisher": {
+        "description": "Publisher of the scenario",
+        "type": "string"
+      },
+      "published_date": {
+        "description": "Date that the scenario was published",
+        "type": "string"
+      },
+      "overview": {
+        "description": "Overview of the scenario",
+        "type": "string"
+      },
+      "expertRecommendation": {
+        "description": "Expert recommendation for the scenario",
+        "type": "string"
+      },
+      "dataSource": {
+        "description": "Data source for the scenario",
+        "type": "object",
+        "properties": {
+          "description": { "type": "string" },
+          "url": { "type": "string" },
+          "downloadAvailable": { "type": "boolean" }
+        },
+        "additionalProperties": false,
+        "required": ["description", "url", "downloadAvailable"]
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "name",
+      "description",
+      "category",
+      "target_year",
+      "target_temperature",
+      "regions",
+      "sectors",
+      "publisher",
+      "published_date",
+      "overview",
+      "expertRecommendation",
+      "dataSource"
+    ]
+  }
+}
