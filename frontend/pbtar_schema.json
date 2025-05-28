@@ -78,7 +78,13 @@
           "description": { "type": "string" },
           "url": { "type": "string" },
           "downloadAvailable": { "type": "boolean" }
-        }
+        },
+        "additionalProperties": false,
+        "required": [
+          "description",
+          "url",
+          "downloadAvailable"
+        ]
       }
     },
     "additionalProperties": false,
