@@ -39,4 +39,4 @@ jobs:
 
       - name: Run ajv JSON validator
         working-directory: ./frontend
-        run: npm run json
+        run: npm run json:check
