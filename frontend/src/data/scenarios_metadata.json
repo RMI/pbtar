@@ -1,6 +1,7 @@
 [
   {
     "id": "scenario-001",
+    "name": "ZETI Net Zero Pathway",
     "description": "A comprehensive pathway for the global energy sector to reach net zero by 2050",
     "category": "IAM",
     "target_year": "2050",
