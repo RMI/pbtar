@@ -12,7 +12,7 @@ git clone https://github.com/RMI/pbtar
 cd pbtar
 ```
 
-2. Create an `.env` file to store the desired API key, (internal) API port, DB port and Frontend port
+2. Create an `.env` file to store the desired frontend port
 
 ```sh
 cp .env.example .env
