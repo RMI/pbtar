@@ -80,11 +80,7 @@
           "downloadAvailable": { "type": "boolean" }
         },
         "additionalProperties": false,
-        "required": [
-          "description",
-          "url",
-          "downloadAvailable"
-        ]
+        "required": ["description", "url", "downloadAvailable"]
       }
     },
     "additionalProperties": false,
