@@ -10,20 +10,8 @@ updates:
           - "patch"
           - "minor"
 
-  - package-ecosystem: "uv"
-    directory: "/api"
-    schedule:
-      interval: "weekly"
-    groups:
-      minor-and-patch:
-        update-types:
-          - "patch"
-          - "minor"
-
   - package-ecosystem: "docker"
     directories:
-      - "/api"
-      - "/database"
       - "/frontend"
     schedule:
       interval: "daily"
