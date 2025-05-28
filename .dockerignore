@@ -1,14 +1,3 @@
-# Byte-compiled / cache
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-
-# Virtual environments
-.venv/
-env/
-venv/
-
 # Logs
 *.log
 
@@ -21,13 +10,5 @@ venv/
 .git/
 .gitignore
 
-# Tests
-tests/
-
 # Other project-specific files
-*.sqlite3
-*.db
 *.env
-*.coverage
-coverage.xml
-
