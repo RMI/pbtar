@@ -1,8 +1,8 @@
 name: "Docker build and push frontend service to ghcr.io"
 
 on:
-  schedule:  # Scheduled workflows only run on the default branch
-    - cron: '0 3 * * *'  # Nightly at 3 AM UTC
+  schedule: # Scheduled workflows only run on the default branch
+    - cron: "0 3 * * *" # Nightly at 3 AM UTC
   push:
     branches:
       - main
@@ -25,7 +25,7 @@ jobs:
 
     permissions:
       contents: read
-      packages: write  # Needed to push to GHCR
+      packages: write # Needed to push to GHCR
 
     steps:
       - name: Set ENV vars
