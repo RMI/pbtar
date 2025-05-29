@@ -2,6 +2,7 @@
 
 [![Lint Frontend service](https://github.com/RMI/pbtar/actions/workflows/frontend-lint.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/frontend-lint.yml)
 [![Test Frontend service](https://github.com/RMI/pbtar/actions/workflows/frontend-test.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/frontend-test.yml)
+[![Docker build and push Frontend service to ghcr.io](https://github.com/RMI/pbtar/actions/workflows/frontend-docker-build-and-push.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/frontend-docker-build-and-push.yml)
 
 ## Running the application
 
