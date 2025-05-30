@@ -40,6 +40,18 @@ The React web service will be accessible at http://localhost.
 docker compose down
 ```
 
+## Deployments
+
+The application is deployed using Azure Static Web Apps:
+
+- **Production**: [View Production Site](https://green-pebble-01f5d5c1e.6.azurestaticapps.net/)  
+  _Deployed automatically when changes are merged to the `production` branch_
+
+- **Development**: [View Development Site](https://green-pebble-01f5d5c1e-main.westus2.6.azurestaticapps.net/)  
+  _Reflects the current state of the `main` branch_
+
+Pull requests automatically deploy to preview environments with URLs provided in the PR comments.
+
 ## Development
 
 ### Set-Up
