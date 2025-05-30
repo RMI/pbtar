@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+// App.tsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -8,7 +10,7 @@ import EnvironmentBanner from "./components/EnvironmentBanner";
 
 // Export the inner content for testing
 export const AppContent = () => {
-  const environment = import.meta.env.VITE_BUILD_MODE || 'development';
+  const environment: string = import.meta.env.VITE_BUILD_MODE;
   const showBanner = environment !== 'production';
 
   return (
