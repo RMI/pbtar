@@ -77,7 +77,7 @@ This will start all services defined in the `docker-compose.yml` file, including
    To render the site,
 
 ```bash
-npm run build`
+npm run build
 
 # or for a PROD BUILD
 VITE_BUILD_MODE=production npm run build
