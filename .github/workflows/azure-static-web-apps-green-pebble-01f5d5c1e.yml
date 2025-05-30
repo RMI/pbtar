@@ -9,8 +9,8 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - 'hotfix/**'
-      - 'release/**'
+      - "hotfix/**"
+      - "release/**"
       - main
       - production
 
