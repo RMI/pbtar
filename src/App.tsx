@@ -1,4 +1,3 @@
-// App.tsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -9,11 +8,11 @@ import EnvironmentBanner from "./components/EnvironmentBanner";
 
 // Export the inner content for testing
 export const AppContent = () => {
-  const environment = import.meta.env.VITE_ENVIRONMENT || 'development';
+  const environment = import.meta.env.VITE_BUILD_MODE || 'development';
   const showBanner = environment !== 'production';
 
   return (
-    <div className={`flex flex-col min-h-screen bg-gray-50 ${showBanner ? 'pt-6' : ''}`}>
+    <div className={`flex flex-col min-h-screen bg-gray-50${showBanner ? ' pt-6' : ''}`}>
       <EnvironmentBanner />
       <Header />
       <main className="flex-grow">
