@@ -1,7 +1,7 @@
 import React from 'react';
 
 const EnvironmentBanner: React.FC = () => {
-  const environment = import.meta.env.VITE_ENVIRONMENT;
+  const environment = import.meta.env.VITE_ENVIRONMENT || 'development';
 
   if (environment === 'production') {
     return null;

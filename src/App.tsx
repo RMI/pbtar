@@ -5,21 +5,28 @@ import Footer from "./components/Footer";
 import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 import ScenarioDetailPage from "./pages/ScenarioDetailPage";
+import EnvironmentBanner from "./components/EnvironmentBanner";
 
 // Export the inner content for testing
-export const AppContent = () => (
-  <div className="flex flex-col min-h-screen bg-gray-50">
-    <Header />
-    <main className="flex-grow">
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/scenario/:id" element={<ScenarioDetailPage />} />
-        <Route path="/about" element={<AboutPage />} />
-      </Routes>
-    </main>
-    <Footer />
-  </div>
-);
+export const AppContent = () => {
+  const environment = import.meta.env.VITE_ENVIRONMENT || 'development';
+  const showBanner = environment !== 'production';
+
+  return (
+    <div className={`flex flex-col min-h-screen bg-gray-50 ${showBanner ? 'pt-6' : ''}`}>
+      <EnvironmentBanner />
+      <Header />
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/scenario/:id" element={<ScenarioDetailPage />} />
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
 function App() {
   return (
