@@ -40,6 +40,18 @@ The React web service will be accessible at http://localhost.
 docker compose down
 ```
 
+## Deployments
+
+The application is deployed using Azure Static Web Apps:
+
+- **Production**: [View Production Site](https://green-pebble-01f5d5c1e.6.azurestaticapps.net/)  
+  _Deployed automatically when changes are merged to the `production` branch_
+
+- **Development**: [View Development Site](https://green-pebble-01f5d5c1e-main.westus2.6.azurestaticapps.net/)  
+  _Reflects the current state of the `main` branch_
+
+Pull requests automatically deploy to preview environments with URLs provided in the PR comments.
+
 ## Development
 
 ### Set-Up
@@ -72,6 +84,23 @@ docker compose up --build
 ```
 
 This will start all services defined in the `docker-compose.yml` file, including the frontend, backend, and database. The frontend will be accessible at `http://localhost`.
+
+4. Building the application
+   To render the site,
+
+```bash
+npm run build
+
+# or for a PROD BUILD
+VITE_BUILD_MODE=production npm run build
+```
+
+Then you can serve the `dist/` directory using your favorite local server.
+For example, to use python's server,
+
+```bash
+python3 -m http.server 9001 -d ./dist
+```
 
 ## Contributing
 
