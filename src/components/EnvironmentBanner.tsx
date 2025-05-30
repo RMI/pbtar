@@ -1,7 +1,7 @@
 import React from 'react';
 
 const EnvironmentBanner: React.FC = () => {
-  const environment: string = import.meta.env.VITE_BUILD_MODE;
+  const environment: string = import.meta.env.VITE_BUILD_MODE || 'development';
 
   if (environment === 'production') {
     return null;
@@ -22,7 +22,7 @@ const EnvironmentBanner: React.FC = () => {
 
   return (
     <div className={`${getBgColor()} text-white text-center py-1 text-sm font-medium fixed top-0 left-0 right-0 z-50`}>
-      {(environment ?? '').toUpperCase()} Environment
+      {environment.toUpperCase()} Environment
     </div>
   );
 };
