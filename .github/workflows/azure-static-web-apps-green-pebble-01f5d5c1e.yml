@@ -14,6 +14,9 @@ on:
       - main
       - production
 
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
   build_and_deploy_job:
@@ -35,9 +38,21 @@ jobs:
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/" # App source code path
-          api_location: "" # Api source code path - optional
-          output_location: "build" # Built app content directory - optional
-          ###### End of Repository/Build Configurations ######
+          skip_api_build: true # Skips API (funcitons) build step
+          # api_location: "" # Api source code path - optional
+          output_location: "dist" # Built app content directory - optional
+          production_branch: "production" # all other branches are preview builds
+        env:
+          VITE_BUILD_MODE: |
+            ${{
+              ((github.event_name == 'push' && github.ref_name == 'production') && 'production') ||
+              ((github.event_name == 'push' && github.ref_name == 'main') && 'development') ||
+              (github.event_name == 'push' && github.ref_name) ||
+              ((github.event_name == 'pull_request' && startsWith(github.head_ref, 'release/')) && format('{0}{1}', 'staging/', github.head_ref)) ||
+              ((github.event_name == 'pull_request' && startsWith(github.head_ref, 'hotfix/')) && format('{0}{1}', 'staging/', github.head_ref)) ||
+              (github.event_name == 'pull_request' && format('{0}-{1}', 'pr', github.event.pull_request.number)) ||
+              github.ref_name
+            }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
