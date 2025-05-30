@@ -1,20 +1,190 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Copy, Check } from 'lucide-react';
 
 interface ColophonProps {
   className?: string;
 }
 
+interface SystemInfo {
+  userAgent: string;
+  screenResolution: string;
+  connectionType: string;
+  language: string;
+  devicePixelRatio: string;
+}
+
 const Colophon: React.FC<ColophonProps> = ({ className = '' }) => {
+  const [systemInfo, setSystemInfo] = useState<SystemInfo>({
+    userAgent: 'Loading...',
+    screenResolution: 'Loading...',
+    connectionType: 'Loading...',
+    language: 'Loading...',
+    devicePixelRatio: 'Loading...'
+  });
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const getConnectionInfo = () => {
+      if ('connection' in navigator) {
+        const conn = (navigator as any).connection;
+        return `${conn.effectiveType || 'unknown'} (${conn.downlink}Mbps)`;
+      }
+      return 'Not available';
+    };
+
+    setSystemInfo({
+      userAgent: navigator.userAgent,
+      screenResolution: `${window.innerWidth}x${window.innerHeight}`,
+      connectionType: getConnectionInfo(),
+      language: navigator.language || 'N/A',
+      devicePixelRatio: `${window.devicePixelRatio}x`
+    });
+  }, []);
+
+  const formatInfoForCopy = () => {
+    const sections = {
+      'Build Info': {
+        'App Version': import.meta.env.VITE_APP_VERSION ?? 'N/A',
+        'Git SHA': import.meta.env.VITE_GIT_SHA ?? 'N/A',
+        'Branch': import.meta.env.VITE_GIT_BRANCH ?? 'N/A',
+        'Working Directory Clean': import.meta.env.VITE_GIT_CLEAN === "true" || import.meta.env.VITE_GIT_CLEAN === true,
+        'Environment': import.meta.env.VITE_ENVIRONMENT ?? 'development',
+        'Build Time': import.meta.env.VITE_BUILD_TIME ?? 'N/A',
+        'Node Version': import.meta.env.VITE_NODE_VERSION ?? 'N/A',
+        'Vite Version': import.meta.env.VITE_VERSION ?? 'N/A'
+      },
+      'Runtime Info': {
+        'User Agent': systemInfo.userAgent,
+        'Screen Resolution': systemInfo.screenResolution,
+        'Device Pixel Ratio': systemInfo.devicePixelRatio,
+        'Language': systemInfo.language,
+        'Connection': systemInfo.connectionType
+      },
+      'GitHub Build Info': {
+        'Actor': import.meta.env.VITE_GITHUB_ACTOR ?? 'N/A',
+        'Event': import.meta.env.VITE_GITHUB_EVENT_NAME ?? 'N/A',
+        'Repository': import.meta.env.VITE_GITHUB_REPOSITORY ?? 'N/A',
+        'Ref': import.meta.env.VITE_GITHUB_REF ?? 'N/A',
+        'Merge SHA': import.meta.env.VITE_GITHUB_SHA ?? 'N/A',
+        'Head SHA': import.meta.env.VITE_GITHUB_HEAD_SHA ?? 'N/A',
+        'Workflow': import.meta.env.VITE_GITHUB_WORKFLOW ?? 'N/A',
+        'Workflow Ref': import.meta.env.VITE_GITHUB_WORKFLOW_REF ?? 'N/A',
+        'Workflow SHA': import.meta.env.VITE_GITHUB_WORKFLOW_SHA ?? 'N/A',
+        'Run ID': import.meta.env.VITE_GITHUB_RUN_ID ?? 'N/A',
+        'Run Number': import.meta.env.VITE_GITHUB_RUN_NUMBER ?? 'N/A',
+        'Run Attempt': import.meta.env.VITE_GITHUB_RUN_ATTEMPT ?? 'N/A'
+      },
+      'Build Machine Info': {
+        'Machine Name': import.meta.env.VITE_BUILD_MACHINE_NAME ?? 'N/A',
+        'OS': import.meta.env.VITE_BUILD_OS ?? 'N/A',
+        'OS Version': import.meta.env.VITE_BUILD_OS_VERSION ?? 'N/A',
+        'Architecture': import.meta.env.VITE_BUILD_ARCH ?? 'N/A'
+      }
+    };
+
+    return Object.entries(sections)
+      .map(([section, data]) => {
+        const items = Object.entries(data)
+          .map(([key, value]) => `${key}: ${value}`)
+          .join('\n');
+        return `### ${section} ###\n${items}`;
+      })
+      .join('\n\n');
+  };
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(formatInfoForCopy());
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+      setCopyError(true);
+      setTimeout(() => setCopyError(false), 2000);
+    }
+  };
+
   return (
-    <div className={`text-sm text-gray-500 ${className}`}>
-      <p>Build Info:</p>
-      <ul className="list-none text-xs">
-        <li>Git SHA: {import.meta.env.VITE_GIT_SHA || 'N/A'}</li>
-        <li>Branch: {import.meta.env.VITE_GIT_BRANCH || 'N/A'}</li>
-        <li>Working Directory: {import.meta.env.VITE_GIT_CLEAN === 'true' ? 'Clean' : 'Modified'}</li>
-        <li>Environment: {import.meta.env.VITE_ENVIRONMENT || 'development'}</li>
-      </ul>
-    </div>
+    <details className={`text-sm text-gray-500 ${className}`}>
+      <summary className="cursor-pointer hover:text-gray-700">
+        Build and System Information
+      </summary>
+      <div className="mt-2">
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            handleCopy();
+          }}
+          className="mb-4 px-3 py-1.5 text-sm rounded border border-gray-300 hover:bg-gray-50 transition-colors inline-flex items-center gap-1.5"
+          title="Copy all information"
+        >
+          {copied ? (
+            <>
+              <Check size={14} className="text-green-500" />
+              <span className="text-green-600">Copied!</span>
+            </>
+          ) : (
+            <>
+              <Copy size={14} />
+              <span>Copy</span>
+            </>
+          )}
+        </button>
+
+        <div className="mb-3">
+          <h4 className="font-medium mb-1">Build Info</h4>
+          <ul className="list-none text-s">
+            <li>App Version: {import.meta.env.VITE_APP_VERSION ?? 'N/A'}</li>
+            <li>Git SHA: {import.meta.env.VITE_GIT_SHA ?? 'N/A'}</li>
+            <li>Branch: {import.meta.env.VITE_GIT_BRANCH ?? 'N/A'}</li>
+            <li>Working Directory Clean: {String(import.meta.env.VITE_GIT_CLEAN === "true" || import.meta.env.VITE_GIT_CLEAN === true)}</li>
+            <li>Environment: {import.meta.env.VITE_ENVIRONMENT ?? 'development'}</li>
+            <li>Build Time: {import.meta.env.VITE_BUILD_TIME ?? 'N/A'}</li>
+            <li>Node Version: {import.meta.env.VITE_NODE_VERSION ?? 'N/A'}</li>
+            <li>Vite Version: {import.meta.env.VITE_VERSION ?? 'N/A'}</li>
+          </ul>
+        </div>
+        
+        <div className="mb-3">
+          <h4 className="font-medium mb-1">Runtime Info</h4>
+          <ul className="list-none text-s">
+            <li>User Agent: {systemInfo.userAgent}</li>
+            <li>Screen Resolution: {systemInfo.screenResolution}</li>
+            <li>Device Pixel Ratio: {systemInfo.devicePixelRatio}</li>
+            <li>Language: {systemInfo.language}</li>
+            <li>Connection: {systemInfo.connectionType}</li>
+          </ul>
+        </div>
+
+        <div className="mb-3">
+          <h4 className="font-medium mb-1">GitHub Build Info</h4>
+          <ul className="list-none text-s">
+            <li>Actor: {import.meta.env.VITE_GITHUB_ACTOR ?? 'N/A'}</li>
+            <li>Event: {import.meta.env.VITE_GITHUB_EVENT_NAME ?? 'N/A'}</li>
+            <li>Repository: {import.meta.env.VITE_GITHUB_REPOSITORY ?? 'N/A'}</li>
+            <li>Ref: {import.meta.env.VITE_GITHUB_REF ?? 'N/A'}</li>
+            <li>Merge SHA: {import.meta.env.VITE_GITHUB_SHA ?? 'N/A'}</li>
+            <li>Head SHA: {import.meta.env.VITE_GITHUB_HEAD_SHA ?? 'N/A'}</li>
+            <li>Workflow: {import.meta.env.VITE_GITHUB_WORKFLOW ?? 'N/A'}</li>
+            <li>Workflow Ref: {import.meta.env.VITE_GITHUB_WORKFLOW_REF ?? 'N/A'}</li>
+            <li>Workflow SHA: {import.meta.env.VITE_GITHUB_WORKFLOW_SHA ?? 'N/A'}</li>
+            <li>Run ID: {import.meta.env.VITE_GITHUB_RUN_ID ?? 'N/A'}</li>
+            <li>Run Number: {import.meta.env.VITE_GITHUB_RUN_NUMBER ?? 'N/A'}</li>
+            <li>Run Attempt: {import.meta.env.VITE_GITHUB_RUN_ATTEMPT ?? 'N/A'}</li>
+          </ul>
+        </div>
+
+        <div className="mb-3">
+          <h4 className="font-medium mb-1">Build Machine Info</h4>
+          <ul className="list-none text-s">
+            <li>Machine Name: {import.meta.env.VITE_BUILD_MACHINE_NAME ?? 'N/A'}</li>
+            <li>OS: {import.meta.env.VITE_BUILD_OS ?? 'N/A'}</li>
+            <li>OS Version: {import.meta.env.VITE_BUILD_OS_VERSION ?? 'N/A'}</li>
+            <li>Architecture: {import.meta.env.VITE_BUILD_ARCH ?? 'N/A'}</li>
+          </ul>
+        </div>
+      </div>
+    </details>
   );
 };
 
