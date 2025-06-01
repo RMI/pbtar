@@ -25,8 +25,15 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
         </div>
 
         <div className="mb-3">
-          <Badge text={scenario.category} variant="category" />
-          <div className="flex flex-wrap mt-2">
+          <p className="text-xs font-medium text-gray-500 mb-1">Category:</p>
+          <div className="flex flex-wrap">
+            <Badge text={scenario.category} variant="category" />
+          </div>
+        </div>
+
+        <div className="mb-3">
+          <p className="text-xs font-medium text-gray-500 mb-1">Targets:</p>
+          <div className="flex flex-wrap">
             <Badge text={scenario.target_year} variant="year" />
             <Badge text={scenario.target_temperature} variant="temperature" />
           </div>
