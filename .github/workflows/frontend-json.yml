@@ -3,6 +3,7 @@ name: JSON validate Frontend service
 on:
   push:
     branches:
+      - production
       - main
     paths:
       - "pbtar_schema.json"
@@ -10,7 +11,10 @@ on:
       - ".github/workflows/frontend-json.yml"
   pull_request:
     branches:
+      - "hotfix/**"
+      - "release/**"
       - main
+      - production
     paths:
       - "pbtar_schema.json"
       - "src/data/scenarios_metadata.json"

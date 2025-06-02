@@ -3,10 +3,14 @@ name: Lint Frontend service
 on:
   push:
     branches:
+      - production
       - main
   pull_request:
     branches:
+      - "hotfix/**"
+      - "release/**"
       - main
+      - production
   workflow_dispatch:
 
 jobs:
