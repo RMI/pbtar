@@ -42,7 +42,7 @@ jobs:
           # api_location: "" # Api source code path - optional
           output_location: "dist" # Built app content directory - optional
           production_branch: "production" # all other branches are preview builds
-          skip_deploy_on_missing_secrets: true
+          skip_deploy_on_missing_secrets: ${{ github.actor == 'dependabot[bot]' }}
         env:
           VITE_BUILD_MODE: |
             ${{
@@ -66,4 +66,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GREEN_PEBBLE_01F5D5C1E }}
           action: "close"
-          skip_deploy_on_missing_secrets: true
+          skip_deploy_on_missing_secrets: ${{ github.actor == 'dependabot[bot]' }}
