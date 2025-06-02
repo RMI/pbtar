@@ -142,7 +142,7 @@ describe("ScenarioCard component", () => {
   it("has the main container classes for styling", () => {
     const { container } = renderScenarioCard();
 
-    const link = container.querySelector("a");
+    const link = container.querySelector("div");
     expect(link).toHaveClass("bg-white");
     expect(link).toHaveClass("rounded-lg");
     expect(link).toHaveClass("shadow-md");

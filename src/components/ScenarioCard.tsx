@@ -10,10 +10,7 @@ interface ScenarioCardProps {
 
 const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
   return (
-    <Link
-      to={`/scenario/${scenario.id}`}
-      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-gray-200"
-    >
+    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-gray-200">
       <div className="p-5 flex flex-col h-full">
         <div className="mb-4">
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
@@ -76,14 +73,19 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
             </div>
           </div>
           <div className="mt-2 flex justify-end">
-            <span className="text-teal-600 text-sm font-medium flex items-center">
-              View details
-              <ChevronRight size={16} className="ml-1" />
-            </span>
+            <Link
+              to={`/scenario/${scenario.id}`}
+              className="text-teal-600 text-sm font-medium flex items-center transition-colors duration-200 hover:text-teal-300"
+            >
+              <span className="flex items-center">
+                View details
+                <ChevronRight size={16} className="ml-1" />
+              </span>
+            </Link>
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
