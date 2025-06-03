@@ -5,10 +5,14 @@ on:
     - cron: "0 3 * * *" # Nightly at 3 AM UTC
   push:
     branches:
+      - production
       - main
   pull_request:
     branches:
+      - "hotfix/**"
+      - "release/**"
       - main
+      - production
   workflow_dispatch:
 
 env:

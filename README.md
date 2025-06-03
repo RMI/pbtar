@@ -85,6 +85,23 @@ docker compose up --build
 
 This will start all services defined in the `docker-compose.yml` file, including the frontend, backend, and database. The frontend will be accessible at `http://localhost`.
 
+4. Building the application
+   To render the site,
+
+```bash
+npm run build
+
+# or for a PROD BUILD
+VITE_BUILD_MODE=production npm run build
+```
+
+Then you can serve the `dist/` directory using your favorite local server.
+For example, to use python's server,
+
+```bash
+python3 -m http.server 9001 -d ./dist
+```
+
 ## Contributing
 
 Dependencies are managed using `npm`. To add a new library, run:

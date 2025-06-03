@@ -10,10 +10,7 @@ interface ScenarioCardProps {
 
 const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
   return (
-    <Link
-      to={`/scenario/${scenario.id}`}
-      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-gray-200"
-    >
+    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-gray-200">
       <div className="p-5 flex flex-col h-full">
         <div className="mb-4">
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
@@ -25,8 +22,15 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
         </div>
 
         <div className="mb-3">
-          <Badge text={scenario.category} variant="category" />
-          <div className="flex flex-wrap mt-2">
+          <p className="text-xs font-medium text-gray-500 mb-1">Category:</p>
+          <div className="flex flex-wrap">
+            <Badge text={scenario.category} variant="category" />
+          </div>
+        </div>
+
+        <div className="mb-3">
+          <p className="text-xs font-medium text-gray-500 mb-1">Targets:</p>
+          <div className="flex flex-wrap">
             <Badge text={scenario.target_year} variant="year" />
             <Badge text={scenario.target_temperature} variant="temperature" />
           </div>
@@ -76,14 +80,19 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
             </div>
           </div>
           <div className="mt-2 flex justify-end">
-            <span className="text-teal-600 text-sm font-medium flex items-center">
-              View details
-              <ChevronRight size={16} className="ml-1" />
-            </span>
+            <Link
+              to={`/scenario/${scenario.id}`}
+              className="text-teal-600 text-sm font-medium flex items-center transition-colors duration-200 hover:text-teal-300"
+            >
+              <span className="flex items-center">
+                View details
+                <ChevronRight size={16} className="ml-1" />
+              </span>
+            </Link>
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
