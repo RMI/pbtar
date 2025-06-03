@@ -1,0 +1,21 @@
+[
+  {
+    "id": "scenario-007",
+    "name": "Planned Transition Scenario",
+    "description": "Gradual, orderly transition that begins immediately and continues gradually",
+    "category": "ITR",
+    "target_year": "2050",
+    "target_temperature": "2C",
+    "regions": ["Global", "EU", "Americas", "Asia Pacific"],
+    "sectors": ["Power", "Oil & Gas", "Coal", "Renewables", "Industrial"],
+    "publisher": "Strategic Climate Transition Forum",
+    "published_date": "2022-09-06",
+    "overview": "The Planned Transition scenario assumes climate policies are introduced early and gradually become more stringent. Carbon prices increase gradually, giving companies and consumers time to adapt. Physical risks are relatively low because climate change is effectively mitigated, while transition risks are manageable due to the predictable policy environment. Global warming is limited to 2°C by the end of the century.",
+    "expertRecommendation": "This scenario is valuable for understanding the financial implications of a well-managed transition. It represents a \"middle ground\" approach that balances climate ambition with economic realities. We recommend using this scenario for financial institutions looking to understand potential transition pathways that minimize market disruption while still achieving significant emissions reductions. The gradual nature of this scenario makes it useful for identifying near-term transition opportunities and risks.",
+    "dataSource": {
+      "description": "The SCTF scenario data is freely available from the SCTF website. Full datasets can be downloaded in various formats.",
+      "url": "https://www.sctf.org/scenarios-portal/",
+      "downloadAvailable": true
+    }
+  }
+]

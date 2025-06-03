@@ -1,0 +1,30 @@
+[
+  {
+    "id": "scenario-006",
+    "name": "GEC SSP1-1.9",
+    "description": "Sustainable development pathway limiting warming to 1.5°C with low overshoot",
+    "category": "IAM",
+    "target_year": "2100",
+    "target_temperature": "1.5C",
+    "regions": ["Global"],
+    "sectors": [
+      "Power",
+      "Oil & Gas",
+      "Coal",
+      "Renewables",
+      "Industrial",
+      "Transport",
+      "Buildings",
+      "Agriculture"
+    ],
+    "publisher": "Global Emissions Consortium",
+    "published_date": "2021-08-09",
+    "overview": "SSP1-1.9 is a Shared Socioeconomic Pathway that represents a sustainable development path with low challenges to mitigation and adaptation. It assumes a gradual shift away from fossil fuels, increased energy efficiency, and sustainable consumption patterns. This scenario limits global warming to 1.5°C by 2100 with limited or no overshoot, aligning with the most ambitious goal of the Paris Agreement.",
+    "expertRecommendation": "This scenario is recommended as a scientific reference point for Paris-aligned transition pathways. It has comprehensive global coverage across all major sectors and is backed by the scientific authority of the GEC. However, it may lack specific regional and sectoral detail needed for company-level assessments. We recommend using this scenario to establish the scientific basis for 1.5°C alignment, complemented by more detailed sectoral or regional scenarios.",
+    "dataSource": {
+      "description": "The GEC SSP database is publicly available and contains the full dataset for this scenario.",
+      "url": "https://sspdata.gec.org/",
+      "downloadAvailable": true
+    }
+  }
+]

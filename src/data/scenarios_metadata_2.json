@@ -1,0 +1,28 @@
+[
+  {
+    "id": "scenario-002",
+    "name": "FGCN Current Policies",
+    "description": "Business-as-usual baseline assuming current policies remain in place",
+    "category": "IAM",
+    "target_year": "2050",
+    "target_temperature": "3C",
+    "regions": ["Global", "EU", "SEA", "Americas", "Asia Pacific"],
+    "sectors": [
+      "Power",
+      "Oil & Gas",
+      "Coal",
+      "Renewables",
+      "Industrial",
+      "Transport"
+    ],
+    "publisher": "Future Governance and Climate Network",
+    "published_date": "2022-09-06",
+    "overview": "The FGCN Current Policies scenario represents a \"business as usual\" world where only currently implemented policies are preserved. This scenario leads to high physical risks as temperature rise is projected to reach 3°C or higher by 2100. The scenario assumes no additional policies are implemented beyond what is already in place, resulting in higher emissions throughout the projection period compared to other FGCN scenarios.",
+    "expertRecommendation": "This scenario is useful as a baseline comparison to understand the implications of inaction. When conducting climate transition assessments, this scenario helps illustrate the risks of maintaining the status quo. We recommend using this alongside more ambitious scenarios to show the contrast between different policy approaches. This scenario is particularly valuable for stress testing and understanding physical climate risks.",
+    "dataSource": {
+      "description": "The FGCN scenario data is freely available from the FGCN website. Full datasets can be downloaded in various formats.",
+      "url": "https://www.fgcn.net/scenarios-portal/",
+      "downloadAvailable": true
+    }
+  }
+]
