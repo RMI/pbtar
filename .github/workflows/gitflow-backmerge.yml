@@ -1,5 +1,6 @@
 ---
 name: Backmerge production to main
+concurrency: backmerge-production-to-main
 
 on:
   workflow_dispatch:
@@ -7,6 +8,7 @@ on:
     types: [closed]
     branches:
       - production
+    if: github.event.pull_request.merged == true
   push:
     branches:
       - production
