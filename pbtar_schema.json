@@ -83,7 +83,6 @@
         "required": ["description", "url", "downloadAvailable"]
       }
     },
-    "minItems": 1,
     "additionalProperties": false,
     "required": [
       "id",
@@ -100,5 +99,6 @@
       "expertRecommendation",
       "dataSource"
     ]
-  }
+  },
+  "minItems": 1
 }
