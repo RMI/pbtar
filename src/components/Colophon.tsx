@@ -13,6 +13,15 @@ interface SystemInfo {
   devicePixelRatio: string;
 }
 
+interface NetworkInformation {
+  effectiveType?: string;
+  downlink?: number;
+  connection?: {
+    effectiveType?: string;
+    downlink?: number;
+  };
+}
+
 const Colophon: React.FC<ColophonProps> = ({ className = '' }) => {
   const [systemInfo, setSystemInfo] = useState<SystemInfo>({
     userAgent: 'Loading...',
@@ -22,12 +31,15 @@ const Colophon: React.FC<ColophonProps> = ({ className = '' }) => {
     devicePixelRatio: 'Loading...'
   });
   const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState(false);
 
   useEffect(() => {
     const getConnectionInfo = () => {
       if ('connection' in navigator) {
-        const conn = (navigator as any).connection;
-        return `${conn.effectiveType || 'unknown'} (${conn.downlink}Mbps)`;
+        const conn = navigator as unknown as NetworkInformation;
+        const effectiveType = conn.connection?.effectiveType ?? conn.effectiveType ?? 'unknown';
+        const downlink = conn.connection?.downlink ?? conn.downlink ?? 0;
+        return `${effectiveType} (${downlink}Mbps)`;
       }
       return 'Not available';
     };
@@ -103,16 +115,18 @@ const Colophon: React.FC<ColophonProps> = ({ className = '' }) => {
       .join('\n\n');
   };
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(formatInfoForCopy());
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
-      setCopyError(true);
-      setTimeout(() => setCopyError(false), 2000);
-    }
+  const handleCopy = () => {
+    void (async () => {
+      try {
+        await navigator.clipboard.writeText(formatInfoForCopy());
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+        setCopyError(true);
+        setTimeout(() => setCopyError(false), 2000);
+      }
+    })();
   };
 
   return (
@@ -133,6 +147,10 @@ const Colophon: React.FC<ColophonProps> = ({ className = '' }) => {
             <>
               <Check size={14} className="text-green-500" />
               <span className="text-green-600">Copied!</span>
+            </>
+          ) : copyError ? (
+            <>
+              <span className="text-red-600">Failed to copy</span>
             </>
           ) : (
             <>
