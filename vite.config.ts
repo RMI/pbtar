@@ -38,7 +38,7 @@ function gitInfoPlugin(): Plugin {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), gitInfoPlugin()],
   server: {
     open: true,
     port: 3000,
