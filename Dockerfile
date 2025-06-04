@@ -1,11 +1,17 @@
+# Git info stage
+FROM alpine/git as git-info
+WORKDIR /app
+COPY . .
+COPY .git ./.git
+RUN echo "export VITE_GIT_SHA=$(git rev-parse HEAD)" >> git_info && \
+    echo "export VITE_GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)" >> git_info && \
+    echo "export VITE_GIT_CLEAN=$([ -z "$(git status --porcelain)" ] && echo "true" || echo "false")" >> git_info
+
 # Build stage
 FROM node:24-slim AS build
 
 # Set working directory
 WORKDIR /app
-
-# Install git
-RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 # Copy package files
 COPY package.json package-lock.json* ./
@@ -16,8 +22,12 @@ RUN npm ci
 # Copy source files
 COPY . .
 
-# Build the app
-RUN npm run build
+# Copy git info from previous stage
+COPY --from=git-info /app/git_info /tmp/git_vars
+
+# Source the env vars and build
+SHELL ["/bin/bash", "-c"]
+RUN source /tmp/git_vars && npm run build
 
 # Production stage
 FROM node:24-slim AS production

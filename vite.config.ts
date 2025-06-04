@@ -22,25 +22,46 @@ const getOsInfo = () => {
   } as const;
 };
 
+// Safe wrapper for git operations
+const getGitInfo = async () => {
+  try {
+    const git = simpleGit();
+    const [sha, status, branch] = await Promise.all([
+      git.revparse(['HEAD']).catch(() => process.env.VITE_GIT_SHA || 'unknown'),
+      git.status().catch(() => ({ isClean: () => process.env.VITE_GIT_CLEAN === 'true' })),
+      git.revparse(['--abbrev-ref', 'HEAD']).catch(() => process.env.VITE_GIT_BRANCH || 'unknown')
+    ]);
+
+    return {
+      sha,
+      isClean: status.isClean(),
+      branch
+    };
+  } catch (error) {
+    // Fallback to environment variables or defaults
+    return {
+      sha: process.env.VITE_GIT_SHA || 'unknown',
+      isClean: process.env.VITE_GIT_CLEAN === 'unknown',
+      branch: process.env.VITE_GIT_BRANCH || 'unknown'
+    };
+  }
+};
+
 // Plugin to inject git information at build time
 function gitInfoPlugin(): Plugin {
   return {
     name: 'vite-plugin-git-info',
     async config(_, { mode }) {
-      const git = simpleGit();
-      const sha = await git.revparse(['HEAD']);
-      const status = await git.status();
-      const isClean = status.isClean();
-      const branch = await git.revparse(['--abbrev-ref', 'HEAD']);
+      const gitInfo = await getGitInfo();
       const osInfo = getOsInfo();
       const pkgVersion = pkg?.version ?? 'unknown';
       
       return {
         define: {
           'import.meta.env.VITE_APP_VERSION': JSON.stringify(pkgVersion),
-          'import.meta.env.VITE_GIT_SHA': JSON.stringify(sha),
-          'import.meta.env.VITE_GIT_CLEAN': JSON.stringify(isClean),
-          'import.meta.env.VITE_GIT_BRANCH': JSON.stringify(branch),
+          'import.meta.env.VITE_GIT_SHA': JSON.stringify(gitInfo.sha),
+          'import.meta.env.VITE_GIT_CLEAN': JSON.stringify(gitInfo.isClean ? 'true' : 'false'),
+          'import.meta.env.VITE_GIT_BRANCH': JSON.stringify(gitInfo.branch),
           'import.meta.env.VITE_ENVIRONMENT': JSON.stringify(mode),
           'import.meta.env.VITE_BUILD_TIME': JSON.stringify(new Date().toISOString()),
           'import.meta.env.VITE_NODE_VERSION': JSON.stringify(process.version),
