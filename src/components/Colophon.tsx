@@ -42,16 +42,27 @@ const Colophon: React.FC<ColophonProps> = ({ className = '' }) => {
   }, []);
 
   const formatInfoForCopy = () => {
+    type EnvValue = string | boolean | undefined;
+    
+    const getEnvValue = (key: string, defaultValue: string = 'N/A'): string => {
+      const value = import.meta.env[key] as EnvValue;
+      if (typeof value === 'boolean') return String(value);
+      return value?.toString() ?? defaultValue;
+    };
+
     const sections = {
       'Build Info': {
-        'App Version': import.meta.env.VITE_APP_VERSION ?? 'N/A',
-        'Git SHA': import.meta.env.VITE_GIT_SHA ?? 'N/A',
-        'Branch': import.meta.env.VITE_GIT_BRANCH ?? 'N/A',
-        'Working Directory Clean': import.meta.env.VITE_GIT_CLEAN === "true" || import.meta.env.VITE_GIT_CLEAN === true,
-        'Environment': import.meta.env.VITE_ENVIRONMENT ?? 'development',
-        'Build Time': import.meta.env.VITE_BUILD_TIME ?? 'N/A',
-        'Node Version': import.meta.env.VITE_NODE_VERSION ?? 'N/A',
-        'Vite Version': import.meta.env.VITE_VERSION ?? 'N/A'
+        'App Version': getEnvValue('VITE_APP_VERSION'),
+        'Git SHA': getEnvValue('VITE_GIT_SHA'),
+        'Branch': getEnvValue('VITE_GIT_BRANCH'),
+        'Working Directory Clean': String(
+          getEnvValue('VITE_GIT_CLEAN') === 'true' || 
+          getEnvValue('VITE_GIT_CLEAN') === 'True'
+        ),
+        'Environment': getEnvValue('VITE_ENVIRONMENT', 'development'),
+        'Build Time': getEnvValue('VITE_BUILD_TIME'),
+        'Node Version': getEnvValue('VITE_NODE_VERSION'),
+        'Vite Version': getEnvValue('VITE_VERSION')
       },
       'Runtime Info': {
         'User Agent': systemInfo.userAgent,
@@ -61,24 +72,24 @@ const Colophon: React.FC<ColophonProps> = ({ className = '' }) => {
         'Connection': systemInfo.connectionType
       },
       'GitHub Build Info': {
-        'Actor': import.meta.env.VITE_GITHUB_ACTOR ?? 'N/A',
-        'Event': import.meta.env.VITE_GITHUB_EVENT_NAME ?? 'N/A',
-        'Repository': import.meta.env.VITE_GITHUB_REPOSITORY ?? 'N/A',
-        'Ref': import.meta.env.VITE_GITHUB_REF ?? 'N/A',
-        'Merge SHA': import.meta.env.VITE_GITHUB_SHA ?? 'N/A',
-        'Head SHA': import.meta.env.VITE_GITHUB_HEAD_SHA ?? 'N/A',
-        'Workflow': import.meta.env.VITE_GITHUB_WORKFLOW ?? 'N/A',
-        'Workflow Ref': import.meta.env.VITE_GITHUB_WORKFLOW_REF ?? 'N/A',
-        'Workflow SHA': import.meta.env.VITE_GITHUB_WORKFLOW_SHA ?? 'N/A',
-        'Run ID': import.meta.env.VITE_GITHUB_RUN_ID ?? 'N/A',
-        'Run Number': import.meta.env.VITE_GITHUB_RUN_NUMBER ?? 'N/A',
-        'Run Attempt': import.meta.env.VITE_GITHUB_RUN_ATTEMPT ?? 'N/A'
+        'Actor': getEnvValue('VITE_GITHUB_ACTOR'),
+        'Event': getEnvValue('VITE_GITHUB_EVENT_NAME'),
+        'Repository': getEnvValue('VITE_GITHUB_REPOSITORY'),
+        'Ref': getEnvValue('VITE_GITHUB_REF'),
+        'Merge SHA': getEnvValue('VITE_GITHUB_SHA'),
+        'Head SHA': getEnvValue('VITE_GITHUB_HEAD_SHA'),
+        'Workflow': getEnvValue('VITE_GITHUB_WORKFLOW'),
+        'Workflow Ref': getEnvValue('VITE_GITHUB_WORKFLOW_REF'),
+        'Workflow SHA': getEnvValue('VITE_GITHUB_WORKFLOW_SHA'),
+        'Run ID': getEnvValue('VITE_GITHUB_RUN_ID'),
+        'Run Number': getEnvValue('VITE_GITHUB_RUN_NUMBER'),
+        'Run Attempt': getEnvValue('VITE_GITHUB_RUN_ATTEMPT')
       },
       'Build Machine Info': {
-        'Machine Name': import.meta.env.VITE_BUILD_MACHINE_NAME ?? 'N/A',
-        'OS': import.meta.env.VITE_BUILD_OS ?? 'N/A',
-        'OS Version': import.meta.env.VITE_BUILD_OS_VERSION ?? 'N/A',
-        'Architecture': import.meta.env.VITE_BUILD_ARCH ?? 'N/A'
+        'Machine Name': getEnvValue('VITE_BUILD_MACHINE_NAME'),
+        'OS': getEnvValue('VITE_BUILD_OS'),
+        'OS Version': getEnvValue('VITE_BUILD_OS_VERSION'),
+        'Architecture': getEnvValue('VITE_BUILD_ARCH')
       }
     };
 
