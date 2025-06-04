@@ -67,10 +67,7 @@ const Colophon: React.FC<ColophonProps> = ({ className = '' }) => {
         'App Version': getEnvValue('VITE_APP_VERSION'),
         'Git SHA': getEnvValue('VITE_GIT_SHA'),
         'Branch': getEnvValue('VITE_GIT_BRANCH'),
-        'Working Directory Clean': String(
-          getEnvValue('VITE_GIT_CLEAN') === 'true' || 
-          getEnvValue('VITE_GIT_CLEAN') === 'True'
-        ),
+        'Working Directory Clean': String(getEnvValue('VITE_GIT_CLEAN')),
         'Environment': getEnvValue('VITE_ENVIRONMENT', 'development'),
         'Build Time': getEnvValue('VITE_BUILD_TIME'),
         'Node Version': getEnvValue('VITE_NODE_VERSION'),
@@ -166,7 +163,7 @@ const Colophon: React.FC<ColophonProps> = ({ className = '' }) => {
             <li>App Version: {import.meta.env.VITE_APP_VERSION ?? 'N/A'}</li>
             <li>Git SHA: {import.meta.env.VITE_GIT_SHA ?? 'N/A'}</li>
             <li>Branch: {import.meta.env.VITE_GIT_BRANCH ?? 'N/A'}</li>
-            <li>Working Directory Clean: {String(import.meta.env.VITE_GIT_CLEAN === "true" || import.meta.env.VITE_GIT_CLEAN === true)}</li>
+            <li>Working Directory Clean: {String(import.meta.env.VITE_GIT_CLEAN)}</li>
             <li>Environment: {import.meta.env.VITE_ENVIRONMENT ?? 'development'}</li>
             <li>Build Time: {import.meta.env.VITE_BUILD_TIME ?? 'N/A'}</li>
             <li>Node Version: {import.meta.env.VITE_NODE_VERSION ?? 'N/A'}</li>
