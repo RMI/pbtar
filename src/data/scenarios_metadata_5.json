@@ -1,0 +1,21 @@
+[
+  {
+    "id": "scenario-005",
+    "name": "GreenForward EU Strategy",
+    "description": "Ambitious accelerated implementation of European Green Deal policies",
+    "category": "NDC",
+    "target_year": "2040",
+    "target_temperature": "1.5C",
+    "regions": ["EU"],
+    "sectors": ["Power", "Renewables", "Transport", "Buildings", "Industrial"],
+    "publisher": "GreenForward Policy Alliance",
+    "published_date": "2023-01-25",
+    "overview": "The GreenForward EU Strategy scenario models an ambitious implementation of European climate policies beyond the current targets. It includes accelerated phase-out of fossil fuels in power generation, rapid electrification of transport, comprehensive building renovations, and industrial decarbonization. The scenario achieves net zero emissions in the EU by 2040, a decade earlier than the current official target.",
+    "expertRecommendation": "This scenario is valuable for assessing European companies and understanding the potential impacts of more ambitious EU climate policies. It presents a useful \"high ambition\" case for European policy evolution and is particularly relevant for financial institutions with significant European exposure. We recommend using this scenario when assessing companies with major operations in the EU, especially in sectors targeted by EU climate policies.",
+    "dataSource": {
+      "description": "The scenario data is publicly available through the GreenForward Policy Alliance climate modeling portal.",
+      "url": "https://greenforward.eu/models/",
+      "downloadAvailable": true
+    }
+  }
+]

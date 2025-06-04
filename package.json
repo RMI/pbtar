@@ -14,7 +14,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "json:check": "ajv validate -s pbtar_schema.json src/data/scenarios_metadata.json"
+    "json:check": "ajv validate -s pbtar_schema.json src/data/*.json"
   },
   "author": "RMI",
   "license": "MIT",

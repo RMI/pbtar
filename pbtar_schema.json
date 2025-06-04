@@ -99,5 +99,6 @@
       "expertRecommendation",
       "dataSource"
     ]
-  }
+  },
+  "minItems": 1
 }
