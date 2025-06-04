@@ -57,6 +57,22 @@ jobs:
               (github.event_name == 'pull_request' && format('{0}-{1}', 'pr', github.event.pull_request.number)) ||
               github.ref_name
             }}
+          VITE_GITHUB_ACTOR: ${{ github.actor }}
+          VITE_GITHUB_EVENT_NAME: ${{ github.event_name }}
+          VITE_GITHUB_REPOSITORY: ${{ github.repository }}
+          VITE_GITHUB_REF: ${{ github.ref }}
+          VITE_GITHUB_SHA: ${{ github.sha }}
+          VITE_GITHUB_HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          VITE_GITHUB_WORKFLOW: ${{ github.workflow }}
+          VITE_GITHUB_WORKFLOW_REF: ${{ github.workflow_ref }}
+          VITE_GITHUB_WORKFLOW_SHA: ${{ github.workflow_sha }}
+          VITE_GITHUB_RUN_ID: ${{ github.run_id }}
+          VITE_GITHUB_RUN_NUMBER: ${{ github.run_number }}
+          VITE_GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+          VITE_BUILD_MACHINE_NAME: ${{ runner.name }}
+          VITE_BUILD_OS: ${{ runner.os }}
+          VITE_BUILD_OS_VERSION: ${{ runner.os-version }}
+          VITE_BUILD_ARCH: ${{ runner.arch }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
