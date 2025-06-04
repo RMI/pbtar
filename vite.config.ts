@@ -4,6 +4,24 @@ import { simpleGit } from 'simple-git';
 import os from 'os';
 import pkg from './package.json';
 
+// Safe wrapper for OS functions with proper typing
+const getOsInfo = () => {
+  const safeCall = <T>(fn: () => T, defaultValue: T): T => {
+    try {
+      return fn();
+    } catch {
+      return defaultValue;
+    }
+  };
+
+  return {
+    hostname: safeCall(() => os.hostname(), 'unknown'),
+    platform: safeCall(() => os.platform(), 'unknown'),
+    release: safeCall(() => os.release(), 'unknown'),
+    arch: safeCall(() => os.arch(), 'unknown')
+  } as const;
+};
+
 // Plugin to inject git information at build time
 function gitInfoPlugin(): Plugin {
   return {
@@ -14,10 +32,12 @@ function gitInfoPlugin(): Plugin {
       const status = await git.status();
       const isClean = status.isClean();
       const branch = await git.revparse(['--abbrev-ref', 'HEAD']);
+      const osInfo = getOsInfo();
+      const pkgVersion = pkg?.version ?? 'unknown';
       
       return {
         define: {
-          'import.meta.env.VITE_APP_VERSION': JSON.stringify(pkg.version),
+          'import.meta.env.VITE_APP_VERSION': JSON.stringify(pkgVersion),
           'import.meta.env.VITE_GIT_SHA': JSON.stringify(sha),
           'import.meta.env.VITE_GIT_CLEAN': JSON.stringify(isClean),
           'import.meta.env.VITE_GIT_BRANCH': JSON.stringify(branch),
@@ -26,10 +46,10 @@ function gitInfoPlugin(): Plugin {
           'import.meta.env.VITE_NODE_VERSION': JSON.stringify(process.version),
           'import.meta.env.VITE_VERSION': JSON.stringify(viteVersion),
           // Build machine information
-          'import.meta.env.VITE_BUILD_MACHINE_NAME': JSON.stringify(os.hostname()),
-          'import.meta.env.VITE_BUILD_OS': JSON.stringify(os.platform()),
-          'import.meta.env.VITE_BUILD_OS_VERSION': JSON.stringify(os.release()),
-          'import.meta.env.VITE_BUILD_ARCH': JSON.stringify(os.arch()),
+          'import.meta.env.VITE_BUILD_MACHINE_NAME': JSON.stringify(osInfo.hostname),
+          'import.meta.env.VITE_BUILD_OS': JSON.stringify(osInfo.platform),
+          'import.meta.env.VITE_BUILD_OS_VERSION': JSON.stringify(osInfo.release),
+          'import.meta.env.VITE_BUILD_ARCH': JSON.stringify(osInfo.arch),
         },
       };
     },
