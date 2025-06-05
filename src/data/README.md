@@ -6,6 +6,38 @@ This README should be the definitive source of information about these JSON file
 
 Each JSON file has a number of mandatory fields which must be included. Additionally, the structure, the data types, and in some cases the allowed values for a given key must be correct for things to work as expected. This repo has CI/CD setup to validate any new JSON added in a PR against the schema, as well as enforce code style requirements through a linter. Therefore, any new JSON added through a PR on main must pass all of the 
 
+An example scenario metadata JSON file looks like...
+``` json
+[
+  {
+    "id": "scenario-001",
+    "name": "ZETI Net Zero Pathway",
+    "description": "A comprehensive pathway for the global energy sector to reach net zero by 2050",
+    "category": "IAM",
+    "target_year": "2050",
+    "target_temperature": "1.5C",
+    "regions": ["Global"],
+    "sectors": [
+      "Power",
+      "Oil & Gas",
+      "Coal",
+      "Renewables",
+      "Transport",
+      "Buildings",
+      "Industrial"
+    ],
+    "publisher": "Zero Emissions Technology Institute",
+    "published_date": "2021-05-18",
+    "overview": "The ZETI Net Zero Pathway roadmap shows how the global energy sector can achieve net zero emissions by 2050. It is designed to examine what would need to happen to the energy system over the next 30 years to achieve net zero emissions by 2050. The pathway calls for rapid deployment of available technologies between now and 2030, with clean technologies in heavy industry and long-distance transport developed and brought to market in the 2030s. The pathway also requires innovation, international cooperation, and significant investment.",
+    "expertRecommendation": "This scenario represents the most comprehensive global pathway to net zero and is highly recommended as a reference scenario for any climate transition assessment. It has excellent sectoral coverage and provides detailed milestones for different technologies and regions. However, analysts should note that it may be less detailed for specific regional considerations in Southeast Asia or other developing regions. Consider complementing this scenario with regional scenarios for a more complete assessment.",
+    "dataSource": {
+      "description": "The full scenario data is available from the ZETI website. Free summary data is available for download, while complete datasets require a ZETI data subscription.",
+      "url": "https://www.zeti.org/reports/net-zero-pathway",
+      "downloadAvailable": true
+    }
+  }
+]
+```
 
 ``` r
 validate_json <- function(json_obj, shcema_url = NULL) {
