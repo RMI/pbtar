@@ -50,7 +50,7 @@ const AboutPage: React.FC = () => {
               href="https://rmi.org/transitionfinance/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center text-teal-600 hover:text-teal-800 transition-colors duration-200"
+              className="inline-flex items-center text-teal-600 hover:text-energy transition-colors duration-200"
             >
               Learn more about Climate Transition Assessments
               <ExternalLink size={16} className="ml-2" />
@@ -119,7 +119,7 @@ const AboutPage: React.FC = () => {
           </p>
           <a
             href="mailto:jhoffart@rmi.org"
-            className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors duration-200"
+            className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-energy transition-colors duration-200"
           >
             <Mail size={16} className="mr-2" />
             Contact Us
