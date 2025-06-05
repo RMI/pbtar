@@ -143,6 +143,9 @@ describe("ScenarioCard component", () => {
     const { container } = renderScenarioCard();
 
     const card = container.firstChild;
+    if (!(card instanceof HTMLElement)) {
+      throw new Error("Expected container.firstChild to be an HTMLElement");
+    }
     expect(card).toHaveClass("bg-white");
     expect(card).toHaveClass("rounded-lg");
     expect(card).toHaveClass("shadow-md");
