@@ -77,7 +77,7 @@ write_json <- function(json_obj, file) {
   validation <- validate_json(json_obj)
   if (!is.data.frame(validation)) {
     jsonlite::write_json(
-      x = new_scenario_metadata,
+      x = json_obj,
       path = file,
       auto_unbox = TRUE,
       pretty = TRUE
