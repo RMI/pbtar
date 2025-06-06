@@ -46,7 +46,7 @@ const ScenarioDetailPage: React.FC = () => {
         </p>
         <Link
           to="/"
-          className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors duration-200"
+          className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-energy transition-colors duration-200"
         >
           <ArrowLeft size={16} className="mr-2" />
           Back to Scenarios
@@ -59,18 +59,18 @@ const ScenarioDetailPage: React.FC = () => {
     <div className="container mx-auto px-4 py-8">
       <Link
         to="/"
-        className="inline-flex items-center text-teal-600 hover:text-teal-800 mb-6 transition-colors duration-200"
+        className="inline-flex items-center text-gray-600 hover:text-energy mb-6 transition-colors duration-200"
       >
         <ArrowLeft size={16} className="mr-1" />
         Back to scenarios
       </Link>
 
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
-        <div className="bg-gradient-to-r from-teal-700 to-blue-800 p-6 text-white">
+        <div className="bg-bluespruce p-6 text-white">
           <h1 className="text-2xl md:text-3xl font-bold mb-2">
             {scenario.name}
           </h1>
-          <p className="text-teal-100 mb-4">{scenario.description}</p>
+          <p className="text-white mb-4">{scenario.description}</p>
 
           <div className="flex flex-wrap gap-2 mb-4">
             <Badge text={scenario.category} variant="category" />
@@ -80,11 +80,11 @@ const ScenarioDetailPage: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
             <p className="mb-1 sm:mb-0">
-              <span className="text-teal-200">Publisher:</span>{" "}
+              <span className="text-white">Publisher:</span>{" "}
               {scenario.publisher}
             </p>
             <p>
-              <span className="text-teal-200">Published:</span>{" "}
+              <span className="text-white">Published:</span>{" "}
               {scenario.published_date}
             </p>
           </div>
@@ -124,14 +124,14 @@ const ScenarioDetailPage: React.FC = () => {
                       href={scenario.dataSource.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
+                      className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-energy transition-colors duration-200"
                     >
                       <ExternalLink size={16} className="mr-2" />
                       Visit Source
                     </a>
 
                     {scenario.dataSource.downloadAvailable && (
-                      <button className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors duration-200">
+                      <button className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-energy transition-colors duration-200">
                         <Download size={16} className="mr-2" />
                         Download Data
                       </button>

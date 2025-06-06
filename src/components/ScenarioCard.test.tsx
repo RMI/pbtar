@@ -142,12 +142,15 @@ describe("ScenarioCard component", () => {
   it("has the main container classes for styling", () => {
     const { container } = renderScenarioCard();
 
-    const link = container.querySelector("div");
-    expect(link).toHaveClass("bg-white");
-    expect(link).toHaveClass("rounded-lg");
-    expect(link).toHaveClass("shadow-md");
-    expect(link).toHaveClass("flex");
-    expect(link).toHaveClass("flex-col");
-    expect(link).toHaveClass("h-full");
+    const card = container.firstChild;
+    if (!(card instanceof HTMLElement)) {
+      throw new Error("Expected container.firstChild to be an HTMLElement");
+    }
+    expect(card).toHaveClass("bg-white");
+    expect(card).toHaveClass("rounded-lg");
+    expect(card).toHaveClass("shadow-md");
+    expect(card).toHaveClass("flex");
+    expect(card).toHaveClass("flex-col");
+    expect(card).toHaveClass("h-full");
   });
 });
