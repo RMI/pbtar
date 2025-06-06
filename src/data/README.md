@@ -41,7 +41,7 @@ An example scenario metadata JSON file looks like...
 ]
 ```
 
-To facilitate creating a new JSON file in the appropriate format using R, we have created the following two functions to validate a R <list> against the schema in this repo, and to write a valid <list> to a JSON file. These functions can be copy-pasted to your R console and then they're available to use on any <list> you have in your environment.
+To facilitate creating a new JSON file in the appropriate format using R, we have created the following two functions to validate a R `<list>` against the schema in this repo, and to write a valid `<list>` to a JSON file. These functions can be copy-pasted to your R console and then they're available to use on any `<list>` you have in your environment.
 
 ``` r
 validate_json <- function(json_obj, shcema_url = NULL) {
@@ -87,7 +87,7 @@ write_json <- function(json_obj, file) {
 }
 ```
 
-Once the above functions have been loaded in your R environment, a new <list> can be created, and then validated and exported as a JSON file using these functions like so...
+Once the above functions have been loaded in your R environment, a new `<list>` can be created, and then validated and exported as a JSON file using these functions like so...
 
 ``` r
 new_scenario_metadata <-
@@ -116,7 +116,7 @@ new_scenario_metadata <-
 write_json(new_scenario_metadata, "test.json")
 ```
 
-If the <list> is not valid, the functions will return a data frame with information about what was invalid, like so...
+If the `<list>` is not valid, the functions will return a data frame with information about what was invalid, like so...
 
 ``` r
 new_scenario_metadata <-
