@@ -9,7 +9,8 @@ Each JSON file has a number of mandatory fields which must be included. Addition
 Currently, once a JSON file has been added to the repo, it still will not be included in the site's data unless it is also explicitly imported in the [scenariosData.ts](https://github.com/RMI/pbtar/blob/main/src/data/scenariosData.ts) script, so any PR that adds a new JSON should also include an edit to `scenariosData.ts` to include it unless intentionally left out of the site's data.
 
 An example scenario metadata JSON file looks like...
-``` json
+
+```json
 [
   {
     "id": "scenario-001",
@@ -43,14 +44,14 @@ An example scenario metadata JSON file looks like...
 
 To facilitate creating a new JSON file in the appropriate format using R, we have created the following two functions to validate a R `<list>` against the schema in this repo, and to write a valid `<list>` to a JSON file. These functions can be copy-pasted to your R console and then they're available to use on any `<list>` you have in your environment.
 
-``` r
+```r
 validate_json <- function(json_obj, shcema_url = NULL) {
   if (is.null(shcema_url)) {
     schema_url <- "https://raw.githubusercontent.com/RMI/pbtar/refs/heads/main/pbtar_schema.json"
   }
   json_schema <- readr::read_file(file = schema_url)
-  
-  validation <- 
+
+  validation <-
     jsonvalidate::json_validate(
       json = jsonlite::toJSON(json_obj, auto_unbox = TRUE),
       schema = json_schema,
@@ -58,15 +59,15 @@ validate_json <- function(json_obj, shcema_url = NULL) {
       greedy = TRUE,
       engine = "ajv"
     )
-  
+
   if (!validation) {
     errors <-
-      attr(validation, "errors") |> 
-      dplyr::mutate(key = stringr::str_extract(instancePath, "[a-z]+")) |> 
-      tidyr::unnest(params) |> 
-      dplyr::mutate(allowedValues = purrr::map_chr(allowedValues, \(x) paste0(x, collapse = ", "))) |> 
-      dplyr::rename(input = data) |> 
-      dplyr::mutate(input = unlist(input)) |> 
+      attr(validation, "errors") |>
+      dplyr::mutate(key = stringr::str_extract(instancePath, "[a-z]+")) |>
+      tidyr::unnest(params) |>
+      dplyr::mutate(allowedValues = purrr::map_chr(allowedValues, \(x) paste0(x, collapse = ", "))) |>
+      dplyr::rename(input = data) |>
+      dplyr::mutate(input = unlist(input)) |>
       dplyr::select(dplyr::any_of(c("input", "key", "message", "allowedValues")))
     return(errors)
   }
@@ -89,7 +90,7 @@ write_json <- function(json_obj, file) {
 
 Once the above functions have been loaded in your R environment, a new `<list>` can be created, and then validated and exported as a JSON file using these functions like so...
 
-``` r
+```r
 new_scenario_metadata <-
   list(
     list(
@@ -118,7 +119,7 @@ write_json(new_scenario_metadata, "test.json")
 
 If the `<list>` is not valid, the functions will return a data frame with information about what was invalid, like so...
 
-``` r
+```r
 new_scenario_metadata <-
   list(
     list(
@@ -145,12 +146,12 @@ new_scenario_metadata <-
 write_json(new_scenario_metadata, "test.json")
 #> # A tibble: 7 × 4
 #>   input                    key     message                         allowedValues
-#>   <chr>                    <chr>   <chr>                           <chr>        
-#> 1 1                        id      must be string                  ""           
-#> 2 ZETI Net Zero Pathway    name    must be string                  ""           
-#> 3 Global                   regions must be array                   ""           
+#>   <chr>                    <chr>   <chr>                           <chr>
+#> 1 1                        id      must be string                  ""
+#> 2 ZETI Net Zero Pathway    name    must be string                  ""
+#> 3 Global                   regions must be array                   ""
 #> 4 Poer                     sectors must be equal to one of the al… "Agriculture…
 #> 5 Oil&Gas                  sectors must be equal to one of the al… "Agriculture…
-#> 6 Data source description. data    must be string                  ""           
+#> 6 Data source description. data    must be string                  ""
 #> 7 1                        data    must be boolean                 ""
 ```
