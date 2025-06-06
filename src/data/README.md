@@ -45,8 +45,8 @@ An example scenario metadata JSON file looks like...
 To facilitate creating a new JSON file in the appropriate format using R, we have created the following two functions to validate a R `<list>` against the schema in this repo, and to write a valid `<list>` to a JSON file. These functions can be copy-pasted to your R console and then they're available to use on any `<list>` you have in your environment.
 
 ```r
-validate_json <- function(json_obj, shcema_url = NULL) {
-  if (is.null(shcema_url)) {
+validate_json <- function(json_obj, schema_url = NULL) {
+  if (is.null(schema_url)) {
     schema_url <- "https://raw.githubusercontent.com/RMI/pbtar/refs/heads/main/pbtar_schema.json"
   }
   json_schema <- readr::read_file(file = schema_url)
