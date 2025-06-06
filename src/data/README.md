@@ -1,10 +1,12 @@
 # Scenario metadata for the pbtar repo
 
-The `src/data` directory in the pbtar repo contains all of the data shown on the Pathways-ba sed transition assessment repository site. There is an individual JSON file for each scenario/pathway containing all of the metadata for the associated scenario. The JSON files have a very strict, specific format that needs to be followed, which is defined by the JSON schema file in this repo at pbtar_schema.json. To add a new scenario, a new JSON file in the correct format needs to be added to this repo in a pull request on `main`.
+The [`src/data`](https://github.com/RMI/pbtar/tree/main/src/data) directory in the [pbtar](https://github.com/RMI/pbtar) repo contains all of the data shown on the [Pathways-based transition assessment repository site](https://green-pebble-01f5d5c1e-main.westus2.6.azurestaticapps.net). There is an individual JSON file for each scenario/pathway containing all of the metadata for the associated scenario. The JSON files have a very strict, specific format that needs to be followed, which is defined by the JSON schema file in this repo at [pbtar_schema.json](https://github.com/RMI/pbtar/blob/main/pbtar_schema.json). To add a new scenario, a new JSON file in the correct format needs to be added to this repo in a pull request on `main`.
 
-This README should be the definitive source of information about these JSON files and how to add them or modify them. As this repo is currently under heavy development, such details may change rapidly, and this README should be kept up to date with those changes as they happen. If you're developing in this repo, please remember to make appropriate changes to this README when relevant changes are made to the underlying code. If you're mainting/modifying/adding the scenario data, please refer to the live version of this README on `main` for the most up to date details.
+This README should be the definitive source of information about these JSON files and how to add them or modify them. As this repo is currently under heavy development, such details may change rapidly, and this README should be kept up to date with those changes as they happen. If you're developing in this repo, please remember to make appropriate changes to this README when relevant changes are made to the underlying code. If you're maintaining/modifying/adding the scenario data, please refer to the [live version of this README](https://github.com/RMI/pbtar/blob/main/src/data/README.md) on `main` for the most up to date details.
 
-Each JSON file has a number of mandatory fields which must be included. Additionally, the structure, the data types, and in some cases the allowed values for a given key must be correct for things to work as expected. This repo has CI/CD setup to validate any new JSON added in a PR against the schema, as well as enforce code style requirements through a linter. Therefore, any new JSON added through a PR on main must pass all of the 
+Each JSON file has a number of mandatory fields which must be included. Additionally, the structure, the data types, and in some cases the allowed values for a given key must be correct for things to work as expected. This repo has CI/CD setup to validate any new JSON added in a PR against the schema, as well as enforce code style requirements through a linter. Therefore, any new JSON added through a PR on main must pass all of the test before being merged.
+
+Currently, once a JSON file has been added to the repo, it still will not be included in the site's data unless it is also explicitly imported in the [scenariosData.ts](https://github.com/RMI/pbtar/blob/main/src/data/scenariosData.ts) script, so any PR that adds a new JSON should also include an edit to `scenariosData.ts` to include it unless intentionally left out of the site's data.
 
 An example scenario metadata JSON file looks like...
 ``` json
@@ -38,6 +40,8 @@ An example scenario metadata JSON file looks like...
   }
 ]
 ```
+
+To facilitate creating a new JSON file in the appropriate format using R, we have created the following two functions to validate a R <list> against the schema in this repo, and to write a valid <list> to a JSON file. These functions can be copy-pasted to your R console and then they're available to use on any <list> you have in your environment.
 
 ``` r
 validate_json <- function(json_obj, shcema_url = NULL) {
@@ -83,6 +87,7 @@ write_json <- function(json_obj, file) {
 }
 ```
 
+Once the above functions have been loaded in your R environment, a new <list> can be created, and then validated and exported as a JSON file using these functions like so...
 
 ``` r
 new_scenario_metadata <-
@@ -110,6 +115,8 @@ new_scenario_metadata <-
 
 write_json(new_scenario_metadata, "test.json")
 ```
+
+If the <list> is not valid, the functions will return a data frame with information about what was invalid, like so...
 
 ``` r
 new_scenario_metadata <-
