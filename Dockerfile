@@ -12,9 +12,6 @@ FROM node:24-slim AS build
 # Set working directory
 WORKDIR /app
 
-# Install git
-RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
-
 # Copy git info from previous stage
 COPY --from=git-info /tmp/git_sha /tmp/git_sha
 COPY --from=git-info /tmp/git_branch /tmp/git_branch
