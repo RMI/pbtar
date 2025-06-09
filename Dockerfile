@@ -4,9 +4,14 @@ WORKDIR /app
 COPY . .
 COPY .git ./.git
 
-RUN echo "export VITE_GIT_SHA=$(git rev-parse HEAD)" >> /tmp/git_vars && \
-    echo "export VITE_GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)" >> /tmp/git_vars && \
-    echo "export VITE_GIT_CLEAN=$([ ! -s $(git status --porcelain) ] && echo 'true' || echo 'false')" >> /tmp/git_vars
+RUN \
+  VITE_GIT_SHA="$(git rev-parse HEAD)" && \
+  VITE_GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)" && \
+  GIT_STATUS="$(git status --porcelain)" && \
+  VITE_GIT_CLEAN="$( [ -z "$GIT_STATUS" ] && echo 'true' || echo 'false' )" && \
+  echo "export VITE_GIT_SHA=$VITE_GIT_SHA" >> /tmp/git_vars && \
+  echo "export VITE_GIT_BRANCH=$VITE_GIT_BRANCH" >> /tmp/git_vars && \
+  echo "export VITE_GIT_CLEAN=$VITE_GIT_CLEAN" >> /tmp/git_vars
 
 # Build stage
 FROM node:24-slim AS build
