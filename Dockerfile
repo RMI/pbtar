@@ -3,9 +3,6 @@ FROM alpine/git:2.49.0 as git-info
 WORKDIR /app
 COPY . .
 COPY .git ./.git
-RUN git rev-parse HEAD > /tmp/git_sha && \
-    git rev-parse --abbrev-ref HEAD > /tmp/git_branch && \
-    git status --porcelain > /tmp/git_status
 
 RUN echo "export VITE_GIT_SHA=$(git rev-parse HEAD)" >> /tmp/git_vars && \
     echo "export VITE_GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)" >> /tmp/git_vars && \
