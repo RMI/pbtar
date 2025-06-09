@@ -1,6 +1,7 @@
 # Git info stage
 FROM alpine/git:2.49.0 as git-info
 WORKDIR /app
+COPY . .
 COPY .git ./.git
 RUN git rev-parse HEAD > /tmp/git_sha && \
     git rev-parse --abbrev-ref HEAD > /tmp/git_branch && \
