@@ -12,6 +12,15 @@ FROM node:24-slim AS build
 # Set working directory
 WORKDIR /app
 
+# Copy package files
+COPY package.json package-lock.json* ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source files
+COPY . .
+
 # Copy git info from previous stage
 COPY --from=git-info /tmp/git_sha /tmp/git_sha
 COPY --from=git-info /tmp/git_branch /tmp/git_branch
@@ -21,15 +30,6 @@ COPY --from=git-info /tmp/git_status /tmp/git_status
 RUN echo "export VITE_GIT_SHA=$(cat git_sha)" >> /tmp/git_profile && \
     echo "export VITE_GIT_BRANCH=$(cat git_branch)" >> /tmp/git_profile && \
     echo "export VITE_GIT_CLEAN=$([ ! -s git_status ] && echo 'true' || echo 'false')" >> /tmp/git_profile
-
-# Copy package files
-COPY package.json package-lock.json* ./
-
-# Install dependencies
-RUN npm ci
-
-# Copy source files
-COPY . .
 
 # Source the env vars and build
 SHELL ["/bin/bash", "-c"]
