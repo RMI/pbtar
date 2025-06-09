@@ -1,5 +1,5 @@
 # Git info stage
-FROM alpine/git as git-info
+FROM alpine/git:2.49.0 as git-info
 WORKDIR /app
 COPY .git ./.git
 RUN git rev-parse HEAD > /tmp/git_sha && \
