@@ -2,9 +2,9 @@
 FROM alpine/git as git-info
 WORKDIR /app
 COPY .git ./.git
-RUN git rev-parse HEAD > git_sha && \
-    git rev-parse --abbrev-ref HEAD > git_branch && \
-    git status --porcelain > git_status
+RUN git rev-parse HEAD > /tmp/git_sha && \
+    git rev-parse --abbrev-ref HEAD > /tmp/git_branch && \
+    git status --porcelain > /tmp/git_status
 
 # Build stage
 FROM node:24-slim AS build
@@ -16,14 +16,14 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 # Copy git info from previous stage
-COPY --from=git-info /app/git_sha /app/git_sha
-COPY --from=git-info /app/git_branch /app/git_branch
-COPY --from=git-info /app/git_status /app/git_status
+COPY --from=git-info /tmp/git_sha /tmp/git_sha
+COPY --from=git-info /tmp/git_branch /tmp/git_branch
+COPY --from=git-info /tmp/git_status /tmp/git_status
 
 # Set git info as env vars
-RUN echo "export VITE_GIT_SHA=$(cat git_sha)" >> /etc/profile && \
-    echo "export VITE_GIT_BRANCH=$(cat git_branch)" >> /etc/profile && \
-    echo "export VITE_GIT_CLEAN=$([ ! -s git_status ] && echo 'true' || echo 'false')" >> /etc/profile
+RUN echo "export VITE_GIT_SHA=$(cat git_sha)" >> /tmp/git_profile && \
+    echo "export VITE_GIT_BRANCH=$(cat git_branch)" >> /tmp/git_profile && \
+    echo "export VITE_GIT_CLEAN=$([ ! -s git_status ] && echo 'true' || echo 'false')" >> /tmp/git_profile
 
 # Copy package files
 COPY package.json package-lock.json* ./
@@ -36,7 +36,7 @@ COPY . .
 
 # Source the env vars and build
 SHELL ["/bin/bash", "-c"]
-RUN source /etc/profile && npm run build
+RUN source /tmp/git_profile && npm run build
 
 # Production stage
 FROM node:24-slim AS production
