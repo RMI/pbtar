@@ -49,9 +49,9 @@ const getGitInfo = async () => {
   } catch {
     // Fallback to environment variables or defaults
     return {
-      sha: process.env.VITE_GIT_SHA || 'unknown',
-      isClean: process.env.VITE_GIT_CLEAN === 'unknown',
-      branch: process.env.VITE_GIT_BRANCH || 'unknown'
+      sha: getEnv("VITE_GIT_SHA", 'unknown'),
+      isClean: getEnv("VITE_GIT_CLEAN", null),
+      branch: getEnv("VITE_GIT_BRANCH", 'unknown'),
     };
   }
 };
