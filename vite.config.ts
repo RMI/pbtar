@@ -5,8 +5,13 @@ import os from 'os';
 import pkg from './package.json';
 
 // Safe wrapper for OS functions with proper typing
-const getOsInfo = () => {
-  const safeCall = <T>(fn: () => T, defaultValue: T): T => {
+const getOsInfo = (): {
+  hostname: string;
+  platform: string;
+  release: string;
+  arch: string;
+} => {
+  const safeCall = (fn: () => string, defaultValue: string): string => {
     try {
       return fn();
     } catch {
