@@ -22,6 +22,15 @@ const getOsInfo = () => {
   } as const;
 };
 
+const getEnv = (key: string, defaultValue?: string): string => {
+  const value = (process as { env: Record<string, string | undefined> }).env?.[key];
+  if (typeof value !== 'string' || value === undefined || value.trim() === '') {
+    if (defaultValue !== undefined) return defaultValue;
+    throw new Error(`Missing required environment variable: ${key}`);
+  }
+  return value;
+};
+
 // Safe wrapper for git operations
 const getGitInfo = async () => {
   try {
@@ -37,7 +46,7 @@ const getGitInfo = async () => {
       isClean: status.isClean(),
       branch
     };
-  } catch (error) {
+  } catch {
     // Fallback to environment variables or defaults
     return {
       sha: process.env.VITE_GIT_SHA || 'unknown',
