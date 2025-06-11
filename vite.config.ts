@@ -65,7 +65,7 @@ const getGitInfo = async (): Promise<{
     // Fallback to environment variables or defaults
     return {
       sha: getEnv("VITE_GIT_SHA", "unknown"),
-      isClean: getEnv("VITE_GIT_CLEAN", null),
+      isClean: getEnv("VITE_GIT_CLEAN", "unknown"),
       branch: getEnv("VITE_GIT_BRANCH", "unknown"),
     };
   }
