@@ -54,7 +54,7 @@ function buildInfoPlugin(): Plugin {
     async config(_, { mode }) {
       const gitInfo = await getGitInfo();
       const osInfo = getOsInfo();
-      const pkgVersion = pkg?.version ?? 'unknown';
+      const pkgVersion = (pkg as { version: string | undefined }).version;
       
       return {
         define: {
