@@ -37,7 +37,11 @@ const getEnv = (key: string, defaultValue?: string): string => {
 };
 
 // Safe wrapper for git operations
-const getGitInfo = async () => {
+const getGitInfo = async (): Promise<{
+  sha: string;
+  isClean: boolean|undefined;
+  branch: string;
+}> => {
   try {
     const git = simpleGit();
     const [sha, status, branch] = await Promise.all([
