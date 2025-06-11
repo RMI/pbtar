@@ -25,3 +25,6 @@ jobs:
 
   unit-test:
     uses: ./.github/workflows/node-test.yml
+
+  json-schema:
+    uses: ./.github/workflows/node-json-schema.yml
