@@ -1,0 +1,26 @@
+---
+on:
+  pull_request:
+    branches:
+      - "hotfix/**"
+      - "release/**"
+      - main
+      - production
+  push:
+    branches:
+      - "hotfix/**"
+      - "release/**"
+      - main
+      - production
+
+name: Node Package Checks
+concurrency: node-package-checks
+
+jobs:
+  linting:
+    name: "Run ESLint and Prettier checks"
+    uses: ./.github/workflows/frontend-lint.yml
+
+  test:
+    name: "Run frontend unit tests"
+    uses: ./.github/workflows/frontend-test.yml

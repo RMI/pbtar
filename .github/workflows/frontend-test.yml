@@ -12,6 +12,7 @@ on:
       - main
       - production
   workflow_dispatch:
+  workflow_call:
 
 jobs:
   test:
