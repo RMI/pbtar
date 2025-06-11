@@ -48,9 +48,9 @@ const getGitInfo = async () => {
 };
 
 // Plugin to inject git information at build time
-function gitInfoPlugin(): Plugin {
+function buildInfoPlugin(): Plugin {
   return {
-    name: 'vite-plugin-git-info',
+    name: 'vite-plugin-build-info',
     async config(_, { mode }) {
       const gitInfo = await getGitInfo();
       const osInfo = getOsInfo();
@@ -58,14 +58,18 @@ function gitInfoPlugin(): Plugin {
       
       return {
         define: {
+          // Build Env
           'import.meta.env.VITE_APP_VERSION': JSON.stringify(pkgVersion),
+          'import.meta.env.VITE_NODE_VERSION': JSON.stringify(process.version),
+          'import.meta.env.VITE_VERSION': JSON.stringify(viteVersion),
+          'import.meta.env.VITE_ENVIRONMENT': JSON.stringify(mode),
+          'import.meta.env.VITE_BUILD_TIME': JSON.stringify(new Date().toISOString()),
+
+          //// Git information
           'import.meta.env.VITE_GIT_SHA': JSON.stringify(gitInfo.sha),
           'import.meta.env.VITE_GIT_CLEAN': JSON.stringify(gitInfo.isClean ? 'true' : 'false'),
           'import.meta.env.VITE_GIT_BRANCH': JSON.stringify(gitInfo.branch),
-          'import.meta.env.VITE_ENVIRONMENT': JSON.stringify(mode),
-          'import.meta.env.VITE_BUILD_TIME': JSON.stringify(new Date().toISOString()),
-          'import.meta.env.VITE_NODE_VERSION': JSON.stringify(process.version),
-          'import.meta.env.VITE_VERSION': JSON.stringify(viteVersion),
+
           // Build machine information
           'import.meta.env.VITE_BUILD_MACHINE_NAME': JSON.stringify(osInfo.hostname),
           'import.meta.env.VITE_BUILD_OS': JSON.stringify(osInfo.platform),
@@ -79,7 +83,7 @@ function gitInfoPlugin(): Plugin {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), gitInfoPlugin()],
+  plugins: [react(), buildInfoPlugin()],
   server: {
     open: true,
     port: 3000,
