@@ -30,7 +30,7 @@ jobs:
     uses: ./.github/workflows/node-test.yml
 
   build:
-    name: "build"
+    name: "Build"
     uses: ./.github/workflows/node-build.yml
 
   json-schema:

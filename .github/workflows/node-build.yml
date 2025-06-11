@@ -2,8 +2,8 @@ on:
   workflow_call:
 
 jobs:
-  test:
-    name: "Run unit tests"
+  build:
+    name: "Build Application"
     runs-on: ubuntu-latest
 
     steps:
