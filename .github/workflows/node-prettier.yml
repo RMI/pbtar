@@ -1,11 +1,9 @@
-name: Prettier Formatting Check
-
 on:
   workflow_call:
 
 jobs:
   lint:
-    name: "Run ESLint and Prettier checks"
+    name: "Run Prettier Check"
     runs-on: ubuntu-latest
 
     steps:

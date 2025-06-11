@@ -18,13 +18,17 @@ concurrency: node-package-checks
 
 jobs:
   linting:
+    name: "Linting"
     uses: ./.github/workflows/node-lint.yml
 
   formatting:
+    name: "Formatting"
     uses: ./.github/workflows/node-prettier.yml
 
   unit-test:
+    name: "Unit Tests"
     uses: ./.github/workflows/node-test.yml
 
   json-schema:
+    name: "JSON Schema Validation"
     uses: ./.github/workflows/node-json-schema.yml

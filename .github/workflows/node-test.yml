@@ -1,11 +1,9 @@
-name: Test Frontend service
-
 on:
   workflow_call:
 
 jobs:
   test:
-    name: "Run frontend unit tests"
+    name: "Run unit tests"
     runs-on: ubuntu-latest
 
     steps:

@@ -1,5 +1,3 @@
-name: JSON validate Frontend service
-
 on:
   workflow_call:
 
