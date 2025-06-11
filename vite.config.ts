@@ -48,11 +48,9 @@ const getGitInfo = async (): Promise<{
     const git = simpleGit();
     const [sha, status, branch] = await Promise.all([
       git.revparse(["HEAD"]).catch(() => process.env.VITE_GIT_SHA || "unknown"),
-      git
-        .status()
-        .catch(() => ({
-          isClean: () => process.env.VITE_GIT_CLEAN === "true",
-        })),
+      git.status().catch(() => ({
+        isClean: () => process.env.VITE_GIT_CLEAN === "true",
+      })),
       git
         .revparse(["--abbrev-ref", "HEAD"])
         .catch(() => process.env.VITE_GIT_BRANCH || "unknown"),
