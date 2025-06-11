@@ -20,7 +20,8 @@ RUN npm run build
 FROM node:24-slim AS production
 
 # Install Azure SWA CLI globally
-RUN npm install -g @azure/static-web-apps-cli
+RUN npm install -g \
+      @azure/static-web-apps-cli@2.0.6
 
 # Copy Azure config file
 COPY staticwebapp.config.json /app/dist/
