@@ -29,6 +29,10 @@ jobs:
     name: "Unit Tests"
     uses: ./.github/workflows/node-test.yml
 
+  build:
+    name: "build"
+    uses: ./.github/workflows/node-build.yml
+
   json-schema:
     name: "JSON Schema Validation"
     uses: ./.github/workflows/node-json-schema.yml
