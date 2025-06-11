@@ -30,9 +30,3 @@ jobs:
     uses: RMI-PACTA/actions/.github/workflows/docker.yml@main
     with:
       do-check-r-sysdeps: false
-      build-platform: |
-        [
-          "linux/amd64",
-          "linux/arm64"
-        ]
-
