@@ -1,0 +1,32 @@
+---
+on:
+  pull_request:
+    branches:
+      - "hotfix/**"
+      - "release/**"
+      - main
+      - production
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+  push:
+    branches:
+      - "hotfix/**"
+      - "release/**"
+      - main
+      - production
+  schedule:
+    - cron: "0 3 * * *" # Nightly at 3 AM UTC
+  workflow_dispatch:
+
+name: docker
+concurrency: docker
+
+jobs:
+  docker:
+    name: Docker actions
+    uses: RMI-PACTA/actions/.github/workflows/docker.yml@main
+    with:
+      do-check-r-sysdeps: false
