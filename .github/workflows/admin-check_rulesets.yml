@@ -21,6 +21,8 @@ jobs:
 
       - name: Get existing Rulesets
         id: get-rulesets
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           RULESETS="$(gh api ${{ format('/repos/{0}/rulesets', github.repository) }})"
           echo "rulesets=$RULESETS"
