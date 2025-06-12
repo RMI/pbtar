@@ -2,7 +2,6 @@
 FROM alpine/git:2.49.0 as git-info
 WORKDIR /app
 COPY . .
-COPY .git ./.git
 
 RUN \
   VITE_GIT_SHA="$(git rev-parse HEAD)" && \
