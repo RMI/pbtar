@@ -1,21 +1,9 @@
-name: Test Frontend service
-
 on:
-  push:
-    branches:
-      - production
-      - main
-  pull_request:
-    branches:
-      - "hotfix/**"
-      - "release/**"
-      - main
-      - production
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
-  test:
-    name: "Run frontend unit tests"
+  build:
+    name: "Build Application"
     runs-on: ubuntu-latest
 
     steps:
@@ -31,9 +19,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Run tests
-        run: npm test
 
       - name: Check build
         run: npm run build

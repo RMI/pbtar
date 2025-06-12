@@ -46,8 +46,6 @@ export const filterScenarios = (
         ...scenario.sectors,
         scenario.publisher,
         scenario.published_date,
-        scenario.overview,
-        scenario.expertRecommendation,
       ];
 
       return searchFields.some((field) =>
