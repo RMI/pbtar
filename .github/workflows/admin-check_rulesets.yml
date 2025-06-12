@@ -19,11 +19,31 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Get existing Rulesets
-        id: get-rulesets
+      - name: Get all existing Rulesets from Repo
+        id: get-all-rulesets-repo
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          RULESETS="$(gh api ${{ format('/repos/{0}/rulesets', github.repository) }})"
-          echo "rulesets=$RULESETS"
-          echo "rulesets=$RULESETS" >> "$GITHUB_OUTPUT"
+          gh api ${{ format('/repos/{0}/rulesets', github.repository) }} > /tmp/all_rulesets.json
+          jq '.' /tmp/all_rulesets.json
+
+          jq '[ .[] | .id ]' /tmp/all_rulesets.json > /tmp/ruleset_ids.json
+          cat /tmp/ruleset_ids.json
+
+          RULESET_LINKS="$(jq -jc '.[] | ._links.self.href' /tmp/all_rulesets)"
+          echo "ruleset-links=$RULESET_LINKS"
+          echo "ruleset-links=$RULESET_LINKS" >> "$GITHUB_OUTPUT"
+
+      - name: Get Rulesets details from Repo
+        id: get-rulesets-details-repo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+
+          mkdir /tmp/repo_rulesets
+          jq -rc '.[]' /tmp/ruleset_ids.json | while read ID
+          do
+            echo "ID=$ID"
+            gh api "/repos/RMI/pbtar/rulesets/$ID" | jq '.' > "/tmp/repo_rulesets/${ID}.json"
+          done
