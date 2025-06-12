@@ -1,21 +1,9 @@
-name: Lint Frontend service
-
 on:
-  push:
-    branches:
-      - production
-      - main
-  pull_request:
-    branches:
-      - "hotfix/**"
-      - "release/**"
-      - main
-      - production
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
   lint:
-    name: "Run ESLint and Prettier checks"
+    name: "Run Prettier Check"
     runs-on: ubuntu-latest
 
     steps:
@@ -31,9 +19,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Run ESLint
-        run: npm run lint
 
       - name: Check Prettier formatting
         run: npm run format:check

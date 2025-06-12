@@ -1,0 +1,38 @@
+---
+on:
+  pull_request:
+    branches:
+      - "hotfix/**"
+      - "release/**"
+      - main
+      - production
+  push:
+    branches:
+      - "hotfix/**"
+      - "release/**"
+      - main
+      - production
+
+name: Node Package Checks
+concurrency: node-package-checks
+
+jobs:
+  linting:
+    name: "Linting"
+    uses: ./.github/workflows/node-lint.yml
+
+  formatting:
+    name: "Formatting"
+    uses: ./.github/workflows/node-prettier.yml
+
+  unit-test:
+    name: "Unit Tests"
+    uses: ./.github/workflows/node-test.yml
+
+  build:
+    name: "Build"
+    uses: ./.github/workflows/node-build.yml
+
+  json-schema:
+    name: "JSON Schema Validation"
+    uses: ./.github/workflows/node-json-schema.yml
