@@ -28,6 +28,7 @@ jobs:
         with:
           submodules: true
           lfs: false
+      - run: git status
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -73,6 +74,7 @@ jobs:
           VITE_BUILD_OS: ${{ runner.os }}
           VITE_BUILD_OS_VERSION: ${{ runner.os-version }}
           VITE_BUILD_ARCH: ${{ runner.arch }}
+      - run: git status
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
