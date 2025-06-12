@@ -1,6 +1,7 @@
 import React from "react";
 import SearchBox from "./SearchBox";
 import FilterDropdown from "./FilterDropdown";
+import { scenariosData } from "../data/scenariosData";
 import {
   SearchFilters,
   ScenarioCategory,
@@ -23,44 +24,21 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   onSearch,
   onClear,
 }) => {
-  const categories: ScenarioCategory[] = ["IAM", "ITR", "NDC", "Other"];
-  const years: YearTarget[] = [
-    "2030",
-    "2040",
-    "2050",
-    "2060",
-    "2070",
-    "2100",
-    "N/A",
-  ];
-  const temperatures: TemperatureTarget[] = [
-    "1.5C",
-    "2C",
-    "2.5C",
-    "3C",
-    "4C",
-    "N/A",
-  ];
-  const regions: Region[] = [
-    "Global",
-    "EU",
-    "SEA",
-    "Americas",
-    "Africa",
-    "Asia Pacific",
-    "N/A",
-  ];
-  const sectors: Sector[] = [
-    "Power",
-    "Oil & Gas",
-    "Coal",
-    "Renewables",
-    "Industrial",
-    "Transport",
-    "Buildings",
-    "Agriculture",
-    "N/A",
-  ];
+  const categories: ScenarioCategory[] = Array.from(
+    new Set(scenariosData.map((d) => d.category)),
+  ).sort();
+  const years: YearTarget[] = Array.from(
+    new Set(scenariosData.map((d) => d.target_year)),
+  ).sort();
+  const temperatures: TemperatureTarget[] = Array.from(
+    new Set(scenariosData.map((d) => d.target_temperature)),
+  ).sort();
+  const regions: Region[] = Array.from(
+    new Set(scenariosData.map((d) => d.regions).flat()),
+  ).sort();
+  const sectors: Sector[] = Array.from(
+    new Set(scenariosData.map((d) => d.sectors).flat()),
+  ).sort();
 
   return (
     <div className="bg-white rounded-lg shadow-md p-5 mb-6">
