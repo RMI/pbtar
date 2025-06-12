@@ -11,8 +11,8 @@ name: Rulesets Checks
 concurrency: rulesets-checks
 
 jobs:
-  build:
-    name: "Build Application"
+  rulesets:
+    name: "Check GH rulesets"
     runs-on: ubuntu-latest
 
     steps:
