@@ -59,7 +59,6 @@ jobs:
       - name: Show Remote Repo Rules
         run: cat /tmp/remote_rulesets/*
 
-
       - name: Prepare local rulesets
         run: |
 
