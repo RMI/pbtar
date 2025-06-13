@@ -2,7 +2,7 @@
 on:
   pull_request:
     paths:
-      - '.github/rulesets/**'
+      - ".github/rulesets/**"
   push:
     branches:
       - "hotfix/**"
