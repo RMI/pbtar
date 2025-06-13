@@ -71,8 +71,8 @@
   --color-rmigray-200: #a7a9ac;
   --color-rmigray-300: #808284;
   --color-rmigray-400: #58585b;
-  --color-rmigray-500: #58585b;
-  --color-rmigray-600: #58585b;
+  --color-rmigray-500: var(--color-rmigray-400);
+  --color-rmigray-600: var(--color-rmigray-400);
   --color-rmigray-700: #231f20;
   --color-rmigray-800: #231f20;
 
