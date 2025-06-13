@@ -50,7 +50,11 @@ jobs:
               .updated_at
             )' \
             > "/tmp/repo_rulesets/${ID}.json"
+            RULESET_NAME="$(jq -rc '.name' /tmp/repo_rulesets/${ID}.json)"
+            echo "RULESET_NAME=$RULESET_NAME"
+            mv "/tmp/repo_rulesets/${ID}.json" "/tmp/repo_rulesets/${RULESET_NAME}.json"
           done
+
 
       - name: Prepare local rulesets
         run: |
@@ -59,8 +63,9 @@ jobs:
           for FILE in .github/rulesets/*.json
           do
             ID="$(jq -rc '.id' $FILE)"
-            echo "$FILE: $ID"
-            jq '.' $FILE > "/tmp/local_rulesets/${ID}.json"
+            RULESET_NAME="$(jq -rc '.name' $FILE)"
+            echo "$FILE: $ID, $RULESET_NAME"
+            jq '.' $FILE > "/tmp/local_rulesets/${RULESET_NAME}.json"
           done
 
       - name: Diff directories
