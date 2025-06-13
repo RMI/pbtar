@@ -53,7 +53,7 @@ jobs:
             > "/tmp/remote_rulesets/${ID}.json"
             RULESET_NAME="$(jq -rc '.name' /tmp/remote_rulesets/${ID}.json)"
             echo "RULESET_NAME=$RULESET_NAME"
-            SANITIZED_RULESET_NAME="$(echo "$RULESET_NAME" | tr -c 'a-zA-Z0-9_-.' '_')"
+            SANITIZED_RULESET_NAME="$(echo "$RULESET_NAME" | tr -c 'a-zA-Z0-9.-_' '_')"
             mv "/tmp/remote_rulesets/${ID}.json" "/tmp/remote_rulesets/${SANITIZED_RULESET_NAME}.json"
           done
 
@@ -69,7 +69,7 @@ jobs:
             ID="$(jq -rc '.id' $FILE)"
             RULESET_NAME="$(jq -rc '.name' $FILE)"
             echo "$FILE: $ID, $RULESET_NAME"
-            SANITIZED_RULESET_NAME="$(echo "$RULESET_NAME" | tr -c 'a-zA-Z0-9_-.' '_')"
+            SANITIZED_RULESET_NAME="$(echo "$RULESET_NAME" | tr -c 'a-zA-Z0-9.-_' '_')"
             jq 'del(.bypass_actors)' $FILE > "/tmp/local_rulesets/${SANITIZED_RULESET_NAME}.json"
           done
 
