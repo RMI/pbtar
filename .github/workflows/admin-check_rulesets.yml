@@ -54,9 +54,10 @@ jobs:
             RULESET_NAME="$(jq -rc '.name' /tmp/remote_rulesets/${ID}.json)"
             echo "RULESET_NAME=$RULESET_NAME"
             mv "/tmp/remote_rulesets/${ID}.json" "/tmp/remote_rulesets/${RULESET_NAME}.json"
-            cat "/tmp/remote_rulesets/${RULESET_NAME}.json"
-            echo ""
           done
+
+      - name: Show Remote Repo Rules
+        run: cat /tmp/remote_rulesets/*
 
 
       - name: Prepare local rulesets
