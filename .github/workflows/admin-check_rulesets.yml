@@ -30,8 +30,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh api "${{ format('/repos/{0}/rulesets', github.repository) }}" | \
-          jq '.' /tmp/all_rulesets.json
+          gh api "${{ format('/repos/{0}/rulesets', github.repository) }}" > /tmp/all_rulesets.json
 
           jq '[ .[] | .id ]' /tmp/all_rulesets.json > /tmp/ruleset_ids.json
           cat /tmp/ruleset_ids.json
