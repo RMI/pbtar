@@ -24,7 +24,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh api ${{ format('/repos/{0}/rulesets', github.repository) }} > /tmp/all_rulesets.json
+          gh api /repos/RMI/pbtar/rulesets > /tmp/all_rulesets.json
           jq '.' /tmp/all_rulesets.json
 
           jq '[ .[] | .id ]' /tmp/all_rulesets.json > /tmp/ruleset_ids.json
@@ -41,7 +41,7 @@ jobs:
           jq -rc '.[]' /tmp/ruleset_ids.json | while read ID
           do
             echo "ID=$ID"
-            gh api "${{ format('/repos/{0}/rulesets', github.repository) }}/$ID" | \
+            gh api "/repos/RMI/pbtar/rulesets/$ID" | \
             jq 'del(
               .current_user_can_bypass,
               ._links,
@@ -53,6 +53,8 @@ jobs:
             RULESET_NAME="$(jq -rc '.name' /tmp/repo_rulesets/${ID}.json)"
             echo "RULESET_NAME=$RULESET_NAME"
             mv "/tmp/repo_rulesets/${ID}.json" "/tmp/repo_rulesets/${RULESET_NAME}.json"
+            cat "/tmp/repo_rulesets/${RULESET_NAME}.json"
+            echo ""
           done
 
 
