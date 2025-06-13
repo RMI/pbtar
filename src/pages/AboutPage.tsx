@@ -1,5 +1,6 @@
 import React from "react";
 import { ExternalLink, Mail } from "lucide-react";
+import Colophon from "../components/Colophon";
 
 const AboutPage: React.FC = () => {
   return (
@@ -125,6 +126,10 @@ const AboutPage: React.FC = () => {
             Contact Us
           </a>
         </section>
+
+        <div className="mt-8">
+          <Colophon />
+        </div>
       </div>
     </div>
   );
