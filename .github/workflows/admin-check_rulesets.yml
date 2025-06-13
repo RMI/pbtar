@@ -30,10 +30,6 @@ jobs:
           jq '[ .[] | .id ]' /tmp/all_rulesets.json > /tmp/ruleset_ids.json
           cat /tmp/ruleset_ids.json
 
-          RULESET_LINKS="$(jq -jc '.[] | ._links.self.href' /tmp/all_rulesets)"
-          echo "ruleset-links=$RULESET_LINKS"
-          echo "ruleset-links=$RULESET_LINKS" >> "$GITHUB_OUTPUT"
-
       - name: Get Rulesets details from Repo
         id: get-rulesets-details-repo
         env:
