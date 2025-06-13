@@ -44,7 +44,10 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
   }, []);
 
   return (
-    <div ref={dropdownRef} className="relative">
+    <div
+      ref={dropdownRef}
+      className="relative"
+    >
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`flex items-center justify-between min-w-32 px-3 py-2 text-sm font-medium rounded-md border ${
@@ -61,7 +64,10 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
             onClick={handleClear}
           />
         ) : (
-          <ChevronDown size={16} className="ml-2 text-gray-500" />
+          <ChevronDown
+            size={16}
+            className="ml-2 text-gray-500"
+          />
         )}
       </button>
 

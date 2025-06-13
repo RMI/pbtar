@@ -21,9 +21,18 @@ export const AppContent = () => {
       <Header />
       <main className="flex-grow">
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/scenario/:id" element={<ScenarioDetailPage />} />
-          <Route path="/about" element={<AboutPage />} />
+          <Route
+            path="/"
+            element={<HomePage />}
+          />
+          <Route
+            path="/scenario/:id"
+            element={<ScenarioDetailPage />}
+          />
+          <Route
+            path="/about"
+            element={<AboutPage />}
+          />
         </Routes>
       </main>
       <Footer />

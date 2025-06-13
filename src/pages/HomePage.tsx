@@ -88,7 +88,10 @@ const HomePage: React.FC = () => {
         className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300 ${isFiltering ? "opacity-50" : "opacity-100"}`}
       >
         {filteredScenarios.map((scenario) => (
-          <ScenarioCard key={scenario.id} scenario={scenario} />
+          <ScenarioCard
+            key={scenario.id}
+            scenario={scenario}
+          />
         ))}
       </div>
 

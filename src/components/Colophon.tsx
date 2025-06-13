@@ -143,7 +143,10 @@ const Colophon: React.FC<ColophonProps> = ({ className = "" }) => {
         >
           {copied ? (
             <>
-              <Check size={14} className="text-green-500" />
+              <Check
+                size={14}
+                className="text-green-500"
+              />
               <span className="text-green-600">Copied!</span>
             </>
           ) : copyError ? (
