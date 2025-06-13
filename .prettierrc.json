@@ -11,5 +11,6 @@
   "objectWrap": "preserve",
   "bracketSameLine": false,
   "arrowParens": "always",
-  "proseWrap": "preserve"
+  "proseWrap": "preserve",
+  "htmlWhitespaceSensitivity": "css"
 }
