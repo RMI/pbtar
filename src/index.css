@@ -12,6 +12,7 @@
   /* Accent colours */
   --color-energy-100: #B6F2F1;  
   --color-energy-400: #7BE8E6;
+  --color-energy-700: #2AB5B2;
   --color-energy-800: #118280;
 
   /* Success colours */
@@ -23,6 +24,18 @@
   --color-error-400: #F7988B;
   --color-error-600: #DF4E39;
   --color-error-800: #AB3C2C;
+
+  /* Neutral colours */
+    --color-neutral-50: #F4F7F9;
+    --color-neutral-100: #ECF1F4;
+    --color-neutral-200: #E4E9EE;
+    --color-neutral-300: #D6DDE2;
+    --color-neutral-400: #BDC9D3;
+    --color-neutral-500: #B3BCC5;
+    --color-neutral-600: #86929D;
+    --color-neutral-700: #646E77;
+    --color-neutral-800: #3B444D;
+    --color-neutral-900: #1D2328;
 
   /* Secondary colours */
   --color-slate: #92aec5;
