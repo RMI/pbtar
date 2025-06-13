@@ -52,7 +52,6 @@ jobs:
             > "/tmp/repo_rulesets/${ID}.json"
           done
 
-
       - name: Prepare local rulesets
         run: |
 
