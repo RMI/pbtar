@@ -1,0 +1,76 @@
+{
+  "id": 4845072,
+  "name": "main",
+  "target": "branch",
+  "source_type": "Repository",
+  "source": "RMI/pbtar",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": {
+      "exclude": [],
+      "include": ["~DEFAULT_BRANCH"]
+    }
+  },
+  "rules": [
+    {
+      "type": "deletion"
+    },
+    {
+      "type": "non_fast_forward"
+    },
+    {
+      "type": "pull_request",
+      "parameters": {
+        "required_approving_review_count": 1,
+        "dismiss_stale_reviews_on_push": true,
+        "require_code_owner_review": false,
+        "require_last_push_approval": false,
+        "required_review_thread_resolution": false,
+        "automatic_copilot_code_review_enabled": false,
+        "allowed_merge_methods": ["squash"]
+      }
+    },
+    {
+      "type": "required_status_checks",
+      "parameters": {
+        "strict_required_status_checks_policy": false,
+        "do_not_enforce_on_create": false,
+        "required_status_checks": [
+          {
+            "context": "Docker actions / build-docker-image / build (linux/amd64)",
+            "integration_id": 15368
+          },
+          {
+            "context": "Docker actions / build-docker-image / merge",
+            "integration_id": 15368
+          },
+          {
+            "context": "Docker actions / hadolint / hadolint",
+            "integration_id": 15368
+          },
+          {
+            "context": "Build / Build Application",
+            "integration_id": 15368
+          },
+          {
+            "context": "Formatting / Run Prettier Check",
+            "integration_id": 15368
+          },
+          {
+            "context": "JSON Schema Validation / Run ajv JSON validator",
+            "integration_id": 15368
+          },
+          {
+            "context": "Build and Deploy Job",
+            "integration_id": 15368
+          },
+          {
+            "context": "Linting / Run ESLint",
+            "integration_id": 15368
+          }
+        ]
+      }
+    }
+  ],
+  "bypass_actors": []
+}
