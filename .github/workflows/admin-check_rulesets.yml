@@ -41,7 +41,7 @@ jobs:
           jq -rc '.[]' /tmp/ruleset_ids.json | while read ID
           do
             echo "ID=$ID"
-            gh api "/repos/RMI/pbtar/rulesets/$ID" | \
+            gh api "${{ format('/repos/{0}/rulesets', github.repository) }}/$ID" | \
             jq 'del(
               .current_user_can_bypass,
               ._links,
