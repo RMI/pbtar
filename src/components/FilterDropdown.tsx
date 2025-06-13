@@ -53,7 +53,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
         className={`flex items-center justify-between min-w-32 px-3 py-2 text-sm font-medium rounded-md border ${
           selectedValue
             ? "text-energy-800 bg-energy-100 border-energy-100"
-            : "text-rmigray-700 bg-white border-rmigray-300 hover:bg-rmigray-100"
+            : "text-rmigray-700 bg-white border-neutral-300 hover:bg-neutral-100"
         } transition-colors duration-150`}
       >
         <span>{selectedValue || label}</span>
@@ -72,7 +72,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
       </button>
 
       {isOpen && (
-        <div className="absolute z-10 mt-1 w-full bg-white rounded-md shadow-lg border border-rmigray-200 py-1 max-h-60 overflow-auto">
+        <div className="absolute z-10 mt-1 w-full bg-white rounded-md shadow-lg border border-neutral-200 py-1 max-h-60 overflow-auto">
           {options.map((option) => (
             <div
               key={option}
@@ -80,7 +80,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
               className={`px-4 py-2 text-sm cursor-pointer ${
                 option === selectedValue
                   ? "bg-energy-100 text-energy-800"
-                  : "text-rmigray-700 hover:bg-rmigray-100"
+                  : "text-rmigray-700 hover:bg-neutral-100"
               }`}
             >
               {option}
