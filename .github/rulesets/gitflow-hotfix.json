@@ -8,9 +8,7 @@
   "conditions": {
     "ref_name": {
       "exclude": [],
-      "include": [
-        "refs/heads/hotfix/**/*"
-      ]
+      "include": ["refs/heads/hotfix/**/*"]
     }
   },
   "rules": [
