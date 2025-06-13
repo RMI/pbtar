@@ -43,3 +43,19 @@ jobs:
             echo "ID=$ID"
             gh api "/repos/RMI/pbtar/rulesets/$ID" | jq '.' > "/tmp/repo_rulesets/${ID}.json"
           done
+
+
+      - name: Prepare local rulesets
+        run: |
+
+          mkdir /tmp/local_rulesets
+          for FILE in .github/rulesets/*.json
+          do
+            ID="$(jq -rc '.id' $FILE)"
+            echo "$FILE: $ID"
+            jq '.' $FILE > "/tmp/local_rulesets/${ID}.json"
+          done
+
+      - name: Diff directories
+        run: |
+          diff -bur /tmp/repo_rulesets/ /tmp/local_rulesets/
