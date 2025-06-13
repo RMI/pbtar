@@ -99,7 +99,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
           <div className="mt-2 flex justify-end">
             <Link
               to={`/scenario/${scenario.id}`}
-              className="text-energy text-sm font-medium flex items-center transition-colors duration-200 hover:text-energy"
+              className="text-energy text-sm font-medium flex items-center transition-colors duration-200 hover:text-energy-700"
             >
               <span className="flex items-center">
                 View details
