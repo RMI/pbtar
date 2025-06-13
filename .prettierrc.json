@@ -6,5 +6,6 @@
   "semi": true,
   "singleQuote": false,
   "quoteProps": "consistent",
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "bracketSpacing": true
 }
