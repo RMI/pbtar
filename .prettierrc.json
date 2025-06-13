@@ -10,5 +10,6 @@
   "bracketSpacing": true,
   "objectWrap": "preserve",
   "bracketSameLine": false,
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "proseWrap": "preserve"
 }
