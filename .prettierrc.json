@@ -7,5 +7,6 @@
   "singleQuote": false,
   "quoteProps": "consistent",
   "trailingComma": "all",
-  "bracketSpacing": true
+  "bracketSpacing": true,
+  "objectWrap": "preserve"
 }
