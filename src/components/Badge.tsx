@@ -25,7 +25,7 @@ const Badge: React.FC<BadgeProps> = ({ text, variant = "default" }) => {
       case "sector":
         return "bg-solar-100 text-solar-800 border-solar-200";
       default:
-        return "bg-rmigrey-100 text-rmigrey-800 border-rmigrey-200";
+        return "bg-rmigray-100 text-rmigray-800 border-rmigray-200";
     }
   };
 
