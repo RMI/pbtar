@@ -9,5 +9,6 @@
   "trailingComma": "all",
   "bracketSpacing": true,
   "objectWrap": "preserve",
-  "bracketSameLine": false
+  "bracketSameLine": false,
+  "arrowParens": "always"
 }
