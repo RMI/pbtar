@@ -11,7 +11,9 @@ const AboutPage: React.FC = () => {
         </h1>
 
         <section className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-xl font-semibold text-rmigray-800 mb-4">Purpose</h2>
+          <h2 className="text-xl font-semibold text-rmigray-800 mb-4">
+            Purpose
+          </h2>
           <p className="text-rmigray-700 mb-4">
             The Climate Transition Scenarios Repository is designed to help
             financial institutions efficiently discover, compare, and utilize

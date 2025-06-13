@@ -25,7 +25,9 @@ const SearchBox: React.FC<SearchBoxProps> = ({
   return (
     <div
       className={`flex items-center w-full max-w-2xl rounded-md border transition-all duration-200 bg-white ${
-        isFocused ? "border-energy-400 ring-2 ring-energy-100" : "border-neutral-300"
+        isFocused
+          ? "border-energy-400 ring-2 ring-energy-100"
+          : "border-neutral-300"
       }`}
     >
       <div className="pl-3 text-gray-400">
