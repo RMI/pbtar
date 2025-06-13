@@ -41,7 +41,15 @@ jobs:
           jq -rc '.[]' /tmp/ruleset_ids.json | while read ID
           do
             echo "ID=$ID"
-            gh api "/repos/RMI/pbtar/rulesets/$ID" | jq '.' > "/tmp/repo_rulesets/${ID}.json"
+            gh api "/repos/RMI/pbtar/rulesets/$ID" | \
+            jq 'del(
+              .current_user_can_bypass,
+              ._links,
+              .node_id,
+              .created_at,
+              .updated_at
+            )' \
+            > "/tmp/repo_rulesets/${ID}.json"
           done
 
 
@@ -58,4 +66,11 @@ jobs:
 
       - name: Diff directories
         run: |
-          diff -bur /tmp/repo_rulesets/ /tmp/local_rulesets/
+
+          diff \
+            --recursive \
+            --unified \
+            --new-file \
+            --color=auto \
+            /tmp/repo_rulesets/ \
+            /tmp/local_rulesets/
