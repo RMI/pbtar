@@ -8,7 +8,10 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center mb-4 md:mb-0">
-            <BarChart3 size={24} className="text-white mr-2" />
+            <BarChart3
+              size={24}
+              className="text-white mr-2"
+            />
             <span className="text-sm font-medium text-white">
               Climate Transition Scenarios Repository
             </span>
@@ -25,7 +28,10 @@ const Footer: React.FC = () => {
               href="mailto:contact@rmi.org"
               className="flex items-center text-sm text-white hover:text-energy transition-colors duration-200"
             >
-              <Mail size={16} className="mr-1" />
+              <Mail
+                size={16}
+                className="mr-1"
+              />
               Contact Us
             </a>
           </div>

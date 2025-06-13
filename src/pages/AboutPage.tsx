@@ -1,5 +1,6 @@
 import React from "react";
 import { ExternalLink, Mail } from "lucide-react";
+import Colophon from "../components/Colophon";
 
 const AboutPage: React.FC = () => {
   return (
@@ -53,7 +54,10 @@ const AboutPage: React.FC = () => {
               className="inline-flex items-center text-teal-600 hover:text-energy transition-colors duration-200"
             >
               Learn more about Climate Transition Assessments
-              <ExternalLink size={16} className="ml-2" />
+              <ExternalLink
+                size={16}
+                className="ml-2"
+              />
             </a>
           </div>
         </section>
@@ -121,10 +125,17 @@ const AboutPage: React.FC = () => {
             href="mailto:jhoffart@rmi.org"
             className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-energy transition-colors duration-200"
           >
-            <Mail size={16} className="mr-2" />
+            <Mail
+              size={16}
+              className="mr-2"
+            />
             Contact Us
           </a>
         </section>
+
+        <div className="mt-8">
+          <Colophon />
+        </div>
       </div>
     </div>
   );

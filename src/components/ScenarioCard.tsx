@@ -24,15 +24,24 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
         <div className="mb-3">
           <p className="text-xs font-medium text-gray-500 mb-1">Category:</p>
           <div className="flex flex-wrap">
-            <Badge text={scenario.category} variant="category" />
+            <Badge
+              text={scenario.category}
+              variant="category"
+            />
           </div>
         </div>
 
         <div className="mb-3">
           <p className="text-xs font-medium text-gray-500 mb-1">Targets:</p>
           <div className="flex flex-wrap">
-            <Badge text={scenario.target_year} variant="year" />
-            <Badge text={scenario.target_temperature} variant="temperature" />
+            <Badge
+              text={scenario.target_year}
+              variant="year"
+            />
+            <Badge
+              text={scenario.target_temperature}
+              variant="temperature"
+            />
           </div>
         </div>
 
@@ -40,7 +49,11 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
           <p className="text-xs font-medium text-gray-500 mb-1">Regions:</p>
           <div className="flex flex-wrap">
             {scenario.regions.slice(0, 3).map((region) => (
-              <Badge key={region} text={region} variant="region" />
+              <Badge
+                key={region}
+                text={region}
+                variant="region"
+              />
             ))}
             {scenario.regions.length > 3 && (
               <span className="text-xs text-gray-500 ml-1 self-center">
@@ -54,7 +67,11 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
           <p className="text-xs font-medium text-gray-500 mb-1">Sectors:</p>
           <div className="flex flex-wrap">
             {scenario.sectors.slice(0, 3).map((sector, index) => (
-              <Badge key={index} text={sector} variant="sector" />
+              <Badge
+                key={index}
+                text={sector}
+                variant="sector"
+              />
             ))}
             {scenario.sectors.length > 3 && (
               <span className="text-xs text-gray-500 ml-1 self-center">
@@ -86,7 +103,10 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
             >
               <span className="flex items-center">
                 View details
-                <ChevronRight size={16} className="ml-1" />
+                <ChevronRight
+                  size={16}
+                  className="ml-1"
+                />
               </span>
             </Link>
           </div>

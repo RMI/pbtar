@@ -48,7 +48,10 @@ const ScenarioDetailPage: React.FC = () => {
           to="/"
           className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-energy transition-colors duration-200"
         >
-          <ArrowLeft size={16} className="mr-2" />
+          <ArrowLeft
+            size={16}
+            className="mr-2"
+          />
           Back to Scenarios
         </Link>
       </div>
@@ -61,7 +64,10 @@ const ScenarioDetailPage: React.FC = () => {
         to="/"
         className="inline-flex items-center text-gray-600 hover:text-energy mb-6 transition-colors duration-200"
       >
-        <ArrowLeft size={16} className="mr-1" />
+        <ArrowLeft
+          size={16}
+          className="mr-1"
+        />
         Back to scenarios
       </Link>
 
@@ -73,9 +79,18 @@ const ScenarioDetailPage: React.FC = () => {
           <p className="text-white mb-4">{scenario.description}</p>
 
           <div className="flex flex-wrap gap-2 mb-4">
-            <Badge text={scenario.category} variant="category" />
-            <Badge text={scenario.target_year} variant="year" />
-            <Badge text={scenario.target_temperature} variant="temperature" />
+            <Badge
+              text={scenario.category}
+              variant="category"
+            />
+            <Badge
+              text={scenario.target_year}
+              variant="year"
+            />
+            <Badge
+              text={scenario.target_temperature}
+              variant="temperature"
+            />
           </div>
 
           <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
@@ -126,13 +141,19 @@ const ScenarioDetailPage: React.FC = () => {
                       rel="noopener noreferrer"
                       className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-energy transition-colors duration-200"
                     >
-                      <ExternalLink size={16} className="mr-2" />
+                      <ExternalLink
+                        size={16}
+                        className="mr-2"
+                      />
                       Visit Source
                     </a>
 
                     {scenario.dataSource.downloadAvailable && (
                       <button className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-energy transition-colors duration-200">
-                        <Download size={16} className="mr-2" />
+                        <Download
+                          size={16}
+                          className="mr-2"
+                        />
                         Download Data
                       </button>
                     )}
@@ -148,7 +169,11 @@ const ScenarioDetailPage: React.FC = () => {
                 </h3>
                 <div className="flex flex-wrap">
                   {scenario.regions.map((region, index) => (
-                    <Badge key={index} text={region} variant="region" />
+                    <Badge
+                      key={index}
+                      text={region}
+                      variant="region"
+                    />
                   ))}
                 </div>
               </div>
@@ -159,7 +184,11 @@ const ScenarioDetailPage: React.FC = () => {
                 </h3>
                 <div className="flex flex-wrap">
                   {scenario.sectors.map((sector, index) => (
-                    <Badge key={index} text={sector} variant="sector" />
+                    <Badge
+                      key={index}
+                      text={sector}
+                      variant="sector"
+                    />
                   ))}
                 </div>
               </div>

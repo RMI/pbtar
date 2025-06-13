@@ -16,7 +16,7 @@ cd pbtar
 2. Create an `.env` file to store the desired frontend port
 
 ```sh
-cp .env.example .env
+cp env.example .env
 ```
 
 3. Run the services with `docker compose`
