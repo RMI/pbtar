@@ -128,8 +128,8 @@ const Colophon: React.FC<ColophonProps> = ({ className = "" }) => {
   };
 
   return (
-    <details className={`text-sm text-gray-500 ${className}`}>
-      <summary className="cursor-pointer hover:text-gray-700">
+    <details className={`text-sm text-rmigray-500 ${className}`}>
+      <summary className="cursor-pointer hover:text-rmigray-700">
         Build and System Information
       </summary>
       <div className="mt-2">
@@ -138,20 +138,20 @@ const Colophon: React.FC<ColophonProps> = ({ className = "" }) => {
             e.preventDefault();
             handleCopy();
           }}
-          className="mb-4 px-3 py-1.5 text-sm rounded border border-gray-300 hover:bg-gray-50 transition-colors inline-flex items-center gap-1.5"
+          className="mb-4 px-3 py-1.5 text-sm rounded border border-rmigray-300 hover:bg-rmigray-100 transition-colors inline-flex items-center gap-1.5"
           title="Copy all information"
         >
           {copied ? (
             <>
               <Check
                 size={14}
-                className="text-green-500"
+                className="text-success-600"
               />
-              <span className="text-green-600">Copied!</span>
+              <span className="text-success-800">Copied!</span>
             </>
           ) : copyError ? (
             <>
-              <span className="text-red-600">Failed to copy</span>
+              <span className="text-error-600">Failed to copy</span>
             </>
           ) : (
             <>
