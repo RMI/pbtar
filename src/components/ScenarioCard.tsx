@@ -10,19 +10,19 @@ interface ScenarioCardProps {
 
 const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-gray-200">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
       <div className="p-5 flex flex-col h-full">
         <div className="mb-4">
-          <h2 className="text-xl font-semibold text-gray-800 mb-2">
+          <h2 className="text-xl font-semibold text-bluespruce mb-2">
             {scenario.name}
           </h2>
-          <p className="text-gray-600 text-sm line-clamp-2">
+          <p className="text-rmigray-600 text-sm line-clamp-2">
             {scenario.description}
           </p>
         </div>
 
         <div className="mb-3">
-          <p className="text-xs font-medium text-gray-500 mb-1">Category:</p>
+          <p className="text-xs font-medium text-rmigray-500 mb-1">Category:</p>
           <div className="flex flex-wrap">
             <Badge
               text={scenario.category}
@@ -32,7 +32,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
         </div>
 
         <div className="mb-3">
-          <p className="text-xs font-medium text-gray-500 mb-1">Targets:</p>
+          <p className="text-xs font-medium text-rmigray-500 mb-1">Targets:</p>
           <div className="flex flex-wrap">
             <Badge
               text={scenario.target_year}
@@ -46,7 +46,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
         </div>
 
         <div className="mb-3">
-          <p className="text-xs font-medium text-gray-500 mb-1">Regions:</p>
+          <p className="text-xs font-medium text-rmigray-500 mb-1">Regions:</p>
           <div className="flex flex-wrap">
             {scenario.regions.slice(0, 3).map((region) => (
               <Badge
@@ -56,7 +56,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
               />
             ))}
             {scenario.regions.length > 3 && (
-              <span className="text-xs text-gray-500 ml-1 self-center">
+              <span className="text-xs text-rmigray-500 ml-1 self-center">
                 +{scenario.regions.length - 3} more
               </span>
             )}
@@ -64,7 +64,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
         </div>
 
         <div className="mb-3">
-          <p className="text-xs font-medium text-gray-500 mb-1">Sectors:</p>
+          <p className="text-xs font-medium text-rmigray-500 mb-1">Sectors:</p>
           <div className="flex flex-wrap">
             {scenario.sectors.slice(0, 3).map((sector, index) => (
               <Badge
@@ -74,7 +74,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
               />
             ))}
             {scenario.sectors.length > 3 && (
-              <span className="text-xs text-gray-500 ml-1 self-center">
+              <span className="text-xs text-rmigray-500 ml-1 self-center">
                 +{scenario.sectors.length - 3} more
               </span>
             )}
@@ -84,14 +84,14 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
         <div className="mt-auto pt-3 border-t border-gray-100">
           <div className="flex justify-between items-center">
             <div>
-              <p className="text-xs text-gray-500">Publisher:</p>
-              <p className="text-sm font-medium text-gray-700">
+              <p className="text-xs text-rmigray-500">Publisher:</p>
+              <p className="text-sm font-medium text-rmigray-800">
                 {scenario.publisher}
               </p>
             </div>
             <div className="text-right">
-              <p className="text-xs text-gray-500">Published:</p>
-              <p className="text-sm font-medium text-gray-700">
+              <p className="text-xs text-rmigray-500">Published:</p>
+              <p className="text-sm font-medium text-rmigray-800">
                 {scenario.published_date}
               </p>
             </div>
@@ -99,7 +99,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
           <div className="mt-2 flex justify-end">
             <Link
               to={`/scenario/${scenario.id}`}
-              className="text-teal-600 text-sm font-medium flex items-center transition-colors duration-200 hover:text-energy"
+              className="text-energy text-sm font-medium flex items-center transition-colors duration-200 hover:text-energy-700"
             >
               <span className="flex items-center">
                 View details
