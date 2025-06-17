@@ -6,7 +6,7 @@ const Header: React.FC = () => {
   const location = useLocation();
 
   return (
-    <header className="bg-bluespruce text-white shadow-md">
+    <header className="bg-pinishgreen-200 text-white shadow-md">
       <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
         <Link
           to="/"
