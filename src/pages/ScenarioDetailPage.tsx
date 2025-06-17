@@ -26,10 +26,10 @@ const ScenarioDetailPage: React.FC = () => {
     return (
       <div className="container mx-auto px-4 py-8 flex justify-center items-center min-h-[60vh]">
         <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 rounded w-96 mb-4"></div>
-          <div className="h-4 bg-gray-200 rounded w-64 mb-8"></div>
-          <div className="h-32 bg-gray-200 rounded w-full mb-4"></div>
-          <div className="h-32 bg-gray-200 rounded w-full"></div>
+          <div className="h-8 bg-neutral-100 rounded w-96 mb-4"></div>
+          <div className="h-4 bg-neutral-100 rounded w-64 mb-8"></div>
+          <div className="h-32 bg-neutral-100 rounded w-full mb-4"></div>
+          <div className="h-32 bg-neutral-100 rounded w-full"></div>
         </div>
       </div>
     );
@@ -38,17 +38,20 @@ const ScenarioDetailPage: React.FC = () => {
   if (!scenario) {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">
+        <h2 className="text-2xl font-bold text-rmigray-800 mb-4">
           Scenario Not Found
         </h2>
-        <p className="text-gray-600 mb-6">
+        <p className="text-rmigray-600 mb-6">
           The scenario you're looking for doesn't exist or has been removed.
         </p>
         <Link
           to="/"
-          className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-energy transition-colors duration-200"
+          className="inline-flex items-center px-4 py-2 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200"
         >
-          <ArrowLeft size={16} className="mr-2" />
+          <ArrowLeft
+            size={16}
+            className="mr-2"
+          />
           Back to Scenarios
         </Link>
       </div>
@@ -59,9 +62,12 @@ const ScenarioDetailPage: React.FC = () => {
     <div className="container mx-auto px-4 py-8">
       <Link
         to="/"
-        className="inline-flex items-center text-gray-600 hover:text-energy mb-6 transition-colors duration-200"
+        className="inline-flex items-center text-rmigray-600 hover:text-energy-700 mb-6 transition-colors duration-200"
       >
-        <ArrowLeft size={16} className="mr-1" />
+        <ArrowLeft
+          size={16}
+          className="mr-1"
+        />
         Back to scenarios
       </Link>
 
@@ -73,9 +79,18 @@ const ScenarioDetailPage: React.FC = () => {
           <p className="text-white mb-4">{scenario.description}</p>
 
           <div className="flex flex-wrap gap-2 mb-4">
-            <Badge text={scenario.category} variant="category" />
-            <Badge text={scenario.target_year} variant="year" />
-            <Badge text={scenario.target_temperature} variant="temperature" />
+            <Badge
+              text={scenario.category}
+              variant="category"
+            />
+            <Badge
+              text={scenario.target_year}
+              variant="year"
+            />
+            <Badge
+              text={scenario.target_temperature}
+              variant="temperature"
+            />
           </div>
 
           <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
@@ -94,29 +109,29 @@ const ScenarioDetailPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
             <div className="md:col-span-8">
               <section className="mb-8">
-                <h2 className="text-xl font-semibold text-gray-800 mb-3">
+                <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
                   Scenario Overview
                 </h2>
-                <div className="prose text-gray-700">
+                <div className="prose text-rmigray-700">
                   <p>{scenario.overview}</p>
                 </div>
               </section>
 
               <section className="mb-8">
-                <h2 className="text-xl font-semibold text-gray-800 mb-3">
+                <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
                   Expert Recommendations
                 </h2>
-                <div className="prose text-gray-700">
+                <div className="prose text-rmigray-700">
                   <p>{scenario.expertRecommendation}</p>
                 </div>
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-3">
+                <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
                   Data Source
                 </h2>
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                  <p className="text-gray-700 mb-4">
+                <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+                  <p className="text-rmigray-700 mb-4">
                     {scenario.dataSource.description}
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3">
@@ -124,15 +139,21 @@ const ScenarioDetailPage: React.FC = () => {
                       href={scenario.dataSource.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-energy transition-colors duration-200"
+                      className="inline-flex items-center px-4 py-2 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200"
                     >
-                      <ExternalLink size={16} className="mr-2" />
+                      <ExternalLink
+                        size={16}
+                        className="mr-2"
+                      />
                       Visit Source
                     </a>
 
                     {scenario.dataSource.downloadAvailable && (
-                      <button className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-energy transition-colors duration-200">
-                        <Download size={16} className="mr-2" />
+                      <button className="inline-flex items-center px-4 py-2 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200">
+                        <Download
+                          size={16}
+                          className="mr-2"
+                        />
                         Download Data
                       </button>
                     )}
@@ -142,24 +163,32 @@ const ScenarioDetailPage: React.FC = () => {
             </div>
 
             <div className="md:col-span-4">
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-6">
-                <h3 className="text-lg font-medium text-gray-800 mb-3">
+              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
                   Regions
                 </h3>
                 <div className="flex flex-wrap">
                   {scenario.regions.map((region, index) => (
-                    <Badge key={index} text={region} variant="region" />
+                    <Badge
+                      key={index}
+                      text={region}
+                      variant="region"
+                    />
                   ))}
                 </div>
               </div>
 
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                <h3 className="text-lg font-medium text-gray-800 mb-3">
+              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
                   Sectors
                 </h3>
                 <div className="flex flex-wrap">
                   {scenario.sectors.map((sector, index) => (
-                    <Badge key={index} text={sector} variant="sector" />
+                    <Badge
+                      key={index}
+                      text={sector}
+                      variant="sector"
+                    />
                   ))}
                 </div>
               </div>

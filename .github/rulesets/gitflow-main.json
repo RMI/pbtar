@@ -32,7 +32,6 @@
         "automatic_copilot_code_review_enabled": true,
         "allowed_merge_methods": ["squash"]
       }
-    },
     {
       "type": "required_status_checks",
       "parameters": {
