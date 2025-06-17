@@ -40,7 +40,7 @@ If you want to alter an existing ruleset (such as adding required checks, see [P
   - The action **should fail**.
   - You should see in the `diff`:
     - That on the updated action has a new `id` (which will need to be updated in the definition file).
-    - You will alsosee the `*_old` actions as having no comparisons.
+    - You will also see the `*_old` actions as having no comparisons.
   - If the `id` is the only difference in the ruleset you updated, then it has imported as expected, and you can delete the `*_old` ruleset in the Repo settings.
     - "Rulesets" -> "`*_old`" -> "..." \_. "Delete ruleset".
   - Update the IDs in the definition files
