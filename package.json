@@ -1,6 +1,6 @@
 {
   "name": "pbtar_frontend",
-  "version": "0.0.1.9002",
+  "version": "0.0.0-development",
   "type": "module",
   "description": "Front-end for the pathways-based transition assessment repository (pbtar)",
   "main": "main.jsx",
@@ -41,6 +41,7 @@
     "jsdom": "^26.1.0",
     "postcss": "^8.5.6",
     "prettier": "^3.5.3",
+    "semantic-release": "^24.2.5",
     "simple-git": "^3.28.0",
     "tailwindcss": "^4.1.7",
     "typescript": "^5.8.3",
@@ -50,5 +51,14 @@
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "release": {
+    "branches": [
+      "production",
+      {
+        "name": "main",
+        "prerelease": "dev"
+      }
+    ]
   }
 }
