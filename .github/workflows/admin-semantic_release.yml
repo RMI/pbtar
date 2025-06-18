@@ -1,16 +1,7 @@
 ---
 on:
-  pull_request:
-    branches:
-      - "hotfix/**"
-      - "release/**"
-      - main
-      - production
   push:
     branches:
-      - "hotfix/**"
-      - "release/**"
-      - main
       - production
 
 name: Release
