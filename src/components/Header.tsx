@@ -18,7 +18,7 @@ const Header: React.FC = () => {
           />
           <div>
             <h1 className="text-xl md:text-2xl font-bold tracking-tight">
-              Climate Transition Scenarios Repository
+              PBTAR-SEMVER-02
             </h1>
             <p className="text-xs md:text-sm text-white">by RMI</p>
           </div>

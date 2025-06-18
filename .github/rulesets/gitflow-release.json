@@ -1,9 +1,9 @@
 {
-  "id": 5772902,
+  "id": 6162873,
   "name": "gitflow-release",
   "target": "branch",
   "source_type": "Repository",
-  "source": "RMI/pbtar",
+  "source": "AlexAxthelm/pbtar-semver02",
   "enforcement": "active",
   "conditions": {
     "ref_name": {
@@ -19,12 +19,15 @@
       "type": "creation"
     },
     {
-      "type": "update"
+      "type": "update",
+      "parameters": {
+        "update_allows_fetch_and_merge": false
+      }
     },
     {
       "type": "pull_request",
       "parameters": {
-        "required_approving_review_count": 1,
+        "required_approving_review_count": 0,
         "dismiss_stale_reviews_on_push": true,
         "require_code_owner_review": true,
         "require_last_push_approval": true,

@@ -1,9 +1,9 @@
 {
-  "id": 6129977,
+  "id": 6162876,
   "name": "gitflow-main",
   "target": "branch",
   "source_type": "Repository",
-  "source": "RMI/pbtar",
+  "source": "AlexAxthelm/pbtar-semver02",
   "enforcement": "active",
   "conditions": {
     "ref_name": {
@@ -24,7 +24,7 @@
     {
       "type": "pull_request",
       "parameters": {
-        "required_approving_review_count": 1,
+        "required_approving_review_count": 0,
         "dismiss_stale_reviews_on_push": true,
         "require_code_owner_review": true,
         "require_last_push_approval": true,
@@ -40,18 +40,6 @@
         "do_not_enforce_on_create": false,
         "required_status_checks": [
           {
-            "context": "Docker actions / build-docker-image / build (linux/amd64)",
-            "integration_id": 15368
-          },
-          {
-            "context": "Docker actions / build-docker-image / merge",
-            "integration_id": 15368
-          },
-          {
-            "context": "Docker actions / hadolint / hadolint",
-            "integration_id": 15368
-          },
-          {
             "context": "Build / Build Application",
             "integration_id": 15368
           },
@@ -61,10 +49,6 @@
           },
           {
             "context": "JSON Schema Validation / Run ajv JSON validator",
-            "integration_id": 15368
-          },
-          {
-            "context": "Build and Deploy Job",
             "integration_id": 15368
           },
           {

@@ -1,9 +1,9 @@
 {
-  "id": 5772908,
+  "id": 6162869,
   "name": "gitflow-hotfix",
   "target": "branch",
   "source_type": "Repository",
-  "source": "RMI/pbtar",
+  "source": "AlexAxthelm/pbtar-semver02",
   "enforcement": "active",
   "conditions": {
     "ref_name": {
@@ -22,7 +22,10 @@
       "type": "creation"
     },
     {
-      "type": "update"
+      "type": "update",
+      "parameters": {
+        "update_allows_fetch_and_merge": false
+      }
     }
   ],
   "bypass_actors": [
