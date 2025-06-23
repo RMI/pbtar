@@ -7,7 +7,7 @@ import { SearchFilters, Scenario } from "../types";
 
 const HomePage: React.FC = () => {
   // Ref for the top section to handle scrolling
-  const topSectionRef = useRef<HTMLSectionElement>(null);
+  const topSectionRef = useRef<HTMLDivElement>(null);
 
   const [filters, setFilters] = useState<SearchFilters>({
     category: null,
