@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ScenarioCard from "../components/ScenarioCard";
 import SearchSection from "../components/SearchSection";
 import { scenariosData } from "../data/scenariosData";
@@ -6,6 +6,9 @@ import { filterScenarios } from "../utils/searchUtils";
 import { SearchFilters, Scenario } from "../types";
 
 const HomePage: React.FC = () => {
+  // Ref for the top section to handle scrolling
+  const topSectionRef = useRef<HTMLDivElement>(null);
+
   const [filters, setFilters] = useState<SearchFilters>({
     category: null,
     target_year: null,
@@ -19,11 +22,36 @@ const HomePage: React.FC = () => {
     useState<Scenario[]>(scenariosData);
   const [isFiltering, setIsFiltering] = useState(false);
 
+  // Track previous filter state to detect changes
+  const prevFiltersRef = useRef<SearchFilters>(filters);
+
   useEffect(() => {
     const applyFilters = () => {
       setIsFiltering(true);
       const result = filterScenarios(scenariosData, filters);
       setFilteredScenarios(result);
+
+      // Check if filters have changed meaningfully
+      const hasFilterChanged =
+        filters.searchTerm !== prevFiltersRef.current.searchTerm ||
+        filters.category !== prevFiltersRef.current.category ||
+        filters.target_year !== prevFiltersRef.current.target_year ||
+        filters.target_temperature !==
+          prevFiltersRef.current.target_temperature ||
+        filters.region !== prevFiltersRef.current.region ||
+        filters.sector !== prevFiltersRef.current.sector;
+
+      // Scroll to top when filters change
+      if (hasFilterChanged && topSectionRef.current) {
+        window.scrollTo({
+          top: topSectionRef.current.offsetTop - 20, // Slight offset for better UX
+          behavior: "smooth",
+        });
+      }
+
+      // Update the previous filters reference
+      prevFiltersRef.current = { ...filters };
+
       setTimeout(() => setIsFiltering(false), 300);
     };
 
@@ -54,7 +82,10 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <section className="mb-8">
+      <section
+        ref={topSectionRef}
+        className="mb-8"
+      >
         <h1 className="text-2xl font-bold text-rmigray-800 mb-2">
           Find Climate Transition Scenarios
         </h1>
@@ -65,26 +96,25 @@ const HomePage: React.FC = () => {
       </section>
 
       <div className="sticky top-0 z-10 py-4 bg-white shadow-md -mx-4 px-4">
-      <SearchSection
-        filters={filters}
-        onFilterChange={handleFilterChange}
-        onSearch={handleSearch}
-        onClear={handleClear}
-      />
+        <SearchSection
+          filters={filters}
+          onFilterChange={handleFilterChange}
+          onSearch={handleSearch}
+          onClear={handleClear}
+        />
 
-
-      <div className="mb-4">
-        <p className="text-sm text-rmigray-500">
-          Found {filteredScenarios.length} scenarios
-          {(filters.searchTerm ||
-            filters.category ||
-            filters.region ||
-            filters.sector ||
-            filters.target_year ||
-            filters.target_temperature) &&
-            " matching your criteria"}
-        </p>
-      </div>
+        <div className="mb-4">
+          <p className="text-sm text-rmigray-500">
+            Found {filteredScenarios.length} scenarios
+            {(filters.searchTerm ||
+              filters.category ||
+              filters.region ||
+              filters.sector ||
+              filters.target_year ||
+              filters.target_temperature) &&
+              " matching your criteria"}
+          </p>
+        </div>
       </div>
 
       <div
