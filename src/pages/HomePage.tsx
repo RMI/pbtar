@@ -64,12 +64,14 @@ const HomePage: React.FC = () => {
         </p>
       </section>
 
+      <div className="sticky top-0 z-10 py-4 bg-white shadow-md -mx-4 px-4">
       <SearchSection
         filters={filters}
         onFilterChange={handleFilterChange}
         onSearch={handleSearch}
         onClear={handleClear}
       />
+
 
       <div className="mb-4">
         <p className="text-sm text-rmigray-500">
@@ -82,6 +84,7 @@ const HomePage: React.FC = () => {
             filters.target_temperature) &&
             " matching your criteria"}
         </p>
+      </div>
       </div>
 
       <div
