@@ -30,3 +30,7 @@ jobs:
     uses: RMI-PACTA/actions/.github/workflows/docker.yml@main
     with:
       do-check-r-sysdeps: false
+      # dependabot forks the repo when making PRs, and doesn't have access
+      # to secrets (like the deploy key) in actions. This allows the CI to
+      # pass for dependabot PRs if the build succeeds.
+      push-image: ${{ github.actor != 'dependabot[bot]' }}
