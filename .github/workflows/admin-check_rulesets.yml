@@ -79,7 +79,8 @@ jobs:
             jq 'del(
               .id,
               .bypass_actors
-            )' $FILE > "/tmp/local_rulesets/${SANITIZED_RULESET_NAME}.json"
+            )' \
+            $FILE > "/tmp/local_rulesets/${SANITIZED_RULESET_NAME}.json"
           done
 
       - name: Diff directories
