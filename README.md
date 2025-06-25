@@ -1,8 +1,12 @@
 # Pathways-based transition assessment repository (pbtar)
 
-[![Lint Frontend service](https://github.com/RMI/pbtar/actions/workflows/frontend-lint.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/frontend-lint.yml)
-[![Test Frontend service](https://github.com/RMI/pbtar/actions/workflows/frontend-test.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/frontend-test.yml)
-[![Docker build and push Frontend service to ghcr.io](https://github.com/RMI/pbtar/actions/workflows/frontend-docker-build-and-push.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/frontend-docker-build-and-push.yml)
+[![Node Package Checks](https://github.com/RMI/pbtar/actions/workflows/node.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/node.yml)
+[![docker](https://github.com/RMI/pbtar/actions/workflows/docker.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/docker.yml)
+[![Azure Static Web Apps CI/CD](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml)
+
+[![Node Package Checks](https://github.com/RMI/pbtar/actions/workflows/node.yml/badge.svg?branch=production)](https://github.com/RMI/pbtar/actions/workflows/node.yml)
+[![docker](https://github.com/RMI/pbtar/actions/workflows/docker.yml/badge.svg?branch=production)](https://github.com/RMI/pbtar/actions/workflows/docker.yml)
+[![Azure Static Web Apps CI/CD](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml/badge.svg?branch=production)](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml)
 
 ## Running the application
 
