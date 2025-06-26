@@ -112,13 +112,11 @@
                 "type": "feat",
                 "section": "Features",
                 "hidden": false
-
               },
               {
                 "type": "fix",
                 "section": "Fixes",
                 "hidden": false
-
               },
               {
                 "type": "build",
@@ -134,31 +132,26 @@
                 "type": "docs",
                 "section": "Docs",
                 "hidden": false
-
               },
               {
                 "type": "refactor",
                 "section": "Refactors",
                 "hidden": false
-
               },
               {
                 "type": "perf",
                 "section": "Performance",
                 "hidden": false
-
               },
               {
                 "type": "style",
                 "section": "Style",
                 "hidden": false
-
               },
               {
                 "type": "test",
                 "section": "Tests",
                 "hidden": false
-
               }
             ]
           }
