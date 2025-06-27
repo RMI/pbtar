@@ -137,6 +137,20 @@ npm run lint:fix
 npm run format
 ```
 
+## Releases
+
+This project uses [`semantic-release`](https://semantic-release.gitbook.io/semantic-release) to manage release versions.
+See "Releases" on the right of the main GitHub repository page to see the latest released version, or click through to see pre-releases.
+
+### Managing Releases (For developers)
+
+To trigger an update in released version, use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in your normal development process.
+Commits with a `feat` prefix (in the commit summary) will cause a bump in the minor version (`x.X.x`), while a `fix`, `build`, `docs`, `perf`, `refactor`, `style`, or `test` prefix will bump the patch version (`x.x.X`).
+The commit summary used will appear in the release notes.
+
+The "released" version of the application is updated when the `production` branch is updated, but we can see pre-release versions by updating `main` (updates `x.x.x-dev.y`) or `next` (updates `x.x.x-rc.y`).
+When opening a Pull Request, an GitHub workflow will dry-run the release process and comment with a preview of the expected version tag and release notes.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE.txt)

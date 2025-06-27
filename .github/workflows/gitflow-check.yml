@@ -13,7 +13,7 @@ jobs:
       - name: Check source branch name
         run: |
           echo "Source branch: ${{ github.head_ref }}"
-          if [[ ! "${{ github.head_ref }}" =~ ^(release|hotfix)/.+$ ]]; then
-            echo "::error::Only release/* or hotfix/* branches can be merged into production"
+          if [[ ! "${{ github.head_ref }}" == "next" ]]; then
+            echo "::error::Only `next` branch can be merged into production"
             exit 1
           fi

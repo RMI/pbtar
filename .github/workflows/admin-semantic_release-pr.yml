@@ -1,0 +1,106 @@
+---
+on:
+  pull_request:
+    branches:
+      - main
+      - production
+      - next
+
+name: Semantic Release Preview
+
+permissions:
+  contents: read # for checkout
+
+jobs:
+  release-preview:
+    name: Release Preview
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.base_ref }}
+
+      - name: Merge PR branch to PR target
+        env:
+          HEAD_BRANCH: ${{ github.head_ref }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git merge "origin/$HEAD_BRANCH"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+
+      - name: Install dependencies
+        run: |
+          npm clean-install
+
+      - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
+        run: |
+          npm audit signatures
+
+      - name: Dry-run Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          unset GITHUB_ACTIONS
+          npx semantic-release \
+            --dry-run \
+            --no-ci | \
+          tee /tmp/semantic-release-raw.txt
+
+      - name: prepare semantic-release output for comment
+        env:
+          HEAD_BRANCH: ${{ github.head_ref }}
+        run: |
+          sed -n \
+            -e '1,/Release note for version/d; p' \
+            /tmp/semantic-release-raw.txt \
+          | sed -E \
+            -e  's/^[[:space:]]*\*/\*/' \
+          | sed \
+            -e "1s|\(\.\.\.[^)]*\))|...${HEAD_BRANCH} )|" \
+            -e "1s/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/$(date -u '+%Y-%m-%dT%H:%M UTC')/" \
+            -e "1s/^# /## /" \
+          | sed '1s/^/# Expected version change and release notes:\n/' \
+          > /tmp/semantic-release-clean.txt
+
+          if [ ! -s /tmp/semantic-release-clean.txt ]; then
+            echo "# Expected version change and release notes" \
+              > /tmp/semantic-release-clean.txt
+            echo "## 🚨 WARNING: This PR is not expected to trigger a new version" \
+              >> /tmp/semantic-release-clean.txt
+            echo "To trigger a version bump, use at least one conventional commit message in this branch." \
+              "See: https://www.conventionalcommits.org/en/v1.0.0/" \
+              >> /tmp/semantic-release-clean.txt
+          fi
+
+      - name: preview semantic-release output for comment
+        run: |
+          cat /tmp/semantic-release-clean.txt
+
+      - name: Find Comment
+        # https://github.com/peter-evans/find-comment
+        uses: peter-evans/find-comment@v3
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: "github-actions[bot]"
+          body-includes: "# Expected version change and release notes:"
+
+      - name: Create or update comment
+        # https://github.com/peter-evans/create-or-update-comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body-path: /tmp/semantic-release-clean.txt
+          edit-mode: replace

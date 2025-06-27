@@ -1,18 +1,20 @@
-name: Azure Static Web Apps CI/CD
-
+---
 on:
   push:
     branches:
       - production
       - main
+      - next
 
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - "hotfix/**"
-      - "release/**"
       - main
       - production
+      - next
+
+name: Azure Static Web Apps CI/CD
+concurrency: azure-static-web-app
 
 permissions:
   contents: read
@@ -52,8 +54,7 @@ jobs:
               ((github.event_name == 'push' && github.ref_name == 'production') && 'production') ||
               ((github.event_name == 'push' && github.ref_name == 'main') && 'development') ||
               (github.event_name == 'push' && github.ref_name) ||
-              ((github.event_name == 'pull_request' && startsWith(github.head_ref, 'release/')) && format('{0}{1}', 'staging/', github.head_ref)) ||
-              ((github.event_name == 'pull_request' && startsWith(github.head_ref, 'hotfix/')) && format('{0}{1}', 'staging/', github.head_ref)) ||
+              ((github.event_name == 'pull_request' && github.ref_name == 'next') && 'staging') ||
               (github.event_name == 'pull_request' && format('{0}-{1}', 'pr', github.event.pull_request.number)) ||
               github.ref_name
             }}

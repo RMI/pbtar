@@ -2,16 +2,14 @@
 on:
   pull_request:
     branches:
-      - "hotfix/**"
-      - "release/**"
       - main
       - production
+      - next
   push:
     branches:
-      - "hotfix/**"
-      - "release/**"
       - main
       - production
+      - next
 
 name: Node Package Checks
 concurrency: node-package-checks
