@@ -95,7 +95,7 @@ const HomePage: React.FC = () => {
         </p>
       </section>
 
-      <div className="sticky top-0 z-10 py-4 bg-white shadow-md -mx-4 px-4">
+      <div className="sticky top-0 z-10 py-4 bg-white -mx-4 px-4">
         <SearchSection
           filters={filters}
           onFilterChange={handleFilterChange}
