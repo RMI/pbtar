@@ -2,7 +2,6 @@ import { defineConfig, Plugin, version as viteVersion } from "vite";
 import react from "@vitejs/plugin-react";
 import { simpleGit } from "simple-git";
 import os from "os";
-import pkg from "./package.json";
 
 // Safe wrapper for OS functions with proper typing
 const getOsInfo = (): {
@@ -78,12 +77,10 @@ function buildInfoPlugin(): Plugin {
     async config(_, { mode }) {
       const gitInfo = await getGitInfo();
       const osInfo = getOsInfo();
-      const pkgVersion = (pkg as { version: string | undefined }).version;
 
       return {
         define: {
           // Build Env
-          "import.meta.env.VITE_APP_VERSION": JSON.stringify(pkgVersion),
           "import.meta.env.VITE_NODE_VERSION": JSON.stringify(process.version),
           "import.meta.env.VITE_VERSION": JSON.stringify(viteVersion),
           "import.meta.env.VITE_ENVIRONMENT": JSON.stringify(mode),

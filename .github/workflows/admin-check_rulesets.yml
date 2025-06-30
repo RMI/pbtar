@@ -48,6 +48,7 @@ jobs:
             echo "ID=$ID"
             gh api "${{ format('/repos/{0}/rulesets', github.repository) }}/$ID" | \
             jq 'del(
+              .id,
               .current_user_can_bypass,
               ._links,
               .node_id,
@@ -75,7 +76,11 @@ jobs:
             RULESET_NAME="$(jq -rc '.name' $FILE)"
             echo "$FILE: $ID, $RULESET_NAME"
             SANITIZED_RULESET_NAME="$(echo "$RULESET_NAME" | tr -c 'a-zA-Z0-9.-_' '_')"
-            jq 'del(.bypass_actors)' $FILE > "/tmp/local_rulesets/${SANITIZED_RULESET_NAME}.json"
+            jq 'del(
+              .id,
+              .bypass_actors
+            )' $FILE \
+            > "/tmp/local_rulesets/${SANITIZED_RULESET_NAME}.json"
           done
 
       - name: Diff directories
