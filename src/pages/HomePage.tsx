@@ -94,27 +94,14 @@ const HomePage: React.FC = () => {
           relevant ones for your assessment needs.
         </p>
       </section>
-
       <div className="sticky top-0 z-10 py-4 bg-white -mx-4 px-4">
         <SearchSection
           filters={filters}
+          scenariosNumber={filteredScenarios.length}
           onFilterChange={handleFilterChange}
           onSearch={handleSearch}
           onClear={handleClear}
         />
-
-        <div className="mb-4">
-          <p className="text-sm text-rmigray-500">
-            Found {filteredScenarios.length} scenarios
-            {(filters.searchTerm ||
-              filters.category ||
-              filters.region ||
-              filters.sector ||
-              filters.target_year ||
-              filters.target_temperature) &&
-              " matching your criteria"}
-          </p>
-        </div>
       </div>
 
       <div
