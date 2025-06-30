@@ -64,26 +64,26 @@ const HomePage: React.FC = () => {
   }, [filters]);
 
   // Detect sticky state
-useEffect(() => {
-  const handleScroll = () => {
-    const scrollPosition = window.scrollY;
-    const threshold = topSectionRef.current?.offsetTop || 0;
-    
-    // Only update if state actually changes (performance optimization)
-    if ((scrollPosition > threshold) !== isSticky) {
-      setIsSticky(scrollPosition > threshold);
-      console.log("Sticky state changed to:", scrollPosition > threshold);
-    }
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const threshold = topSectionRef.current?.offsetTop || 0;
 
-  window.addEventListener('scroll', handleScroll);
-  // Initialize on mount
-  handleScroll();
-  
-  return () => {
-    window.removeEventListener('scroll', handleScroll);
-  };
-}, [isSticky]);
+      // Only update if state actually changes (performance optimization)
+      if (scrollPosition > threshold !== isSticky) {
+        setIsSticky(scrollPosition > threshold);
+        console.log("Sticky state changed to:", scrollPosition > threshold);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    // Initialize on mount
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isSticky]);
 
   const handleFilterChange = (
     key: keyof SearchFilters,
@@ -124,16 +124,16 @@ useEffect(() => {
       <div
         ref={searchSectionRef}
         className={`sticky rounded-lg top-0 z-10 bg-white inset-x-0 transition-shadow duration-200 ${isSticky ? "shadow-md" : ""}`}
-        style={{margin: "0 calc(-50vw + 50%)"}}
+        style={{ margin: "0 calc(-50vw + 50%)" }}
       >
         <div className="container mx-auto px-4 py-2">
           <SearchSection
-          filters={filters}
-          scenariosNumber={filteredScenarios.length}
-          onFilterChange={handleFilterChange}
-          onSearch={handleSearch}
-          onClear={handleClear}
-        />
+            filters={filters}
+            scenariosNumber={filteredScenarios.length}
+            onFilterChange={handleFilterChange}
+            onSearch={handleSearch}
+            onClear={handleClear}
+          />
         </div>
       </div>
 
