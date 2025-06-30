@@ -8,6 +8,11 @@ import { SearchFilters, Scenario } from "../types";
 const HomePage: React.FC = () => {
   // Ref for the top section to handle scrolling
   const topSectionRef = useRef<HTMLDivElement>(null);
+  // Ref for the search section to detect sticky state
+  const searchSectionRef = useRef<HTMLDivElement>(null);
+
+  // State to track if search section is sticky
+  const [isSticky, setIsSticky] = useState(false);
 
   const [filters, setFilters] = useState<SearchFilters>({
     category: null,
@@ -58,6 +63,35 @@ const HomePage: React.FC = () => {
     applyFilters();
   }, [filters]);
 
+  // Detect sticky state
+  useEffect(() => {
+    const options = {
+      threshold: [0, 1], // Track when element is both fully visible and starts to disappear
+      rootMargin: "-10px 0px 0px 0px", // More forgiving margin
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+      // When intersection is less than 1, element is starting to be sticky
+      setIsSticky(!entry.isIntersecting || entry.intersectionRatio < 1);
+      console.log(
+        "Sticky state:",
+        !entry.isIntersecting || entry.intersectionRatio < 1,
+      ); // Debug logging
+    }, options);
+
+    const sectionRef = searchSectionRef.current;
+    if (sectionRef) {
+      observer.observe(sectionRef);
+    }
+
+    return () => {
+      if (sectionRef) {
+        observer.unobserve(sectionRef);
+      }
+    };
+  }, []);
+
   const handleFilterChange = (
     key: keyof SearchFilters,
     value: string | null,
@@ -94,7 +128,10 @@ const HomePage: React.FC = () => {
           relevant ones for your assessment needs.
         </p>
       </section>
-      <div className="sticky top-0 z-10 bg-white -mx-4 px-4">
+      <div
+        ref={searchSectionRef}
+        className={`sticky rounded-lg top-0 z-10 bg-white -mx-4 px-4 mt-4 transition-shadow duration-200 ${isSticky ? "shadow-md" : ""}`}
+      >
         <SearchSection
           filters={filters}
           scenariosNumber={filteredScenarios.length}
