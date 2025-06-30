@@ -50,8 +50,8 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       filters.target_temperature) !== null;
 
   return (
-    <div className="bg-white p-5">
-      <div className="mb-4 pt-5">
+    <div className="bg-white">
+      <div className="mb-4 pt-8">
         <SearchBox
           value={filters.searchTerm}
           onChange={(value) => onFilterChange("searchTerm", value)}

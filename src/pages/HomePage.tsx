@@ -64,33 +64,26 @@ const HomePage: React.FC = () => {
   }, [filters]);
 
   // Detect sticky state
-  useEffect(() => {
-    const options = {
-      threshold: [0, 1], // Track when element is both fully visible and starts to disappear
-      rootMargin: "-10px 0px 0px 0px", // More forgiving margin
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      const [entry] = entries;
-      // When intersection is less than 1, element is starting to be sticky
-      setIsSticky(!entry.isIntersecting || entry.intersectionRatio < 1);
-      console.log(
-        "Sticky state:",
-        !entry.isIntersecting || entry.intersectionRatio < 1,
-      ); // Debug logging
-    }, options);
-
-    const sectionRef = searchSectionRef.current;
-    if (sectionRef) {
-      observer.observe(sectionRef);
+useEffect(() => {
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY;
+    const threshold = topSectionRef.current?.offsetTop || 0;
+    
+    // Only update if state actually changes (performance optimization)
+    if ((scrollPosition > threshold) !== isSticky) {
+      setIsSticky(scrollPosition > threshold);
+      console.log("Sticky state changed to:", scrollPosition > threshold);
     }
+  };
 
-    return () => {
-      if (sectionRef) {
-        observer.unobserve(sectionRef);
-      }
-    };
-  }, []);
+  window.addEventListener('scroll', handleScroll);
+  // Initialize on mount
+  handleScroll();
+  
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, [isSticky]);
 
   const handleFilterChange = (
     key: keyof SearchFilters,
@@ -130,15 +123,18 @@ const HomePage: React.FC = () => {
       </section>
       <div
         ref={searchSectionRef}
-        className={`sticky rounded-lg top-0 z-10 bg-white -mx-4 px-4 mt-4 transition-shadow duration-200 ${isSticky ? "shadow-md" : ""}`}
+        className={`sticky rounded-lg top-0 z-10 bg-white inset-x-0 transition-shadow duration-200 ${isSticky ? "shadow-md" : ""}`}
+        style={{margin: "0 calc(-50vw + 50%)"}}
       >
-        <SearchSection
+        <div className="container mx-auto px-4 py-2">
+          <SearchSection
           filters={filters}
           scenariosNumber={filteredScenarios.length}
           onFilterChange={handleFilterChange}
           onSearch={handleSearch}
           onClear={handleClear}
         />
+        </div>
       </div>
 
       <div
