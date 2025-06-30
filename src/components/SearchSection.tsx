@@ -41,10 +41,16 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   const sectors: Sector[] = Array.from(
     new Set(scenariosData.map((d) => d.sectors).flat()),
   ).sort();
-  const areFiltersApplied = (filters.searchTerm || filters.category || filters.region || filters.sector || filters.target_year || filters.target_temperature) !== null;
-  
+  const areFiltersApplied =
+    (filters.searchTerm ||
+      filters.category ||
+      filters.region ||
+      filters.sector ||
+      filters.target_year ||
+      filters.target_temperature) !== null;
+
   return (
-    <div className="bg-white rounded-lg shadow-md p-5 mb-6">
+    <div className="bg-white rounded-lg shadow-md p-5">
       <div className="mb-4">
         <SearchBox
           value={filters.searchTerm}
@@ -91,11 +97,11 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         />
       </div>
       <div className="mt-4 ml-1">
-          <p className="text-sm text-rmigray-500">
-            Found {scenariosNumber} scenarios
-            {areFiltersApplied && " matching your criteria"}
-          </p>
-          </div>
+        <p className="text-sm text-rmigray-500">
+          Found {scenariosNumber} scenarios
+          {areFiltersApplied && " matching your criteria"}
+        </p>
+      </div>
     </div>
   );
 };
