@@ -13,6 +13,7 @@ import {
 
 interface SearchSectionProps {
   filters: SearchFilters;
+  scenariosNumber: number;
   onFilterChange: (key: keyof SearchFilters, value: string | null) => void;
   onSearch: () => void;
   onClear: () => void;
@@ -20,6 +21,7 @@ interface SearchSectionProps {
 
 const SearchSection: React.FC<SearchSectionProps> = ({
   filters,
+  scenariosNumber,
   onFilterChange,
   onSearch,
   onClear,
@@ -39,10 +41,17 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   const sectors: Sector[] = Array.from(
     new Set(scenariosData.map((d) => d.sectors).flat()),
   ).sort();
+  const areFiltersApplied =
+    (filters.searchTerm ||
+      filters.category ||
+      filters.region ||
+      filters.sector ||
+      filters.target_year ||
+      filters.target_temperature) !== null;
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-5 mb-6">
-      <div className="mb-4">
+    <div className="bg-white">
+      <div className="mb-4 pt-8">
         <SearchBox
           value={filters.searchTerm}
           onChange={(value) => onFilterChange("searchTerm", value)}
@@ -86,6 +95,12 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           selectedValue={filters.sector}
           onChange={(value) => onFilterChange("sector", value)}
         />
+      </div>
+      <div className="mt-4 ml-1">
+        <p className="text-sm text-rmigray-500">
+          Found {scenariosNumber} scenarios
+          {areFiltersApplied && " matching your criteria"}
+        </p>
       </div>
     </div>
   );
