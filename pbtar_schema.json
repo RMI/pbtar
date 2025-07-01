@@ -23,6 +23,10 @@
         "description": "Category of the scenario",
         "type": "string"
       },
+      "category_tooltip": {
+        "description": "Detailed explanation of the scenario category",
+        "type": "string"
+      },
       "target_year": {
         "description": "Target year of the scenario",
         "type": "string"
@@ -89,6 +93,7 @@
       "name",
       "description",
       "category",
+      "category_tooltip",
       "target_year",
       "target_temperature",
       "regions",
