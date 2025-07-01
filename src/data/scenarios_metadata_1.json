@@ -4,6 +4,7 @@
     "name": "ZETI Net Zero Pathway",
     "description": "A comprehensive pathway for the global energy sector to reach net zero by 2050",
     "category": "IAM",
+    "category_tooltip": "Integrated Assessment Model",
     "target_year": "2050",
     "target_temperature": "1.5C",
     "regions": ["Global"],

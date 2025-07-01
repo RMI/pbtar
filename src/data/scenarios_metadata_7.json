@@ -4,6 +4,7 @@
     "name": "Planned Transition Scenario",
     "description": "Gradual, orderly transition that begins immediately and continues gradually",
     "category": "ITR",
+    "category_tooltip": "Implied Temperature Rise",
     "target_year": "2050",
     "target_temperature": "2C",
     "regions": ["Global", "EU", "Americas", "Asia Pacific"],

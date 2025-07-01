@@ -4,6 +4,7 @@
     "name": "Reactive Transition Scenario",
     "description": "Delayed transition with sudden policy changes leading to higher transition risks",
     "category": "ITR",
+    "category_tooltip": "Implied Temperature Rise",
     "target_year": "2050",
     "target_temperature": "2C",
     "regions": ["Global", "EU", "Americas", "Asia Pacific"],

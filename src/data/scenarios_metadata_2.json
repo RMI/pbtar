@@ -4,6 +4,7 @@
     "name": "FGCN Current Policies",
     "description": "Business-as-usual baseline assuming current policies remain in place",
     "category": "IAM",
+    "category_tooltip": "Integrated Assessment Model",
     "target_year": "2050",
     "target_temperature": "3C",
     "regions": ["Global", "EU", "SEA", "Americas", "Asia Pacific"],

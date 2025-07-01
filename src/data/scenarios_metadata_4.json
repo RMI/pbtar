@@ -4,6 +4,7 @@
     "name": "CoalTech CCS Transition",
     "description": "Scenario focused on CCS deployment for existing coal infrastructure",
     "category": "ITR",
+    "category_tooltip": "Implied Temperature Rise",
     "target_year": "2060",
     "target_temperature": "2C",
     "regions": ["Global", "SEA", "Asia Pacific"],

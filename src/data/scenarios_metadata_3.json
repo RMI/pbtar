@@ -4,6 +4,7 @@
     "name": "SEA Clean Energy Pathway",
     "description": "Pathway focused on replacing coal with renewables in Southeast Asia",
     "category": "NDC",
+    "category_tooltip": "Nationally Determined Contribution",
     "target_year": "2050",
     "target_temperature": "1.5C",
     "regions": ["SEA"],

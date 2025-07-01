@@ -4,6 +4,7 @@
     "name": "GreenForward EU Strategy",
     "description": "Ambitious accelerated implementation of European Green Deal policies",
     "category": "NDC",
+    "category_tooltip": "Nationally Determined Contribution",
     "target_year": "2040",
     "target_temperature": "1.5C",
     "regions": ["EU"],
