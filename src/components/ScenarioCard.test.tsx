@@ -12,10 +12,16 @@ describe("ScenarioCard component", () => {
     description:
       "A scenario describing the path to net zero emissions by 2050.",
     category: "Policy",
+    category_tooltip: "Policy scenarios focus on regulatory and legislative measures.",
     target_year: "2050",
     target_temperature: "1.5°C",
     regions: ["Global", "Europe", "North America", "Asia"],
-    sectors: ["Energy", "Transport", "Industry", "Buildings"],
+    sectors: [
+      { name: "Power", tooltip: "Electricity generation and distribution" },
+      { name: "Transport", tooltip: "Transportation and logistics" },
+      { name: "Industrial", tooltip: "Manufacturing and industrial processes" },
+      { name: "Buildings", tooltip: "Residential and commercial buildings" },
+    ],
     publisher: "IEA",
     published_date: "Jan 2023",
     overview: "Mock",
@@ -102,9 +108,9 @@ describe("ScenarioCard component", () => {
     expect(screen.getByText("Sectors:")).toBeInTheDocument();
 
     // Check first 3 sectors are displayed
-    expect(screen.getByText(mockScenario.sectors[0])).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.sectors[1])).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.sectors[2])).toBeInTheDocument();
+    expect(screen.getByText(mockScenario.sectors[0].name)).toBeInTheDocument();
+    expect(screen.getByText(mockScenario.sectors[1].name)).toBeInTheDocument();
+    expect(screen.getByText(mockScenario.sectors[2].name)).toBeInTheDocument();
   });
 
   it("shows '+1 more' text when there are more than 3 sectors", () => {
