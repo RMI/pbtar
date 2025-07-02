@@ -12,7 +12,8 @@ describe("ScenarioCard component", () => {
     description:
       "A scenario describing the path to net zero emissions by 2050.",
     category: "Policy",
-    category_tooltip: "Policy scenarios focus on regulatory and legislative measures.",
+    category_tooltip:
+      "Policy scenarios focus on regulatory and legislative measures.",
     target_year: "2050",
     target_temperature: "1.5°C",
     regions: ["Global", "Europe", "North America", "Asia"],
