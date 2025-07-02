@@ -26,6 +26,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
           <div className="flex flex-wrap">
             <Badge
               text={scenario.category}
+              tooltip={scenario.category_tooltip}
               variant="category"
             />
           </div>

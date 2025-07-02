@@ -81,6 +81,7 @@ const ScenarioDetailPage: React.FC = () => {
           <div className="flex flex-wrap gap-2 mb-4">
             <Badge
               text={scenario.category}
+              tooltip={scenario.category_tooltip}
               variant="category"
             />
             <Badge
