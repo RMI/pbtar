@@ -8,7 +8,8 @@ describe("searchUtils", () => {
     {
       id: "scenario-1",
       name: "Net Zero 2050",
-      description: "A scenario describing the path to net zero emissions by 2050.",
+      description:
+        "A scenario describing the path to net zero emissions by 2050.",
       category: "Policy",
       category_tooltip: "Policy scenarios focus on regulatory measures.",
       target_year: "2050",
@@ -16,7 +17,7 @@ describe("searchUtils", () => {
       regions: ["Global", "Europe"],
       sectors: [
         { name: "Power", tooltip: "Electricity generation and distribution" },
-        { name: "Transport", tooltip: "Transportation and logistics" }
+        { name: "Transport", tooltip: "Transportation and logistics" },
       ],
       publisher: "IEA",
       published_date: "Jan 2023",
@@ -38,8 +39,11 @@ describe("searchUtils", () => {
       target_temperature: "2.7°C",
       regions: ["Global", "Asia"],
       sectors: [
-        { name: "Industrial", tooltip: "Manufacturing and industrial processes" },
-        { name: "Buildings", tooltip: "Residential and commercial buildings" }
+        {
+          name: "Industrial",
+          tooltip: "Manufacturing and industrial processes",
+        },
+        { name: "Buildings", tooltip: "Residential and commercial buildings" },
       ],
       publisher: "IPCC",
       published_date: "Mar 2022",
@@ -57,7 +61,7 @@ describe("searchUtils", () => {
     it("returns all scenarios when no filters are applied", () => {
       const emptyFilters: SearchFilters = {};
       const result = filterScenarios(mockScenarios, emptyFilters);
-      
+
       expect(result).toEqual(mockScenarios);
       expect(result.length).toBe(2);
     });
@@ -65,7 +69,7 @@ describe("searchUtils", () => {
     it("filters by category", () => {
       const filters: SearchFilters = { category: "Policy" };
       const result = filterScenarios(mockScenarios, filters);
-      
+
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("scenario-1");
     });
@@ -73,7 +77,7 @@ describe("searchUtils", () => {
     it("filters by target year", () => {
       const filters: SearchFilters = { target_year: "2030" };
       const result = filterScenarios(mockScenarios, filters);
-      
+
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("scenario-2");
     });
@@ -81,7 +85,7 @@ describe("searchUtils", () => {
     it("filters by target temperature", () => {
       const filters: SearchFilters = { target_temperature: "1.5°C" };
       const result = filterScenarios(mockScenarios, filters);
-      
+
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("scenario-1");
     });
@@ -89,7 +93,7 @@ describe("searchUtils", () => {
     it("filters by region", () => {
       const filters: SearchFilters = { region: "Asia" };
       const result = filterScenarios(mockScenarios, filters);
-      
+
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("scenario-2");
     });
@@ -97,7 +101,7 @@ describe("searchUtils", () => {
     it("filters by sector", () => {
       const filters: SearchFilters = { sector: "Power" };
       const result = filterScenarios(mockScenarios, filters);
-      
+
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("scenario-1");
     });
@@ -105,7 +109,7 @@ describe("searchUtils", () => {
     it("filters by search term in name", () => {
       const filters: SearchFilters = { searchTerm: "zero" };
       const result = filterScenarios(mockScenarios, filters);
-      
+
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("scenario-1");
     });
@@ -113,7 +117,7 @@ describe("searchUtils", () => {
     it("filters by search term in description", () => {
       const filters: SearchFilters = { searchTerm: "current implemented" };
       const result = filterScenarios(mockScenarios, filters);
-      
+
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("scenario-2");
     });
@@ -121,29 +125,29 @@ describe("searchUtils", () => {
     it("filters by search term in sector tooltip", () => {
       const filters: SearchFilters = { searchTerm: "electricity" };
       const result = filterScenarios(mockScenarios, filters);
-      
+
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("scenario-1");
     });
 
     it("combines multiple filters", () => {
-      const filters: SearchFilters = { 
-        target_year: "2050", 
-        region: "Europe" 
+      const filters: SearchFilters = {
+        target_year: "2050",
+        region: "Europe",
       };
       const result = filterScenarios(mockScenarios, filters);
-      
+
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("scenario-1");
     });
 
     it("returns empty array when no scenarios match filters", () => {
-      const filters: SearchFilters = { 
+      const filters: SearchFilters = {
         category: "Policy",
-        target_year: "2030" 
+        target_year: "2030",
       };
       const result = filterScenarios(mockScenarios, filters);
-      
+
       expect(result.length).toBe(0);
       expect(result).toEqual([]);
     });
@@ -151,7 +155,7 @@ describe("searchUtils", () => {
     it("handles empty search term", () => {
       const filters: SearchFilters = { searchTerm: "" };
       const result = filterScenarios(mockScenarios, filters);
-      
+
       expect(result.length).toBe(2);
       expect(result).toEqual(mockScenarios);
     });
@@ -159,7 +163,7 @@ describe("searchUtils", () => {
     it("handles whitespace-only search term", () => {
       const filters: SearchFilters = { searchTerm: "   " };
       const result = filterScenarios(mockScenarios, filters);
-      
+
       expect(result.length).toBe(2);
       expect(result).toEqual(mockScenarios);
     });

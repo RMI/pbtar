@@ -113,39 +113,41 @@ describe("Badge component", () => {
     expect(container.firstChild?.nodeName).toBe("SPAN");
   });
 
-// Tooltip tests
+  // Tooltip tests
   it("does not render tooltip when no tooltip is provided", () => {
     const { container } = render(<Badge text="No Tooltip" />);
-    
+
     // Find the badge span
     const badge = screen.getByText("No Tooltip");
-    
+
     // Check that it's a direct child of the container without tooltip wrapper divs
     expect(badge.parentElement).toBe(container);
-    
+
     // Ensure no tooltip text is rendered
-    const tooltipElements = container.querySelectorAll('.group-hover\\:visible');
+    const tooltipElements = container.querySelectorAll(
+      ".group-hover\\:visible",
+    );
     expect(tooltipElements.length).toBe(0);
   });
 
   it("renders tooltip structure when tooltip is provided", () => {
     const { container } = render(
-      <Badge 
-        text="With Tooltip" 
-        tooltip="This is a tooltip" 
-      />
+      <Badge
+        text="With Tooltip"
+        tooltip="This is a tooltip"
+      />,
     );
-    
+
     // Should have a group div wrapper
     const groupDiv = container.firstChild as HTMLElement;
     expect(groupDiv.tagName).toBe("DIV");
     expect(groupDiv).toHaveClass("group");
-    
+
     // Should have the badge span with cursor-help
     const badge = screen.getByText("With Tooltip");
     expect(badge).toHaveClass("cursor-help");
     expect(badge).toHaveAttribute("tabIndex", "0");
-    
+
     // Should have the tooltip text
     const tooltip = screen.getByText("This is a tooltip");
     expect(tooltip).toBeInTheDocument();
@@ -153,23 +155,25 @@ describe("Badge component", () => {
 
   it("shows tooltip on hover", () => {
     render(
-      <Badge 
-        text="Hover Me" 
-        tooltip="Hover tooltip" 
-      />
+      <Badge
+        text="Hover Me"
+        tooltip="Hover tooltip"
+      />,
     );
-    
+
     // Get the badge element
     const badge = screen.getByText("Hover Me");
-    
+
     // Get the tooltip container (the div with the transition classes)
-    const tooltipContainer = screen.getByText("Hover tooltip").closest("div")?.parentElement;
+    const tooltipContainer = screen
+      .getByText("Hover tooltip")
+      .closest("div")?.parentElement;
     expect(tooltipContainer).toHaveClass("invisible");
     expect(tooltipContainer).toHaveClass("group-hover:visible");
-    
+
     // Simulate hover
     fireEvent.mouseEnter(badge);
-    
+
     // In a real browser, the group-hover:visible class would make it visible
     // We can verify the class is there since we can't test the actual CSS effect in JSDOM
     expect(tooltipContainer).toHaveClass("group-hover:visible");
@@ -178,40 +182,44 @@ describe("Badge component", () => {
 
   it("shows tooltip on focus", () => {
     render(
-      <Badge 
-        text="Focus Me" 
-        tooltip="Focus tooltip" 
-      />
+      <Badge
+        text="Focus Me"
+        tooltip="Focus tooltip"
+      />,
     );
-    
+
     // Get the badge element
     const badge = screen.getByText("Focus Me");
-    
+
     // Get the tooltip container
-    const tooltipContainer = screen.getByText("Focus tooltip").closest("div")?.parentElement;
-    
+    const tooltipContainer = screen
+      .getByText("Focus tooltip")
+      .closest("div")?.parentElement;
+
     // Verify the focus classes are present
     expect(tooltipContainer).toHaveClass("group-focus-within:visible");
     expect(tooltipContainer).toHaveClass("group-focus-within:opacity-100");
-    
+
     // Simulate focus
     fireEvent.focus(badge);
-    
+
     // Verify classes are still there (actual visibility would be handled by CSS)
     expect(tooltipContainer).toHaveClass("group-focus-within:visible");
   });
 
   it("positions the tooltip correctly", () => {
-   render(
-      <Badge 
-        text="Position Test" 
-        tooltip="Right positioned tooltip" 
-      />
+    render(
+      <Badge
+        text="Position Test"
+        tooltip="Right positioned tooltip"
+      />,
     );
-    
+
     // Get the tooltip positioning div
-    const tooltipPositioner = screen.getByText("Right positioned tooltip").closest("div")?.parentElement;
-    
+    const tooltipPositioner = screen
+      .getByText("Right positioned tooltip")
+      .closest("div")?.parentElement;
+
     // Check positioning classes
     expect(tooltipPositioner).toHaveClass("left-full");
     expect(tooltipPositioner).toHaveClass("ml-2");
@@ -221,15 +229,17 @@ describe("Badge component", () => {
 
   it("includes the tooltip arrow pointing to the badge", () => {
     render(
-      <Badge 
-        text="Arrow Test" 
-        tooltip="Tooltip with arrow" 
-      />
+      <Badge
+        text="Arrow Test"
+        tooltip="Tooltip with arrow"
+      />,
     );
-    
+
     // Find the tooltip content
-    const tooltipContent = screen.getByText("Tooltip with arrow").closest("div");
-    
+    const tooltipContent = screen
+      .getByText("Tooltip with arrow")
+      .closest("div");
+
     // Find the arrow element (should be a div with border classes)
     const arrow = tooltipContent?.querySelector("div[class*='border-']");
     expect(arrow).toBeInTheDocument();
