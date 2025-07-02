@@ -12,7 +12,11 @@ interface BadgeProps {
     | "sector";
 }
 
-const Badge: React.FC<BadgeProps> = ({ text, tooltip, variant = "default" }) => {
+const Badge: React.FC<BadgeProps> = ({
+  text,
+  tooltip,
+  variant = "default",
+}) => {
   const getVariantStyles = () => {
     switch (variant) {
       case "category":
@@ -30,18 +34,18 @@ const Badge: React.FC<BadgeProps> = ({ text, tooltip, variant = "default" }) => 
     }
   };
 
-   // If no tooltip, just return the basic badge
+  // If no tooltip, just return the basic badge
   if (!tooltip) {
-  return (
-    <span
-      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getVariantStyles()} mr-2 mb-1`}
-    >
-      {text}
-    </span>
-  );
-}
+    return (
+      <span
+        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getVariantStyles()} mr-2 mb-1`}
+      >
+        {text}
+      </span>
+    );
+  }
 
- // With tooltip, use a group for hover/focus behavior
+  // With tooltip, use a group for hover/focus behavior
   return (
     <div className="relative inline-block group">
       <span
@@ -50,12 +54,14 @@ const Badge: React.FC<BadgeProps> = ({ text, tooltip, variant = "default" }) => 
       >
         {text}
       </span>
-      
+
       {/* Tooltip that shows on group-hover and group-focus */}
-      <div className="absolute z-10 left-full ml-2 top-1/2 transform -translate-y-1/2
+      <div
+        className="absolute z-10 left-full ml-2 top-1/2 transform -translate-y-1/2
                   invisible opacity-0 group-hover:visible group-hover:opacity-100 
                   group-focus-within:visible group-focus-within:opacity-100
-                  transition-opacity duration-200 ease-in-out">
+                  transition-opacity duration-200 ease-in-out"
+      >
         <div className="px-3 py-2 bg-white text-rmigray-500 text-xs rounded shadow-lg max-w-xs">
           {tooltip}
           {/* Arrow */}
