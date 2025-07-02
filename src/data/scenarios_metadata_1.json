@@ -9,13 +9,22 @@
     "target_temperature": "1.5C",
     "regions": ["Global"],
     "sectors": [
-      "Power",
-      "Oil & Gas",
-      "Coal",
-      "Renewables",
-      "Transport",
-      "Buildings",
-      "Industrial"
+      { "name": "Power", "tooltip": "Electricity generation and distribution" },
+      {
+        "name": "Oil & Gas",
+        "tooltip": "Fossil fuel extraction and processing"
+      },
+      { "name": "Coal", "tooltip": "Coal mining and utilization" },
+      { "name": "Renewables", "tooltip": "Renewable energy sources" },
+      { "name": "Transport", "tooltip": "Transportation and logistics" },
+      {
+        "name": "Buildings",
+        "tooltip": "Residential and commercial buildings"
+      },
+      {
+        "name": "Industrial",
+        "tooltip": "Manufacturing and industrial processes"
+      }
     ],
     "publisher": "Zero Emissions Technology Institute",
     "published_date": "2021-05-18",

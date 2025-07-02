@@ -70,7 +70,8 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
             {scenario.sectors.slice(0, 3).map((sector, index) => (
               <Badge
                 key={index}
-                text={sector}
+                text={sector.name}
+                tooltip={sector.tooltip}
                 variant="sector"
               />
             ))}

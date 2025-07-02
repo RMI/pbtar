@@ -187,7 +187,8 @@ const ScenarioDetailPage: React.FC = () => {
                   {scenario.sectors.map((sector, index) => (
                     <Badge
                       key={index}
-                      text={sector}
+                      text={sector.name}
+                      tooltip={sector.tooltip}
                       variant="sector"
                     />
                   ))}

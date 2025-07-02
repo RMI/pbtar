@@ -9,14 +9,23 @@
     "target_temperature": "1.5C",
     "regions": ["Global"],
     "sectors": [
-      "Power",
-      "Oil & Gas",
-      "Coal",
-      "Renewables",
-      "Industrial",
-      "Transport",
-      "Buildings",
-      "Agriculture"
+      { "name": "Power", "tooltip": "Electricity generation and distribution" },
+      {
+        "name": "Oil & Gas",
+        "tooltip": "Fossil fuel extraction and processing"
+      },
+      { "name": "Coal", "tooltip": "Coal mining and utilization" },
+      { "name": "Renewables", "tooltip": "Renewable energy sources" },
+      {
+        "name": "Industrial",
+        "tooltip": "Manufacturing and industrial processes"
+      },
+      { "name": "Transport", "tooltip": "Transportation and logistics" },
+      {
+        "name": "Buildings",
+        "tooltip": "Residential and commercial buildings"
+      },
+      { "name": "Agriculture", "tooltip": "Farming and land use" }
     ],
     "publisher": "Global Emissions Consortium",
     "published_date": "2021-08-09",

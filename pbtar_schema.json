@@ -47,16 +47,28 @@
         "description": "Sectors that the scenario covers",
         "type": "array",
         "items": {
-          "enum": [
-            "Agriculture",
-            "Buildings",
-            "Coal",
-            "Industrial",
-            "Oil & Gas",
-            "Power",
-            "Renewables",
-            "Transport"
-          ]
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "enum": [
+                "Agriculture",
+                "Buildings",
+                "Coal",
+                "Industrial",
+                "Oil & Gas",
+                "Power",
+                "Renewables",
+                "Transport"
+              ]
+            },
+            "tooltip": {
+              "type": "string",
+              "description": "Detailed explanation of the sector"
+            }
+          },
+          "required": ["name"],
+          "additionalProperties": false
         }
       },
       "publisher": {

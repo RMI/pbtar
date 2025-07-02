@@ -8,7 +8,19 @@
     "target_year": "2050",
     "target_temperature": "2C",
     "regions": ["Global", "EU", "Americas", "Asia Pacific"],
-    "sectors": ["Power", "Oil & Gas", "Coal", "Renewables", "Industrial"],
+    "sectors": [
+      { "name": "Power", "tooltip": "Electricity generation and distribution" },
+      {
+        "name": "Oil & Gas",
+        "tooltip": "Fossil fuel extraction and processing"
+      },
+      { "name": "Coal", "tooltip": "Coal mining and utilization" },
+      { "name": "Renewables", "tooltip": "Renewable energy sources" },
+      {
+        "name": "Industrial",
+        "tooltip": "Manufacturing and industrial processes"
+      }
+    ],
     "publisher": "Strategic Climate Transition Forum",
     "published_date": "2022-09-06",
     "overview": "The Planned Transition scenario assumes climate policies are introduced early and gradually become more stringent. Carbon prices increase gradually, giving companies and consumers time to adapt. Physical risks are relatively low because climate change is effectively mitigated, while transition risks are manageable due to the predictable policy environment. Global warming is limited to 2°C by the end of the century.",

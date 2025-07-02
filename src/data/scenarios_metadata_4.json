@@ -8,7 +8,14 @@
     "target_year": "2060",
     "target_temperature": "2C",
     "regions": ["Global", "SEA", "Asia Pacific"],
-    "sectors": ["Power", "Coal", "Industrial"],
+    "sectors": [
+      { "name": "Power", "tooltip": "Electricity generation and distribution" },
+      { "name": "Coal", "tooltip": "Coal mining and utilization" },
+      {
+        "name": "Industrial",
+        "tooltip": "Manufacturing and industrial processes"
+      }
+    ],
     "publisher": "CoalTech Solutions Consortium",
     "published_date": "2022-11-30",
     "overview": "This scenario explores a transition pathway that heavily leverages carbon capture and storage (CCS) technologies to reduce emissions from existing coal power plants and industrial facilities. Rather than rapid decommissioning of coal assets, this scenario models a more gradual transition where CCS is deployed at scale to allow continued operation of some coal plants while still meeting climate goals. The scenario includes detailed modeling of CCS deployment curves, costs, and infrastructure requirements.",
