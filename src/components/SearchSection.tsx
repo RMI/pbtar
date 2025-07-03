@@ -39,7 +39,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     new Set(scenariosData.map((d) => d.regions).flat()),
   ).sort();
   const sectors: Sector[] = Array.from(
-    new Set(scenariosData.map((d) => d.sectors).flat()),
+    new Set(scenariosData.flatMap((d) => d.sectors.map(s => s.name))),
   ).sort();
   const areFiltersApplied =
     (filters.searchTerm ||
