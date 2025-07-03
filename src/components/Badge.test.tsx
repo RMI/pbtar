@@ -245,6 +245,6 @@ describe("Badge component", () => {
     expect(arrow).toBeInTheDocument();
     expect(arrow).toHaveClass("border-4");
     expect(arrow).toHaveClass("border-transparent");
-    expect(arrow).toHaveClass("border-r-white"); // Right arrow
+    expect(arrow).toHaveClass("border-r-rmigray-100"); // Right arrow
   });
 });

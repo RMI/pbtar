@@ -62,10 +62,10 @@ const Badge: React.FC<BadgeProps> = ({
                   group-focus-within:visible group-focus-within:opacity-100
                   transition-opacity duration-200 ease-in-out"
       >
-        <div className="px-3 py-2 bg-white text-rmigray-500 text-xs rounded shadow-lg max-w-xs opacity-95">
+        <div className="px-3 py-2 bg-white text-rmigray-500 text-xs rounded shadow-lg max-w-xs opacity-95 border border-rmigray-100">
           {tooltip}
           {/* Arrow */}
-          <div className="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 border-4 border-transparent border-r-white opacity-95"></div>
+          <div className="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 border-4 border-transparent border-r-rmigray-100 opacity-95"></div>
         </div>
       </div>
     </div>
