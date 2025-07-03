@@ -57,7 +57,7 @@ const Badge: React.FC<BadgeProps> = ({
 
       {/* Tooltip that shows on group-hover and group-focus */}
       <div
-        className="absolute z-10 left-full ml-2 top-1/2 transform -translate-y-1/2
+        className="absolute z-10 left-full ml-0 top-1/2 transform -translate-y-1/2
                   invisible opacity-0 group-hover:visible group-hover:opacity-100 
                   group-focus-within:visible group-focus-within:opacity-100
                   transition-opacity duration-200 ease-in-out"
