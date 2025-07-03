@@ -28,16 +28,16 @@ const SearchSection: React.FC<SearchSectionProps> = ({
 }) => {
   const categories: ScenarioCategory[] = Array.from(
     new Set(scenariosData.map((d) => d.category)),
-  ).sort();
+  ).sort() as ScenarioCategory[];
   const years: YearTarget[] = Array.from(
     new Set(scenariosData.map((d) => d.target_year)),
-  ).sort();
+  ).sort() as YearTarget[];
   const temperatures: TemperatureTarget[] = Array.from(
     new Set(scenariosData.map((d) => d.target_temperature)),
-  ).sort();
+  ).sort() as TemperatureTarget[];
   const regions: Region[] = Array.from(
     new Set(scenariosData.map((d) => d.regions).flat()),
-  ).sort();
+  ).sort() as Region[];
   const sectors: Sector[] = Array.from(
     new Set(scenariosData.flatMap((d) => d.sectors.map(s => s.name))),
   ).sort();
