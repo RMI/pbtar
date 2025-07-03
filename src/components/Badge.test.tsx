@@ -222,7 +222,7 @@ describe("Badge component", () => {
 
     // Check positioning classes
     expect(tooltipPositioner).toHaveClass("left-full");
-    expect(tooltipPositioner).toHaveClass("ml-2");
+    expect(tooltipPositioner).toHaveClass("ml-0");
     expect(tooltipPositioner).toHaveClass("top-1/2");
     expect(tooltipPositioner).toHaveClass("-translate-y-1/2");
   });
