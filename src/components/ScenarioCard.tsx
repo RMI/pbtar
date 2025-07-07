@@ -26,6 +26,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
           <div className="flex flex-wrap">
             <Badge
               text={scenario.category}
+              tooltip={scenario.category_tooltip}
               variant="category"
             />
           </div>
@@ -69,7 +70,8 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
             {scenario.sectors.slice(0, 3).map((sector, index) => (
               <Badge
                 key={index}
-                text={sector}
+                text={sector.name}
+                tooltip={sector.tooltip}
                 variant="sector"
               />
             ))}

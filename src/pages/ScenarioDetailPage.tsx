@@ -81,6 +81,7 @@ const ScenarioDetailPage: React.FC = () => {
           <div className="flex flex-wrap gap-2 mb-4">
             <Badge
               text={scenario.category}
+              tooltip={scenario.category_tooltip}
               variant="category"
             />
             <Badge
@@ -176,7 +177,8 @@ const ScenarioDetailPage: React.FC = () => {
                   {scenario.sectors.map((sector, index) => (
                     <Badge
                       key={index}
-                      text={sector}
+                      text={sector.name}
+                      tooltip={sector.tooltip}
                       variant="sector"
                     />
                   ))}

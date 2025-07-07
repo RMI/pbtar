@@ -3,10 +3,14 @@ export interface Scenario {
   name: string;
   description: string;
   category: string;
+  category_tooltip: string;
   target_year: string;
   target_temperature: string;
   regions: string[];
-  sectors: string[];
+  sectors: {
+    name: Sector;
+    tooltip: string;
+  }[];
   publisher: string;
   published_date: string;
   overview: string;
