@@ -34,6 +34,11 @@ const Badge: React.FC<BadgeProps> = ({
     }
   };
 
+   // Handle click to blur (remove focus) from badge
+  const handleClick = (e: React.MouseEvent<HTMLSpanElement>) => {
+    e.currentTarget.blur();
+  };
+
   // If no tooltip, just return the basic badge
   if (!tooltip) {
     return (
@@ -51,6 +56,7 @@ const Badge: React.FC<BadgeProps> = ({
       <span
         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getVariantStyles()} mr-2 mb-1 cursor-help`}
         tabIndex={0} // Make it focusable
+        onClick={handleClick} // Remove focus on click
       >
         {text}
       </span>
