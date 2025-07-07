@@ -23,6 +23,10 @@
         "description": "Category of the scenario",
         "type": "string"
       },
+      "category_tooltip": {
+        "description": "Detailed explanation of the scenario category",
+        "type": "string"
+      },
       "target_year": {
         "description": "Target year of the scenario",
         "type": "string"
@@ -43,16 +47,28 @@
         "description": "Sectors that the scenario covers",
         "type": "array",
         "items": {
-          "enum": [
-            "Agriculture",
-            "Buildings",
-            "Coal",
-            "Industrial",
-            "Oil & Gas",
-            "Power",
-            "Renewables",
-            "Transport"
-          ]
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "enum": [
+                "Agriculture",
+                "Buildings",
+                "Coal",
+                "Industrial",
+                "Oil & Gas",
+                "Power",
+                "Renewables",
+                "Transport"
+              ]
+            },
+            "tooltip": {
+              "type": "string",
+              "description": "Detailed explanation of the sector"
+            }
+          },
+          "required": ["name"],
+          "additionalProperties": false
         }
       },
       "publisher": {
@@ -89,6 +105,7 @@
       "name",
       "description",
       "category",
+      "category_tooltip",
       "target_year",
       "target_temperature",
       "regions",

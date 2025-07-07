@@ -4,10 +4,15 @@
     "name": "SEA Clean Energy Pathway",
     "description": "Pathway focused on replacing coal with renewables in Southeast Asia",
     "category": "NDC",
+    "category_tooltip": "Nationally Determined Contribution",
     "target_year": "2050",
     "target_temperature": "1.5C",
     "regions": ["SEA"],
-    "sectors": ["Power", "Coal", "Renewables"],
+    "sectors": [
+      { "name": "Power", "tooltip": "Electricity generation and distribution" },
+      { "name": "Coal", "tooltip": "Coal mining and utilization" },
+      { "name": "Renewables", "tooltip": "Renewable energy sources" }
+    ],
     "publisher": "Southeast Energy Analysis Group",
     "published_date": "2023-04-15",
     "overview": "The SEA Clean Energy Pathway scenario outlines a regionally specific pathway for Southeast Asian countries to transition away from coal-fired power generation to renewable energy sources. The scenario includes detailed projections for solar, wind, hydro, and geothermal deployment across the region, with country-specific considerations for Indonesia, Malaysia, Philippines, Thailand, and Vietnam. It provides a technically feasible and economically optimal pathway that aligns with the 1.5°C global temperature goal.",
