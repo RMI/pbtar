@@ -34,7 +34,7 @@ const Badge: React.FC<BadgeProps> = ({
     }
   };
 
-   // Handle click to blur (remove focus) from badge
+  // Handle click to blur (remove focus) from badge
   const handleClick = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.currentTarget.blur();
   };
