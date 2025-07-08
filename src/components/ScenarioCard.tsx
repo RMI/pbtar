@@ -3,21 +3,32 @@ import { Link } from "react-router-dom";
 import { Scenario } from "../types";
 import Badge from "./Badge";
 import { ChevronRight } from "lucide-react";
+import HighlightedText from "./HighlightedText";
 
 interface ScenarioCardProps {
   scenario: Scenario;
+  searchTerm?: string;
 }
 
-const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
+const ScenarioCard: React.FC<ScenarioCardProps> = ({
+  scenario,
+  searchTerm = "",
+}) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
       <div className="p-5 flex flex-col h-full">
         <div className="mb-4">
           <h2 className="text-xl font-semibold text-bluespruce mb-2">
-            {scenario.name}
+            <HighlightedText
+              text={scenario.name}
+              searchTerm={searchTerm}
+            />
           </h2>
           <p className="text-rmigray-600 text-sm line-clamp-2">
-            {scenario.description}
+            <HighlightedText
+              text={scenario.description}
+              searchTerm={searchTerm}
+            />
           </p>
         </div>
 
@@ -88,13 +99,19 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
             <div>
               <p className="text-xs text-rmigray-500">Publisher:</p>
               <p className="text-sm font-medium text-rmigray-800">
-                {scenario.publisher}
+                <HighlightedText
+                  text={scenario.publisher}
+                  searchTerm={searchTerm}
+                />
               </p>
             </div>
             <div className="text-right">
               <p className="text-xs text-rmigray-500">Published:</p>
               <p className="text-sm font-medium text-rmigray-800">
-                {scenario.published_date}
+                <HighlightedText
+                  text={scenario.published_date}
+                  searchTerm={searchTerm}
+                />
               </p>
             </div>
           </div>

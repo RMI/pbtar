@@ -144,6 +144,7 @@ const HomePage: React.FC = () => {
           <ScenarioCard
             key={scenario.id}
             scenario={scenario}
+            searchTerm={filters.searchTerm}
           />
         ))}
       </div>
