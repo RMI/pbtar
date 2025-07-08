@@ -37,12 +37,17 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <div className="flex flex-wrap">
             <Badge
               text={
-                searchTerm && scenario.category.toLowerCase().includes(searchTerm.toLowerCase()) ? (
-                  <HighlightedText 
-                    text={scenario.category} 
-                    searchTerm={searchTerm} 
+                searchTerm &&
+                scenario.category
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase()) ? (
+                  <HighlightedText
+                    text={scenario.category}
+                    searchTerm={searchTerm}
                   />
-                ) : scenario.category
+                ) : (
+                  scenario.category
+                )
               }
               tooltip={scenario.category_tooltip}
               variant="category"
@@ -55,23 +60,33 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <div className="flex flex-wrap">
             <Badge
               text={
-                searchTerm && scenario.target_year.toLowerCase().includes(searchTerm.toLowerCase()) ? (
-                  <HighlightedText 
-                    text={scenario.target_year} 
-                    searchTerm={searchTerm} 
+                searchTerm &&
+                scenario.target_year
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase()) ? (
+                  <HighlightedText
+                    text={scenario.target_year}
+                    searchTerm={searchTerm}
                   />
-                ) : scenario.target_year
+                ) : (
+                  scenario.target_year
+                )
               }
               variant="year"
             />
             <Badge
               text={
-                searchTerm && scenario.target_temperature.toLowerCase().includes(searchTerm.toLowerCase()) ? (
+                searchTerm &&
+                scenario.target_temperature
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase()) ? (
                   <HighlightedText
                     text={scenario.target_temperature}
                     searchTerm={searchTerm}
                   />
-                ) : scenario.target_temperature
+                ) : (
+                  scenario.target_temperature
+                )
               }
               variant="temperature"
             />
@@ -85,12 +100,15 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               <Badge
                 key={region}
                 text={
-                  searchTerm && region.toLowerCase().includes(searchTerm.toLowerCase()) ? (
-                    <HighlightedText 
-                      text={region} 
-                      searchTerm={searchTerm} 
+                  searchTerm &&
+                  region.toLowerCase().includes(searchTerm.toLowerCase()) ? (
+                    <HighlightedText
+                      text={region}
+                      searchTerm={searchTerm}
                     />
-                  ) : region
+                  ) : (
+                    region
+                  )
                 }
                 variant="region"
               />
@@ -110,12 +128,17 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               <Badge
                 key={index}
                 text={
-                  searchTerm && sector.name.toLowerCase().includes(searchTerm.toLowerCase()) ? (
-                    <HighlightedText 
-                      text={sector.name} 
-                      searchTerm={searchTerm} 
+                  searchTerm &&
+                  sector.name
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase()) ? (
+                    <HighlightedText
+                      text={sector.name}
+                      searchTerm={searchTerm}
                     />
-                  ) : sector.name
+                  ) : (
+                    sector.name
+                  )
                 }
                 tooltip={sector.tooltip}
                 variant="sector"
