@@ -14,6 +14,30 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
   scenario,
   searchTerm = "",
 }) => {
+  // Function to prioritize items that match the search term
+  const prioritizeMatches = <T extends string | { name: string }>(
+    items: T[],
+    searchTerm: string,
+  ): T[] => {
+    if (!searchTerm.trim()) return items;
+
+    return [...items].sort((a, b) => {
+      const textA = typeof a === "string" ? a : a.name;
+      const textB = typeof b === "string" ? b : b.name;
+
+      const matchesA = textA.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesB = textB.toLowerCase().includes(searchTerm.toLowerCase());
+
+      if (matchesA && !matchesB) return -1;
+      if (!matchesA && matchesB) return 1;
+      return 0;
+    });
+  };
+
+  // Sort regions and sectors to prioritize matches
+  const sortedRegions = prioritizeMatches(scenario.regions, searchTerm);
+  const sortedSectors = prioritizeMatches(scenario.sectors, searchTerm);
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
       <div className="p-5 flex flex-col h-full">
@@ -96,7 +120,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Regions:</p>
           <div className="flex flex-wrap">
-            {scenario.regions.slice(0, 3).map((region) => (
+            {sortedRegions.slice(0, 3).map((region) => (
               <Badge
                 key={region}
                 text={
@@ -124,7 +148,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Sectors:</p>
           <div className="flex flex-wrap">
-            {scenario.sectors.slice(0, 3).map((sector, index) => (
+            {sortedSectors.slice(0, 3).map((sector, index) => (
               <Badge
                 key={index}
                 text={
