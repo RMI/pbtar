@@ -36,7 +36,14 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <p className="text-xs font-medium text-rmigray-500 mb-1">Category:</p>
           <div className="flex flex-wrap">
             <Badge
-              text={scenario.category}
+              text={
+                searchTerm && scenario.category.toLowerCase().includes(searchTerm.toLowerCase()) ? (
+                  <HighlightedText 
+                    text={scenario.category} 
+                    searchTerm={searchTerm} 
+                  />
+                ) : scenario.category
+              }
               tooltip={scenario.category_tooltip}
               variant="category"
             />
@@ -47,11 +54,25 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <p className="text-xs font-medium text-rmigray-500 mb-1">Targets:</p>
           <div className="flex flex-wrap">
             <Badge
-              text={scenario.target_year}
+              text={
+                searchTerm && scenario.target_year.toLowerCase().includes(searchTerm.toLowerCase()) ? (
+                  <HighlightedText 
+                    text={scenario.target_year} 
+                    searchTerm={searchTerm} 
+                  />
+                ) : scenario.target_year
+              }
               variant="year"
             />
             <Badge
-              text={scenario.target_temperature}
+              text={
+                searchTerm && scenario.target_temperature.toLowerCase().includes(searchTerm.toLowerCase()) ? (
+                  <HighlightedText
+                    text={scenario.target_temperature}
+                    searchTerm={searchTerm}
+                  />
+                ) : scenario.target_temperature
+              }
               variant="temperature"
             />
           </div>
@@ -63,7 +84,14 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             {scenario.regions.slice(0, 3).map((region) => (
               <Badge
                 key={region}
-                text={region}
+                text={
+                  searchTerm && region.toLowerCase().includes(searchTerm.toLowerCase()) ? (
+                    <HighlightedText 
+                      text={region} 
+                      searchTerm={searchTerm} 
+                    />
+                  ) : region
+                }
                 variant="region"
               />
             ))}
@@ -81,7 +109,14 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             {scenario.sectors.slice(0, 3).map((sector, index) => (
               <Badge
                 key={index}
-                text={sector.name}
+                text={
+                  searchTerm && sector.name.toLowerCase().includes(searchTerm.toLowerCase()) ? (
+                    <HighlightedText 
+                      text={sector.name} 
+                      searchTerm={searchTerm} 
+                    />
+                  ) : sector.name
+                }
                 tooltip={sector.tooltip}
                 variant="sector"
               />

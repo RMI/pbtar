@@ -1,7 +1,7 @@
 import React from "react";
 
 interface BadgeProps {
-  text: string;
+  text: React.ReactNode;
   tooltip?: string;
   variant?:
     | "default"
