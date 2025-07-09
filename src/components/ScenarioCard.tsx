@@ -17,23 +17,23 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
   // Function to prioritize items that match the search term
   const prioritizeMatches = <T extends string | { name: string }>(
     items: T[],
-    searchTerm: string,
+    searchTerm: string
   ): T[] => {
     if (!searchTerm.trim()) return items;
-
+    
     return [...items].sort((a, b) => {
-      const textA = typeof a === "string" ? a : a.name;
-      const textB = typeof b === "string" ? b : b.name;
-
+      const textA = typeof a === 'string' ? a : a.name;
+      const textB = typeof b === 'string' ? b : b.name;
+      
       const matchesA = textA.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesB = textB.toLowerCase().includes(searchTerm.toLowerCase());
-
+      
       if (matchesA && !matchesB) return -1;
       if (!matchesA && matchesB) return 1;
       return 0;
     });
   };
-
+  
   // Sort regions and sectors to prioritize matches
   const sortedRegions = prioritizeMatches(scenario.regions, searchTerm);
   const sortedSectors = prioritizeMatches(scenario.sectors, searchTerm);
@@ -148,9 +148,9 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Sectors:</p>
           <div className="flex flex-wrap">
-            {sortedSectors.slice(0, 3).map((sector, index) => (
+            {sortedSectors.slice(0, 3).map((sector) => (
               <Badge
-                key={index}
+                key={sector.name}
                 text={
                   searchTerm &&
                   sector.name
