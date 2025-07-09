@@ -26,6 +26,21 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
     [scenario.sectors, searchTerm],
   );
 
+  // Helper function to conditionally highlight text based on search term
+  const highlightTextIfSearchMatch = (text: string) => {
+    // If there's a search term and it matches the text
+    if (searchTerm && text.toLowerCase().includes(searchTerm.toLowerCase())) {
+      return (
+        <HighlightedText
+          text={text}
+          searchTerm={searchTerm}
+        />
+      );
+    }
+    // Otherwise return the plain text
+    return text;
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
       <div className="p-5 flex flex-col h-full">
@@ -48,19 +63,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <p className="text-xs font-medium text-rmigray-500 mb-1">Category:</p>
           <div className="flex flex-wrap">
             <Badge
-              text={
-                searchTerm &&
-                scenario.category
-                  .toLowerCase()
-                  .includes(searchTerm.toLowerCase()) ? (
-                  <HighlightedText
-                    text={scenario.category}
-                    searchTerm={searchTerm}
-                  />
-                ) : (
-                  scenario.category
-                )
-              }
+              text={highlightTextIfSearchMatch(scenario.category)}
               tooltip={scenario.category_tooltip}
               variant="category"
             />
@@ -71,35 +74,11 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <p className="text-xs font-medium text-rmigray-500 mb-1">Targets:</p>
           <div className="flex flex-wrap">
             <Badge
-              text={
-                searchTerm &&
-                scenario.target_year
-                  .toLowerCase()
-                  .includes(searchTerm.toLowerCase()) ? (
-                  <HighlightedText
-                    text={scenario.target_year}
-                    searchTerm={searchTerm}
-                  />
-                ) : (
-                  scenario.target_year
-                )
-              }
+              text={highlightTextIfSearchMatch(scenario.target_year)}
               variant="year"
             />
             <Badge
-              text={
-                searchTerm &&
-                scenario.target_temperature
-                  .toLowerCase()
-                  .includes(searchTerm.toLowerCase()) ? (
-                  <HighlightedText
-                    text={scenario.target_temperature}
-                    searchTerm={searchTerm}
-                  />
-                ) : (
-                  scenario.target_temperature
-                )
-              }
+              text={highlightTextIfSearchMatch(scenario.target_temperature)}
               variant="temperature"
             />
           </div>
@@ -111,17 +90,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             {sortedRegions.slice(0, 3).map((region) => (
               <Badge
                 key={region}
-                text={
-                  searchTerm &&
-                  region.toLowerCase().includes(searchTerm.toLowerCase()) ? (
-                    <HighlightedText
-                      text={region}
-                      searchTerm={searchTerm}
-                    />
-                  ) : (
-                    region
-                  )
-                }
+                text={highlightTextIfSearchMatch(region)}
                 variant="region"
               />
             ))}
@@ -139,19 +108,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             {sortedSectors.slice(0, 3).map((sector) => (
               <Badge
                 key={sector.name}
-                text={
-                  searchTerm &&
-                  sector.name
-                    .toLowerCase()
-                    .includes(searchTerm.toLowerCase()) ? (
-                    <HighlightedText
-                      text={sector.name}
-                      searchTerm={searchTerm}
-                    />
-                  ) : (
-                    sector.name
-                  )
-                }
+                text={highlightTextIfSearchMatch(sector.name)}
                 tooltip={sector.tooltip}
                 variant="sector"
               />
