@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Scenario } from "../types";
 import Badge from "./Badge";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
+import { prioritizeMatches } from "../utils/sortUtils";
 
 interface ScenarioCardProps {
   scenario: Scenario;
@@ -14,29 +15,16 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
   scenario,
   searchTerm = "",
 }) => {
-  // Function to prioritize items that match the search term
-  const prioritizeMatches = <T extends string | { name: string }>(
-    items: T[],
-    searchTerm: string
-  ): T[] => {
-    if (!searchTerm.trim()) return items;
-    
-    return [...items].sort((a, b) => {
-      const textA = typeof a === 'string' ? a : a.name;
-      const textB = typeof b === 'string' ? b : b.name;
-      
-      const matchesA = textA.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesB = textB.toLowerCase().includes(searchTerm.toLowerCase());
-      
-      if (matchesA && !matchesB) return -1;
-      if (!matchesA && matchesB) return 1;
-      return 0;
-    });
-  };
-  
   // Sort regions and sectors to prioritize matches
-  const sortedRegions = prioritizeMatches(scenario.regions, searchTerm);
-  const sortedSectors = prioritizeMatches(scenario.sectors, searchTerm);
+  const sortedRegions = useMemo(
+    () => prioritizeMatches(scenario.regions, searchTerm),
+    [scenario.regions, searchTerm],
+  );
+
+  const sortedSectors = useMemo(
+    () => prioritizeMatches(scenario.sectors, searchTerm),
+    [scenario.sectors, searchTerm],
+  );
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
