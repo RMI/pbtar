@@ -1,23 +1,61 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Scenario } from "../types";
 import Badge from "./Badge";
 import { ChevronRight } from "lucide-react";
+import HighlightedText from "./HighlightedText";
+import { prioritizeMatches } from "../utils/sortUtils";
 
 interface ScenarioCardProps {
   scenario: Scenario;
+  searchTerm?: string;
 }
 
-const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
+const ScenarioCard: React.FC<ScenarioCardProps> = ({
+  scenario,
+  searchTerm = "",
+}) => {
+  // Sort regions and sectors to prioritize matches
+  const sortedRegions = useMemo(
+    () => prioritizeMatches(scenario.regions, searchTerm),
+    [scenario.regions, searchTerm],
+  );
+
+  const sortedSectors = useMemo(
+    () => prioritizeMatches(scenario.sectors, searchTerm),
+    [scenario.sectors, searchTerm],
+  );
+
+  // Helper function to conditionally highlight text based on search term
+  const highlightTextIfSearchMatch = (text: string) => {
+    // If there's a search term and it matches the text
+    if (searchTerm && text.toLowerCase().includes(searchTerm.toLowerCase())) {
+      return (
+        <HighlightedText
+          text={text}
+          searchTerm={searchTerm}
+        />
+      );
+    }
+    // Otherwise return the plain text
+    return text;
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
       <div className="p-5 flex flex-col h-full">
         <div className="mb-4">
           <h2 className="text-xl font-semibold text-bluespruce mb-2">
-            {scenario.name}
+            <HighlightedText
+              text={scenario.name}
+              searchTerm={searchTerm}
+            />
           </h2>
           <p className="text-rmigray-600 text-sm line-clamp-2">
-            {scenario.description}
+            <HighlightedText
+              text={scenario.description}
+              searchTerm={searchTerm}
+            />
           </p>
         </div>
 
@@ -25,7 +63,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
           <p className="text-xs font-medium text-rmigray-500 mb-1">Category:</p>
           <div className="flex flex-wrap">
             <Badge
-              text={scenario.category}
+              text={highlightTextIfSearchMatch(scenario.category)}
               tooltip={scenario.category_tooltip}
               variant="category"
             />
@@ -36,11 +74,11 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
           <p className="text-xs font-medium text-rmigray-500 mb-1">Targets:</p>
           <div className="flex flex-wrap">
             <Badge
-              text={scenario.target_year}
+              text={highlightTextIfSearchMatch(scenario.target_year)}
               variant="year"
             />
             <Badge
-              text={scenario.target_temperature}
+              text={highlightTextIfSearchMatch(scenario.target_temperature)}
               variant="temperature"
             />
           </div>
@@ -49,10 +87,10 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Regions:</p>
           <div className="flex flex-wrap">
-            {scenario.regions.slice(0, 3).map((region) => (
+            {sortedRegions.slice(0, 3).map((region) => (
               <Badge
                 key={region}
-                text={region}
+                text={highlightTextIfSearchMatch(region)}
                 variant="region"
               />
             ))}
@@ -67,10 +105,10 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Sectors:</p>
           <div className="flex flex-wrap">
-            {scenario.sectors.slice(0, 3).map((sector, index) => (
+            {sortedSectors.slice(0, 3).map((sector) => (
               <Badge
-                key={index}
-                text={sector.name}
+                key={sector.name}
+                text={highlightTextIfSearchMatch(sector.name)}
                 tooltip={sector.tooltip}
                 variant="sector"
               />
@@ -88,13 +126,19 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
             <div>
               <p className="text-xs text-rmigray-500">Publisher:</p>
               <p className="text-sm font-medium text-rmigray-800">
-                {scenario.publisher}
+                <HighlightedText
+                  text={scenario.publisher}
+                  searchTerm={searchTerm}
+                />
               </p>
             </div>
             <div className="text-right">
               <p className="text-xs text-rmigray-500">Published:</p>
               <p className="text-sm font-medium text-rmigray-800">
-                {scenario.published_date}
+                <HighlightedText
+                  text={scenario.published_date}
+                  searchTerm={searchTerm}
+                />
               </p>
             </div>
           </div>

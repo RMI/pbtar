@@ -161,3 +161,108 @@ describe("ScenarioCard component", () => {
     expect(card).toHaveClass("h-full");
   });
 });
+
+describe("ScenarioCard search highlighting", () => {
+  const mockScenario: Scenario = {
+    id: "scenario-1",
+    name: "Net Zero 2050",
+    description:
+      "A scenario describing the path to net zero emissions by 2050.",
+    category: "Policy",
+    category_tooltip: "Policy scenarios focus on regulatory measures.",
+    target_year: "2050",
+    target_temperature: "1.5°C",
+    regions: ["Global", "Europe", "North America", "Hidden Match Region"],
+    sectors: [
+      { name: "Power", tooltip: "Electricity generation" },
+      { name: "Transport", tooltip: "Transportation" },
+      { name: "Industrial", tooltip: "Manufacturing" },
+      { name: "Hidden Match Sector", tooltip: "This would normally be hidden" },
+    ],
+    publisher: "IEA",
+    published_date: "Jan 2023",
+    overview: "Test overview",
+    expertRecommendation: "Test recommendation",
+    dataSource: {
+      description: "Test Source",
+      url: "https://example.com",
+      downloadAvailable: true,
+    },
+  };
+
+  const renderWithRouter = (searchTerm = "") => {
+    return render(
+      <MemoryRouter>
+        <ScenarioCard
+          scenario={mockScenario}
+          searchTerm={searchTerm}
+        />
+      </MemoryRouter>,
+    );
+  };
+
+  it("highlights matching text in name and description", () => {
+    const { container } = renderWithRouter("zero");
+
+    // Find marks directly in the container
+    const marks = container.querySelectorAll("mark");
+
+    // Check that we found at least 2 marks (name and description)
+    expect(marks.length).toBeGreaterThanOrEqual(2);
+
+    // Check that there's a mark with "Zero" and one with "zero"
+    const markTexts = Array.from(marks).map((mark) => mark.textContent);
+    expect(markTexts).toContain("Zero");
+    expect(markTexts).toContain("zero");
+  });
+
+  it("prioritizes and shows regions that match search term even if they would normally be hidden", () => {
+    const { container } = renderWithRouter("Hidden Match");
+
+    // Look for the regions section
+    const regionsSection = Array.from(container.querySelectorAll("p")).find(
+      (p) => p.textContent === "Regions:",
+    );
+
+    // Find nearby badge with Hidden Match Region text (could be split across elements)
+    if (!regionsSection) {
+      throw new Error("Regions section not found");
+    }
+
+    // Find a badge containing the text "Hidden Match Region" in the parent div of the Regions section
+    const sectionContainer = regionsSection.closest("div");
+    const hiddenMatchText = Array.from(
+      sectionContainer?.querySelectorAll(".flex-wrap span") || [],
+    ).some((span) => span.textContent?.includes("Hidden Match Region"));
+
+    expect(hiddenMatchText).toBe(true);
+
+    // Check that the "+more" text still exists
+    const moreText = Array.from(container.querySelectorAll("span")).some(
+      (span) => /\+\d+ more/.test(span.textContent || ""),
+    );
+
+    expect(moreText).toBe(true);
+  });
+
+  it("prioritizes and shows sectors that match search term even if they would normally be hidden", () => {
+    const { container } = renderWithRouter("Hidden Match");
+
+    // Look for the sectors section
+    const sectorsSection = Array.from(container.querySelectorAll("p")).find(
+      (p) => p.textContent === "Sectors:",
+    );
+
+    if (!sectorsSection) {
+      throw new Error("Sectors section not found");
+    }
+
+    // Find a badge containing the text "Hidden Match Sector" in the parent div of the Sectors section
+    const sectionContainer = sectorsSection.closest("div");
+    const hiddenMatchText = Array.from(
+      sectionContainer?.querySelectorAll(".flex-wrap span") || [],
+    ).some((span) => span.textContent?.includes("Hidden Match Sector"));
+
+    expect(hiddenMatchText).toBe(true);
+  });
+});
