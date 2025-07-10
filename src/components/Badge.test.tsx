@@ -137,16 +137,19 @@ describe("Badge component", () => {
         tooltip="This is a tooltip"
       />,
     );
-
-    // Should have a group div wrapper
+    // Should have a group div wrapper as the root element
     const groupDiv = container.firstChild as HTMLElement;
     expect(groupDiv.tagName).toBe("DIV");
     expect(groupDiv).toHaveClass("group");
 
+    // Badge text should still be present
+    const badgeText = screen.getByText("With Tooltip");
+    expect(badgeText).toBeInTheDocument();
+
     // Should have the badge span with cursor-help
-    const badge = screen.getByText("With Tooltip");
-    expect(badge).toHaveClass("cursor-help");
-    expect(badge).toHaveAttribute("tabIndex", "0");
+    const badgeParent = badgeText.closest("span")?.parentElement;
+    expect(badgeParent).toHaveClass("cursor-help");
+    expect(badgeParent).toHaveAttribute("tabIndex", "0");
 
     // Should have the tooltip text
     const tooltip = screen.getByText("This is a tooltip");
