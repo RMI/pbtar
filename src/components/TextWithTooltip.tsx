@@ -1,4 +1,4 @@
-import React, { useId } from "react";
+import React, { useId, useMemo } from "react";
 
 interface TextWithTooltipProps {
   text: React.ReactNode;
@@ -29,7 +29,7 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
   };
 
   // Arrow position styles based on tooltip position
-  const getArrowStyles = () => {
+  const arrowStyles = useMemo(() => {
     switch (position) {
       case "right":
         return "top-1/2 left-0 transform -translate-x-full -translate-y-1/2 border-r-rmigray-100";
@@ -42,10 +42,10 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
       default:
         return "top-1/2 left-0 transform -translate-x-full -translate-y-1/2 border-r-rmigray-100";
     }
-  };
+  }, [position]);
 
   // Tooltip position styles
-  const getPositionStyles = () => {
+  const positionStyles = useMemo(() => {
     switch (position) {
       case "right":
         return "left-full ml-0 top-1/2 transform -translate-y-1/2";
@@ -58,7 +58,7 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
       default:
         return "left-full ml-0 top-1/2 transform -translate-y-1/2";
     }
-  };
+  }, [position]);
 
   return (
     <div className={`relative inline-block group ${className}`}>
@@ -74,7 +74,7 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
 
       {/* Tooltip that shows on group-hover and group-focus */}
       <div
-        className={`absolute z-10 ${getPositionStyles()}
+        className={`absolute z-10 ${positionStyles}
                   invisible opacity-0 group-hover:visible group-hover:opacity-100 
                   group-focus-within:visible group-focus-within:opacity-100
                   transition-opacity duration-200 ease-in-out`}
@@ -87,7 +87,7 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
           {tooltip}
           {/* Arrow */}
           <div
-            className={`absolute border-4 border-transparent ${getArrowStyles()} opacity-95`}
+            className={`absolute border-4 border-transparent ${arrowStyles} opacity-95`}
             aria-hidden="true"
           ></div>
         </div>
