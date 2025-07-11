@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 
 interface TextWithTooltipProps {
   text: React.ReactNode;
@@ -13,9 +13,19 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
   className = "",
   position = "right",
 }) => {
+  // Generate a unique ID for this tooltip instance
+  const tooltipId = useId();
+
   // Handle click to blur (remove focus) from tooltip trigger
   const handleClick = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.currentTarget.blur();
+  };
+
+  // Handle keydown to allow dismissing tooltip with Escape key
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>) => {
+    if (e.key === "Escape") {
+      e.currentTarget.blur();
+    }
   };
 
   // Arrow position styles based on tooltip position
@@ -56,6 +66,8 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
         className="cursor-help"
         tabIndex={0}
         onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        aria-describedby={tooltipId}
       >
         {text}
       </span>
@@ -67,11 +79,16 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
                   group-focus-within:visible group-focus-within:opacity-100
                   transition-opacity duration-200 ease-in-out`}
       >
-        <div className="px-3 py-2 bg-white text-rmigray-500 text-xs rounded shadow-lg max-w-xs opacity-95 border border-rmigray-100">
+        <div
+          className="px-3 py-2 bg-white text-rmigray-500 text-xs rounded shadow-lg max-w-xs opacity-95 border border-rmigray-100"
+          id={tooltipId}
+          role="tooltip"
+        >
           {tooltip}
           {/* Arrow */}
           <div
             className={`absolute border-4 border-transparent ${getArrowStyles()} opacity-95`}
+            aria-hidden="true"
           ></div>
         </div>
       </div>
