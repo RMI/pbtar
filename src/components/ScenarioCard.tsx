@@ -5,6 +5,7 @@ import Badge from "./Badge";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
 import { prioritizeMatches } from "../utils/sortUtils";
+import TextWithTooltip from "./TextWithTooltip";
 
 interface ScenarioCardProps {
   scenario: Scenario;
@@ -95,9 +96,23 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               />
             ))}
             {scenario.regions.length > 3 && (
-              <span className="text-xs text-rmigray-500 ml-1 self-center">
-                +{scenario.regions.length - 3} more
-              </span>
+              <TextWithTooltip
+                text={
+                  <span className="text-xs text-rmigray-500 ml-1 self-center">
+                    +{scenario.regions.length - 3} more
+                  </span>
+                }
+                tooltip={
+                  <span>
+                    {sortedRegions.slice(3).map((region, idx) => (
+                      <React.Fragment key={region}>
+                        {idx > 0 && ", "}
+                        <span className="whitespace-nowrap">{region}</span>
+                      </React.Fragment>
+                    ))}
+                  </span>
+                }
+              />
             )}
           </div>
         </div>
@@ -114,9 +129,23 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               />
             ))}
             {scenario.sectors.length > 3 && (
-              <span className="text-xs text-rmigray-500 ml-1 self-center">
-                +{scenario.sectors.length - 3} more
-              </span>
+              <TextWithTooltip
+                text={
+                  <span className="text-xs text-rmigray-500 ml-1 self-center">
+                    +{scenario.sectors.length - 3} more
+                  </span>
+                }
+                tooltip={
+                  <span>
+                    {sortedSectors.slice(3).map((sector, idx) => (
+                      <React.Fragment key={sector.name}>
+                        {idx > 0 && ", "}
+                        <span className="whitespace-nowrap">{sector.name}</span>
+                      </React.Fragment>
+                    ))}
+                  </span>
+                }
+              />
             )}
           </div>
         </div>

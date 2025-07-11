@@ -160,6 +160,136 @@ describe("ScenarioCard component", () => {
     expect(card).toHaveClass("flex-col");
     expect(card).toHaveClass("h-full");
   });
+
+  describe("'+n more' tooltip functionality", () => {
+    // Create a test scenario with more than 3 regions and sectors
+    const testScenario: Scenario = {
+      id: "test-scenario",
+      name: "Test Scenario",
+      description: "Test description",
+      category: "IAM",
+      category_tooltip: "Category tooltip",
+      target_year: "2050",
+      target_temperature: "1.5C",
+      regions: ["Global", "EU", "Americas", "Africa", "Asia Pacific"], // 5 regions
+      sectors: [
+        { name: "Power", tooltip: "Power tooltip" },
+        { name: "Oil & Gas", tooltip: "Oil & Gas tooltip" },
+        { name: "Coal", tooltip: "Coal tooltip" },
+        { name: "Renewables", tooltip: "Renewables tooltip" },
+        { name: "Transport", tooltip: "Transport tooltip" },
+      ], // 5 sectors
+      publisher: "Test Publisher",
+      published_date: "2025-01-01",
+      overview: "Test overview",
+      expertRecommendation: "Test recommendation",
+      dataSource: {
+        description: "Test data source",
+        url: "https://example.com",
+        downloadAvailable: true,
+      },
+    };
+
+    it("shows '+n more' text for regions when more than 3 regions exist", () => {
+      const { container } = renderScenarioCard(testScenario);
+
+      // Find the regions section
+      const regionsSection = Array.from(container.querySelectorAll("p")).find(
+        (p) => p.textContent === "Regions:",
+      );
+
+      if (!regionsSection) {
+        throw new Error("Regions section not found");
+      }
+
+      // Get the parent div of the Regions section
+      const regionsSectionContainer = regionsSection.closest("div");
+
+      // Check if the "+2 more" text exists within the regions section
+      const moreTextInRegionsSection = Array.from(
+        regionsSectionContainer?.querySelectorAll("span") || [],
+      ).some((span) => span.textContent === "+2 more");
+
+      expect(moreTextInRegionsSection).toBe(true);
+    });
+
+    it("shows '+n more' text for sectors when more than 3 sectors exist", () => {
+      const { container } = renderScenarioCard(testScenario);
+
+      // Find the sectors section
+      const sectorsSection = Array.from(container.querySelectorAll("p")).find(
+        (p) => p.textContent === "Sectors:",
+      );
+
+      if (!sectorsSection) {
+        throw new Error("Sectors section not found");
+      }
+
+      // Get the parent div of the Sectors section
+      const sectorsSectionContainer = sectorsSection.closest("div");
+
+      // Check if the "+2 more" text exists within the sectors section
+      const moreTextInSectorsSection = Array.from(
+        sectorsSectionContainer?.querySelectorAll("span") || [],
+      ).some((span) => span.textContent === "+2 more");
+
+      expect(moreTextInSectorsSection).toBe(true);
+    });
+
+    it("includes all remaining regions in the tooltip", () => {
+      renderScenarioCard(testScenario);
+
+      // First 3 regions should be visible as badges
+      expect(screen.getByText("Global")).toBeInTheDocument();
+      expect(screen.getByText("EU")).toBeInTheDocument();
+      expect(screen.getByText("Americas")).toBeInTheDocument();
+
+      // The remaining 2 regions should be in the tooltip
+      // Note: This will find the text content even though it's initially hidden
+      const tooltipContent = screen.getByText("Africa");
+      expect(tooltipContent).toBeInTheDocument();
+      expect(screen.getByText("Asia Pacific")).toBeInTheDocument();
+    });
+
+    it("does not show '+n more' when 3 or fewer regions exist", () => {
+      const scenarioWithFewRegions = {
+        ...testScenario,
+        regions: ["Global", "EU", "Americas"],
+      };
+
+      const { container } = renderScenarioCard(scenarioWithFewRegions);
+
+      // Find the regions section
+      const regionsSection = Array.from(container.querySelectorAll("p")).find(
+        (p) => p.textContent === "Regions:",
+      );
+
+      if (!regionsSection) {
+        throw new Error("Regions section not found");
+      }
+
+      // Get the parent div of the Regions section
+      const regionsSectionContainer = regionsSection.closest("div");
+
+      // Check that there's no "+n more" text in the regions section
+      const moreTextInRegionsSection = Array.from(
+        regionsSectionContainer?.querySelectorAll("span") || [],
+      ).some((span) => /\+\d+ more/.test(span.textContent || ""));
+
+      expect(moreTextInRegionsSection).toBe(false);
+    });
+
+    it("applies whitespace-nowrap to multi-word regions in tooltip", () => {
+      renderScenarioCard(testScenario);
+
+      // Find the tooltip content for "Asia Pacific"
+      const multiWordRegion = screen.getByText("Asia Pacific");
+
+      // Check that it's wrapped in a span with the whitespace-nowrap class
+      expect(multiWordRegion.tagName).toBe("SPAN");
+      expect(multiWordRegion).toHaveClass("whitespace-nowrap");
+    });
+  });
 });
 
 describe("ScenarioCard search highlighting", () => {
