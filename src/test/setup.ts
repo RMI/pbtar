@@ -16,6 +16,6 @@ class MockResizeObserver {
 }
 
 // Add the mock to the global object if it doesn't exist
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   window.ResizeObserver = window.ResizeObserver || MockResizeObserver;
 }

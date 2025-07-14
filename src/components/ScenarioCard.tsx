@@ -15,28 +15,34 @@ interface ScenarioCardProps {
 type MaybeHTMLElement = HTMLElement | null;
 
 // Custom hook to measure container width and calculate how many badges will fit
-const useAvailableBadgeCount = (containerRef: RefObject<MaybeHTMLElement>, itemWidth = 100, gap = 8) => {
+const useAvailableBadgeCount = (
+  containerRef: RefObject<MaybeHTMLElement>,
+  itemWidth = 100,
+  gap = 8,
+) => {
   const [availableBadgeCount, setAvailableBadgeCount] = useState(3); // Default to 3 as minimum
-  
+
   useEffect(() => {
     if (!containerRef.current) return;
-    
+
     const updateBadgeCount = () => {
       const containerWidth = containerRef.current?.clientWidth || 0;
-      const possibleBadges = Math.floor((containerWidth + gap) / (itemWidth + gap));
-      
+      const possibleBadges = Math.floor(
+        (containerWidth + gap) / (itemWidth + gap),
+      );
+
       // Ensure we show at least 1 badge, and cap at a reasonable maximum (e.g., 8)
       const badgeCount = Math.max(1, Math.min(possibleBadges, 8));
       setAvailableBadgeCount(badgeCount);
     };
-    
+
     // Calculate on mount
     updateBadgeCount();
-    
+
     // Recalculate when window resizes
     const resizeObserver = new ResizeObserver(updateBadgeCount);
     resizeObserver.observe(containerRef.current);
-    
+
     return () => {
       if (containerRef.current) {
         resizeObserver.unobserve(containerRef.current);
@@ -44,7 +50,7 @@ const useAvailableBadgeCount = (containerRef: RefObject<MaybeHTMLElement>, itemW
       resizeObserver.disconnect();
     };
   }, [containerRef, itemWidth, gap]);
-  
+
   return availableBadgeCount;
 };
 
@@ -66,14 +72,19 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
   // Refs for the container elements
   const regionsContainerRef = useRef<HTMLDivElement>(null);
   const sectorsContainerRef = useRef<HTMLDivElement>(null);
-  
+
   // Calculate how many badges can fit in each container
   const regionBadgeWidth = 90; // Estimated average width of a region badge in pixels
   const sectorBadgeWidth = 80; // Estimated average width of a sector badge in pixels
-  
-  const visibleRegionsCount = useAvailableBadgeCount(regionsContainerRef, regionBadgeWidth);
-  const visibleSectorsCount = useAvailableBadgeCount(sectorsContainerRef, sectorBadgeWidth);
 
+  const visibleRegionsCount = useAvailableBadgeCount(
+    regionsContainerRef,
+    regionBadgeWidth,
+  );
+  const visibleSectorsCount = useAvailableBadgeCount(
+    sectorsContainerRef,
+    sectorBadgeWidth,
+  );
 
   // Helper function to conditionally highlight text based on search term
   const highlightTextIfSearchMatch = (text: string) => {
@@ -136,7 +147,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         {/* Regions section with dynamic badge count */}
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Regions:</p>
-          <div 
+          <div
             className="flex flex-wrap"
             ref={regionsContainerRef}
           >
@@ -156,12 +167,14 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
                 }
                 tooltip={
                   <span>
-                    {sortedRegions.slice(visibleRegionsCount).map((region, idx) => (
-                      <React.Fragment key={region}>
-                        {idx > 0 && ", "}
-                        <span className="whitespace-nowrap">{region}</span>
-                      </React.Fragment>
-                    ))}
+                    {sortedRegions
+                      .slice(visibleRegionsCount)
+                      .map((region, idx) => (
+                        <React.Fragment key={region}>
+                          {idx > 0 && ", "}
+                          <span className="whitespace-nowrap">{region}</span>
+                        </React.Fragment>
+                      ))}
                   </span>
                 }
               />
@@ -172,7 +185,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         {/* Sectors section with dynamic badge count */}
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Sectors:</p>
-          <div 
+          <div
             className="flex flex-wrap"
             ref={sectorsContainerRef}
           >
@@ -193,12 +206,16 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
                 }
                 tooltip={
                   <span>
-                    {sortedSectors.slice(visibleSectorsCount).map((sector, idx) => (
-                      <React.Fragment key={sector.name}>
-                        {idx > 0 && ", "}
-                        <span className="whitespace-nowrap">{sector.name}</span>
-                      </React.Fragment>
-                    ))}
+                    {sortedSectors
+                      .slice(visibleSectorsCount)
+                      .map((sector, idx) => (
+                        <React.Fragment key={sector.name}>
+                          {idx > 0 && ", "}
+                          <span className="whitespace-nowrap">
+                            {sector.name}
+                          </span>
+                        </React.Fragment>
+                      ))}
                   </span>
                 }
               />

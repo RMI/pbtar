@@ -74,22 +74,22 @@ describe("ScenarioCard component", () => {
   });
 
   it("displays region information with some regions visible", () => {
-  renderScenarioCard();
+    renderScenarioCard();
 
-  expect(screen.getByText("Regions:")).toBeInTheDocument();
+    expect(screen.getByText("Regions:")).toBeInTheDocument();
 
-  // Check that at least the first region is displayed
-  expect(screen.getByText(mockScenario.regions[0])).toBeInTheDocument();
-});
+    // Check that at least the first region is displayed
+    expect(screen.getByText(mockScenario.regions[0])).toBeInTheDocument();
+  });
 
-it("displays sector information with some sectors visible", () => {
-  renderScenarioCard();
+  it("displays sector information with some sectors visible", () => {
+    renderScenarioCard();
 
-  expect(screen.getByText("Sectors:")).toBeInTheDocument();
+    expect(screen.getByText("Sectors:")).toBeInTheDocument();
 
-  // Check that at least the first sector is displayed
-  expect(screen.getByText(mockScenario.sectors[0].name)).toBeInTheDocument();
-});
+    // Check that at least the first sector is displayed
+    expect(screen.getByText(mockScenario.sectors[0].name)).toBeInTheDocument();
+  });
 
   it("shows publisher information", () => {
     renderScenarioCard();
@@ -161,116 +161,118 @@ it("displays sector information with some sectors visible", () => {
     };
 
     it("shows '+n more' text when there are too many regions to display", () => {
-    const { container } = renderScenarioCard(testScenario);
+      const { container } = renderScenarioCard(testScenario);
 
-    // Find the regions section
-    const regionsSection = Array.from(container.querySelectorAll("p")).find(
-      (p) => p.textContent === "Regions:",
-    );
+      // Find the regions section
+      const regionsSection = Array.from(container.querySelectorAll("p")).find(
+        (p) => p.textContent === "Regions:",
+      );
 
-    if (!regionsSection) {
-      throw new Error("Regions section not found");
-    }
+      if (!regionsSection) {
+        throw new Error("Regions section not found");
+      }
 
-    // Get the parent div of the Regions section
-    const regionsSectionContainer = regionsSection.closest("div");
+      // Get the parent div of the Regions section
+      const regionsSectionContainer = regionsSection.closest("div");
 
-    // Check if any "+n more" text exists within the regions section
-    const moreTextElements = Array.from(
-      regionsSectionContainer?.querySelectorAll("span") || []
-    ).filter(span => /\+\d+ more/.test(span.textContent || ""));
+      // Check if any "+n more" text exists within the regions section
+      const moreTextElements = Array.from(
+        regionsSectionContainer?.querySelectorAll("span") || [],
+      ).filter((span) => /\+\d+ more/.test(span.textContent || ""));
 
-    // There should be at least one "+n more" element
-    expect(moreTextElements.length).toBeGreaterThan(0);
-    
-    // The number in "+n more" should be positive
-    const moreTextMatch = moreTextElements[0].textContent?.match(/\+(\d+) more/);
-    expect(moreTextMatch).not.toBeNull();
-    if (moreTextMatch) {
-      const countNumber = parseInt(moreTextMatch[1]);
-      expect(countNumber).toBeGreaterThan(0);
-    }
-  });
+      // There should be at least one "+n more" element
+      expect(moreTextElements.length).toBeGreaterThan(0);
+
+      // The number in "+n more" should be positive
+      const moreTextMatch =
+        moreTextElements[0].textContent?.match(/\+(\d+) more/);
+      expect(moreTextMatch).not.toBeNull();
+      if (moreTextMatch) {
+        const countNumber = parseInt(moreTextMatch[1]);
+        expect(countNumber).toBeGreaterThan(0);
+      }
+    });
 
     it("shows '+n more' text when there are too many sectors to display", () => {
-    const { container } = renderScenarioCard(testScenario);
+      const { container } = renderScenarioCard(testScenario);
 
-    // Find the sectors section
-    const sectorsSection = Array.from(container.querySelectorAll("p")).find(
-      (p) => p.textContent === "Sectors:",
-    );
+      // Find the sectors section
+      const sectorsSection = Array.from(container.querySelectorAll("p")).find(
+        (p) => p.textContent === "Sectors:",
+      );
 
-    if (!sectorsSection) {
-      throw new Error("Sectors section not found");
-    }
+      if (!sectorsSection) {
+        throw new Error("Sectors section not found");
+      }
 
-    // Get the parent div of the Sectors section
-    const sectorsSectionContainer = sectorsSection.closest("div");
+      // Get the parent div of the Sectors section
+      const sectorsSectionContainer = sectorsSection.closest("div");
 
-    // Check if any "+n more" text exists within the sectors section
-    const moreTextElements = Array.from(
-      sectorsSectionContainer?.querySelectorAll("span") || []
-    ).filter(span => /\+\d+ more/.test(span.textContent || ""));
+      // Check if any "+n more" text exists within the sectors section
+      const moreTextElements = Array.from(
+        sectorsSectionContainer?.querySelectorAll("span") || [],
+      ).filter((span) => /\+\d+ more/.test(span.textContent || ""));
 
-    // There should be at least one "+n more" element
-    expect(moreTextElements.length).toBeGreaterThan(0);
-    
-    // The number in "+n more" should be positive
-    const moreTextMatch = moreTextElements[0].textContent?.match(/\+(\d+) more/);
-    expect(moreTextMatch).not.toBeNull();
-    if (moreTextMatch) {
-      const countNumber = parseInt(moreTextMatch[1]);
-      expect(countNumber).toBeGreaterThan(0);
-    }
-  });
+      // There should be at least one "+n more" element
+      expect(moreTextElements.length).toBeGreaterThan(0);
 
-   it("displays visible regions and includes remaining regions in tooltip", () => {
-  const { container } = renderScenarioCard(testScenario);
-  
-  // Check that some regions are visible
-  expect(screen.getByText("Global")).toBeInTheDocument();
-  
-  // Find the regions section
-  const regionsSection = Array.from(container.querySelectorAll("p")).find(
-    (p) => p.textContent === "Regions:",
-  );
-  if (!regionsSection) throw new Error("Regions section not found");
-  
-  // Get the "+n more" element in the regions section
-  const regionsSectionContainer = regionsSection.closest("div");
-  const moreTextElement = Array.from(
-    regionsSectionContainer?.querySelectorAll("span") || []
-  ).find(span => /\+\d+ more/.test(span.textContent || ""));
-  
-  // If we have a "+n more" element, verify there's tooltip content for hidden regions
-  if (moreTextElement) {
-    // At least some of the later regions should be in the tooltip
-    // Find them by text without requiring them to be visible
-    const hiddenRegions = testScenario.regions.slice(3); // Assuming at least 3 are visible
-    
-    // At least one of these should be findable in the DOM using screen.queryByText
-    const foundHiddenRegion = hiddenRegions.some(region => 
-      screen.queryByText(region) !== null
-    );
-    
-    expect(foundHiddenRegion).toBe(true);
-  }
-});
+      // The number in "+n more" should be positive
+      const moreTextMatch =
+        moreTextElements[0].textContent?.match(/\+(\d+) more/);
+      expect(moreTextMatch).not.toBeNull();
+      if (moreTextMatch) {
+        const countNumber = parseInt(moreTextMatch[1]);
+        expect(countNumber).toBeGreaterThan(0);
+      }
+    });
 
-  it("ensures all regions are displayed when there are few regions", () => {
-  // Create a scenario with only 2 regions
-  const scenarioWithFewRegions = {
-    ...testScenario,
-    regions: ["Global", "EU"], // Only 2 regions
-  };
+    it("displays visible regions and includes remaining regions in tooltip", () => {
+      const { container } = renderScenarioCard(testScenario);
 
-  renderScenarioCard(scenarioWithFewRegions);
+      // Check that some regions are visible
+      expect(screen.getByText("Global")).toBeInTheDocument();
 
-  // Verify that each region in the scenario is visible on the page
-  scenarioWithFewRegions.regions.forEach(region => {
-    expect(screen.getByText(region)).toBeInTheDocument();
-  });
-});
+      // Find the regions section
+      const regionsSection = Array.from(container.querySelectorAll("p")).find(
+        (p) => p.textContent === "Regions:",
+      );
+      if (!regionsSection) throw new Error("Regions section not found");
+
+      // Get the "+n more" element in the regions section
+      const regionsSectionContainer = regionsSection.closest("div");
+      const moreTextElement = Array.from(
+        regionsSectionContainer?.querySelectorAll("span") || [],
+      ).find((span) => /\+\d+ more/.test(span.textContent || ""));
+
+      // If we have a "+n more" element, verify there's tooltip content for hidden regions
+      if (moreTextElement) {
+        // At least some of the later regions should be in the tooltip
+        // Find them by text without requiring them to be visible
+        const hiddenRegions = testScenario.regions.slice(3); // Assuming at least 3 are visible
+
+        // At least one of these should be findable in the DOM using screen.queryByText
+        const foundHiddenRegion = hiddenRegions.some(
+          (region) => screen.queryByText(region) !== null,
+        );
+
+        expect(foundHiddenRegion).toBe(true);
+      }
+    });
+
+    it("ensures all regions are displayed when there are few regions", () => {
+      // Create a scenario with only 2 regions
+      const scenarioWithFewRegions = {
+        ...testScenario,
+        regions: ["Global", "EU"], // Only 2 regions
+      };
+
+      renderScenarioCard(scenarioWithFewRegions);
+
+      // Verify that each region in the scenario is visible on the page
+      scenarioWithFewRegions.regions.forEach((region) => {
+        expect(screen.getByText(region)).toBeInTheDocument();
+      });
+    });
 
     it("applies whitespace-nowrap to multi-word regions in tooltip", () => {
       renderScenarioCard(testScenario);
