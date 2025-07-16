@@ -162,7 +162,7 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
       window.removeEventListener("resize", updatePosition);
       window.removeEventListener("scroll", updatePosition);
     };
-  }, [triggerRef.current]);
+  }, []);
 
   // Get tooltip CSS classes based on position
   const getTooltipTransformClass = () => {

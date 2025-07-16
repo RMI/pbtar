@@ -41,11 +41,14 @@ const useAvailableBadgeCount = (
 
     // Recalculate when window resizes
     const resizeObserver = new ResizeObserver(updateBadgeCount);
-    resizeObserver.observe(containerRef.current);
+    const observedElement = containerRef.current;
+    if (observedElement) {
+      resizeObserver.observe(observedElement);
+    }
 
     return () => {
-      if (containerRef.current) {
-        resizeObserver.unobserve(containerRef.current);
+      if (observedElement) {
+        resizeObserver.unobserve(observedElement);
       }
       resizeObserver.disconnect();
     };
