@@ -121,11 +121,6 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
     }
   }, []);
 
-  useEffect(() => {
-    console.log("Tooltip visibility:", isVisible);
-    console.log("Tooltip position:", tooltipPosition);
-  }, [isVisible, tooltipPosition]);
-
   // Add event handlers
   useEffect(() => {
     const trigger = triggerRef.current;
