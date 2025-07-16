@@ -9,10 +9,14 @@ interface TextWithTooltipProps {
 }
 
 // Arrow component that uses Tailwind classes
-const TooltipArrow = ({ position }: { position: "right" | "top" | "bottom" | "left" }) => {
+const TooltipArrow = ({
+  position,
+}: {
+  position: "right" | "top" | "bottom" | "left";
+}) => {
   let positionClasses = "";
   let borderClasses = "";
-  
+
   switch (position) {
     case "right":
       positionClasses = "top-1/2 -left-2 transform -translate-y-1/2";
@@ -31,10 +35,12 @@ const TooltipArrow = ({ position }: { position: "right" | "top" | "bottom" | "le
       borderClasses = "border-b-rmigray-100";
       break;
   }
-  
+
   return (
-    <div className={`absolute border-4 opacity-95 border-transparent ${positionClasses} ${borderClasses}`} 
-         aria-hidden="true" />
+    <div
+      className={`absolute border-4 opacity-95 border-transparent ${positionClasses} ${borderClasses}`}
+      aria-hidden="true"
+    />
   );
 };
 
@@ -71,12 +77,18 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
     if (!triggerRef.current) return;
 
     const rect = triggerRef.current.getBoundingClientRect();
-    const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-    const scrollX = window.scrollX || window.pageXOffset || document.documentElement.scrollLeft;
+    const scrollY =
+      window.scrollY ||
+      window.pageYOffset ||
+      document.documentElement.scrollTop;
+    const scrollX =
+      window.scrollX ||
+      window.pageXOffset ||
+      document.documentElement.scrollLeft;
 
     // Calculate position based on trigger element and desired position
     let top = 0;
-    let left = 0; 
+    let left = 0;
 
     switch (position) {
       case "right":
@@ -85,14 +97,14 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
         break;
       case "left":
         top = rect.top + scrollY + rect.height / 2;
-        left = rect.left + scrollX; 
+        left = rect.left + scrollX;
         break;
       case "top":
-        top = rect.top + scrollY; 
+        top = rect.top + scrollY;
         left = rect.left + scrollX + rect.width / 2;
         break;
       case "bottom":
-        top = rect.bottom + scrollY; 
+        top = rect.bottom + scrollY;
         left = rect.left + scrollX + rect.width / 2;
         break;
       default:
@@ -103,16 +115,16 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
   };
 
   // Add an effect to calculate initial position after mount
-useEffect(() => {
-  if (triggerRef.current) {
-    updatePosition();
-  }
-}, []);
+  useEffect(() => {
+    if (triggerRef.current) {
+      updatePosition();
+    }
+  }, []);
 
-useEffect(() => {
-  console.log("Tooltip visibility:", isVisible);
-  console.log("Tooltip position:", tooltipPosition);
-}, [isVisible, tooltipPosition]);
+  useEffect(() => {
+    console.log("Tooltip visibility:", isVisible);
+    console.log("Tooltip position:", tooltipPosition);
+  }, [isVisible, tooltipPosition]);
 
   // Add event handlers
   useEffect(() => {
@@ -122,7 +134,7 @@ useEffect(() => {
     const handleMouseEnter = () => {
       updatePosition();
       setIsVisible(true);
-    };  
+    };
 
     const handleMouseLeave = () => {
       setIsVisible(false);
@@ -173,7 +185,7 @@ useEffect(() => {
     }
   };
 
-// Calculate tooltip container styles
+  // Calculate tooltip container styles
   const getTooltipStyles = () => {
     // Default position if tooltipPosition is null
     if (!tooltipPosition) {
@@ -182,7 +194,7 @@ useEffect(() => {
         top: 0,
         left: 0,
         opacity: 0,
-        visibility: "hidden"
+        visibility: "hidden",
       } as React.CSSProperties;
     }
 
@@ -193,7 +205,7 @@ useEffect(() => {
       zIndex: 9999,
       opacity: isVisible ? 1 : 0,
       visibility: isVisible ? "visible" : "hidden",
-      transition: "opacity 200ms ease-in-out, visibility 200ms ease-in-out"
+      transition: "opacity 200ms ease-in-out, visibility 200ms ease-in-out",
     } as React.CSSProperties;
   };
 
@@ -210,22 +222,24 @@ useEffect(() => {
         {text}
       </span>
 
-      {isVisible && tooltipPosition && createPortal(
-        <div
-          style={getTooltipStyles()}
-          className={getTooltipTransformClass()}
-        >
+      {isVisible &&
+        tooltipPosition &&
+        createPortal(
           <div
-            className="bg-white text-rmigray-500 text-xs rounded shadow-lg max-w-xs border border-rmigray-100 px-3 py-2 relative opacity-95"
-            id={tooltipId}
-            role="tooltip"
+            style={getTooltipStyles()}
+            className={getTooltipTransformClass()}
           >
-            {tooltip}
-            <TooltipArrow position={position} />
-          </div>
-        </div>,
-        document.body
-      )}
+            <div
+              className="bg-white text-rmigray-500 text-xs rounded shadow-lg max-w-xs border border-rmigray-100 px-3 py-2 relative opacity-95"
+              id={tooltipId}
+              role="tooltip"
+            >
+              {tooltip}
+              <TooltipArrow position={position} />
+            </div>
+          </div>,
+          document.body,
+        )}
     </>
   );
 };

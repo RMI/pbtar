@@ -193,45 +193,49 @@ describe("ScenarioCard component", () => {
       }
     });
 
-  it("handles regions display appropriately based on available space", () => {
-  // Create a scenario with only 2 regions
-  const scenarioWithFewRegions = {
-    ...testScenario,
-    regions: ["Global", "EU"], // Only 2 regions
-  };
+    it("handles regions display appropriately based on available space", () => {
+      // Create a scenario with only 2 regions
+      const scenarioWithFewRegions = {
+        ...testScenario,
+        regions: ["Global", "EU"], // Only 2 regions
+      };
 
-  const { container } = renderScenarioCard(scenarioWithFewRegions);
+      const { container } = renderScenarioCard(scenarioWithFewRegions);
 
-  // Find the regions section
-  const regionsSection = Array.from(container.querySelectorAll("p")).find(
-    (p) => p.textContent === "Regions:"
-  );
-  if (!regionsSection) throw new Error("Regions section not found");
-  
-  // Get the parent container of the regions section
-  const regionsSectionContainer = regionsSection.closest("div");
-  if (!regionsSectionContainer) throw new Error("Region section container not found");
-  
-  // Check if there's a "+n more" text
-  const hasMoreText = Array.from(regionsSectionContainer.querySelectorAll("span"))
-    .some(span => /\+\d+ more/.test(span.textContent || ""));
-  
-  // If we find "+n more" text, ensure it only shows 1 more (since we have 2 regions total)
-  if (hasMoreText) {
-    const moreTextMatch = Array.from(regionsSectionContainer.querySelectorAll("span"))
-      .find(span => /\+\d+ more/.test(span.textContent || ""))
-      ?.textContent?.match(/\+(\d+) more/);
-    
-    expect(moreTextMatch).not.toBeNull();
-    if (moreTextMatch) {
-      const countNumber = parseInt(moreTextMatch[1]);
-      expect(countNumber).toBeLessThanOrEqual(1); // Should show at most 1 more (we have 2 regions total)
-    }
-  } else {
-    // If there's no "+n more" text, ensure at least one region is visible
-    expect(screen.queryByText("Global")).not.toBeNull();
-  }
-});
+      // Find the regions section
+      const regionsSection = Array.from(container.querySelectorAll("p")).find(
+        (p) => p.textContent === "Regions:",
+      );
+      if (!regionsSection) throw new Error("Regions section not found");
+
+      // Get the parent container of the regions section
+      const regionsSectionContainer = regionsSection.closest("div");
+      if (!regionsSectionContainer)
+        throw new Error("Region section container not found");
+
+      // Check if there's a "+n more" text
+      const hasMoreText = Array.from(
+        regionsSectionContainer.querySelectorAll("span"),
+      ).some((span) => /\+\d+ more/.test(span.textContent || ""));
+
+      // If we find "+n more" text, ensure it only shows 1 more (since we have 2 regions total)
+      if (hasMoreText) {
+        const moreTextMatch = Array.from(
+          regionsSectionContainer.querySelectorAll("span"),
+        )
+          .find((span) => /\+\d+ more/.test(span.textContent || ""))
+          ?.textContent?.match(/\+(\d+) more/);
+
+        expect(moreTextMatch).not.toBeNull();
+        if (moreTextMatch) {
+          const countNumber = parseInt(moreTextMatch[1]);
+          expect(countNumber).toBeLessThanOrEqual(1); // Should show at most 1 more (we have 2 regions total)
+        }
+      } else {
+        // If there's no "+n more" text, ensure at least one region is visible
+        expect(screen.queryByText("Global")).not.toBeNull();
+      }
+    });
   });
 });
 

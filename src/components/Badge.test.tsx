@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { render, screen} from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Badge from "./Badge";
 
 describe("Badge component", () => {
@@ -126,26 +126,26 @@ describe("Badge component", () => {
   });
 
   it("uses TextWithTooltip when tooltip is provided", () => {
-  render(
-    <Badge
-      text="With Tooltip"
-      tooltip="This is a tooltip"
-    />,
-  );
-  
-  // Badge text should still be present
-  const badgeText = screen.getByText("With Tooltip");
-  expect(badgeText).toBeInTheDocument();
-  
-  // The outer span from TextWithTooltip should have tabindex attribute
-  // We need to look for a parent element with tabindex since the badge text itself
-  // is wrapped in its own span
-  const triggerElement = badgeText.closest("span")?.parentElement;
-  expect(triggerElement).toHaveAttribute("tabindex", "0");
-  
-  // The aria-describedby attribute is added when tooltip is visible
-  expect(triggerElement).not.toHaveAttribute("aria-describedby");
-});
+    render(
+      <Badge
+        text="With Tooltip"
+        tooltip="This is a tooltip"
+      />,
+    );
+
+    // Badge text should still be present
+    const badgeText = screen.getByText("With Tooltip");
+    expect(badgeText).toBeInTheDocument();
+
+    // The outer span from TextWithTooltip should have tabindex attribute
+    // We need to look for a parent element with tabindex since the badge text itself
+    // is wrapped in its own span
+    const triggerElement = badgeText.closest("span")?.parentElement;
+    expect(triggerElement).toHaveAttribute("tabindex", "0");
+
+    // The aria-describedby attribute is added when tooltip is visible
+    expect(triggerElement).not.toHaveAttribute("aria-describedby");
+  });
 
   // Testing tooltip visibility requires checking document.body, since tooltips are now in portals
   it("doesn't show tooltip initially", () => {
