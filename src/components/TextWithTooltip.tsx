@@ -208,7 +208,7 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
     <>
       <span
         ref={triggerRef}
-        className={`relative inline-block ${className}`}
+        className={`relative inline-block cursor-help ${className}`}
         tabIndex={0}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
