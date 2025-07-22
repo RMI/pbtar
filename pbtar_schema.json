@@ -33,6 +33,11 @@
         "minimum": 2030,
         "maximum": 2100
       },
+      "carbon_budget": {
+        "description": "Carbon budget of the scenario in gigatons of CO2 equivalent",
+        "type": ["number", "null"],
+        "minimum": 0
+      },
       "target_year": {
         "description": "Target year of the scenario",
         "type": "string"
