@@ -9,7 +9,10 @@
     "target_temperature": "1.5C",
     "regions": ["Global"],
     "sectors": [
-      { "name": "Power Generation", "tooltip": "Electricity generation and distribution" },
+      {
+        "name": "Power Generation",
+        "tooltip": "Electricity generation and distribution"
+      },
       {
         "name": "Industrial",
         "tooltip": "Manufacturing and industrial processes"
