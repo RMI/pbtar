@@ -30,7 +30,7 @@
       "net_zero_reached_year": {
         "description": "Year by which net zero is reached in the scenario",
         "type": ["string", "null"],
-        "pattern": "^(20(3[0-9]|[4-9][0-9])|21[0-9][0-9])$"
+        "pattern": "^(20[3-9][0-9])|(21[0-9][0-9])$"
       },
       "target_year": {
         "description": "Target year of the scenario",
