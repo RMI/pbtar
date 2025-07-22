@@ -46,6 +46,18 @@
         "description": "Target temperature of the scenario",
         "type": "string"
       },
+      "ssp": {
+        "description": "Shared Socioeconomic Pathways (SSP) associated with the scenario",
+        "type": "string",
+        "enum": [
+          "SSP1",
+          "SSP2",
+          "SSP3",
+          "SSP4",
+          "SSP5",
+          "N/A"
+        ]
+      },
       "regions": {
         "description": "Regions that the scenario covers",
         "type": "array",
