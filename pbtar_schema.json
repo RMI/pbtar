@@ -46,7 +46,15 @@
         "type": "array",
         "uniqueItems": true,
         "items": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Global",
+            "EU",
+            "Americas",
+            "Asia Pacific",
+            "SEA",
+            "Country-Specific"
+          ]
         }
       },
       "sectors": {
