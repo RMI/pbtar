@@ -27,6 +27,12 @@
         "description": "Detailed explanation of the scenario category",
         "type": "string"
       },
+      "net_zero_reached_year": {
+        "description": "Year by which net zero is reached in the scenario",
+        "type": ["integer", "null"],
+        "minimum": 2030,
+        "maximum": 2100
+      },
       "target_year": {
         "description": "Target year of the scenario",
         "type": "string"
