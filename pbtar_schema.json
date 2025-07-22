@@ -58,13 +58,10 @@
             "name": {
               "type": "string",
               "enum": [
-                "Agriculture",
+                "Agricultural",
                 "Buildings",
-                "Coal",
                 "Industrial",
-                "Oil & Gas",
-                "Power",
-                "Renewables",
+                "Power Generation",
                 "Transport"
               ]
             },

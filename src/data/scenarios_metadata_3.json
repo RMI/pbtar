@@ -9,9 +9,7 @@
     "target_temperature": "1.5C",
     "regions": ["SEA"],
     "sectors": [
-      { "name": "Power", "tooltip": "Electricity generation and distribution" },
-      { "name": "Coal", "tooltip": "Coal mining and utilization" },
-      { "name": "Renewables", "tooltip": "Renewable energy sources" }
+      { "name": "Power Generation", "tooltip": "Electricity generation and distribution" }
     ],
     "publisher": "Southeast Energy Analysis Group",
     "published_date": "2023-04-15",

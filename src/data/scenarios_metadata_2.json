@@ -9,13 +9,7 @@
     "target_temperature": "3C",
     "regions": ["Global", "EU", "SEA", "Americas", "Asia Pacific"],
     "sectors": [
-      { "name": "Power", "tooltip": "Electricity generation and distribution" },
-      {
-        "name": "Oil & Gas",
-        "tooltip": "Fossil fuel extraction and processing"
-      },
-      { "name": "Coal", "tooltip": "Coal mining and utilization" },
-      { "name": "Renewables", "tooltip": "Renewable energy sources" },
+      { "name": "Power Generation", "tooltip": "Electricity generation and distribution" },
       {
         "name": "Industrial",
         "tooltip": "Manufacturing and industrial processes"
