@@ -46,7 +46,15 @@
         "type": "array",
         "uniqueItems": true,
         "items": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Global",
+            "EU",
+            "Americas",
+            "Asia Pacific",
+            "SEA",
+            "Country-Specific"
+          ]
         }
       },
       "sectors": {
@@ -58,13 +66,10 @@
             "name": {
               "type": "string",
               "enum": [
-                "Agriculture",
+                "Agricultural",
                 "Buildings",
-                "Coal",
                 "Industrial",
-                "Oil & Gas",
-                "Power",
-                "Renewables",
+                "Power Generation",
                 "Transport"
               ]
             },

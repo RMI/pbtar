@@ -9,8 +9,10 @@
     "target_temperature": "1.5C",
     "regions": ["EU"],
     "sectors": [
-      { "name": "Power", "tooltip": "Electricity generation and distribution" },
-      { "name": "Renewables", "tooltip": "Renewable energy sources" },
+      {
+        "name": "Power Generation",
+        "tooltip": "Electricity generation and distribution"
+      },
       { "name": "Transport", "tooltip": "Transportation and logistics" },
       {
         "name": "Buildings",
