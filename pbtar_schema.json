@@ -75,7 +75,7 @@
       },
       "country": {
         "description": "The country code associated with the scenario",
-        "$ref": "country-codes.json"
+        "$ref": "./country-codes.json"
       },
       "sectors": {
         "description": "Sectors that the scenario covers",
