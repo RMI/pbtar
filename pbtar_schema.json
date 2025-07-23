@@ -38,6 +38,12 @@
         "type": ["number", "null"],
         "minimum": 0
       },
+      "model_start_year": {
+        "description": "Year from which the model starts",
+        "type": ["integer", "null"],
+        "minimum": 1900,
+        "maximum": 2025
+      },
       "target_year": {
         "description": "Target year of the scenario",
         "type": "string"
