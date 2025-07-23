@@ -33,6 +33,17 @@
         "minimum": 2030,
         "maximum": 2100
       },
+      "carbon_budget": {
+        "description": "Carbon budget of the scenario in gigatons of CO2 equivalent",
+        "type": ["number", "null"],
+        "minimum": 0
+      },
+      "model_start_year": {
+        "description": "Year from which the model starts",
+        "type": ["integer", "null"],
+        "minimum": 1900,
+        "maximum": 2025
+      },
       "target_year": {
         "description": "Target year of the scenario",
         "type": "string"
@@ -40,6 +51,11 @@
       "target_temperature": {
         "description": "Target temperature of the scenario",
         "type": "string"
+      },
+      "ssp": {
+        "description": "Shared Socioeconomic Pathways (SSP) associated with the scenario",
+        "type": "string",
+        "enum": ["SSP1", "SSP2", "SSP3", "SSP4", "SSP5", "N/A"]
       },
       "regions": {
         "description": "Regions that the scenario covers",
