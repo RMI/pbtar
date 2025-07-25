@@ -11,7 +11,17 @@
     "sectors": [
       {
         "name": "Power Generation",
-        "tooltip": "Electricity generation and distribution"
+        "tooltip": "Electricity generation and distribution",
+        "technologies": [
+          "Coal",
+          "Oil",
+          "Gas",
+          "Wind",
+          "Solar",
+          "Nuclear",
+          "Biomass",
+          "Other"
+        ]
       }
     ],
     "publisher": "Southeast Energy Analysis Group",
