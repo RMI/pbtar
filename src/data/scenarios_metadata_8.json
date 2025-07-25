@@ -12,12 +12,7 @@
       {
         "name": "Power Generation",
         "tooltip": "Electricity generation and distribution",
-        "technologies": [
-          "Solar",
-          "Wind",
-          "Nuclear",
-          "Gas"
-        ]
+        "technologies": ["Solar", "Wind", "Nuclear", "Gas"]
       },
       {
         "name": "Industrial",
@@ -30,12 +25,10 @@
           "Other"
         ]
       },
-      { "name": "Transport", "tooltip": "Transportation and logistics",
-        "technologies": [
-          "Electric Vehicles",
-          "Hydrogen Vehicles",
-          "Biofuels"
-        ]
+      {
+        "name": "Transport",
+        "tooltip": "Transportation and logistics",
+        "technologies": ["Electric Vehicles", "Hydrogen Vehicles", "Biofuels"]
       }
     ],
     "publisher": "Strategic Climate Transition Forum",

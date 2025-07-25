@@ -12,12 +12,7 @@
       {
         "name": "Power Generation",
         "tooltip": "Electricity generation and distribution",
-        "technologies": [
-          "Solar",
-          "Wind",
-          "Nuclear",
-          "Coal"
-        ]
+        "technologies": ["Solar", "Wind", "Nuclear", "Coal"]
       },
       {
         "name": "Transport",
@@ -35,11 +30,7 @@
       {
         "name": "Buildings",
         "tooltip": "Residential and commercial buildings",
-        "technologies": [
-          "Energy Efficiency",
-          "Heat Pumps",
-          "Other"
-        ]
+        "technologies": ["Energy Efficiency", "Heat Pumps", "Other"]
       },
       {
         "name": "Industrial",

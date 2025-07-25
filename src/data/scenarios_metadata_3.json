@@ -14,13 +14,13 @@
         "tooltip": "Electricity generation and distribution",
         "technologies": [
           "Coal",
-                        "Oil",
-                        "Gas",
-                        "Wind",
-                        "Solar",
-                        "Nuclear",
-                        "Biomass",
-                        "Other"
+          "Oil",
+          "Gas",
+          "Wind",
+          "Solar",
+          "Nuclear",
+          "Biomass",
+          "Other"
         ]
       }
     ],

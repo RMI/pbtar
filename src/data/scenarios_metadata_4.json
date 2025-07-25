@@ -14,25 +14,25 @@
         "tooltip": "Electricity generation and distribution",
         "technologies": [
           "Coal",
-                        "Oil",
-                        "Gas",
-                        "Wind",
-                        "Solar",
-                        "Nuclear",
-                        "Biomass",
-                        "Other"
+          "Oil",
+          "Gas",
+          "Wind",
+          "Solar",
+          "Nuclear",
+          "Biomass",
+          "Other"
         ]
       },
       {
         "name": "Industrial",
         "tooltip": "Manufacturing and industrial processes",
         "technologies": [
-                        "Carbon Capture and Storage",
-                        "Electrification",
-                        "Process Optimization",
-                        "Hydrogen Use",
-                        "Other"
-                      ]
+          "Carbon Capture and Storage",
+          "Electrification",
+          "Process Optimization",
+          "Hydrogen Use",
+          "Other"
+        ]
       }
     ],
     "publisher": "CoalTech Solutions Consortium",

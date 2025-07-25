@@ -12,27 +12,21 @@
       {
         "name": "Power Generation",
         "tooltip": "Electricity generation and distribution",
-        "technologies": [
-          "Coal",
-          "Gas",
-          "Solar",
-          "Wind",
-          "Nuclear"
-        ]
+        "technologies": ["Coal", "Gas", "Solar", "Wind", "Nuclear"]
       },
       {
         "name": "Industrial",
         "tooltip": "Manufacturing and industrial processes",
         "technologies": [
-         "Carbon Capture and Storage",
-                        "Electrification",
-                        "Process Optimization",
-                        "Hydrogen Use",
-                        "Other"
+          "Carbon Capture and Storage",
+          "Electrification",
+          "Process Optimization",
+          "Hydrogen Use",
+          "Other"
         ]
       },
-      { 
-        "name": "Transport", 
+      {
+        "name": "Transport",
         "tooltip": "Transportation and logistics",
         "technologies": [
           "Electric Vehicles",

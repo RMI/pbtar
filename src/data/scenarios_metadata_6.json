@@ -12,12 +12,7 @@
       {
         "name": "Power Generation",
         "tooltip": "Electricity generation and distribution",
-        "technologies": [
-          "Solar",
-          "Wind",
-          "Biomass",
-          "Nuclear"
-        ]
+        "technologies": ["Solar", "Wind", "Biomass", "Nuclear"]
       },
       {
         "name": "Industrial",
@@ -29,23 +24,19 @@
           "Hydrogen Use"
         ]
       },
-      { "name": "Transport", "tooltip": "Transportation and logistics",
-        "technologies": [
-          "Electric Vehicles",
-          "Hydrogen Vehicles",
-          "Biofuels"
-        ]
+      {
+        "name": "Transport",
+        "tooltip": "Transportation and logistics",
+        "technologies": ["Electric Vehicles", "Hydrogen Vehicles", "Biofuels"]
       },
       {
         "name": "Buildings",
         "tooltip": "Residential and commercial buildings",
-        "technologies": [
-          "Energy Efficiency",
-          "Heat Pumps",
-          "Other"
-        ]
+        "technologies": ["Energy Efficiency", "Heat Pumps", "Other"]
       },
-      { "name": "Agricultural", "tooltip": "Farming and land use",
+      {
+        "name": "Agricultural",
+        "tooltip": "Farming and land use",
         "technologies": [
           "Precision Agriculture",
           "Agroforestry",
