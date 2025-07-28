@@ -11,13 +11,25 @@
     "sectors": [
       {
         "name": "Power Generation",
-        "tooltip": "Electricity generation and distribution"
+        "tooltip": "Electricity generation and distribution",
+        "technologies": ["Solar", "Wind", "Nuclear", "Gas"]
       },
       {
         "name": "Industrial",
-        "tooltip": "Manufacturing and industrial processes"
+        "tooltip": "Manufacturing and industrial processes",
+        "technologies": [
+          "Carbon Capture and Storage",
+          "Electrification",
+          "Process Optimization",
+          "Hydrogen Use",
+          "Other"
+        ]
       },
-      { "name": "Transport", "tooltip": "Transportation and logistics" }
+      {
+        "name": "Transport",
+        "tooltip": "Transportation and logistics",
+        "technologies": ["Electric Vehicles", "Hydrogen Vehicles", "Biofuels"]
+      }
     ],
     "publisher": "Strategic Climate Transition Forum",
     "published_date": "2022-09-06",
