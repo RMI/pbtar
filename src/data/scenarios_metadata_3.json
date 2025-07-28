@@ -6,7 +6,7 @@
     "category": "NDC",
     "category_tooltip": "Nationally Determined Contribution",
     "target_year": "2050",
-    "target_temperature": "1.5C",
+    "modeled_temperature_increase": 1.5,
     "regions": ["SEA"],
     "sectors": [
       {

@@ -6,7 +6,7 @@
     "category": "IAM",
     "category_tooltip": "Integrated Assessment Model",
     "target_year": "2050",
-    "target_temperature": "3C",
+    "modeled_temperature_increase": 3,
     "regions": ["Global", "EU", "SEA", "Americas", "Asia Pacific"],
     "sectors": [
       {
