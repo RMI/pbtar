@@ -14,7 +14,7 @@ vi.mock("../data/scenariosData", () => ({
       category: "Policy",
       category_tooltip: "Policy scenarios focus on regulatory measures.",
       target_year: "2050",
-      target_temperature: "1.5°C",
+      modeled_temperature_increase: 1.5,
       regions: ["Global", "Europe"],
       sectors: [
         { name: "Power", tooltip: "Electricity generation and distribution" },
@@ -37,7 +37,7 @@ vi.mock("../data/scenariosData", () => ({
       category: "Forecast",
       category_tooltip: "Forecast scenarios are based on existing trends.",
       target_year: "2030",
-      target_temperature: "2.7°C",
+      modeled_temperature_increase: 2.7,
       regions: ["Global", "Asia"],
       sectors: [
         {
@@ -78,7 +78,7 @@ describe("SearchSection", () => {
 
     expect(screen.getByText("Category")).toBeInTheDocument();
     expect(screen.getByText("Target Year")).toBeInTheDocument();
-    expect(screen.getByText("Temperature")).toBeInTheDocument();
+    expect(screen.getByText("Temperature (°C)")).toBeInTheDocument();
     expect(screen.getByText("Region")).toBeInTheDocument();
     expect(screen.getByText("Sector")).toBeInTheDocument();
   });
