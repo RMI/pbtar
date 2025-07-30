@@ -69,7 +69,9 @@ describe("ScenarioCard component", () => {
 
     expect(screen.getByText(mockScenario.target_year)).toBeInTheDocument();
     expect(
-      screen.getByText(mockScenario.modeled_temperature_increase?.toString() + "°C"),
+      screen.getByText(
+        mockScenario.modeled_temperature_increase?.toString() + "°C",
+      ),
     ).toBeInTheDocument();
   });
 
