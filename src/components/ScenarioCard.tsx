@@ -143,7 +143,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             {scenario.modeled_temperature_increase && (
               <Badge
                 text={highlightTextIfSearchMatch(
-                  `${scenario.modeled_temperature_increase}°C`,
+                  `${scenario.modeled_temperature_increase.toString()}°C`,
                 )}
                 variant="temperature"
               />
