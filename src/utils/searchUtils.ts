@@ -18,7 +18,8 @@ export const filterScenarios = (
     // Target temperature filter
     if (
       filters.modeled_temperature_increase &&
-      scenario.modeled_temperature_increase !== filters.modeled_temperature_increase
+      scenario.modeled_temperature_increase !==
+        filters.modeled_temperature_increase
     ) {
       return false;
     }

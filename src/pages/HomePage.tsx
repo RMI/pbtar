@@ -87,7 +87,7 @@ const HomePage: React.FC = () => {
 
   const handleFilterChange = <T extends string | number>(
     key: keyof SearchFilters,
-    value: T | null
+    value: T | null,
   ) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };

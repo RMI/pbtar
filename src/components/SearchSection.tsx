@@ -14,7 +14,10 @@ import {
 interface SearchSectionProps {
   filters: SearchFilters;
   scenariosNumber: number;
-  onFilterChange: <T extends string | number | null>(key: keyof SearchFilters, value: T | null) => void;
+  onFilterChange: <T extends string | number | null>(
+    key: keyof SearchFilters,
+    value: T | null,
+  ) => void;
   onSearch: () => void;
   onClear: () => void;
 }
@@ -79,7 +82,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           label="Temperature (°C)"
           options={temperatures}
           selectedValue={filters.modeled_temperature_increase}
-          onChange={(value) => onFilterChange("modeled_temperature_increase", value)}
+          onChange={(value) =>
+            onFilterChange("modeled_temperature_increase", value)
+          }
         />
 
         <FilterDropdown<string>
