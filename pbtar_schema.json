@@ -50,7 +50,7 @@
       },
       "modeled_temperature_increase": {
         "description": "Modeled temperature increase expected by the scenario (in degrees Celsius)",
-        "type": ["number", "null"],
+        "type": "number",
         "multipleOf": 0.1,
         "minimum": 0.5,
         "maximum": 3

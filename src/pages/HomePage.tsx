@@ -17,7 +17,7 @@ const HomePage: React.FC = () => {
   const [filters, setFilters] = useState<SearchFilters>({
     category: null,
     target_year: null,
-    target_temperature: null,
+    modeled_temperature_increase: null,
     region: null,
     sector: null,
     searchTerm: "",
@@ -41,8 +41,8 @@ const HomePage: React.FC = () => {
         filters.searchTerm !== prevFiltersRef.current.searchTerm ||
         filters.category !== prevFiltersRef.current.category ||
         filters.target_year !== prevFiltersRef.current.target_year ||
-        filters.target_temperature !==
-          prevFiltersRef.current.target_temperature ||
+        filters.modeled_temperature_increase !==
+          prevFiltersRef.current.modeled_temperature_increase ||
         filters.region !== prevFiltersRef.current.region ||
         filters.sector !== prevFiltersRef.current.sector;
 
@@ -85,9 +85,9 @@ const HomePage: React.FC = () => {
     };
   }, [isSticky]);
 
-  const handleFilterChange = (
+  const handleFilterChange = <T extends string | number>(
     key: keyof SearchFilters,
-    value: string | null,
+    value: T | null
   ) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };
@@ -100,7 +100,7 @@ const HomePage: React.FC = () => {
     setFilters({
       category: null,
       target_year: null,
-      target_temperature: null,
+      modeled_temperature_increase: null,
       region: null,
       sector: null,
       searchTerm: "",

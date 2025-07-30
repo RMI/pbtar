@@ -88,10 +88,12 @@ const ScenarioDetailPage: React.FC = () => {
               text={scenario.target_year}
               variant="year"
             />
-            <Badge
-              text={scenario.target_temperature}
-              variant="temperature"
-            />
+            {scenario.modeled_temperature_increase && (
+              <Badge
+                text={`${scenario.modeled_temperature_increase}°C`}
+                variant="temperature"
+              />
+            )}
           </div>
 
           <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
