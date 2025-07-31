@@ -6,7 +6,7 @@
     "category": "IAM",
     "category_tooltip": "Integrated Assessment Model",
     "target_year": "2100",
-    "target_temperature": "1.5C",
+    "modeled_temperature_increase": 1.5,
     "regions": ["Global"],
     "sectors": [
       {

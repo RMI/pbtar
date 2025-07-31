@@ -13,7 +13,7 @@ describe("searchUtils", () => {
       category: "Policy",
       category_tooltip: "Policy scenarios focus on regulatory measures.",
       target_year: "2050",
-      target_temperature: "1.5°C",
+      modeled_temperature_increase: 1.5,
       regions: ["Global", "Europe"],
       sectors: [
         { name: "Power", tooltip: "Electricity generation and distribution" },
@@ -36,7 +36,7 @@ describe("searchUtils", () => {
       category: "Forecast",
       category_tooltip: "Forecast scenarios are based on existing trends.",
       target_year: "2030",
-      target_temperature: "2.7°C",
+      modeled_temperature_increase: 2.7,
       regions: ["Global", "Asia"],
       sectors: [
         {
@@ -82,8 +82,8 @@ describe("searchUtils", () => {
       expect(result[0].id).toBe("scenario-2");
     });
 
-    it("filters by target temperature", () => {
-      const filters: SearchFilters = { target_temperature: "1.5°C" };
+    it("filters by modeled temperature increase", () => {
+      const filters: SearchFilters = { modeled_temperature_increase: 1.5 };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(1);

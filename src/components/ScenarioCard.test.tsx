@@ -15,7 +15,7 @@ describe("ScenarioCard component", () => {
     category_tooltip:
       "Policy scenarios focus on regulatory and legislative measures.",
     target_year: "2050",
-    target_temperature: "1.5°C",
+    modeled_temperature_increase: 1.5,
     regions: ["Global", "Europe", "North America", "Asia"],
     sectors: [
       { name: "Power", tooltip: "Electricity generation and distribution" },
@@ -69,7 +69,9 @@ describe("ScenarioCard component", () => {
 
     expect(screen.getByText(mockScenario.target_year)).toBeInTheDocument();
     expect(
-      screen.getByText(mockScenario.target_temperature),
+      screen.getByText(
+        mockScenario.modeled_temperature_increase?.toString() + "°C",
+      ),
     ).toBeInTheDocument();
   });
 
@@ -140,7 +142,7 @@ describe("ScenarioCard component", () => {
       category: "IAM",
       category_tooltip: "Category tooltip",
       target_year: "2050",
-      target_temperature: "1.5C",
+      modeled_temperature_increase: 1.5,
       regions: ["Global", "EU", "Americas", "Africa", "Asia Pacific"], // 5 regions
       sectors: [
         { name: "Power", tooltip: "Power tooltip" },
@@ -248,7 +250,7 @@ describe("ScenarioCard search highlighting", () => {
     category: "Policy",
     category_tooltip: "Policy scenarios focus on regulatory measures.",
     target_year: "2050",
-    target_temperature: "1.5°C",
+    modeled_temperature_increase: 1.5,
     regions: ["Global", "Europe", "North America", "Hidden Match Region"],
     sectors: [
       { name: "Power", tooltip: "Electricity generation" },

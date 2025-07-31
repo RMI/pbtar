@@ -48,9 +48,12 @@
         "description": "Target year of the scenario",
         "type": "string"
       },
-      "target_temperature": {
-        "description": "Target temperature of the scenario",
-        "type": "string"
+      "modeled_temperature_increase": {
+        "description": "Modeled temperature increase expected by the scenario (in degrees Celsius)",
+        "type": "number",
+        "multipleOf": 0.1,
+        "minimum": 0.5,
+        "maximum": 3
       },
       "ssp": {
         "description": "Shared Socioeconomic Pathways (SSP) associated with the scenario",
@@ -264,7 +267,6 @@
       "category",
       "category_tooltip",
       "target_year",
-      "target_temperature",
       "regions",
       "sectors",
       "publisher",

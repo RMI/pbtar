@@ -14,7 +14,10 @@ import {
 interface SearchSectionProps {
   filters: SearchFilters;
   scenariosNumber: number;
-  onFilterChange: (key: keyof SearchFilters, value: string | null) => void;
+  onFilterChange: <T extends string | number | null>(
+    key: keyof SearchFilters,
+    value: T | null,
+  ) => void;
   onSearch: () => void;
   onClear: () => void;
 }
@@ -33,7 +36,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     new Set(scenariosData.map((d) => d.target_year)),
   ).sort() as YearTarget[];
   const temperatures: TemperatureTarget[] = Array.from(
-    new Set(scenariosData.map((d) => d.target_temperature)),
+    new Set(scenariosData.map((d) => d.modeled_temperature_increase)),
   ).sort() as TemperatureTarget[];
   const regions: Region[] = Array.from(
     new Set(scenariosData.map((d) => d.regions).flat()),
@@ -47,7 +50,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       filters.region ||
       filters.sector ||
       filters.target_year ||
-      filters.target_temperature) !== null;
+      filters.modeled_temperature_increase) !== null;
 
   return (
     <div className="bg-white">
@@ -61,35 +64,37 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <FilterDropdown
+        <FilterDropdown<string>
           label="Category"
           options={categories}
           selectedValue={filters.category}
           onChange={(value) => onFilterChange("category", value)}
         />
 
-        <FilterDropdown
+        <FilterDropdown<string>
           label="Target Year"
           options={years}
           selectedValue={filters.target_year}
           onChange={(value) => onFilterChange("target_year", value)}
         />
 
-        <FilterDropdown
-          label="Temperature"
+        <FilterDropdown<number>
+          label="Temperature (°C)"
           options={temperatures}
-          selectedValue={filters.target_temperature}
-          onChange={(value) => onFilterChange("target_temperature", value)}
+          selectedValue={filters.modeled_temperature_increase}
+          onChange={(value) =>
+            onFilterChange("modeled_temperature_increase", value)
+          }
         />
 
-        <FilterDropdown
+        <FilterDropdown<string>
           label="Region"
           options={regions}
           selectedValue={filters.region}
           onChange={(value) => onFilterChange("region", value)}
         />
 
-        <FilterDropdown
+        <FilterDropdown<string>
           label="Sector"
           options={sectors}
           selectedValue={filters.sector}
