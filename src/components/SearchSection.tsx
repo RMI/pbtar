@@ -4,7 +4,7 @@ import FilterDropdown from "./FilterDropdown";
 import { scenariosData } from "../data/scenariosData";
 import {
   SearchFilters,
-  ScenarioCategory,
+  PathwayType,
   YearTarget,
   TemperatureTarget,
   Region,
@@ -29,9 +29,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   onSearch,
   onClear,
 }) => {
-  const categories: ScenarioCategory[] = Array.from(
-    new Set(scenariosData.map((d) => d.category)),
-  ).sort() as ScenarioCategory[];
+  const categories: PathwayType[] = Array.from(
+    new Set(scenariosData.map((d) => d.pathway_type)),
+  ).sort() as PathwayType[];
   const years: YearTarget[] = Array.from(
     new Set(scenariosData.map((d) => d.target_year)),
   ).sort() as YearTarget[];
@@ -46,7 +46,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   ).sort();
   const areFiltersApplied =
     (filters.searchTerm ||
-      filters.category ||
+      filters.pathway_type ||
       filters.region ||
       filters.sector ||
       filters.target_year ||
@@ -65,10 +65,10 @@ const SearchSection: React.FC<SearchSectionProps> = ({
 
       <div className="flex flex-wrap gap-2">
         <FilterDropdown<string>
-          label="Category"
+          label="Pathway Type"
           options={categories}
-          selectedValue={filters.category}
-          onChange={(value) => onFilterChange("category", value)}
+          selectedValue={filters.pathway_type}
+          onChange={(value) => onFilterChange("pathway_type", value)}
         />
 
         <FilterDropdown<string>

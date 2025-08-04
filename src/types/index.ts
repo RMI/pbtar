@@ -2,8 +2,8 @@ export interface Scenario {
   id: string;
   name: string;
   description: string;
-  category: string;
-  category_tooltip: string;
+  pathway_type: string;
+  pathway_type_tooltip: string;
   target_year: string;
   modeled_temperature_increase?: number;
   regions: string[];
@@ -22,7 +22,7 @@ export interface Scenario {
   };
 }
 
-export type ScenarioCategory = "IAM" | "ITR" | "NDC" | "Other";
+export type PathwayType = "Normative" | "Projection" | "Policy" | "Exploration";
 
 export type TemperatureTarget = number;
 
@@ -56,7 +56,7 @@ export type Sector =
   | "N/A";
 
 export interface SearchFilters {
-  category: ScenarioCategory | null;
+  pathway_type: PathwayType | null;
   target_year: YearTarget | null;
   modeled_temperature_increase: TemperatureTarget | null;
   region: Region | null;
