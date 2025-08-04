@@ -22,12 +22,7 @@
       "pathway_type": {
         "description": "Type of the scenario pathway",
         "type": "string",
-        "enum": [
-          "Normative",
-          "Projection",
-          "Policy",
-          "Exploration"
-        ]
+        "enum": ["Normative", "Projection", "Policy", "Exploration"]
       },
       "pathway_type_tooltip": {
         "description": "Detailed explanation of the scenario pathway type",
