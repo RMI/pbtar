@@ -4,16 +4,37 @@
     "name": "FGCN Current Policies",
     "description": "Business-as-usual baseline assuming current policies remain in place",
     "category": "IAM",
+    "category_tooltip": "Integrated Assessment Model",
     "target_year": "2050",
-    "target_temperature": "3C",
+    "modeled_temperature_increase": 3,
     "regions": ["Global", "EU", "SEA", "Americas", "Asia Pacific"],
     "sectors": [
-      "Power",
-      "Oil & Gas",
-      "Coal",
-      "Renewables",
-      "Industrial",
-      "Transport"
+      {
+        "name": "Power Generation",
+        "tooltip": "Electricity generation and distribution",
+        "technologies": ["Coal", "Gas", "Solar", "Wind", "Nuclear"]
+      },
+      {
+        "name": "Industrial",
+        "tooltip": "Manufacturing and industrial processes",
+        "technologies": [
+          "Carbon Capture and Storage",
+          "Electrification",
+          "Process Optimization",
+          "Hydrogen Use",
+          "Other"
+        ]
+      },
+      {
+        "name": "Transport",
+        "tooltip": "Transportation and logistics",
+        "technologies": [
+          "Electric Vehicles",
+          "Hydrogen Vehicles",
+          "Biofuels",
+          "Public Transport"
+        ]
+      }
     ],
     "publisher": "Future Governance and Climate Network",
     "published_date": "2022-09-06",

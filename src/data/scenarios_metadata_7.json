@@ -4,10 +4,28 @@
     "name": "Planned Transition Scenario",
     "description": "Gradual, orderly transition that begins immediately and continues gradually",
     "category": "ITR",
+    "category_tooltip": "Implied Temperature Rise",
     "target_year": "2050",
-    "target_temperature": "2C",
+    "modeled_temperature_increase": 2,
     "regions": ["Global", "EU", "Americas", "Asia Pacific"],
-    "sectors": ["Power", "Oil & Gas", "Coal", "Renewables", "Industrial"],
+    "sectors": [
+      {
+        "name": "Power Generation",
+        "tooltip": "Electricity generation and distribution",
+        "technologies": ["Solar", "Wind", "Coal", "Oil", "Nuclear", "Gas"]
+      },
+      {
+        "name": "Industrial",
+        "tooltip": "Manufacturing and industrial processes",
+        "technologies": [
+          "Carbon Capture and Storage",
+          "Electrification",
+          "Process Optimization",
+          "Hydrogen Use",
+          "Other"
+        ]
+      }
+    ],
     "publisher": "Strategic Climate Transition Forum",
     "published_date": "2022-09-06",
     "overview": "The Planned Transition scenario assumes climate policies are introduced early and gradually become more stringent. Carbon prices increase gradually, giving companies and consumers time to adapt. Physical risks are relatively low because climate change is effectively mitigated, while transition risks are manageable due to the predictable policy environment. Global warming is limited to 2°C by the end of the century.",

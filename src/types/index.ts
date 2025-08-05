@@ -3,10 +3,14 @@ export interface Scenario {
   name: string;
   description: string;
   category: string;
+  category_tooltip: string;
   target_year: string;
-  target_temperature: string;
+  modeled_temperature_increase?: number;
   regions: string[];
-  sectors: string[];
+  sectors: {
+    name: Sector;
+    tooltip: string;
+  }[];
   publisher: string;
   published_date: string;
   overview: string;
@@ -20,7 +24,7 @@ export interface Scenario {
 
 export type ScenarioCategory = "IAM" | "ITR" | "NDC" | "Other";
 
-export type TemperatureTarget = "1.5C" | "2C" | "2.5C" | "3C" | "4C" | "N/A";
+export type TemperatureTarget = number;
 
 export type YearTarget =
   | "2030"
@@ -54,7 +58,7 @@ export type Sector =
 export interface SearchFilters {
   category: ScenarioCategory | null;
   target_year: YearTarget | null;
-  target_temperature: TemperatureTarget | null;
+  modeled_temperature_increase: TemperatureTarget | null;
   region: Region | null;
   sector: Sector | null;
   searchTerm: string;

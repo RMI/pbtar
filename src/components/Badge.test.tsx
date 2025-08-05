@@ -112,4 +112,52 @@ describe("Badge component", () => {
     const { container } = render(<Badge text="Test" />);
     expect(container.firstChild?.nodeName).toBe("SPAN");
   });
+
+  // Tooltip tests
+  it("does not render tooltip when no tooltip is provided", () => {
+    render(<Badge text="No Tooltip" />);
+
+    // Find the badge span
+    const badge = screen.getByText("No Tooltip");
+
+    // Check that it's a plain span without tabindex
+    expect(badge).toBeInTheDocument();
+    expect(badge).not.toHaveAttribute("tabindex");
+  });
+
+  it("uses TextWithTooltip when tooltip is provided", () => {
+    render(
+      <Badge
+        text="With Tooltip"
+        tooltip="This is a tooltip"
+      />,
+    );
+
+    // Badge text should still be present
+    const badgeText = screen.getByText("With Tooltip");
+    expect(badgeText).toBeInTheDocument();
+
+    // The outer span from TextWithTooltip should have tabindex attribute
+    // We need to look for a parent element with tabindex since the badge text itself
+    // is wrapped in its own span
+    const triggerElement = badgeText.closest("span")?.parentElement;
+    expect(triggerElement).toHaveAttribute("tabindex", "0");
+
+    // The aria-describedby attribute is added when tooltip is visible
+    expect(triggerElement).not.toHaveAttribute("aria-describedby");
+  });
+
+  // Testing tooltip visibility requires checking document.body, since tooltips are now in portals
+  it("doesn't show tooltip initially", () => {
+    render(
+      <Badge
+        text="Hover Me"
+        tooltip="Hover tooltip"
+      />,
+    );
+
+    // Initially the tooltip shouldn't be in document.body
+    const tooltipElement = document.querySelector("[role='tooltip']");
+    expect(tooltipElement).not.toBeInTheDocument();
+  });
 });

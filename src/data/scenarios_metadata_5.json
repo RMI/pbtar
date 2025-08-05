@@ -4,10 +4,46 @@
     "name": "GreenForward EU Strategy",
     "description": "Ambitious accelerated implementation of European Green Deal policies",
     "category": "NDC",
+    "category_tooltip": "Nationally Determined Contribution",
     "target_year": "2040",
-    "target_temperature": "1.5C",
+    "modeled_temperature_increase": 1.5,
     "regions": ["EU"],
-    "sectors": ["Power", "Renewables", "Transport", "Buildings", "Industrial"],
+    "sectors": [
+      {
+        "name": "Power Generation",
+        "tooltip": "Electricity generation and distribution",
+        "technologies": ["Coal", "Gas", "Solar", "Wind", "Nuclear"]
+      },
+      {
+        "name": "Transport",
+        "tooltip": "Transportation and logistics",
+        "technologies": [
+          "Electric Vehicles",
+          "Hydrogen Vehicles",
+          "Biofuels",
+          "Public Transport",
+          "Active Mobility",
+          "Aviation Efficiency",
+          "Maritime Efficiency"
+        ]
+      },
+      {
+        "name": "Buildings",
+        "tooltip": "Residential and commercial buildings",
+        "technologies": ["Energy Efficiency", "Heat Pumps", "Other"]
+      },
+      {
+        "name": "Industrial",
+        "tooltip": "Manufacturing and industrial processes",
+        "technologies": [
+          "Carbon Capture and Storage",
+          "Electrification",
+          "Process Optimization",
+          "Hydrogen Use",
+          "Other"
+        ]
+      }
+    ],
     "publisher": "GreenForward Policy Alliance",
     "published_date": "2023-01-25",
     "overview": "The GreenForward EU Strategy scenario models an ambitious implementation of European climate policies beyond the current targets. It includes accelerated phase-out of fossil fuels in power generation, rapid electrification of transport, comprehensive building renovations, and industrial decarbonization. The scenario achieves net zero emissions in the EU by 2040, a decade earlier than the current official target.",

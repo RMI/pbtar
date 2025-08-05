@@ -1,7 +1,9 @@
 import React from "react";
+import TextWithTooltip from "./TextWithTooltip";
 
 interface BadgeProps {
-  text: string;
+  text: React.ReactNode;
+  tooltip?: string;
   variant?:
     | "default"
     | "category"
@@ -11,7 +13,11 @@ interface BadgeProps {
     | "sector";
 }
 
-const Badge: React.FC<BadgeProps> = ({ text, variant = "default" }) => {
+const Badge: React.FC<BadgeProps> = ({
+  text,
+  tooltip,
+  variant = "default",
+}) => {
   const getVariantStyles = () => {
     switch (variant) {
       case "category":
@@ -29,12 +35,21 @@ const Badge: React.FC<BadgeProps> = ({ text, variant = "default" }) => {
     }
   };
 
+  const badgeStyles = `inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getVariantStyles()} mr-2 mb-1`;
+
+  // If no tooltip, just return the basic badge
+  // If no tooltip, just return the basic badge
+  if (!tooltip) {
+    return <span className={badgeStyles}>{text}</span>;
+  }
+
+  // With tooltip, use the TextWithTooltip component
   return (
-    <span
-      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getVariantStyles()} mr-2 mb-1`}
-    >
-      {text}
-    </span>
+    <TextWithTooltip
+      text={<span className={badgeStyles}>{text}</span>}
+      tooltip={tooltip}
+      position="right"
+    />
   );
 };
 

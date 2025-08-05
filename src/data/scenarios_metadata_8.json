@@ -4,16 +4,32 @@
     "name": "Reactive Transition Scenario",
     "description": "Delayed transition with sudden policy changes leading to higher transition risks",
     "category": "ITR",
+    "category_tooltip": "Implied Temperature Rise",
     "target_year": "2050",
-    "target_temperature": "2C",
+    "modeled_temperature_increase": 2,
     "regions": ["Global", "EU", "Americas", "Asia Pacific"],
     "sectors": [
-      "Power",
-      "Oil & Gas",
-      "Coal",
-      "Renewables",
-      "Industrial",
-      "Transport"
+      {
+        "name": "Power Generation",
+        "tooltip": "Electricity generation and distribution",
+        "technologies": ["Solar", "Wind", "Nuclear", "Gas"]
+      },
+      {
+        "name": "Industrial",
+        "tooltip": "Manufacturing and industrial processes",
+        "technologies": [
+          "Carbon Capture and Storage",
+          "Electrification",
+          "Process Optimization",
+          "Hydrogen Use",
+          "Other"
+        ]
+      },
+      {
+        "name": "Transport",
+        "tooltip": "Transportation and logistics",
+        "technologies": ["Electric Vehicles", "Hydrogen Vehicles", "Biofuels"]
+      }
     ],
     "publisher": "Strategic Climate Transition Forum",
     "published_date": "2022-09-06",

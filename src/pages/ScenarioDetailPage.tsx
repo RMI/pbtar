@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { scenariosData } from "../data/scenariosData";
 import { Scenario } from "../types";
 import Badge from "../components/Badge";
-import { Download, ExternalLink, ArrowLeft } from "lucide-react";
+import { ExternalLink, ArrowLeft } from "lucide-react";
 
 const ScenarioDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -81,16 +81,19 @@ const ScenarioDetailPage: React.FC = () => {
           <div className="flex flex-wrap gap-2 mb-4">
             <Badge
               text={scenario.category}
+              tooltip={scenario.category_tooltip}
               variant="category"
             />
             <Badge
               text={scenario.target_year}
               variant="year"
             />
-            <Badge
-              text={scenario.target_temperature}
-              variant="temperature"
-            />
+            {scenario.modeled_temperature_increase && (
+              <Badge
+                text={`${scenario.modeled_temperature_increase}°C`}
+                variant="temperature"
+              />
+            )}
           </div>
 
           <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
@@ -147,16 +150,6 @@ const ScenarioDetailPage: React.FC = () => {
                       />
                       Visit Source
                     </a>
-
-                    {scenario.dataSource.downloadAvailable && (
-                      <button className="inline-flex items-center px-4 py-2 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200">
-                        <Download
-                          size={16}
-                          className="mr-2"
-                        />
-                        Download Data
-                      </button>
-                    )}
                   </div>
                 </div>
               </section>
@@ -186,7 +179,8 @@ const ScenarioDetailPage: React.FC = () => {
                   {scenario.sectors.map((sector, index) => (
                     <Badge
                       key={index}
-                      text={sector}
+                      text={sector.name}
+                      tooltip={sector.tooltip}
                       variant="sector"
                     />
                   ))}
