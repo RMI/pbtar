@@ -11,8 +11,8 @@ describe("ScenarioCard component", () => {
     name: "Net Zero 2050",
     description:
       "A scenario describing the path to net zero emissions by 2050.",
-    category: "Policy",
-    category_tooltip:
+    pathway_type: "Policy",
+    pathway_type_tooltip:
       "Policy scenarios focus on regulatory and legislative measures.",
     target_year: "2050",
     modeled_temperature_increase: 1.5,
@@ -57,11 +57,11 @@ describe("ScenarioCard component", () => {
     expect(link).toHaveAttribute("href", `/scenario/${mockScenario.id}`);
   });
 
-  it("displays the category badge", () => {
+  it("displays the pathway_type badge", () => {
     renderScenarioCard();
 
-    const categoryBadge = screen.getByText(mockScenario.category);
-    expect(categoryBadge).toBeInTheDocument();
+    const pathway_typeBadge = screen.getByText(mockScenario.pathway_type);
+    expect(pathway_typeBadge).toBeInTheDocument();
   });
 
   it("shows target year and temperature badges", () => {
@@ -139,8 +139,8 @@ describe("ScenarioCard component", () => {
       id: "test-scenario",
       name: "Test Scenario",
       description: "Test description",
-      category: "IAM",
-      category_tooltip: "Category tooltip",
+      pathway_type: "Exploration",
+      pathway_type_tooltip: "Category tooltip",
       target_year: "2050",
       modeled_temperature_increase: 1.5,
       regions: ["Global", "EU", "Americas", "Africa", "Asia Pacific"], // 5 regions
@@ -247,8 +247,8 @@ describe("ScenarioCard search highlighting", () => {
     name: "Net Zero 2050",
     description:
       "A scenario describing the path to net zero emissions by 2050.",
-    category: "Policy",
-    category_tooltip: "Policy scenarios focus on regulatory measures.",
+    pathway_type: "Policy",
+    pathway_type_tooltip: "Policy scenarios focus on regulatory measures.",
     target_year: "2050",
     modeled_temperature_increase: 1.5,
     regions: ["Global", "Europe", "North America", "Hidden Match Region"],
