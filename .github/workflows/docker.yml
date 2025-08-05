@@ -2,10 +2,9 @@
 on:
   pull_request:
     branches:
-      - "hotfix/**"
-      - "release/**"
       - main
       - production
+      - next
     types:
       - opened
       - reopened
@@ -13,10 +12,9 @@ on:
       - closed
   push:
     branches:
-      - "hotfix/**"
-      - "release/**"
       - main
       - production
+      - next
   schedule:
     - cron: "0 3 * * *" # Nightly at 3 AM UTC
   workflow_dispatch:
