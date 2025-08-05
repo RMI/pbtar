@@ -5,7 +5,7 @@ export const filterScenarios = (
   filters: SearchFilters,
 ): Scenario[] => {
   return scenarios.filter((scenario) => {
-    // Policy type filter
+    // Pathway type filter
     if (
       filters.pathway_type &&
       scenario.pathway_type !== filters.pathway_type
