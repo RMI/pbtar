@@ -140,7 +140,7 @@ describe("ScenarioCard component", () => {
       name: "Test Scenario",
       description: "Test description",
       pathway_type: "Exploration",
-      pathway_type_tooltip: "Category tooltip",
+      pathway_type_tooltip: "Pathway Type tooltip",
       target_year: "2050",
       modeled_temperature_increase: 1.5,
       regions: ["Global", "EU", "Americas", "Africa", "Asia Pacific"], // 5 regions
