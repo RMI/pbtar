@@ -34,7 +34,8 @@ describe("searchUtils", () => {
       name: "Current Policies",
       description: "A scenario based on current implemented policies.",
       pathway_type: "Projection",
-      pathway_type_tooltip: "Projection scenarios are based on existing trends.",
+      pathway_type_tooltip:
+        "Projection scenarios are based on existing trends.",
       target_year: "2030",
       modeled_temperature_increase: 2.7,
       regions: ["Global", "Asia"],
