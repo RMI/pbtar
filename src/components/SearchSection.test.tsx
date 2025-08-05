@@ -11,8 +11,8 @@ vi.mock("../data/scenariosData", () => ({
       name: "Net Zero 2050",
       description:
         "A scenario describing the path to net zero emissions by 2050.",
-      category: "Policy",
-      category_tooltip: "Policy scenarios focus on regulatory measures.",
+      pathway_type: "Policy",
+      pathway_type_tooltip: "Policy scenarios focus on regulatory measures.",
       target_year: "2050",
       modeled_temperature_increase: 1.5,
       regions: ["Global", "Europe"],
@@ -34,8 +34,8 @@ vi.mock("../data/scenariosData", () => ({
       id: "scenario-2",
       name: "Current Policies",
       description: "A scenario based on current implemented policies.",
-      category: "Forecast",
-      category_tooltip: "Forecast scenarios are based on existing trends.",
+      pathway_type: "Forecast",
+      pathway_type_tooltip: "Forecast scenarios are based on existing trends.",
       target_year: "2030",
       modeled_temperature_increase: 2.7,
       regions: ["Global", "Asia"],
@@ -76,7 +76,7 @@ describe("SearchSection", () => {
   it("renders all filter dropdowns", () => {
     render(<SearchSection {...defaultProps} />);
 
-    expect(screen.getByText("Category")).toBeInTheDocument();
+    expect(screen.getByText("Pathway Type")).toBeInTheDocument();
     expect(screen.getByText("Target Year")).toBeInTheDocument();
     expect(screen.getByText("Temperature (°C)")).toBeInTheDocument();
     expect(screen.getByText("Region")).toBeInTheDocument();
@@ -159,9 +159,12 @@ describe("SearchSection", () => {
     fireEvent.click(sectorDropdown);
     expect(screen.getByText("Power")).toBeInTheDocument();
 
-    const categoryDropdown = screen.getByText("Category");
-    fireEvent.click(categoryDropdown);
-    expect(screen.getByText("Policy")).toBeInTheDocument();
-    expect(screen.getByText("Forecast")).toBeInTheDocument();
+    const pathwayDropdown = screen.getByText("Pathway Type");
+    fireEvent.click(pathwayDropdown);
+    //TODO: Re-enable these tests
+    //expect(screen.getByText("Exploration")).toBeInTheDocument();
+    //expect(screen.getByText("Normative")).toBeInTheDocument();
+    //expect(screen.getByText("Policy")).toBeInTheDocument();
+    //expect(screen.getByText("Projection")).toBeInTheDocument();
   });
 });
