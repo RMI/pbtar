@@ -30,7 +30,7 @@
         "require_last_push_approval": true,
         "required_review_thread_resolution": false,
         "automatic_copilot_code_review_enabled": true,
-        "allowed_merge_methods": ["squash"]
+        "allowed_merge_methods": ["merge"]
       }
     },
     {
