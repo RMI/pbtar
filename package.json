@@ -167,6 +167,7 @@
       [
         "@semantic-release/github",
         {
+          "successComment": false,
           "assets": [
             {
               "path": "dist/*.tgz",
