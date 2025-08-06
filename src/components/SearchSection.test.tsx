@@ -12,7 +12,7 @@ vi.mock("../data/scenariosData", () => ({
       description:
         "A scenario describing the path to net zero emissions by 2050.",
       pathway_type: "Policy",
-      pathway_type_tooltip: "Policy scenarios focus on regulatory measures.",
+      pathway_type_tooltip: "Policy tooltip test",
       target_year: "2050",
       modeled_temperature_increase: 1.5,
       regions: ["Global", "Europe"],
@@ -34,8 +34,8 @@ vi.mock("../data/scenariosData", () => ({
       id: "scenario-2",
       name: "Current Policies",
       description: "A scenario based on current implemented policies.",
-      pathway_type: "Policy",
-      pathway_type_tooltip: "A pathway based on policy targets or commitments, rather than modeled projections.",
+      pathway_type: "Projection",
+      pathway_type_tooltip: "Projection tooltip test",
       target_year: "2030",
       modeled_temperature_increase: 2.7,
       regions: ["Global", "Asia"],
@@ -54,6 +54,54 @@ vi.mock("../data/scenariosData", () => ({
         description: "Mock Data Source",
         url: "https://example.com/data-source",
         downloadAvailable: false,
+      },
+    },
+    {
+      id: "scenario-3",
+      name: "Net Zero 2050",
+      description:
+        "A scenario describing the path to net zero emissions by 2050.",
+      pathway_type: "Exploration",
+      pathway_type_tooltip: "Exploration tooltip test",
+      target_year: "2050",
+      modeled_temperature_increase: 1.5,
+      regions: ["Global", "Europe"],
+      sectors: [
+        { name: "Power", tooltip: "Electricity generation and distribution" },
+        { name: "Transport", tooltip: "Transportation and logistics" },
+      ],
+      publisher: "IEA",
+      published_date: "Jan 2023",
+      overview: "Mock overview",
+      expertRecommendation: "Mock recommendation",
+      dataSource: {
+        description: "Mock Data Source",
+        url: "https://example.com/data-source",
+        downloadAvailable: true,
+      },
+    },
+    {
+      id: "scenario-4",
+      name: "Net Zero 2050",
+      description:
+        "A scenario describing the path to net zero emissions by 2050.",
+      pathway_type: "Normative",
+      pathway_type_tooltip: "Normative tooltip test",
+      target_year: "2050",
+      modeled_temperature_increase: 1.5,
+      regions: ["Global", "Europe"],
+      sectors: [
+        { name: "Power", tooltip: "Electricity generation and distribution" },
+        { name: "Transport", tooltip: "Transportation and logistics" },
+      ],
+      publisher: "IEA",
+      published_date: "Jan 2023",
+      overview: "Mock overview",
+      expertRecommendation: "Mock recommendation",
+      dataSource: {
+        description: "Mock Data Source",
+        url: "https://example.com/data-source",
+        downloadAvailable: true,
       },
     },
   ],
@@ -161,10 +209,9 @@ describe("SearchSection", () => {
 
     const pathwayDropdown = screen.getByText("Pathway Type");
     fireEvent.click(pathwayDropdown);
-    //TODO: Re-enable these tests
-    //expect(screen.getByText("Exploration")).toBeInTheDocument();
-    //expect(screen.getByText("Normative")).toBeInTheDocument();
-    //expect(screen.getByText("Policy")).toBeInTheDocument();
-    //expect(screen.getByText("Projection")).toBeInTheDocument();
+    expect(screen.getByText("Exploration")).toBeInTheDocument();
+    expect(screen.getByText("Normative")).toBeInTheDocument();
+    expect(screen.getByText("Policy")).toBeInTheDocument();
+    expect(screen.getByText("Projection")).toBeInTheDocument();
   });
 });
