@@ -123,12 +123,14 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         </div>
 
         <div className="mb-3">
-          <p className="text-xs font-medium text-rmigray-500 mb-1">Category:</p>
+          <p className="text-xs font-medium text-rmigray-500 mb-1">
+            Pathway type:
+          </p>
           <div className="flex flex-wrap">
             <Badge
-              text={highlightTextIfSearchMatch(scenario.category)}
-              tooltip={scenario.category_tooltip}
-              variant="category"
+              text={highlightTextIfSearchMatch(scenario.pathway_type)}
+              tooltip={scenario.pathway_type_tooltip}
+              variant="pathway_type"
             />
           </div>
         </div>

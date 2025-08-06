@@ -15,7 +15,7 @@ const HomePage: React.FC = () => {
   const [isSticky, setIsSticky] = useState(false);
 
   const [filters, setFilters] = useState<SearchFilters>({
-    category: null,
+    pathway_type: null,
     target_year: null,
     modeled_temperature_increase: null,
     region: null,
@@ -39,7 +39,7 @@ const HomePage: React.FC = () => {
       // Check if filters have changed meaningfully
       const hasFilterChanged =
         filters.searchTerm !== prevFiltersRef.current.searchTerm ||
-        filters.category !== prevFiltersRef.current.category ||
+        filters.pathway_type !== prevFiltersRef.current.pathway_type ||
         filters.target_year !== prevFiltersRef.current.target_year ||
         filters.modeled_temperature_increase !==
           prevFiltersRef.current.modeled_temperature_increase ||
@@ -98,7 +98,7 @@ const HomePage: React.FC = () => {
 
   const handleClear = () => {
     setFilters({
-      category: null,
+      pathway_type: null,
       target_year: null,
       modeled_temperature_increase: null,
       region: null,

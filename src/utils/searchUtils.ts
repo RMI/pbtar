@@ -5,8 +5,11 @@ export const filterScenarios = (
   filters: SearchFilters,
 ): Scenario[] => {
   return scenarios.filter((scenario) => {
-    // Category filter
-    if (filters.category && scenario.category !== filters.category) {
+    // Pathway type filter
+    if (
+      filters.pathway_type &&
+      scenario.pathway_type !== filters.pathway_type
+    ) {
       return false;
     }
 
@@ -43,7 +46,7 @@ export const filterScenarios = (
       const searchFields = [
         scenario.name,
         scenario.description,
-        scenario.category,
+        scenario.pathway_type,
         scenario.target_year,
         scenario.modeled_temperature_increase,
         ...scenario.regions,

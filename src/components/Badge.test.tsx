@@ -17,11 +17,11 @@ describe("Badge component", () => {
     expect(badge).toHaveClass("border-rmigray-200");
   });
 
-  it("applies category styling when variant is 'category'", () => {
+  it("applies pathway_type styling when variant is 'pathway_type'", () => {
     const { container } = render(
       <Badge
-        text="Category"
-        variant="category"
+        text="Pathway Type"
+        variant="pathway_type"
       />,
     );
     const badge = container.firstChild as HTMLElement;
@@ -92,7 +92,7 @@ describe("Badge component", () => {
     const { container } = render(
       <Badge
         text="Test"
-        variant="category"
+        variant="pathway_type"
       />,
     );
     const badge = container.firstChild as HTMLElement;

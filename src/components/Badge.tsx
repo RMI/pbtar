@@ -6,7 +6,7 @@ interface BadgeProps {
   tooltip?: string;
   variant?:
     | "default"
-    | "category"
+    | "pathway_type"
     | "temperature"
     | "year"
     | "region"
@@ -20,7 +20,7 @@ const Badge: React.FC<BadgeProps> = ({
 }) => {
   const getVariantStyles = () => {
     switch (variant) {
-      case "category":
+      case "pathway_type":
         return "bg-rmipurple-100 text-rmipurple-800 border-rmipurple-200";
       case "temperature":
         return "bg-rmired-100 text-rmired-800 border-rmired-200";
