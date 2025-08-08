@@ -45,8 +45,8 @@
         "minimum": 1900,
         "maximum": 2025
       },
-      "target_year": {
-        "description": "Target year of the scenario",
+      "modelYearEnd": {
+        "description": "Year in which the model ends",
         "type": "string"
       },
       "modeled_temperature_increase": {
@@ -236,8 +236,8 @@
         "description": "Publisher of the scenario",
         "type": "string"
       },
-      "published_date": {
-        "description": "Date that the scenario was published",
+      "publicationYear": {
+        "description": "Year that the scenario was published",
         "type": "string"
       },
       "overview": {
@@ -267,11 +267,11 @@
       "description",
       "pathway_type",
       "pathway_type_tooltip",
-      "target_year",
+      "modelYearEnd",
       "regions",
       "sectors",
       "publisher",
-      "published_date",
+      "publicationYear",
       "overview",
       "expertRecommendation",
       "dataSource"

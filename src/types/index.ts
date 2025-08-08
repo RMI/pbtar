@@ -4,7 +4,7 @@ export interface Scenario {
   description: string;
   pathway_type: string;
   pathway_type_tooltip: string;
-  target_year: string;
+  modelYearEnd: string;
   modeled_temperature_increase?: number;
   regions: string[];
   sectors: {
@@ -12,7 +12,7 @@ export interface Scenario {
     tooltip: string;
   }[];
   publisher: string;
-  published_date: string;
+  publicationYear: string;
   overview: string;
   expertRecommendation: string;
   dataSource: {
@@ -57,7 +57,7 @@ export type Sector =
 
 export interface SearchFilters {
   pathway_type: PathwayType | null;
-  target_year: YearTarget | null;
+  modelYearEnd: YearTarget | null;
   modeled_temperature_increase: TemperatureTarget | null;
   region: Region | null;
   sector: Sector | null;
