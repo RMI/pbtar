@@ -247,7 +247,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               <p className="text-xs text-rmigray-500">Published:</p>
               <p className="text-sm font-medium text-rmigray-800">
                 <HighlightedText
-                  text={scenario.published_date}
+                  text={scenario.publicationYear}
                   searchTerm={searchTerm}
                 />
               </p>

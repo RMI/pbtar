@@ -20,7 +20,7 @@ describe("searchUtils", () => {
         { name: "Transport", tooltip: "Transportation and logistics" },
       ],
       publisher: "IEA",
-      published_date: "Jan 2023",
+      publicationYear: "Jan 2023",
       overview: "Mock overview",
       expertRecommendation: "Mock recommendation",
       dataSource: {
@@ -47,7 +47,7 @@ describe("searchUtils", () => {
         { name: "Buildings", tooltip: "Residential and commercial buildings" },
       ],
       publisher: "IPCC",
-      published_date: "Mar 2022",
+      publicationYear: "Mar 2022",
       overview: "Mock overview",
       expertRecommendation: "Mock recommendation",
       dataSource: {

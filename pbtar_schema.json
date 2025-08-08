@@ -236,8 +236,8 @@
         "description": "Publisher of the scenario",
         "type": "string"
       },
-      "published_date": {
-        "description": "Date that the scenario was published",
+      "publicationYear": {
+        "description": "Year that the scenario was published",
         "type": "string"
       },
       "overview": {
@@ -271,7 +271,7 @@
       "regions",
       "sectors",
       "publisher",
-      "published_date",
+      "publicationYear",
       "overview",
       "expertRecommendation",
       "dataSource"

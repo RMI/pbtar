@@ -53,7 +53,7 @@ export const filterScenarios = (
         ...scenario.sectors.map((s) => s.name),
         ...scenario.sectors.map((s) => s.tooltip || ""),
         scenario.publisher,
-        scenario.published_date,
+        scenario.publicationYear,
       ];
 
       return searchFields.some((field) =>

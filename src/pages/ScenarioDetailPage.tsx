@@ -103,7 +103,7 @@ const ScenarioDetailPage: React.FC = () => {
             </p>
             <p>
               <span className="text-white">Published:</span>{" "}
-              {scenario.published_date}
+              {scenario.publicationYear}
             </p>
           </div>
         </div>

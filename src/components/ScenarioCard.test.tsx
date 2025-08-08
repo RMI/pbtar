@@ -24,7 +24,7 @@ describe("ScenarioCard component", () => {
       { name: "Buildings", tooltip: "Residential and commercial buildings" },
     ],
     publisher: "IEA",
-    published_date: "Jan 2023",
+    publicationYear: "Jan 2023",
     overview: "Mock",
     expertRecommendation: "Mock",
     dataSource: {
@@ -104,7 +104,7 @@ describe("ScenarioCard component", () => {
     renderScenarioCard();
 
     expect(screen.getByText("Published:")).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.published_date)).toBeInTheDocument();
+    expect(screen.getByText(mockScenario.publicationYear)).toBeInTheDocument();
   });
 
   it("displays the 'View details' text with icon", () => {
@@ -152,7 +152,7 @@ describe("ScenarioCard component", () => {
         { name: "Transport", tooltip: "Transport tooltip" },
       ], // 5 sectors
       publisher: "Test Publisher",
-      published_date: "2025-01-01",
+      publicationYear: "2025-01-01",
       overview: "Test overview",
       expertRecommendation: "Test recommendation",
       dataSource: {
@@ -259,7 +259,7 @@ describe("ScenarioCard search highlighting", () => {
       { name: "Hidden Match Sector", tooltip: "This would normally be hidden" },
     ],
     publisher: "IEA",
-    published_date: "Jan 2023",
+    publicationYear: "Jan 2023",
     overview: "Test overview",
     expertRecommendation: "Test recommendation",
     dataSource: {

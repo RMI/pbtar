@@ -12,7 +12,7 @@ export interface Scenario {
     tooltip: string;
   }[];
   publisher: string;
-  published_date: string;
+  publicationYear: string;
   overview: string;
   expertRecommendation: string;
   dataSource: {
