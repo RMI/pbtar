@@ -5,7 +5,7 @@
     "description": "Business-as-usual baseline assuming current policies remain in place",
     "pathway_type": "Projection",
     "pathway_type_tooltip": "Projection of future developments in sectors.",
-    "target_year": "2050",
+    "modelYearEnd": "2050",
     "modeled_temperature_increase": 3,
     "regions": ["Global", "EU", "SEA", "Americas", "Asia Pacific"],
     "sectors": [

@@ -33,7 +33,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     new Set(scenariosData.map((d) => d.pathway_type)),
   ).sort() as PathwayType[];
   const years: YearTarget[] = Array.from(
-    new Set(scenariosData.map((d) => d.target_year)),
+    new Set(scenariosData.map((d) => d.modelYearEnd)),
   ).sort() as YearTarget[];
   const temperatures: TemperatureTarget[] = Array.from(
     new Set(scenariosData.map((d) => d.modeled_temperature_increase)),
@@ -49,7 +49,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       filters.pathway_type ||
       filters.region ||
       filters.sector ||
-      filters.target_year ||
+      filters.modelYearEnd ||
       filters.modeled_temperature_increase) !== null;
 
   return (
@@ -74,8 +74,8 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         <FilterDropdown<string>
           label="Target Year"
           options={years}
-          selectedValue={filters.target_year}
-          onChange={(value) => onFilterChange("target_year", value)}
+          selectedValue={filters.modelYearEnd}
+          onChange={(value) => onFilterChange("modelYearEnd", value)}
         />
 
         <FilterDropdown<number>

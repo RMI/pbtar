@@ -5,7 +5,7 @@
     "description": "A comprehensive pathway for the global energy sector to reach net zero by 2050",
     "pathway_type": "Projection",
     "pathway_type_tooltip": "Projection of future developments in sectors.",
-    "target_year": "2050",
+    "modelYearEnd": "2050",
     "modeled_temperature_increase": 1.5,
     "regions": ["Global"],
     "sectors": [

@@ -14,7 +14,7 @@ describe("ScenarioCard component", () => {
     pathway_type: "Policy",
     pathway_type_tooltip:
       "Policy scenarios focus on regulatory and legislative measures.",
-    target_year: "2050",
+    modelYearEnd: "2050",
     modeled_temperature_increase: 1.5,
     regions: ["Global", "Europe", "North America", "Asia"],
     sectors: [
@@ -67,7 +67,7 @@ describe("ScenarioCard component", () => {
   it("shows target year and temperature badges", () => {
     renderScenarioCard();
 
-    expect(screen.getByText(mockScenario.target_year)).toBeInTheDocument();
+    expect(screen.getByText(mockScenario.modelYearEnd)).toBeInTheDocument();
     expect(
       screen.getByText(
         mockScenario.modeled_temperature_increase?.toString() + "°C",
@@ -141,7 +141,7 @@ describe("ScenarioCard component", () => {
       description: "Test description",
       pathway_type: "Exploration",
       pathway_type_tooltip: "Pathway Type tooltip",
-      target_year: "2050",
+      modelYearEnd: "2050",
       modeled_temperature_increase: 1.5,
       regions: ["Global", "EU", "Americas", "Africa", "Asia Pacific"], // 5 regions
       sectors: [
@@ -249,7 +249,7 @@ describe("ScenarioCard search highlighting", () => {
       "A scenario describing the path to net zero emissions by 2050.",
     pathway_type: "Policy",
     pathway_type_tooltip: "Policy scenarios focus on regulatory measures.",
-    target_year: "2050",
+    modelYearEnd: "2050",
     modeled_temperature_increase: 1.5,
     regions: ["Global", "Europe", "North America", "Hidden Match Region"],
     sectors: [

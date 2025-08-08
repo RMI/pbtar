@@ -13,7 +13,7 @@ vi.mock("../data/scenariosData", () => ({
         "A scenario describing the path to net zero emissions by 2050.",
       pathway_type: "Policy",
       pathway_type_tooltip: "Policy tooltip test",
-      target_year: "2050",
+      modelYearEnd: "2050",
       modeled_temperature_increase: 1.5,
       regions: ["Global", "Europe"],
       sectors: [
@@ -36,7 +36,7 @@ vi.mock("../data/scenariosData", () => ({
       description: "A scenario based on current implemented policies.",
       pathway_type: "Projection",
       pathway_type_tooltip: "Projection tooltip test",
-      target_year: "2030",
+      modelYearEnd: "2030",
       modeled_temperature_increase: 2.7,
       regions: ["Global", "Asia"],
       sectors: [
@@ -63,7 +63,7 @@ vi.mock("../data/scenariosData", () => ({
         "A scenario describing the path to net zero emissions by 2050.",
       pathway_type: "Exploration",
       pathway_type_tooltip: "Exploration tooltip test",
-      target_year: "2050",
+      modelYearEnd: "2050",
       modeled_temperature_increase: 1.5,
       regions: ["Global", "Europe"],
       sectors: [
@@ -87,7 +87,7 @@ vi.mock("../data/scenariosData", () => ({
         "A scenario describing the path to net zero emissions by 2050.",
       pathway_type: "Normative",
       pathway_type_tooltip: "Normative tooltip test",
-      target_year: "2050",
+      modelYearEnd: "2050",
       modeled_temperature_increase: 1.5,
       regions: ["Global", "Europe"],
       sectors: [

@@ -85,7 +85,7 @@ const ScenarioDetailPage: React.FC = () => {
               variant="pathway_type"
             />
             <Badge
-              text={scenario.target_year}
+              text={scenario.modelYearEnd}
               variant="year"
             />
             {scenario.modeled_temperature_increase && (

@@ -5,7 +5,7 @@
     "description": "Pathway focused on replacing coal with renewables in Southeast Asia",
     "pathway_type": "Policy",
     "pathway_type_tooltip": "Policy-driven scenario.",
-    "target_year": "2050",
+    "modelYearEnd": "2050",
     "modeled_temperature_increase": 1.5,
     "regions": ["SEA"],
     "sectors": [

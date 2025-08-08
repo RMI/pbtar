@@ -12,7 +12,7 @@ describe("searchUtils", () => {
         "A scenario describing the path to net zero emissions by 2050.",
       pathway_type: "Policy",
       pathway_type_tooltip: "Policy scenarios focus on regulatory measures.",
-      target_year: "2050",
+      modelYearEnd: "2050",
       modeled_temperature_increase: 1.5,
       regions: ["Global", "Europe"],
       sectors: [
@@ -36,7 +36,7 @@ describe("searchUtils", () => {
       pathway_type: "Projection",
       pathway_type_tooltip:
         "Projection scenarios are based on existing trends.",
-      target_year: "2030",
+      modelYearEnd: "2030",
       modeled_temperature_increase: 2.7,
       regions: ["Global", "Asia"],
       sectors: [
@@ -76,7 +76,7 @@ describe("searchUtils", () => {
     });
 
     it("filters by target year", () => {
-      const filters: SearchFilters = { target_year: "2030" };
+      const filters: SearchFilters = { modelYearEnd: "2030" };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(1);
@@ -133,7 +133,7 @@ describe("searchUtils", () => {
 
     it("combines multiple filters", () => {
       const filters: SearchFilters = {
-        target_year: "2050",
+        modelYearEnd: "2050",
         region: "Europe",
       };
       const result = filterScenarios(mockScenarios, filters);
@@ -145,7 +145,7 @@ describe("searchUtils", () => {
     it("returns empty array when no scenarios match filters", () => {
       const filters: SearchFilters = {
         pathway_type: "Policy",
-        target_year: "2030",
+        modelYearEnd: "2030",
       };
       const result = filterScenarios(mockScenarios, filters);
 
