@@ -3,13 +3,11 @@ export interface Scenario {
   name: string;
   description: string;
   pathway_type: string;
-  pathway_type_tooltip: string;
   modelYearEnd: string;
   modeled_temperature_increase?: number;
   regions: string[];
   sectors: {
     name: Sector;
-    tooltip: string;
   }[];
   publisher: string;
   publicationYear: string;
