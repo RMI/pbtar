@@ -14,7 +14,12 @@ describe("searchUtils", () => {
       modelYearEnd: "2050",
       modeled_temperature_increase: 1.5,
       regions: ["Global", "Europe"],
-      sectors: [{ name: "Power" }, { name: "Transport" }],
+      sectors: [
+        {
+          name: "Power",
+        },
+        { name: "Transport" },
+      ],
       publisher: "IEA",
       publicationYear: "Jan 2023",
       overview: "Mock overview",
@@ -117,7 +122,7 @@ describe("searchUtils", () => {
     });
 
     it("filters by search term in sector tooltip", () => {
-      const filters: SearchFilters = { searchTerm: "electricity" };
+      const filters: SearchFilters = { searchTerm: "Direct Policy" };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(1);
