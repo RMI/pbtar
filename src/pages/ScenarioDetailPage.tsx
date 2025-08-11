@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { scenariosData } from "../data/scenariosData";
-import { Scenario, PathwayType, Sector } from "../types";
+import { Scenario, PathwayType } from "../types";
 import Badge from "../components/Badge";
 import { ExternalLink, ArrowLeft } from "lucide-react";
 import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";

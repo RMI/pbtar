@@ -2,7 +2,7 @@ import React, { useMemo, useRef, useState, useEffect, RefObject } from "react";
 import { Link } from "react-router-dom";
 import Badge from "./Badge";
 import TextWithTooltip from "./TextWithTooltip";
-import { Scenario, PathwayType, Sector } from "../types";
+import { Scenario, PathwayType } from "../types";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
 import { prioritizeMatches } from "../utils/sortUtils";

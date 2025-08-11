@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import ScenarioCard from "./ScenarioCard";
 import { Scenario } from "../types";
-import { pathwayTypeTooltips, sectorTooltips } from "../utils/tooltipUtils";
 
 // Mock scenario data
 const mockScenario: Scenario = {
