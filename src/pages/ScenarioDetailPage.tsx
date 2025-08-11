@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { scenariosData } from "../data/scenariosData";
-import { Scenario } from "../types";
+import { Scenario, PathwayType, Sector } from "../types";
 import Badge from "../components/Badge";
 import { ExternalLink, ArrowLeft } from "lucide-react";
+import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
 
 const ScenarioDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -81,7 +82,7 @@ const ScenarioDetailPage: React.FC = () => {
           <div className="flex flex-wrap gap-2 mb-4">
             <Badge
               text={scenario.pathway_type}
-              tooltip={scenario.pathway_type_tooltip}
+              tooltip={getPathwayTypeTooltip(scenario.pathway_type as PathwayType)}
               variant="pathway_type"
             />
             <Badge
@@ -180,7 +181,7 @@ const ScenarioDetailPage: React.FC = () => {
                     <Badge
                       key={index}
                       text={sector.name}
-                      tooltip={sector.tooltip}
+                      tooltip={getSectorTooltip(sector.name)}
                       variant="sector"
                     />
                   ))}
