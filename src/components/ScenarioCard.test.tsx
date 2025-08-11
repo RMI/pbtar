@@ -5,43 +5,45 @@ import ScenarioCard from "./ScenarioCard";
 import { Scenario } from "../types";
 import { pathwayTypeTooltips, sectorTooltips } from "../utils/tooltipUtils";
 
+// Mock scenario data
+const mockScenario: Scenario = {
+  id: "scenario-1",
+  name: "Net Zero 2050",
+  description: "A scenario describing the path to net zero emissions by 2050.",
+  pathway_type: "Policy",
+  modelYearEnd: "2050",
+  modeled_temperature_increase: 1.5,
+  regions: ["Global", "Europe", "North America", "Asia"],
+  sectors: [
+    { name: "Power" },
+    { name: "Transport" },
+    { name: "Industrial" },
+    { name: "Buildings" },
+  ],
+  publisher: "IEA",
+  publicationYear: "Jan 2023",
+  overview: "Mock",
+  expertRecommendation: "Mock",
+  dataSource: {
+    description: "Mock Data Source",
+    url: "https://example.com/data-source",
+    downloadAvailable: true,
+  },
+};
+
+// Helper function to render component with router context
+const renderScenarioCard = (scenario: Scenario = mockScenario) => {
+  return render(
+    <MemoryRouter>
+      <ScenarioCard
+        scenario={scenario}
+        searchTerm=""
+      />
+    </MemoryRouter>,
+  );
+};
+
 describe("ScenarioCard component", () => {
-  // Mock scenario data
-  const mockScenario: Scenario = {
-    id: "scenario-1",
-    name: "Net Zero 2050",
-    description:
-      "A scenario describing the path to net zero emissions by 2050.",
-    pathway_type: "Policy",
-    modelYearEnd: "2050",
-    modeled_temperature_increase: 1.5,
-    regions: ["Global", "Europe", "North America", "Asia"],
-    sectors: [
-      { name: "Power" },
-      { name: "Transport" },
-      { name: "Industrial" },
-      { name: "Buildings" },
-    ],
-    publisher: "IEA",
-    publicationYear: "Jan 2023",
-    overview: "Mock",
-    expertRecommendation: "Mock",
-    dataSource: {
-      description: "Mock Data Source",
-      url: "https://example.com/data-source",
-      downloadAvailable: true,
-    },
-  };
-
-  // Helper function to render component with router context
-  const renderScenarioCard = (scenario: Scenario = mockScenario) => {
-    return render(
-      <MemoryRouter>
-        <ScenarioCard scenario={scenario} />
-      </MemoryRouter>,
-    );
-  };
-
   it("renders the scenario name and description", () => {
     renderScenarioCard();
 
