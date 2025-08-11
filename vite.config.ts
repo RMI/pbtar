@@ -1,6 +1,6 @@
 import { defineConfig, Plugin, version as viteVersion } from "vite";
 import react from "@vitejs/plugin-react";
-import { simpleGit } from "simple-git";
+import { simpleGit, SimpleGit, StatusResult } from "simple-git";
 import os from "os";
 
 // Safe wrapper for OS functions with proper typing
@@ -44,12 +44,15 @@ const getGitInfo = async (): Promise<{
   branch: string;
 }> => {
   try {
-    const git = simpleGit();
+    const git: SimpleGit = simpleGit();
     const [sha, status, branch] = await Promise.all([
       git.revparse(["HEAD"]).catch(() => process.env.VITE_GIT_SHA || "unknown"),
-      git.status().catch(() => ({
-        isClean: () => process.env.VITE_GIT_CLEAN === "true",
-      })),
+      git.status().catch(
+        () =>
+          ({
+            isClean: () => process.env.VITE_GIT_CLEAN === "true",
+          }) as StatusResult,
+      ),
       git
         .revparse(["--abbrev-ref", "HEAD"])
         .catch(() => process.env.VITE_GIT_BRANCH || "unknown"),
@@ -57,14 +60,14 @@ const getGitInfo = async (): Promise<{
 
     return {
       sha,
-      isClean: status.isClean(),
+      isClean: (status as StatusResult).isClean(),
       branch,
     };
   } catch {
     // Fallback to environment variables or defaults
     return {
       sha: getEnv("VITE_GIT_SHA", "unknown"),
-      isClean: getEnv("VITE_GIT_CLEAN", "unknown"),
+      isClean: getEnv("VITE_GIT_CLEAN", "false") === "true",
       branch: getEnv("VITE_GIT_BRANCH", "unknown"),
     };
   }
