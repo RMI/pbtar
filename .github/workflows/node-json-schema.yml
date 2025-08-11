@@ -34,6 +34,6 @@ jobs:
       - id: render-json-schema
         uses: RMI-PACTA/actions/actions/json-schema/render-docs@main
         with:
-          input-files: 'public/schema.json'
-          outputs: 'public/schema.html'
+          input-files: "public/schema.json"
+          outputs: "public/schema.html"
           output-format: html

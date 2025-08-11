@@ -120,10 +120,10 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: 'index.html',
-        schema: 'pbtar_schema.json'
-      }
-    }
+        main: "index.html",
+        schema: "pbtar_schema.json",
+      },
+    },
   },
-  publicDir: 'public'
+  publicDir: "public",
 });
