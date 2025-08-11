@@ -17,19 +17,16 @@ An example scenario metadata JSON file looks like...
     "name": "ZETI Net Zero Pathway",
     "description": "A comprehensive pathway for the global energy sector to reach net zero by 2050",
     "pathway_type": "Policy",
-    "pathway_type_tooltip": "A pathway based on policy targets or commitments, rather than modeled projections.",
     "modelYearEnd": "2050",
     "modeled_temperature_increase": 1.5,
     "regions": ["Global"],
     "sectors": [
       {
         "name": "Power Generation",
-        "tooltip": "Electricity generation and distribution",
         "technologies": ["Solar", "Wind", "Nuclear", "Coal"]
       },
       {
         "name": "Transport",
-        "tooltip": "Transportation and logistics",
         "technologies": [
           "Electric Vehicles",
           "Hydrogen Vehicles",
@@ -42,12 +39,10 @@ An example scenario metadata JSON file looks like...
       },
       {
         "name": "Buildings",
-        "tooltip": "Residential and commercial buildings",
         "technologies": ["Energy Efficiency", "Heat Pumps", "Other"]
       },
       {
         "name": "Industrial",
-        "tooltip": "Manufacturing and industrial processes",
         "technologies": [
           "Electrification",
           "Carbon Capture and Storage",
@@ -125,7 +120,6 @@ new_scenario_metadata <-
       name = "ZETI Net Zero Pathway",
       description = "Text based description short",
       "pathway_type" =  "Policy",
-      "pathway_type_tooltip" = "A pathway based on policy targets or commitments, rather than modeled projections.",
       modelYearEnd = "2050",
       modeled_temperature_increase = 1.5,
       regions = list("Global"),
@@ -155,7 +149,6 @@ new_scenario_metadata <-
       name = list("ZETI Net Zero Pathway"),
       description = "Text based description short",
       "pathway_type" =  "Policy",
-      "pathway_type_tooltip" = "A pathway based on policy targets or commitments, rather than modeled projections.",
       modelYearEnd = "2050",
       modeled_temperature_increase = 1.5,
       regions = "Global",
