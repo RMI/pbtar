@@ -14,7 +14,10 @@ export const filterScenarios = (
     }
 
     // Target year filter
-    if (filters.modelYearEnd && scenario.modelYearEnd !== filters.modelYearEnd) {
+    if (
+      filters.modelYearEnd &&
+      scenario.modelYearEnd !== filters.modelYearEnd
+    ) {
       return false;
     }
 
