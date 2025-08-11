@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import ScenarioCard from "./ScenarioCard";
 import { Scenario } from "../types";
+import { pathwayTypeTooltips, sectorTooltips } from "../utils/tooltipUtils";
 
 describe("ScenarioCard component", () => {
   // Mock scenario data
@@ -339,5 +340,43 @@ describe("ScenarioCard search highlighting", () => {
     ).some((span) => span.textContent?.includes("Hidden Match Sector"));
 
     expect(hiddenMatchText).toBe(true);
+  });
+});
+
+describe("tooltip functionality", () => {
+  it("uses correct tooltip for Policy pathway type", () => {
+    const scenarioWithPolicy: Scenario = {
+      ...mockScenario,
+      pathway_type: "Policy",
+    };
+
+    renderScenarioCard(scenarioWithPolicy);
+
+    const badge = screen.getByText("Policy");
+    expect(badge).toBeInTheDocument();
+    const tooltipTrigger = badge.closest("span")?.parentElement;
+    expect(tooltipTrigger).toHaveAttribute("tabindex", "0");
+    expect(tooltipTrigger).toHaveAttribute(
+      "class",
+      expect.stringContaining("cursor-help"),
+    );
+  });
+
+  it("uses correct tooltip for Power sector", () => {
+    const scenarioWithPowerSector: Scenario = {
+      ...mockScenario,
+      sectors: [{ name: "Power" }],
+    };
+
+    renderScenarioCard(scenarioWithPowerSector);
+
+    const badge = screen.getByText("Power");
+    expect(badge).toBeInTheDocument();
+    const tooltipTrigger = badge.closest("span")?.parentElement;
+    expect(tooltipTrigger).toHaveAttribute("tabindex", "0");
+    expect(tooltipTrigger).toHaveAttribute(
+      "class",
+      expect.stringContaining("cursor-help"),
+    );
   });
 });
