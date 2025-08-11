@@ -4,19 +4,16 @@
     "name": "Reactive Transition Scenario",
     "description": "Delayed transition with sudden policy changes leading to higher transition risks",
     "pathway_type": "Normative",
-    "pathway_type_tooltip": "Normative scenario.",
     "modelYearEnd": "2050",
     "modeled_temperature_increase": 2,
     "regions": ["Global", "EU", "Americas", "Asia Pacific"],
     "sectors": [
       {
         "name": "Power Generation",
-        "tooltip": "Electricity generation and distribution",
         "technologies": ["Solar", "Wind", "Nuclear", "Gas"]
       },
       {
         "name": "Industrial",
-        "tooltip": "Manufacturing and industrial processes",
         "technologies": [
           "Carbon Capture and Storage",
           "Electrification",
@@ -27,7 +24,6 @@
       },
       {
         "name": "Transport",
-        "tooltip": "Transportation and logistics",
         "technologies": ["Electric Vehicles", "Hydrogen Vehicles", "Biofuels"]
       }
     ],

@@ -4,19 +4,16 @@
     "name": "Planned Transition Scenario",
     "description": "Gradual, orderly transition that begins immediately and continues gradually",
     "pathway_type": "Normative",
-    "pathway_type_tooltip": "Normative scenario.",
     "modelYearEnd": "2050",
     "modeled_temperature_increase": 2,
     "regions": ["Global", "EU", "Americas", "Asia Pacific"],
     "sectors": [
       {
         "name": "Power Generation",
-        "tooltip": "Electricity generation and distribution",
         "technologies": ["Solar", "Wind", "Coal", "Oil", "Nuclear", "Gas"]
       },
       {
         "name": "Industrial",
-        "tooltip": "Manufacturing and industrial processes",
         "technologies": [
           "Carbon Capture and Storage",
           "Electrification",

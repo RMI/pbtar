@@ -4,19 +4,16 @@
     "name": "GreenForward EU Strategy",
     "description": "Ambitious accelerated implementation of European Green Deal policies",
     "pathway_type": "Policy",
-    "pathway_type_tooltip": "Policy-driven scenario.",
     "modelYearEnd": "2040",
     "modeled_temperature_increase": 1.5,
     "regions": ["EU"],
     "sectors": [
       {
         "name": "Power Generation",
-        "tooltip": "Electricity generation and distribution",
         "technologies": ["Coal", "Gas", "Solar", "Wind", "Nuclear"]
       },
       {
         "name": "Transport",
-        "tooltip": "Transportation and logistics",
         "technologies": [
           "Electric Vehicles",
           "Hydrogen Vehicles",
@@ -29,12 +26,10 @@
       },
       {
         "name": "Buildings",
-        "tooltip": "Residential and commercial buildings",
         "technologies": ["Energy Efficiency", "Heat Pumps", "Other"]
       },
       {
         "name": "Industrial",
-        "tooltip": "Manufacturing and industrial processes",
         "technologies": [
           "Carbon Capture and Storage",
           "Electrification",

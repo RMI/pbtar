@@ -4,14 +4,12 @@
     "name": "SEA Clean Energy Pathway",
     "description": "Pathway focused on replacing coal with renewables in Southeast Asia",
     "pathway_type": "Policy",
-    "pathway_type_tooltip": "Policy-driven scenario.",
     "modelYearEnd": "2050",
     "modeled_temperature_increase": 1.5,
     "regions": ["SEA"],
     "sectors": [
       {
         "name": "Power Generation",
-        "tooltip": "Electricity generation and distribution",
         "technologies": [
           "Coal",
           "Oil",
