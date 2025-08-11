@@ -14,7 +14,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "json:check": "ajv validate -s pbtar_schema.json src/data/*.json",
+    "json:check": "ajv validate -s public/schema.json src/data/*.json",
     "docs:jsonSchema": "python3 scripts/render-schema-docs.py"
   },
   "author": "RMI",
