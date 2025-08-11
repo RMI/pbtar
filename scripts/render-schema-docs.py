@@ -7,7 +7,7 @@ config = GenerationConfiguration(
         collapse_long_descriptions=True,
         template_name="js",
         with_footer=True,
-        footer_show_time=FALSE
+        footer_show_time=False
         )
 
 generate_from_filename(
