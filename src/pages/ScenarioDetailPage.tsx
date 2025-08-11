@@ -85,7 +85,7 @@ const ScenarioDetailPage: React.FC = () => {
               variant="pathway_type"
             />
             <Badge
-              text={scenario.target_year}
+              text={scenario.modelYearEnd}
               variant="year"
             />
             {scenario.modeled_temperature_increase && (
@@ -103,7 +103,7 @@ const ScenarioDetailPage: React.FC = () => {
             </p>
             <p>
               <span className="text-white">Published:</span>{" "}
-              {scenario.published_date}
+              {scenario.publicationYear}
             </p>
           </div>
         </div>

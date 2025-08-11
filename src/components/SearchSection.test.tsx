@@ -13,7 +13,7 @@ vi.mock("../data/scenariosData", () => ({
         "A scenario describing the path to net zero emissions by 2050.",
       pathway_type: "Policy",
       pathway_type_tooltip: "Policy tooltip test",
-      target_year: "2050",
+      modelYearEnd: "2050",
       modeled_temperature_increase: 1.5,
       regions: ["Global", "Europe"],
       sectors: [
@@ -21,7 +21,7 @@ vi.mock("../data/scenariosData", () => ({
         { name: "Transport", tooltip: "Transportation and logistics" },
       ],
       publisher: "IEA",
-      published_date: "Jan 2023",
+      publicationYear: "Jan 2023",
       overview: "Mock overview",
       expertRecommendation: "Mock recommendation",
       dataSource: {
@@ -36,7 +36,7 @@ vi.mock("../data/scenariosData", () => ({
       description: "A scenario based on current implemented policies.",
       pathway_type: "Projection",
       pathway_type_tooltip: "Projection tooltip test",
-      target_year: "2030",
+      modelYearEnd: "2030",
       modeled_temperature_increase: 2.7,
       regions: ["Global", "Asia"],
       sectors: [
@@ -47,7 +47,7 @@ vi.mock("../data/scenariosData", () => ({
         { name: "Buildings", tooltip: "Residential and commercial buildings" },
       ],
       publisher: "IPCC",
-      published_date: "Mar 2022",
+      publicationYear: "Mar 2022",
       overview: "Mock overview",
       expertRecommendation: "Mock recommendation",
       dataSource: {
@@ -63,7 +63,7 @@ vi.mock("../data/scenariosData", () => ({
         "A scenario describing the path to net zero emissions by 2050.",
       pathway_type: "Exploration",
       pathway_type_tooltip: "Exploration tooltip test",
-      target_year: "2050",
+      modelYearEnd: "2050",
       modeled_temperature_increase: 1.5,
       regions: ["Global", "Europe"],
       sectors: [
@@ -71,7 +71,7 @@ vi.mock("../data/scenariosData", () => ({
         { name: "Transport", tooltip: "Transportation and logistics" },
       ],
       publisher: "IEA",
-      published_date: "Jan 2023",
+      publicationYear: "Jan 2023",
       overview: "Mock overview",
       expertRecommendation: "Mock recommendation",
       dataSource: {
@@ -87,7 +87,7 @@ vi.mock("../data/scenariosData", () => ({
         "A scenario describing the path to net zero emissions by 2050.",
       pathway_type: "Normative",
       pathway_type_tooltip: "Normative tooltip test",
-      target_year: "2050",
+      modelYearEnd: "2050",
       modeled_temperature_increase: 1.5,
       regions: ["Global", "Europe"],
       sectors: [
@@ -95,7 +95,7 @@ vi.mock("../data/scenariosData", () => ({
         { name: "Transport", tooltip: "Transportation and logistics" },
       ],
       publisher: "IEA",
-      published_date: "Jan 2023",
+      publicationYear: "Jan 2023",
       overview: "Mock overview",
       expertRecommendation: "Mock recommendation",
       dataSource: {

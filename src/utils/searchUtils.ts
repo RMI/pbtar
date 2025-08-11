@@ -14,7 +14,10 @@ export const filterScenarios = (
     }
 
     // Target year filter
-    if (filters.target_year && scenario.target_year !== filters.target_year) {
+    if (
+      filters.modelYearEnd &&
+      scenario.modelYearEnd !== filters.modelYearEnd
+    ) {
       return false;
     }
 
@@ -47,13 +50,13 @@ export const filterScenarios = (
         scenario.name,
         scenario.description,
         scenario.pathway_type,
-        scenario.target_year,
+        scenario.modelYearEnd,
         scenario.modeled_temperature_increase,
         ...scenario.regions,
         ...scenario.sectors.map((s) => s.name),
         ...scenario.sectors.map((s) => s.tooltip || ""),
         scenario.publisher,
-        scenario.published_date,
+        scenario.publicationYear,
       ];
 
       return searchFields.some((field) =>

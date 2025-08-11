@@ -139,7 +139,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <p className="text-xs font-medium text-rmigray-500 mb-1">Targets:</p>
           <div className="flex flex-wrap">
             <Badge
-              text={highlightTextIfSearchMatch(scenario.target_year)}
+              text={highlightTextIfSearchMatch(scenario.modelYearEnd)}
               variant="year"
             />
             {scenario.modeled_temperature_increase && (
@@ -247,7 +247,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               <p className="text-xs text-rmigray-500">Published:</p>
               <p className="text-sm font-medium text-rmigray-800">
                 <HighlightedText
-                  text={scenario.published_date}
+                  text={scenario.publicationYear}
                   searchTerm={searchTerm}
                 />
               </p>
