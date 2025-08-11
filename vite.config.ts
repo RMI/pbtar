@@ -60,7 +60,7 @@ const getGitInfo = async (): Promise<{
 
     return {
       sha,
-      isClean: (status as StatusResult).isClean(),
+      isClean: (status).isClean(),
       branch,
     };
   } catch {
