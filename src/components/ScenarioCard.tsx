@@ -6,7 +6,7 @@ import { Scenario, PathwayType, Sector } from "../types";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
 import { prioritizeMatches } from "../utils/sortUtils";
-import { getPathwayTypeTooltip, getSectorTooltip } from '../utils/tooltipUtils';
+import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
 
 interface ScenarioCardProps {
   scenario: Scenario;
@@ -130,7 +130,9 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <div className="flex flex-wrap gap-2">
             <Badge
               text={highlightTextIfSearchMatch(scenario.pathway_type)}
-              tooltip={getPathwayTypeTooltip(scenario.pathway_type as PathwayType)}
+              tooltip={getPathwayTypeTooltip(
+                scenario.pathway_type as PathwayType,
+              )}
               variant="pathway_type"
             />
           </div>
