@@ -117,4 +117,13 @@ export default defineConfig({
     open: true,
     port: 3000,
   },
+  build: {
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        schema: 'pbtar_schema.json'
+      }
+    }
+  },
+  publicDir: 'public'
 });

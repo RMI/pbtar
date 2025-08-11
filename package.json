@@ -19,6 +19,8 @@
   "author": "RMI",
   "license": "MIT",
   "dependencies": {
+    "@stoplight/json-schema-viewer": "^4.16.4",
+    "@stoplight/mosaic": "^1.53.4",
     "lucide-react": "^0.539.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

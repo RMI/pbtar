@@ -7,6 +7,7 @@ import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 import ScenarioDetailPage from "./pages/ScenarioDetailPage";
 import EnvironmentBanner from "./components/EnvironmentBanner";
+import SchemaPage from "./pages/SchemaPage";
 
 // Export the inner content for testing
 export const AppContent = () => {
@@ -32,6 +33,10 @@ export const AppContent = () => {
           <Route
             path="/about"
             element={<AboutPage />}
+          />
+          <Route
+            path="/schema.html"
+            element={<SchemaPage />}
           />
         </Routes>
       </main>
