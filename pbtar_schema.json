@@ -184,7 +184,7 @@
           },
           "url": {
             "type": "string",
-            "pattern": "^(https?|ftp)://[^\s/$.?#].[^\s]*$"
+            "pattern": "^(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*$"
           },
           "downloadAvailable": {
             "type": "boolean"
