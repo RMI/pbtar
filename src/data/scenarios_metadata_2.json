@@ -3,7 +3,7 @@
     "id": "scenario-002",
     "name": "FGCN Current Policies",
     "description": "Business-as-usual baseline assuming current policies remain in place",
-    "pathway_type": "Projection",
+    "pathwayType": "Projection",
     "pathway_type_tooltip": "Projection of future developments in sectors.",
     "modelYearEnd": "2050",
     "modeled_temperature_increase": 3,

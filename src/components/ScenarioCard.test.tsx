@@ -11,7 +11,7 @@ describe("ScenarioCard component", () => {
     name: "Net Zero 2050",
     description:
       "A scenario describing the path to net zero emissions by 2050.",
-    pathway_type: "Policy",
+    pathwayType: "Policy",
     pathway_type_tooltip:
       "Policy scenarios focus on regulatory and legislative measures.",
     modelYearEnd: "2050",
@@ -57,11 +57,11 @@ describe("ScenarioCard component", () => {
     expect(link).toHaveAttribute("href", `/scenario/${mockScenario.id}`);
   });
 
-  it("displays the pathway_type badge", () => {
+  it("displays the pathwayType badge", () => {
     renderScenarioCard();
 
-    const pathway_typeBadge = screen.getByText(mockScenario.pathway_type);
-    expect(pathway_typeBadge).toBeInTheDocument();
+    const pathwayTypeBadge = screen.getByText(mockScenario.pathwayType);
+    expect(pathwayTypeBadge).toBeInTheDocument();
   });
 
   it("shows target year and temperature badges", () => {
@@ -139,7 +139,7 @@ describe("ScenarioCard component", () => {
       id: "test-scenario",
       name: "Test Scenario",
       description: "Test description",
-      pathway_type: "Exploration",
+      pathwayType: "Exploration",
       pathway_type_tooltip: "Pathway Type tooltip",
       modelYearEnd: "2050",
       modeled_temperature_increase: 1.5,
@@ -247,7 +247,7 @@ describe("ScenarioCard search highlighting", () => {
     name: "Net Zero 2050",
     description:
       "A scenario describing the path to net zero emissions by 2050.",
-    pathway_type: "Policy",
+    pathwayType: "Policy",
     pathway_type_tooltip: "Policy scenarios focus on regulatory measures.",
     modelYearEnd: "2050",
     modeled_temperature_increase: 1.5,

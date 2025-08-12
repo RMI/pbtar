@@ -30,7 +30,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   onClear,
 }) => {
   const categories: PathwayType[] = Array.from(
-    new Set(scenariosData.map((d) => d.pathway_type)),
+    new Set(scenariosData.map((d) => d.pathwayType)),
   ).sort() as PathwayType[];
   const years: YearTarget[] = Array.from(
     new Set(scenariosData.map((d) => d.modelYearEnd)),
@@ -46,7 +46,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   ).sort();
   const areFiltersApplied =
     (filters.searchTerm ||
-      filters.pathway_type ||
+      filters.pathwayType ||
       filters.region ||
       filters.sector ||
       filters.modelYearEnd ||
@@ -67,8 +67,8 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         <FilterDropdown<string>
           label="Pathway Type"
           options={categories}
-          selectedValue={filters.pathway_type}
-          onChange={(value) => onFilterChange("pathway_type", value)}
+          selectedValue={filters.pathwayType}
+          onChange={(value) => onFilterChange("pathwayType", value)}
         />
 
         <FilterDropdown<string>

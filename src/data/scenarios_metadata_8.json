@@ -3,7 +3,7 @@
     "id": "scenario-008",
     "name": "Reactive Transition Scenario",
     "description": "Delayed transition with sudden policy changes leading to higher transition risks",
-    "pathway_type": "Normative",
+    "pathwayType": "Normative",
     "pathway_type_tooltip": "Normative scenario.",
     "modelYearEnd": "2050",
     "modeled_temperature_increase": 2,

@@ -7,8 +7,8 @@ export const filterScenarios = (
   return scenarios.filter((scenario) => {
     // Pathway type filter
     if (
-      filters.pathway_type &&
-      scenario.pathway_type !== filters.pathway_type
+      filters.pathwayType &&
+      scenario.pathwayType !== filters.pathwayType
     ) {
       return false;
     }
@@ -49,7 +49,7 @@ export const filterScenarios = (
       const searchFields = [
         scenario.name,
         scenario.description,
-        scenario.pathway_type,
+        scenario.pathwayType,
         scenario.modelYearEnd,
         scenario.modeled_temperature_increase,
         ...scenario.regions,
