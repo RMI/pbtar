@@ -6,7 +6,7 @@
     "pathwayType": "Projection",
     "pathway_type_tooltip": "Projection of future developments in sectors.",
     "modelYearEnd": "2050",
-    "modeled_temperature_increase": 3,
+    "modelTempIncrease": 3,
     "regions": ["Global", "EU", "SEA", "Americas", "Asia Pacific"],
     "sectors": [
       {

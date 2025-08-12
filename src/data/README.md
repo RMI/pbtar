@@ -19,7 +19,7 @@ An example scenario metadata JSON file looks like...
     "pathwayType": "Policy",
     "pathway_type_tooltip": "A pathway based on policy targets or commitments, rather than modeled projections.",
     "modelYearEnd": "2050",
-    "modeled_temperature_increase": 1.5,
+    "modelTempIncrease": 1.5,
     "regions": ["Global"],
     "sectors": [
       {
@@ -127,7 +127,7 @@ new_scenario_metadata <-
       "pathwayType" =  "Policy",
       "pathway_type_tooltip" = "A pathway based on policy targets or commitments, rather than modeled projections.",
       modelYearEnd = "2050",
-      modeled_temperature_increase = 1.5,
+      modelTempIncrease = 1.5,
       regions = list("Global"),
       sectors = list("Power", "Oil & Gas", "Coal", "Renewables", "Transport", "Buildings", "Industrial"),
       publisher = "Zero Emissions Technology Institute",
@@ -157,7 +157,7 @@ new_scenario_metadata <-
       "pathwayType" =  "Policy",
       "pathway_type_tooltip" = "A pathway based on policy targets or commitments, rather than modeled projections.",
       modelYearEnd = "2050",
-      modeled_temperature_increase = 1.5,
+      modelTempIncrease = 1.5,
       regions = "Global",
       sectors = list("Poer", "Oil&Gas", "Coal", "Renewables", "Transport", "Buildings", "Industrial"),
       publisher = "Zero Emissions Technology Institute",

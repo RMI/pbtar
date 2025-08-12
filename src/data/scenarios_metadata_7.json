@@ -6,7 +6,7 @@
     "pathwayType": "Normative",
     "pathway_type_tooltip": "Normative scenario.",
     "modelYearEnd": "2050",
-    "modeled_temperature_increase": 2,
+    "modelTempIncrease": 2,
     "regions": ["Global", "EU", "Americas", "Asia Pacific"],
     "sectors": [
       {

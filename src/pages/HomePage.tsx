@@ -17,7 +17,7 @@ const HomePage: React.FC = () => {
   const [filters, setFilters] = useState<SearchFilters>({
     pathwayType: null,
     modelYearEnd: null,
-    modeled_temperature_increase: null,
+    modelTempIncrease: null,
     region: null,
     sector: null,
     searchTerm: "",
@@ -41,8 +41,8 @@ const HomePage: React.FC = () => {
         filters.searchTerm !== prevFiltersRef.current.searchTerm ||
         filters.pathwayType !== prevFiltersRef.current.pathwayType ||
         filters.modelYearEnd !== prevFiltersRef.current.modelYearEnd ||
-        filters.modeled_temperature_increase !==
-          prevFiltersRef.current.modeled_temperature_increase ||
+        filters.modelTempIncrease !==
+          prevFiltersRef.current.modelTempIncrease ||
         filters.region !== prevFiltersRef.current.region ||
         filters.sector !== prevFiltersRef.current.sector;
 
@@ -100,7 +100,7 @@ const HomePage: React.FC = () => {
     setFilters({
       pathwayType: null,
       modelYearEnd: null,
-      modeled_temperature_increase: null,
+      modelTempIncrease: null,
       region: null,
       sector: null,
       searchTerm: "",

@@ -14,7 +14,7 @@ vi.mock("../data/scenariosData", () => ({
       pathwayType: "Policy",
       pathway_type_tooltip: "Policy tooltip test",
       modelYearEnd: "2050",
-      modeled_temperature_increase: 1.5,
+      modelTempIncrease: 1.5,
       regions: ["Global", "Europe"],
       sectors: [
         { name: "Power", tooltip: "Electricity generation and distribution" },
@@ -37,7 +37,7 @@ vi.mock("../data/scenariosData", () => ({
       pathwayType: "Projection",
       pathway_type_tooltip: "Projection tooltip test",
       modelYearEnd: "2030",
-      modeled_temperature_increase: 2.7,
+      modelTempIncrease: 2.7,
       regions: ["Global", "Asia"],
       sectors: [
         {
@@ -64,7 +64,7 @@ vi.mock("../data/scenariosData", () => ({
       pathwayType: "Exploration",
       pathway_type_tooltip: "Exploration tooltip test",
       modelYearEnd: "2050",
-      modeled_temperature_increase: 1.5,
+      modelTempIncrease: 1.5,
       regions: ["Global", "Europe"],
       sectors: [
         { name: "Power", tooltip: "Electricity generation and distribution" },
@@ -88,7 +88,7 @@ vi.mock("../data/scenariosData", () => ({
       pathwayType: "Normative",
       pathway_type_tooltip: "Normative tooltip test",
       modelYearEnd: "2050",
-      modeled_temperature_increase: 1.5,
+      modelTempIncrease: 1.5,
       regions: ["Global", "Europe"],
       sectors: [
         { name: "Power", tooltip: "Electricity generation and distribution" },

@@ -13,7 +13,7 @@ describe("searchUtils", () => {
       pathwayType: "Policy",
       pathway_type_tooltip: "Policy scenarios focus on regulatory measures.",
       modelYearEnd: "2050",
-      modeled_temperature_increase: 1.5,
+      modelTempIncrease: 1.5,
       regions: ["Global", "Europe"],
       sectors: [
         { name: "Power", tooltip: "Electricity generation and distribution" },
@@ -37,7 +37,7 @@ describe("searchUtils", () => {
       pathway_type_tooltip:
         "Projection scenarios are based on existing trends.",
       modelYearEnd: "2030",
-      modeled_temperature_increase: 2.7,
+      modelTempIncrease: 2.7,
       regions: ["Global", "Asia"],
       sectors: [
         {
@@ -84,7 +84,7 @@ describe("searchUtils", () => {
     });
 
     it("filters by modeled temperature increase", () => {
-      const filters: SearchFilters = { modeled_temperature_increase: 1.5 };
+      const filters: SearchFilters = { modelTempIncrease: 1.5 };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(1);

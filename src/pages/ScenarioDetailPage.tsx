@@ -88,9 +88,9 @@ const ScenarioDetailPage: React.FC = () => {
               text={scenario.modelYearEnd}
               variant="year"
             />
-            {scenario.modeled_temperature_increase && (
+            {scenario.modelTempIncrease && (
               <Badge
-                text={`${scenario.modeled_temperature_increase}°C`}
+                text={`${scenario.modelTempIncrease}°C`}
                 variant="temperature"
               />
             )}

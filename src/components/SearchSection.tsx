@@ -36,7 +36,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     new Set(scenariosData.map((d) => d.modelYearEnd)),
   ).sort() as YearTarget[];
   const temperatures: TemperatureTarget[] = Array.from(
-    new Set(scenariosData.map((d) => d.modeled_temperature_increase)),
+    new Set(scenariosData.map((d) => d.modelTempIncrease)),
   ).sort() as TemperatureTarget[];
   const regions: Region[] = Array.from(
     new Set(scenariosData.map((d) => d.regions).flat()),
@@ -50,7 +50,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       filters.region ||
       filters.sector ||
       filters.modelYearEnd ||
-      filters.modeled_temperature_increase) !== null;
+      filters.modelTempIncrease) !== null;
 
   return (
     <div className="bg-white">
@@ -81,9 +81,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         <FilterDropdown<number>
           label="Temperature (°C)"
           options={temperatures}
-          selectedValue={filters.modeled_temperature_increase}
+          selectedValue={filters.modelTempIncrease}
           onChange={(value) =>
-            onFilterChange("modeled_temperature_increase", value)
+            onFilterChange("modelTempIncrease", value)
           }
         />
 
