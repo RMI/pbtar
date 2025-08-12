@@ -9,20 +9,23 @@
     "properties": {
       "id": {
         "description": "The unique identifier for a scenario",
-        "type": "string"
+        "type": "string",
+        "maxLength": 100
       },
       "name": {
         "description": "Name of the scenario",
-        "type": "string"
+        "type": "string",
+        "maxLength": 100
       },
       "description": {
         "description": "Description of the scenario",
-        "type": "string"
+        "type": "string",
+        "maxLength": 100
       },
       "pathwayType": {
         "description": "Type of the scenario pathway",
         "type": "string",
-        "enum": ["Normative", "Projection", "Policy", "Exploration"]
+        "enum": ["Normative", "Exploratory", "Direct Policy", "Predictive"]
       },
       "modelYearNetzero": {
         "description": "Year by which net zero is reached in the scenario",
@@ -39,11 +42,13 @@
         "description": "Year from which the model starts",
         "type": "integer",
         "minimum": 1900,
-        "maximum": 2025
+        "maximum": 2030
       },
       "modelYearEnd": {
         "description": "Year in which the model ends",
-        "type": "integer"
+        "type": "integer",
+        "minimum": 2030,
+        "maximum": 2100
       },
       "modelTempIncrease": {
         "description": "Modeled temperature increase expected by the scenario (in degrees Celsius)",
@@ -55,7 +60,7 @@
       "ssp": {
         "description": "Shared Socioeconomic Pathways (SSP) associated with the scenario",
         "type": "string",
-        "enum": ["SSP1", "SSP2", "SSP3", "SSP4", "SSP5", "N/A"]
+        "enum": ["SSP1", "SSP2", "SSP3", "SSP4", "SSP5"]
       },
       "regions": {
         "description": "Regions that the scenario covers",
@@ -150,29 +155,36 @@
       },
       "publisher": {
         "description": "Publisher of the scenario",
-        "type": "string"
+        "type": "string",
+        "maxLength": 100
       },
       "publicationYear": {
         "description": "Year that the scenario was published",
-        "type": "integer"
+        "type": "integer",
+        "minimum": 1900,
+        "maximum": 2030
       },
       "overview": {
         "description": "Overview of the scenario",
-        "type": "string"
+        "type": "string",
+        "maxLength": 500
       },
       "expertRecommendation": {
         "description": "Expert recommendation for the scenario",
-        "type": "string"
+        "type": "string",
+        "maxLength": 5000
       },
       "dataSource": {
         "description": "Data source for the scenario",
         "type": "object",
         "properties": {
           "description": { 
-            "type": "string"
+            "type": "string",
+            "maxLength": 500
           },
           "url": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^(https?|ftp)://[^\s/$.?#].[^\s]*$"
           },
           "downloadAvailable": {
             "type": "boolean"
