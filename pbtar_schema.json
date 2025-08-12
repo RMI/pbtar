@@ -26,24 +26,24 @@
       },
       "modelYearNetzero": {
         "description": "Year by which net zero is reached in the scenario",
-        "type": ["integer", "null"],
+        "type": "integer",
         "minimum": 2030,
         "maximum": 2100
       },
       "carbonBudget": {
         "description": "Carbon budget of the scenario in gigatons of CO2 equivalent",
-        "type": ["number", "null"],
+        "type": "number",
         "minimum": 0
       },
       "modelYearStart": {
         "description": "Year from which the model starts",
-        "type": ["integer", "null"],
+        "type": "integer",
         "minimum": 1900,
         "maximum": 2025
       },
       "modelYearEnd": {
         "description": "Year in which the model ends",
-        "type": "string"
+        "type": "integer"
       },
       "modelTempIncrease": {
         "description": "Modeled temperature increase expected by the scenario (in degrees Celsius)",
@@ -234,7 +234,7 @@
       },
       "publicationYear": {
         "description": "Year that the scenario was published",
-        "type": "string"
+        "type": "integer"
       },
       "overview": {
         "description": "Overview of the scenario",
@@ -248,9 +248,15 @@
         "description": "Data source for the scenario",
         "type": "object",
         "properties": {
-          "description": { "type": "string" },
-          "url": { "type": "string" },
-          "downloadAvailable": { "type": "boolean" }
+          "description": { 
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "downloadAvailable": {
+            "type": "boolean"
+          }
         },
         "additionalProperties": false,
         "required": ["description", "url", "downloadAvailable"]
