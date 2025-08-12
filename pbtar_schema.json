@@ -28,18 +28,18 @@
         "description": "Detailed explanation of the scenario pathway type",
         "type": "string"
       },
-      "net_zero_reached_year": {
+      "modelYearNetzero": {
         "description": "Year by which net zero is reached in the scenario",
         "type": ["integer", "null"],
         "minimum": 2030,
         "maximum": 2100
       },
-      "carbon_budget": {
+      "carbonBudget": {
         "description": "Carbon budget of the scenario in gigatons of CO2 equivalent",
         "type": ["number", "null"],
         "minimum": 0
       },
-      "model_start_year": {
+      "modelYearStart": {
         "description": "Year from which the model starts",
         "type": ["integer", "null"],
         "minimum": 1900,
