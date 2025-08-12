@@ -200,8 +200,6 @@
       "name",
       "description",
       "pathwayType",
-      "pathway_type_tooltip",
-      "modelYearEnd",
       "regions",
       "sectors",
       "publisher",
