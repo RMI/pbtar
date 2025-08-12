@@ -6,10 +6,7 @@ export const filterScenarios = (
 ): Scenario[] => {
   return scenarios.filter((scenario) => {
     // Pathway type filter
-    if (
-      filters.pathwayType &&
-      scenario.pathwayType !== filters.pathwayType
-    ) {
+    if (filters.pathwayType && scenario.pathwayType !== filters.pathwayType) {
       return false;
     }
 
@@ -24,8 +21,7 @@ export const filterScenarios = (
     // Target temperature filter
     if (
       filters.modelTempIncrease &&
-      scenario.modelTempIncrease !==
-        filters.modelTempIncrease
+      scenario.modelTempIncrease !== filters.modelTempIncrease
     ) {
       return false;
     }

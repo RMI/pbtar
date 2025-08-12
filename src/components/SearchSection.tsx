@@ -82,9 +82,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           label="Temperature (°C)"
           options={temperatures}
           selectedValue={filters.modelTempIncrease}
-          onChange={(value) =>
-            onFilterChange("modelTempIncrease", value)
-          }
+          onChange={(value) => onFilterChange("modelTempIncrease", value)}
         />
 
         <FilterDropdown<string>
