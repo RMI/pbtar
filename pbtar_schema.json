@@ -86,146 +86,66 @@
             "name": {
               "type": "string",
               "enum": [
-                "Agricultural",
-                "Buildings",
-                "Industrial",
-                "Power Generation",
-                "Transport"
+                "Land Use",
+                "Agriculture",
+                "Real Estate",
+                "Industry",
+                "Steel",
+                "Cement",
+                "Chemicals",
+                "Coal Mining",
+                "Oil (Upstream)",
+                "Gas (Upstream)",
+                "Power",
+                "Transport",
+                "Road transport",
+                "Aviation",
+                "Rail",
+                "Shipping",
+                "Other"
               ]
-            },
-            "tooltip": {
-              "type": "string",
-              "description": "Detailed explanation of the sector"
             },
             "technologies": {
               "type": "array",
               "description": "Technologies applicable to this sector",
               "items": {
-                "type": "string"
+                "type": "string",
+                "enum": [
+                  "Precision Agriculture",
+                  "Agroforestry",
+                  "Bioenergy Crops",
+                  "Energy Efficiency",
+                  "Smart Grids",
+                  "Renewable Heating",
+                  "Heat Pumps",
+                  "Building Automation",
+                  "Smart Appliances",
+                  "Insulation",
+                  "Carbon Capture and Storage",
+                  "Electrification",
+                  "Process Optimization",
+                  "Hydrogen Use",
+                  "Coal",
+                  "Oil",
+                  "Gas",
+                  "Wind",
+                  "Solar",
+                  "Nuclear",
+                  "Biomass",
+                  "Electric Vehicles",
+                  "Hydrogen Vehicles",
+                  "Biofuels",
+                  "Public Transport",
+                  "Active Mobility",
+                  "Aviation Efficiency",
+                  "Maritime Efficiency",
+                  "Other"
+                ]
               }
             }
           },
           "required": ["name", "technologies"],
-          "additionalProperties": false,
-          "allOf": [
-            {
-              "if": {
-                "properties": { "name": { "const": "Agricultural" } }
-              },
-              "then": {
-                "properties": {
-                  "technologies": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "Precision Agriculture",
-                        "Agroforestry",
-                        "Bioenergy Crops",
-                        "Other"
-                      ]
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "if": {
-                "properties": { "name": { "const": "Buildings" } }
-              },
-              "then": {
-                "properties": {
-                  "technologies": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "Energy Efficiency",
-                        "Smart Grids",
-                        "Renewable Heating",
-                        "Heat Pumps",
-                        "Building Automation",
-                        "Smart Appliances",
-                        "Insulation",
-                        "Other"
-                      ]
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "if": {
-                "properties": { "name": { "const": "Industrial" } }
-              },
-              "then": {
-                "properties": {
-                  "technologies": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "Carbon Capture and Storage",
-                        "Electrification",
-                        "Process Optimization",
-                        "Hydrogen Use",
-                        "Other"
-                      ]
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "if": {
-                "properties": { "name": { "const": "Power Generation" } }
-              },
-              "then": {
-                "properties": {
-                  "technologies": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "Coal",
-                        "Oil",
-                        "Gas",
-                        "Wind",
-                        "Solar",
-                        "Nuclear",
-                        "Biomass",
-                        "Other"
-                      ]
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "if": {
-                "properties": { "name": { "const": "Transport" } }
-              },
-              "then": {
-                "properties": {
-                  "technologies": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "Electric Vehicles",
-                        "Hydrogen Vehicles",
-                        "Biofuels",
-                        "Public Transport",
-                        "Active Mobility",
-                        "Aviation Efficiency",
-                        "Maritime Efficiency"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          ]
+          "additionalProperties": false
         }
       },
       "publisher": {
