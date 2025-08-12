@@ -178,7 +178,7 @@
         "description": "Data source for the scenario",
         "type": "object",
         "properties": {
-          "description": { 
+          "description": {
             "type": "string",
             "maxLength": 500
           },
