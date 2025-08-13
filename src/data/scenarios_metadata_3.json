@@ -3,10 +3,10 @@
     "id": "scenario-003",
     "name": "SEA Clean Energy Pathway",
     "description": "Pathway focused on replacing coal with renewables in Southeast Asia",
-    "pathway_type": "Policy",
+    "pathwayType": "Policy",
     "pathway_type_tooltip": "Policy-driven scenario.",
     "modelYearEnd": "2050",
-    "modeled_temperature_increase": 1.5,
+    "modelTempIncrease": 1.5,
     "regions": ["SEA"],
     "sectors": [
       {

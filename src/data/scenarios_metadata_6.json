@@ -3,10 +3,10 @@
     "id": "scenario-006",
     "name": "GEC SSP1-1.9",
     "description": "Sustainable development pathway limiting warming to 1.5°C with low overshoot",
-    "pathway_type": "Exploration",
+    "pathwayType": "Exploration",
     "pathway_type_tooltip": "Exploration of future sustainable development scenarios.",
     "modelYearEnd": "2100",
-    "modeled_temperature_increase": 1.5,
+    "modelTempIncrease": 1.5,
     "regions": ["Global"],
     "sectors": [
       {

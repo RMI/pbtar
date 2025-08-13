@@ -19,7 +19,7 @@
         "description": "Description of the scenario",
         "type": "string"
       },
-      "pathway_type": {
+      "pathwayType": {
         "description": "Type of the scenario pathway",
         "type": "string",
         "enum": ["Normative", "Projection", "Policy", "Exploration"]
@@ -28,18 +28,18 @@
         "description": "Detailed explanation of the scenario pathway type",
         "type": "string"
       },
-      "net_zero_reached_year": {
+      "modelYearNetzero": {
         "description": "Year by which net zero is reached in the scenario",
         "type": ["integer", "null"],
         "minimum": 2030,
         "maximum": 2100
       },
-      "carbon_budget": {
+      "carbonBudget": {
         "description": "Carbon budget of the scenario in gigatons of CO2 equivalent",
         "type": ["number", "null"],
         "minimum": 0
       },
-      "model_start_year": {
+      "modelYearStart": {
         "description": "Year from which the model starts",
         "type": ["integer", "null"],
         "minimum": 1900,
@@ -49,7 +49,7 @@
         "description": "Year in which the model ends",
         "type": "string"
       },
-      "modeled_temperature_increase": {
+      "modelTempIncrease": {
         "description": "Modeled temperature increase expected by the scenario (in degrees Celsius)",
         "type": "number",
         "multipleOf": 0.1,
@@ -265,7 +265,7 @@
       "id",
       "name",
       "description",
-      "pathway_type",
+      "pathwayType",
       "pathway_type_tooltip",
       "modelYearEnd",
       "regions",
