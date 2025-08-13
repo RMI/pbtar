@@ -8,7 +8,7 @@
     "type": "object",
     "properties": {
       "id": {
-        "description": "The unique identifier for a scenario",
+        "description": "The unique identifier for a test",
         "type": "string"
       },
       "name": {
@@ -22,7 +22,12 @@
       "pathwayType": {
         "description": "Type of the scenario pathway",
         "type": "string",
-        "enum": ["Normative", "Projection", "Policy", "Exploration"]
+        "enum": [
+          "Normative",
+          "Projection",
+          "Policy",
+          "Exploration"
+        ]
       },
       "pathway_type_tooltip": {
         "description": "Detailed explanation of the scenario pathway type",
@@ -30,18 +35,27 @@
       },
       "modelYearNetzero": {
         "description": "Year by which net zero is reached in the scenario",
-        "type": ["integer", "null"],
+        "type": [
+          "integer",
+          "null"
+        ],
         "minimum": 2030,
         "maximum": 2100
       },
       "carbonBudget": {
         "description": "Carbon budget of the scenario in gigatons of CO2 equivalent",
-        "type": ["number", "null"],
+        "type": [
+          "number",
+          "null"
+        ],
         "minimum": 0
       },
       "modelYearStart": {
         "description": "Year from which the model starts",
-        "type": ["integer", "null"],
+        "type": [
+          "integer",
+          "null"
+        ],
         "minimum": 1900,
         "maximum": 2025
       },
@@ -59,7 +73,14 @@
       "ssp": {
         "description": "Shared Socioeconomic Pathways (SSP) associated with the scenario",
         "type": "string",
-        "enum": ["SSP1", "SSP2", "SSP3", "SSP4", "SSP5", "N/A"]
+        "enum": [
+          "SSP1",
+          "SSP2",
+          "SSP3",
+          "SSP4",
+          "SSP5",
+          "N/A"
+        ]
       },
       "regions": {
         "description": "Regions that the scenario covers",
@@ -109,12 +130,19 @@
               }
             }
           },
-          "required": ["name", "technologies"],
+          "required": [
+            "name",
+            "technologies"
+          ],
           "additionalProperties": false,
           "allOf": [
             {
               "if": {
-                "properties": { "name": { "const": "Agricultural" } }
+                "properties": {
+                  "name": {
+                    "const": "Agricultural"
+                  }
+                }
               },
               "then": {
                 "properties": {
@@ -135,7 +163,11 @@
             },
             {
               "if": {
-                "properties": { "name": { "const": "Buildings" } }
+                "properties": {
+                  "name": {
+                    "const": "Buildings"
+                  }
+                }
               },
               "then": {
                 "properties": {
@@ -160,7 +192,11 @@
             },
             {
               "if": {
-                "properties": { "name": { "const": "Industrial" } }
+                "properties": {
+                  "name": {
+                    "const": "Industrial"
+                  }
+                }
               },
               "then": {
                 "properties": {
@@ -182,7 +218,11 @@
             },
             {
               "if": {
-                "properties": { "name": { "const": "Power Generation" } }
+                "properties": {
+                  "name": {
+                    "const": "Power Generation"
+                  }
+                }
               },
               "then": {
                 "properties": {
@@ -207,7 +247,11 @@
             },
             {
               "if": {
-                "properties": { "name": { "const": "Transport" } }
+                "properties": {
+                  "name": {
+                    "const": "Transport"
+                  }
+                }
               },
               "then": {
                 "properties": {
@@ -252,12 +296,22 @@
         "description": "Data source for the scenario",
         "type": "object",
         "properties": {
-          "description": { "type": "string" },
-          "url": { "type": "string" },
-          "downloadAvailable": { "type": "boolean" }
+          "description": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "downloadAvailable": {
+            "type": "boolean"
+          }
         },
         "additionalProperties": false,
-        "required": ["description", "url", "downloadAvailable"]
+        "required": [
+          "description",
+          "url",
+          "downloadAvailable"
+        ]
       }
     },
     "additionalProperties": false,
