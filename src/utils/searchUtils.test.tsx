@@ -10,10 +10,10 @@ describe("searchUtils", () => {
       name: "Net Zero 2050",
       description:
         "A scenario describing the path to net zero emissions by 2050.",
-      pathway_type: "Policy",
+      pathwayType: "Policy",
       pathway_type_tooltip: "Policy scenarios focus on regulatory measures.",
       modelYearEnd: "2050",
-      modeled_temperature_increase: 1.5,
+      modelTempIncrease: 1.5,
       regions: ["Global", "Europe"],
       sectors: [
         { name: "Power", tooltip: "Electricity generation and distribution" },
@@ -33,11 +33,11 @@ describe("searchUtils", () => {
       id: "scenario-2",
       name: "Current Policies",
       description: "A scenario based on current implemented policies.",
-      pathway_type: "Projection",
+      pathwayType: "Projection",
       pathway_type_tooltip:
         "Projection scenarios are based on existing trends.",
       modelYearEnd: "2030",
-      modeled_temperature_increase: 2.7,
+      modelTempIncrease: 2.7,
       regions: ["Global", "Asia"],
       sectors: [
         {
@@ -68,7 +68,7 @@ describe("searchUtils", () => {
     });
 
     it("filters by pathway type", () => {
-      const filters: SearchFilters = { pathway_type: "Policy" };
+      const filters: SearchFilters = { pathwayType: "Policy" };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(1);
@@ -84,7 +84,7 @@ describe("searchUtils", () => {
     });
 
     it("filters by modeled temperature increase", () => {
-      const filters: SearchFilters = { modeled_temperature_increase: 1.5 };
+      const filters: SearchFilters = { modelTempIncrease: 1.5 };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(1);
@@ -144,7 +144,7 @@ describe("searchUtils", () => {
 
     it("returns empty array when no scenarios match filters", () => {
       const filters: SearchFilters = {
-        pathway_type: "Policy",
+        pathwayType: "Policy",
         modelYearEnd: "2030",
       };
       const result = filterScenarios(mockScenarios, filters);
