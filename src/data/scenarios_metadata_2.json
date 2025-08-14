@@ -3,20 +3,17 @@
     "id": "scenario-002",
     "name": "FGCN Current Policies",
     "description": "Business-as-usual baseline assuming current policies remain in place",
-    "pathwayType": "Projection",
-    "pathway_type_tooltip": "Projection of future developments in sectors.",
-    "modelYearEnd": "2050",
+    "pathwayType": "Predictive",
+    "modelYearEnd": 2050,
     "modelTempIncrease": 3,
     "regions": ["Global", "EU", "SEA", "Americas", "Asia Pacific"],
     "sectors": [
       {
-        "name": "Power Generation",
-        "tooltip": "Electricity generation and distribution",
+        "name": "Power",
         "technologies": ["Coal", "Gas", "Solar", "Wind", "Nuclear"]
       },
       {
-        "name": "Industrial",
-        "tooltip": "Manufacturing and industrial processes",
+        "name": "Industry",
         "technologies": [
           "Carbon Capture and Storage",
           "Electrification",
@@ -27,7 +24,6 @@
       },
       {
         "name": "Transport",
-        "tooltip": "Transportation and logistics",
         "technologies": [
           "Electric Vehicles",
           "Hydrogen Vehicles",
@@ -37,7 +33,7 @@
       }
     ],
     "publisher": "Future Governance and Climate Network",
-    "publicationYear": "2022-09-06",
+    "publicationYear": 2022,
     "overview": "The FGCN Current Policies scenario represents a \"business as usual\" world where only currently implemented policies are preserved. This scenario leads to high physical risks as temperature rise is projected to reach 3°C or higher by 2100. The scenario assumes no additional policies are implemented beyond what is already in place, resulting in higher emissions throughout the projection period compared to other FGCN scenarios.",
     "expertRecommendation": "This scenario is useful as a baseline comparison to understand the implications of inaction. When conducting climate transition assessments, this scenario helps illustrate the risks of maintaining the status quo. We recommend using this alongside more ambitious scenarios to show the contrast between different policy approaches. This scenario is particularly valuable for stress testing and understanding physical climate risks.",
     "dataSource": {

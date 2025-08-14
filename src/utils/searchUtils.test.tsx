@@ -169,4 +169,78 @@ describe("searchUtils", () => {
       expect(result).toEqual(mockScenarios);
     });
   });
+
+  describe("Schema compliance scenarios", () => {
+    const mockScenarios: Scenario[] = [
+      {
+        id: "scenario-1",
+        name: "Net Zero 2050",
+        description:
+          "A scenario describing the path to net zero emissions by 2050.",
+        pathwayType: "Direct Policy",
+        pathway_type_tooltip: "Policy scenarios focus on regulatory measures.",
+        modelYearEnd: "2050",
+        modelTempIncrease: 1.5,
+        regions: ["Global", "Europe"],
+        sectors: [
+          { name: "Power", tooltip: "Electricity generation and distribution" },
+          { name: "Transport", tooltip: "Transportation and logistics" },
+        ],
+        publisher: "IEA",
+        publicationYear: "Jan 2023",
+        overview: "Mock overview",
+        expertRecommendation: "Mock recommendation",
+        dataSource: {
+          description: "Mock Data Source",
+          url: "https://example.com/data-source",
+          downloadAvailable: true,
+        },
+      },
+      {
+        id: "scenario-minimal",
+        name: "Minimal Scenario",
+        description: "A minimal scenario file that passes schema validation.",
+        pathwayType: "Direct Policy",
+        regions: ["Country-Specific"],
+        sectors: [
+          {
+            name: "Other",
+            technologies: ["Other"],
+          },
+        ],
+        publisher: "Test Publisher",
+        publicationYear: 1900,
+        overview: "This is a minimal scenario for testing purposes.",
+        expertRecommendation: "Test recommendation",
+        dataSource: {
+          description: "Test Data Source",
+          url: "http://example.com/",
+          downloadAvailable: false,
+        },
+      },
+    ];
+
+    it("returns matches on extant fields", () => {
+      const filters: SearchFilters = {
+        pathwayType: "Direct Policy",
+      };
+
+      const result = filterScenarios(mockScenarios, filters);
+      expect(result.length).toBe(2);
+      expect(result.map((x) => x.id)).toEqual([
+        "scenario-1",
+        "scenario-minimal",
+      ]);
+    });
+
+    it("safely omits results for non-existing fields", () => {
+      const filters: SearchFilters = {
+        modelTempIncrease: 1.5,
+      };
+
+      const result = filterScenarios(mockScenarios, filters);
+      expect(result.length).toBe(1);
+      expect(result.map((x) => x.id)).toEqual(["scenario-1"]);
+    });
+  });
 });

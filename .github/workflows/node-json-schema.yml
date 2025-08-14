@@ -24,16 +24,37 @@ jobs:
         run: npm run json:check
 
   schema-docs:
-    name: "Render Schema Docs"
+    name: "Check Schema Docs"
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - id: render-json-schema
-        uses: RMI-PACTA/actions/actions/json-schema/check-docs@main
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          input-files: "public/schema.json"
-          outputs: "public/schema.html"
-          output-format: html
+          node-version-file: package.json
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run JSON schema render
+        run: npm run docs:jsonSchema
+
+      - name: Compare Results
+        run: |
+          git add --all
+          changes=$(git diff-index HEAD --name-only -- $OUTPUTS)
+          if [ -n "$changes" ]; then
+            echo "Changes found after documenting."
+            echo "$changes"
+            echo "Please update documentation."
+            git --no-pager diff HEAD
+            exit 1
+          else
+            echo "No changes found after documenting."
+            exit 0
+          fi
