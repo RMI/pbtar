@@ -25,7 +25,13 @@
       "pathwayType": {
         "description": "Type of the scenario pathway.",
         "type": "string",
-        "enum": ["Normative", "Exploratory", "Direct Policy", "Predictive", "Test"]
+        "enum": [
+          "Normative",
+          "Exploratory",
+          "Direct Policy",
+          "Predictive",
+          "Test"
+        ]
       },
       "modelYearNetzero": {
         "description": "Year by which net zero is reached in the scenario. If Scenario does not reach net zero, this field should be omitted.",
