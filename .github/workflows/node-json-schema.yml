@@ -37,3 +37,4 @@ jobs:
           input-files: "public/schema.json"
           outputs: "public/schema.html"
           output-format: html
+          config-file: "scripts/schema-render-config.json"
