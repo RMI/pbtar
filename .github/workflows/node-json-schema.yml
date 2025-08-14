@@ -24,7 +24,7 @@ jobs:
         run: npm run json:check
 
   schema-docs:
-    name: "Render Schema Docs"
+    name: "Check Schema Docs"
     runs-on: ubuntu-latest
 
     steps:
