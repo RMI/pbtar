@@ -2,67 +2,68 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "pbtar_schema.json",
   "title": "PBTAR Scenarios metadata Schema",
-  "description": "A schema for the scenarios metadata dataset in PBTAR",
+  "description": "A schema for the scenarios metadata dataset in PBTAR.",
   "type": "array",
   "items": {
     "type": "object",
     "properties": {
       "id": {
-        "description": "The unique identifier for a scenario",
-        "type": "string"
+        "description": "The unique identifier for a scenario.",
+        "type": "string",
+        "maxLength": 100
       },
       "name": {
-        "description": "Name of the scenario",
-        "type": "string"
+        "description": "Name of the scenario.",
+        "type": "string",
+        "maxLength": 100
       },
       "description": {
-        "description": "Description of the scenario",
-        "type": "string"
+        "description": "Brief description of the scenario.",
+        "type": "string",
+        "maxLength": 100
       },
       "pathwayType": {
-        "description": "Type of the scenario pathway",
+        "description": "Type of the scenario pathway.",
         "type": "string",
-        "enum": ["Normative", "Projection", "Policy", "Exploration"]
-      },
-      "pathway_type_tooltip": {
-        "description": "Detailed explanation of the scenario pathway type",
-        "type": "string"
+        "enum": ["Normative", "Exploratory", "Direct Policy", "Predictive"]
       },
       "modelYearNetzero": {
-        "description": "Year by which net zero is reached in the scenario",
-        "type": ["integer", "null"],
+        "description": "Year by which net zero is reached in the scenario. If Scenario does not reach net zero, this field should be omitted.",
+        "type": "integer",
         "minimum": 2030,
         "maximum": 2100
       },
       "carbonBudget": {
-        "description": "Carbon budget of the scenario in gigatons of CO2 equivalent",
-        "type": ["number", "null"],
+        "description": "Carbon budget of the scenario in gigatons of CO2 equivalent (GtCO2eq). If no carbon budget is defined, this field should be omitted. If the carbon budget is not applicable, it should be set to 0.",
+        "type": "number",
         "minimum": 0
       },
       "modelYearStart": {
-        "description": "Year from which the model starts",
-        "type": ["integer", "null"],
+        "description": "Year from which the model starts.",
+        "type": "integer",
         "minimum": 1900,
-        "maximum": 2025
+        "maximum": 2030
       },
       "modelYearEnd": {
-        "description": "Year in which the model ends",
-        "type": "string"
+        "description": "Year in which the model ends.",
+        "type": "integer",
+        "minimum": 2030,
+        "maximum": 2100
       },
       "modelTempIncrease": {
-        "description": "Modeled temperature increase expected by the scenario (in degrees Celsius)",
+        "description": "Modeled temperature increase expected by the scenario (in degrees Celsius).",
         "type": "number",
         "multipleOf": 0.1,
         "minimum": 0.5,
         "maximum": 3
       },
       "ssp": {
-        "description": "Shared Socioeconomic Pathways (SSP) associated with the scenario",
+        "description": "Shared Socioeconomic Pathways (SSP) associated with the scenario.",
         "type": "string",
-        "enum": ["SSP1", "SSP2", "SSP3", "SSP4", "SSP5", "N/A"]
+        "enum": ["SSP1", "SSP2", "SSP3", "SSP4", "SSP5"]
       },
       "regions": {
-        "description": "Regions that the scenario covers",
+        "description": "Regions that the scenario covers.",
         "type": "array",
         "uniqueItems": true,
         "items": {
@@ -78,11 +79,11 @@
         }
       },
       "country": {
-        "description": "The country code associated with the scenario",
+        "description": "The country code associated with the scenario.",
         "$ref": "#/definitions/countryCode"
       },
       "sectors": {
-        "description": "Sectors that the scenario covers",
+        "description": "Sectors that the scenario covers.",
         "type": "array",
         "items": {
           "type": "object",
@@ -90,171 +91,107 @@
             "name": {
               "type": "string",
               "enum": [
-                "Agricultural",
-                "Buildings",
-                "Industrial",
-                "Power Generation",
-                "Transport"
+                "Land Use",
+                "Agriculture",
+                "Real Estate",
+                "Industry",
+                "Steel",
+                "Cement",
+                "Chemicals",
+                "Coal Mining",
+                "Oil (Upstream)",
+                "Gas (Upstream)",
+                "Power",
+                "Transport",
+                "Road transport",
+                "Aviation",
+                "Rail",
+                "Shipping",
+                "Other"
               ]
-            },
-            "tooltip": {
-              "type": "string",
-              "description": "Detailed explanation of the sector"
             },
             "technologies": {
               "type": "array",
-              "description": "Technologies applicable to this sector",
+              "description": "Technologies applicable to this sector.",
               "items": {
-                "type": "string"
+                "type": "string",
+                "enum": [
+                  "Precision Agriculture",
+                  "Agroforestry",
+                  "Bioenergy Crops",
+                  "Energy Efficiency",
+                  "Smart Grids",
+                  "Renewable Heating",
+                  "Heat Pumps",
+                  "Building Automation",
+                  "Smart Appliances",
+                  "Insulation",
+                  "Carbon Capture and Storage",
+                  "Electrification",
+                  "Process Optimization",
+                  "Hydrogen Use",
+                  "Coal",
+                  "Oil",
+                  "Gas",
+                  "Wind",
+                  "Solar",
+                  "Nuclear",
+                  "Biomass",
+                  "Electric Vehicles",
+                  "Hydrogen Vehicles",
+                  "Biofuels",
+                  "Public Transport",
+                  "Active Mobility",
+                  "Aviation Efficiency",
+                  "Maritime Efficiency",
+                  "Other"
+                ]
               }
             }
           },
           "required": ["name", "technologies"],
-          "additionalProperties": false,
-          "allOf": [
-            {
-              "if": {
-                "properties": { "name": { "const": "Agricultural" } }
-              },
-              "then": {
-                "properties": {
-                  "technologies": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "Precision Agriculture",
-                        "Agroforestry",
-                        "Bioenergy Crops",
-                        "Other"
-                      ]
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "if": {
-                "properties": { "name": { "const": "Buildings" } }
-              },
-              "then": {
-                "properties": {
-                  "technologies": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "Energy Efficiency",
-                        "Smart Grids",
-                        "Renewable Heating",
-                        "Heat Pumps",
-                        "Building Automation",
-                        "Smart Appliances",
-                        "Insulation",
-                        "Other"
-                      ]
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "if": {
-                "properties": { "name": { "const": "Industrial" } }
-              },
-              "then": {
-                "properties": {
-                  "technologies": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "Carbon Capture and Storage",
-                        "Electrification",
-                        "Process Optimization",
-                        "Hydrogen Use",
-                        "Other"
-                      ]
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "if": {
-                "properties": { "name": { "const": "Power Generation" } }
-              },
-              "then": {
-                "properties": {
-                  "technologies": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "Coal",
-                        "Oil",
-                        "Gas",
-                        "Wind",
-                        "Solar",
-                        "Nuclear",
-                        "Biomass",
-                        "Other"
-                      ]
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "if": {
-                "properties": { "name": { "const": "Transport" } }
-              },
-              "then": {
-                "properties": {
-                  "technologies": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "Electric Vehicles",
-                        "Hydrogen Vehicles",
-                        "Biofuels",
-                        "Public Transport",
-                        "Active Mobility",
-                        "Aviation Efficiency",
-                        "Maritime Efficiency"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          ]
+          "additionalProperties": false
         }
       },
       "publisher": {
-        "description": "Publisher of the scenario",
-        "type": "string"
+        "description": "Publisher of the scenario.",
+        "type": "string",
+        "maxLength": 100
       },
       "publicationYear": {
-        "description": "Year that the scenario was published",
-        "type": "string"
+        "description": "Year that the scenario was published.",
+        "type": "integer",
+        "minimum": 1900,
+        "maximum": 2030
       },
       "overview": {
-        "description": "Overview of the scenario",
-        "type": "string"
+        "description": "Overview of the scenario.",
+        "type": "string",
+        "maxLength": 500
       },
       "expertRecommendation": {
-        "description": "Expert recommendation for the scenario",
-        "type": "string"
+        "description": "Expert recommendation for the scenario.",
+        "type": "string",
+        "maxLength": 5000
       },
       "dataSource": {
-        "description": "Data source for the scenario",
+        "description": "Data source for the scenario.",
         "type": "object",
         "properties": {
-          "description": { "type": "string" },
-          "url": { "type": "string" },
-          "downloadAvailable": { "type": "boolean" }
+          "description": {
+            "description": "Description of the data source.",
+            "type": "string",
+            "maxLength": 500
+          },
+          "url": {
+            "description": "URL at which the data source can be accessed.",
+            "type": "string",
+            "pattern": "^(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*$"
+          },
+          "downloadAvailable": {
+            "description": "Flag indicating if the data source can be downloaded.",
+            "type": "boolean"
+          }
         },
         "additionalProperties": false,
         "required": ["description", "url", "downloadAvailable"]
@@ -266,8 +203,6 @@
       "name",
       "description",
       "pathwayType",
-      "pathway_type_tooltip",
-      "modelYearEnd",
       "regions",
       "sectors",
       "publisher",
@@ -280,7 +215,7 @@
   "minItems": 1,
   "definitions": {
     "countryCode": {
-      "description": "ISO 3166-1 Alpha-2 Country Codes",
+      "description": "ISO 3166-1 Alpha-2 Country Codes.",
       "type": "string",
       "enum": [
         "AF",
