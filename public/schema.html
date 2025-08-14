@@ -20,6 +20,7 @@
     <!-- <script src="js/facf9fa52c.js"></script> -->
     <script src="js/schema_doc.min.js"></script>
     <meta charset="utf-8" />
+
     <title>PBTAR Scenarios metadata Schema</title>
   </head>
   <body
@@ -46,12 +47,14 @@
         Collapse all
       </button>
     </div>
+
     <div class="breadcrumbs"></div>
     <h1>PBTAR Scenarios metadata Schema</h1>
-    <span class="badge badge-dark value-type">Type: array of object</span
-    ><br /><span class="description"
+    <span class="badge badge-dark value-type">Type: array of object</span><br />
+    <span class="description"
       ><p>A schema for the scenarios metadata dataset in PBTAR.</p>
     </span>
+
     <p>
       <span
         class="badge badge-light restriction min-items-restriction"
@@ -91,6 +94,7 @@
         <span class="badge badge-info no-additional"
           >No Additional Properties</span
         >
+
         <div
           class="accordion"
           id="accordionitems_id"
@@ -165,9 +169,11 @@
                   >
                 </div>
                 <span class="badge badge-dark value-type">Type: string</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>The unique identifier for a scenario.</p>
                 </span>
+
                 <p>
                   <span
                     class="badge badge-light restriction max-length-restriction"
@@ -253,9 +259,9 @@
                   >
                 </div>
                 <span class="badge badge-dark value-type">Type: string</span
-                ><br /><span class="description"
-                  ><p>Name of the scenario.</p>
-                </span>
+                ><br />
+                <span class="description"><p>Name of the scenario.</p> </span>
+
                 <p>
                   <span
                     class="badge badge-light restriction max-length-restriction"
@@ -341,9 +347,11 @@
                   >
                 </div>
                 <span class="badge badge-dark value-type">Type: string</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>Brief description of the scenario.</p>
                 </span>
+
                 <p>
                   <span
                     class="badge badge-light restriction max-length-restriction"
@@ -430,7 +438,8 @@
                 </div>
                 <span class="badge badge-dark value-type"
                   >Type: enum (of string)</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>Type of the scenario pathway.</p>
                 </span>
                 <div
@@ -520,13 +529,15 @@
                   >
                 </div>
                 <span class="badge badge-dark value-type">Type: integer</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>
                     Year by which net zero is reached in the scenario. If
                     Scenario does not reach net zero, this field should be
                     omitted.
                   </p>
                 </span>
+
                 <p>
                   <span
                     class="badge badge-light restriction numeric-restriction"
@@ -610,7 +621,8 @@
                   >
                 </div>
                 <span class="badge badge-dark value-type">Type: number</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>
                     Carbon budget of the scenario in gigatons of CO2 equivalent
                     (GtCO2eq). If no carbon budget is defined, this field should
@@ -618,6 +630,7 @@
                     should be set to 0.
                   </p>
                 </span>
+
                 <p>
                   <span
                     class="badge badge-light restriction numeric-restriction"
@@ -700,9 +713,11 @@
                   >
                 </div>
                 <span class="badge badge-dark value-type">Type: integer</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>Year from which the model starts.</p>
                 </span>
+
                 <p>
                   <span
                     class="badge badge-light restriction numeric-restriction"
@@ -786,9 +801,11 @@
                   >
                 </div>
                 <span class="badge badge-dark value-type">Type: integer</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>Year in which the model ends.</p>
                 </span>
+
                 <p>
                   <span
                     class="badge badge-light restriction numeric-restriction"
@@ -872,12 +889,14 @@
                   >
                 </div>
                 <span class="badge badge-dark value-type">Type: number</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>
                     Modeled temperature increase expected by the scenario (in
                     degrees Celsius).
                   </p>
                 </span>
+
                 <p>
                   <span
                     class="badge badge-light restriction numeric-restriction"
@@ -963,7 +982,8 @@
                 </div>
                 <span class="badge badge-dark value-type"
                   >Type: enum (of string)</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>
                     Shared Socioeconomic Pathways (SSP) associated with the
                     scenario.
@@ -1061,9 +1081,11 @@
                 </div>
                 <span class="badge badge-dark value-type"
                   >Type: array of enum (of string)</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>Regions that the scenario covers.</p>
                 </span>
+
                 <p>
                   <span
                     class="badge badge-light restriction unique-items-restriction"
@@ -1236,9 +1258,11 @@
                 </div>
                 <span class="badge badge-dark value-type"
                   >Type: enum (of string)</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>The country code associated with the scenario.</p>
                 </span>
+
                 <div
                   class="enum-value"
                   id="items_country_enum"
@@ -1571,9 +1595,11 @@
                 </div>
                 <span class="badge badge-dark value-type"
                   >Type: array of object</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>Sectors that the scenario covers.</p>
                 </span>
+
                 <span class="badge badge-info no-additional"
                   >No Additional Items</span
                 >
@@ -1645,6 +1671,7 @@
                     <span class="badge badge-info no-additional"
                       >No Additional Properties</span
                     >
+
                     <div
                       class="accordion"
                       id="accordionitems_sectors_items_name"
@@ -1933,9 +1960,11 @@
                             </div>
                             <span class="badge badge-dark value-type"
                               >Type: array of enum (of string)</span
-                            ><br /><span class="description"
+                            ><br />
+                            <span class="description"
                               ><p>Technologies applicable to this sector.</p>
                             </span>
+
                             <span class="badge badge-info no-additional"
                               >No Additional Items</span
                             >
@@ -2222,9 +2251,11 @@
                   >
                 </div>
                 <span class="badge badge-dark value-type">Type: string</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>Publisher of the scenario.</p>
                 </span>
+
                 <p>
                   <span
                     class="badge badge-light restriction max-length-restriction"
@@ -2310,9 +2341,11 @@
                   >
                 </div>
                 <span class="badge badge-dark value-type">Type: integer</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>Year that the scenario was published.</p>
                 </span>
+
                 <p>
                   <span
                     class="badge badge-light restriction numeric-restriction"
@@ -2399,9 +2432,11 @@
                   >
                 </div>
                 <span class="badge badge-dark value-type">Type: string</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>Overview of the scenario.</p>
                 </span>
+
                 <p>
                   <span
                     class="badge badge-light restriction max-length-restriction"
@@ -2487,9 +2522,11 @@
                   >
                 </div>
                 <span class="badge badge-dark value-type">Type: string</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>Expert recommendation for the scenario.</p>
                 </span>
+
                 <p>
                   <span
                     class="badge badge-light restriction max-length-restriction"
@@ -2575,12 +2612,14 @@
                   >
                 </div>
                 <span class="badge badge-dark value-type">Type: object</span
-                ><br /><span class="description"
+                ><br />
+                <span class="description"
                   ><p>Data source for the scenario.</p>
                 </span>
                 <span class="badge badge-info no-additional"
                   >No Additional Properties</span
                 >
+
                 <div
                   class="accordion"
                   id="accordionitems_dataSource_description"
@@ -2674,9 +2713,11 @@
                         </div>
                         <span class="badge badge-dark value-type"
                           >Type: string</span
-                        ><br /><span class="description"
+                        ><br />
+                        <span class="description"
                           ><p>Description of the data source.</p>
                         </span>
+
                         <p>
                           <span
                             class="badge badge-light restriction max-length-restriction"
@@ -2782,7 +2823,8 @@
                         </div>
                         <span class="badge badge-dark value-type"
                           >Type: string</span
-                        ><br /><span class="description"
+                        ><br />
+                        <span class="description"
                           ><p>
                             URL at which the data source can be accessed.
                           </p> </span
@@ -2891,7 +2933,8 @@
                         </div>
                         <span class="badge badge-dark value-type"
                           >Type: boolean</span
-                        ><br /><span class="description"
+                        ><br />
+                        <span class="description"
                           ><p>
                             Flag indicating if the data source can be
                             downloaded.
@@ -2907,6 +2950,7 @@
         </div>
       </div>
     </div>
+
     <footer>
       <p class="generated-by-footer">
         Generated using
