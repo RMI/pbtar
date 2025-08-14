@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v4
 
       - id: render-json-schema
-        uses: RMI-PACTA/actions/actions/json-schema/render-docs@main
+        uses: RMI-PACTA/actions/actions/json-schema/check-docs@main
         with:
           input-files: "public/schema.json"
           outputs: "public/schema.html"
