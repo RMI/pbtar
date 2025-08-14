@@ -10,6 +10,7 @@ on:
       - main
       - production
       - next
+      - test-226
 
 name: Node Package Checks
 concurrency: node-package-checks
