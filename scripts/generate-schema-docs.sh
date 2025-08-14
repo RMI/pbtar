@@ -13,3 +13,5 @@ generate-schema-doc \
 
 npm run format
 
+# leave the venv
+deactivate

@@ -15,7 +15,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "json:check": "ajv validate -s public/schema.json src/data/*.json",
-    "docs:jsonSchema": "generate-schema-doc --config-file scripts/schema-render-config.json public/ public/ && npm run format"
+    "docs:jsonSchema": "scripts/generate-schema-docs.sh"
   },
   "author": "RMI",
   "license": "MIT",
