@@ -1,5 +1,5 @@
-import { Scenario, SearchFilters, PathwayType } from "../types";
-import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
+import { Scenario, SearchFilters } from "../types";
+import { getSectorTooltip } from "../utils/tooltipUtils";
 
 export const filterScenarios = (
   scenarios: Scenario[],
