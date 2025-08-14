@@ -2,12 +2,13 @@ from json_schema_for_humans.generate import generate_from_filename
 from json_schema_for_humans.generation_configuration import GenerationConfiguration
 
 config = GenerationConfiguration(
-        copy_css=False,
         expand_buttons=True,
-        collapse_long_descriptions=True,
-        template_name="js",
-        with_footer=True,
-        footer_show_time=False
+        footer_show_time=False,
+        minify=True,
+        show_breadcrumbs=True,
+        show_toc=True,
+        template_name="js_offline",
+        with_footer=True
         )
 
 generate_from_filename(
