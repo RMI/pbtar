@@ -8,6 +8,7 @@ import scenarios_metadata_5 from "./scenarios_metadata_5.json" with { type: "jso
 import scenarios_metadata_6 from "./scenarios_metadata_6.json" with { type: "json" };
 import scenarios_metadata_7 from "./scenarios_metadata_7.json" with { type: "json" };
 import scenarios_metadata_8 from "./scenarios_metadata_8.json" with { type: "json" };
+import scenarios_metadata_minimal from "./scenarios_metadata_minimal.json" with { type: "json" };
 
 export const scenariosData: Scenario[] = [
   ...scenarios_metadata_1,
@@ -18,4 +19,5 @@ export const scenariosData: Scenario[] = [
   ...scenarios_metadata_6,
   ...scenarios_metadata_7,
   ...scenarios_metadata_8,
+  ...scenarios_metadata_minimal,
 ];

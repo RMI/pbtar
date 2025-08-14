@@ -1,0 +1,24 @@
+[
+  {
+    "id": "scenario-minimal",
+    "name": "Minimal Scenario",
+    "description": "A minimal scenario file that passes schema validation.",
+    "pathwayType": "Exploratory",
+    "regions": ["Country-Specific"],
+    "sectors": [
+      {
+        "name": "Other",
+        "technologies": ["Other"]
+      }
+    ],
+    "publisher": "Test Publisher",
+    "publicationYear": 1900,
+    "overview": "This is a minimal scenario for testing purposes.",
+    "expertRecommendation": "Test recommendation",
+    "dataSource": {
+      "description": "Test Data Source",
+      "url": "http://example.com/",
+      "downloadAvailable": false
+    }
+  }
+]
