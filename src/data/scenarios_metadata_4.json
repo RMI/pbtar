@@ -3,13 +3,13 @@
     "id": "scenario-004",
     "name": "CoalTech CCS Transition",
     "description": "Scenario focused on CCS deployment for existing coal infrastructure",
-    "pathway_type": "Normative",
-    "modelYearEnd": "2060",
-    "modeled_temperature_increase": 2,
+    "pathwayType": "Normative",
+    "modelYearEnd": 2060,
+    "modelTempIncrease": 2,
     "regions": ["Global", "SEA", "Asia Pacific"],
     "sectors": [
       {
-        "name": "Power Generation",
+        "name": "Power",
         "technologies": [
           "Coal",
           "Oil",
@@ -22,7 +22,7 @@
         ]
       },
       {
-        "name": "Industrial",
+        "name": "Industry",
         "technologies": [
           "Carbon Capture and Storage",
           "Electrification",
@@ -33,8 +33,8 @@
       }
     ],
     "publisher": "CoalTech Solutions Consortium",
-    "publicationYear": "2022-11-30",
-    "overview": "This scenario explores a transition pathway that heavily leverages carbon capture and storage (CCS) technologies to reduce emissions from existing coal power plants and industrial facilities. Rather than rapid decommissioning of coal assets, this scenario models a more gradual transition where CCS is deployed at scale to allow continued operation of some coal plants while still meeting climate goals. The scenario includes detailed modeling of CCS deployment curves, costs, and infrastructure requirements.",
+    "publicationYear": 2022,
+    "overview": "This scenario explores a transition pathway that heavily leverages carbon capture and storage (CCS) technologies to reduce emissions from existing coal power plants and industrial facilities. Rather than rapid decommissioning of coal assets, this scenario models a more gradual transition where CCS is deployed at scale to allow continued operation of some coal plants. The scenario includes detailed modeling of CCS deployment curves, costs, and infrastructure requirements.",
     "expertRecommendation": "This scenario provides a useful alternative perspective to scenarios that focus primarily on renewable deployment. It is particularly relevant for assessments of companies with younger coal assets that may be difficult to retire early, especially in regions like Southeast Asia where coal remains a significant part of the energy mix. However, we recommend using this scenario alongside others, as it relies heavily on technology deployment that has yet to be proven at scale and may overestimate the potential for CCS.",
     "dataSource": {
       "description": "The scenario data is available from the CoalTech Solutions Consortium website. Basic data is freely available, while detailed datasets require membership.",

@@ -43,6 +43,42 @@ const renderScenarioCard = (scenario: Scenario = mockScenario) => {
 };
 
 describe("ScenarioCard component", () => {
+  // Mock scenario data
+  const mockScenario: Scenario = {
+    id: "scenario-1",
+    name: "Net Zero 2050",
+    description:
+      "A scenario describing the path to net zero emissions by 2050.",
+    pathwayType: "Policy",
+    modelYearEnd: "2050",
+    modelTempIncrease: 1.5,
+    regions: ["Global", "Europe", "North America", "Asia"],
+    sectors: [
+      { name: "Power", tooltip: "Electricity generation and distribution" },
+      { name: "Transport", tooltip: "Transportation and logistics" },
+      { name: "Industrial", tooltip: "Manufacturing and industrial processes" },
+      { name: "Buildings", tooltip: "Residential and commercial buildings" },
+    ],
+    publisher: "IEA",
+    publicationYear: "Jan 2023",
+    overview: "Mock",
+    expertRecommendation: "Mock",
+    dataSource: {
+      description: "Mock Data Source",
+      url: "https://example.com/data-source",
+      downloadAvailable: true,
+    },
+  };
+
+  // Helper function to render component with router context
+  const renderScenarioCard = (scenario: Scenario = mockScenario) => {
+    return render(
+      <MemoryRouter>
+        <ScenarioCard scenario={scenario} />
+      </MemoryRouter>,
+    );
+  };
+
   it("renders the scenario name and description", () => {
     renderScenarioCard();
 
@@ -57,11 +93,11 @@ describe("ScenarioCard component", () => {
     expect(link).toHaveAttribute("href", `/scenario/${mockScenario.id}`);
   });
 
-  it("displays the pathway_type badge", () => {
+  it("displays the pathwayType badge", () => {
     renderScenarioCard();
 
-    const pathway_typeBadge = screen.getByText(mockScenario.pathway_type);
-    expect(pathway_typeBadge).toBeInTheDocument();
+    const pathwayTypeBadge = screen.getByText(mockScenario.pathwayType);
+    expect(pathwayTypeBadge).toBeInTheDocument();
   });
 
   it("shows target year and temperature badges", () => {
@@ -69,9 +105,7 @@ describe("ScenarioCard component", () => {
 
     expect(screen.getByText(mockScenario.modelYearEnd)).toBeInTheDocument();
     expect(
-      screen.getByText(
-        mockScenario.modeled_temperature_increase?.toString() + "°C",
-      ),
+      screen.getByText(mockScenario.modelTempIncrease?.toString() + "°C"),
     ).toBeInTheDocument();
   });
 
@@ -139,9 +173,9 @@ describe("ScenarioCard component", () => {
       id: "test-scenario",
       name: "Test Scenario",
       description: "Test description",
-      pathway_type: "Exploration",
+      pathwayType: "Exploration",
       modelYearEnd: "2050",
-      modeled_temperature_increase: 1.5,
+      modelTempIncrease: 1.5,
       regions: ["Global", "EU", "Americas", "Africa", "Asia Pacific"], // 5 regions
       sectors: [
         { name: "Power" },
@@ -246,9 +280,9 @@ describe("ScenarioCard search highlighting", () => {
     name: "Net Zero 2050",
     description:
       "A scenario describing the path to net zero emissions by 2050.",
-    pathway_type: "Policy",
+    pathwayType: "Policy",
     modelYearEnd: "2050",
-    modeled_temperature_increase: 1.5,
+    modelTempIncrease: 1.5,
     regions: ["Global", "Europe", "North America", "Hidden Match Region"],
     sectors: [
       { name: "Power" },
@@ -348,12 +382,12 @@ describe("tooltip functionality", () => {
   it("uses correct tooltip for Policy pathway type", () => {
     const scenarioWithPolicy: Scenario = {
       ...mockScenario,
-      pathway_type: "Policy",
+      pathwayType: "Direct Policy",
     };
 
     renderScenarioCard(scenarioWithPolicy);
 
-    const badge = screen.getByText("Policy");
+    const badge = screen.getByText("Direct Policy");
     expect(badge).toBeInTheDocument();
     const tooltipTrigger = badge.closest("span")?.parentElement;
     expect(tooltipTrigger).toHaveAttribute("tabindex", "0");

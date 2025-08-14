@@ -11,9 +11,9 @@ vi.mock("../data/scenariosData", () => ({
       name: "Net Zero 2050",
       description:
         "A scenario describing the path to net zero emissions by 2050.",
-      pathway_type: "Policy",
+      pathwayType: "Policy",
       modelYearEnd: "2050",
-      modeled_temperature_increase: 1.5,
+      modelTempIncrease: 1.5,
       regions: ["Global", "Europe"],
       sectors: [{ name: "Power" }, { name: "Transport" }],
       publisher: "IEA",
@@ -30,9 +30,9 @@ vi.mock("../data/scenariosData", () => ({
       id: "scenario-2",
       name: "Current Policies",
       description: "A scenario based on current implemented policies.",
-      pathway_type: "Projection",
+      pathwayType: "Projection",
       modelYearEnd: "2030",
-      modeled_temperature_increase: 2.7,
+      modelTempIncrease: 2.7,
       regions: ["Global", "Asia"],
       sectors: [
         {
@@ -55,9 +55,9 @@ vi.mock("../data/scenariosData", () => ({
       name: "Net Zero 2050",
       description:
         "A scenario describing the path to net zero emissions by 2050.",
-      pathway_type: "Exploration",
+      pathwayType: "Exploration",
       modelYearEnd: "2050",
-      modeled_temperature_increase: 1.5,
+      modelTempIncrease: 1.5,
       regions: ["Global", "Europe"],
       sectors: [{ name: "Power" }, { name: "Transport" }],
       publisher: "IEA",
@@ -75,9 +75,9 @@ vi.mock("../data/scenariosData", () => ({
       name: "Net Zero 2050",
       description:
         "A scenario describing the path to net zero emissions by 2050.",
-      pathway_type: "Normative",
+      pathwayType: "Normative",
       modelYearEnd: "2050",
-      modeled_temperature_increase: 1.5,
+      modelTempIncrease: 1.5,
       regions: ["Global", "Europe"],
       sectors: [{ name: "Power" }, { name: "Transport" }],
       publisher: "IEA",

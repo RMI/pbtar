@@ -2,9 +2,9 @@ export interface Scenario {
   id: string;
   name: string;
   description: string;
-  pathway_type: string;
+  pathwayType: string;
   modelYearEnd: string;
-  modeled_temperature_increase?: number;
+  modelTempIncrease?: number;
   regions: string[];
   sectors: {
     name: Sector;
@@ -54,9 +54,9 @@ export type Sector =
   | "N/A";
 
 export interface SearchFilters {
-  pathway_type: PathwayType | null;
+  pathwayType: PathwayType | null;
   modelYearEnd: YearTarget | null;
-  modeled_temperature_increase: TemperatureTarget | null;
+  modelTempIncrease: TemperatureTarget | null;
   region: Region | null;
   sector: Sector | null;
   searchTerm: string;

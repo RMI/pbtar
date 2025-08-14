@@ -129,11 +129,11 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           </p>
           <div className="flex flex-wrap gap-2">
             <Badge
-              text={highlightTextIfSearchMatch(scenario.pathway_type)}
+              text={highlightTextIfSearchMatch(scenario.pathwayType)}
               tooltip={getPathwayTypeTooltip(
                 scenario.pathway_type as PathwayType,
               )}
-              variant="pathway_type"
+              variant="pathwayType"
             />
           </div>
         </div>
@@ -145,10 +145,10 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               text={highlightTextIfSearchMatch(scenario.modelYearEnd)}
               variant="year"
             />
-            {scenario.modeled_temperature_increase && (
+            {scenario.modelTempIncrease && (
               <Badge
                 text={highlightTextIfSearchMatch(
-                  `${scenario.modeled_temperature_increase.toString()}°C`,
+                  `${scenario.modelTempIncrease.toString()}°C`,
                 )}
                 variant="temperature"
               />

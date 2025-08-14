@@ -81,19 +81,19 @@ const ScenarioDetailPage: React.FC = () => {
 
           <div className="flex flex-wrap gap-2 mb-4">
             <Badge
-              text={scenario.pathway_type}
+              text={scenario.pathwayType}
               tooltip={getPathwayTypeTooltip(
                 scenario.pathway_type as PathwayType,
               )}
-              variant="pathway_type"
+              variant="pathwayType"
             />
             <Badge
               text={scenario.modelYearEnd}
               variant="year"
             />
-            {scenario.modeled_temperature_increase && (
+            {scenario.modelTempIncrease && (
               <Badge
-                text={`${scenario.modeled_temperature_increase}°C`}
+                text={`${scenario.modelTempIncrease}°C`}
                 variant="temperature"
               />
             )}
