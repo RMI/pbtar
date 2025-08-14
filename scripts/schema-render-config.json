@@ -4,7 +4,7 @@
   "minify": true,
   "show_breadcrumbs": true,
   "show_toc": false,
-  "template_name": "js",
+  "template_name": "js_offline",
   "with_footer": true,
   "template_md_options": {
     "badge_as_image": true,
