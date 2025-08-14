@@ -41,9 +41,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Setup Python
-        run: . "scripts/setup-python.sh"
-
       - name: Run JSON schema render
         run: npm run docs:jsonSchema
 
