@@ -1,10 +1,10 @@
 import { PathwayType, Sector } from "../types";
 
 export const pathwayTypeTooltips: Record<PathwayType, string> = {
-  "Direct Policy": "Direct Policy test tooltip TKTK",
-  "Exploratory": "Exploratory test tooltip TKTK",
-  "Normative": "Normative test tooltip TKTK",
-  "Predictive": "Projection test tooltip TKTK",
+  "Direct Policy": "Outcomes based on legislated policy targets or commitments.",
+  "Exploratory": "Examines a range of plausible futures without fixed goals.",
+  "Normative": "Starts from a desired end state and works backward to actions.",
+  "Predictive": "Projects likely futures based on current trends and assumptions.",
 };
 
 export const sectorTooltips: Record<Sector, string> = {
