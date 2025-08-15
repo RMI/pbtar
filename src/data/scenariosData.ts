@@ -18,9 +18,9 @@ const validate = ajv.compile(schema);
 
 const validateData = (data: unknown, filename: string): Scenario[] => {
   if (!validate(data)) {
-    const errors = validate.errors?.map(err => 
-      `${err.instancePath} ${err.message}`
-    ).join('\n');
+    const errors = validate.errors
+      ?.map((err) => `${err.instancePath} ${err.message}`)
+      .join("\n");
     throw new Error(`Schema validation failed for ${filename}:\n${errors}`);
   }
   return data as Scenario[];
