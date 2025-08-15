@@ -1,0 +1,7 @@
+[
+  {
+    "id": "scenario-failing",
+    "name": "Failing Scenario",
+    "description": "Scenario that does not pass schema validation"
+  }
+]
