@@ -1,8 +1,11 @@
 # Pathways-based transition assessment repository (pbtar)
 
-[![Lint Frontend service](https://github.com/RMI/pbtar/actions/workflows/frontend-lint.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/frontend-lint.yml)
-[![Test Frontend service](https://github.com/RMI/pbtar/actions/workflows/frontend-test.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/frontend-test.yml)
-[![Docker build and push Frontend service to ghcr.io](https://github.com/RMI/pbtar/actions/workflows/frontend-docker-build-and-push.yml/badge.svg?branch=main)](https://github.com/RMI/pbtar/actions/workflows/frontend-docker-build-and-push.yml)
+|                    |                                                                                                                                                                                                                                                     Production |                                                                                                                                                                                                                         Development (`main`) |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| **Link**           |                                                                                                                                                                                        **[Production](https://green-pebble-01f5d5c1e.6.azurestaticapps.net/)** |                                                                                                                                                        **[Development](https://green-pebble-01f5d5c1e-main.westus2.6.azurestaticapps.net/)** |
+| **`node` checks**  |                                                                                         [![Node Package Checks](https://github.com/RMI/pbtar/actions/workflows/node.yml/badge.svg?branch=production)](https://github.com/RMI/pbtar/actions/workflows/node.yml) |                                                                                         [![Node Package Checks](https://github.com/RMI/pbtar/actions/workflows/node.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/node.yml) |
+| **`docker` build** |                                                                                                  [![docker](https://github.com/RMI/pbtar/actions/workflows/docker.yml/badge.svg?branch=production)](https://github.com/RMI/pbtar/actions/workflows/docker.yml) |                                                                                                  [![docker](https://github.com/RMI/pbtar/actions/workflows/docker.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/docker.yml) |
+| **Azure Deploy**   | [![Azure Static Web Apps CI/CD](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml/badge.svg?branch=production)](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml) | [![Azure Static Web Apps CI/CD](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml) |
 
 ## Running the application
 
@@ -16,7 +19,7 @@ cd pbtar
 2. Create an `.env` file to store the desired frontend port
 
 ```sh
-cp .env.example .env
+cp env.example .env
 ```
 
 3. Run the services with `docker compose`
@@ -39,6 +42,18 @@ The React web service will be accessible at http://localhost.
 ```sh
 docker compose down
 ```
+
+## Deployments
+
+The application is deployed using Azure Static Web Apps:
+
+- **Production**: [View Production Site](https://green-pebble-01f5d5c1e.6.azurestaticapps.net/)  
+  _Deployed automatically when changes are merged to the `production` branch_
+
+- **Development**: [View Development Site](https://green-pebble-01f5d5c1e-main.westus2.6.azurestaticapps.net/)  
+  _Reflects the current state of the `main` branch_
+
+Pull requests automatically deploy to preview environments with URLs provided in the PR comments.
 
 ## Development
 
@@ -73,6 +88,23 @@ docker compose up --build
 
 This will start all services defined in the `docker-compose.yml` file, including the frontend, backend, and database. The frontend will be accessible at `http://localhost`.
 
+4. Building the application
+   To render the site,
+
+```bash
+npm run build
+
+# or for a PROD BUILD
+VITE_BUILD_MODE=production npm run build
+```
+
+Then you can serve the `dist/` directory using your favorite local server.
+For example, to use python's server,
+
+```bash
+python3 -m http.server 9001 -d ./dist
+```
+
 ## Contributing
 
 Dependencies are managed using `npm`. To add a new library, run:
@@ -104,6 +136,28 @@ npm run lint:fix
 # Format code with Prettier
 npm run format
 ```
+
+## Documentation
+
+### JSON Schema
+
+To render JSON Schema documentation (available in-app at `/schema.html` route), run `npm run docs:json:schema`, which invokes the `scripts/generate-schema-docs.sh`. This script creates and activates a python virtual environment, and renders the `public/schema.html` file, which will be picked up by the build process.
+
+There is a GitHub workflow (`schema-docs` in `.github/workflows/node-json-schema.yml`) to check that the documentation and the schema do not diverge.
+
+## Releases
+
+This project uses [`semantic-release`](https://semantic-release.gitbook.io/semantic-release) to manage release versions.
+See "Releases" on the right of the main GitHub repository page to see the latest released version, or click through to see pre-releases.
+
+### Managing Releases (For developers)
+
+To trigger an update in released version, use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in your normal development process.
+Commits with a `feat` prefix (in the commit summary) will cause a bump in the minor version (`x.X.x`), while a `fix`, `build`, `docs`, `perf`, `refactor`, `style`, or `test` prefix will bump the patch version (`x.x.X`).
+The commit summary used will appear in the release notes.
+
+The "released" version of the application is updated when the `production` branch is updated, but we can see pre-release versions by updating `main` (updates `x.x.x-dev.y`) or `next` (updates `x.x.x-rc.y`).
+When opening a Pull Request, an GitHub workflow will dry-run the release process and comment with a preview of the expected version tag and release notes.
 
 ## License
 

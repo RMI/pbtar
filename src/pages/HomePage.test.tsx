@@ -8,7 +8,10 @@ import { Scenario } from "../types";
 // Mock the ScenarioCard component to simplify testing
 vi.mock("../components/ScenarioCard", () => ({
   default: ({ scenario }: { scenario: Scenario }) => (
-    <div data-testid="scenario-card" data-scenario-id={scenario.id}>
+    <div
+      data-testid="scenario-card"
+      data-scenario-id={scenario.id}
+    >
       {scenario.name}
     </div>
   ),

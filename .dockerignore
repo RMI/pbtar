@@ -6,9 +6,5 @@
 .idea/
 .vscode/
 
-# Git
-.git/
-.gitignore
-
 # Other project-specific files
 *.env

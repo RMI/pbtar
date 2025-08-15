@@ -1,9 +1,10 @@
 import React from "react";
 import SearchBox from "./SearchBox";
 import FilterDropdown from "./FilterDropdown";
+import { scenariosData } from "../data/scenariosData";
 import {
   SearchFilters,
-  ScenarioCategory,
+  PathwayType,
   YearTarget,
   TemperatureTarget,
   Region,
@@ -12,59 +13,48 @@ import {
 
 interface SearchSectionProps {
   filters: SearchFilters;
-  onFilterChange: (key: keyof SearchFilters, value: string | null) => void;
+  scenariosNumber: number;
+  onFilterChange: <T extends string | number | null>(
+    key: keyof SearchFilters,
+    value: T | null,
+  ) => void;
   onSearch: () => void;
   onClear: () => void;
 }
 
 const SearchSection: React.FC<SearchSectionProps> = ({
   filters,
+  scenariosNumber,
   onFilterChange,
   onSearch,
   onClear,
 }) => {
-  const categories: ScenarioCategory[] = ["IAM", "ITR", "NDC", "Other"];
-  const years: YearTarget[] = [
-    "2030",
-    "2040",
-    "2050",
-    "2060",
-    "2070",
-    "2100",
-    "N/A",
-  ];
-  const temperatures: TemperatureTarget[] = [
-    "1.5C",
-    "2C",
-    "2.5C",
-    "3C",
-    "4C",
-    "N/A",
-  ];
-  const regions: Region[] = [
-    "Global",
-    "EU",
-    "SEA",
-    "Americas",
-    "Africa",
-    "Asia Pacific",
-    "N/A",
-  ];
-  const sectors: Sector[] = [
-    "Power",
-    "Oil & Gas",
-    "Coal",
-    "Renewables",
-    "Industrial",
-    "Transport",
-    "Buildings",
-    "Agriculture",
-    "N/A",
-  ];
+  const categories: PathwayType[] = Array.from(
+    new Set(scenariosData.map((d) => d.pathwayType)),
+  ).sort() as PathwayType[];
+  const years: YearTarget[] = Array.from(
+    new Set(scenariosData.map((d) => d.modelYearEnd)),
+  ).sort() as YearTarget[];
+  const temperatures: TemperatureTarget[] = Array.from(
+    new Set(scenariosData.map((d) => d.modelTempIncrease)),
+  ).sort() as TemperatureTarget[];
+  const regions: Region[] = Array.from(
+    new Set(scenariosData.map((d) => d.regions).flat()),
+  ).sort() as Region[];
+  const sectors: Sector[] = Array.from(
+    new Set(scenariosData.flatMap((d) => d.sectors.map((s) => s.name))),
+  ).sort();
+  const areFiltersApplied =
+    (filters.searchTerm ||
+      filters.pathwayType ||
+      filters.region ||
+      filters.sector ||
+      filters.modelYearEnd ||
+      filters.modelTempIncrease) !== null;
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-5 mb-6">
-      <div className="mb-4">
+    <div className="bg-white">
+      <div className="mb-4 pt-8">
         <SearchBox
           value={filters.searchTerm}
           onChange={(value) => onFilterChange("searchTerm", value)}
@@ -74,40 +64,46 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <FilterDropdown
-          label="Category"
+        <FilterDropdown<string>
+          label="Pathway Type"
           options={categories}
-          selectedValue={filters.category}
-          onChange={(value) => onFilterChange("category", value)}
+          selectedValue={filters.pathwayType}
+          onChange={(value) => onFilterChange("pathwayType", value)}
         />
 
-        <FilterDropdown
+        <FilterDropdown<string>
           label="Target Year"
           options={years}
-          selectedValue={filters.target_year}
-          onChange={(value) => onFilterChange("target_year", value)}
+          selectedValue={filters.modelYearEnd}
+          onChange={(value) => onFilterChange("modelYearEnd", value)}
         />
 
-        <FilterDropdown
-          label="Temperature"
+        <FilterDropdown<number>
+          label="Temperature (°C)"
           options={temperatures}
-          selectedValue={filters.target_temperature}
-          onChange={(value) => onFilterChange("target_temperature", value)}
+          selectedValue={filters.modelTempIncrease}
+          onChange={(value) => onFilterChange("modelTempIncrease", value)}
         />
 
-        <FilterDropdown
+        <FilterDropdown<string>
           label="Region"
           options={regions}
           selectedValue={filters.region}
           onChange={(value) => onFilterChange("region", value)}
         />
 
-        <FilterDropdown
+        <FilterDropdown<string>
           label="Sector"
           options={sectors}
           selectedValue={filters.sector}
           onChange={(value) => onFilterChange("sector", value)}
         />
+      </div>
+      <div className="mt-4 ml-1">
+        <p className="text-sm text-rmigray-500">
+          Found {scenariosNumber} scenarios
+          {areFiltersApplied && " matching your criteria"}
+        </p>
       </div>
     </div>
   );
