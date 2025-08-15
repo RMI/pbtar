@@ -131,7 +131,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             <Badge
               text={highlightTextIfSearchMatch(scenario.pathwayType)}
               tooltip={getPathwayTypeTooltip(
-                scenario.pathway_type as PathwayType,
+                scenario.pathwayType as PathwayType,
               )}
               variant="pathwayType"
             />

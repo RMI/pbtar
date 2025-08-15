@@ -83,7 +83,7 @@ const ScenarioDetailPage: React.FC = () => {
             <Badge
               text={scenario.pathwayType}
               tooltip={getPathwayTypeTooltip(
-                scenario.pathway_type as PathwayType,
+                scenario.pathwayType as PathwayType,
               )}
               variant="pathwayType"
             />
