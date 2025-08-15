@@ -3,13 +3,11 @@ export interface Scenario {
   name: string;
   description: string;
   pathwayType: string;
-  pathway_type_tooltip: string;
   modelYearEnd: string;
   modelTempIncrease?: number;
   regions: string[];
   sectors: {
     name: Sector;
-    tooltip: string;
   }[];
   publisher: string;
   publicationYear: string;

@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Badge from "./Badge";
+import { pathwayTypeTooltips, sectorTooltips } from "../utils/tooltipUtils";
 
 describe("Badge component", () => {
   it("renders with the provided text", () => {
@@ -159,5 +160,75 @@ describe("Badge component", () => {
     // Initially the tooltip shouldn't be in document.body
     const tooltipElement = document.querySelector("[role='tooltip']");
     expect(tooltipElement).not.toBeInTheDocument();
+  });
+
+  describe("tooltip content tests", () => {
+    it("displays correct tooltip for Normative pathway type", () => {
+      render(
+        <Badge
+          text="Normative"
+          tooltip={pathwayTypeTooltips["Normative"]}
+          variant="pathwayType"
+        />,
+      );
+
+      const badge = screen.getByText("Normative");
+      expect(badge).toBeInTheDocument();
+      expect(badge.closest("span")?.parentElement).toHaveAttribute(
+        "tabindex",
+        "0",
+      );
+    });
+
+    it("displays correct tooltip for Policy pathway type", () => {
+      render(
+        <Badge
+          text="Direct Policy"
+          tooltip={pathwayTypeTooltips["Direct Policy"] as string}
+          variant="pathwayType"
+        />,
+      );
+
+      const badge = screen.getByText("Direct Policy");
+      expect(badge).toBeInTheDocument();
+      expect(badge.closest("span")?.parentElement).toHaveAttribute(
+        "tabindex",
+        "0",
+      );
+    });
+
+    it("displays correct tooltip for Power sector", () => {
+      render(
+        <Badge
+          text="Power"
+          tooltip={sectorTooltips["Power"]}
+          variant="sector"
+        />,
+      );
+
+      const badge = screen.getByText("Power");
+      expect(badge).toBeInTheDocument();
+      expect(badge.closest("span")?.parentElement).toHaveAttribute(
+        "tabindex",
+        "0",
+      );
+    });
+
+    it("displays correct tooltip for Transport sector", () => {
+      render(
+        <Badge
+          text="Transport"
+          tooltip={sectorTooltips["Transport"]}
+          variant="sector"
+        />,
+      );
+
+      const badge = screen.getByText("Transport");
+      expect(badge).toBeInTheDocument();
+      expect(badge.closest("span")?.parentElement).toHaveAttribute(
+        "tabindex",
+        "0",
+      );
+    });
   });
 });

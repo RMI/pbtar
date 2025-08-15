@@ -1,11 +1,12 @@
 import React, { useMemo, useRef, useState, useEffect, RefObject } from "react";
 import { Link } from "react-router-dom";
-import { Scenario } from "../types";
 import Badge from "./Badge";
+import TextWithTooltip from "./TextWithTooltip";
+import { Scenario, PathwayType } from "../types";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
 import { prioritizeMatches } from "../utils/sortUtils";
-import TextWithTooltip from "./TextWithTooltip";
+import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
 
 interface ScenarioCardProps {
   scenario: Scenario;
@@ -126,10 +127,12 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <p className="text-xs font-medium text-rmigray-500 mb-1">
             Pathway type:
           </p>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap gap-2">
             <Badge
               text={highlightTextIfSearchMatch(scenario.pathwayType)}
-              tooltip={scenario.pathway_type_tooltip}
+              tooltip={getPathwayTypeTooltip(
+                scenario.pathwayType as PathwayType,
+              )}
               variant="pathwayType"
             />
           </div>
@@ -202,7 +205,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               <Badge
                 key={sector.name}
                 text={highlightTextIfSearchMatch(sector.name)}
-                tooltip={sector.tooltip}
+                tooltip={getSectorTooltip(sector.name)}
                 variant="sector"
               />
             ))}

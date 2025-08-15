@@ -4,6 +4,44 @@ import { MemoryRouter } from "react-router-dom";
 import ScenarioCard from "./ScenarioCard";
 import { Scenario } from "../types";
 
+// Mock scenario data
+const mockScenario: Scenario = {
+  id: "scenario-1",
+  name: "Net Zero 2050",
+  description: "A scenario describing the path to net zero emissions by 2050.",
+  pathway_type: "Policy",
+  modelYearEnd: "2050",
+  modeled_temperature_increase: 1.5,
+  regions: ["Global", "Europe", "North America", "Asia"],
+  sectors: [
+    { name: "Power" },
+    { name: "Transport" },
+    { name: "Industrial" },
+    { name: "Buildings" },
+  ],
+  publisher: "IEA",
+  publicationYear: "Jan 2023",
+  overview: "Mock",
+  expertRecommendation: "Mock",
+  dataSource: {
+    description: "Mock Data Source",
+    url: "https://example.com/data-source",
+    downloadAvailable: true,
+  },
+};
+
+// Helper function to render component with router context
+const renderScenarioCard = (scenario: Scenario = mockScenario) => {
+  return render(
+    <MemoryRouter>
+      <ScenarioCard
+        scenario={scenario}
+        searchTerm=""
+      />
+    </MemoryRouter>,
+  );
+};
+
 describe("ScenarioCard component", () => {
   // Mock scenario data
   const mockScenario: Scenario = {
@@ -12,8 +50,6 @@ describe("ScenarioCard component", () => {
     description:
       "A scenario describing the path to net zero emissions by 2050.",
     pathwayType: "Policy",
-    pathway_type_tooltip:
-      "Policy scenarios focus on regulatory and legislative measures.",
     modelYearEnd: "2050",
     modelTempIncrease: 1.5,
     regions: ["Global", "Europe", "North America", "Asia"],
@@ -138,16 +174,15 @@ describe("ScenarioCard component", () => {
       name: "Test Scenario",
       description: "Test description",
       pathwayType: "Exploration",
-      pathway_type_tooltip: "Pathway Type tooltip",
       modelYearEnd: "2050",
       modelTempIncrease: 1.5,
       regions: ["Global", "EU", "Americas", "Africa", "Asia Pacific"], // 5 regions
       sectors: [
-        { name: "Power", tooltip: "Power tooltip" },
-        { name: "Oil & Gas", tooltip: "Oil & Gas tooltip" },
-        { name: "Coal", tooltip: "Coal tooltip" },
-        { name: "Renewables", tooltip: "Renewables tooltip" },
-        { name: "Transport", tooltip: "Transport tooltip" },
+        { name: "Power" },
+        { name: "Oil & Gas" },
+        { name: "Coal" },
+        { name: "Renewables" },
+        { name: "Transport" },
       ], // 5 sectors
       publisher: "Test Publisher",
       publicationYear: "2025-01-01",
@@ -246,15 +281,14 @@ describe("ScenarioCard search highlighting", () => {
     description:
       "A scenario describing the path to net zero emissions by 2050.",
     pathwayType: "Policy",
-    pathway_type_tooltip: "Policy scenarios focus on regulatory measures.",
     modelYearEnd: "2050",
     modelTempIncrease: 1.5,
     regions: ["Global", "Europe", "North America", "Hidden Match Region"],
     sectors: [
-      { name: "Power", tooltip: "Electricity generation" },
-      { name: "Transport", tooltip: "Transportation" },
-      { name: "Industrial", tooltip: "Manufacturing" },
-      { name: "Hidden Match Sector", tooltip: "This would normally be hidden" },
+      { name: "Power" },
+      { name: "Transport" },
+      { name: "Industrial" },
+      { name: "Hidden Match Sector" },
     ],
     publisher: "IEA",
     publicationYear: "Jan 2023",
@@ -341,5 +375,43 @@ describe("ScenarioCard search highlighting", () => {
     ).some((span) => span.textContent?.includes("Hidden Match Sector"));
 
     expect(hiddenMatchText).toBe(true);
+  });
+});
+
+describe("tooltip functionality", () => {
+  it("uses correct tooltip for Policy pathway type", () => {
+    const scenarioWithPolicy: Scenario = {
+      ...mockScenario,
+      pathwayType: "Direct Policy",
+    };
+
+    renderScenarioCard(scenarioWithPolicy);
+
+    const badge = screen.getByText("Direct Policy");
+    expect(badge).toBeInTheDocument();
+    const tooltipTrigger = badge.closest("span")?.parentElement;
+    expect(tooltipTrigger).toHaveAttribute("tabindex", "0");
+    expect(tooltipTrigger).toHaveAttribute(
+      "class",
+      expect.stringContaining("cursor-help"),
+    );
+  });
+
+  it("uses correct tooltip for Power sector", () => {
+    const scenarioWithPowerSector: Scenario = {
+      ...mockScenario,
+      sectors: [{ name: "Power" }],
+    };
+
+    renderScenarioCard(scenarioWithPowerSector);
+
+    const badge = screen.getByText("Power");
+    expect(badge).toBeInTheDocument();
+    const tooltipTrigger = badge.closest("span")?.parentElement;
+    expect(tooltipTrigger).toHaveAttribute("tabindex", "0");
+    expect(tooltipTrigger).toHaveAttribute(
+      "class",
+      expect.stringContaining("cursor-help"),
+    );
   });
 });

@@ -11,13 +11,14 @@ describe("searchUtils", () => {
       description:
         "A scenario describing the path to net zero emissions by 2050.",
       pathwayType: "Policy",
-      pathway_type_tooltip: "Policy scenarios focus on regulatory measures.",
       modelYearEnd: "2050",
       modelTempIncrease: 1.5,
       regions: ["Global", "Europe"],
       sectors: [
-        { name: "Power", tooltip: "Electricity generation and distribution" },
-        { name: "Transport", tooltip: "Transportation and logistics" },
+        {
+          name: "Power",
+        },
+        { name: "Transport" },
       ],
       publisher: "IEA",
       publicationYear: "Jan 2023",
@@ -34,17 +35,14 @@ describe("searchUtils", () => {
       name: "Current Policies",
       description: "A scenario based on current implemented policies.",
       pathwayType: "Projection",
-      pathway_type_tooltip:
-        "Projection scenarios are based on existing trends.",
       modelYearEnd: "2030",
       modelTempIncrease: 2.7,
       regions: ["Global", "Asia"],
       sectors: [
         {
           name: "Industrial",
-          tooltip: "Manufacturing and industrial processes",
         },
-        { name: "Buildings", tooltip: "Residential and commercial buildings" },
+        { name: "Buildings" },
       ],
       publisher: "IPCC",
       publicationYear: "Mar 2022",
@@ -124,7 +122,7 @@ describe("searchUtils", () => {
     });
 
     it("filters by search term in sector tooltip", () => {
-      const filters: SearchFilters = { searchTerm: "electricity" };
+      const filters: SearchFilters = { searchTerm: "Policy" };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(1);
@@ -178,7 +176,6 @@ describe("searchUtils", () => {
         description:
           "A scenario describing the path to net zero emissions by 2050.",
         pathwayType: "Direct Policy",
-        pathway_type_tooltip: "Policy scenarios focus on regulatory measures.",
         modelYearEnd: "2050",
         modelTempIncrease: 1.5,
         regions: ["Global", "Europe"],
