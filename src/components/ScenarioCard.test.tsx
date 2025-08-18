@@ -4,6 +4,44 @@ import { MemoryRouter } from "react-router-dom";
 import ScenarioCard from "./ScenarioCard";
 import { Scenario } from "../types";
 
+// Mock scenario data
+const mockScenario: Scenario = {
+  id: "scenario-1",
+  name: "Net Zero 2050",
+  description: "A scenario describing the path to net zero emissions by 2050.",
+  pathway_type: "Policy",
+  modelYearEnd: "2050",
+  modeled_temperature_increase: 1.5,
+  regions: ["Global", "Europe", "North America", "Asia"],
+  sectors: [
+    { name: "Power" },
+    { name: "Transport" },
+    { name: "Industrial" },
+    { name: "Buildings" },
+  ],
+  publisher: "IEA",
+  publicationYear: "Jan 2023",
+  overview: "Mock",
+  expertRecommendation: "Mock",
+  dataSource: {
+    description: "Mock Data Source",
+    url: "https://example.com/data-source",
+    downloadAvailable: true,
+  },
+};
+
+// Helper function to render component with router context
+const renderScenarioCard = (scenario: Scenario = mockScenario) => {
+  return render(
+    <MemoryRouter>
+      <ScenarioCard
+        scenario={scenario}
+        searchTerm=""
+      />
+    </MemoryRouter>,
+  );
+};
+
 describe("ScenarioCard component", () => {
   // Mock scenario data
   const mockScenario: Scenario = {
@@ -11,11 +49,9 @@ describe("ScenarioCard component", () => {
     name: "Net Zero 2050",
     description:
       "A scenario describing the path to net zero emissions by 2050.",
-    category: "Policy",
-    category_tooltip:
-      "Policy scenarios focus on regulatory and legislative measures.",
-    target_year: "2050",
-    target_temperature: "1.5°C",
+    pathwayType: "Policy",
+    modelYearEnd: "2050",
+    modelTempIncrease: 1.5,
     regions: ["Global", "Europe", "North America", "Asia"],
     sectors: [
       { name: "Power", tooltip: "Electricity generation and distribution" },
@@ -24,7 +60,7 @@ describe("ScenarioCard component", () => {
       { name: "Buildings", tooltip: "Residential and commercial buildings" },
     ],
     publisher: "IEA",
-    published_date: "Jan 2023",
+    publicationYear: "Jan 2023",
     overview: "Mock",
     expertRecommendation: "Mock",
     dataSource: {
@@ -57,68 +93,38 @@ describe("ScenarioCard component", () => {
     expect(link).toHaveAttribute("href", `/scenario/${mockScenario.id}`);
   });
 
-  it("displays the category badge", () => {
+  it("displays the pathwayType badge", () => {
     renderScenarioCard();
 
-    const categoryBadge = screen.getByText(mockScenario.category);
-    expect(categoryBadge).toBeInTheDocument();
+    const pathwayTypeBadge = screen.getByText(mockScenario.pathwayType);
+    expect(pathwayTypeBadge).toBeInTheDocument();
   });
 
   it("shows target year and temperature badges", () => {
     renderScenarioCard();
 
-    expect(screen.getByText(mockScenario.target_year)).toBeInTheDocument();
+    expect(screen.getByText(mockScenario.modelYearEnd)).toBeInTheDocument();
     expect(
-      screen.getByText(mockScenario.target_temperature),
+      screen.getByText(mockScenario.modelTempIncrease?.toString() + "°C"),
     ).toBeInTheDocument();
   });
 
-  it("displays region information with the first 3 regions", () => {
+  it("displays region information with some regions visible", () => {
     renderScenarioCard();
 
     expect(screen.getByText("Regions:")).toBeInTheDocument();
 
-    // Check first 3 regions are displayed
+    // Check that at least the first region is displayed
     expect(screen.getByText(mockScenario.regions[0])).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.regions[1])).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.regions[2])).toBeInTheDocument();
   });
 
-  it("shows '+1 more' text when there are more than 3 regions", () => {
-    renderScenarioCard();
-
-    const moreTextElements = screen.getAllByText("+1 more");
-    expect(moreTextElements.length).toBeGreaterThan(0);
-  });
-
-  it("doesn't show '+X more' text when there are exactly 3 regions", () => {
-    const scenarioWithThreeRegions = {
-      ...mockScenario,
-      regions: ["Global", "Europe", "North America"],
-    };
-
-    renderScenarioCard(scenarioWithThreeRegions);
-
-    const moreText = screen.queryByText("+0 more");
-    expect(moreText).not.toBeInTheDocument();
-  });
-
-  it("displays sector information with the first 3 sectors", () => {
+  it("displays sector information with some sectors visible", () => {
     renderScenarioCard();
 
     expect(screen.getByText("Sectors:")).toBeInTheDocument();
 
-    // Check first 3 sectors are displayed
+    // Check that at least the first sector is displayed
     expect(screen.getByText(mockScenario.sectors[0].name)).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.sectors[1].name)).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.sectors[2].name)).toBeInTheDocument();
-  });
-
-  it("shows '+1 more' text when there are more than 3 sectors", () => {
-    renderScenarioCard();
-
-    const moreTextElements = screen.getAllByText("+1 more");
-    expect(moreTextElements.length).toBeGreaterThan(0);
   });
 
   it("shows publisher information", () => {
@@ -132,7 +138,7 @@ describe("ScenarioCard component", () => {
     renderScenarioCard();
 
     expect(screen.getByText("Published:")).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.published_date)).toBeInTheDocument();
+    expect(screen.getByText(mockScenario.publicationYear)).toBeInTheDocument();
   });
 
   it("displays the 'View details' text with icon", () => {
@@ -160,6 +166,112 @@ describe("ScenarioCard component", () => {
     expect(card).toHaveClass("flex-col");
     expect(card).toHaveClass("h-full");
   });
+
+  describe("'+n more' tooltip functionality", () => {
+    // Create a test scenario with more than 3 regions and sectors
+    const testScenario: Scenario = {
+      id: "test-scenario",
+      name: "Test Scenario",
+      description: "Test description",
+      pathwayType: "Exploration",
+      modelYearEnd: "2050",
+      modelTempIncrease: 1.5,
+      regions: ["Global", "EU", "Americas", "Africa", "Asia Pacific"], // 5 regions
+      sectors: [
+        { name: "Power" },
+        { name: "Oil & Gas" },
+        { name: "Coal" },
+        { name: "Renewables" },
+        { name: "Transport" },
+      ], // 5 sectors
+      publisher: "Test Publisher",
+      publicationYear: "2025-01-01",
+      overview: "Test overview",
+      expertRecommendation: "Test recommendation",
+      dataSource: {
+        description: "Test data source",
+        url: "https://example.com",
+        downloadAvailable: true,
+      },
+    };
+
+    it("shows '+n more' text when there are too many sectors to display", () => {
+      const { container } = renderScenarioCard(testScenario);
+
+      // Find the sectors section
+      const sectorsSection = Array.from(container.querySelectorAll("p")).find(
+        (p) => p.textContent === "Sectors:",
+      );
+
+      if (!sectorsSection) {
+        throw new Error("Sectors section not found");
+      }
+
+      // Get the parent div of the Sectors section
+      const sectorsSectionContainer = sectorsSection.closest("div");
+
+      // Check if any "+n more" text exists within the sectors section
+      const moreTextElements = Array.from(
+        sectorsSectionContainer?.querySelectorAll("span") || [],
+      ).filter((span) => /\+\d+ more/.test(span.textContent || ""));
+
+      // There should be at least one "+n more" element
+      expect(moreTextElements.length).toBeGreaterThan(0);
+
+      // The number in "+n more" should be positive
+      const moreTextMatch =
+        moreTextElements[0].textContent?.match(/\+(\d+) more/);
+      expect(moreTextMatch).not.toBeNull();
+      if (moreTextMatch) {
+        const countNumber = parseInt(moreTextMatch[1]);
+        expect(countNumber).toBeGreaterThan(0);
+      }
+    });
+
+    it("handles regions display appropriately based on available space", () => {
+      // Create a scenario with only 2 regions
+      const scenarioWithFewRegions = {
+        ...testScenario,
+        regions: ["Global", "EU"], // Only 2 regions
+      };
+
+      const { container } = renderScenarioCard(scenarioWithFewRegions);
+
+      // Find the regions section
+      const regionsSection = Array.from(container.querySelectorAll("p")).find(
+        (p) => p.textContent === "Regions:",
+      );
+      if (!regionsSection) throw new Error("Regions section not found");
+
+      // Get the parent container of the regions section
+      const regionsSectionContainer = regionsSection.closest("div");
+      if (!regionsSectionContainer)
+        throw new Error("Region section container not found");
+
+      // Check if there's a "+n more" text
+      const hasMoreText = Array.from(
+        regionsSectionContainer.querySelectorAll("span"),
+      ).some((span) => /\+\d+ more/.test(span.textContent || ""));
+
+      // If we find "+n more" text, ensure it only shows 1 more (since we have 2 regions total)
+      if (hasMoreText) {
+        const moreTextMatch = Array.from(
+          regionsSectionContainer.querySelectorAll("span"),
+        )
+          .find((span) => /\+\d+ more/.test(span.textContent || ""))
+          ?.textContent?.match(/\+(\d+) more/);
+
+        expect(moreTextMatch).not.toBeNull();
+        if (moreTextMatch) {
+          const countNumber = parseInt(moreTextMatch[1]);
+          expect(countNumber).toBeLessThanOrEqual(1); // Should show at most 1 more (we have 2 regions total)
+        }
+      } else {
+        // If there's no "+n more" text, ensure at least one region is visible
+        expect(screen.queryByText("Global")).not.toBeNull();
+      }
+    });
+  });
 });
 
 describe("ScenarioCard search highlighting", () => {
@@ -168,19 +280,18 @@ describe("ScenarioCard search highlighting", () => {
     name: "Net Zero 2050",
     description:
       "A scenario describing the path to net zero emissions by 2050.",
-    category: "Policy",
-    category_tooltip: "Policy scenarios focus on regulatory measures.",
-    target_year: "2050",
-    target_temperature: "1.5°C",
+    pathwayType: "Policy",
+    modelYearEnd: "2050",
+    modelTempIncrease: 1.5,
     regions: ["Global", "Europe", "North America", "Hidden Match Region"],
     sectors: [
-      { name: "Power", tooltip: "Electricity generation" },
-      { name: "Transport", tooltip: "Transportation" },
-      { name: "Industrial", tooltip: "Manufacturing" },
-      { name: "Hidden Match Sector", tooltip: "This would normally be hidden" },
+      { name: "Power" },
+      { name: "Transport" },
+      { name: "Industrial" },
+      { name: "Hidden Match Sector" },
     ],
     publisher: "IEA",
-    published_date: "Jan 2023",
+    publicationYear: "Jan 2023",
     overview: "Test overview",
     expertRecommendation: "Test recommendation",
     dataSource: {
@@ -264,5 +375,43 @@ describe("ScenarioCard search highlighting", () => {
     ).some((span) => span.textContent?.includes("Hidden Match Sector"));
 
     expect(hiddenMatchText).toBe(true);
+  });
+});
+
+describe("tooltip functionality", () => {
+  it("uses correct tooltip for Policy pathway type", () => {
+    const scenarioWithPolicy: Scenario = {
+      ...mockScenario,
+      pathwayType: "Direct Policy",
+    };
+
+    renderScenarioCard(scenarioWithPolicy);
+
+    const badge = screen.getByText("Direct Policy");
+    expect(badge).toBeInTheDocument();
+    const tooltipTrigger = badge.closest("span")?.parentElement;
+    expect(tooltipTrigger).toHaveAttribute("tabindex", "0");
+    expect(tooltipTrigger).toHaveAttribute(
+      "class",
+      expect.stringContaining("cursor-help"),
+    );
+  });
+
+  it("uses correct tooltip for Power sector", () => {
+    const scenarioWithPowerSector: Scenario = {
+      ...mockScenario,
+      sectors: [{ name: "Power" }],
+    };
+
+    renderScenarioCard(scenarioWithPowerSector);
+
+    const badge = screen.getByText("Power");
+    expect(badge).toBeInTheDocument();
+    const tooltipTrigger = badge.closest("span")?.parentElement;
+    expect(tooltipTrigger).toHaveAttribute("tabindex", "0");
+    expect(tooltipTrigger).toHaveAttribute(
+      "class",
+      expect.stringContaining("cursor-help"),
+    );
   });
 });

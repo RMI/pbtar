@@ -1,24 +1,28 @@
 import { Scenario, SearchFilters } from "../types";
+import { getSectorTooltip } from "../utils/tooltipUtils";
 
 export const filterScenarios = (
   scenarios: Scenario[],
   filters: SearchFilters,
 ): Scenario[] => {
   return scenarios.filter((scenario) => {
-    // Category filter
-    if (filters.category && scenario.category !== filters.category) {
+    // Pathway type filter
+    if (filters.pathwayType && scenario.pathwayType !== filters.pathwayType) {
       return false;
     }
 
     // Target year filter
-    if (filters.target_year && scenario.target_year !== filters.target_year) {
+    if (
+      filters.modelYearEnd &&
+      scenario.modelYearEnd !== filters.modelYearEnd
+    ) {
       return false;
     }
 
     // Target temperature filter
     if (
-      filters.target_temperature &&
-      scenario.target_temperature !== filters.target_temperature
+      filters.modelTempIncrease &&
+      scenario.modelTempIncrease !== filters.modelTempIncrease
     ) {
       return false;
     }
@@ -42,14 +46,14 @@ export const filterScenarios = (
       const searchFields = [
         scenario.name,
         scenario.description,
-        scenario.category,
-        scenario.target_year,
-        scenario.target_temperature,
+        scenario.pathwayType,
+        scenario.modelYearEnd,
+        scenario.modelTempIncrease,
         ...scenario.regions,
         ...scenario.sectors.map((s) => s.name),
-        ...scenario.sectors.map((s) => s.tooltip || ""),
+        ...scenario.sectors.map((s) => getSectorTooltip(s.name) || ""),
         scenario.publisher,
-        scenario.published_date,
+        scenario.publicationYear,
       ];
 
       return searchFields.some((field) =>

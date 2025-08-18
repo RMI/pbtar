@@ -1,23 +1,23 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown, X } from "lucide-react";
 
-interface FilterDropdownProps {
+interface FilterDropdownProps<T extends string | number> {
   label: string;
-  options: string[];
-  selectedValue: string | null;
-  onChange: (value: string | null) => void;
+  options: T[];
+  selectedValue: T | null;
+  onChange: (value: T | null) => void;
 }
 
-const FilterDropdown: React.FC<FilterDropdownProps> = ({
+const FilterDropdown = <T extends string | number>({
   label,
   options,
   selectedValue,
   onChange,
-}) => {
+}: FilterDropdownProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleSelect = (option: string) => {
+  const handleSelect = (option: T) => {
     onChange(option === selectedValue ? null : option);
     setIsOpen(false);
   };
@@ -56,8 +56,8 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
             : "text-rmigray-700 bg-white border-neutral-300 hover:bg-neutral-100"
         } transition-colors duration-150`}
       >
-        <span>{selectedValue || label}</span>
-        {selectedValue ? (
+        <span>{selectedValue != null ? String(selectedValue) : label}</span>
+        {selectedValue !== null ? (
           <X
             size={16}
             className="ml-2 text-rmigray-500 hover:text-rmigray-700"
@@ -75,7 +75,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
         <div className="absolute z-10 mt-1 w-full bg-white rounded-md shadow-lg border border-neutral-200 py-1 max-h-60 overflow-auto">
           {options.map((option) => (
             <div
-              key={option}
+              key={String(option)}
               onClick={() => handleSelect(option)}
               className={`px-4 py-2 text-sm cursor-pointer ${
                 option === selectedValue
@@ -83,7 +83,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
                   : "text-rmigray-700 hover:bg-neutral-100"
               }`}
             >
-              {option}
+              {String(option)}
             </div>
           ))}
         </div>

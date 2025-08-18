@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { scenariosData } from "../data/scenariosData";
-import { Scenario } from "../types";
+import { Scenario, PathwayType } from "../types";
 import Badge from "../components/Badge";
 import { ExternalLink, ArrowLeft } from "lucide-react";
+import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
 
 const ScenarioDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -80,18 +81,22 @@ const ScenarioDetailPage: React.FC = () => {
 
           <div className="flex flex-wrap gap-2 mb-4">
             <Badge
-              text={scenario.category}
-              tooltip={scenario.category_tooltip}
-              variant="category"
+              text={scenario.pathwayType}
+              tooltip={getPathwayTypeTooltip(
+                scenario.pathwayType as PathwayType,
+              )}
+              variant="pathwayType"
             />
             <Badge
-              text={scenario.target_year}
+              text={scenario.modelYearEnd}
               variant="year"
             />
-            <Badge
-              text={scenario.target_temperature}
-              variant="temperature"
-            />
+            {scenario.modelTempIncrease && (
+              <Badge
+                text={`${scenario.modelTempIncrease}°C`}
+                variant="temperature"
+              />
+            )}
           </div>
 
           <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
@@ -101,7 +106,7 @@ const ScenarioDetailPage: React.FC = () => {
             </p>
             <p>
               <span className="text-white">Published:</span>{" "}
-              {scenario.published_date}
+              {scenario.publicationYear}
             </p>
           </div>
         </div>
@@ -178,7 +183,7 @@ const ScenarioDetailPage: React.FC = () => {
                     <Badge
                       key={index}
                       text={sector.name}
-                      tooltip={sector.tooltip}
+                      tooltip={getSectorTooltip(sector.name)}
                       variant="sector"
                     />
                   ))}

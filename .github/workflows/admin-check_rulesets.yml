@@ -5,10 +5,9 @@ on:
       - ".github/rulesets/**"
   push:
     branches:
-      - "hotfix/**"
-      - "release/**"
       - main
       - production
+      - next
   schedule:
     - cron: "0 3 * * *" # Nightly at 3 AM UTC
   workflow_dispatch:
@@ -23,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Get all existing Rulesets from Remote Repo
         id: get-all-rulesets-remote

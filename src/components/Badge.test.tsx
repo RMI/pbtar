@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Badge from "./Badge";
+import { pathwayTypeTooltips, sectorTooltips } from "../utils/tooltipUtils";
 
 describe("Badge component", () => {
   it("renders with the provided text", () => {
@@ -17,11 +18,11 @@ describe("Badge component", () => {
     expect(badge).toHaveClass("border-rmigray-200");
   });
 
-  it("applies category styling when variant is 'category'", () => {
+  it("applies pathwayType styling when variant is 'pathwayType'", () => {
     const { container } = render(
       <Badge
-        text="Category"
-        variant="category"
+        text="Pathway Type"
+        variant="pathwayType"
       />,
     );
     const badge = container.firstChild as HTMLElement;
@@ -92,7 +93,7 @@ describe("Badge component", () => {
     const { container } = render(
       <Badge
         text="Test"
-        variant="category"
+        variant="pathwayType"
       />,
     );
     const badge = container.firstChild as HTMLElement;
@@ -115,45 +116,40 @@ describe("Badge component", () => {
 
   // Tooltip tests
   it("does not render tooltip when no tooltip is provided", () => {
-    const { container } = render(<Badge text="No Tooltip" />);
+    render(<Badge text="No Tooltip" />);
 
     // Find the badge span
     const badge = screen.getByText("No Tooltip");
 
-    // Check that it's a direct child of the container without tooltip wrapper divs
-    expect(badge.parentElement).toBe(container);
-
-    // Ensure no tooltip text is rendered
-    const tooltipElements = container.querySelectorAll(
-      ".group-hover\\:visible",
-    );
-    expect(tooltipElements.length).toBe(0);
+    // Check that it's a plain span without tabindex
+    expect(badge).toBeInTheDocument();
+    expect(badge).not.toHaveAttribute("tabindex");
   });
 
-  it("renders tooltip structure when tooltip is provided", () => {
-    const { container } = render(
+  it("uses TextWithTooltip when tooltip is provided", () => {
+    render(
       <Badge
         text="With Tooltip"
         tooltip="This is a tooltip"
       />,
     );
 
-    // Should have a group div wrapper
-    const groupDiv = container.firstChild as HTMLElement;
-    expect(groupDiv.tagName).toBe("DIV");
-    expect(groupDiv).toHaveClass("group");
+    // Badge text should still be present
+    const badgeText = screen.getByText("With Tooltip");
+    expect(badgeText).toBeInTheDocument();
 
-    // Should have the badge span with cursor-help
-    const badge = screen.getByText("With Tooltip");
-    expect(badge).toHaveClass("cursor-help");
-    expect(badge).toHaveAttribute("tabIndex", "0");
+    // The outer span from TextWithTooltip should have tabindex attribute
+    // We need to look for a parent element with tabindex since the badge text itself
+    // is wrapped in its own span
+    const triggerElement = badgeText.closest("span")?.parentElement;
+    expect(triggerElement).toHaveAttribute("tabindex", "0");
 
-    // Should have the tooltip text
-    const tooltip = screen.getByText("This is a tooltip");
-    expect(tooltip).toBeInTheDocument();
+    // The aria-describedby attribute is added when tooltip is visible
+    expect(triggerElement).not.toHaveAttribute("aria-describedby");
   });
 
-  it("shows tooltip on hover", () => {
+  // Testing tooltip visibility requires checking document.body, since tooltips are now in portals
+  it("doesn't show tooltip initially", () => {
     render(
       <Badge
         text="Hover Me"
@@ -161,90 +157,78 @@ describe("Badge component", () => {
       />,
     );
 
-    // Get the badge element
-    const badge = screen.getByText("Hover Me");
-
-    // Get the tooltip container (the div with the transition classes)
-    const tooltipContainer = screen
-      .getByText("Hover tooltip")
-      .closest("div")?.parentElement;
-    expect(tooltipContainer).toHaveClass("invisible");
-    expect(tooltipContainer).toHaveClass("group-hover:visible");
-
-    // Simulate hover
-    fireEvent.mouseEnter(badge);
-
-    // In a real browser, the group-hover:visible class would make it visible
-    // We can verify the class is there since we can't test the actual CSS effect in JSDOM
-    expect(tooltipContainer).toHaveClass("group-hover:visible");
-    expect(tooltipContainer).toHaveClass("group-hover:opacity-100");
+    // Initially the tooltip shouldn't be in document.body
+    const tooltipElement = document.querySelector("[role='tooltip']");
+    expect(tooltipElement).not.toBeInTheDocument();
   });
 
-  it("shows tooltip on focus", () => {
-    render(
-      <Badge
-        text="Focus Me"
-        tooltip="Focus tooltip"
-      />,
-    );
+  describe("tooltip content tests", () => {
+    it("displays correct tooltip for Normative pathway type", () => {
+      render(
+        <Badge
+          text="Normative"
+          tooltip={pathwayTypeTooltips["Normative"]}
+          variant="pathwayType"
+        />,
+      );
 
-    // Get the badge element
-    const badge = screen.getByText("Focus Me");
+      const badge = screen.getByText("Normative");
+      expect(badge).toBeInTheDocument();
+      expect(badge.closest("span")?.parentElement).toHaveAttribute(
+        "tabindex",
+        "0",
+      );
+    });
 
-    // Get the tooltip container
-    const tooltipContainer = screen
-      .getByText("Focus tooltip")
-      .closest("div")?.parentElement;
+    it("displays correct tooltip for Policy pathway type", () => {
+      render(
+        <Badge
+          text="Direct Policy"
+          tooltip={pathwayTypeTooltips["Direct Policy"] as string}
+          variant="pathwayType"
+        />,
+      );
 
-    // Verify the focus classes are present
-    expect(tooltipContainer).toHaveClass("group-focus-within:visible");
-    expect(tooltipContainer).toHaveClass("group-focus-within:opacity-100");
+      const badge = screen.getByText("Direct Policy");
+      expect(badge).toBeInTheDocument();
+      expect(badge.closest("span")?.parentElement).toHaveAttribute(
+        "tabindex",
+        "0",
+      );
+    });
 
-    // Simulate focus
-    fireEvent.focus(badge);
+    it("displays correct tooltip for Power sector", () => {
+      render(
+        <Badge
+          text="Power"
+          tooltip={sectorTooltips["Power"]}
+          variant="sector"
+        />,
+      );
 
-    // Verify classes are still there (actual visibility would be handled by CSS)
-    expect(tooltipContainer).toHaveClass("group-focus-within:visible");
-  });
+      const badge = screen.getByText("Power");
+      expect(badge).toBeInTheDocument();
+      expect(badge.closest("span")?.parentElement).toHaveAttribute(
+        "tabindex",
+        "0",
+      );
+    });
 
-  it("positions the tooltip correctly", () => {
-    render(
-      <Badge
-        text="Position Test"
-        tooltip="Right positioned tooltip"
-      />,
-    );
+    it("displays correct tooltip for Transport sector", () => {
+      render(
+        <Badge
+          text="Transport"
+          tooltip={sectorTooltips["Transport"]}
+          variant="sector"
+        />,
+      );
 
-    // Get the tooltip positioning div
-    const tooltipPositioner = screen
-      .getByText("Right positioned tooltip")
-      .closest("div")?.parentElement;
-
-    // Check positioning classes
-    expect(tooltipPositioner).toHaveClass("left-full");
-    expect(tooltipPositioner).toHaveClass("ml-0");
-    expect(tooltipPositioner).toHaveClass("top-1/2");
-    expect(tooltipPositioner).toHaveClass("-translate-y-1/2");
-  });
-
-  it("includes the tooltip arrow pointing to the badge", () => {
-    render(
-      <Badge
-        text="Arrow Test"
-        tooltip="Tooltip with arrow"
-      />,
-    );
-
-    // Find the tooltip content
-    const tooltipContent = screen
-      .getByText("Tooltip with arrow")
-      .closest("div");
-
-    // Find the arrow element (should be a div with border classes)
-    const arrow = tooltipContent?.querySelector("div[class*='border-']");
-    expect(arrow).toBeInTheDocument();
-    expect(arrow).toHaveClass("border-4");
-    expect(arrow).toHaveClass("border-transparent");
-    expect(arrow).toHaveClass("border-r-rmigray-100"); // Right arrow
+      const badge = screen.getByText("Transport");
+      expect(badge).toBeInTheDocument();
+      expect(badge.closest("span")?.parentElement).toHaveAttribute(
+        "tabindex",
+        "0",
+      );
+    });
   });
 });

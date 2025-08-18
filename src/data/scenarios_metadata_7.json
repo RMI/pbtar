@@ -3,26 +3,28 @@
     "id": "scenario-007",
     "name": "Planned Transition Scenario",
     "description": "Gradual, orderly transition that begins immediately and continues gradually",
-    "category": "ITR",
-    "category_tooltip": "Implied Temperature Rise",
-    "target_year": "2050",
-    "target_temperature": "2C",
+    "pathwayType": "Normative",
+    "modelYearEnd": 2050,
+    "modelTempIncrease": 2,
     "regions": ["Global", "EU", "Americas", "Asia Pacific"],
     "sectors": [
-      { "name": "Power", "tooltip": "Electricity generation and distribution" },
       {
-        "name": "Oil & Gas",
-        "tooltip": "Fossil fuel extraction and processing"
+        "name": "Power",
+        "technologies": ["Solar", "Wind", "Coal", "Oil", "Nuclear", "Gas"]
       },
-      { "name": "Coal", "tooltip": "Coal mining and utilization" },
-      { "name": "Renewables", "tooltip": "Renewable energy sources" },
       {
-        "name": "Industrial",
-        "tooltip": "Manufacturing and industrial processes"
+        "name": "Industry",
+        "technologies": [
+          "Carbon Capture and Storage",
+          "Electrification",
+          "Process Optimization",
+          "Hydrogen Use",
+          "Other"
+        ]
       }
     ],
     "publisher": "Strategic Climate Transition Forum",
-    "published_date": "2022-09-06",
+    "publicationYear": 2022,
     "overview": "The Planned Transition scenario assumes climate policies are introduced early and gradually become more stringent. Carbon prices increase gradually, giving companies and consumers time to adapt. Physical risks are relatively low because climate change is effectively mitigated, while transition risks are manageable due to the predictable policy environment. Global warming is limited to 2°C by the end of the century.",
     "expertRecommendation": "This scenario is valuable for understanding the financial implications of a well-managed transition. It represents a \"middle ground\" approach that balances climate ambition with economic realities. We recommend using this scenario for financial institutions looking to understand potential transition pathways that minimize market disruption while still achieving significant emissions reductions. The gradual nature of this scenario makes it useful for identifying near-term transition opportunities and risks.",
     "dataSource": {

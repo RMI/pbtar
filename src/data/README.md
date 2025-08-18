@@ -16,21 +16,43 @@ An example scenario metadata JSON file looks like...
     "id": "scenario-001",
     "name": "ZETI Net Zero Pathway",
     "description": "A comprehensive pathway for the global energy sector to reach net zero by 2050",
-    "category": "IAM",
-    "target_year": "2050",
-    "target_temperature": "1.5C",
+    "pathwayType": "Direct Policy",
+    "modelYearEnd": "2050",
+    "modelTempIncrease": 1.5,
     "regions": ["Global"],
     "sectors": [
-      "Power",
-      "Oil & Gas",
-      "Coal",
-      "Renewables",
-      "Transport",
-      "Buildings",
-      "Industrial"
+      {
+        "name": "Power",
+        "technologies": ["Solar", "Wind", "Nuclear", "Coal"]
+      },
+      {
+        "name": "Transport",
+        "technologies": [
+          "Electric Vehicles",
+          "Hydrogen Vehicles",
+          "Biofuels",
+          "Public Transport",
+          "Active Mobility",
+          "Aviation Efficiency",
+          "Maritime Efficiency"
+        ]
+      },
+      {
+        "name": "Real Estate",
+        "technologies": ["Energy Efficiency", "Heat Pumps", "Other"]
+      },
+      {
+        "name": "Industry",
+        "technologies": [
+          "Electrification",
+          "Carbon Capture and Storage",
+          "Hydrogen Use",
+          "Other"
+        ]
+      }
     ],
     "publisher": "Zero Emissions Technology Institute",
-    "published_date": "2021-05-18",
+    "publicationYear": 2021,
     "overview": "The ZETI Net Zero Pathway roadmap shows how the global energy sector can achieve net zero emissions by 2050. It is designed to examine what would need to happen to the energy system over the next 30 years to achieve net zero emissions by 2050. The pathway calls for rapid deployment of available technologies between now and 2030, with clean technologies in heavy industry and long-distance transport developed and brought to market in the 2030s. The pathway also requires innovation, international cooperation, and significant investment.",
     "expertRecommendation": "This scenario represents the most comprehensive global pathway to net zero and is highly recommended as a reference scenario for any climate transition assessment. It has excellent sectoral coverage and provides detailed milestones for different technologies and regions. However, analysts should note that it may be less detailed for specific regional considerations in Southeast Asia or other developing regions. Consider complementing this scenario with regional scenarios for a more complete assessment.",
     "dataSource": {
@@ -97,13 +119,13 @@ new_scenario_metadata <-
       id = "1",
       name = "ZETI Net Zero Pathway",
       description = "Text based description short",
-      category = "IAM",
-      target_year = "2050",
-      target_temperature = "1.5C",
+      "pathwayType" =  "Direct Policy",
+      modelYearEnd = "2050",
+      modelTempIncrease = 1.5,
       regions = list("Global"),
       sectors = list("Power", "Oil & Gas", "Coal", "Renewables", "Transport", "Buildings", "Industrial"),
       publisher = "Zero Emissions Technology Institute",
-      published_date = "2021-05-18",
+      publicationYear = 2021,
       overview = "Text based overview long.",
       expertRecommendation = "Text based expert recommendation long.",
       dataSource = list(
@@ -126,13 +148,13 @@ new_scenario_metadata <-
       id = 1,
       name = list("ZETI Net Zero Pathway"),
       description = "Text based description short",
-      category = "IAM",
-      target_year = "2050",
-      target_temperature = "1.5C",
+      "pathwayType" =  "Direct Policy",
+      modelYearEnd = "2050",
+      modelTempIncrease = 1.5,
       regions = "Global",
       sectors = list("Poer", "Oil&Gas", "Coal", "Renewables", "Transport", "Buildings", "Industrial"),
       publisher = "Zero Emissions Technology Institute",
-      published_date = "2021-05-18",
+      publicationYear = 2021,
       overview = "Text based overview long.",
       expertRecommendation = "Text based expert recommendation long.",
       dataSource = list(
