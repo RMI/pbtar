@@ -1,5 +1,4 @@
 import { Scenario, SearchFilters } from "../types";
-import { getSectorTooltip } from "../utils/tooltipUtils";
 
 export const filterScenarios = (
   scenarios: Scenario[],
@@ -51,7 +50,6 @@ export const filterScenarios = (
         scenario.modelTempIncrease,
         ...scenario.regions,
         ...scenario.sectors.map((s) => s.name),
-        ...scenario.sectors.map((s) => getSectorTooltip(s.name) || ""),
         scenario.publisher,
         scenario.publicationYear,
       ];
