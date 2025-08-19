@@ -242,7 +242,7 @@ describe("searchUtils", () => {
   });
 });
 
-describe("searchUtils", () => {
+describe("searchUtils - array results", () => {
   //
   // Mock scenario data
   const regions: string[] = [
