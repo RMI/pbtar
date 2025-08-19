@@ -241,3 +241,89 @@ describe("searchUtils", () => {
     });
   });
 });
+
+describe("searchUtils", () => {
+  //
+  // Mock scenario data
+  const regions: string[] = [
+    "Global",
+    "EU",
+    "Americas",
+    "Asia Pacific",
+    "SEA",
+    "Country-Specific",
+  ];
+
+  const sectors: string[] = [
+    "Land Use",
+    "Agriculture",
+    "Real Estate",
+    "Industry",
+    "Steel",
+    "Cement",
+    "Chemicals",
+    "Coal Mining",
+    "Oil (Upstream)",
+    "Gas (Upstream)",
+    "Power",
+    "Transport",
+    "Road transport",
+    "Aviation",
+    "Rail",
+    "Shipping",
+    "Other",
+  ];
+
+  const mockScenarios: Scenario[] = [
+    {
+      id: "scenario-full-arrays",
+      name: "Scenario with Full Arrays of Enums",
+      description:
+        "A scenario that includes all possible enum values for testing purposes.",
+      pathwayType: "Policy",
+      regions: [
+        "Global",
+        "EU",
+        "Americas",
+        "Asia Pacific",
+        "SEA",
+        "Country-Specific",
+      ],
+      sectors: sectors.map((sector) => ({ name: sector })),
+      publisher: "IEA",
+      publicationYear: "Jan 2023",
+      overview: "Mock overview",
+      expertRecommendation: "Mock recommendation",
+      dataSource: {
+        description: "Mock Data Source",
+        url: "https://example.com/data-source",
+        downloadAvailable: true,
+      },
+    },
+  ];
+
+  //These tests are to ensure that search works for all array values, even when
+  //they would not be surface directly in the UI (e.g. "Power, Transport, + 15
+  //more")
+  describe("filterScenarios for many array values", () => {
+    regions.forEach((region) => {
+      it(`options for regions - ${region}`, () => {
+        const filters: SearchFilters = { region: region };
+        const result = filterScenarios(mockScenarios, filters);
+
+        expect(result.length).toBe(1);
+        expect(result[0].id).toBe("scenario-full-arrays");
+      });
+    });
+
+    sectors.forEach((sector) => {
+      it(`filters by sector - ${sector}`, () => {
+        const filters: SearchFilters = { sector: sector };
+        const result = filterScenarios(mockScenarios, filters);
+
+        expect(result.length).toBe(1);
+        expect(result[0].id).toBe("scenario-full-arrays");
+      });
+    });
+  });
+});
