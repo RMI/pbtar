@@ -1,4 +1,5 @@
 import Ajv from "ajv";
+import addFormats from "ajv-formats";
 import schema from "../schema/schema.json" with { type: "json" };
 import { Scenario } from "../types";
 
@@ -15,7 +16,9 @@ const files = Object.entries(modules)
     data,
   }))
   .sort((a, b) => a.name.localeCompare(b.name));
-const ajv = new Ajv();
+
+const ajv = new Ajv({ allErrors: true, strict: true });
+addFormats(ajv);
 const validate = ajv.compile(schema);
 
 const validateData = (data: unknown, filename: string): Scenario[] => {
