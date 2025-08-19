@@ -1,5 +1,5 @@
 import Ajv from "ajv";
-import schema from "../../public/schema.json" with { type: "json" };
+import schema from "../schema/schema.json" with { type: "json" };
 import { Scenario } from "../types";
 
 // 1) Grab every JSON file in this folder
