@@ -116,7 +116,7 @@ function buildInfoPlugin(): Plugin {
   };
 }
 
-function dataValidationPlugin(dataDir: string = "src/data") {
+function dataValidationPlugin() {
   return {
     name: "data-validation",
     apply: "build",

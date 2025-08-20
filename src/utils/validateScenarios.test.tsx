@@ -1,7 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { promises as fs } from "node:fs";
-import { dirname, resolve, join } from "node:path";
+import { resolve, join } from "node:path";
 import { validateScenarios, FileEntry } from "./validateScenarios";
+import { Scenario } from "../types";
 
 describe("real scenario data validity", () => {
   it("all src/data/*.json data files conform to schema", async () => {
@@ -10,7 +11,7 @@ describe("real scenario data validity", () => {
     const entries: FileEntry[] = await Promise.all(
       names.map(async (name) => ({
         name,
-        data: JSON.parse(await fs.readFile(join(dir, name), "utf8")),
+        data: JSON.parse(await fs.readFile(join(dir, name), "utf8")) as string,
       })),
     );
     expect(() => validateScenarios(entries)).not.toThrow();
@@ -57,8 +58,23 @@ describe("scenario schema enforces expected limits", () => {
   // Type guard: data must be an array of objects
   it("fails when top-level is not an array", () => {
     fail(
-      { name: "not-array.json", data: { ...baseScenario } as any },
+      { name: "not-array.json", data: { ...baseScenario } as Scenario },
       /must be array/i,
+    );
+  });
+
+  it("fails when field is wrong type", () => {
+    fail(
+      {
+        name: "start.json",
+        data: [
+          {
+            ...baseScenario,
+            modelYearStart: "1950" as string, // should be a number
+          },
+        ],
+      },
+      /modelYearStart/,
     );
   });
 
@@ -112,7 +128,8 @@ describe("scenario schema enforces expected limits", () => {
 
   for (const key of REQ) {
     it(`fails when required property '${key}' is missing`, () => {
-      const { [key]: _, ...rest } = baseScenario as any;
+      const rest = { ...baseScenario };
+      delete (rest as Scenario)[key]; // remove the key
       fail({ name: "missing.json", data: [rest] }, new RegExp(`${key}`));
     });
   }
@@ -205,7 +222,7 @@ describe("scenario schema enforces expected limits", () => {
         data: [
           {
             ...baseScenario,
-            sectors: [{ name: "Power" }] as any, // missing technologies
+            sectors: [{ name: "Power" }], // missing technologies
           },
         ],
       },
@@ -220,7 +237,7 @@ describe("scenario schema enforces expected limits", () => {
         data: [
           {
             ...baseScenario,
-            sectors: [{ name: "Yak Shaving", technologies: ["Other"] } as any],
+            sectors: [{ name: "Yak Shaving", technologies: ["Other"] }],
           },
         ],
       },
@@ -235,7 +252,7 @@ describe("scenario schema enforces expected limits", () => {
         data: [
           {
             ...baseScenario,
-            sectors: [{ name: "Power", technologies: ["Cold Fusion"] as any }],
+            sectors: [{ name: "Power", technologies: ["Cold Fusion"] }],
           },
         ],
       },
@@ -247,7 +264,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "extra-top.json",
-        data: [{ ...baseScenario, foobar: 1 } as any],
+        data: [{ ...baseScenario, foobar: 1 } as Scenario],
       },
       /must NOT have additional properties/,
     );
@@ -260,9 +277,7 @@ describe("scenario schema enforces expected limits", () => {
         data: [
           {
             ...baseScenario,
-            sectors: [
-              { name: "Power", technologies: ["Solar"], foobar: 1 } as any,
-            ],
+            sectors: [{ name: "Power", technologies: ["Solar"], foobar: 1 }],
           },
         ],
       },
@@ -277,7 +292,7 @@ describe("scenario schema enforces expected limits", () => {
         data: [
           {
             ...baseScenario,
-            dataSource: { ...baseScenario.dataSource, foobar: "x" } as any,
+            dataSource: { ...baseScenario.dataSource, foobar: "x" },
           },
         ],
       },

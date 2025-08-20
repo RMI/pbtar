@@ -6,7 +6,7 @@ import { validateScenarios, FileEntry } from "../utils/validateScenarios";
 const modules = import.meta.glob("./*.json", {
   eager: true,
   import: "default",
-}) as Record<string, unknown>;
+});
 
 const entries: FileEntry[] = Object.entries(modules)
   .map(([path, data]) => ({
