@@ -91,7 +91,9 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
   );
 
   // Helper function to conditionally highlight text based on search term
-  const highlightTextIfSearchMatch = (value: unknown) => {
+  const highlightTextIfSearchMatch = (
+    value: string | number | undefined | null | boolean,
+  ) => {
     // If value is null or undefined, return empty string, otherwise cast to string.
     const text = value == null ? "" : String(value);
 
