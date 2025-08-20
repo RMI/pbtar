@@ -1,4 +1,9 @@
-import { defineConfig, Plugin, version as viteVersion } from "vite";
+import {
+  defineConfig,
+  Plugin,
+  version as viteVersion,
+  type ViteDevServer,
+} from "vite";
 import react from "@vitejs/plugin-react";
 import { simpleGit } from "simple-git";
 import os from "os";
@@ -8,6 +13,7 @@ import { join } from "node:path";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import type { IncomingMessage, ServerResponse } from "node:http";
 
 // Safe wrapper for OS functions with proper typing
 const getOsInfo = (): {
@@ -150,11 +156,21 @@ export default defineConfig({
     open: true,
     port: 3000,
   },
-  configureServer(server) {
-    server.middlewares.use("/schema.json", async (_req, res) => {
-      const json = await readFile(resolve("src/schema/schema.json"), "utf8");
-      res.setHeader("Content-Type", "application/json");
-      res.end(json);
-    });
+  configureServer(server: ViteDevServer) {
+    server.middlewares.use(
+      "/schema.json",
+      (
+        _req: IncomingMessage,
+        res: ServerResponse,
+        next: (err?: unknown) => void,
+      ) => {
+        readFile(resolve("src/schema/schema.json"), "utf8")
+          .then((json) => {
+            res.setHeader("Content-Type", "application/json");
+            res.end(json);
+          })
+          .catch(next);
+      },
+    );
   },
 });

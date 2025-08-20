@@ -1,9 +1,7 @@
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
-import {
-  validateScenarios,
-  type FileEntry,
-} from "../src/utils/validateScenarios.ts";
+import { validateScenarios } from "../src/utils/validateScenarios.ts";
+import type { FileEntry } from "../src/utils/validateScenarios.ts";
 
 async function main() {
   const dir = "src/data";
