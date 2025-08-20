@@ -4,10 +4,13 @@ import { simpleGit } from "simple-git";
 import os from "os";
 import {
   validateScenarios,
-  type FileEntry,
+  FileEntry,
 } from "./src/utils/validateScenarios";
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
+import { viteStaticCopy } from "vite-plugin-static-copy";
+import { readFile } from "node:fs/promises";
+import { resolve } from "node:path";
 
 // Safe wrapper for OS functions with proper typing
 const getOsInfo = (): {
@@ -138,9 +141,23 @@ function dataValidationPlugin() {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), buildInfoPlugin(), dataValidationPlugin("src/data")],
+  plugins: [
+    react(),
+    buildInfoPlugin(),
+    dataValidationPlugin("src/data"),
+    viteStaticCopy({
+      targets: [{ src: "src/schema/schema.json", dest: "" }],
+    }),
+  ],
   server: {
     open: true,
     port: 3000,
+  },
+  configureServer(server) {
+    server.middlewares.use("/schema.json", async (_req, res) => {
+      const json = await readFile(resolve("src/schema/schema.json"), "utf8");
+      res.setHeader("Content-Type", "application/json");
+      res.end(json);
+    });
   },
 });
