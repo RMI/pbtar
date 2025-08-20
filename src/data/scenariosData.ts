@@ -1,7 +1,5 @@
-import Ajv from "ajv";
-import addFormats from "ajv-formats";
-import schema from "../schema/schema.json" with { type: "json" };
 import { Scenario } from "../types";
+import { validateScenarios, FileEntry } from "../utils/validateScenarios";
 
 // 1) Grab every JSON file in this folder
 //    `eager:true` = load at build time (no async), `import:'default'` = get the parsed JSON
@@ -10,29 +8,11 @@ const modules = import.meta.glob("./*.json", {
   import: "default",
 }) as Record<string, unknown>;
 
-const files = Object.entries(modules)
+const entries: FileEntry[] = Object.entries(modules)
   .map(([path, data]) => ({
     name: path.split("/").pop()!, // e.g. "scenarios_metadata_1.json"
-    data,
+    data, // file contents
   }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
-const ajv = new Ajv({ allErrors: true, strict: true });
-addFormats(ajv);
-const validate = ajv.compile(schema);
-
-const validateData = (data: unknown, filename: string): Scenario[] => {
-  if (!validate(data)) {
-    const errors = validate.errors
-      ?.map((err) => `${err.instancePath} ${err.message}`)
-      .join("\n");
-    throw new Error(`Schema validation failed for ${filename}:\n${errors}`);
-  }
-  if (!Array.isArray(data))
-    throw new Error(`${filename} did not produce an array`);
-  return data as Scenario[];
-};
-
-export const scenariosData: Scenario[] = files
-  .map(({ data, name }) => validateData(data, name))
-  .flat();
+export const scenariosData: Scenario[] = validateScenarios(entries).flat();

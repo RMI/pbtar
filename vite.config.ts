@@ -2,8 +2,10 @@ import { defineConfig, Plugin, version as viteVersion } from "vite";
 import react from "@vitejs/plugin-react";
 import { simpleGit } from "simple-git";
 import os from "os";
-import Ajv from "ajv";
-import addFormats from "ajv-formats";
+import {
+  validateScenarios,
+  type FileEntry,
+} from "./src/utils/validateScenarios";
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
 
@@ -120,32 +122,16 @@ function dataValidationPlugin(dataDir: string = "src/data") {
     apply: "build",
     enforce: "pre",
     async buildStart() {
-      const schema = JSON.parse(
-        await fs.readFile(join("src/schema/schema.json"), "utf8"),
-      );
-      const ajv = new Ajv({ allErrors: true, strict: true });
-      addFormats(ajv);
-      const validate = ajv.compile(schema);
+      const dir = "src/data";
+      const names = (await fs.readdir(dir)).filter((f) => f.endsWith(".json"));
+      const entries: FileEntry[] = [];
 
-      const files = (await fs.readdir(dataDir))
-        .filter((f) => f.endsWith(".json"))
-        .map((f) => join(dataDir, f));
-
-      const errors: string[] = [];
-      for (const file of files) {
-        const data = JSON.parse(await fs.readFile(file, "utf8"));
-        if (!validate(data)) {
-          errors.push(
-            `✖ ${file}\n    ${(validate.errors ?? [])
-              .map((e) => `${e.instancePath || "/"} ${e.message}`)
-              .join("\n    ")}`,
-          );
-        }
+      for (const name of names) {
+        const raw = await fs.readFile(join(dir, name), "utf8");
+        entries.push({ name, data: JSON.parse(raw) });
       }
 
-      if (errors.length) {
-        throw new Error(`Data validation failed:\n\n${errors.join("\n\n")}\n`);
-      }
+      validateScenarios(entries); // throws -> build fails
     },
   };
 }
