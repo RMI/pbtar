@@ -2,10 +2,7 @@ import { defineConfig, Plugin, version as viteVersion } from "vite";
 import react from "@vitejs/plugin-react";
 import { simpleGit } from "simple-git";
 import os from "os";
-import {
-  validateScenarios,
-  FileEntry,
-} from "./src/utils/validateScenarios";
+import { validateScenarios, FileEntry } from "./src/utils/validateScenarios";
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
 import { viteStaticCopy } from "vite-plugin-static-copy";

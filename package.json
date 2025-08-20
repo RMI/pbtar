@@ -14,7 +14,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "json:check": "ajv validate -s public/schema.json src/data/*.json",
+    "json:check": "npx ts-node --esm scripts/schema-check-files.ts",
     "docs:jsonSchema": "scripts/generate-schema-docs.sh"
   },
   "author": "RMI",
@@ -49,6 +49,7 @@
     "semantic-release": "^24.2.7",
     "simple-git": "^3.28.0",
     "tailwindcss": "^4.1.7",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2",
