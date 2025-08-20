@@ -449,8 +449,9 @@ describe("tooltip functionality", () => {
     it("does not crash when highlighting numeric fields", () => {
       const s: Scenario = {
         ...baseScenario,
-        modelYearEnd: 2030 as any, // number on purpose
-        publicationYear: 2024 as any, // number
+        // Using a double cast to satisfy TS, but this still presents as numeric at runtime.
+        modelYearEnd: 2030 as unknown as string, // number on purpose
+        publicationYear: 2024 as unknown as string, // number
       };
 
       expect(() => renderWithRouter(s, "2030")).not.toThrow();
@@ -466,8 +467,9 @@ describe("tooltip functionality", () => {
     it("does not crash with null / undefined text fields", () => {
       const s: Scenario = {
         ...baseScenario,
-        description: null as any,
-        publisher: undefined as any,
+        // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
+        description: null as unknown as string, // null
+        publisher: undefined as unknown as string, // undefined
       };
 
       expect(() => renderWithRouter(s, "rmi")).not.toThrow();
@@ -479,7 +481,11 @@ describe("tooltip functionality", () => {
     });
 
     it("highlights matches inside stringified numbers", () => {
-      const s: Scenario = { ...baseScenario, modelYearEnd: 2045 as any };
+      const s: Scenario = {
+        ...baseScenario,
+        // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
+        modelYearEnd: 2045 as unknown as string, // number on purpose
+      };
       const { container } = renderWithRouter(s, "2045");
       const marks = container.querySelectorAll("mark");
       expect(Array.from(marks).some((m) => m.textContent === "2045")).toBe(
