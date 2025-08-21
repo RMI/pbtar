@@ -11,7 +11,9 @@ describe("real scenario data validity", () => {
     const entries: FileEntry[] = await Promise.all(
       names.map(async (name) => ({
         name,
-        data: JSON.parse(await fs.readFile(join(dir, name), "utf8")) as string,
+        data: JSON.parse(await fs.readFile(join(dir, name), "utf8")) as
+          | Scenario[]
+          | unknown[],
       })),
     );
     expect(() => validateScenarios(entries)).not.toThrow();

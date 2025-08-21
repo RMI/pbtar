@@ -15,4 +15,4 @@ const entries: FileEntry[] = Object.entries(modules)
   }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
-export const scenariosData: Scenario[] = validateScenarios(entries).flat();
+export const scenariosData: Scenario[] = validateScenarios(entries);

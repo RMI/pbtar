@@ -133,7 +133,10 @@ function dataValidationPlugin(dir: string = "src/data") {
 
       for (const name of names) {
         const raw = await fs.readFile(join(dir, name), "utf8");
-        entries.push({ name, data: JSON.parse(raw) });
+        entries.push({
+          name,
+          data: JSON.parse(raw) as Scenario[] | unknown[],
+        });
       }
 
       validateScenarios(entries); // throws -> build fails

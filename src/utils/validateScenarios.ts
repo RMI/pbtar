@@ -3,7 +3,7 @@ import addFormats from "ajv-formats";
 import schema from "../schema/schema.json" with { type: "json" };
 import type { Scenario } from "../types";
 
-export type FileEntry = { name: string; data: unknown };
+export type FileEntry = { name: string; data: Scenario[] };
 
 function makeValidator() {
   const ajv = new Ajv({ allErrors: true, strict: true });
@@ -31,7 +31,7 @@ export function validateScenarios(entries: FileEntry[]): Scenario[] {
       problems.push(`✖ ${name}\n  expected an array of Scenario items`);
       continue;
     }
-    out.push(...(data as Scenario[]));
+    out.push(...data);
   }
 
   if (problems.length) {
