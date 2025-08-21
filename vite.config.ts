@@ -122,13 +122,12 @@ function buildInfoPlugin(): Plugin {
   };
 }
 
-function dataValidationPlugin() {
+function dataValidationPlugin(dir: string = "src/data") {
   return {
     name: "data-validation",
     apply: "build",
     enforce: "pre",
     async buildStart() {
-      const dir = "src/data";
       const names = (await fs.readdir(dir)).filter((f) => f.endsWith(".json"));
       const entries: FileEntry[] = [];
 
