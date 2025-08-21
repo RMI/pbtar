@@ -11,7 +11,7 @@ generate-schema-doc \
   public/ \
   public/ 
 
-npm run format
+prettier --write public/
 
 # leave the venv
 deactivate
