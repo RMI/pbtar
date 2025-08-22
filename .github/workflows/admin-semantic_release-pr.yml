@@ -59,7 +59,7 @@ jobs:
 
       - name: Build
         run: |
-          npm run build
+          npm run prepare:tarball
         env:
           VITE_BUILD_MODE: |
             ${{
