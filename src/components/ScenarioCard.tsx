@@ -87,11 +87,13 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
     regionsContainerRef,
     regionBadgeWidth,
   );
-  const visibleSectorsCount = useAvailableBadgeCount(
+  // Ugliest possible hack to quickly show all sectors
+  const visibleSectorsCount = 15
+  /*const visibleSectorsCount = useAvailableBadgeCount(
     sectorsContainerRef,
     sectorBadgeWidth,
   );
-
+*/
   // Helper function to conditionally highlight text based on search term
   const highlightTextIfSearchMatch = (text: string) => {
     // If there's a search term and it matches the text
