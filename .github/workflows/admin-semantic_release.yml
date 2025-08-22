@@ -1,19 +1,15 @@
 ---
 on:
-  push:
-    branches:
-      - production
-      - main
-      - next
+  workflow_call:
 
-name: Release
+name: Build and Release
 
 permissions:
   contents: read # for checkout
 
 jobs:
-  release:
-    name: Release
+  build-release:
+    name: Build and Release
     runs-on: ubuntu-latest
     permissions:
       contents: write # to be able to publish a GitHub release
@@ -33,7 +29,41 @@ jobs:
         run: npm clean-install
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
         run: npm audit signatures
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VITE_BUILD_MODE: |
+            ${{
+              ((github.event_name == 'push' && github.ref_name == 'production') && 'production') ||
+              ((github.event_name == 'push' && github.ref_name == 'main') && 'development') ||
+              (github.event_name == 'push' && github.ref_name) ||
+              ((github.event_name == 'pull_request' && github.ref_name == 'next') && 'staging') ||
+              (github.event_name == 'pull_request' && format('{0}-{1}', 'pr', github.event.pull_request.number)) ||
+              github.ref_name
+            }}
+          VITE_GITHUB_ACTOR: ${{ github.actor }}
+          VITE_GITHUB_EVENT_NAME: ${{ github.event_name }}
+          VITE_GITHUB_REPOSITORY: ${{ github.repository }}
+          VITE_GITHUB_REF: ${{ github.ref }}
+          VITE_GITHUB_SHA: ${{ github.sha }}
+          VITE_GITHUB_HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          VITE_GITHUB_WORKFLOW: ${{ github.workflow }}
+          VITE_GITHUB_WORKFLOW_REF: ${{ github.workflow_ref }}
+          VITE_GITHUB_WORKFLOW_SHA: ${{ github.workflow_sha }}
+          VITE_GITHUB_RUN_ID: ${{ github.run_id }}
+          VITE_GITHUB_RUN_NUMBER: ${{ github.run_number }}
+          VITE_GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+          VITE_BUILD_MACHINE_NAME: ${{ runner.name }}
+          VITE_BUILD_OS: ${{ runner.os }}
+          VITE_BUILD_OS_VERSION: ${{ runner.os-version }}
+          VITE_BUILD_ARCH: ${{ runner.arch }}
         run: npx semantic-release
+
+        # Reuse the artifact for downstream deploy
+      - name: Upload dist.tgz as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-tgz
+          path: dist.tgz
+          if-no-files-found: error

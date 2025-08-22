@@ -1,10 +1,6 @@
 ---
 on:
-  pull_request:
-    branches:
-      - main
-      - production
-      - next
+  workflow_call:
 
 name: Semantic Release Preview
 
@@ -46,6 +42,50 @@ jobs:
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
         run: |
           npm audit signatures
+
+      - name: Compute preview version
+        id: ver
+        run: |
+          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
+          echo "preview-version=0.0.0-pr.${{ github.event.pull_request.number }}.${{ github.run_number }}+sha.${SHORT_SHA}" >> $GITHUB_OUTPUT
+
+      # Update package.json locally (no commit, no tag)
+      - name: Set package.json version
+        env:
+          PREVIEW_VERSION: ${{ steps.ver.outputs.preview-version }}
+        run: |
+          npm version "$PREVIEW_VERSION" --no-git-tag-version
+          jq -r '.version' package.json  # sanity check
+
+      - name: Build
+        run: |
+          npm run build
+        env:
+          VITE_BUILD_MODE: |
+            ${{
+              ((github.event_name == 'push' && github.ref_name == 'production') && 'production') ||
+              ((github.event_name == 'push' && github.ref_name == 'main') && 'development') ||
+              (github.event_name == 'push' && github.ref_name) ||
+              ((github.event_name == 'pull_request' && github.ref_name == 'next') && 'staging') ||
+              (github.event_name == 'pull_request' && format('{0}-{1}', 'pr', github.event.pull_request.number)) ||
+              github.ref_name
+            }}
+          VITE_GITHUB_ACTOR: ${{ github.actor }}
+          VITE_GITHUB_EVENT_NAME: ${{ github.event_name }}
+          VITE_GITHUB_REPOSITORY: ${{ github.repository }}
+          VITE_GITHUB_REF: ${{ github.ref }}
+          VITE_GITHUB_SHA: ${{ github.sha }}
+          VITE_GITHUB_HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          VITE_GITHUB_WORKFLOW: ${{ github.workflow }}
+          VITE_GITHUB_WORKFLOW_REF: ${{ github.workflow_ref }}
+          VITE_GITHUB_WORKFLOW_SHA: ${{ github.workflow_sha }}
+          VITE_GITHUB_RUN_ID: ${{ github.run_id }}
+          VITE_GITHUB_RUN_NUMBER: ${{ github.run_number }}
+          VITE_GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+          VITE_BUILD_MACHINE_NAME: ${{ runner.name }}
+          VITE_BUILD_OS: ${{ runner.os }}
+          VITE_BUILD_OS_VERSION: ${{ runner.os-version }}
+          VITE_BUILD_ARCH: ${{ runner.arch }}
 
       - name: Dry-run Release
         env:
