@@ -48,3 +48,4 @@ jobs:
     # that one or the other dependencies ran.
     if: ${{ always() && (needs.build-release.result == 'success' || needs.build-pr.result == 'success') }}
     uses: ./.github/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml
+    secrets: inherit
