@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Badge from "./Badge";
 import { pathwayTypeTooltips, sectorTooltips } from "../utils/tooltipUtils";
+import { Sprout } from "lucide-react";
 
 // NOTE: The PathwayType union in types/index.ts differs from the keys used in
 // pathwayTypeTooltips (legacy vs current naming). For test stability, we access
@@ -109,6 +110,21 @@ describe("Badge component", () => {
     expect(badge).toHaveClass("border");
     expect(badge).toHaveClass("mr-2");
     expect(badge).toHaveClass("mb-1");
+  });
+
+  it("renders an icon when provided", () => {
+    const { container } = render(
+      <Badge
+        text="Agriculture"
+        variant="sector"
+        icon={<Sprout size={14} data-testid="badge-icon" />}
+      />,
+    );
+    const badge = container.firstChild as HTMLElement;
+    // Ensure icon wrapper present before text
+    const iconEl = container.querySelector("[data-testid='badge-icon']");
+    expect(iconEl).toBeInTheDocument();
+    expect(badge.textContent).toContain("Agriculture");
   });
 
   it("renders as a span element", () => {
