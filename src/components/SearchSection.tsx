@@ -1,6 +1,7 @@
 import React from "react";
 import SearchBox from "./SearchBox";
 import FilterDropdown from "./FilterDropdown";
+import FilterChipsBar from "./FilterChipsBar";
 import { scenariosData } from "../data/scenariosData";
 import {
   SearchFilters,
@@ -52,6 +53,14 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       filters.modelYearEnd ||
       filters.modelTempIncrease) !== null;
 
+  const handleRemove = (key: keyof SearchFilters) => {
+    if (key === "searchTerm") {
+      onFilterChange(key, "");
+    } else {
+      onFilterChange(key as keyof SearchFilters, null);
+    }
+  };
+
   return (
     <div className="bg-white">
       <div className="mb-4 pt-8">
@@ -63,7 +72,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         />
       </div>
 
-      <div className="flex flex-wrap gap-2">
+  <div className="flex flex-wrap gap-2">
         <FilterDropdown<string>
           label="Pathway Type"
           options={categories}
@@ -99,12 +108,12 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           onChange={(value) => onFilterChange("sector", value)}
         />
       </div>
-      <div className="mt-4 ml-1">
-        <p className="text-sm text-rmigray-500">
-          Found {scenariosNumber} scenarios
-          {areFiltersApplied && " matching your criteria"}
-        </p>
-      </div>
+      <FilterChipsBar
+        filters={filters}
+        onRemove={handleRemove}
+        onClearAll={onClear}
+        count={scenariosNumber}
+      />
     </div>
   );
 };

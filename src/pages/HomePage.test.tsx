@@ -30,7 +30,7 @@ describe("HomePage component", () => {
     renderHomePage();
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Find Climate Transition Scenarios",
+      "Find Transition Pathways",
     );
   });
 
@@ -39,7 +39,7 @@ describe("HomePage component", () => {
 
     expect(
       screen.getByText(
-        "Browse our repository of climate transition scenarios to find the most relevant ones for your assessment needs.",
+        "Browse our repository of Transition Pathways to find the most relevant ones for your assessment needs.",
       ),
     ).toBeInTheDocument();
   });
