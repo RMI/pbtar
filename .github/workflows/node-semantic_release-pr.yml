@@ -46,8 +46,7 @@ jobs:
       - name: Compute preview version
         id: ver
         run: |
-          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
-          echo "preview-version=0.0.0-pr.${{ github.event.pull_request.number }}.${{ github.run_number }}+sha.${SHORT_SHA}" >> $GITHUB_OUTPUT
+          echo "preview-version=0.0.0-pr.${{ github.event.pull_request.number }}.${{ github.run_number }}" >> $GITHUB_OUTPUT
 
       # Update package.json locally (no commit, no tag)
       - name: Set package.json version
