@@ -414,4 +414,83 @@ describe("tooltip functionality", () => {
       expect.stringContaining("cursor-help"),
     );
   });
+
+  describe("ScenarioCard robustness with non-string values", () => {
+    const baseScenario: Scenario = {
+      id: "robust-1",
+      name: "Scenario A",
+      description: "Desc",
+      pathwayType: "Policy",
+      modelYearEnd: "2030",
+      modelTempIncrease: 1.5,
+      regions: ["EU", "US"],
+      sectors: [{ name: "Power" }],
+      publisher: "RMI",
+      publicationYear: "2024",
+      overview: "x",
+      expertRecommendation: "x",
+      dataSource: {
+        description: "x",
+        url: "https://example.com",
+        downloadAvailable: false,
+      },
+    };
+
+    const renderWithRouter = (scenario: Scenario, searchTerm = "") =>
+      render(
+        <MemoryRouter>
+          <ScenarioCard
+            scenario={scenario}
+            searchTerm={searchTerm}
+          />
+        </MemoryRouter>,
+      );
+
+    it("does not crash when highlighting numeric fields", () => {
+      const s: Scenario = {
+        ...baseScenario,
+        // Using a double cast to satisfy TS, but this still presents as numeric at runtime.
+        modelYearEnd: 2030 as unknown as string, // number on purpose
+        publicationYear: 2024 as unknown as string, // number
+      };
+
+      expect(() => renderWithRouter(s, "2030")).not.toThrow();
+      // Should render stringified year and highlight it
+      expect(screen.getByText("2030")).toBeInTheDocument();
+      // mark exists for the numeric match (adjust selector if your Highlighter differs)
+      const marked = document.querySelectorAll("mark");
+      expect(Array.from(marked).some((m) => m.textContent === "2030")).toBe(
+        true,
+      );
+    });
+
+    it("does not crash with null / undefined text fields", () => {
+      const s: Scenario = {
+        ...baseScenario,
+        // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
+        description: null as unknown as string, // null
+        publisher: undefined as unknown as string, // undefined
+      };
+
+      expect(() => renderWithRouter(s, "rmi")).not.toThrow();
+      // Card chrome still there
+      expect(screen.getByText("Pathway type:")).toBeInTheDocument();
+      expect(screen.getByText("Publisher:")).toBeInTheDocument();
+      // No “[object Object]” leaks
+      expect(document.body.textContent).not.toContain("[object Object]");
+    });
+
+    it("highlights matches inside stringified numbers", () => {
+      const s: Scenario = {
+        ...baseScenario,
+        // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
+        modelYearEnd: 2045 as unknown as string, // number on purpose
+      };
+      const { container } = renderWithRouter(s, "2045");
+      const marks = container.querySelectorAll("mark");
+      expect(Array.from(marks).some((m) => m.textContent === "2045")).toBe(
+        true,
+      );
+    });
+  });
 });
