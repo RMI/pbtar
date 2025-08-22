@@ -47,5 +47,5 @@ jobs:
     # always will trigger, and the "success" conditionals are there to ensure
     # that one or the other dependencies ran.
     if: ${{ always() && (needs.build-release.result == 'success' || needs.build-pr.result == 'success') }}
-    uses: ./.github/workflows/github/workflows/azure-static-web-apps-deploy.yml
+    uses: ./.github/workflows/azure-static-web-apps-deploy.yml
     secrets: inherit
