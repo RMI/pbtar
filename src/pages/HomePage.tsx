@@ -118,23 +118,27 @@ const HomePage: React.FC = () => {
         <div className="relative mx-auto max-w-7xl px-6 pt-14 pb-16 md:pt-20 md:pb-20">
           <div className="max-w-3xl">
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-bluespruce mb-4 leading-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-energy-700 to-bluespruce">Find Climate Transition Scenarios</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-energy-700 to-bluespruce">Transition Pathways</span>
             </h1>
+    
             <p className="text-base md:text-lg text-neutral-700 leading-relaxed">
-              Browse, filter, and explore a curated repository of climate transition scenarios to support robust assessment and decision-making.
+              New to transition pathways? Check out our whitepaper or get started with the step-by-step guide.<br/><br/>
+              Or browse, filter, and explore the curated repository of transition pathways below.
             </p>
+      
             <div className="mt-8 flex gap-4">
               <a
                 href="#scenarios"
                 className="inline-flex items-center rounded-full bg-bluespruce px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-bluespruce/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-energy-400 transition-colors"
               >
-                Explore scenarios
+                Step by Step Guide
               </a>
+          
               <a
                 href="#filters"
                 className="inline-flex items-center rounded-full px-5 py-2.5 text-sm font-medium text-bluespruce border border-bluespruce/30 hover:border-bluespruce/60 hover:bg-white/60 backdrop-blur-sm transition"
               >
-                Jump to filters
+                Jump to scenarios
               </a>
             </div>
           </div>

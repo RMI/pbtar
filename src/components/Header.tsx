@@ -18,7 +18,7 @@ const Header: React.FC = () => {
           />
           <div>
             <h1 className="text-title tracking-tight">
-              Climate Transition Scenarios Repository
+              Transition Pathways Repository
             </h1>
             <p className="text-meta text-white">by RMI</p>
           </div>
@@ -33,7 +33,7 @@ const Header: React.FC = () => {
                 : "text-white"
             }`}
           >
-            Scenarios
+            Pathways
           </Link>
           <Link
             to="/about"
