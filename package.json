@@ -6,7 +6,7 @@
   "main": "main.jsx",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --mode ${VITE_BUILD_MODE:-development}",
+    "build": "cross-env NODE_OPTIONS=--disable-warning=ExperimentalWarning vite build --mode ${VITE_BUILD_MODE:-development}",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -37,6 +37,7 @@
     "@vitejs/plugin-react": "^5.0.1",
     "autoprefixer": "^10.4.21",
     "conventional-changelog-conventionalcommits": "^9.1.0",
+    "cross-env": "^10.0.0",
     "eslint": "^9.33.0",
     "globals": "^16.3.0",
     "jiti": "^2.5.1",
