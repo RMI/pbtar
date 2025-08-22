@@ -11,19 +11,26 @@ const HighlightedText: React.FC<HighlightedTextProps> = ({
   searchTerm,
   className = "",
 }) => {
-  if (!searchTerm.trim()) {
-    return <span className={className}>{text}</span>;
+  // Normalize inputs to ensure consistent behavior
+  const normalizedText = String(text ?? "");
+  const normalizedTerm = String(searchTerm ?? "");
+
+  if (!normalizedTerm.trim()) {
+    return <span className={className}>{normalizedText}</span>;
   }
 
   // Split text by the search term (case-insensitive)
-  const parts = text.split(
-    new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi"),
+  const parts = normalizedText.split(
+    new RegExp(
+      `(${normalizedTerm.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
+      "gi",
+    ),
   );
 
   return (
     <span className={className}>
       {parts.map((part, i) =>
-        part.toLowerCase() === searchTerm.toLowerCase() ? (
+        part.toLowerCase() === normalizedTerm.toLowerCase() ? (
           <mark
             key={i}
             className="bg-energy-100 text-energy-800 px-0.5 rounded-sm font-medium"
