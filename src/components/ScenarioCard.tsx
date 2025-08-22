@@ -5,8 +5,10 @@ import TextWithTooltip from "./TextWithTooltip";
 import { Scenario, PathwayType } from "../types";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
+import WorldCoverageMap from "./WorldCoverageMap";
 import { prioritizeMatches } from "../utils/sortUtils";
 import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
+import { getSectorIcon } from "../utils/sectorIcons";
 
 interface ScenarioCardProps {
   scenario: Scenario;
@@ -131,113 +133,120 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           </p>
         </div>
 
-        <div className="mb-3">
-          <p className={`text-section-label uppercase ${labelCls.replace(/text-\[10px].*/, '')}`}>Pathway Type</p>
-          <div className="flex flex-wrap gap-2">
-            <Badge
-              text={highlightTextIfSearchMatch(scenario.pathwayType)}
-              tooltip={getPathwayTypeTooltip(
-                scenario.pathwayType as PathwayType,
-              )}
-              variant="pathwayType"
-            />
-          </div>
-        </div>
-
-        <div className="mb-3">
-          <p className={`text-section-label uppercase ${labelCls.replace(/text-\[10px].*/, '')}`}>Targets</p>
-          <div className="flex flex-wrap">
-            <Badge
-              text={highlightTextIfSearchMatch(scenario.modelYearEnd)}
-              variant="year"
-            />
-            {scenario.modelTempIncrease && (
+        {/* Unified grid so map aligns with top of Pathway Type */}
+        <div className="mb-4 grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-4 items-start">
+          {/* Row 1 Left: Pathway Type */}
+          <div>
+            <p className={`text-section-label uppercase ${labelCls.replace(/text-\[10px].*/, '')}`}>Pathway Type</p>
+            <div className="flex flex-wrap gap-2">
               <Badge
-                text={highlightTextIfSearchMatch(
-                  `${scenario.modelTempIncrease.toString()}°C`,
+                text={highlightTextIfSearchMatch(scenario.pathwayType)}
+                tooltip={getPathwayTypeTooltip(
+                  scenario.pathwayType as PathwayType,
                 )}
-                variant="temperature"
+                variant="pathwayType"
               />
-            )}
+            </div>
           </div>
-        </div>
-
-        {/* Regions section with dynamic badge count */}
-        <div className="mb-3">
-          <p className={`text-section-label uppercase ${labelCls.replace(/text-\[10px].*/, '')}`}>Regions</p>
-          <div
-            className="flex flex-wrap"
-            ref={regionsContainerRef}
-          >
-            {sortedRegions.slice(0, visibleRegionsCount).map((region) => (
-              <Badge
-                key={region}
-                text={highlightTextIfSearchMatch(region)}
-                variant="region"
-              />
-            ))}
-            {scenario.regions.length > visibleRegionsCount && (
-              <TextWithTooltip
-                text={
-                  <span className="text-xs text-rmigray-500 ml-1 self-center">
-                    +{scenario.regions.length - visibleRegionsCount} more
-                  </span>
-                }
-                tooltip={
-                  <span>
-                    {sortedRegions
-                      .slice(visibleRegionsCount)
-                      .map((region, idx) => (
-                        <React.Fragment key={region}>
-                          {idx > 0 && ", "}
-                          <span className="whitespace-nowrap">{region}</span>
-                        </React.Fragment>
-                      ))}
-                  </span>
-                }
-              />
-            )}
+          {/* Right column spanning rows 1-3: Map */}
+          <div className="lg:row-span-3 lg:col-start-2 flex lg:justify-end">
+            <WorldCoverageMap regions={scenario.regions} />
           </div>
-        </div>
-
-        {/* Sectors section with dynamic badge count */}
-        <div className="mb-3">
-          <p className={`text-section-label uppercase ${labelCls.replace(/text-\[10px].*/, '')}`}>Sectors</p>
-          <div
-            className="flex flex-wrap"
-            ref={sectorsContainerRef}
-          >
-            {sortedSectors.slice(0, visibleSectorsCount).map((sector) => (
+          {/* Row 2 Left: Targets */}
+          <div>
+            <p className={`text-section-label uppercase ${labelCls.replace(/text-\[10px].*/, '')}`}>Targets</p>
+            <div className="flex flex-wrap gap-2">
               <Badge
-                key={sector.name}
-                text={highlightTextIfSearchMatch(sector.name)}
-                tooltip={getSectorTooltip(sector.name)}
-                variant="sector"
+                text={highlightTextIfSearchMatch(scenario.modelYearEnd)}
+                variant="year"
               />
-            ))}
-            {scenario.sectors.length > visibleSectorsCount && (
-              <TextWithTooltip
-                text={
-                  <span className="text-xs text-rmigray-500 ml-1 self-center">
-                    +{scenario.sectors.length - visibleSectorsCount} more
-                  </span>
-                }
-                tooltip={
-                  <span>
-                    {sortedSectors
-                      .slice(visibleSectorsCount)
-                      .map((sector, idx) => (
-                        <React.Fragment key={sector.name}>
-                          {idx > 0 && ", "}
-                          <span className="whitespace-nowrap">
-                            {sector.name}
-                          </span>
-                        </React.Fragment>
-                      ))}
-                  </span>
-                }
-              />
-            )}
+              {scenario.modelTempIncrease && (
+                <Badge
+                  text={highlightTextIfSearchMatch(
+                    `${scenario.modelTempIncrease.toString()}°C`,
+                  )}
+                  variant="temperature"
+                />
+              )}
+            </div>
+          </div>
+          {/* Row 3 Left: Regions */}
+            <div>
+              <p className={`text-section-label uppercase ${labelCls.replace(/text-\[10px].*/, '')}`}>Regions</p>
+              <div
+                className="flex flex-wrap"
+                ref={regionsContainerRef}
+              >
+                {sortedRegions.slice(0, visibleRegionsCount).map((region) => (
+                  <Badge
+                    key={region}
+                    text={highlightTextIfSearchMatch(region)}
+                    variant="region"
+                  />
+                ))}
+                {scenario.regions.length > visibleRegionsCount && (
+                  <TextWithTooltip
+                    text={
+                      <span className="text-xs text-rmigray-500 ml-1 self-center">
+                        +{scenario.regions.length - visibleRegionsCount} more
+                      </span>
+                    }
+                    tooltip={
+                      <span>
+                        {sortedRegions
+                          .slice(visibleRegionsCount)
+                          .map((region, idx) => (
+                            <React.Fragment key={region}>
+                              {idx > 0 && ", "}
+                              <span className="whitespace-nowrap">{region}</span>
+                            </React.Fragment>
+                          ))}
+                      </span>
+                    }
+                  />
+                )}
+              </div>
+            </div>
+          {/* Row 4 (spanning both columns): Sectors */}
+          <div className="lg:col-span-2">
+            <p className={`text-section-label uppercase ${labelCls.replace(/text-\[10px].*/, '')}`}>Sectors</p>
+            <div
+              className="flex flex-wrap"
+              ref={sectorsContainerRef}
+            >
+              {sortedSectors.slice(0, visibleSectorsCount).map((sector) => (
+                <Badge
+                  key={sector.name}
+                  text={highlightTextIfSearchMatch(sector.name)}
+                  tooltip={getSectorTooltip(sector.name)}
+                  variant="sector"
+                  icon={getSectorIcon(sector.name as any)}
+                />
+              ))}
+              {scenario.sectors.length > visibleSectorsCount && (
+                <TextWithTooltip
+                  text={
+                    <span className="text-xs text-rmigray-500 ml-1 self-center">
+                      +{scenario.sectors.length - visibleSectorsCount} more
+                    </span>
+                  }
+                  tooltip={
+                    <span>
+                      {sortedSectors
+                        .slice(visibleSectorsCount)
+                        .map((sector, idx) => (
+                          <React.Fragment key={sector.name}>
+                            {idx > 0 && ", "}
+                            <span className="whitespace-nowrap">
+                              {sector.name}
+                            </span>
+                          </React.Fragment>
+                        ))}
+                    </span>
+                  }
+                />
+              )}
+            </div>
           </div>
         </div>
 
