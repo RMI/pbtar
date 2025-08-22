@@ -34,12 +34,12 @@ jobs:
   build-release:
     name: "Build and Release"
     if: ${{ github.event_name == 'push' }}
-    uses: ./.github/workflows/admin-semantic_release.yml
+    uses: ./.github/workflows/node-semantic_release.yml
 
   build-pr:
     name: "Build"
     if: ${{ github.event_name == 'pull_request' }}
-    uses: ./.github/workflows/admin-semantic_release-pr.yml
+    uses: ./.github/workflows/node-semantic_release-pr.yml
 
   deploy:
     name: "Deploy to SWA"
@@ -47,5 +47,5 @@ jobs:
     # always will trigger, and the "success" conditionals are there to ensure
     # that one or the other dependencies ran.
     if: ${{ always() && (needs.build-release.result == 'success' || needs.build-pr.result == 'success') }}
-    uses: ./.github/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml
+    uses: ./.github/workflows/github/workflows/azure-static-web-apps-deploy.yml
     secrets: inherit
