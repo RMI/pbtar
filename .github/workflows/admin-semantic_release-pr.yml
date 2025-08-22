@@ -87,6 +87,14 @@ jobs:
           VITE_BUILD_OS_VERSION: ${{ runner.os-version }}
           VITE_BUILD_ARCH: ${{ runner.arch }}
 
+        # Reuse the artifact for downstream deploy
+      - name: Upload dist.tgz as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-tgz
+          path: dist.tgz
+          if-no-files-found: error
+
       - name: Dry-run Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
