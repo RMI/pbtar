@@ -68,7 +68,7 @@ const FilterChipsBar: React.FC<FilterChipsBarProps> = ({
         <div
           key={chip.key}
           role="listitem"
-          className="group inline-flex items-center gap-1 pl-2 pr-1 py-1 radius-full bg-energy-100 text-energy-800 border border-energy-100 shadow-token-xs transition-colors transition-fast ease-standard text-xs font-medium"
+          className="group inline-flex items-center gap-1 h-6 leading-none pl-2 pr-1 radius-full bg-energy-100 text-energy-800 border border-energy-100 shadow-token-xs text-xs font-medium select-none whitespace-nowrap transition duration-150 ease-standard hover:bg-energy-200 hover:-translate-y-0.5 hover:shadow-token-sm"
         >
           <span className="whitespace-nowrap">
             <span className="opacity-70 mr-1">{chip.label}:</span>{chip.value}
