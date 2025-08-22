@@ -13,11 +13,16 @@ interface BadgeProps {
     | "sector";
 }
 
-const Badge: React.FC<BadgeProps> = ({
-  text,
-  tooltip,
-  variant = "default",
-}) => {
+/*
+  Flat, material-style badge implementation
+  -------------------------------------------------
+  Goals:
+  - Simple, unobtrusive, consistent with filter dropdown button aesthetics
+  - Uses subtle neutral border + soft background tint per variant
+  - Accessible contrast for text
+  - Minimal motion; rely on global focus-visible styles provided elsewhere
+*/
+const Badge: React.FC<BadgeProps> = ({ text, tooltip, variant = "default" }) => {
   const getVariantStyles = () => {
     switch (variant) {
       case "pathwayType":
@@ -35,15 +40,13 @@ const Badge: React.FC<BadgeProps> = ({
     }
   };
 
-  const badgeStyles = `inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getVariantStyles()} mr-2 mb-1`;
+  // Flat material style
+  const badgeStyles = `inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium border ${getVariantStyles()} mr-2 mb-1 select-none whitespace-nowrap`;
 
-  // If no tooltip, just return the basic badge
-  // If no tooltip, just return the basic badge
   if (!tooltip) {
     return <span className={badgeStyles}>{text}</span>;
   }
 
-  // With tooltip, use the TextWithTooltip component
   return (
     <TextWithTooltip
       text={<span className={badgeStyles}>{text}</span>}

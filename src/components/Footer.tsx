@@ -4,7 +4,7 @@ import { BarChart3, Mail } from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-bluespruce border-t border-basalt mt-auto">
+  <footer className="bg-bluespruce border-t border-basalt mt-auto shadow-token-sm transition-colors transition-base ease-standard">
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center mb-4 md:mb-0">
@@ -20,13 +20,13 @@ const Footer: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0">
             <Link
               to="/about"
-              className="text-sm text-white hover:text-energy transition-colors duration-200 sm:mr-6"
+              className="text-sm text-white hover:text-energy transition-colors transition-fast ease-standard sm:mr-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-energy-400 focus-visible:ring-offset-2 focus-visible:ring-offset-bluespruce rounded-sm"
             >
               About Us
             </Link>
             <a
               href="mailto:contact@rmi.org"
-              className="flex items-center text-sm text-white hover:text-energy transition-colors duration-200"
+              className="flex items-center text-sm text-white hover:text-energy transition-colors transition-fast ease-standard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-energy-400 focus-visible:ring-offset-2 focus-visible:ring-offset-bluespruce rounded-sm"
             >
               <Mail
                 size={16}

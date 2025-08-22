@@ -8,8 +8,10 @@
     "dev": "vite",
     "build": "vite build --mode ${VITE_BUILD_MODE:-development}",
     "preview": "vite preview",
-    "test": "vitest run",
-    "test:watch": "vitest",
+  "test": "vitest run",
+  "test:watch": "vitest --watch",
+  "test:ci": "vitest run --coverage",
+  "test:open-handles": "vitest run --detectOpenHandles",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -20,7 +22,7 @@
   "author": "RMI",
   "license": "MIT",
   "dependencies": {
-    "lucide-react": "^0.539.0",
+    "lucide-react": "^0.536.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.8.1"

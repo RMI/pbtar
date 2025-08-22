@@ -105,17 +105,25 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
     return text;
   };
 
+  const labelCls = "text-[10px] font-semibold tracking-wide text-rmigray-500 mb-1 uppercase";
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
+    <div
+  className="group relative bg-white radius-xl shadow-token-sm overflow-hidden flex flex-col h-full border border-neutral-200 transition-all transition-base ease-standard hover:shadow-token-md hover:-translate-y-0.5 focus-within:shadow-token-md focus-within:-translate-y-0.5 focus-within:ring-2 focus-within:ring-energy-400/60"
+      aria-label={`Scenario: ${scenario.name}`}
+    >
+      {/* Accent bar using gradient token */}
+      <div className="relative h-1 w-full bg-gradient-accent transition-base ease-standard">
+        <span className="absolute inset-0 sheen-overlay opacity-0 group-hover:opacity-60 transition-opacity transition-slow ease-emphasized" />
+      </div>
       <div className="p-5 flex flex-col h-full">
         <div className="mb-4">
-          <h2 className="text-xl font-semibold text-bluespruce mb-2">
+          <h2 className="text-subtitle text-bluespruce mb-2">
             <HighlightedText
               text={scenario.name}
               searchTerm={searchTerm}
             />
           </h2>
-          <p className="text-rmigray-600 text-sm line-clamp-2">
+          <p className="text-body text-rmigray-600 line-clamp-2" title={scenario.description}>
             <HighlightedText
               text={scenario.description}
               searchTerm={searchTerm}
@@ -124,9 +132,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         </div>
 
         <div className="mb-3">
-          <p className="text-xs font-medium text-rmigray-500 mb-1">
-            Pathway type:
-          </p>
+          <p className={`text-section-label uppercase ${labelCls.replace(/text-\[10px].*/, '')}`}>Pathway Type</p>
           <div className="flex flex-wrap gap-2">
             <Badge
               text={highlightTextIfSearchMatch(scenario.pathwayType)}
@@ -139,7 +145,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         </div>
 
         <div className="mb-3">
-          <p className="text-xs font-medium text-rmigray-500 mb-1">Targets:</p>
+          <p className={`text-section-label uppercase ${labelCls.replace(/text-\[10px].*/, '')}`}>Targets</p>
           <div className="flex flex-wrap">
             <Badge
               text={highlightTextIfSearchMatch(scenario.modelYearEnd)}
@@ -158,7 +164,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
 
         {/* Regions section with dynamic badge count */}
         <div className="mb-3">
-          <p className="text-xs font-medium text-rmigray-500 mb-1">Regions:</p>
+          <p className={`text-section-label uppercase ${labelCls.replace(/text-\[10px].*/, '')}`}>Regions</p>
           <div
             className="flex flex-wrap"
             ref={regionsContainerRef}
@@ -196,7 +202,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
 
         {/* Sectors section with dynamic badge count */}
         <div className="mb-3">
-          <p className="text-xs font-medium text-rmigray-500 mb-1">Sectors:</p>
+          <p className={`text-section-label uppercase ${labelCls.replace(/text-\[10px].*/, '')}`}>Sectors</p>
           <div
             className="flex flex-wrap"
             ref={sectorsContainerRef}
@@ -235,11 +241,11 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           </div>
         </div>
 
-        <div className="mt-auto pt-3 border-t border-gray-100">
+    <div className="mt-auto pt-3 border-t border-neutral-100">
           <div className="flex justify-between items-center">
             <div>
-              <p className="text-xs text-rmigray-500">Publisher:</p>
-              <p className="text-sm font-medium text-rmigray-800">
+  <p className={`text-section-label uppercase mb-0.5`}>Publisher</p>
+      <p className="text-sm font-medium text-rmigray-800 leading-snug">
                 <HighlightedText
                   text={scenario.publisher}
                   searchTerm={searchTerm}
@@ -247,8 +253,8 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               </p>
             </div>
             <div className="text-right">
-              <p className="text-xs text-rmigray-500">Published:</p>
-              <p className="text-sm font-medium text-rmigray-800">
+  <p className={`text-section-label uppercase mb-0.5`}>Published</p>
+      <p className="text-sm font-medium text-rmigray-800 leading-snug">
                 <HighlightedText
                   text={scenario.publicationYear}
                   searchTerm={searchTerm}
@@ -259,15 +265,10 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <div className="mt-2 flex justify-end">
             <Link
               to={`/scenario/${scenario.id}`}
-              className="text-energy text-sm font-medium flex items-center transition-colors duration-200 hover:text-energy-700"
+  className="relative inline-flex items-center gap-1 text-energy text-sm font-medium transition-all transition-fast ease-standard hover:text-energy-700 group-hover:translate-x-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-energy-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-full px-2 py-1"
             >
-              <span className="flex items-center">
-                View details
-                <ChevronRight
-                  size={16}
-                  className="ml-1"
-                />
-              </span>
+      <span>View details</span>
+  <ChevronRight size={16} className="transition-transform transition-fast ease-standard group-hover:translate-x-0.5" />
             </Link>
           </div>
         </div>
