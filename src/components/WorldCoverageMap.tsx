@@ -5,7 +5,7 @@ import { feature, mesh } from 'topojson-client';
 // We'll dynamically import the world-atlas TopoJSON (countries-110m) once on mount.
 // If network fetch is undesired, world-atlas can be added as a dependency and imported locally.
 
-export interface WorldCoverageMapProps { className?: string; regions?: string[] }
+export interface WorldCoverageMapProps { className?: string; regions?: string[]; bare?: boolean }
 
 // EU-27 (2025) ISO-3166 numeric (3-digit strings)
 const EU = new Set([
@@ -19,7 +19,7 @@ const SEA = new Set(['096','104','116','360','418','458','608','626','702','704'
 type Topology = any; // minimal typing for quick integration
 
 
-const WorldCoverageMap: React.FC<WorldCoverageMapProps> = ({ className = '', regions = [] }) => {
+const WorldCoverageMap: React.FC<WorldCoverageMapProps> = ({ className = '', regions = [], bare = false }) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -138,36 +138,37 @@ const WorldCoverageMap: React.FC<WorldCoverageMapProps> = ({ className = '', reg
   }, []);
 
   return (
-    <div className={`relative inline-flex w-full aspect-[2/1] rounded-md bg-white p-2 shadow-token-sm ${className}`}>
-      {error && (
-        <div className="text-xs text-red-600 m-auto">{error}</div>
-      )}
+    <>
       <svg
         ref={svgRef}
         viewBox="0 0 1000 550"
         role="img"
-        aria-label="World map with EU and South-eastern Asia highlighted"
-        className="w-full h-full"
+        aria-label="World map with highlighted regions"
+        className={`w-full h-full ${className}`}
+        aria-hidden="true"
       />
-      {/* Inline scoped styles */}
       <style>{`
-        .wc-sphere { fill: #eeeeee; }
-        .wc-country { fill: #cccccc; stroke: #aaaaaa; stroke-width: 0.35; }
-        .wc-eu { fill: #2f7ed8; stroke: #ffffff; stroke-width: 0.35; }
-        .wc-sea { fill: #f28e2b; stroke: #ffffff; stroke-width: 0.35; }
-  .wc-americas { fill: #16a34a; stroke: #ffffff; stroke-width: 0.35; }
-  .wc-asiapacific { fill: #0d9488; stroke: #ffffff; stroke-width: 0.35; }
-  .wc-both { fill: #8b6bdc; stroke: #ffffff; stroke-width: 0.35; }
-  .wc-globalrest { fill: #14b8a6; stroke: #ffffff; stroke-width: 0.35; }
-        .wc-borders { fill: none; stroke: #ffffff; stroke-width: 0.35; }
-        .wc-legend-label { font: 12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; fill: #111; }
+        /* Background mode assumes parent controls positioning & opacity */
+        .wc-sphere { fill: #fafafa; }
+        .wc-country { fill: #e5e7eb; stroke: #d1d5db; stroke-width: 0.3; }
+        .wc-eu { fill: #2f7ed8; stroke: #ffffff; stroke-width: 0.3; }
+        .wc-sea { fill: #f28e2b; stroke: #ffffff; stroke-width: 0.3; }
+        .wc-americas { fill: #16a34a; stroke: #ffffff; stroke-width: 0.3; }
+        .wc-asiapacific { fill: #0d9488; stroke: #ffffff; stroke-width: 0.3; }
+        .wc-globalrest { fill: #14b8a6; stroke: #ffffff; stroke-width: 0.3; }
+        .wc-borders { fill: none; stroke: #ffffff; stroke-width: 0.25; }
       `}</style>
-      {!loaded && !error && (
+      {!bare && !loaded && !error && (
         <div className="absolute inset-0 flex items-center justify-center" aria-hidden>
           <span className="text-xs text-neutral-500">Loading map…</span>
         </div>
       )}
-    </div>
+      {error && !bare && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-xs text-red-600">{error}</span>
+        </div>
+      )}
+    </>
   );
 };
 

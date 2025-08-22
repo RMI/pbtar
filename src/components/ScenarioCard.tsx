@@ -151,7 +151,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             </div>
           </div>
           {/* Right column spanning rows 1-3: Map */}
-          <div className="lg:row-span-3 lg:col-start-2 flex lg:justify-end">
+          <div className="lg:row-span-3 lg:col-start-2 flex lg:justify-end opacity-30">
             <WorldCoverageMap regions={scenario.regions} />
           </div>
           {/* Row 2 Left: Targets */}
