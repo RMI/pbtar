@@ -8,13 +8,13 @@ pip3 install "json-schema-for-humans"
 
 # Create directory if no exist, and `cd` to it
 mkdir -p public
-cd public || exit 1
 
 generate-schema-doc \
-  --config-file "../scripts/schema-render-config.json" \
-  "../src/schema/"
+  --config-file "scripts/schema-render-config.json" \
+  "src/schema/" \
+  "public/"
 
-prettier --write public/
+prettier --write "public/"
 
 # leave the venv
 deactivate
