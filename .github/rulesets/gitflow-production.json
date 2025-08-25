@@ -40,18 +40,6 @@
         "do_not_enforce_on_create": false,
         "required_status_checks": [
           {
-            "context": "Docker actions / build-docker-image / build (linux/amd64)",
-            "integration_id": 15368
-          },
-          {
-            "context": "Docker actions / build-docker-image / merge",
-            "integration_id": 15368
-          },
-          {
-            "context": "Docker actions / hadolint / hadolint",
-            "integration_id": 15368
-          },
-          {
             "context": "Formatting / Run Prettier Check",
             "integration_id": 15368
           },
