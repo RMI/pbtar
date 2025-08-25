@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "resolveJsonModule": true,
+    "outDir": "dist-scripts"
+  },
+  "include": ["scripts/**/*", "src/validation/**/*", "src/schema/schema.json"]
+}

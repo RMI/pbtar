@@ -1,23 +1,18 @@
 import { Scenario } from "../types";
+import { validateScenarios, FileEntry } from "../utils/validateScenarios";
 
-import scenarios_metadata_1 from "./scenarios_metadata_1.json" with { type: "json" };
-import scenarios_metadata_2 from "./scenarios_metadata_2.json" with { type: "json" };
-import scenarios_metadata_3 from "./scenarios_metadata_3.json" with { type: "json" };
-import scenarios_metadata_4 from "./scenarios_metadata_4.json" with { type: "json" };
-import scenarios_metadata_5 from "./scenarios_metadata_5.json" with { type: "json" };
-import scenarios_metadata_6 from "./scenarios_metadata_6.json" with { type: "json" };
-import scenarios_metadata_7 from "./scenarios_metadata_7.json" with { type: "json" };
-import scenarios_metadata_8 from "./scenarios_metadata_8.json" with { type: "json" };
-import scenarios_metadata_minimal from "./scenarios_metadata_minimal.json" with { type: "json" };
+// 1) Grab every JSON file in this folder
+//    `eager:true` = load at build time (no async), `import:'default'` = get the parsed JSON
+const modules = import.meta.glob("./*.json", {
+  eager: true,
+  import: "default",
+});
 
-export const scenariosData: Scenario[] = [
-  ...scenarios_metadata_1,
-  ...scenarios_metadata_2,
-  ...scenarios_metadata_3,
-  ...scenarios_metadata_4,
-  ...scenarios_metadata_5,
-  ...scenarios_metadata_6,
-  ...scenarios_metadata_7,
-  ...scenarios_metadata_8,
-  ...scenarios_metadata_minimal,
-];
+const entries: FileEntry[] = Object.entries(modules)
+  .map(([path, data]) => ({
+    name: path.split("/").pop()!, // e.g. "scenarios_metadata_1.json"
+    data, // file contents
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+export const scenariosData: Scenario[] = validateScenarios(entries);

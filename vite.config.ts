@@ -1,7 +1,19 @@
-import { defineConfig, Plugin, version as viteVersion } from "vite";
+import {
+  defineConfig,
+  Plugin,
+  version as viteVersion,
+  type ViteDevServer,
+} from "vite";
 import react from "@vitejs/plugin-react";
 import { simpleGit } from "simple-git";
 import os from "os";
+import { validateScenarios, FileEntry } from "./src/utils/validateScenarios";
+import { promises as fs } from "node:fs";
+import { join } from "node:path";
+import { viteStaticCopy } from "vite-plugin-static-copy";
+import { readFile } from "node:fs/promises";
+import { resolve } from "node:path";
+import type { IncomingMessage, ServerResponse } from "node:http";
 import pkg from "./package.json";
 
 // Safe wrapper for OS functions with proper typing
@@ -113,11 +125,57 @@ function buildInfoPlugin(): Plugin {
   };
 }
 
+function dataValidationPlugin(dir: string = "src/data") {
+  return {
+    name: "data-validation",
+    apply: "build",
+    enforce: "pre",
+    async buildStart() {
+      const names = (await fs.readdir(dir)).filter((f) => f.endsWith(".json"));
+      const entries: FileEntry[] = [];
+
+      for (const name of names) {
+        const raw = await fs.readFile(join(dir, name), "utf8");
+        entries.push({
+          name,
+          data: JSON.parse(raw) as Scenario[] | unknown[],
+        });
+      }
+
+      validateScenarios(entries); // throws -> build fails
+    },
+  };
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), buildInfoPlugin()],
+  plugins: [
+    react(),
+    buildInfoPlugin(),
+    dataValidationPlugin("src/data"),
+    viteStaticCopy({
+      targets: [{ src: "src/schema/schema.json", dest: "" }],
+    }),
+  ],
   server: {
     open: true,
     port: 3000,
+  },
+  configureServer(server: ViteDevServer) {
+    server.middlewares.use(
+      "/schema.json",
+      (
+        _req: IncomingMessage,
+        res: ServerResponse,
+        next: (err?: unknown) => void,
+      ) => {
+        readFile(resolve("src/schema/schema.json"), "utf8")
+          .then((json) => {
+            res.setHeader("Content-Type", "application/json");
+            res.end(json);
+          })
+          .catch(next);
+      },
+    );
   },
 });
