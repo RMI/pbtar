@@ -6,7 +6,7 @@ python3 -m venv ".venv/python"
 # This adds the generate-schema-doc command
 pip3 install "json-schema-for-humans"
 
-# Create djirectory if no exist, and `cd` to it
+# Create directory if no exist, and `cd` to it
 mkdir -p public
 cd public || exit 1
 
