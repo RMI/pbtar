@@ -22,3 +22,5 @@ jobs:
 
       - name: Check build
         run: npm run build
+        env:
+          VITE_GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
