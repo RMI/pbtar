@@ -65,6 +65,7 @@ const Colophon: React.FC<ColophonProps> = ({ className = "" }) => {
 
     const sections = {
       "Build Info": {
+        "App Version": getEnvValue("VITE_APP_VERSION"),
         "Git SHA": getEnvValue("VITE_GIT_SHA"),
         "Branch": getEnvValue("VITE_GIT_BRANCH"),
         "Working Directory Clean": String(getEnvValue("VITE_GIT_CLEAN")),
@@ -163,6 +164,7 @@ const Colophon: React.FC<ColophonProps> = ({ className = "" }) => {
         <div className="mb-3">
           <h4 className="font-medium mb-1">Build Info</h4>
           <ul className="list-none text-s">
+            <li>App Version: {import.meta.env.VITE_APP_VERSION ?? "N/A"}</li>
             <li>Git SHA: {import.meta.env.VITE_GIT_SHA ?? "N/A"}</li>
             <li>Branch: {import.meta.env.VITE_GIT_BRANCH ?? "N/A"}</li>
             <li>

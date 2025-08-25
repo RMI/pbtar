@@ -14,6 +14,7 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import type { IncomingMessage, ServerResponse } from "node:http";
+import pkg from "./package.json";
 
 // Safe wrapper for OS functions with proper typing
 const getOsInfo = (): {
@@ -89,10 +90,12 @@ function buildInfoPlugin(): Plugin {
     async config(_, { mode }) {
       const gitInfo = await getGitInfo();
       const osInfo = getOsInfo();
+      const pkgVersion = (pkg as { version: string | undefined }).version;
 
       return {
         define: {
           // Build Env
+          "import.meta.env.VITE_APP_VERSION": JSON.stringify(pkgVersion),
           "import.meta.env.VITE_NODE_VERSION": JSON.stringify(process.version),
           "import.meta.env.VITE_VERSION": JSON.stringify(viteVersion),
           "import.meta.env.VITE_ENVIRONMENT": JSON.stringify(mode),

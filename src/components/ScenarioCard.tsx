@@ -91,7 +91,12 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
   );
 
   // Helper function to conditionally highlight text based on search term
-  const highlightTextIfSearchMatch = (text: string) => {
+  const highlightTextIfSearchMatch = (
+    value: string | number | undefined | null | boolean,
+  ) => {
+    // If value is null or undefined, return empty string, otherwise cast to string.
+    const text = value == null ? "" : String(value);
+
     // If there's a search term and it matches the text
     if (searchTerm && text.toLowerCase().includes(searchTerm.toLowerCase())) {
       return (
