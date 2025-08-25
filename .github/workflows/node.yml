@@ -27,10 +27,25 @@ jobs:
     name: "Unit Tests"
     uses: ./.github/workflows/node-test.yml
 
-  build:
-    name: "Build"
-    uses: ./.github/workflows/node-build.yml
-
   json-schema:
     name: "JSON Schema Validation"
     uses: ./.github/workflows/node-json-schema.yml
+
+  build-release:
+    name: "Build and Release"
+    if: ${{ github.event_name == 'push' }}
+    uses: ./.github/workflows/node-semantic_release.yml
+
+  build-pr:
+    name: "Build"
+    if: ${{ github.event_name == 'pull_request' }}
+    uses: ./.github/workflows/node-semantic_release-pr.yml
+
+  deploy:
+    name: "Deploy to SWA"
+    needs: [build-release, build-pr]
+    # always will trigger, and the "success" conditionals are there to ensure
+    # that one or the other dependencies ran.
+    if: ${{ always() && (needs.build-release.result == 'success' || needs.build-pr.result == 'success') }}
+    uses: ./.github/workflows/azure-static-web-apps-deploy.yml
+    secrets: inherit

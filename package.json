@@ -15,7 +15,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "json:check": "ajv validate -s public/schema.json src/data/*.json",
-    "docs:jsonSchema": "scripts/generate-schema-docs.sh"
+    "docs:jsonSchema": "scripts/generate-schema-docs.sh",
+    "prepare:tarball": "npm ci && npm run build && tar -czf dist.tgz -C dist ."
   },
   "author": "RMI",
   "license": "MIT",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@eslint/js": "^9.34.0",
     "@jirutka/ajv-cli": "^6.0.0",
+    "@semantic-release/exec": "^7.1.0",
     "@tailwindcss/postcss": "^4.1.12",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
@@ -167,13 +169,19 @@
         }
       ],
       [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "npm run prepare:tarball"
+        }
+      ],
+      [
         "@semantic-release/github",
         {
           "successComment": false,
           "assets": [
             {
-              "path": "dist/*.tgz",
-              "label": "tarball"
+              "path": "dist.tgz",
+              "label": "Built Site"
             }
           ]
         }
