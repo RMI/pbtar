@@ -58,6 +58,8 @@ jobs:
           VITE_BUILD_OS: ${{ runner.os }}
           VITE_BUILD_OS_VERSION: ${{ runner.os-version }}
           VITE_BUILD_ARCH: ${{ runner.arch }}
+          VITE_GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
+
         run: npx semantic-release
 
         # Reuse the artifact for downstream deploy
