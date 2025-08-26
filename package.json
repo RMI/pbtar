@@ -27,7 +27,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.8.2",
-    "vite-plugin-static-copy": "^3.1.1"
+    "vite-plugin-static-copy": "^3.1.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.34.0",
