@@ -35,11 +35,13 @@ jobs:
     name: "Build and Release"
     if: ${{ github.event_name == 'push' }}
     uses: ./.github/workflows/node-semantic_release.yml
+    secrets: inherit
 
   build-pr:
     name: "Build"
     if: ${{ github.event_name == 'pull_request' }}
     uses: ./.github/workflows/node-semantic_release-pr.yml
+    secrets: inherit
 
   deploy:
     name: "Deploy to SWA"
