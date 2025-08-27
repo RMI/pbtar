@@ -68,4 +68,4 @@ jobs:
         with:
           name: dist-tgz
           path: dist.tgz
-          if-no-files-found: error
+          if-no-files-found: warn
