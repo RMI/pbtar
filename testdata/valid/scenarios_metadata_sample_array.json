@@ -1,0 +1,99 @@
+[
+  {
+    "id": "sample-01",
+    "name": "Sample Scenario 01",
+    "description": "First Sample Scenario. qwerty description",
+    "pathwayType": "Normative",
+    "modelYearNetzero": 2050,
+    "carbonBudget": 100,
+    "modelYearStart": 2020,
+    "modelYearEnd": 2050,
+    "modelTempIncrease": 1,
+    "ssp": "SSP1",
+    "regions": ["Global"],
+    "country": "US",
+    "sectors": [
+      { "name": "Land Use", "technologies": ["Precision Agriculture"] }
+    ],
+    "publisher": "Example Publisher",
+    "publicationYear": 2025,
+    "overview": "QWERTY Overview",
+    "expertRecommendation": "Example Expert Recommendation",
+    "dataSource": {
+      "description": "Mock Data Source",
+      "url": "https://example.com/data-source",
+      "downloadAvailable": true
+    }
+  },
+  {
+    "id": "sample-02",
+    "name": "Sample Scenario 02",
+    "description": "Second Sample Scenario. uiop description",
+    "pathwayType": "Exploratory",
+    "carbonBudget": 200,
+    "modelYearStart": 2020,
+    "modelYearEnd": 2050,
+    "modelTempIncrease": 2,
+    "ssp": "SSP2",
+    "regions": ["EU"],
+    "country": "FR",
+    "sectors": [{ "name": "Agriculture", "technologies": ["Agroforestry"] }],
+    "publisher": "Example Publisher",
+    "publicationYear": 2025,
+    "overview": "UIOP Overview",
+    "expertRecommendation": "Example Expert Recommendation",
+    "dataSource": {
+      "description": "Mock Data Source",
+      "url": "https://example.com/data-source",
+      "downloadAvailable": true
+    }
+  },
+  {
+    "id": "sample-03",
+    "name": "Sample Scenario 03",
+    "description": "Third Sample Scenario. asdf description",
+    "pathwayType": "Direct Policy",
+    "modelTempIncrease": 3,
+    "ssp": "SSP3",
+    "regions": ["Americas"],
+    "country": "US",
+    "sectors": [
+      { "name": "Land Use", "technologies": ["Precision Agriculture"] },
+      { "name": "Steel", "technologies": ["Carbon Capture and Storage"] }
+    ],
+    "publisher": "Example Publisher",
+    "publicationYear": 2025,
+    "overview": "ASDF Overview",
+    "expertRecommendation": "Example Expert Recommendation",
+    "dataSource": {
+      "description": "Mock Data Source",
+      "url": "https://example.com/data-source",
+      "downloadAvailable": true
+    }
+  },
+  {
+    "id": "sample-04",
+    "name": "Sample Scenario 04",
+    "description": "Fourth Sample Scenario. ghjkl description",
+    "pathwayType": "Predictive",
+    "modelYearNetzero": 2050,
+    "modelYearStart": 2020,
+    "modelYearEnd": 2050,
+    "ssp": "SSP4",
+    "regions": ["SEA"],
+    "country": "VN",
+    "sectors": [
+      { "name": "Land Use", "technologies": ["Precision Agriculture"] },
+      { "name": "Real Estate", "technologies": ["Other"] }
+    ],
+    "publisher": "Example Publisher",
+    "publicationYear": 2025,
+    "overview": "GHJKL Overview",
+    "expertRecommendation": "Example Expert Recommendation",
+    "dataSource": {
+      "description": "Mock Data Source",
+      "url": "https://example.com/data-source",
+      "downloadAvailable": true
+    }
+  }
+]

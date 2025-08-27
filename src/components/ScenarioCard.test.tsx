@@ -5,30 +5,12 @@ import ScenarioCard from "./ScenarioCard";
 import { Scenario } from "../types";
 
 // Mock scenario data
-const mockScenario: Scenario = {
-  id: "scenario-1",
-  name: "Net Zero 2050",
-  description: "A scenario describing the path to net zero emissions by 2050.",
-  pathway_type: "Policy",
-  modelYearEnd: "2050",
-  modeled_temperature_increase: 1.5,
-  regions: ["Global", "Europe", "North America", "Asia"],
-  sectors: [
-    { name: "Power" },
-    { name: "Transport" },
-    { name: "Industrial" },
-    { name: "Buildings" },
-  ],
-  publisher: "IEA",
-  publicationYear: "Jan 2023",
-  overview: "Mock",
-  expertRecommendation: "Mock",
-  dataSource: {
-    description: "Mock Data Source",
-    url: "https://example.com/data-source",
-    downloadAvailable: true,
-  },
-};
+import rawScenarioArray from "../../testdata/valid/scenarios_metadata_standard.json" assert { type: "json" };
+const mockScenario: Scenario = rawScenarioArray[0];
+
+// Mock full scenario data
+import rawScenarioFull from "../../testdata/valid/scenarios_metadata_full.json" assert { type: "json" };
+const mockScenarioFull: Scenario = rawScenarioFull[0];
 
 // Helper function to render component with router context
 const renderScenarioCard = (scenario: Scenario = mockScenario) => {
@@ -43,33 +25,6 @@ const renderScenarioCard = (scenario: Scenario = mockScenario) => {
 };
 
 describe("ScenarioCard component", () => {
-  // Mock scenario data
-  const mockScenario: Scenario = {
-    id: "scenario-1",
-    name: "Net Zero 2050",
-    description:
-      "A scenario describing the path to net zero emissions by 2050.",
-    pathwayType: "Policy",
-    modelYearEnd: "2050",
-    modelTempIncrease: 1.5,
-    regions: ["Global", "Europe", "North America", "Asia"],
-    sectors: [
-      { name: "Power", tooltip: "Electricity generation and distribution" },
-      { name: "Transport", tooltip: "Transportation and logistics" },
-      { name: "Industrial", tooltip: "Manufacturing and industrial processes" },
-      { name: "Buildings", tooltip: "Residential and commercial buildings" },
-    ],
-    publisher: "IEA",
-    publicationYear: "Jan 2023",
-    overview: "Mock",
-    expertRecommendation: "Mock",
-    dataSource: {
-      description: "Mock Data Source",
-      url: "https://example.com/data-source",
-      downloadAvailable: true,
-    },
-  };
-
   // Helper function to render component with router context
   const renderScenarioCard = (scenario: Scenario = mockScenario) => {
     return render(
@@ -168,35 +123,8 @@ describe("ScenarioCard component", () => {
   });
 
   describe("'+n more' tooltip functionality", () => {
-    // Create a test scenario with more than 3 regions and sectors
-    const testScenario: Scenario = {
-      id: "test-scenario",
-      name: "Test Scenario",
-      description: "Test description",
-      pathwayType: "Exploration",
-      modelYearEnd: "2050",
-      modelTempIncrease: 1.5,
-      regions: ["Global", "EU", "Americas", "Africa", "Asia Pacific"], // 5 regions
-      sectors: [
-        { name: "Power" },
-        { name: "Oil & Gas" },
-        { name: "Coal" },
-        { name: "Renewables" },
-        { name: "Transport" },
-      ], // 5 sectors
-      publisher: "Test Publisher",
-      publicationYear: "2025-01-01",
-      overview: "Test overview",
-      expertRecommendation: "Test recommendation",
-      dataSource: {
-        description: "Test data source",
-        url: "https://example.com",
-        downloadAvailable: true,
-      },
-    };
-
     it("shows '+n more' text when there are too many sectors to display", () => {
-      const { container } = renderScenarioCard(testScenario);
+      const { container } = renderScenarioCard(mockScenarioFull);
 
       // Find the sectors section
       const sectorsSection = Array.from(container.querySelectorAll("p")).find(
@@ -231,7 +159,7 @@ describe("ScenarioCard component", () => {
     it("handles regions display appropriately based on available space", () => {
       // Create a scenario with only 2 regions
       const scenarioWithFewRegions = {
-        ...testScenario,
+        ...mockScenarioFull,
         regions: ["Global", "EU"], // Only 2 regions
       };
 
@@ -276,30 +204,15 @@ describe("ScenarioCard component", () => {
 
 describe("ScenarioCard search highlighting", () => {
   const mockScenario: Scenario = {
-    id: "scenario-1",
-    name: "Net Zero 2050",
-    description:
-      "A scenario describing the path to net zero emissions by 2050.",
-    pathwayType: "Policy",
-    modelYearEnd: "2050",
-    modelTempIncrease: 1.5,
-    regions: ["Global", "Europe", "North America", "Hidden Match Region"],
+    ...mockScenarioFull,
+    regions: [...mockScenarioFull.regions, "Hidden Match Region"],
     sectors: [
-      { name: "Power" },
-      { name: "Transport" },
-      { name: "Industrial" },
-      { name: "Hidden Match Sector" },
+      ...mockScenarioFull.sectors,
+      { name: "Hidden Match Sector", technologies: ["Other"] },
     ],
-    publisher: "IEA",
-    publicationYear: "Jan 2023",
-    overview: "Test overview",
-    expertRecommendation: "Test recommendation",
-    dataSource: {
-      description: "Test Source",
-      url: "https://example.com",
-      downloadAvailable: true,
-    },
   };
+
+  console.log("mockScenario:", mockScenario);
 
   const renderWithRouter = (searchTerm = "") => {
     return render(
@@ -313,7 +226,7 @@ describe("ScenarioCard search highlighting", () => {
   };
 
   it("highlights matching text in name and description", () => {
-    const { container } = renderWithRouter("zero");
+    const { container } = renderWithRouter("enum");
 
     // Find marks directly in the container
     const marks = container.querySelectorAll("mark");
@@ -321,10 +234,10 @@ describe("ScenarioCard search highlighting", () => {
     // Check that we found at least 2 marks (name and description)
     expect(marks.length).toBeGreaterThanOrEqual(2);
 
-    // Check that there's a mark with "Zero" and one with "zero"
+    // Check that there's a mark with "Enum" (in name) and one with "enum" (in description)
     const markTexts = Array.from(marks).map((mark) => mark.textContent);
-    expect(markTexts).toContain("Zero");
-    expect(markTexts).toContain("zero");
+    expect(markTexts).toContain("Enum");
+    expect(markTexts).toContain("enum");
   });
 
   it("prioritizes and shows regions that match search term even if they would normally be hidden", () => {
@@ -416,26 +329,6 @@ describe("tooltip functionality", () => {
   });
 
   describe("ScenarioCard robustness with non-string values", () => {
-    const baseScenario: Scenario = {
-      id: "robust-1",
-      name: "Scenario A",
-      description: "Desc",
-      pathwayType: "Policy",
-      modelYearEnd: "2030",
-      modelTempIncrease: 1.5,
-      regions: ["EU", "US"],
-      sectors: [{ name: "Power" }],
-      publisher: "RMI",
-      publicationYear: "2024",
-      overview: "x",
-      expertRecommendation: "x",
-      dataSource: {
-        description: "x",
-        url: "https://example.com",
-        downloadAvailable: false,
-      },
-    };
-
     const renderWithRouter = (scenario: Scenario, searchTerm = "") =>
       render(
         <MemoryRouter>
@@ -448,7 +341,7 @@ describe("tooltip functionality", () => {
 
     it("does not crash when highlighting numeric fields", () => {
       const s: Scenario = {
-        ...baseScenario,
+        ...mockScenario,
         // Using a double cast to satisfy TS, but this still presents as numeric at runtime.
         modelYearEnd: 2030 as unknown as string, // number on purpose
         publicationYear: 2024 as unknown as string, // number
@@ -466,7 +359,7 @@ describe("tooltip functionality", () => {
 
     it("does not crash with null / undefined text fields", () => {
       const s: Scenario = {
-        ...baseScenario,
+        ...mockScenario,
         // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
         description: null as unknown as string, // null
         publisher: undefined as unknown as string, // undefined
@@ -482,7 +375,7 @@ describe("tooltip functionality", () => {
 
     it("highlights matches inside stringified numbers", () => {
       const s: Scenario = {
-        ...baseScenario,
+        ...mockScenario,
         // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
         modelYearEnd: 2045 as unknown as string, // number on purpose
       };
