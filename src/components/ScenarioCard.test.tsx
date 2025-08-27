@@ -212,7 +212,6 @@ describe("ScenarioCard search highlighting", () => {
     ],
   };
 
-
   const renderWithRouter = (searchTerm = "") => {
     return render(
       <MemoryRouter>
