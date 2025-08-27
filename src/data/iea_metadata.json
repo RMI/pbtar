@@ -81,7 +81,20 @@
     "name": "STEPS",
     "description": "Stated Policies Scenario (STEPS) give a sense of the current direction of travel for the energy economy, based on the actual state of play in different sectors, countries and regions.",
     "regions": [
-"Global", "East Asia and Pacific", "Europe and Central Asia", "Latin America and Caribbean", "Middle East and North Africa", "North America", "South East Asia", "Sub-Saharan Africa", "US", "BR", "RU", "CN", "IN", "JP"
+      "Global",
+      "East Asia and Pacific",
+      "Europe and Central Asia",
+      "Latin America and Caribbean",
+      "Middle East and North Africa",
+      "North America",
+      "South East Asia",
+      "Sub-Saharan Africa",
+      "US",
+      "BR",
+      "RU",
+      "CN",
+      "IN",
+      "JP"
     ],
     "publicationYear": 2024,
     "pathwayType": "Exploratory",

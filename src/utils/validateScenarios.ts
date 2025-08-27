@@ -6,7 +6,11 @@ import type { Scenario } from "../types";
 export type FileEntry = { name: string; data: Scenario[] };
 
 function makeValidator() {
-  const ajv = new Ajv({ allErrors: true, strict: true, multipleOfPrecision: 12 });
+  const ajv = new Ajv({
+    allErrors: true,
+    strict: true,
+    multipleOfPrecision: 12,
+  });
   addFormats(ajv);
   return ajv.compile(schema);
 }
