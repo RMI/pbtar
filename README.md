@@ -1,11 +1,10 @@
 # Pathways-based transition assessment repository (pbtar)
 
-|                    |                                                                                                                                                                                                                                                     Production |                                                                                                                                                                                                                         Development (`main`) |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| **Link**           |                                                                                                                                                                                        **[Production](https://green-pebble-01f5d5c1e.6.azurestaticapps.net/)** |                                                                                                                                                        **[Development](https://green-pebble-01f5d5c1e-main.westus2.6.azurestaticapps.net/)** |
-| **`node` checks**  |                                                                                         [![Node Package Checks](https://github.com/RMI/pbtar/actions/workflows/node.yml/badge.svg?branch=production)](https://github.com/RMI/pbtar/actions/workflows/node.yml) |                                                                                         [![Node Package Checks](https://github.com/RMI/pbtar/actions/workflows/node.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/node.yml) |
-| **`docker` build** |                                                                                                  [![docker](https://github.com/RMI/pbtar/actions/workflows/docker.yml/badge.svg?branch=production)](https://github.com/RMI/pbtar/actions/workflows/docker.yml) |                                                                                                  [![docker](https://github.com/RMI/pbtar/actions/workflows/docker.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/docker.yml) |
-| **Azure Deploy**   | [![Azure Static Web Apps CI/CD](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml/badge.svg?branch=production)](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml) | [![Azure Static Web Apps CI/CD](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml) |
+|                   |                                                                                                                                                                                                                                                     Production |                                                                                                                                                                                                                         Development (`main`) |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| **Link**          |                                                                                                                                                                                        **[Production](https://green-pebble-01f5d5c1e.6.azurestaticapps.net/)** |                                                                                                                                                        **[Development](https://green-pebble-01f5d5c1e-main.westus2.6.azurestaticapps.net/)** |
+| **`node` checks** |                                                                                         [![Node Package Checks](https://github.com/RMI/pbtar/actions/workflows/node.yml/badge.svg?branch=production)](https://github.com/RMI/pbtar/actions/workflows/node.yml) |                                                                                         [![Node Package Checks](https://github.com/RMI/pbtar/actions/workflows/node.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/node.yml) |
+| **Azure Deploy**  | [![Azure Static Web Apps CI/CD](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml/badge.svg?branch=production)](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml) | [![Azure Static Web Apps CI/CD](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/azure-static-web-apps-green-pebble-01f5d5c1e.yml) |
 
 ## Running the application
 
@@ -22,25 +21,10 @@ cd pbtar
 cp env.example .env
 ```
 
-3. Run the services with `docker compose`
+3. Run the service
 
 ```sh
-# build the image
-docker compose build
-
-# run the container
-docker compose up --detach
-
-# do both
-docker compose up --detach --build
-```
-
-The React web service will be accessible at http://localhost.
-
-4. Shutdown the docker container
-
-```sh
-docker compose down
+npm run dev
 ```
 
 ## Deployments
@@ -79,16 +63,7 @@ npm run dev
 
 The local development service will be accessible at `http://localhost:3000`. It automatically reloads on file changes.
 
-3. Running with `docker compose`
-   If you prefer to run the entire application stack using Docker, you can use the following command:
-
-```bash
-docker compose up --build
-```
-
-This will start all services defined in the `docker-compose.yml` file, including the frontend, backend, and database. The frontend will be accessible at `http://localhost`.
-
-4. Building the application
+3. Building the application
    To render the site,
 
 ```bash
