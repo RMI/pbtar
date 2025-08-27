@@ -212,7 +212,6 @@ describe("ScenarioCard search highlighting", () => {
     ],
   };
 
-  console.log("mockScenario:", mockScenario);
 
   const renderWithRouter = (searchTerm = "") => {
     return render(
