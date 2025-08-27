@@ -1,6 +1,0 @@
-services:
-  frontend:
-    build:
-      context: .
-    ports:
-      - "${PBTAR_FRONTEND_PORT:-80}:4280"
