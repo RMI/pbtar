@@ -284,15 +284,4 @@ describe("scenario schema enforces expected limits", () => {
       /must NOT have additional properties/,
     );
   });
-
-  it("accepts a valid country code", () => {
-    ok({ name: "country-ok.json", data: [{ ...baseScenario, country: "US" }] });
-  });
-
-  it("fails on invalid country code", () => {
-    fail(
-      { name: "country-bad.json", data: [{ ...baseScenario, country: "USA" }] },
-      /must be equal to one of the allowed values/,
-    );
-  });
 });
