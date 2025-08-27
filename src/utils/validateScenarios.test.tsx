@@ -28,25 +28,8 @@ function fail(entry: FileEntry, rx: RegExp | string) {
   expect(() => validateScenarios([entry])).toThrowError(rx);
 }
 
-const baseScenario = {
-  id: "scn-1",
-  name: "Sample",
-  description: "desc",
-  pathwayType: "Normative",
-  modelYearStart: 2000,
-  modelYearEnd: 2050,
-  publicationYear: 2020,
-  regions: ["Global"],
-  sectors: [{ name: "Power", technologies: ["Solar"] }],
-  publisher: "RMI",
-  overview: "overview",
-  expertRecommendation: "rec",
-  dataSource: {
-    description: "src",
-    url: "https://example.com/file.csv",
-    downloadAvailable: true,
-  },
-};
+import rawScenarioArray from "../../testdata/valid/scenarios_metadata_standard.json" assert { type: "json" };
+const baseScenario: Scenario = rawScenarioArray[0];
 
 describe("scenario schema enforces expected limits", () => {
   it("accepts a minimal valid array (minItems=1)", () => {
