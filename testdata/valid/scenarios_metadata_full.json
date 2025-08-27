@@ -1,0 +1,85 @@
+[
+  {
+    "id": "scenario-simple-full",
+    "name": "Full Enums Scenario",
+    "description": "Scenario with all enum values populated where possible",
+    "pathwayType": "Normative",
+    "modelYearNetzero": 2050,
+    "carbonBudget": 500,
+    "modelYearStart": 2020,
+    "modelYearEnd": 2050,
+    "modelTempIncrease": 1.5,
+    "ssp": "SSP1",
+    "regions": [
+      "Global",
+      "EU",
+      "Americas",
+      "Asia Pacific",
+      "SEA",
+      "Country-Specific"
+    ],
+    "country": "US",
+    "sectors": [
+      {
+        "name": "Land Use",
+        "technologies": ["Agroforestry", "Bioenergy Crops"]
+      },
+      { "name": "Agriculture", "technologies": ["Precision Agriculture"] },
+      {
+        "name": "Real Estate",
+        "technologies": [
+          "Energy Efficiency",
+          "Smart Grids",
+          "Renewable Heating",
+          "Heat Pumps",
+          "Building Automation",
+          "Smart Appliances",
+          "Insulation"
+        ]
+      },
+      {
+        "name": "Industry",
+        "technologies": ["Carbon Capture and Storage", "Electrification"]
+      },
+      { "name": "Steel", "technologies": ["Process Optimization"] },
+      { "name": "Cement", "technologies": ["Other"] },
+      { "name": "Chemicals", "technologies": ["Hydrogen Use", "Biofuels"] },
+      { "name": "Coal Mining", "technologies": ["Other"] },
+      { "name": "Oil (Upstream)", "technologies": ["Other"] },
+      { "name": "Gas (Upstream)", "technologies": ["Other"] },
+      {
+        "name": "Power",
+        "technologies": [
+          "Coal",
+          "Oil",
+          "Gas",
+          "Wind",
+          "Solar",
+          "Nuclear",
+          "Biomass"
+        ]
+      },
+      {
+        "name": "Transport",
+        "technologies": ["Public Transport", "Active Mobility"]
+      },
+      {
+        "name": "Road transport",
+        "technologies": ["Electric Vehicles", "Hydrogen Vehicles"]
+      },
+      { "name": "Aviation", "technologies": ["Aviation Efficiency"] },
+      { "name": "Rail", "technologies": ["Other"] },
+      { "name": "Shipping", "technologies": ["Maritime Efficiency"] },
+      { "name": "Other", "technologies": ["Other"] }
+    ],
+    "publisher": "Example Publisher",
+    "publicationYear": 2025,
+    "overview": "Example Overview",
+    "expertRecommendation": "Example Expert Recommendation",
+    "dataSource": {
+      "description": "Mock Data Source",
+      "url": "https://example.com/data-source",
+      "downloadAvailable": true
+    }
+  }
+]

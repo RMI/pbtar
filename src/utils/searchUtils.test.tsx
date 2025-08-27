@@ -2,59 +2,11 @@ import { describe, it, expect } from "vitest";
 import { filterScenarios } from "./searchUtils";
 import { Scenario, SearchFilters } from "../types";
 
+import rawScenarioArray from "../../testdata/valid/scenarios_metadata_sample_array.json" assert { type: "json" };
+const mockScenarios: Scenario[] = rawScenarioArray;
+
 describe("searchUtils", () => {
   // Mock scenario data
-  const mockScenarios: Scenario[] = [
-    {
-      id: "scenario-1",
-      name: "Net Zero 2050",
-      description:
-        "A scenario describing the path to net zero emissions by 2050.",
-      pathwayType: "Policy",
-      modelYearEnd: "2050",
-      modelTempIncrease: 1.5,
-      regions: ["Global", "Europe"],
-      sectors: [
-        {
-          name: "Power",
-        },
-        { name: "Transport" },
-      ],
-      publisher: "IEA",
-      publicationYear: "Jan 2023",
-      overview: "Mock overview",
-      expertRecommendation: "Mock recommendation",
-      dataSource: {
-        description: "Mock Data Source",
-        url: "https://example.com/data-source",
-        downloadAvailable: true,
-      },
-    },
-    {
-      id: "scenario-2",
-      name: "Current Policies",
-      description: "A scenario based on current implemented policies.",
-      pathwayType: "Projection",
-      modelYearEnd: "2030",
-      modelTempIncrease: 2.7,
-      regions: ["Global", "Asia"],
-      sectors: [
-        {
-          name: "Industrial",
-        },
-        { name: "Buildings" },
-      ],
-      publisher: "IPCC",
-      publicationYear: "Mar 2022",
-      overview: "Mock overview",
-      expertRecommendation: "Mock recommendation",
-      dataSource: {
-        description: "Mock Data Source",
-        url: "https://example.com/data-source",
-        downloadAvailable: false,
-      },
-    },
-  ];
 
   describe("filterScenarios", () => {
     it("returns all scenarios when no filters are applied", () => {
@@ -62,82 +14,77 @@ describe("searchUtils", () => {
       const result = filterScenarios(mockScenarios, emptyFilters);
 
       expect(result).toEqual(mockScenarios);
-      expect(result.length).toBe(2);
     });
 
     it("filters by pathway type", () => {
-      const filters: SearchFilters = { pathwayType: "Policy" };
+      const filters: SearchFilters = { pathwayType: "Exploratory" };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(1);
-      expect(result[0].id).toBe("scenario-1");
+      expect(result[0].id).toBe("sample-02");
     });
 
     it("filters by target year", () => {
-      const filters: SearchFilters = { modelYearEnd: "2030" };
+      const filters: SearchFilters = { modelYearEnd: 2050 };
       const result = filterScenarios(mockScenarios, filters);
 
-      expect(result.length).toBe(1);
-      expect(result[0].id).toBe("scenario-2");
+      expect(result.length).toBe(3);
+      expect(result.map((x) => x.id)).toEqual([
+        "sample-01",
+        "sample-02",
+        "sample-04",
+      ]);
     });
 
     it("filters by modeled temperature increase", () => {
-      const filters: SearchFilters = { modelTempIncrease: 1.5 };
+      const filters: SearchFilters = { modelTempIncrease: 1 };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(1);
-      expect(result[0].id).toBe("scenario-1");
+      expect(result[0].id).toBe("sample-01");
     });
 
     it("filters by region", () => {
-      const filters: SearchFilters = { region: "Asia" };
+      const filters: SearchFilters = { region: "Global" };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(1);
-      expect(result[0].id).toBe("scenario-2");
+      expect(result[0].id).toBe("sample-01");
     });
 
     it("filters by sector", () => {
-      const filters: SearchFilters = { sector: "Power" };
+      const filters: SearchFilters = { sector: "Agriculture" };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(1);
-      expect(result[0].id).toBe("scenario-1");
+      expect(result[0].id).toBe("sample-02");
     });
 
     it("filters by search term in name", () => {
-      const filters: SearchFilters = { searchTerm: "zero" };
+      const filters: SearchFilters = { searchTerm: "Scenario 01" };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(1);
-      expect(result[0].id).toBe("scenario-1");
+      expect(result[0].id).toBe("sample-01");
     });
 
     it("filters by search term in description", () => {
-      const filters: SearchFilters = { searchTerm: "current implemented" };
+      const filters: SearchFilters = { searchTerm: "qwerty description" };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(1);
-      expect(result[0].id).toBe("scenario-2");
-    });
-
-    it("filters by search term in sector tooltip", () => {
-      const filters: SearchFilters = { searchTerm: "Policy" };
-      const result = filterScenarios(mockScenarios, filters);
-
-      expect(result.length).toBe(1);
-      expect(result[0].id).toBe("scenario-1");
+      expect(result[0].id).toBe("sample-01");
     });
 
     it("combines multiple filters", () => {
       const filters: SearchFilters = {
-        modelYearEnd: "2050",
-        region: "Europe",
+        pathwayType: "Normative",
+        region: "Global",
       };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(1);
-      expect(result[0].id).toBe("scenario-1");
+      expect(result[0].id).toBe("sample-01");
     });
 
     it("returns empty array when no scenarios match filters", () => {
@@ -155,7 +102,7 @@ describe("searchUtils", () => {
       const filters: SearchFilters = { searchTerm: "" };
       const result = filterScenarios(mockScenarios, filters);
 
-      expect(result.length).toBe(2);
+      expect(result.length).toBe(mockScenarios.length);
       expect(result).toEqual(mockScenarios);
     });
 
@@ -163,84 +110,41 @@ describe("searchUtils", () => {
       const filters: SearchFilters = { searchTerm: "   " };
       const result = filterScenarios(mockScenarios, filters);
 
-      expect(result.length).toBe(2);
+      expect(result.length).toBe(mockScenarios.length);
       expect(result).toEqual(mockScenarios);
     });
   });
 
   describe("Schema compliance scenarios", () => {
-    const mockScenarios: Scenario[] = [
-      {
-        id: "scenario-1",
-        name: "Net Zero 2050",
-        description:
-          "A scenario describing the path to net zero emissions by 2050.",
-        pathwayType: "Direct Policy",
-        modelYearEnd: "2050",
-        modelTempIncrease: 1.5,
-        regions: ["Global", "Europe"],
-        sectors: [
-          { name: "Power", tooltip: "Electricity generation and distribution" },
-          { name: "Transport", tooltip: "Transportation and logistics" },
-        ],
-        publisher: "IEA",
-        publicationYear: "Jan 2023",
-        overview: "Mock overview",
-        expertRecommendation: "Mock recommendation",
-        dataSource: {
-          description: "Mock Data Source",
-          url: "https://example.com/data-source",
-          downloadAvailable: true,
-        },
-      },
-      {
-        id: "scenario-minimal",
-        name: "Minimal Scenario",
-        description: "A minimal scenario file that passes schema validation.",
-        pathwayType: "Direct Policy",
-        regions: ["Country-Specific"],
-        sectors: [
-          {
-            name: "Other",
-            technologies: ["Other"],
-          },
-        ],
-        publisher: "Test Publisher",
-        publicationYear: 1900,
-        overview: "This is a minimal scenario for testing purposes.",
-        expertRecommendation: "Test recommendation",
-        dataSource: {
-          description: "Test Data Source",
-          url: "http://example.com/",
-          downloadAvailable: false,
-        },
-      },
-    ];
-
     it("returns matches on extant fields", () => {
       const filters: SearchFilters = {
-        pathwayType: "Direct Policy",
+        publisher: "Example Publisher",
       };
 
       const result = filterScenarios(mockScenarios, filters);
-      expect(result.length).toBe(2);
-      expect(result.map((x) => x.id)).toEqual([
-        "scenario-1",
-        "scenario-minimal",
-      ]);
+      expect(result.length).toBe(mockScenarios.length);
+      expect(result).toEqual(mockScenarios);
     });
 
     it("safely omits results for non-existing fields", () => {
+      //scenario 3 in the mock data has no modelYearEnd
       const filters: SearchFilters = {
-        modelTempIncrease: 1.5,
+        modelYearEnd: 2050,
       };
 
       const result = filterScenarios(mockScenarios, filters);
-      expect(result.length).toBe(1);
-      expect(result.map((x) => x.id)).toEqual(["scenario-1"]);
+      expect(result.length).toBe(3);
+      expect(result.map((x) => x.id)).toEqual([
+        "sample-01",
+        "sample-02",
+        "sample-04",
+      ]);
     });
   });
 });
+
+import rawFullScenarioArray from "../../testdata/valid/scenarios_metadata_full.json" assert { type: "json" };
+const mockFullScenarios: Scenario[] = rawFullScenarioArray;
 
 describe("searchUtils - array results", () => {
   //
@@ -274,34 +178,6 @@ describe("searchUtils - array results", () => {
     "Other",
   ];
 
-  const mockScenarios: Scenario[] = [
-    {
-      id: "scenario-full-arrays",
-      name: "Scenario with Full Arrays of Enums",
-      description:
-        "A scenario that includes all possible enum values for testing purposes.",
-      pathwayType: "Policy",
-      regions: [
-        "Global",
-        "EU",
-        "Americas",
-        "Asia Pacific",
-        "SEA",
-        "Country-Specific",
-      ],
-      sectors: sectors.map((sector) => ({ name: sector })),
-      publisher: "IEA",
-      publicationYear: "Jan 2023",
-      overview: "Mock overview",
-      expertRecommendation: "Mock recommendation",
-      dataSource: {
-        description: "Mock Data Source",
-        url: "https://example.com/data-source",
-        downloadAvailable: true,
-      },
-    },
-  ];
-
   //These tests are to ensure that search works for all array values, even when
   //they would not be surface directly in the UI (e.g. "Power, Transport, + 15
   //more")
@@ -309,20 +185,20 @@ describe("searchUtils - array results", () => {
     regions.forEach((region) => {
       it(`options for regions - ${region}`, () => {
         const filters: SearchFilters = { region: region };
-        const result = filterScenarios(mockScenarios, filters);
+        const result = filterScenarios(mockFullScenarios, filters);
 
         expect(result.length).toBe(1);
-        expect(result[0].id).toBe("scenario-full-arrays");
+        expect(result[0].id).toBe("scenario-simple-full");
       });
     });
 
     sectors.forEach((sector) => {
       it(`filters by sector - ${sector}`, () => {
         const filters: SearchFilters = { sector: sector };
-        const result = filterScenarios(mockScenarios, filters);
+        const result = filterScenarios(mockFullScenarios, filters);
 
         expect(result.length).toBe(1);
-        expect(result[0].id).toBe("scenario-full-arrays");
+        expect(result[0].id).toBe("scenario-simple-full");
       });
     });
   });

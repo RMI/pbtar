@@ -4,94 +4,14 @@ import SearchSection from "./SearchSection";
 import { SearchFilters } from "../types";
 
 // Mock the scenariosData import
-vi.mock("../data/scenariosData", () => ({
-  scenariosData: [
-    {
-      id: "scenario-1",
-      name: "Net Zero 2050",
-      description:
-        "A scenario describing the path to net zero emissions by 2050.",
-      pathwayType: "Policy",
-      modelYearEnd: "2050",
-      modelTempIncrease: 1.5,
-      regions: ["Global", "Europe"],
-      sectors: [{ name: "Power" }, { name: "Transport" }],
-      publisher: "IEA",
-      publicationYear: "Jan 2023",
-      overview: "Mock overview",
-      expertRecommendation: "Mock recommendation",
-      dataSource: {
-        description: "Mock Data Source",
-        url: "https://example.com/data-source",
-        downloadAvailable: true,
-      },
-    },
-    {
-      id: "scenario-2",
-      name: "Current Policies",
-      description: "A scenario based on current implemented policies.",
-      pathwayType: "Projection",
-      modelYearEnd: "2030",
-      modelTempIncrease: 2.7,
-      regions: ["Global", "Asia"],
-      sectors: [
-        {
-          name: "Industrial",
-        },
-        { name: "Buildings" },
-      ],
-      publisher: "IPCC",
-      publicationYear: "Mar 2022",
-      overview: "Mock overview",
-      expertRecommendation: "Mock recommendation",
-      dataSource: {
-        description: "Mock Data Source",
-        url: "https://example.com/data-source",
-        downloadAvailable: false,
-      },
-    },
-    {
-      id: "scenario-3",
-      name: "Net Zero 2050",
-      description:
-        "A scenario describing the path to net zero emissions by 2050.",
-      pathwayType: "Exploration",
-      modelYearEnd: "2050",
-      modelTempIncrease: 1.5,
-      regions: ["Global", "Europe"],
-      sectors: [{ name: "Power" }, { name: "Transport" }],
-      publisher: "IEA",
-      publicationYear: "Jan 2023",
-      overview: "Mock overview",
-      expertRecommendation: "Mock recommendation",
-      dataSource: {
-        description: "Mock Data Source",
-        url: "https://example.com/data-source",
-        downloadAvailable: true,
-      },
-    },
-    {
-      id: "scenario-4",
-      name: "Net Zero 2050",
-      description:
-        "A scenario describing the path to net zero emissions by 2050.",
-      pathwayType: "Normative",
-      modelYearEnd: "2050",
-      modelTempIncrease: 1.5,
-      regions: ["Global", "Europe"],
-      sectors: [{ name: "Power" }, { name: "Transport" }],
-      publisher: "IEA",
-      publicationYear: "Jan 2023",
-      overview: "Mock overview",
-      expertRecommendation: "Mock recommendation",
-      dataSource: {
-        description: "Mock Data Source",
-        url: "https://example.com/data-source",
-        downloadAvailable: true,
-      },
-    },
-  ],
-}));
+vi.mock("../data/scenariosData", async () => {
+  const mockScenarios = (
+    await import("../../testdata/valid/scenarios_metadata_sample_array.json", {
+      assert: { type: "json" },
+    })
+  ).default as import("../types").Scenario[];
+  return { scenariosData: mockScenarios };
+});
 
 describe("SearchSection", () => {
   // Default props for the component
@@ -126,10 +46,10 @@ describe("SearchSection", () => {
     fireEvent.click(sectorDropdown);
 
     // Verify that all unique sector names from the mock data are in the dropdown
-    expect(screen.getByText("Power")).toBeInTheDocument();
-    expect(screen.getByText("Transport")).toBeInTheDocument();
-    expect(screen.getByText("Industrial")).toBeInTheDocument();
-    expect(screen.getByText("Buildings")).toBeInTheDocument();
+    expect(screen.getByText("Agriculture")).toBeInTheDocument();
+    expect(screen.getByText("Land Use")).toBeInTheDocument();
+    expect(screen.getByText("Steel")).toBeInTheDocument();
+    expect(screen.getByText("Real Estate")).toBeInTheDocument();
   });
 
   it("calls onFilterChange with the correct sector name when selected", () => {
@@ -140,11 +60,14 @@ describe("SearchSection", () => {
     fireEvent.click(sectorDropdown);
 
     // Select the "Power" sector
-    const powerOption = screen.getByText("Power");
+    const powerOption = screen.getByText("Land Use");
     fireEvent.click(powerOption);
 
     // Verify the filter change is called with the correct parameter
-    expect(defaultProps.onFilterChange).toHaveBeenCalledWith("sector", "Power");
+    expect(defaultProps.onFilterChange).toHaveBeenCalledWith(
+      "sector",
+      "Land Use",
+    );
   });
 
   it("properly displays selected sector in the dropdown button", () => {
@@ -191,13 +114,13 @@ describe("SearchSection", () => {
     // Try to open each dropdown to ensure they render without errors
     const sectorDropdown = screen.getByText("Sector");
     fireEvent.click(sectorDropdown);
-    expect(screen.getByText("Power")).toBeInTheDocument();
+    expect(screen.getByText("Agriculture")).toBeInTheDocument();
 
     const pathwayDropdown = screen.getByText("Pathway Type");
     fireEvent.click(pathwayDropdown);
-    expect(screen.getByText("Exploration")).toBeInTheDocument();
+    expect(screen.getByText("Direct Policy")).toBeInTheDocument();
+    expect(screen.getByText("Exploratory")).toBeInTheDocument();
     expect(screen.getByText("Normative")).toBeInTheDocument();
-    expect(screen.getByText("Policy")).toBeInTheDocument();
-    expect(screen.getByText("Projection")).toBeInTheDocument();
+    expect(screen.getByText("Predictive")).toBeInTheDocument();
   });
 });
