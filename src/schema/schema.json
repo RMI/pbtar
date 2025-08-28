@@ -148,7 +148,7 @@
       "publisher": {
         "description": "Publisher of the scenario.",
         "type": "string",
-        "maxLength": 100
+        "maxLength": 200
       },
       "publicationYear": {
         "description": "Year that the scenario was published.",
@@ -164,7 +164,7 @@
       "expertRecommendation": {
         "description": "Expert recommendation for the scenario.",
         "type": "string",
-        "maxLength": 5000
+        "maxLength": 10000
       },
       "dataSource": {
         "description": "Data source for the scenario.",
@@ -173,7 +173,7 @@
           "description": {
             "description": "Description of the data source.",
             "type": "string",
-            "maxLength": 500
+            "maxLength": 1000
           },
           "url": {
             "description": "URL at which the data source can be accessed.",
