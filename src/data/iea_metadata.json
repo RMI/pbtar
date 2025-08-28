@@ -3,7 +3,7 @@
     "id": "IEA-APS-2024",
     "publisher": "IEA",
     "name": "APS",
-    "description": "IEA forecast  if all countries were to hit their aspirational targets, including national and regional net zero emissions pledges, on time and in full",
+    "description": "Pathway where all countries fully meet their aspirational targets (incl. NDCs and net zero pledges).",
     "regions": [
       "Global",
       "East Asia and Pacific",
@@ -79,7 +79,7 @@
     "id": "IEA-STEPS-2024",
     "publisher": "IEA",
     "name": "STEPS",
-    "description": "Stated Policies Scenario (STEPS) give a sense of the current direction of travel for the energy economy, based on the actual state of play in different sectors, countries and regions.",
+    "description": "Shows current trends of the energy economy. Uses active policies from sectors, countries, regions.",
     "regions": [
       "Global",
       "East Asia and Pacific",
