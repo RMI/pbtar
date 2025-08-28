@@ -11,7 +11,6 @@
     "modelTempIncrease": 1.5,
     "ssp": "SSP1",
     "regions": ["Global"],
-    "country": "US",
     "sectors": [
       { "name": "Land Use", "technologies": ["Precision Agriculture"] }
     ],
@@ -23,6 +22,7 @@
       "description": "Mock Data Source",
       "url": "https://example.com/data-source",
       "downloadAvailable": true
-    }
+    },
+    "metric": ["Emissions Intensity", "Carbon Price"]
   }
 ]
