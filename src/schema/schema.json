@@ -20,7 +20,7 @@
       "description": {
         "description": "Brief description of the scenario.",
         "type": "string",
-        "maxLength": 200
+        "maxLength": 100
       },
       "pathwayType": {
         "description": "Type of the scenario pathway.",
@@ -148,7 +148,7 @@
       "publisher": {
         "description": "Publisher of the scenario.",
         "type": "string",
-        "maxLength": 200
+        "maxLength": 100
       },
       "publicationYear": {
         "description": "Year that the scenario was published.",
