@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 import { scenariosData } from "../data/scenariosData";
 import { Scenario, PathwayType } from "../types";
 import Badge from "../components/Badge";
@@ -119,7 +120,7 @@ const ScenarioDetailPage: React.FC = () => {
                   Scenario Overview
                 </h2>
                 <div className="prose text-rmigray-700">
-                  <p>{scenario.overview}</p>
+                  <ReactMarkdown>{scenario.overview}</ReactMarkdown>
                 </div>
               </section>
 
@@ -128,7 +129,7 @@ const ScenarioDetailPage: React.FC = () => {
                   Expert Recommendations
                 </h2>
                 <div className="prose text-rmigray-700">
-                  <p>{scenario.expertRecommendation}</p>
+                  <ReactMarkdown>{scenario.expertRecommendation}</ReactMarkdown>
                 </div>
               </section>
 
