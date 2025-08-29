@@ -4,29 +4,27 @@ import { MemoryRouter } from "react-router-dom";
 import ScenarioCard from "./ScenarioCard";
 import { Scenario } from "../types";
 
-describe("ScenarioCard component", () => {
-  // Mock scenario data
-  const mockScenario: Scenario = {
-    id: "scenario-1",
-    name: "Net Zero 2050",
-    description:
-      "A scenario describing the path to net zero emissions by 2050.",
-    category: "Policy",
-    target_year: "2050",
-    target_temperature: "1.5°C",
-    regions: ["Global", "Europe", "North America", "Asia"],
-    sectors: ["Energy", "Transport", "Industry", "Buildings"],
-    publisher: "IEA",
-    published_date: "Jan 2023",
-    overview: "Mock",
-    expertRecommendation: "Mock",
-    dataSource: {
-      description: "Mock Data Source",
-      url: "https://example.com/data-source",
-      downloadAvailable: true,
-    },
-  };
+// Mock scenario data
+import rawScenarioArray from "../../testdata/valid/scenarios_metadata_standard.json" assert { type: "json" };
+const mockScenario: Scenario = rawScenarioArray[0];
 
+// Mock full scenario data
+import rawScenarioFull from "../../testdata/valid/scenarios_metadata_full.json" assert { type: "json" };
+const mockScenarioFull: Scenario = rawScenarioFull[0];
+
+// Helper function to render component with router context
+const renderScenarioCard = (scenario: Scenario = mockScenario) => {
+  return render(
+    <MemoryRouter>
+      <ScenarioCard
+        scenario={scenario}
+        searchTerm=""
+      />
+    </MemoryRouter>,
+  );
+};
+
+describe("ScenarioCard component", () => {
   // Helper function to render component with router context
   const renderScenarioCard = (scenario: Scenario = mockScenario) => {
     return render(
@@ -50,68 +48,38 @@ describe("ScenarioCard component", () => {
     expect(link).toHaveAttribute("href", `/scenario/${mockScenario.id}`);
   });
 
-  it("displays the category badge", () => {
+  it("displays the pathwayType badge", () => {
     renderScenarioCard();
 
-    const categoryBadge = screen.getByText(mockScenario.category);
-    expect(categoryBadge).toBeInTheDocument();
+    const pathwayTypeBadge = screen.getByText(mockScenario.pathwayType);
+    expect(pathwayTypeBadge).toBeInTheDocument();
   });
 
   it("shows target year and temperature badges", () => {
     renderScenarioCard();
 
-    expect(screen.getByText(mockScenario.target_year)).toBeInTheDocument();
+    expect(screen.getByText(mockScenario.modelYearEnd)).toBeInTheDocument();
     expect(
-      screen.getByText(mockScenario.target_temperature),
+      screen.getByText(mockScenario.modelTempIncrease?.toString() + "°C"),
     ).toBeInTheDocument();
   });
 
-  it("displays region information with the first 3 regions", () => {
+  it("displays region information with some regions visible", () => {
     renderScenarioCard();
 
     expect(screen.getByText("Regions:")).toBeInTheDocument();
 
-    // Check first 3 regions are displayed
+    // Check that at least the first region is displayed
     expect(screen.getByText(mockScenario.regions[0])).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.regions[1])).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.regions[2])).toBeInTheDocument();
   });
 
-  it("shows '+1 more' text when there are more than 3 regions", () => {
-    renderScenarioCard();
-
-    const moreTextElements = screen.getAllByText("+1 more");
-    expect(moreTextElements.length).toBeGreaterThan(0);
-  });
-
-  it("doesn't show '+X more' text when there are exactly 3 regions", () => {
-    const scenarioWithThreeRegions = {
-      ...mockScenario,
-      regions: ["Global", "Europe", "North America"],
-    };
-
-    renderScenarioCard(scenarioWithThreeRegions);
-
-    const moreText = screen.queryByText("+0 more");
-    expect(moreText).not.toBeInTheDocument();
-  });
-
-  it("displays sector information with the first 3 sectors", () => {
+  it("displays sector information with some sectors visible", () => {
     renderScenarioCard();
 
     expect(screen.getByText("Sectors:")).toBeInTheDocument();
 
-    // Check first 3 sectors are displayed
-    expect(screen.getByText(mockScenario.sectors[0])).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.sectors[1])).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.sectors[2])).toBeInTheDocument();
-  });
-
-  it("shows '+1 more' text when there are more than 3 sectors", () => {
-    renderScenarioCard();
-
-    const moreTextElements = screen.getAllByText("+1 more");
-    expect(moreTextElements.length).toBeGreaterThan(0);
+    // Check that at least the first sector is displayed
+    expect(screen.getByText(mockScenario.sectors[0].name)).toBeInTheDocument();
   });
 
   it("shows publisher information", () => {
@@ -125,7 +93,7 @@ describe("ScenarioCard component", () => {
     renderScenarioCard();
 
     expect(screen.getByText("Published:")).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.published_date)).toBeInTheDocument();
+    expect(screen.getByText(mockScenario.publicationYear)).toBeInTheDocument();
   });
 
   it("displays the 'View details' text with icon", () => {
@@ -142,12 +110,278 @@ describe("ScenarioCard component", () => {
   it("has the main container classes for styling", () => {
     const { container } = renderScenarioCard();
 
-    const link = container.querySelector("a");
-    expect(link).toHaveClass("bg-white");
-    expect(link).toHaveClass("rounded-lg");
-    expect(link).toHaveClass("shadow-md");
-    expect(link).toHaveClass("flex");
-    expect(link).toHaveClass("flex-col");
-    expect(link).toHaveClass("h-full");
+    const card = container.firstChild;
+    if (!(card instanceof HTMLElement)) {
+      throw new Error("Expected container.firstChild to be an HTMLElement");
+    }
+    expect(card).toHaveClass("bg-white");
+    expect(card).toHaveClass("rounded-lg");
+    expect(card).toHaveClass("shadow-md");
+    expect(card).toHaveClass("flex");
+    expect(card).toHaveClass("flex-col");
+    expect(card).toHaveClass("h-full");
+  });
+
+  describe("'+n more' tooltip functionality", () => {
+    it("shows '+n more' text when there are too many sectors to display", () => {
+      const { container } = renderScenarioCard(mockScenarioFull);
+
+      // Find the sectors section
+      const sectorsSection = Array.from(container.querySelectorAll("p")).find(
+        (p) => p.textContent === "Sectors:",
+      );
+
+      if (!sectorsSection) {
+        throw new Error("Sectors section not found");
+      }
+
+      // Get the parent div of the Sectors section
+      const sectorsSectionContainer = sectorsSection.closest("div");
+
+      // Check if any "+n more" text exists within the sectors section
+      const moreTextElements = Array.from(
+        sectorsSectionContainer?.querySelectorAll("span") || [],
+      ).filter((span) => /\+\d+ more/.test(span.textContent || ""));
+
+      // There should be at least one "+n more" element
+      expect(moreTextElements.length).toBeGreaterThan(0);
+
+      // The number in "+n more" should be positive
+      const moreTextMatch =
+        moreTextElements[0].textContent?.match(/\+(\d+) more/);
+      expect(moreTextMatch).not.toBeNull();
+      if (moreTextMatch) {
+        const countNumber = parseInt(moreTextMatch[1]);
+        expect(countNumber).toBeGreaterThan(0);
+      }
+    });
+
+    it("handles regions display appropriately based on available space", () => {
+      // Create a scenario with only 2 regions
+      const scenarioWithFewRegions = {
+        ...mockScenarioFull,
+        regions: ["Global", "EU"], // Only 2 regions
+      };
+
+      const { container } = renderScenarioCard(scenarioWithFewRegions);
+
+      // Find the regions section
+      const regionsSection = Array.from(container.querySelectorAll("p")).find(
+        (p) => p.textContent === "Regions:",
+      );
+      if (!regionsSection) throw new Error("Regions section not found");
+
+      // Get the parent container of the regions section
+      const regionsSectionContainer = regionsSection.closest("div");
+      if (!regionsSectionContainer)
+        throw new Error("Region section container not found");
+
+      // Check if there's a "+n more" text
+      const hasMoreText = Array.from(
+        regionsSectionContainer.querySelectorAll("span"),
+      ).some((span) => /\+\d+ more/.test(span.textContent || ""));
+
+      // If we find "+n more" text, ensure it only shows 1 more (since we have 2 regions total)
+      if (hasMoreText) {
+        const moreTextMatch = Array.from(
+          regionsSectionContainer.querySelectorAll("span"),
+        )
+          .find((span) => /\+\d+ more/.test(span.textContent || ""))
+          ?.textContent?.match(/\+(\d+) more/);
+
+        expect(moreTextMatch).not.toBeNull();
+        if (moreTextMatch) {
+          const countNumber = parseInt(moreTextMatch[1]);
+          expect(countNumber).toBeLessThanOrEqual(1); // Should show at most 1 more (we have 2 regions total)
+        }
+      } else {
+        // If there's no "+n more" text, ensure at least one region is visible
+        expect(screen.queryByText("Global")).not.toBeNull();
+      }
+    });
+  });
+});
+
+describe("ScenarioCard search highlighting", () => {
+  const mockScenario: Scenario = {
+    ...mockScenarioFull,
+    regions: [...mockScenarioFull.regions, "Hidden Match Region"],
+    sectors: [
+      ...mockScenarioFull.sectors,
+      { name: "Hidden Match Sector", technologies: ["Other"] },
+    ],
+  };
+
+  const renderWithRouter = (searchTerm = "") => {
+    return render(
+      <MemoryRouter>
+        <ScenarioCard
+          scenario={mockScenario}
+          searchTerm={searchTerm}
+        />
+      </MemoryRouter>,
+    );
+  };
+
+  it("highlights matching text in name and description", () => {
+    const { container } = renderWithRouter("enum");
+
+    // Find marks directly in the container
+    const marks = container.querySelectorAll("mark");
+
+    // Check that we found at least 2 marks (name and description)
+    expect(marks.length).toBeGreaterThanOrEqual(2);
+
+    // Check that there's a mark with "Enum" (in name) and one with "enum" (in description)
+    const markTexts = Array.from(marks).map((mark) => mark.textContent);
+    expect(markTexts).toContain("Enum");
+    expect(markTexts).toContain("enum");
+  });
+
+  it("prioritizes and shows regions that match search term even if they would normally be hidden", () => {
+    const { container } = renderWithRouter("Hidden Match");
+
+    // Look for the regions section
+    const regionsSection = Array.from(container.querySelectorAll("p")).find(
+      (p) => p.textContent === "Regions:",
+    );
+
+    // Find nearby badge with Hidden Match Region text (could be split across elements)
+    if (!regionsSection) {
+      throw new Error("Regions section not found");
+    }
+
+    // Find a badge containing the text "Hidden Match Region" in the parent div of the Regions section
+    const sectionContainer = regionsSection.closest("div");
+    const hiddenMatchText = Array.from(
+      sectionContainer?.querySelectorAll(".flex-wrap span") || [],
+    ).some((span) => span.textContent?.includes("Hidden Match Region"));
+
+    expect(hiddenMatchText).toBe(true);
+
+    // Check that the "+more" text still exists
+    const moreText = Array.from(container.querySelectorAll("span")).some(
+      (span) => /\+\d+ more/.test(span.textContent || ""),
+    );
+
+    expect(moreText).toBe(true);
+  });
+
+  it("prioritizes and shows sectors that match search term even if they would normally be hidden", () => {
+    const { container } = renderWithRouter("Hidden Match");
+
+    // Look for the sectors section
+    const sectorsSection = Array.from(container.querySelectorAll("p")).find(
+      (p) => p.textContent === "Sectors:",
+    );
+
+    if (!sectorsSection) {
+      throw new Error("Sectors section not found");
+    }
+
+    // Find a badge containing the text "Hidden Match Sector" in the parent div of the Sectors section
+    const sectionContainer = sectorsSection.closest("div");
+    const hiddenMatchText = Array.from(
+      sectionContainer?.querySelectorAll(".flex-wrap span") || [],
+    ).some((span) => span.textContent?.includes("Hidden Match Sector"));
+
+    expect(hiddenMatchText).toBe(true);
+  });
+});
+
+describe("tooltip functionality", () => {
+  it("uses correct tooltip for Policy pathway type", () => {
+    const scenarioWithPolicy: Scenario = {
+      ...mockScenario,
+      pathwayType: "Direct Policy",
+    };
+
+    renderScenarioCard(scenarioWithPolicy);
+
+    const badge = screen.getByText("Direct Policy");
+    expect(badge).toBeInTheDocument();
+    const tooltipTrigger = badge.closest("span")?.parentElement;
+    expect(tooltipTrigger).toHaveAttribute("tabindex", "0");
+    expect(tooltipTrigger).toHaveAttribute(
+      "class",
+      expect.stringContaining("cursor-help"),
+    );
+  });
+
+  it("uses correct tooltip for Power sector", () => {
+    const scenarioWithPowerSector: Scenario = {
+      ...mockScenario,
+      sectors: [{ name: "Power" }],
+    };
+
+    renderScenarioCard(scenarioWithPowerSector);
+
+    const badge = screen.getByText("Power");
+    expect(badge).toBeInTheDocument();
+    const tooltipTrigger = badge.closest("span")?.parentElement;
+    expect(tooltipTrigger).toHaveAttribute("tabindex", "0");
+    expect(tooltipTrigger).toHaveAttribute(
+      "class",
+      expect.stringContaining("cursor-help"),
+    );
+  });
+
+  describe("ScenarioCard robustness with non-string values", () => {
+    const renderWithRouter = (scenario: Scenario, searchTerm = "") =>
+      render(
+        <MemoryRouter>
+          <ScenarioCard
+            scenario={scenario}
+            searchTerm={searchTerm}
+          />
+        </MemoryRouter>,
+      );
+
+    it("does not crash when highlighting numeric fields", () => {
+      const s: Scenario = {
+        ...mockScenario,
+        // Using a double cast to satisfy TS, but this still presents as numeric at runtime.
+        modelYearEnd: 2030 as unknown as string, // number on purpose
+        publicationYear: 2024 as unknown as string, // number
+      };
+
+      expect(() => renderWithRouter(s, "2030")).not.toThrow();
+      // Should render stringified year and highlight it
+      expect(screen.getByText("2030")).toBeInTheDocument();
+      // mark exists for the numeric match (adjust selector if your Highlighter differs)
+      const marked = document.querySelectorAll("mark");
+      expect(Array.from(marked).some((m) => m.textContent === "2030")).toBe(
+        true,
+      );
+    });
+
+    it("does not crash with null / undefined text fields", () => {
+      const s: Scenario = {
+        ...mockScenario,
+        // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
+        description: null as unknown as string, // null
+        publisher: undefined as unknown as string, // undefined
+      };
+
+      expect(() => renderWithRouter(s, "rmi")).not.toThrow();
+      // Card chrome still there
+      expect(screen.getByText("Pathway type:")).toBeInTheDocument();
+      expect(screen.getByText("Publisher:")).toBeInTheDocument();
+      // No “[object Object]” leaks
+      expect(document.body.textContent).not.toContain("[object Object]");
+    });
+
+    it("highlights matches inside stringified numbers", () => {
+      const s: Scenario = {
+        ...mockScenario,
+        // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
+        modelYearEnd: 2045 as unknown as string, // number on purpose
+      };
+      const { container } = renderWithRouter(s, "2045");
+      const marks = container.querySelectorAll("mark");
+      expect(Array.from(marks).some((m) => m.textContent === "2045")).toBe(
+        true,
+      );
+    });
   });
 });

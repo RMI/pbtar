@@ -1,0 +1,19 @@
+---
+name: Check GitFlow branch names
+
+on:
+  pull_request:
+    branches:
+      - production
+
+jobs:
+  check_branch_name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check source branch name
+        run: |
+          echo "Source branch: ${{ github.head_ref }}"
+          if [[ ! "${{ github.head_ref }}" == "next" ]]; then
+            echo "::error::Only `next` branch can be merged into production"
+            exit 1
+          fi

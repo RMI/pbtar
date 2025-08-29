@@ -5,20 +5,23 @@ export const filterScenarios = (
   filters: SearchFilters,
 ): Scenario[] => {
   return scenarios.filter((scenario) => {
-    // Category filter
-    if (filters.category && scenario.category !== filters.category) {
+    // Pathway type filter
+    if (filters.pathwayType && scenario.pathwayType !== filters.pathwayType) {
       return false;
     }
 
     // Target year filter
-    if (filters.target_year && scenario.target_year !== filters.target_year) {
+    if (
+      filters.modelYearEnd &&
+      scenario.modelYearEnd !== filters.modelYearEnd
+    ) {
       return false;
     }
 
     // Target temperature filter
     if (
-      filters.target_temperature &&
-      scenario.target_temperature !== filters.target_temperature
+      filters.modelTempIncrease &&
+      scenario.modelTempIncrease !== filters.modelTempIncrease
     ) {
       return false;
     }
@@ -29,7 +32,10 @@ export const filterScenarios = (
     }
 
     // Sector filter
-    if (filters.sector && !scenario.sectors.includes(filters.sector)) {
+    if (
+      filters.sector &&
+      !scenario.sectors.some((s) => s.name === filters.sector)
+    ) {
       return false;
     }
 
@@ -39,19 +45,17 @@ export const filterScenarios = (
       const searchFields = [
         scenario.name,
         scenario.description,
-        scenario.category,
-        scenario.target_year,
-        scenario.target_temperature,
+        scenario.pathwayType,
+        scenario.modelYearEnd,
+        scenario.modelTempIncrease,
         ...scenario.regions,
-        ...scenario.sectors,
+        ...scenario.sectors.map((s) => s.name),
         scenario.publisher,
-        scenario.published_date,
-        scenario.overview,
-        scenario.expertRecommendation,
+        scenario.publicationYear,
       ];
 
       return searchFields.some((field) =>
-        field.toLowerCase().includes(searchTerm),
+        String(field).toLowerCase().includes(searchTerm),
       );
     }
 
