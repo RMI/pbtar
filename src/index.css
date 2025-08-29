@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
+@plugin "@tailwindcss/typography";
 
 @theme {
   /* Primary colours */
