@@ -27,9 +27,7 @@ jobs:
               --base main \
               --head production \
               --title 'Backmerge `production` to `main`' \
-              --body 'Automatic backmerge. Created by GitHub action. Triggered by closing PR #${{ github.event.number }}' \
-              --assignee RMI/pbtar  \
-              --reviewer RMI/pbtar
+              --body 'Automatic backmerge. Created by GitHub action. Triggered by closing PR #${{ github.event.number }}'
             )
           echo "pr-url=$PR_URL"
           echo "pr-url=$PR_URL" >> $GITHUB_OUTPUT
