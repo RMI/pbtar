@@ -1,7 +1,9 @@
 import React from "react";
 
 const EnvironmentBanner: React.FC = () => {
-  const environment: string = import.meta.env.VITE_BUILD_MODE || "development";
+  const environment: string = (import.meta.env.VITE_BUILD_MODE || "development")
+    .trim()
+    .toLowerCase();
 
   if (environment === "production") {
     return null;
