@@ -138,7 +138,7 @@ const ScenarioDetailPage: React.FC = () => {
                   Data Source
                 </h2>
                 <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-                  <p className="text-rmigray-700 mb-4">
+                  <p className="text-rmigray-700 mb-4 [&_a]:text-energy [&_a]:hover:text-energy-700">
                     <ReactMarkdown>
                       {scenario.dataSource.description}
                     </ReactMarkdown>
