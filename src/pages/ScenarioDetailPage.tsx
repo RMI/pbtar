@@ -138,7 +138,9 @@ const ScenarioDetailPage: React.FC = () => {
                   Data Source
                 </h2>
                 <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-                  <ReactMarkdown>{scenario.dataSource.description}</ReactMarkdown>
+                  <ReactMarkdown>
+                    {scenario.dataSource.description}
+                  </ReactMarkdown>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <a
                       href={scenario.dataSource.url}
