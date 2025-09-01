@@ -138,7 +138,7 @@ const ScenarioDetailPage: React.FC = () => {
                   Data Source
                 </h2>
                 <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-                  <ReactMarkdown>
+                  <ReactMarkdown className="text-rmigray-700 mb-4">
                     {scenario.dataSource.description}
                   </ReactMarkdown>
                   <div className="flex flex-col sm:flex-row gap-3">
