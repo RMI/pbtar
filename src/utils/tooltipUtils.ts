@@ -13,6 +13,7 @@ export const sectorTooltips: Record<Sector, string> = {
   "Agriculture": "Agricultural activities",
   "Automotive": "Automotive manufacturing.",
   "Aviation": "Logistics of passengers and cargo by airplane.",
+  "Buildings": "Residential and commercial buildings. Focus on energy use.",
   "Cement": "Cement manufacturing",
   "Chemicals":
     "Production of primary chemicals and/or chemicals for end use, such as plastics, fertilizer, pharmaceuticals",
