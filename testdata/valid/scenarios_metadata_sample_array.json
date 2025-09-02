@@ -84,7 +84,7 @@
     "country": "VN",
     "sectors": [
       { "name": "Land Use", "technologies": ["Precision Agriculture"] },
-      { "name": "Real Estate", "technologies": ["Other"] }
+      { "name": "Buildings", "technologies": ["Other"] }
     ],
     "publisher": "Example Publisher",
     "publicationYear": 2025,

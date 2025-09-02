@@ -161,7 +161,7 @@ describe("searchUtils - array results", () => {
   const sectors: string[] = [
     "Land Use",
     "Agriculture",
-    "Real Estate",
+    "Buildings",
     "Industry",
     "Steel",
     "Cement",
