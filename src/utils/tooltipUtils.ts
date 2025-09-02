@@ -28,8 +28,6 @@ export const sectorTooltips: Record<Sector, string> = {
   "Power":
     "Includes power generation based on any energy source. Can also include power storage, transmission, and distribution.",
   "Rail": "Logistics of passengers and cargo by train.",
-  "Real Estate":
-    "Residential & Commercial buildings, their construction and energy use",
   "Road transport":
     "Logistics of passengers and cargo on the road, by different means, I.e. types of vehicles.",
   "Shipping": "Logistics of passengers and cargo by ship.",
