@@ -38,7 +38,7 @@ An example scenario metadata JSON file looks like...
         ]
       },
       {
-        "name": "Real Estate",
+        "name": "Buildings",
         "technologies": ["Energy Efficiency", "Heat Pumps", "Other"]
       },
       {
