@@ -1,18 +1,24 @@
 import React from "react";
 
 const EnvironmentBanner: React.FC = () => {
-  const mode = (import.meta.env.MODE ?? "development")
-  .trim()
-  .toLowerCase(); // "development", "production", "staging", etc.
+  const mode = (import.meta.env.MODE ?? "development").trim().toLowerCase(); // "development", "production", "staging", etc.
 
-  const isProd = mode==="production"; // boolean at build time
+  const isProd = mode === "production"; // boolean at build time
   if (isProd) return null; // hide on real prod builds
 
-  const bgColor =
-    mode.startsWith("develop") ? "bg-red-500" :
-    mode.startsWith("staging") ? "bg-yellow-500" :
-    mode.startsWith("pr-")      ? "bg-indigo-500" :
-                                   "bg-pink-500";
+  function getBgColor(mode: string): string {
+    if (mode.startsWith("develop")) {
+      return "bg-red-500";
+    } else if (mode.startsWith("staging")) {
+      return "bg-yellow-500";
+    } else if (mode.startsWith("pr-")) {
+      return "bg-indigo-500";
+    } else {
+      return "bg-pink-500";
+    }
+  }
+
+  const bgColor = getBgColor(mode);
 
   return (
     <div
