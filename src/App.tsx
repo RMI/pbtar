@@ -10,13 +10,8 @@ import EnvironmentBanner from "./components/EnvironmentBanner";
 
 // Export the inner content for testing
 export const AppContent = () => {
-  const environment: string = import.meta.env.VITE_BUILD_MODE;
-  const showBanner = environment !== "production";
-
   return (
-    <div
-      className={`flex flex-col min-h-screen bg-gray-50${showBanner ? " pt-6" : ""}`}
-    >
+    <div className="flex flex-col min-h-screen bg-gray-50">
       <EnvironmentBanner />
       <Header />
       <main className="flex-grow">
