@@ -12,7 +12,7 @@ Additionally, the structure, the data types, and in some cases the allowed value
 This repo has CI/CD setup to validate any new JSON added in a PR against the schema.
 Therefore, any new JSON added through a PR on main must pass all of the tests before being merged.
 
-After preparing a JSON file, you can run `npm run json:check`, which will trigger validation (locally) against all JSON files in this directory,
+After preparing a JSON file, you can run `npm run json:check`, which will trigger validation (locally) against all JSON files in this directory.
 You can preview a JSON File as it will appear in the UI with `npm run dev`.
 To add a new scenario, a new JSON file in the correct format needs to be added to this repo in a pull request on `main`.
 
@@ -22,7 +22,7 @@ To see example files, look in this directory, or `testdata/valid/`
 
 ## Creating new pathway files
 
-To facilitate creating a new JSON file in the appropriate format using R, we have created the following two functions to validate a R `<list>` against the schema in this repo, and to write a valid nested `<list>` to a JSON file.
+To facilitate creating a new JSON file in the appropriate format using R, we have created the following two functions to validate a `<list>` object against the schema in this repo, and to write a valid nested `<list>` to a JSON file.
 These functions can be copy-pasted to your R console and then they're available to use on any `<list>` you have in your environment.
 These functions require the following R packages to be installed in your environment: `jsonvalidate`, `jsonlite`, `dplyr`, `tidyr`, `stringr`, and `purrr`.
 
