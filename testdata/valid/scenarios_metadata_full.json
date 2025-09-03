@@ -2,7 +2,7 @@
   {
     "id": "scenario-simple-full",
     "name": "Full Enums Scenario",
-    "description": "Scenario with all enum values populated where possible",
+    "description": "Scenario with all enum values populated where possible.",
     "pathwayType": "Normative",
     "modelYearNetzero": 2050,
     "carbonBudget": 500,
@@ -74,10 +74,10 @@
     ],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "Example Overview",
-    "expertRecommendation": "Example Expert Recommendation",
+    "overview": "Example Overview.",
+    "expertRecommendation": "Example Expert Recommendation.",
     "dataSource": {
-      "description": "Mock Data Source",
+      "description": "Mock Data Source.",
       "url": "https://example.com/data-source",
       "downloadAvailable": true
     }
