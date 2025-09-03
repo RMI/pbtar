@@ -20,6 +20,7 @@
       "description": {
         "description": "Brief description of the scenario.",
         "type": "string",
+        "pattern": "\\.$",
         "maxLength": 100
       },
       "pathwayType": {
@@ -158,11 +159,13 @@
       "overview": {
         "description": "Overview of the scenario.",
         "type": "string",
+        "pattern": "\\.$",
         "maxLength": 1000
       },
       "expertRecommendation": {
         "description": "Expert recommendation for the scenario.",
         "type": "string",
+        "pattern": "\\.$",
         "maxLength": 10000
       },
       "dataSource": {
@@ -172,6 +175,7 @@
           "description": {
             "description": "Description of the data source.",
             "type": "string",
+            "pattern": "\\.$",
             "maxLength": 1000
           },
           "url": {
