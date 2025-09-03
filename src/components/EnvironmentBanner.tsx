@@ -22,7 +22,7 @@ const EnvironmentBanner: React.FC = () => {
 
   return (
     <div
-      className={`${bgColor} text-white text-center py-1 text-sm font-medium sticky top-0 left-0 right-0 z-50`}
+      className={`${bgColor} text-white text-center py-1 text-sm font-medium sticky top-0 z-50`}
     >
       {mode.toUpperCase()} Environment
     </div>
