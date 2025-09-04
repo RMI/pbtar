@@ -2,7 +2,7 @@
   {
     "id": "sample-01",
     "name": "Sample Scenario 01",
-    "description": "First Sample Scenario. qwerty description",
+    "description": "First Sample Scenario. qwerty description.",
     "pathwayType": "Normative",
     "modelYearNetzero": 2050,
     "carbonBudget": 100,
@@ -17,10 +17,10 @@
     ],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "QWERTY Overview",
-    "expertRecommendation": "Example Expert Recommendation",
+    "overview": "QWERTY Overview.",
+    "expertRecommendation": "Example Expert Recommendation.",
     "dataSource": {
-      "description": "Mock Data Source",
+      "description": "Mock Data Source.",
       "url": "https://example.com/data-source",
       "downloadAvailable": true
     }
@@ -28,7 +28,7 @@
   {
     "id": "sample-02",
     "name": "Sample Scenario 02",
-    "description": "Second Sample Scenario. uiop description",
+    "description": "Second Sample Scenario. uiop description.",
     "pathwayType": "Exploratory",
     "carbonBudget": 200,
     "modelYearStart": 2020,
@@ -40,10 +40,10 @@
     "sectors": [{ "name": "Agriculture", "technologies": ["Agroforestry"] }],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "UIOP Overview",
-    "expertRecommendation": "Example Expert Recommendation",
+    "overview": "UIOP Overview.",
+    "expertRecommendation": "Example Expert Recommendation.",
     "dataSource": {
-      "description": "Mock Data Source",
+      "description": "Mock Data Source.",
       "url": "https://example.com/data-source",
       "downloadAvailable": true
     }
@@ -51,7 +51,7 @@
   {
     "id": "sample-03",
     "name": "Sample Scenario 03",
-    "description": "Third Sample Scenario. asdf description",
+    "description": "Third Sample Scenario. asdf description.",
     "pathwayType": "Direct Policy",
     "modelTempIncrease": 3,
     "ssp": "SSP3",
@@ -63,10 +63,10 @@
     ],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "ASDF Overview",
-    "expertRecommendation": "Example Expert Recommendation",
+    "overview": "ASDF Overview.",
+    "expertRecommendation": "Example Expert Recommendation.",
     "dataSource": {
-      "description": "Mock Data Source",
+      "description": "Mock Data Source.",
       "url": "https://example.com/data-source",
       "downloadAvailable": true
     }
@@ -74,7 +74,7 @@
   {
     "id": "sample-04",
     "name": "Sample Scenario 04",
-    "description": "Fourth Sample Scenario. ghjkl description",
+    "description": "Fourth Sample Scenario. ghjkl description.",
     "pathwayType": "Predictive",
     "modelYearNetzero": 2050,
     "modelYearStart": 2020,
@@ -88,10 +88,10 @@
     ],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "GHJKL Overview",
-    "expertRecommendation": "Example Expert Recommendation",
+    "overview": "GHJKL Overview.",
+    "expertRecommendation": "Example Expert Recommendation.",
     "dataSource": {
-      "description": "Mock Data Source",
+      "description": "Mock Data Source.",
       "url": "https://example.com/data-source",
       "downloadAvailable": true
     }
