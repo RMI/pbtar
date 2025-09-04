@@ -13,12 +13,12 @@ This repo has CI/CD setup to validate any new JSON added in a PR against the sch
 Therefore, any new JSON added through a PR on main must pass all of the tests before being merged.
 
 After preparing a JSON file, you can run `npm run json:check`, which will trigger validation (locally) against all JSON files in this directory.
-You can preview a JSON File as it will appear in the UI with `npm run dev`.
+You can preview a JSON file as it will appear in the UI with `npm run dev`.
 To add a new scenario, a new JSON file in the correct format needs to be added to this repo in a pull request on `main`.
 
 ## Examples
 
-To see example files, look in this directory, or `testdata/valid/`
+To see example files, look in this directory, or `testdata/valid/`.
 
 ## Creating new pathway files
 
@@ -31,7 +31,7 @@ These functions require the following R packages to be installed in your environ
 
 validate_json <- function(json_obj, schema_url = NULL) {
   if (is.null(schema_url)) {
-    schema_url <- "https://green-pebble-01f5d5c1e-main.westus2.6.azurestaticapps.net/schema.json"
+    schema_url <- "https://raw.githubusercontent.com/RMI/pbtar/refs/heads/main/pbtar_schema.json"
   }
   json_schema <- readr::read_file(file = schema_url)
   validation <-
