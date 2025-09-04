@@ -15,9 +15,7 @@
     "publicationYear": 1900,
     "overview": "This is a minimal scenario for testing purposes.",
     "expertRecommendation": "Test recommendation.",
-    "metric": [
-      "Capacity"
-    ],
+    "metric": ["Capacity"],
     "dataSource": {
       "description": "Test Data Source.",
       "url": "http://example.com/",
