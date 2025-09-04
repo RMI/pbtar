@@ -36,7 +36,7 @@ export const sectorTooltips: Record<Sector, string> = {
   "Transport": "Logistics of passengers and cargo.",
 };
 
-const unknownTooltip = "No tooltip available";
+export const unknownTooltip = "No tooltip available.";
 
 export const getPathwayTypeTooltip = (type: PathwayType): string => {
   return pathwayTypeTooltips[type] || unknownTooltip;
