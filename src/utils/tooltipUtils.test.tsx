@@ -1,4 +1,5 @@
-import schema from "../schema/schema.json";
+import { describe, test, expect } from "vitest";
+import rawSchema from "../schema/schema.json";
 import {
   pathwayTypeTooltips,
   sectorTooltips,
@@ -7,26 +8,40 @@ import {
   unknownTooltip,
 } from "./tooltipUtils";
 
-type Json = Record<string, any>;
+const schema: unknown = rawSchema;
 
-const getEnumAtPath = (root: Json, path: string[]): string[] => {
+// ✅ Type guards to keep ESLint happy about "unsafe" usage
+const isRecord = (v: unknown): v is Record<string, unknown> =>
+  typeof v === "object" && v !== null && !Array.isArray(v);
+
+const isStringArray = (v: unknown): v is string[] =>
+  Array.isArray(v) && v.every((x) => typeof x === "string");
+
+// Safe enum walker (no `any`, no unsafe access)
+const getEnumAtPath = (root: unknown, path: readonly string[]): string[] => {
   // Walk the path safely and return [] if missing
-  let node: any = root;
+  let node: unknown = root;
   for (const segment of path) {
-    if (!node || typeof node !== "object" || !(segment in node)) return [];
+    if (!isRecord(node) || !(segment in node)) return [];
     node = node[segment];
   }
-  return Array.isArray(node) ? node : [];
+  return isStringArray(node) ? node : [];
 };
 
-const expectTooltipCoverage = (opts: {
+// ----------------------------------------
+// Coverage helper
+// ----------------------------------------
+
+type CoverageOpts = {
   label: string;
-  schemaValues: string[];
+  schemaValues: readonly string[];
   record: Record<string, string>;
-  getter: (v: any) => string;
-}) => {
+  getter?: (v: string) => string;
+};
+
+const expectTooltipCoverage = (opts: CoverageOpts) => {
   const { label, schemaValues, record, getter } = opts;
-  const fallback = unknownTooltip;
+  const fallback: string = unknownTooltip;
 
   describe(`${label} tooltip coverage`, () => {
     test("every schema enum value has a tooltip", () => {
@@ -48,6 +63,15 @@ const expectTooltipCoverage = (opts: {
       expect(empties).toEqual([]);
     });
 
+    test("all tooltips end with a period", () => {
+      const bad = Object.entries(record)
+        .filter(
+          ([, val]) => typeof val === "string" && !val.trim().endsWith("."),
+        )
+        .map(([k]) => k);
+      expect(bad).toEqual([]);
+    });
+
     if (getter) {
       test("public getter never falls back for valid enum values", () => {
         const bad = schemaValues
@@ -61,9 +85,8 @@ const expectTooltipCoverage = (opts: {
         expect(bad).toEqual(fallback);
       });
 
-      test("public getter correctly ends with period", () => {
-        const bad = [schemaValues, "___this_is_not_a_real_enum_value___"]
-          .flat()
+      test("public getter outputs strings ending with period", () => {
+        const bad = [...schemaValues, "___this_is_not_a_real_enum_value___"]
           .map((v) => [v, getter(v)] as const)
           .filter(
             ([, tip]) => typeof tip === "string" && !tip.trim().endsWith("."),
@@ -71,28 +94,21 @@ const expectTooltipCoverage = (opts: {
         expect(bad).toEqual([]);
       });
     }
-
-    test("all tooltips end with a period", () => {
-      const bad = Object.entries(record)
-        .filter(
-          ([, val]) => typeof val === "string" && !val.trim().endsWith("."),
-        )
-        .map(([k]) => k);
-      expect(bad).toEqual([]);
-    });
   });
 };
 
+// ----------------------------------------
+// Checks
+// ----------------------------------------
 const CHECKS: Array<{
   label: string;
-  schemaPath: string[];
+  schemaPath: readonly string[];
   record: Record<string, string>;
   getter?: (v: string) => string;
 }> = [
   {
     label: "pathwayType",
-    // schema.items.properties.pathwayType.enum
-    schemaPath: ["items", "properties", "pathwayType", "enum"],
+    schemaPath: ["items", "properties", "pathwayType", "enum"] as const,
     record: pathwayTypeTooltips,
     getter: getPathwayTypeTooltip,
   },
@@ -107,7 +123,7 @@ const CHECKS: Array<{
       "properties",
       "name",
       "enum",
-    ],
+    ] as const,
     record: sectorTooltips,
     getter: getSectorTooltip,
   },
@@ -119,8 +135,7 @@ const CHECKS: Array<{
 
 describe("Tooltip <-> JSON Schema enum integration", () => {
   CHECKS.forEach(({ label, schemaPath, record, getter }) => {
-    const values = getEnumAtPath(schema as Json, schemaPath);
-
+    const values = getEnumAtPath(schema, schemaPath);
     expectTooltipCoverage({
       label,
       schemaValues: values,
