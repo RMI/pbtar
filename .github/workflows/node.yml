@@ -1,6 +1,11 @@
 ---
 on:
   pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
     branches:
       - main
       - production
@@ -17,18 +22,22 @@ concurrency: node-package-checks
 jobs:
   linting:
     name: "Linting"
+    if: ${{ !( github.event_name == 'pull_request' && github.event.action == 'closed' ) }}
     uses: ./.github/workflows/node-lint.yml
 
   formatting:
     name: "Formatting"
+    if: ${{ !( github.event_name == 'pull_request' && github.event.action == 'closed' ) }}
     uses: ./.github/workflows/node-prettier.yml
 
   unit-test:
     name: "Unit Tests"
+    if: ${{ !( github.event_name == 'pull_request' && github.event.action == 'closed' ) }}
     uses: ./.github/workflows/node-test.yml
 
   json-schema:
     name: "JSON Schema Validation"
+    if: ${{ !( github.event_name == 'pull_request' && github.event.action == 'closed' ) }}
     uses: ./.github/workflows/node-json-schema.yml
 
   build-release:
@@ -39,7 +48,7 @@ jobs:
 
   build-pr:
     name: "Build"
-    if: ${{ github.event_name == 'pull_request' }}
+    if: ${{ github.event_name == 'pull_request' && github.event.action != 'closed'}}
     uses: ./.github/workflows/node-semantic_release-pr.yml
     secrets: inherit
 
