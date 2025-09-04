@@ -14,7 +14,9 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "json:check": "npx ts-node --esm scripts/schema-check-files.ts",
+    "json:check": "npm run json:check:srcdata && npm run json:check:testdata",
+    "json:check:srcdata": "npx ts-node --esm scripts/schema-check-files.ts src/data",
+    "json:check:testdata": "npx ts-node --esm scripts/schema-check-files.ts testdata/valid",
     "docs:jsonSchema": "scripts/generate-schema-docs.sh",
     "prepare:tarball": "npm ci && npm run build && tar -czf dist.tgz -C dist ."
   },
