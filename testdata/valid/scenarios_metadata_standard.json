@@ -16,10 +16,10 @@
     ],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "Example Overview",
-    "expertRecommendation": "Example Expert Recommendation",
+    "overview": "Example Overview.",
+    "expertRecommendation": "Example Expert Recommendation.",
     "dataSource": {
-      "description": "Mock Data Source",
+      "description": "Mock Data Source.",
       "url": "https://example.com/data-source",
       "downloadAvailable": true
     },
