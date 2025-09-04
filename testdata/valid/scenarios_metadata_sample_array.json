@@ -11,7 +11,6 @@
     "modelTempIncrease": 1,
     "ssp": "SSP1",
     "regions": ["Global"],
-    "country": "US",
     "sectors": [
       { "name": "Land Use", "technologies": ["Precision Agriculture"] }
     ],
@@ -19,6 +18,10 @@
     "publicationYear": 2025,
     "overview": "QWERTY Overview.",
     "expertRecommendation": "Example Expert Recommendation.",
+    "metric": [
+      "Emissions Intensity",
+      "Capacity"
+    ],
     "dataSource": {
       "description": "Mock Data Source.",
       "url": "https://example.com/data-source",
@@ -36,12 +39,15 @@
     "modelTempIncrease": 2,
     "ssp": "SSP2",
     "regions": ["EU"],
-    "country": "FR",
     "sectors": [{ "name": "Agriculture", "technologies": ["Agroforestry"] }],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
     "overview": "UIOP Overview.",
     "expertRecommendation": "Example Expert Recommendation.",
+    "metric": [
+      "Capacity",
+      "Generation"
+    ],
     "dataSource": {
       "description": "Mock Data Source.",
       "url": "https://example.com/data-source",
@@ -56,7 +62,6 @@
     "modelTempIncrease": 3,
     "ssp": "SSP3",
     "regions": ["Americas"],
-    "country": "US",
     "sectors": [
       { "name": "Land Use", "technologies": ["Precision Agriculture"] },
       { "name": "Steel", "technologies": ["Carbon Capture and Storage"] }
@@ -65,6 +70,10 @@
     "publicationYear": 2025,
     "overview": "ASDF Overview.",
     "expertRecommendation": "Example Expert Recommendation.",
+    "metric": [
+      "Generation",
+      "Technology Mix"
+    ],
     "dataSource": {
       "description": "Mock Data Source.",
       "url": "https://example.com/data-source",
@@ -81,7 +90,6 @@
     "modelYearEnd": 2050,
     "ssp": "SSP4",
     "regions": ["SEA"],
-    "country": "VN",
     "sectors": [
       { "name": "Land Use", "technologies": ["Precision Agriculture"] },
       { "name": "Buildings", "technologies": ["Other"] }
@@ -90,6 +98,10 @@
     "publicationYear": 2025,
     "overview": "GHJKL Overview.",
     "expertRecommendation": "Example Expert Recommendation.",
+    "metric": [
+      "Emissions Intensity",
+      "Technology Mix"
+    ],
     "dataSource": {
       "description": "Mock Data Source.",
       "url": "https://example.com/data-source",
