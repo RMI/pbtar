@@ -26,8 +26,8 @@ export const filterScenarios = (
       return false;
     }
 
-    // Region filter
-    if (filters.region && !scenario.regions.includes(filters.region)) {
+    // Geography filter
+    if (filters.geography && !scenario.geography.includes(filters.geography)) {
       return false;
     }
 
@@ -48,7 +48,7 @@ export const filterScenarios = (
         scenario.pathwayType,
         scenario.modelYearEnd,
         scenario.modelTempIncrease,
-        ...scenario.regions,
+        ...scenario.geography,
         ...scenario.sectors.map((s) => s.name),
         scenario.publisher,
         scenario.publicationYear,

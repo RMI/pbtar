@@ -63,8 +63,8 @@
         "type": "string",
         "enum": ["SSP1", "SSP2", "SSP3", "SSP4", "SSP5"]
       },
-      "regions": {
-        "description": "Regions that the scenario covers.",
+      "geography": {
+        "description": "Geographical areas that the scenario covers.",
         "type": "array",
         "uniqueItems": true,
         "items": {
@@ -214,7 +214,7 @@
       "name",
       "description",
       "pathwayType",
-      "regions",
+      "geography",
       "sectors",
       "publisher",
       "publicationYear",

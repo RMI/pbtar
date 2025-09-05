@@ -10,7 +10,7 @@
     "modelYearEnd": 2050,
     "modelTempIncrease": 1.5,
     "ssp": "SSP1",
-    "regions": ["Global"],
+    "geography": ["Global"],
     "sectors": [
       { "name": "Land Use", "technologies": ["Precision Agriculture"] }
     ],

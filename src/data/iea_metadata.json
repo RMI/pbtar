@@ -4,7 +4,7 @@
     "publisher": "IEA",
     "name": "APS",
     "description": "Pathway where all countries fully meet their aspirational targets (incl. NDCs and net zero pledges).",
-    "regions": [
+    "geography": [
       "Global",
       "East Asia and Pacific",
       "Europe and Central Asia",
@@ -80,7 +80,7 @@
     "publisher": "IEA",
     "name": "STEPS",
     "description": "Shows current trends of the energy economy. Uses active policies from sectors, countries, regions.",
-    "regions": [
+    "geography": [
       "Global",
       "East Asia and Pacific",
       "Europe and Central Asia",

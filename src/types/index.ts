@@ -5,7 +5,7 @@ export interface Scenario {
   pathwayType: string;
   modelYearEnd: string;
   modelTempIncrease?: number;
-  regions: string[];
+  geography: string[];
   sectors: {
     name: Sector;
   }[];
@@ -33,7 +33,7 @@ export type YearTarget =
   | "2100"
   | "N/A";
 
-export type Region =
+export type Geography =
   | "Global"
   | "EU"
   | "SEA"
@@ -57,7 +57,7 @@ export interface SearchFilters {
   pathwayType: PathwayType | null;
   modelYearEnd: YearTarget | null;
   modelTempIncrease: TemperatureTarget | null;
-  region: Region | null;
+  geography: Geography | null;
   sector: Sector | null;
   searchTerm: string;
 }

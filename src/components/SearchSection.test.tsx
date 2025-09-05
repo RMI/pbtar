@@ -33,7 +33,7 @@ describe("SearchSection", () => {
     expect(screen.getByText("Pathway Type")).toBeInTheDocument();
     expect(screen.getByText("Target Year")).toBeInTheDocument();
     expect(screen.getByText("Temperature (°C)")).toBeInTheDocument();
-    expect(screen.getByText("Region")).toBeInTheDocument();
+    expect(screen.getByText("Geography")).toBeInTheDocument();
     expect(screen.getByText("Sector")).toBeInTheDocument();
   });
 

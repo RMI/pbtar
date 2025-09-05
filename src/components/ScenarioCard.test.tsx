@@ -64,13 +64,13 @@ describe("ScenarioCard component", () => {
     ).toBeInTheDocument();
   });
 
-  it("displays region information with some regions visible", () => {
+  it("displays geography information with some geography visible", () => {
     renderScenarioCard();
 
-    expect(screen.getByText("Regions:")).toBeInTheDocument();
+    expect(screen.getByText("Geographies:")).toBeInTheDocument();
 
-    // Check that at least the first region is displayed
-    expect(screen.getByText(mockScenario.regions[0])).toBeInTheDocument();
+    // Check that at least the first geography is displayed
+    expect(screen.getByText(mockScenario.geography[0])).toBeInTheDocument();
   });
 
   it("displays sector information with some sectors visible", () => {
@@ -156,35 +156,35 @@ describe("ScenarioCard component", () => {
       }
     });
 
-    it("handles regions display appropriately based on available space", () => {
-      // Create a scenario with only 2 regions
-      const scenarioWithFewRegions = {
+    it("handles geography display appropriately based on available space", () => {
+      // Create a scenario with only 2 geographies
+      const scenarioWithFewGeography = {
         ...mockScenarioFull,
-        regions: ["Global", "EU"], // Only 2 regions
+        geography: ["Global", "EU"], // Only 2 geography
       };
 
-      const { container } = renderScenarioCard(scenarioWithFewRegions);
+      const { container } = renderScenarioCard(scenarioWithFewGeography);
 
-      // Find the regions section
-      const regionsSection = Array.from(container.querySelectorAll("p")).find(
-        (p) => p.textContent === "Regions:",
+      // Find the geography section
+      const geographySection = Array.from(container.querySelectorAll("p")).find(
+        (p) => p.textContent === "Geographies:",
       );
-      if (!regionsSection) throw new Error("Regions section not found");
+      if (!geographySection) throw new Error("Geography section not found");
 
-      // Get the parent container of the regions section
-      const regionsSectionContainer = regionsSection.closest("div");
-      if (!regionsSectionContainer)
-        throw new Error("Region section container not found");
+      // Get the parent container of the geography section
+      const geographySectionContainer = geographySection.closest("div");
+      if (!geographySectionContainer)
+        throw new Error("Geography section container not found");
 
       // Check if there's a "+n more" text
       const hasMoreText = Array.from(
-        regionsSectionContainer.querySelectorAll("span"),
+        geographySectionContainer.querySelectorAll("span"),
       ).some((span) => /\+\d+ more/.test(span.textContent || ""));
 
-      // If we find "+n more" text, ensure it only shows 1 more (since we have 2 regions total)
+      // If we find "+n more" text, ensure it only shows 1 more (since we have 2 geography total)
       if (hasMoreText) {
         const moreTextMatch = Array.from(
-          regionsSectionContainer.querySelectorAll("span"),
+          geographySectionContainer.querySelectorAll("span"),
         )
           .find((span) => /\+\d+ more/.test(span.textContent || ""))
           ?.textContent?.match(/\+(\d+) more/);
@@ -192,10 +192,10 @@ describe("ScenarioCard component", () => {
         expect(moreTextMatch).not.toBeNull();
         if (moreTextMatch) {
           const countNumber = parseInt(moreTextMatch[1]);
-          expect(countNumber).toBeLessThanOrEqual(1); // Should show at most 1 more (we have 2 regions total)
+          expect(countNumber).toBeLessThanOrEqual(1); // Should show at most 1 more (we have 2 geography total)
         }
       } else {
-        // If there's no "+n more" text, ensure at least one region is visible
+        // If there's no "+n more" text, ensure at least one geography is visible
         expect(screen.queryByText("Global")).not.toBeNull();
       }
     });
@@ -205,7 +205,7 @@ describe("ScenarioCard component", () => {
 describe("ScenarioCard search highlighting", () => {
   const mockScenario: Scenario = {
     ...mockScenarioFull,
-    regions: [...mockScenarioFull.regions, "Hidden Match Region"],
+    geography: [...mockScenarioFull.geography, "Hidden Match Geography"],
     sectors: [
       ...mockScenarioFull.sectors,
       { name: "Hidden Match Sector", technologies: ["Other"] },
@@ -238,24 +238,24 @@ describe("ScenarioCard search highlighting", () => {
     expect(markTexts).toContain("enum");
   });
 
-  it("prioritizes and shows regions that match search term even if they would normally be hidden", () => {
+  it("prioritizes and shows geographies that match search term even if they would normally be hidden", () => {
     const { container } = renderWithRouter("Hidden Match");
 
-    // Look for the regions section
-    const regionsSection = Array.from(container.querySelectorAll("p")).find(
-      (p) => p.textContent === "Regions:",
+    // Look for the geography section
+    const geographySection = Array.from(container.querySelectorAll("p")).find(
+      (p) => p.textContent === "Geographies:",
     );
 
-    // Find nearby badge with Hidden Match Region text (could be split across elements)
-    if (!regionsSection) {
-      throw new Error("Regions section not found");
+    // Find nearby badge with Hidden Match Geography text (could be split across elements)
+    if (!geographySection) {
+      throw new Error("Geographies section not found");
     }
 
-    // Find a badge containing the text "Hidden Match Region" in the parent div of the Regions section
-    const sectionContainer = regionsSection.closest("div");
+    // Find a badge containing the text "Hidden Match Geography" in the parent div of the Geography section
+    const sectionContainer = geographySection.closest("div");
     const hiddenMatchText = Array.from(
       sectionContainer?.querySelectorAll(".flex-wrap span") || [],
-    ).some((span) => span.textContent?.includes("Hidden Match Region"));
+    ).some((span) => span.textContent?.includes("Hidden Match Geography"));
 
     expect(hiddenMatchText).toBe(true);
 
