@@ -1,32 +1,30 @@
 import React from "react";
 
 const EnvironmentBanner: React.FC = () => {
-  const environment: string = (import.meta.env.VITE_BUILD_MODE || "development")
-    .trim()
-    .toLowerCase();
+  const mode = (import.meta.env.MODE ?? "development").trim().toLowerCase(); // "development", "production", "staging", etc.
 
-  if (environment === "production") {
-    return null;
-  }
+  const isProd = mode === "production"; // boolean at build time
+  if (isProd) return null; // hide on real prod builds
 
-  const getBgColor = () => {
-    const lowerEnv = (environment ?? "").toLowerCase();
-    if (lowerEnv.startsWith("develop")) {
+  function getBgColor(mode: string): string {
+    if (mode.startsWith("develop")) {
       return "bg-red-500";
-    } else if (lowerEnv.startsWith("staging")) {
+    } else if (mode.startsWith("staging")) {
       return "bg-yellow-500";
-    } else if (lowerEnv.startsWith("pr-")) {
+    } else if (mode.startsWith("pr-")) {
       return "bg-indigo-500";
     } else {
       return "bg-pink-500";
     }
-  };
+  }
+
+  const bgColor = getBgColor(mode);
 
   return (
     <div
-      className={`${getBgColor()} text-white text-center py-1 text-sm font-medium fixed top-0 left-0 right-0 z-50`}
+      className={`${bgColor} text-white text-center py-1 text-sm font-medium sticky top-0 z-50`}
     >
-      {environment.toUpperCase()} Environment
+      {mode.toUpperCase()} Environment
     </div>
   );
 };
