@@ -82,7 +82,7 @@ new_scenario_metadata <-
       pathwayType =  "Direct Policy",
       modelYearEnd = 2050,
       modelTempIncrease = 1.5,
-      regions = list("Global", "US", "Europe"),
+      geography = list("Global", "US", "Europe"),
       sectors = list(
         list(name = "Power", technologies = c("Coal", "Wind")),
         list(name = "Industry", technologies = I(c("Other")))

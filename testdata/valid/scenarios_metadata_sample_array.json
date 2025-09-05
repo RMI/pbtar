@@ -10,7 +10,7 @@
     "modelYearEnd": 2050,
     "modelTempIncrease": 1,
     "ssp": "SSP1",
-    "regions": ["Global"],
+    "geography": ["Global"],
     "sectors": [
       { "name": "Land Use", "technologies": ["Precision Agriculture"] }
     ],
@@ -35,7 +35,7 @@
     "modelYearEnd": 2050,
     "modelTempIncrease": 2,
     "ssp": "SSP2",
-    "regions": ["EU"],
+    "geography": ["EU"],
     "sectors": [{ "name": "Agriculture", "technologies": ["Agroforestry"] }],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
@@ -55,7 +55,7 @@
     "pathwayType": "Direct Policy",
     "modelTempIncrease": 3,
     "ssp": "SSP3",
-    "regions": ["Americas"],
+    "geography": ["Americas"],
     "sectors": [
       { "name": "Land Use", "technologies": ["Precision Agriculture"] },
       { "name": "Steel", "technologies": ["Carbon Capture and Storage"] }
@@ -80,7 +80,7 @@
     "modelYearStart": 2020,
     "modelYearEnd": 2050,
     "ssp": "SSP4",
-    "regions": ["SEA"],
+    "geography": ["SEA"],
     "sectors": [
       { "name": "Land Use", "technologies": ["Precision Agriculture"] },
       { "name": "Buildings", "technologies": ["Other"] }

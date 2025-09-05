@@ -10,7 +10,7 @@
     "modelYearEnd": 2050,
     "modelTempIncrease": 1.5,
     "ssp": "SSP1",
-    "regions": [
+    "geography": [
       "Global",
       "EU",
       "Americas",

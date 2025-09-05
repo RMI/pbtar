@@ -60,11 +60,11 @@ describe("Badge component", () => {
     expect(badge).toHaveClass("border-rmiblue-200");
   });
 
-  it("applies region styling when variant is 'region'", () => {
+  it("applies geography styling when variant is 'geography'", () => {
     const { container } = render(
       <Badge
         text="Global"
-        variant="region"
+        variant="geography"
       />,
     );
     const badge = container.firstChild as HTMLElement;
