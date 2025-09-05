@@ -4,7 +4,7 @@ import { validateScenarios } from "../src/utils/validateScenarios.ts";
 import type { FileEntry } from "../src/utils/validateScenarios.ts";
 
 async function main() {
-  const dir = "src/data";
+  const dir = process.argv[2] ?? "src/data"; // default if not provided
   const names = (await fs.readdir(dir)).filter((f) => f.endsWith(".json"));
 
   const entries: FileEntry[] = [];
@@ -15,7 +15,9 @@ async function main() {
 
   // throws (non-zero exit) on any problem
   validateScenarios(entries);
-  console.log(`✔ Validated ${names.length} data file(s) against schema.`);
+  console.log(
+    `✔ Validated ${names.length} data file(s) from ${dir} against schema.`,
+  );
 }
 
 main().catch((e) => {
