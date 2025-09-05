@@ -48,7 +48,7 @@ jobs:
 
   build-pr:
     name: "Build"
-    if: ${{ github.event_name == 'pull_request' && github.event.action != 'closed'}}
+    if: ${{ github.event_name == 'pull_request' && github.event.action != 'closed' }}
     uses: ./.github/workflows/node-semantic_release-pr.yml
     secrets: inherit
 
