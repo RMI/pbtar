@@ -18,7 +18,6 @@
       "SEA",
       "Country-Specific"
     ],
-    "country": "US",
     "sectors": [
       {
         "name": "Land Use",
@@ -76,6 +75,14 @@
     "publicationYear": 2025,
     "overview": "Example Overview.",
     "expertRecommendation": "Example Expert Recommendation.",
+    "metric": [
+      "Emissions Intensity",
+      "Capacity",
+      "Generation",
+      "Technology Mix",
+      "Absolute Emissions",
+      "Carbon Price"
+    ],
     "dataSource": {
       "description": "Mock Data Source.",
       "url": "https://example.com/data-source",
