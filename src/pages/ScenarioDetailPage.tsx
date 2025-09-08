@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import { scenariosData } from "../data/scenariosData";
 import { Scenario, PathwayType } from "../types";
 import Badge from "../components/Badge";
+import GeographyBadge from "../components/GeographyBadge";
 import { ExternalLink, ArrowLeft } from "lucide-react";
 import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
 
@@ -138,11 +139,11 @@ const ScenarioDetailPage: React.FC = () => {
                   Data Source
                 </h2>
                 <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-                  <p className="text-rmigray-700 mb-4 [&_a]:text-energy [&_a]:hover:text-energy-700">
+                  <div className="text-rmigray-700 mb-4 [&_a]:text-energy [&_a]:hover:text-energy-700">
                     <ReactMarkdown>
                       {scenario.dataSource.description}
                     </ReactMarkdown>
-                  </p>
+                  </div>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <a
                       href={scenario.dataSource.url}
@@ -167,11 +168,10 @@ const ScenarioDetailPage: React.FC = () => {
                   Geographies
                 </h3>
                 <div className="flex flex-wrap">
-                  {scenario.geography.map((geography, index) => (
-                    <Badge
+                  {(scenario.geography ?? []).map((geography, index) => (
+                    <GeographyBadge
                       key={index}
                       text={geography}
-                      variant="geography"
                     />
                   ))}
                 </div>

@@ -1,6 +1,7 @@
 import React, { useMemo, useRef, useState, useEffect, RefObject } from "react";
 import { Link } from "react-router-dom";
 import Badge from "./Badge";
+import GeographyBadge from "../components/GeographyBadge";
 import TextWithTooltip from "./TextWithTooltip";
 import { Scenario, PathwayType } from "../types";
 import { ChevronRight } from "lucide-react";
@@ -173,10 +174,9 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             {sortedGeography
               .slice(0, visibleGeographyCount)
               .map((geography) => (
-                <Badge
+                <GeographyBadge
                   key={geography}
                   text={highlightTextIfSearchMatch(geography)}
-                  variant="geography"
                 />
               ))}
             {scenario.geography.length > visibleGeographyCount && (
