@@ -17,7 +17,9 @@ on:
       - next
 
 name: Node Package Checks
-concurrency: node-package-checks
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   linting:
