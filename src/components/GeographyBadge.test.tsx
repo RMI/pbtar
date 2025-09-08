@@ -41,16 +41,16 @@ describe("GeographyBadge", () => {
   });
 
   it("does not render for empty/whitespace-only (incl. zero-width & NBSP)", () => {
-    const { container, rerender } = render(<GeographyBadge value="" />);
+    const { container, rerender } = render(<GeographyBadge text="" />);
     expect(container).toBeEmptyDOMElement();
 
-    rerender(<GeographyBadge value={"   "} />);
+    rerender(<GeographyBadge text={"   "} />);
     expect(container).toBeEmptyDOMElement();
 
-    rerender(<GeographyBadge value={" \u00A0 "} />); // NBSP
+    rerender(<GeographyBadge text={" \u00A0 "} />); // NBSP
     expect(container).toBeEmptyDOMElement();
 
-    rerender(<GeographyBadge value={" \u200B "} />); // zero-width space
+    rerender(<GeographyBadge text={" \u200B "} />); // zero-width space
     expect(container).toBeEmptyDOMElement();
   });
 });
