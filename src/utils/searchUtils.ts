@@ -50,7 +50,7 @@ export const filterScenarios = (
         scenario.modelYearEnd,
         scenario.modelTempIncrease,
         ...scenario.geography,
-        ...scenario.geography.map((s) => geographyLabel(s) ),
+        ...scenario.geography.map((s) => geographyLabel(s)),
         ...scenario.sectors.map((s) => s.name),
         scenario.publisher,
         scenario.publicationYear,

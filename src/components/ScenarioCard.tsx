@@ -10,7 +10,7 @@ import TextWithTooltip from "./TextWithTooltip";
 import { Scenario, PathwayType } from "../types";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
-import { prioritizeMatches } from "../utils/sortUtils";
+import { prioritizeMatches, prioritizeGeographies } from "../utils/sortUtils";
 import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
 
 interface ScenarioCardProps {
@@ -70,7 +70,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
   // Sort geography and sectors to prioritize matches
   const sortedGeography = useMemo(
     () =>
-      prioritizeMatches(
+      prioritizeGeographies(
         sortGeographiesForDetails(scenario.geography),
         searchTerm,
       ),
