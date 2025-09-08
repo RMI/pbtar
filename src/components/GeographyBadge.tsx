@@ -19,15 +19,22 @@ function variantFor(
 
 interface GeographyBadgeProps {
   text: string;
+  display?: React.ReactNode;
 }
 
-const GeographyBadge: React.FC<GeographyBadgeProps> = ({ text }) => {
-  const kind = geographyKind(text);
+const GeographyBadge: React.FC<GeographyBadgeProps> = ({ text, display }) => {
+  // Trim whitespace and handle empty strings (do not render)
+  const text_clean = String(text ?? "")
+    .replace(/[\u200B-\u200D\u2060\uFEFF]/g, "")
+    .trim();
+  if (!text_clean) return null;
+
+  const kind = geographyKind(text_clean);
   return (
     <Badge
       variant={variantFor(kind)}
-      text={text}
-      tooltip={text}
+      text={display ?? text_clean}
+      tooltip={text_clean}
     ></Badge>
   );
 };

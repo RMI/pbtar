@@ -176,7 +176,8 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               .map((geography) => (
                 <GeographyBadge
                   key={geography}
-                  text={highlightTextIfSearchMatch(geography)}
+                  text={geography}
+                  display={highlightTextIfSearchMatch(geography)}
                 />
               ))}
             {scenario.geography.length > visibleGeographyCount && (
