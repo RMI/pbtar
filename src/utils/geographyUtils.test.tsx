@@ -4,7 +4,7 @@ import {
   sortGeographiesForDetails,
   geographyTooltip,
   normalizeGeography,
-  assertKnownCountryISO2
+  assertKnownCountryISO2,
 } from "./geographyUtils";
 
 describe("normalizeGeography", () => {

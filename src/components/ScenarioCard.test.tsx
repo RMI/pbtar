@@ -24,21 +24,33 @@ const renderScenarioCard = (scenario: Scenario = mockScenario) => {
   );
 };
 //
-// Force a wide container in JSDOM so the card shows several badges.
 function withClientWidth<T>(width: number, run: () => T): T {
   const desc = Object.getOwnPropertyDescriptor(
     HTMLElement.prototype,
     "clientWidth",
   );
+
   Object.defineProperty(HTMLElement.prototype, "clientWidth", {
     configurable: true,
-    get: () => width,
+    get(this: HTMLElement): number {
+      return width;
+    },
   });
+
   try {
     return run();
   } finally {
-    if (desc) Object.defineProperty(HTMLElement.prototype, "clientWidth", desc);
-    else delete (HTMLElement.prototype as any).clientWidth;
+    if (desc) {
+      Object.defineProperty(HTMLElement.prototype, "clientWidth", desc);
+    } else {
+      // define a safe fallback getter if none existed
+      Object.defineProperty(HTMLElement.prototype, "clientWidth", {
+        configurable: true,
+        get(): number {
+          return 0;
+        },
+      });
+    }
   }
 }
 

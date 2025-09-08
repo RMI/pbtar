@@ -79,7 +79,8 @@ export function sortGeographiesForDetails(input: unknown[]): string[] {
       const raw = normalizeGeography(v);
       if (!raw) return null;
       const kind = geographyKind(raw);
-      const iso2 = kind === "country" ? assertKnownCountryISO2(raw)! : null; // non-null for countries
+      const iso2Maybe = toISO2(raw);
+      const iso2 = kind === "country" && iso2Maybe ? iso2Maybe : null;
       const label = geographyLabel(raw); // used for display; sorting uses iso2
       return { idx, raw, kind, iso2, label };
     })

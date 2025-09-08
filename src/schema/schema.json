@@ -71,7 +71,7 @@
           "type": "string",
           "minLength": 1,
           "allOf": [
-            { "pattern": "^(?!\\s*$).+" },           
+            { "pattern": "^(?!\\s*$).+" },
             { "not": { "pattern": "^[A-Za-z]{3}$" } }
           ]
         }
