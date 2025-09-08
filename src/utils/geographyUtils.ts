@@ -34,6 +34,18 @@ export function countryNameFromISO2(code: string): string | null {
   return name;
 }
 
+export function assertKnownCountryISO2(raw: string): string {
+  const iso2 = toISO2(raw);
+  if (!iso2) {
+    throw new Error(`Not an ISO-2 code: ${raw}`);
+  }
+  const name = countryNameFromISO2(iso2);
+  if (!name) {
+    throw new Error(`Unknown ISO-2 country code: ${iso2}`);
+  }
+  return iso2; // normalized uppercase
+}
+
 export function geographyKind(raw: string): GeographyKind {
   const s = normalizeGeography(raw ?? "").toLowerCase();
   if (/^global$/i.test(s)) return "global"; // match literal "global"
@@ -67,7 +79,7 @@ export function sortGeographiesForDetails(input: unknown[]): string[] {
       const raw = normalizeGeography(v);
       if (!raw) return null;
       const kind = geographyKind(raw);
-      const iso2 = kind === "country" ? toISO2(raw)! : null; // non-null for countries
+      const iso2 = kind === "country" ? assertKnownCountryISO2(raw)! : null; // non-null for countries
       const label = geographyLabel(raw); // used for display; sorting uses iso2
       return { idx, raw, kind, iso2, label };
     })

@@ -4,6 +4,7 @@ import {
   sortGeographiesForDetails,
   geographyTooltip,
   normalizeGeography,
+  assertKnownCountryISO2
 } from "./geographyUtils";
 
 describe("normalizeGeography", () => {
@@ -96,5 +97,20 @@ describe("geographyTooltip", () => {
   it("tooltip is label for Global/regions", () => {
     expect(geographyTooltip("Global")).toBe("Global");
     expect(geographyTooltip("APAC")).toBe("APAC");
+  });
+});
+
+describe("assertKnownCountryISO2 (strict ISO2 validation)", () => {
+  it("throws for a 2-letter code that doesn't map to a country (EU)", () => {
+    expect(() => assertKnownCountryISO2("EU")).toThrow(/unknown iso-?2/i);
+  });
+
+  it("returns normalized ISO2 for valid codes", () => {
+    expect(assertKnownCountryISO2("cn")).toBe("CN");
+    expect(assertKnownCountryISO2("US")).toBe("US");
+  });
+
+  it("throws for non-ISO2 inputs", () => {
+    expect(() => assertKnownCountryISO2("Europe")).toThrow(/not an iso-?2/i);
   });
 });
