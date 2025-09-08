@@ -6,6 +6,8 @@ import {
   normalizeGeography,
   assertKnownCountryISO2,
 } from "./geographyUtils";
+import { makeGeographyOptions } from "./searchUtils";
+import type { Scenario } from "../types";
 
 describe("normalizeGeography", () => {
   it("normalizeGeography drops zero-width and NBSP then trims", () => {
@@ -112,5 +114,63 @@ describe("assertKnownCountryISO2 (strict ISO2 validation)", () => {
 
   it("throws for non-ISO2 inputs", () => {
     expect(() => assertKnownCountryISO2("Europe")).toThrow(/not an iso-?2/i);
+  });
+});
+
+const mkScenario = (id: string, geography: string[]): Scenario =>
+  ({
+    id,
+    name: `Scenario ${id}`,
+    description: "",
+    pathwayType: "Mitigation",
+    modelYearEnd: 2050,
+    modelTempIncrease: 1.5,
+    geography,
+    sectors: [],
+    publisher: "RMI",
+    publicationYear: 2024,
+  }) as unknown as Scenario;
+
+describe("makeGeographyOptions", () => {
+  it("uses full names for ISO2 and preserves badge ordering", () => {
+    const scenarios = [
+      mkScenario("A", ["US", "Europe", "Global"]),
+      mkScenario("B", ["DE", "APAC", "CN"]),
+      mkScenario("C", ["US"]), // duplicate, should be deduped
+    ];
+
+    const opts = makeGeographyOptions(scenarios);
+
+    // Expect order: Global → Regions (first-seen order: Europe, APAC) → Countries (A→Z by ISO2: CN, DE, US)
+    expect(opts.map((o) => o.value)).toEqual([
+      "Global",
+      "Europe",
+      "APAC",
+      "CN",
+      "DE",
+      "US",
+    ]);
+    expect(opts.map((o) => o.label)).toEqual([
+      "Global",
+      "Europe",
+      "APAC",
+      "People's Republic of China",
+      "Germany",
+      "United States of America",
+    ]);
+  });
+
+  it("treats unknown 2-letter strings as regions (e.g., 'EU')", () => {
+    const scenarios = [mkScenario("X", ["EU", "Global"])];
+    const opts = makeGeographyOptions(scenarios);
+    expect(opts.map((o) => o.value)).toEqual(["Global", "EU"]);
+    expect(opts.map((o) => o.label)).toEqual(["Global", "EU"]);
+  });
+
+  it("drops empty / whitespace entries", () => {
+    const scenarios = [mkScenario("X", ["", "  ", "\u200B", "CN"])];
+    const opts = makeGeographyOptions(scenarios);
+    expect(opts.map((o) => o.value)).toEqual(["CN"]);
+    expect(opts.map((o) => o.label)).toEqual(["People's Republic of China"]);
   });
 });

@@ -10,6 +10,7 @@ import {
   Geography,
   Sector,
 } from "../types";
+import { makeGeographyOptions } from "../utils/searchUtils";
 
 interface SearchSectionProps {
   filters: SearchFilters;
@@ -38,9 +39,10 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   const temperatures: TemperatureTarget[] = Array.from(
     new Set(scenariosData.map((d) => d.modelTempIncrease)),
   ).sort() as TemperatureTarget[];
-  const geography: Geography[] = Array.from(
-    new Set(scenariosData.map((d) => d.geography).flat()),
-  ).sort() as Geography[];
+  const geography: Geography[] = React.useMemo(
+    () => makeGeographyOptions(scenariosData),
+    [scenariosData],
+  ) as Geography[];
   const sectors: Sector[] = Array.from(
     new Set(scenariosData.flatMap((d) => d.sectors.map((s) => s.name))),
   ).sort();

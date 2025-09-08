@@ -1,5 +1,29 @@
 import { Scenario, SearchFilters } from "../types";
-import { geographyLabel } from "./geographyUtils";
+import {
+  normalizeGeography,
+  geographyLabel,
+  sortGeographiesForDetails,
+} from "./geographyUtils";
+
+export interface GeoOption {
+  value: string; // raw (e.g., "CN", "Europe", "Global")
+  label: string; // display (e.g., "China", "Europe", "Global")
+}
+
+export function makeGeographyOptions(scenarios: Scenario[]): GeoOption[] {
+  const seen = new Set<string>();
+  for (const s of scenarios) {
+    for (const g of s.geography ?? []) {
+      const v = normalizeGeography(g);
+      if (v) seen.add(v);
+    }
+  }
+  const uniques = Array.from(seen);
+  const sorted = sortGeographiesForDetails(uniques);
+
+  // ✅ value stays raw, label is full name (or passthrough for regions/Global)
+  return sorted.map((v) => ({ value: v, label: geographyLabel(v) }));
+}
 
 export const filterScenarios = (
   scenarios: Scenario[],
@@ -28,8 +52,12 @@ export const filterScenarios = (
     }
 
     // Geography filter
-    if (filters.geography && !scenario.geography.includes(filters.geography)) {
-      return false;
+    if (filters.geography) {
+      const want = normalizeGeography(filters.geography).toUpperCase();
+      const hit = (scenario.geography ?? []).some(
+        (g) => normalizeGeography(g).toUpperCase() === want,
+      );
+      if (!hit) return false;
     }
 
     // Sector filter
