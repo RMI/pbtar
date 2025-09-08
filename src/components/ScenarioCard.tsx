@@ -2,6 +2,7 @@ import React, { useMemo, useRef, useState, useEffect, RefObject } from "react";
 import { Link } from "react-router-dom";
 import Badge from "./Badge";
 import GeographyBadge from "../components/GeographyBadge";
+import { sortGeographiesForDetails } from "../utils/geographyUtils";
 import TextWithTooltip from "./TextWithTooltip";
 import { Scenario, PathwayType } from "../types";
 import { ChevronRight } from "lucide-react";
@@ -65,7 +66,11 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
 }) => {
   // Sort geography and sectors to prioritize matches
   const sortedGeography = useMemo(
-    () => prioritizeMatches(scenario.geography, searchTerm),
+    () =>
+      prioritizeMatches(
+        sortGeographiesForDetails(scenario.geography),
+        searchTerm,
+      ),
     [scenario.geography, searchTerm],
   );
 

@@ -5,6 +5,7 @@ import { scenariosData } from "../data/scenariosData";
 import { Scenario, PathwayType } from "../types";
 import Badge from "../components/Badge";
 import GeographyBadge from "../components/GeographyBadge";
+import { sortGeographiesForDetails } from "../utils/geographyUtils";
 import { ExternalLink, ArrowLeft } from "lucide-react";
 import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
 
@@ -168,12 +169,14 @@ const ScenarioDetailPage: React.FC = () => {
                   Geographies
                 </h3>
                 <div className="flex flex-wrap">
-                  {(scenario.geography ?? []).map((geography, index) => (
-                    <GeographyBadge
-                      key={index}
-                      text={geography}
-                    />
-                  ))}
+                  {sortGeographiesForDetails(scenario.geography ?? []).map(
+                    (geography, index) => (
+                      <GeographyBadge
+                        key={index}
+                        text={geography}
+                      />
+                    ),
+                  )}
                 </div>
               </div>
 
