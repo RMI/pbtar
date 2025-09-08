@@ -80,7 +80,7 @@
     "modelYearStart": 2020,
     "modelYearEnd": 2050,
     "ssp": "SSP4",
-    "geography": ["SEA"],
+    "geography": ["CN"],
     "sectors": [
       { "name": "Land Use", "technologies": ["Precision Agriculture"] },
       { "name": "Buildings", "technologies": ["Other"] }

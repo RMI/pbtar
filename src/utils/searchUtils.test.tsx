@@ -154,7 +154,7 @@ describe("searchUtils - array results", () => {
     "EU",
     "Americas",
     "Asia Pacific",
-    "SEA",
+    "US",
     "Country-Specific",
   ];
 
