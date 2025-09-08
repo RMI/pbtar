@@ -5,7 +5,7 @@ import {
   normalizeGeography,
   geographyLabel,
   geographyTooltip,
-} from "../utils/geographyUtils.ts";
+} from "../utils/geographyUtils";
 import Badge from "./Badge";
 
 function variantFor(
