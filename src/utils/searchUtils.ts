@@ -1,4 +1,5 @@
 import { Scenario, SearchFilters } from "../types";
+import { geographyLabel } from "./geographyUtils";
 
 export const filterScenarios = (
   scenarios: Scenario[],
@@ -49,6 +50,7 @@ export const filterScenarios = (
         scenario.modelYearEnd,
         scenario.modelTempIncrease,
         ...scenario.geography,
+        ...scenario.geography.map((s) => geographyLabel(s) ),
         ...scenario.sectors.map((s) => s.name),
         scenario.publisher,
         scenario.publicationYear,

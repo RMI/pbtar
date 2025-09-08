@@ -14,47 +14,80 @@ export function normalizeGeography(raw: unknown): string {
   return s.replace(/[\u200B-\u200D\u2060\uFEFF\u00A0]/g, "").trim();
 }
 
+const ISO2 = /^[A-Za-z]{2}$/;
+
+export function toISO2(raw: string): string | null {
+  const s = normalizeGeography(raw).toUpperCase();
+  if (!s) return null;
+  return ISO2.test(s) ? s : null;
+}
+
+const NAME_CACHE = new Map<string, string>();
+export function countryNameFromISO2(code: string): string | null {
+  const cc = toISO2(code);
+  if (!cc) return null;
+  const cached = NAME_CACHE.get(cc);
+  if (cached) return cached;
+  const name = countries.getName(cc, "en");
+  if (!name) return null;
+  NAME_CACHE.set(cc, name);
+  return name;
+}
+
 export function geographyKind(raw: string): GeographyKind {
   const s = normalizeGeography(raw ?? "").toLowerCase();
   if (/^global$/i.test(s)) return "global"; // match literal "global"
-  if (/^[a-z]{2}$/.test(s) && countries.getName(s, "en")) return "country";
+  if (toISO2(raw) && countryNameFromISO2(raw)) return "country";
   return "region";
 }
 
 // TODO: Does not implement ISO Mapping yet.
 export function geographyLabel(raw: string): string {
   const s = normalizeGeography(raw);
+  if (!s) return "";
   const kind = geographyKind(s);
   if (kind === "global") return "Global";
-  if (kind === "country") return s;
-  return s; // for region, return as-is
+  const name = countryNameFromISO2(s);
+  return name ?? s; // country name if known; else passthrough
+}
+
+/** Tooltip: Countries → 'Full name (ISO2)'; else raw text. */
+export function geographyTooltip(raw: string): string {
+  const s = normalizeGeography(raw);
+  if (!s) return "";
+  const iso2 = toISO2(s);
+  const name = iso2 && countryNameFromISO2(iso2);
+  if (iso2 && name) return `${name} (${iso2})`;
+  return s;
 }
 
 export function sortGeographiesForDetails(input: unknown[]): string[] {
-  // annotate once for stability + easy grouping
   const annotated = input
     .map((v, idx) => {
       const raw = normalizeGeography(v);
-      if (!raw) return null; // drop empties
-      const kind = geographyKind(raw); // "global" | "region" | "country"
-      // label used only for country sorting; for others we keep default order
-      const label = kind === "country" ? geographyLabel(raw) || raw : raw;
-      return { idx, raw, kind, label };
+      if (!raw) return null;
+      const kind = geographyKind(raw);
+      const iso2 = kind === "country" ? toISO2(raw)! : null; // non-null for countries
+      const label = geographyLabel(raw); // used for display; sorting uses iso2
+      return { idx, raw, kind, iso2, label };
     })
-    .filter(Boolean) as {
-    idx: number;
-    raw: string;
-    kind: GeographyKind;
-    label: string;
-  }[];
+    .filter(
+      (
+        x,
+      ): x is {
+        idx: number;
+        raw: string;
+        kind: GeographyKind;
+        iso2: string | null;
+        label: string;
+      } => !!x,
+    );
 
-  const globals = annotated.filter((a) => a.kind === "global"); // keep original order
-  const regions = annotated.filter((a) => a.kind === "region"); // keep original order
+  const globals = annotated.filter((a) => a.kind === "global"); // keep input order
+  const regions = annotated.filter((a) => a.kind === "region"); // keep input order
   const countries = annotated
     .filter((a) => a.kind === "country")
-    .sort((a, b) =>
-      a.label.localeCompare(b.label, undefined, { sensitivity: "base" }),
-    ); // A→Z
+    .sort((a, b) => (a.iso2! < b.iso2! ? -1 : a.iso2! > b.iso2! ? 1 : 0)); // A→Z by ISO2
 
   return [...globals, ...regions, ...countries].map((a) => a.raw);
 }

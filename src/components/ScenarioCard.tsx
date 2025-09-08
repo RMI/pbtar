@@ -2,7 +2,10 @@ import React, { useMemo, useRef, useState, useEffect, RefObject } from "react";
 import { Link } from "react-router-dom";
 import Badge from "./Badge";
 import GeographyBadge from "../components/GeographyBadge";
-import { sortGeographiesForDetails } from "../utils/geographyUtils";
+import {
+  geographyLabel,
+  sortGeographiesForDetails,
+} from "../utils/geographyUtils";
 import TextWithTooltip from "./TextWithTooltip";
 import { Scenario, PathwayType } from "../types";
 import { ChevronRight } from "lucide-react";
@@ -178,13 +181,16 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           >
             {sortedGeography
               .slice(0, visibleGeographyCount)
-              .map((geography) => (
-                <GeographyBadge
-                  key={geography}
-                  text={geography}
-                  display={highlightTextIfSearchMatch(geography)}
-                />
-              ))}
+              .map((geography) => {
+                const label = geographyLabel(geography);
+                return (
+                  <GeographyBadge
+                    key={geography}
+                    text={geography}
+                    display={highlightTextIfSearchMatch(label)}
+                  />
+                );
+              })}
             {scenario.geography.length > visibleGeographyCount && (
               <TextWithTooltip
                 text={
@@ -199,7 +205,9 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
                       .map((geography, idx) => (
                         <React.Fragment key={geography}>
                           {idx > 0 && ", "}
-                          <span className="whitespace-nowrap">{geography}</span>
+                          <span className="whitespace-nowrap">
+                            {geographyLabel(geography)}
+                          </span>
                         </React.Fragment>
                       ))}
                   </span>

@@ -1,5 +1,11 @@
 import React from "react";
-import { geographyKind, GeographyKind } from "../utils/geographyUtils.ts";
+import {
+  geographyKind,
+  GeographyKind,
+  normalizeGeography,
+  geographyLabel,
+  geographyTooltip,
+} from "../utils/geographyUtils.ts";
 import Badge from "./Badge";
 
 function variantFor(
@@ -24,17 +30,15 @@ interface GeographyBadgeProps {
 
 const GeographyBadge: React.FC<GeographyBadgeProps> = ({ text, display }) => {
   // Trim whitespace and handle empty strings (do not render)
-  const text_clean = String(text ?? "")
-    .replace(/[\u200B-\u200D\u2060\uFEFF]/g, "")
-    .trim();
+  const text_clean = normalizeGeography(text);
   if (!text_clean) return null;
 
   const kind = geographyKind(text_clean);
   return (
     <Badge
       variant={variantFor(kind)}
-      text={display ?? text_clean}
-      tooltip={text_clean}
+      text={display ?? geographyLabel(text_clean)}
+      tooltip={geographyTooltip(text_clean)}
     ></Badge>
   );
 };

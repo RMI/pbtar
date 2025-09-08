@@ -30,11 +30,11 @@ describe("GeographyBadge", () => {
     expect(badge.className).toContain("border-pinishgreen-800");
   });
 
-  it("renders country badge (e.g., US) with geographyCountry styling", () => {
-    render(<GeographyBadge text="US" />);
+  it("renders country badge (e.g., DE) with geographyCountry styling", () => {
+    render(<GeographyBadge text="DE" />);
     // No mapping assertion yet; just check the raw text is shown
-    expect(screen.getByText("US")).toBeInTheDocument();
-    const badge = getStyledSpanByText("US");
+    expect(screen.getByText("Germany")).toBeInTheDocument();
+    const badge = getStyledSpanByText("Germany");
     expect(badge.className).toContain("bg-pinishgreen-100");
     expect(badge.className).toContain("text-pinishgreen-800");
     expect(badge.className).toContain("border-pinishgreen-200");
