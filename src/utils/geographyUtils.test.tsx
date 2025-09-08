@@ -1,5 +1,16 @@
 import { describe, it, expect } from "vitest";
-import { geographyKind, sortGeographiesForDetails } from "./geographyUtils";
+import {
+  geographyKind,
+  sortGeographiesForDetails,
+  geographyTooltip,
+  normalizeGeography,
+} from "./geographyUtils";
+
+describe("normalizeGeography", () => {
+  it("normalizeGeography drops zero-width and NBSP then trims", () => {
+    expect(normalizeGeography("\u200B CN \u00A0")).toBe("CN");
+  });
+});
 
 // NOTE: These cover *classification only*. No label mapping assertions yet.
 describe("geographyKind", () => {
@@ -75,5 +86,15 @@ describe("sortGeographiesForDetails", () => {
     const input = ["Region B", "Region A", "DE", "DK", "Global"];
     const out = sortGeographiesForDetails(input);
     expect(out).toEqual(["Global", "Region B", "Region A", "DE", "DK"]);
+  });
+});
+
+describe("geographyTooltip", () => {
+  it("tooltip is 'Full Name (ISO2)' for countries", () => {
+    expect(geographyTooltip("dk")).toBe("Denmark (DK)");
+  });
+  it("tooltip is label for Global/regions", () => {
+    expect(geographyTooltip("Global")).toBe("Global");
+    expect(geographyTooltip("APAC")).toBe("APAC");
   });
 });

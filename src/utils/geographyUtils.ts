@@ -57,8 +57,8 @@ export function geographyTooltip(raw: string): string {
   if (!s) return "";
   const iso2 = toISO2(s);
   const name = iso2 && countryNameFromISO2(iso2);
-  if (iso2 && name) return `${name} (${iso2})`;
-  return s;
+  if (iso2 && name) return `${geographyLabel(name)} (${iso2})`;
+  return geographyLabel(s);
 }
 
 export function sortGeographiesForDetails(input: unknown[]): string[] {

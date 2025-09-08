@@ -23,6 +23,24 @@ const renderScenarioCard = (scenario: Scenario = mockScenario) => {
     </MemoryRouter>,
   );
 };
+//
+// Force a wide container in JSDOM so the card shows several badges.
+function withClientWidth<T>(width: number, run: () => T): T {
+  const desc = Object.getOwnPropertyDescriptor(
+    HTMLElement.prototype,
+    "clientWidth",
+  );
+  Object.defineProperty(HTMLElement.prototype, "clientWidth", {
+    configurable: true,
+    get: () => width,
+  });
+  try {
+    return run();
+  } finally {
+    if (desc) Object.defineProperty(HTMLElement.prototype, "clientWidth", desc);
+    else delete (HTMLElement.prototype as any).clientWidth;
+  }
+}
 
 describe("ScenarioCard component", () => {
   // Helper function to render component with router context
@@ -198,6 +216,23 @@ describe("ScenarioCard component", () => {
         // If there's no "+n more" text, ensure at least one geography is visible
         expect(screen.queryByText("Global")).not.toBeNull();
       }
+    });
+  });
+
+  it("renders mapped country names on badges (not ISO2 codes)", () => {
+    const scenario = {
+      ...mockScenario,
+      geography: ["Global", "APAC", "DE"], // CN should render as "China"
+    };
+
+    // Make the container wide enough for 3+ badges in JSDOM
+    withClientWidth(1000, () => {
+      renderScenarioCard(scenario);
+
+      expect(screen.getByText("Global")).toBeInTheDocument();
+      expect(screen.getByText("APAC")).toBeInTheDocument();
+      expect(screen.getByText("Germany")).toBeInTheDocument();
+      expect(screen.queryByText(/^DE$/)).toBeNull(); // ensure code itself isn't shown
     });
   });
 });
