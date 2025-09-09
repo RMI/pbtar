@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 import {
   geographyKind,
   sortGeographiesForDetails,
-  geographyTooltip,
   normalizeGeography,
   assertKnownCountryISO2,
 } from "./geographyUtils";
@@ -89,16 +88,6 @@ describe("sortGeographiesForDetails", () => {
     const input = ["Region B", "Region A", "DE", "DK", "Global"];
     const out = sortGeographiesForDetails(input);
     expect(out).toEqual(["Global", "Region B", "Region A", "DE", "DK"]);
-  });
-});
-
-describe("geographyTooltip", () => {
-  it("tooltip is 'Full Name (ISO2)' for countries", () => {
-    expect(geographyTooltip("dk")).toBe("Denmark (DK)");
-  });
-  it("tooltip is label for Global/regions", () => {
-    expect(geographyTooltip("Global")).toBe("Global");
-    expect(geographyTooltip("APAC")).toBe("APAC");
   });
 });
 

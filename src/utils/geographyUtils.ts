@@ -64,16 +64,6 @@ export function geographyLabel(raw: string): string {
   return name ?? s; // country name if known; else passthrough
 }
 
-/** Tooltip: Countries → 'Full name (ISO2)'; else raw text. */
-export function geographyTooltip(raw: string): string {
-  const s = normalizeGeography(raw);
-  if (!s) return "";
-  const iso2 = toISO2(s);
-  const name = iso2 && countryNameFromISO2(iso2);
-  if (iso2 && name) return `${geographyLabel(name)} (${iso2})`;
-  return geographyLabel(s);
-}
-
 export function sortGeographiesForDetails(input: unknown[]): string[] {
   const annotated = input
     .map((v, idx) => {

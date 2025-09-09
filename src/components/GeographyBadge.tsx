@@ -4,7 +4,6 @@ import {
   GeographyKind,
   normalizeGeography,
   geographyLabel,
-  geographyTooltip,
 } from "../utils/geographyUtils";
 import Badge from "./Badge";
 
@@ -38,7 +37,6 @@ const GeographyBadge: React.FC<GeographyBadgeProps> = ({ text, display }) => {
     <Badge
       variant={variantFor(kind)}
       text={display ?? geographyLabel(text_clean)}
-      tooltip={geographyTooltip(text_clean)}
     ></Badge>
   );
 };
