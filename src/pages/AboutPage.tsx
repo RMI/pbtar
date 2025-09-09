@@ -85,7 +85,7 @@ const AboutPage: React.FC = () => {
               </h3>
               <p className="text-rmigray-700">
                 Use our search and filter tools to narrow down scenarios based
-                on specific criteria such as regions, sectors, temperature
+                on specific criteria such as geographies, sectors, temperature
                 targets, or other attributes relevant to your assessment.
               </p>
             </div>

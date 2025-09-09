@@ -4,7 +4,7 @@
     "name": "Minimal Scenario",
     "description": "A minimal scenario file that passes schema validation.",
     "pathwayType": "Exploratory",
-    "regions": ["Country-Specific"],
+    "geography": ["Country-Specific"],
     "sectors": [
       {
         "name": "Other",

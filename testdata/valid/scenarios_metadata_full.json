@@ -10,12 +10,12 @@
     "modelYearEnd": 2050,
     "modelTempIncrease": 1.5,
     "ssp": "SSP1",
-    "regions": [
+    "geography": [
       "Global",
       "EU",
       "Americas",
       "Asia Pacific",
-      "SEA",
+      "US",
       "Country-Specific"
     ],
     "sectors": [

@@ -1,3 +1,5 @@
+import { geographyLabel, normalizeGeography } from "./geographyUtils";
+
 // Function to prioritize items that match the search term
 export const prioritizeMatches = <T extends string | { name: string }>(
   items: T[],
@@ -16,4 +18,26 @@ export const prioritizeMatches = <T extends string | { name: string }>(
     if (!matchesA && matchesB) return 1;
     return 0;
   });
+};
+
+/** Stable partition: items whose code OR label includes the query come first. */
+export const prioritizeGeographies = (
+  items: string[],
+  searchTerm: string,
+): string[] => {
+  const q = normalizeGeography(searchTerm).toLowerCase();
+  if (!q) return items;
+
+  const matched: string[] = [];
+  const rest: string[] = [];
+
+  for (const g of items) {
+    const code = normalizeGeography(g).toLowerCase();
+    const label = geographyLabel(g).toLowerCase();
+    const labelNoSpaces = label.replace(/\s+/g, "");
+    const hit =
+      code.includes(q) || label.includes(q) || labelNoSpaces.includes(q);
+    (hit ? matched : rest).push(g);
+  }
+  return [...matched, ...rest]; // preserve relative order within each bucket
 };
