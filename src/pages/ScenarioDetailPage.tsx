@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
+import Markdown from "../components/Markdown";
 import { scenariosData } from "../data/scenariosData";
 import { Scenario, PathwayType } from "../types";
 import Badge from "../components/Badge";
@@ -122,7 +122,7 @@ const ScenarioDetailPage: React.FC = () => {
                   Scenario Overview
                 </h2>
                 <div className="prose text-rmigray-700">
-                  <ReactMarkdown>{scenario.overview}</ReactMarkdown>
+                  <Markdown>{scenario.overview}</Markdown>
                 </div>
               </section>
 
@@ -131,7 +131,7 @@ const ScenarioDetailPage: React.FC = () => {
                   Expert Recommendations
                 </h2>
                 <div className="prose text-rmigray-700">
-                  <ReactMarkdown>{scenario.expertRecommendation}</ReactMarkdown>
+                  <Markdown>{scenario.expertRecommendation}</Markdown>
                 </div>
               </section>
 
@@ -141,9 +141,7 @@ const ScenarioDetailPage: React.FC = () => {
                 </h2>
                 <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
                   <div className="text-rmigray-700 mb-4 [&_a]:text-energy [&_a]:hover:text-energy-700">
-                    <ReactMarkdown>
-                      {scenario.dataSource.description}
-                    </ReactMarkdown>
+                    <Markdown>{scenario.dataSource.description}</Markdown>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <a
