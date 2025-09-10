@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import AboutPage from "./AboutPage";
 
@@ -55,6 +55,24 @@ describe("AboutPage component", () => {
       "rel",
       "noopener noreferrer",
     );
+  });
+
+  it("contains a Contact Us section with a mailto link", () => {
+    renderAboutPage();
+
+    // Find the "Contact Us" section via its heading
+    const contactHeading = screen.getByRole("heading", {
+      name: /contact us/i,
+      level: 2,
+    });
+    const contactSection = contactHeading.closest("section");
+    expect(contactSection).not.toBeNull();
+
+    // Ensure there's a link in that section pointing to the mailto address
+    const contactLink = within(contactSection!).getByRole("link", {
+      name: /contact us/i,
+    });
+    expect(contactLink).toHaveAttribute("href", "mailto:contact@rmi.org");
   });
 
   it("renders the lucide icons", () => {

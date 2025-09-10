@@ -9,7 +9,9 @@ interface BadgeProps {
     | "pathwayType"
     | "temperature"
     | "year"
-    | "region"
+    | "geographyGlobal"
+    | "geographyRegion"
+    | "geographyCountry"
     | "sector";
 }
 
@@ -26,7 +28,11 @@ const Badge: React.FC<BadgeProps> = ({
         return "bg-rmired-100 text-rmired-800 border-rmired-200";
       case "year":
         return "bg-rmiblue-100 text-rmiblue-800 border-rmiblue-200";
-      case "region":
+      case "geographyGlobal":
+        return "bg-pinishgreen-800 text-pinishgreen-100 border-pinishgreen-100";
+      case "geographyRegion":
+        return "bg-pinishgreen-200 text-pinishgreen-800 border-pinishgreen-800";
+      case "geographyCountry":
         return "bg-pinishgreen-100 text-pinishgreen-800 border-pinishgreen-200";
       case "sector":
         return "bg-solar-100 text-solar-800 border-solar-200";

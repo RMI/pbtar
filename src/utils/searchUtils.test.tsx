@@ -44,8 +44,8 @@ describe("searchUtils", () => {
       expect(result[0].id).toBe("sample-01");
     });
 
-    it("filters by region", () => {
-      const filters: SearchFilters = { region: "Global" };
+    it("filters by geography", () => {
+      const filters: SearchFilters = { geography: "Global" };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(1);
@@ -79,7 +79,7 @@ describe("searchUtils", () => {
     it("combines multiple filters", () => {
       const filters: SearchFilters = {
         pathwayType: "Normative",
-        region: "Global",
+        geography: "Global",
       };
       const result = filterScenarios(mockScenarios, filters);
 
@@ -149,19 +149,19 @@ const mockFullScenarios: Scenario[] = rawFullScenarioArray;
 describe("searchUtils - array results", () => {
   //
   // Mock scenario data
-  const regions: string[] = [
+  const geography: string[] = [
     "Global",
     "EU",
     "Americas",
     "Asia Pacific",
-    "SEA",
+    "US",
     "Country-Specific",
   ];
 
   const sectors: string[] = [
     "Land Use",
     "Agriculture",
-    "Real Estate",
+    "Buildings",
     "Industry",
     "Steel",
     "Cement",
@@ -182,9 +182,9 @@ describe("searchUtils - array results", () => {
   //they would not be surface directly in the UI (e.g. "Power, Transport, + 15
   //more")
   describe("filterScenarios for many array values", () => {
-    regions.forEach((region) => {
-      it(`options for regions - ${region}`, () => {
-        const filters: SearchFilters = { region: region };
+    geography.forEach((geography) => {
+      it(`options for geography - ${geography}`, () => {
+        const filters: SearchFilters = { geography: geography };
         const result = filterScenarios(mockFullScenarios, filters);
 
         expect(result.length).toBe(1);

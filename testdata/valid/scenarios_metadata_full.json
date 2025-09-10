@@ -2,7 +2,7 @@
   {
     "id": "scenario-simple-full",
     "name": "Full Enums Scenario",
-    "description": "Scenario with all enum values populated where possible",
+    "description": "Scenario with all enum values populated where possible.",
     "pathwayType": "Normative",
     "modelYearNetzero": 2050,
     "carbonBudget": 500,
@@ -10,15 +10,14 @@
     "modelYearEnd": 2050,
     "modelTempIncrease": 1.5,
     "ssp": "SSP1",
-    "regions": [
+    "geography": [
       "Global",
       "EU",
       "Americas",
       "Asia Pacific",
-      "SEA",
+      "US",
       "Country-Specific"
     ],
-    "country": "US",
     "sectors": [
       {
         "name": "Land Use",
@@ -26,7 +25,7 @@
       },
       { "name": "Agriculture", "technologies": ["Precision Agriculture"] },
       {
-        "name": "Real Estate",
+        "name": "Buildings",
         "technologies": [
           "Energy Efficiency",
           "Smart Grids",
@@ -74,10 +73,18 @@
     ],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "Example Overview",
-    "expertRecommendation": "Example Expert Recommendation",
+    "overview": "Example Overview.",
+    "expertRecommendation": "Example Expert Recommendation.",
+    "metric": [
+      "Emissions Intensity",
+      "Capacity",
+      "Generation",
+      "Technology Mix",
+      "Absolute Emissions",
+      "Carbon Price"
+    ],
     "dataSource": {
-      "description": "Mock Data Source",
+      "description": "Mock Data Source.",
       "url": "https://example.com/data-source",
       "downloadAvailable": true
     }

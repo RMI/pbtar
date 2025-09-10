@@ -18,7 +18,7 @@ const HomePage: React.FC = () => {
     pathwayType: null,
     modelYearEnd: null,
     modelTempIncrease: null,
-    region: null,
+    geography: null,
     sector: null,
     searchTerm: "",
   });
@@ -43,7 +43,7 @@ const HomePage: React.FC = () => {
         filters.modelYearEnd !== prevFiltersRef.current.modelYearEnd ||
         filters.modelTempIncrease !==
           prevFiltersRef.current.modelTempIncrease ||
-        filters.region !== prevFiltersRef.current.region ||
+        filters.geography !== prevFiltersRef.current.geography ||
         filters.sector !== prevFiltersRef.current.sector;
 
       // Scroll to top when filters change
@@ -101,7 +101,7 @@ const HomePage: React.FC = () => {
       pathwayType: null,
       modelYearEnd: null,
       modelTempIncrease: null,
-      region: null,
+      geography: null,
       sector: null,
       searchTerm: "",
     });

@@ -15,7 +15,7 @@ export default tseslint.config(
       globals: globals.browser,
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: "./",
+        tsconfigRootDir: import.meta.dirname, // or __dirname in CJS
       },
     },
     plugins: {
