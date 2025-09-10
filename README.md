@@ -2,7 +2,7 @@
 
 |                   |                                                                                                                                                             Production |                                                                                                                                 Development (`main`) |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------: |
-| **Link**          |                                                                                                **[Production](https://green-pebble-01f5d5c1e.6.azurestaticapps.net/)** |                                                                **[Development](https://green-pebble-01f5d5c1e-main.westus2.6.azurestaticapps.net/)** |
+| **Link**          |                                                                                                **[Production](https://proud-glacier-0f640931e.2.azurestaticapps.net)** |                                                               **[Development](https://proud-glacier-0f640931e-main.westus2.2.azurestaticapps.net/)** |
 | **`node` checks** | [![Node Package Checks](https://github.com/RMI/pbtar/actions/workflows/node.yml/badge.svg?branch=production)](https://github.com/RMI/pbtar/actions/workflows/node.yml) | [![Node Package Checks](https://github.com/RMI/pbtar/actions/workflows/node.yml/badge.svg)](https://github.com/RMI/pbtar/actions/workflows/node.yml) |
 
 ## Running the application
@@ -30,10 +30,10 @@ npm run dev
 
 The application is deployed using Azure Static Web Apps:
 
-- **Production**: [View Production Site](https://green-pebble-01f5d5c1e.6.azurestaticapps.net/)  
+- **Production**: [View Production Site](https://proud-glacier-0f640931e.2.azurestaticapps.net/)  
   _Deployed automatically when changes are merged to the `production` branch_
 
-- **Development**: [View Development Site](https://green-pebble-01f5d5c1e-main.westus2.6.azurestaticapps.net/)  
+- **Development**: [View Development Site](https://proud-glacier-0f640931e-main.westus2.2.azurestaticapps.net/)  
   _Reflects the current state of the `main` branch_
 
 Pull requests automatically deploy to preview environments with URLs provided in the PR comments.
