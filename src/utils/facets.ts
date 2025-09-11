@@ -88,3 +88,26 @@ export function buildOptionsFromValues<T extends string | number>(
 
   return options;
 }
+
+/**
+ * Missing-aware matcher for optional facets.
+ * - selected: array of tokens from FilterDropdown (e.g., ["2°C", "__ABSENT__"])
+ * - value: field value from the scenario (string | number | null | undefined)
+ */
+export function matchesOptionalFacet<T extends string | number>(
+  selected: readonly string[] | undefined,
+  value: T | null | undefined,
+): boolean {
+  const sel = selected ?? [];
+  if (sel.length === 0) return true; // no filter applied
+
+  const wantAbsent = sel.includes(ABSENT_FILTER_TOKEN);
+  const concrete = sel.filter((v) => v !== ABSENT_FILTER_TOKEN);
+
+  const isMissing = value == null;
+  if (wantAbsent && isMissing) return true;
+  if (!isMissing && concrete.length > 0) {
+    return concrete.includes(String(value));
+  }
+  return false;
+}

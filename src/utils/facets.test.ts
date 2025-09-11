@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildOptionsFromValues } from "./facets";
+import { buildOptionsFromValues, matchesOptionalFacet } from "./facets";
 import { ABSENT_FILTER_TOKEN } from "./absent";
 
 describe("buildOptionsFromValues", () => {
@@ -43,5 +43,31 @@ describe("buildOptionsFromValues", () => {
   it("can disable sorting", () => {
     const options = buildOptionsFromValues(["b", "a"], { sort: false });
     expect(options.map((o) => o.label)).toEqual(["b", "a"]);
+  });
+});
+
+describe("matchesOptionalFacet", () => {
+  it("matches absent when __ABSENT__ is selected", () => {
+    expect(matchesOptionalFacet([ABSENT_FILTER_TOKEN], undefined)).toBe(true);
+    expect(matchesOptionalFacet([ABSENT_FILTER_TOKEN], null)).toBe(true);
+    expect(matchesOptionalFacet([ABSENT_FILTER_TOKEN], "2°C")).toBe(false);
+  });
+
+  it("matches concrete values when present", () => {
+    expect(matchesOptionalFacet(["2°C"], "2°C")).toBe(true);
+    expect(matchesOptionalFacet(["2°C"], "1.5°C")).toBe(false);
+    expect(matchesOptionalFacet(["2°C"], undefined)).toBe(false);
+  });
+
+  it("supports mixed selections (concrete + __ABSENT__)", () => {
+    expect(matchesOptionalFacet(["2°C", ABSENT_FILTER_TOKEN], undefined)).toBe(
+      true,
+    );
+    expect(matchesOptionalFacet(["2°C", ABSENT_FILTER_TOKEN], "2°C")).toBe(
+      true,
+    );
+    expect(matchesOptionalFacet(["2°C", ABSENT_FILTER_TOKEN], "1.5°C")).toBe(
+      false,
+    );
   });
 });
