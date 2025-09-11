@@ -5,6 +5,7 @@ import {
   sortGeographiesForDetails,
 } from "./geographyUtils";
 import { matchesOptionalFacet, matchesOptionalFacetAny } from "./facets";
+import { ABSENT_FILTER_TOKEN } from "./absent";
 
 export interface GeoOption {
   value: string; // raw (e.g., "CN", "Europe", "Global")
@@ -61,13 +62,22 @@ export const filterScenarios = (
       return false;
     }
 
-    // Geography filter
-    if (filters.geography) {
-      const want = normalizeGeography(filters.geography).toUpperCase();
-      const hit = (scenario.geography ?? []).some(
-        (g) => normalizeGeography(g).toUpperCase() === want,
+    // Geography filter (array + missing-aware + normalization)
+    {
+      // Single-select dropdown → array of 1 (or [] if none)
+      const selected =
+        filters.geography == null ? [] : [String(filters.geography)];
+      const norm = (s: string) => normalizeGeography(s).toUpperCase();
+      // IMPORTANT: preserve the ABSENT token; only normalize concrete selections
+      const normalizedSelected = selected.map((t) =>
+        t === ABSENT_FILTER_TOKEN ? t : norm(t),
       );
-      if (!hit) return false;
+      const ok = matchesOptionalFacetAny(
+        normalizedSelected,
+        scenario.geography ?? [],
+        (g) => norm(g),
+      );
+      if (!ok) return false;
     }
 
     // Sector filter (array + missing-aware)
