@@ -1,5 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { buildOptionsFromValues, matchesOptionalFacet } from "./facets";
+import {
+  buildOptionsFromValues,
+  matchesOptionalFacet,
+  hasAbsent,
+  withAbsentOption,
+} from "./facets";
+import { ABSENT_FILTER_TOKEN } from "./absent";
+
 import { ABSENT_FILTER_TOKEN } from "./absent";
 
 describe("buildOptionsFromValues", () => {
@@ -70,4 +77,19 @@ describe("matchesOptionalFacet", () => {
       false,
     );
   });
+});
+
+it("hasAbsent detects null/undefined", () => {
+  expect(hasAbsent([1, 2, null])).toBe(true);
+  expect(hasAbsent(["a", undefined])).toBe(true);
+  expect(hasAbsent([0, ""])).toBe(false);
+});
+
+it("withAbsentOption appends a None option only when absent exists", () => {
+  const base = [{ label: "A", value: "A" }];
+  const withNone = withAbsentOption(base, true);
+  expect(withNone.some((o) => o.value === ABSENT_FILTER_TOKEN)).toBe(true);
+
+  const unchanged = withAbsentOption(base, false);
+  expect(unchanged).toHaveLength(1);
 });

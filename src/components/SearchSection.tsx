@@ -2,15 +2,13 @@ import React from "react";
 import SearchBox from "./SearchBox";
 import FilterDropdown from "./FilterDropdown";
 import { scenariosData } from "../data/scenariosData";
-import {
-  SearchFilters,
-  PathwayType,
-  YearTarget,
-  Geography,
-  Sector,
-} from "../types";
+import { SearchFilters, Geography } from "../types";
 import { makeGeographyOptions } from "../utils/searchUtils";
-import { buildOptionsFromValues } from "../utils/facets";
+import {
+  buildOptionsFromValues,
+  hasAbsent,
+  withAbsentOption,
+} from "../utils/facets";
 
 interface SearchSectionProps {
   filters: SearchFilters;
@@ -30,23 +28,32 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   onSearch,
   onClear,
 }) => {
-  const categories: PathwayType[] = Array.from(
-    new Set(scenariosData.map((d) => d.pathwayType)),
-  ).sort() as PathwayType[];
-  const years: YearTarget[] = Array.from(
-    new Set(scenariosData.map((d) => d.modelYearEnd)),
-  ).sort() as YearTarget[];
+  const pathwayTypeOptions = buildOptionsFromValues(
+    scenariosData.map((d) => d.pathwayType),
+  );
+
+  const modelYearEndOptions = buildOptionsFromValues(
+    scenariosData.map((d) => d.modelYearEnd),
+  );
+
   const temperatureOptions = buildOptionsFromValues(
     scenariosData.map((d) => d.modelTempIncrease),
-    { forceIncludeAbsent: true },
   );
-  const geography: Geography[] = React.useMemo(
+
+  const geographyOptionsRaw: Geography[] = React.useMemo(
     () => makeGeographyOptions(scenariosData),
     [scenariosData],
   ) as Geography[];
-  const sectors: Sector[] = Array.from(
-    new Set(scenariosData.flatMap((d) => d.sectors.map((s) => s.name))),
-  ).sort();
+  const sawAbsentGeography = hasAbsent(scenariosData.map((d) => d.geography));
+  const geographyOptions = withAbsentOption(
+    geographyOptionsRaw,
+    sawAbsentGeography,
+  );
+
+  const sectorOptions = buildOptionsFromValues(
+    scenariosData.flatMap((d) => d.sectors.map((s) => s.name)),
+  );
+
   const areFiltersApplied =
     (filters.searchTerm ||
       filters.pathwayType ||
@@ -69,14 +76,14 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       <div className="flex flex-wrap gap-2">
         <FilterDropdown<string>
           label="Pathway Type"
-          options={categories}
+          options={pathwayTypeOptions}
           selectedValue={filters.pathwayType}
           onChange={(value) => onFilterChange("pathwayType", value)}
         />
 
         <FilterDropdown<string>
           label="Target Year"
-          options={years}
+          options={modelYearEndOptions}
           selectedValue={filters.modelYearEnd}
           onChange={(value) => onFilterChange("modelYearEnd", value)}
         />
@@ -90,14 +97,14 @@ const SearchSection: React.FC<SearchSectionProps> = ({
 
         <FilterDropdown<string>
           label="Geography"
-          options={geography}
+          options={geographyOptions}
           selectedValue={filters.geography}
           onChange={(value) => onFilterChange("geography", value)}
         />
 
         <FilterDropdown<string>
           label="Sector"
-          options={sectors}
+          options={sectorOptions}
           selectedValue={filters.sector}
           onChange={(value) => onFilterChange("sector", value)}
         />

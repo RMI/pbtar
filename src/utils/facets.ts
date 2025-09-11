@@ -111,3 +111,26 @@ export function matchesOptionalFacet<T extends string | number>(
   }
   return false;
 }
+
+// Detect if any value is null/undefined in a list (for auto “None”)
+export function hasAbsent<T>(values: Array<T | null | undefined>): boolean {
+  return values.some((v) => v == null);
+}
+
+/**
+ * If `sawAbsent` is true, append a “None” option unless it’s already present.
+ * Useful when you already have label/value options (e.g., Geography) and
+ * only need to add the virtual None bucket when data is actually missing.
+ */
+export function withAbsentOption(
+  options: LabeledOption[],
+  sawAbsent: boolean,
+  noneLabel?: string,
+): LabeledOption[] {
+  if (!sawAbsent) return options;
+  if (options.some((o) => o.value === ABSENT_FILTER_TOKEN)) return options;
+  return [
+    ...options,
+    { label: noneLabel ?? "None", value: ABSENT_FILTER_TOKEN },
+  ];
+}
