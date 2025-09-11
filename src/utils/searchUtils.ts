@@ -4,7 +4,7 @@ import {
   geographyLabel,
   sortGeographiesForDetails,
 } from "./geographyUtils";
-import { matchesOptionalFacet } from "./facets";
+import { matchesOptionalFacet, matchesOptionalFacetAny } from "./facets";
 
 export interface GeoOption {
   value: string; // raw (e.g., "CN", "Europe", "Global")
@@ -70,12 +70,15 @@ export const filterScenarios = (
       if (!hit) return false;
     }
 
-    // Sector filter
-    if (
-      filters.sector &&
-      !scenario.sectors.some((s) => s.name === filters.sector)
-    ) {
-      return false;
+    // Sector filter (array + missing-aware)
+    {
+      const selected = filters.sector == null ? [] : [String(filters.sector)];
+      const ok = matchesOptionalFacetAny(
+        selected,
+        scenario.sectors ?? [],
+        (s) => s.name,
+      );
+      if (!ok) return false;
     }
 
     // Search term

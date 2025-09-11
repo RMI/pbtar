@@ -9,6 +9,7 @@ import {
   hasAbsent,
   withAbsentOption,
 } from "../utils/facets";
+import { ABSENT_FILTER_TOKEN } from "../utils/absent";
 
 interface SearchSectionProps {
   filters: SearchFilters;
@@ -50,9 +51,16 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     sawAbsentGeography,
   );
 
-  const sectorOptions = buildOptionsFromValues(
-    scenariosData.flatMap((d) => d.sectors.map((s) => s.name)),
+  const sectorNames = scenariosData.flatMap(
+    (d) => d.sectors?.map((s) => s.name) ?? [],
   );
+  const sectorOptionsBase = buildOptionsFromValues(sectorNames);
+  const sawAbsentSectors = scenariosData.some(
+    (d) => !d.sectors || d.sectors.length === 0,
+  );
+  const sectorOptions = sawAbsentSectors
+    ? [...sectorOptionsBase, { label: "None", value: ABSENT_FILTER_TOKEN }]
+    : sectorOptionsBase;
 
   const areFiltersApplied =
     (filters.searchTerm ||

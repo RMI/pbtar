@@ -112,6 +112,31 @@ export function matchesOptionalFacet<T extends string | number>(
   return false;
 }
 
+/**
+ * Missing-aware matcher for ARRAY facets (e.g., sectors[]).
+ * - selected: tokens from a FilterDropdown (e.g., ["Power", "__ABSENT__"])
+ * - values: array of scenario values (strings/objects), or null/undefined
+ * - toToken: map each item to a compare string (e.g., s => s.name)
+ */
+export function matchesOptionalFacetAny<T>(
+  selected: readonly string[] | undefined,
+  values: readonly T[] | null | undefined,
+  toToken: (v: T) => string | number,
+): boolean {
+  const sel = selected ?? [];
+  if (sel.length === 0) return true; // no filter applied
+
+  const wantAbsent = sel.includes(ABSENT_FILTER_TOKEN);
+  const concrete = sel.filter((v) => v !== ABSENT_FILTER_TOKEN).map(String);
+
+  const missing = values == null || values.length === 0;
+  if (wantAbsent && missing) return true;
+  if (concrete.length === 0) return false;
+
+  const tokens = (values ?? []).map((v) => String(toToken(v)));
+  return tokens.some((t) => concrete.includes(t));
+}
+
 // Detect if any value is null/undefined in a list (for auto “None”)
 export function hasAbsent<T>(values: Array<T | null | undefined>): boolean {
   return values.some((v) => v == null);
