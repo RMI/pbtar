@@ -4,6 +4,7 @@ import {
   geographyLabel,
   sortGeographiesForDetails,
 } from "./geographyUtils";
+import { matchesOptionalFacet } from "./facets";
 
 export interface GeoOption {
   value: string; // raw (e.g., "CN", "Europe", "Global")
@@ -43,10 +44,14 @@ export const filterScenarios = (
       return false;
     }
 
-    // Target temperature filter
+    // Target temperature filter (missing-aware: supports "__ABSENT__")
     if (
-      filters.modelTempIncrease &&
-      scenario.modelTempIncrease !== filters.modelTempIncrease
+      !matchesOptionalFacet(
+        filters.modelTempIncrease == null
+          ? [] // no selection => don't filter by temperature
+          : [String(filters.modelTempIncrease)], // single-select dropdown -> 1 token
+        scenario.modelTempIncrease,
+      )
     ) {
       return false;
     }

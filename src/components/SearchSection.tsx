@@ -6,11 +6,11 @@ import {
   SearchFilters,
   PathwayType,
   YearTarget,
-  TemperatureTarget,
   Geography,
   Sector,
 } from "../types";
 import { makeGeographyOptions } from "../utils/searchUtils";
+import { buildOptionsFromValues } from "../utils/facets";
 
 interface SearchSectionProps {
   filters: SearchFilters;
@@ -36,9 +36,10 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   const years: YearTarget[] = Array.from(
     new Set(scenariosData.map((d) => d.modelYearEnd)),
   ).sort() as YearTarget[];
-  const temperatures: TemperatureTarget[] = Array.from(
-    new Set(scenariosData.map((d) => d.modelTempIncrease)),
-  ).sort() as TemperatureTarget[];
+  const temperatureOptions = buildOptionsFromValues(
+    scenariosData.map((d) => d.modelTempIncrease),
+    { forceIncludeAbsent: true },
+  );
   const geography: Geography[] = React.useMemo(
     () => makeGeographyOptions(scenariosData),
     [scenariosData],
@@ -82,7 +83,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
 
         <FilterDropdown<number>
           label="Temperature (°C)"
-          options={temperatures}
+          options={temperatureOptions}
           selectedValue={filters.modelTempIncrease}
           onChange={(value) => onFilterChange("modelTempIncrease", value)}
         />
