@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import HomePage from "./HomePage";
@@ -54,79 +54,87 @@ describe("HomePage component", () => {
 });
 
 describe("HomePage integration: dropdowns render and filter with 'None'", () => {
-// IMPORTANT: we dynamically render HomePage AFTER mocking scenariosData,
-// so these tests don't interfere with any existing unit tests in this file.
-let HomePageUnderTest: React.ComponentType<any>;
+  // IMPORTANT: we dynamically render HomePage AFTER mocking scenariosData,
+  // so these tests don't interfere with any existing unit tests in this file.
+  let HomePageUnderTest: React.ComponentType<unknown>;
 
-const fixtures = [
-  {
-    id: "A",
-    name: "Scenario A (no sectors, no geo, no temp)",
-    sectors: undefined,          // -> Sector "None"
-    geography: undefined,        // -> Geography "None"
-    modelTempIncrease: undefined,// -> Temperature "None"
-    pathwayType: "Net Zero",
-    modelYearEnd: 2050,
-  },
-  {
-    id: "B",
-    name: "Scenario B (Power, Europe, 2°C)",
-    sectors: [{ name: "Power" }],
-    geography: ["Europe"],
-    modelTempIncrease: "2°C",
-    pathwayType: "Net Zero",
-    modelYearEnd: 2050,
-  },
-  {
-    id: "C",
-    name: "Scenario C (empty sectors[], empty geo[], 1.5°C)",
-    sectors: [],                 // -> Sector "None"
-    geography: [],               // -> Geography "None"
-    modelTempIncrease: "1.5°C",
-    pathwayType: "NZi2050",
-    modelYearEnd: 2040,
-  },
-  {
-    id: "D",
-    name: "Scenario D (Industry, Asia, no temp)",
-    sectors: [{ name: "Industry" }],
-    geography: ["Asia"],
-    modelTempIncrease: undefined,// -> Temperature "None"
-    pathwayType: "BAU",
-    modelYearEnd: 2030,
-  },
-] as const;
+  // Use a typed userEvent instance to avoid "no-unsafe-call" on user interactions
+  let u: ReturnType<typeof userEvent.setup>;
 
-async function mountWithFixtures() {
-  // Reset module graph so our mock applies to the next import.
-  vi.resetModules();
-  // Mock BEFORE importing HomePage
-  vi.doMock("../data/scenariosData", () => ({ scenariosData: fixtures }), { virtual: true });
-  HomePageUnderTest = (await import("./HomePage")).default;
-  render(<HomePageUnderTest />);
-}
+  const fixtures = [
+    {
+      id: "A",
+      name: "Scenario A (no sectors, no geo, no temp)",
+      sectors: undefined, // -> Sector "None"
+      geography: undefined, // -> Geography "None"
+      modelTempIncrease: undefined, // -> Temperature "None"
+      pathwayType: "Net Zero",
+      modelYearEnd: 2050,
+    },
+    {
+      id: "B",
+      name: "Scenario B (Power, Europe, 2°C)",
+      sectors: [{ name: "Power" }],
+      geography: ["Europe"],
+      modelTempIncrease: "2°C",
+      pathwayType: "Net Zero",
+      modelYearEnd: 2050,
+    },
+    {
+      id: "C",
+      name: "Scenario C (empty sectors[], empty geo[], 1.5°C)",
+      sectors: [], // -> Sector "None"
+      geography: [], // -> Geography "None"
+      modelTempIncrease: "1.5°C",
+      pathwayType: "NZi2050",
+      modelYearEnd: 2040,
+    },
+    {
+      id: "D",
+      name: "Scenario D (Industry, Asia, no temp)",
+      sectors: [{ name: "Industry" }],
+      geography: ["Asia"],
+      modelTempIncrease: undefined, // -> Temperature "None"
+      pathwayType: "BAU",
+      modelYearEnd: 2030,
+    },
+  ] as const;
 
-async function openDropdown(labelRegex: RegExp) {
-  // Assumes the FilterDropdown trigger is a button with visible label text.
-  // If your triggers aren't labeled, consider adding aria-labels for stability.
-  const trigger = await screen.findByRole("button", { name: labelRegex });
-  await userEvent.click(trigger);
-  return trigger;
-}
+  async function mountWithFixtures(): Promise<void> {
+    // Reset module graph so our mock applies to the next import.
+    vi.resetModules();
+    // Mock BEFORE importing HomePage
+    vi.doMock("../data/scenariosData", () => ({ scenariosData: fixtures }), {
+      virtual: true,
+    });
+    HomePageUnderTest = (await import("./HomePage")).default;
+    render(<HomePageUnderTest />);
+  }
 
-async function selectOption(optionText: string) {
-  const opt = await screen.findByText(optionText, {}, { timeout: 2000 });
-  await userEvent.click(opt);
-}
+  async function openDropdown(labelRegex: RegExp): Promise<HTMLButtonElement> {
+    // Assumes the FilterDropdown trigger is a button with visible label text.
+    // If your triggers aren't labeled, consider adding aria-labels for stability.
+    const trigger = await screen.findByRole("button", { name: labelRegex });
+    await u.click(trigger);
+    return trigger;
+  }
 
-function expectVisible(names: string[]) {
-  for (const n of names) expect(screen.getByText(n)).toBeInTheDocument();
-}
-function expectHidden(names: string[]) {
-  for (const n of names) expect(screen.queryByText(n)).not.toBeInTheDocument();
-}
+  async function selectOption(optionText: string): Promise<void> {
+    const opt = await screen.findByText(optionText, {}, { timeout: 2000 });
+    await u.click(opt);
+  }
 
+  function expectVisible(names: string[]) {
+    for (const n of names) expect(screen.getByText(n)).toBeInTheDocument();
+  }
+  function expectHidden(names: string[]) {
+    for (const n of names)
+      expect(screen.queryByText(n)).not.toBeInTheDocument();
+  }
+
+  // Vitest awaits async hooks; this is safe in tests.
   beforeEach(async () => {
+    u = userEvent.setup();
     await mountWithFixtures();
   });
 
@@ -175,6 +183,20 @@ function expectHidden(names: string[]) {
     expectHidden([
       "Scenario B (Power, EU, 2°C)",
       "Scenario C (empty sectors[], empty geo[], 1.5°C)",
+    ]);
+  });
+
+  // Concrete selection (requested): pick a real value and ensure only matching scenarios remain
+  it("Sector: selecting a concrete option (Power) filters correctly", async () => {
+    await openDropdown(/sector/i);
+    // Select a real sector option
+    await selectOption("Power");
+    // Only Scenario B has sector "Power"
+    expectVisible(["Scenario B (Power, Europe, 2°C)"]);
+    expectHidden([
+      "Scenario A (no sectors, no geo, no temp)",
+      "Scenario C (empty sectors[], empty geo[], 1.5°C)",
+      "Scenario D (Industry, Asia, no temp)",
     ]);
   });
 });
