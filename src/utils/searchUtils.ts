@@ -32,17 +32,22 @@ export const filterScenarios = (
 ): Scenario[] => {
   return scenarios.filter((scenario) => {
     // Pathway type filter
-    if (filters.pathwayType && scenario.pathwayType !== filters.pathwayType) {
+    if (
+      !matchesOptionalFacet(
+        filters.pathwayType == null ? [] : [String(filters.pathwayType)],
+        scenario.pathwayType,
+      )
+    )
       return false;
-    }
 
     // Target year filter
     if (
-      filters.modelYearEnd &&
-      scenario.modelYearEnd !== filters.modelYearEnd
-    ) {
+      !matchesOptionalFacet(
+        filters.modelYearEnd == null ? [] : [String(filters.modelYearEnd)],
+        scenario.modelYearEnd,
+      )
+    )
       return false;
-    }
 
     // Target temperature filter (missing-aware: supports "__ABSENT__")
     if (
