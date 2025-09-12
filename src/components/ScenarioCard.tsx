@@ -123,12 +123,14 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
       <div className="p-5 flex flex-col h-full">
         <div className="mb-4">
-          <h2 className="text-xl font-semibold text-bluespruce mb-2">
-            <HighlightedText
-              text={scenario.name}
-              searchTerm={searchTerm}
-            />
-          </h2>
+          <Link to={`/scenario/${scenario.id}`}>
+            <h2 className="text-xl font-semibold text-bluespruce mb-2">
+              <HighlightedText
+                text={scenario.name}
+                searchTerm={searchTerm}
+              />
+            </h2>
+          </Link>
           <p className="text-rmigray-600 text-sm line-clamp-2">
             <HighlightedText
               text={scenario.description}
