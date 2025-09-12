@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState, useEffect, RefObject } from "react";
 import { Link } from "react-router-dom";
-import Badge from "./Badge";
+import { BadgeMaybeAbsent } from "./Badge";
 import GeographyBadge from "../components/GeographyBadge";
 import {
   geographyLabel,
@@ -142,7 +142,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             Pathway type:
           </p>
           <div className="flex flex-wrap gap-2">
-            <Badge
+            <BadgeMaybeAbsent
               text={highlightTextIfSearchMatch(scenario.pathwayType)}
               tooltip={getPathwayTypeTooltip(
                 scenario.pathwayType as PathwayType,
@@ -155,18 +155,19 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Targets:</p>
           <div className="flex flex-wrap">
-            <Badge
+            <BadgeMaybeAbsent
               text={highlightTextIfSearchMatch(scenario.modelYearEnd)}
               variant="year"
             />
-            {scenario.modelTempIncrease && (
-              <Badge
-                text={highlightTextIfSearchMatch(
-                  `${scenario.modelTempIncrease.toString()}°C`,
-                )}
-                variant="temperature"
-              />
-            )}
+            <BadgeMaybeAbsent
+              text={scenario.modelTempIncrease}
+              variant="temperature"
+              toLabel={(t) => {
+                const s = String(t);
+                return s.endsWith("°C") ? s : `${s}°C`;
+              }}
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
+            />
           </div>
         </div>
 
@@ -225,7 +226,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             ref={sectorsContainerRef}
           >
             {sortedSectors.slice(0, visibleSectorsCount).map((sector) => (
-              <Badge
+              <BadgeMaybeAbsent
                 key={sector.name}
                 text={highlightTextIfSearchMatch(sector.name)}
                 tooltip={getSectorTooltip(sector.name)}
