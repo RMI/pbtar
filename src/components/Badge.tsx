@@ -101,7 +101,8 @@ export function BadgeMaybeAbsent<T>({
     base = text as React.ReactNode;
   }
 
-  const content = renderLabel ? renderLabel(String(base), absent) : base;
+  const content =
+    renderLabel && typeof base === "string" ? renderLabel(base, absent) : base;
   return (
     <Badge
       {...rest}
