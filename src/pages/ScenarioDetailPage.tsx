@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Markdown from "../components/Markdown";
 import { scenariosData } from "../data/scenariosData";
 import { Scenario, PathwayType } from "../types";
-import Badge from "../components/Badge";
+import { BadgeMaybeAbsent } from "../components/Badge";
 import GeographyBadge from "../components/GeographyBadge";
 import { sortGeographiesForDetails } from "../utils/geographyUtils";
 import { ExternalLink, ArrowLeft } from "lucide-react";
@@ -83,23 +83,21 @@ const ScenarioDetailPage: React.FC = () => {
           <p className="text-white mb-4">{scenario.description}</p>
 
           <div className="flex flex-wrap gap-2 mb-4">
-            <Badge
+            <BadgeMaybeAbsent
               text={scenario.pathwayType}
               tooltip={getPathwayTypeTooltip(
                 scenario.pathwayType as PathwayType,
               )}
               variant="pathwayType"
             />
-            <Badge
+            <BadgeMaybeAbsent
               text={scenario.modelYearEnd}
               variant="year"
             />
-            {scenario.modelTempIncrease && (
-              <Badge
-                text={`${scenario.modelTempIncrease}°C`}
-                variant="temperature"
-              />
-            )}
+            <BadgeMaybeAbsent
+              text={`${scenario.modelTempIncrease}°C`}
+              variant="temperature"
+            />
           </div>
 
           <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
@@ -184,7 +182,7 @@ const ScenarioDetailPage: React.FC = () => {
                 </h3>
                 <div className="flex flex-wrap">
                   {scenario.sectors.map((sector, index) => (
-                    <Badge
+                    <BadgeMaybeAbsent
                       key={index}
                       text={sector.name}
                       tooltip={getSectorTooltip(sector.name)}

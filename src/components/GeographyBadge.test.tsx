@@ -53,4 +53,25 @@ describe("GeographyBadge", () => {
     rerender(<GeographyBadge text={" \u200B "} />); // zero-width space
     expect(container).toBeEmptyDOMElement();
   });
+
+  it("renders processed label", () => {
+    render(<GeographyBadge text=" Europe " />);
+    expect(screen.getByText("Europe")).toBeInTheDocument();
+  });
+
+  it("renders null for empty normalized text", () => {
+    const { container } = render(<GeographyBadge text="   " />);
+    expect(container).toBeEmptyDOMElement();
+  });
+
+  it("respects custom display ReactNode", () => {
+    render(
+      <GeographyBadge
+        text="France"
+        display={<span data-testid="X">FR</span>}
+      />,
+    );
+    expect(screen.getByTestId("X")).toBeInTheDocument();
+    expect(screen.getByText("FR")).toBeInTheDocument();
+  });
 });

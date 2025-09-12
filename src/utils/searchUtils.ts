@@ -4,6 +4,8 @@ import {
   geographyLabel,
   sortGeographiesForDetails,
 } from "./geographyUtils";
+import { matchesOptionalFacet, matchesOptionalFacetAny } from "./facets";
+import { ABSENT_FILTER_TOKEN } from "./absent";
 
 export interface GeoOption {
   value: string; // raw (e.g., "CN", "Europe", "Global")
@@ -31,41 +33,62 @@ export const filterScenarios = (
 ): Scenario[] => {
   return scenarios.filter((scenario) => {
     // Pathway type filter
-    if (filters.pathwayType && scenario.pathwayType !== filters.pathwayType) {
+    if (
+      !matchesOptionalFacet(
+        filters.pathwayType == null ? [] : [String(filters.pathwayType)],
+        scenario.pathwayType,
+      )
+    )
       return false;
-    }
 
     // Target year filter
     if (
-      filters.modelYearEnd &&
-      scenario.modelYearEnd !== filters.modelYearEnd
-    ) {
+      !matchesOptionalFacet(
+        filters.modelYearEnd == null ? [] : [String(filters.modelYearEnd)],
+        scenario.modelYearEnd,
+      )
+    )
       return false;
-    }
 
-    // Target temperature filter
+    // Target temperature filter (missing-aware: supports "__ABSENT__")
     if (
-      filters.modelTempIncrease &&
-      scenario.modelTempIncrease !== filters.modelTempIncrease
+      !matchesOptionalFacet(
+        filters.modelTempIncrease == null
+          ? [] // no selection => don't filter by temperature
+          : [String(filters.modelTempIncrease)], // single-select dropdown -> 1 token
+        scenario.modelTempIncrease,
+      )
     ) {
       return false;
     }
 
-    // Geography filter
-    if (filters.geography) {
-      const want = normalizeGeography(filters.geography).toUpperCase();
-      const hit = (scenario.geography ?? []).some(
-        (g) => normalizeGeography(g).toUpperCase() === want,
+    // Geography filter (array + missing-aware + normalization)
+    {
+      // Single-select dropdown → array of 1 (or [] if none)
+      const selected =
+        filters.geography == null ? [] : [String(filters.geography)];
+      const norm = (s: string) => normalizeGeography(s).toUpperCase();
+      // IMPORTANT: preserve the ABSENT token; only normalize concrete selections
+      const normalizedSelected = selected.map((t) =>
+        t === ABSENT_FILTER_TOKEN ? t : norm(t),
       );
-      if (!hit) return false;
+      const ok = matchesOptionalFacetAny(
+        normalizedSelected,
+        scenario.geography ?? [],
+        (g) => norm(g),
+      );
+      if (!ok) return false;
     }
 
-    // Sector filter
-    if (
-      filters.sector &&
-      !scenario.sectors.some((s) => s.name === filters.sector)
-    ) {
-      return false;
+    // Sector filter (array + missing-aware)
+    {
+      const selected = filters.sector == null ? [] : [String(filters.sector)];
+      const ok = matchesOptionalFacetAny(
+        selected,
+        scenario.sectors ?? [],
+        (s) => s.name,
+      );
+      if (!ok) return false;
     }
 
     // Search term
