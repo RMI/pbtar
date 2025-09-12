@@ -33,7 +33,7 @@ describe("SearchSection", () => {
     expect(screen.getByText("Pathway Type")).toBeInTheDocument();
     expect(screen.getByText("Target Year")).toBeInTheDocument();
     expect(screen.getByText("Temperature (°C)")).toBeInTheDocument();
-    expect(screen.getByText("Region")).toBeInTheDocument();
+    expect(screen.getByText("Geography")).toBeInTheDocument();
     expect(screen.getByText("Sector")).toBeInTheDocument();
   });
 
@@ -49,7 +49,7 @@ describe("SearchSection", () => {
     expect(screen.getByText("Agriculture")).toBeInTheDocument();
     expect(screen.getByText("Land Use")).toBeInTheDocument();
     expect(screen.getByText("Steel")).toBeInTheDocument();
-    expect(screen.getByText("Real Estate")).toBeInTheDocument();
+    expect(screen.getByText("Buildings")).toBeInTheDocument();
   });
 
   it("calls onFilterChange with the correct sector name when selected", () => {

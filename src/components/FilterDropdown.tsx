@@ -1,11 +1,26 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown, X } from "lucide-react";
 
-interface FilterDropdownProps<T extends string | number> {
+type Primitive = string | number;
+type Option<T extends Primitive> = T | { value: T; label: string };
+
+interface FilterDropdownProps<T extends Primitive> {
   label: string;
-  options: T[];
-  selectedValue: T | null;
+  options: Array<Option<T>>;
+  selectedValue: T | null | undefined;
   onChange: (value: T | null) => void;
+  placeholder?: string; // optional
+}
+
+function normalizeOptions<T extends Primitive>(
+  options: Array<Option<T>>,
+): Array<{ value: T; label: string }> {
+  return options.map(
+    (o) =>
+      typeof o === "object" && o !== null && "value" in o
+        ? o
+        : { value: o, label: String(o) }, // ← no `as T`
+  );
 }
 
 const FilterDropdown = <T extends string | number>({
@@ -26,6 +41,16 @@ const FilterDropdown = <T extends string | number>({
     e.stopPropagation();
     onChange(null);
   };
+
+  // turn whatever comes in (strings/numbers or {value,label}) into a uniform shape
+  const opts = React.useMemo(() => normalizeOptions(options), [options]);
+
+  // show the pretty label in the button when a value is selected
+  const displaySelected =
+    selectedValue != null
+      ? (opts.find((o) => o.value === selectedValue)?.label ??
+        String(selectedValue))
+      : label;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -56,7 +81,7 @@ const FilterDropdown = <T extends string | number>({
             : "text-rmigray-700 bg-white border-neutral-300 hover:bg-neutral-100"
         } transition-colors duration-150`}
       >
-        <span>{selectedValue != null ? String(selectedValue) : label}</span>
+        <span>{displaySelected}</span>
         {selectedValue !== null ? (
           <X
             size={16}
@@ -73,17 +98,17 @@ const FilterDropdown = <T extends string | number>({
 
       {isOpen && (
         <div className="absolute z-10 mt-1 w-full bg-white rounded-md shadow-lg border border-neutral-200 py-1 max-h-60 overflow-auto">
-          {options.map((option) => (
+          {opts.map((option) => (
             <div
-              key={String(option)}
-              onClick={() => handleSelect(option)}
+              key={String(option.value)}
+              onClick={() => handleSelect(option.value)}
               className={`px-4 py-2 text-sm cursor-pointer ${
-                option === selectedValue
+                option.value === selectedValue
                   ? "bg-energy-100 text-energy-800"
                   : "text-rmigray-700 hover:bg-neutral-100"
               }`}
             >
-              {String(option)}
+              {String(option.label)}
             </div>
           ))}
         </div>

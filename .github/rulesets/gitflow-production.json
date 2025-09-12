@@ -40,7 +40,19 @@
         "do_not_enforce_on_create": false,
         "required_status_checks": [
           {
+            "context": "Build and Release / Build and Release",
+            "integration_id": 15368
+          },
+          {
+            "context": "Deploy to SWA / Build and Deploy Job",
+            "integration_id": 15368
+          },
+          {
             "context": "Formatting / Run Prettier Check",
+            "integration_id": 15368
+          },
+          {
+            "context": "JSON Schema Validation / Check Schema Docs",
             "integration_id": 15368
           },
           {
@@ -49,6 +61,10 @@
           },
           {
             "context": "Linting / Run ESLint",
+            "integration_id": 15368
+          },
+          {
+            "context": "Unit Tests / Run unit tests",
             "integration_id": 15368
           }
         ]

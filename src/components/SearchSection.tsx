@@ -7,9 +7,10 @@ import {
   PathwayType,
   YearTarget,
   TemperatureTarget,
-  Region,
+  Geography,
   Sector,
 } from "../types";
+import { makeGeographyOptions } from "../utils/searchUtils";
 
 interface SearchSectionProps {
   filters: SearchFilters;
@@ -38,16 +39,17 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   const temperatures: TemperatureTarget[] = Array.from(
     new Set(scenariosData.map((d) => d.modelTempIncrease)),
   ).sort() as TemperatureTarget[];
-  const regions: Region[] = Array.from(
-    new Set(scenariosData.map((d) => d.regions).flat()),
-  ).sort() as Region[];
+  const geography: Geography[] = React.useMemo(
+    () => makeGeographyOptions(scenariosData),
+    [scenariosData],
+  ) as Geography[];
   const sectors: Sector[] = Array.from(
     new Set(scenariosData.flatMap((d) => d.sectors.map((s) => s.name))),
   ).sort();
   const areFiltersApplied =
     (filters.searchTerm ||
       filters.pathwayType ||
-      filters.region ||
+      filters.geography ||
       filters.sector ||
       filters.modelYearEnd ||
       filters.modelTempIncrease) !== null;
@@ -86,10 +88,10 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         />
 
         <FilterDropdown<string>
-          label="Region"
-          options={regions}
-          selectedValue={filters.region}
-          onChange={(value) => onFilterChange("region", value)}
+          label="Geography"
+          options={geography}
+          selectedValue={filters.geography}
+          onChange={(value) => onFilterChange("geography", value)}
         />
 
         <FilterDropdown<string>

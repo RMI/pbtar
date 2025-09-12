@@ -60,11 +60,39 @@ describe("Badge component", () => {
     expect(badge).toHaveClass("border-rmiblue-200");
   });
 
-  it("applies region styling when variant is 'region'", () => {
+  it("applies geography styling when variant is 'geographyGlobal'", () => {
     const { container } = render(
       <Badge
         text="Global"
-        variant="region"
+        variant="geographyGlobal"
+      />,
+    );
+    const badge = container.firstChild as HTMLElement;
+
+    expect(badge).toHaveClass("bg-pinishgreen-800");
+    expect(badge).toHaveClass("text-pinishgreen-100");
+    expect(badge).toHaveClass("border-pinishgreen-100");
+  });
+
+  it("applies geography styling when variant is 'geographyRegion'", () => {
+    const { container } = render(
+      <Badge
+        text="RegionName"
+        variant="geographyRegion"
+      />,
+    );
+    const badge = container.firstChild as HTMLElement;
+
+    expect(badge).toHaveClass("bg-pinishgreen-200");
+    expect(badge).toHaveClass("text-pinishgreen-800");
+    expect(badge).toHaveClass("border-pinishgreen-800");
+  });
+
+  it("applies geography styling when variant is 'geographyCountry'", () => {
+    const { container } = render(
+      <Badge
+        text="CountryName"
+        variant="geographyCountry"
       />,
     );
     const badge = container.firstChild as HTMLElement;
