@@ -8,8 +8,6 @@ import {
 } from "./facets";
 import { ABSENT_FILTER_TOKEN } from "./absent";
 
-import { ABSENT_FILTER_TOKEN } from "./absent";
-
 describe("buildOptionsFromValues", () => {
   it("dedupes and sorts by label by default", () => {
     const options = buildOptionsFromValues(["b", "a", "b"]);
