@@ -22,6 +22,14 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.base_ref }}
 
+      - name: Ensure tags are available
+        run: |
+          git fetch --tags --force --prune
+
+      - name: Ensure PR head is available
+        run: |
+          git fetch --tags --force --prune "origin/$HEAD_BRANCH"
+
       - name: Merge PR branch to PR target
         env:
           HEAD_BRANCH: ${{ github.head_ref }}
