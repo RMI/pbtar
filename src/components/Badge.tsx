@@ -1,5 +1,6 @@
 import React from "react";
 import TextWithTooltip from "./TextWithTooltip";
+import { coalesceOptional, isAbsent } from "../utils/absent";
 
 interface BadgeProps {
   text: React.ReactNode;
@@ -13,12 +14,14 @@ interface BadgeProps {
     | "geographyRegion"
     | "geographyCountry"
     | "sector";
+  className?: string;
 }
 
 const Badge: React.FC<BadgeProps> = ({
   text,
   tooltip,
   variant = "default",
+  className,
 }) => {
   const getVariantStyles = () => {
     switch (variant) {
@@ -41,7 +44,10 @@ const Badge: React.FC<BadgeProps> = ({
     }
   };
 
-  const badgeStyles = `inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getVariantStyles()} mr-2 mb-1`;
+  const badgeStylesBase = `inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getVariantStyles()} mr-2 mb-1`;
+  const badgeStyles = className
+    ? `${badgeStylesBase} ${className}`
+    : badgeStylesBase;
 
   // If no tooltip, just return the basic badge
   // If no tooltip, just return the basic badge
@@ -60,3 +66,47 @@ const Badge: React.FC<BadgeProps> = ({
 };
 
 export default Badge;
+// --- value-aware helpers (schema-agnostic) --------------------
+
+export type BadgeValueProps<T> = React.ComponentProps<typeof Badge> & {
+  /** Scalar value to show inside the badge. If null/undefined -> renders "None". */
+  text: T | null | undefined;
+  /** Optional labeler for non-absent values (e.g., pretty format). */
+  toLabel?: (v: T) => string;
+  /** Visible text for the "None" case (default "None"). */
+  noneLabel?: string;
+  /** Optional decorator for the final label (e.g., highlight search matches). */
+  renderLabel?: (label: string, isAbsent: boolean) => React.ReactNode;
+};
+
+export function BadgeMaybeAbsent<T>({
+  text,
+  toLabel,
+  noneLabel,
+  renderLabel,
+  ...rest
+}: BadgeValueProps<T>) {
+  const normalized = coalesceOptional(text as T | null | undefined);
+  const absent = isAbsent(normalized);
+
+  let base: React.ReactNode;
+  if (absent) {
+    base = noneLabel ?? "None";
+  } else if (toLabel) {
+    base = toLabel(text as T);
+  } else if (typeof text === "string" || typeof text === "number") {
+    base = String(text);
+  } else {
+    // Already a React node (e.g., <HighlightedText />) — use as-is
+    base = text as React.ReactNode;
+  }
+
+  const content =
+    renderLabel && typeof base === "string" ? renderLabel(base, absent) : base;
+  return (
+    <Badge
+      {...rest}
+      text={content}
+    ></Badge>
+  );
+}

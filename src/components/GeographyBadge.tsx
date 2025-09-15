@@ -5,11 +5,11 @@ import {
   normalizeGeography,
   geographyLabel,
 } from "../utils/geographyUtils";
-import Badge from "./Badge";
+import { BadgeMaybeAbsent } from "./Badge";
 
 function variantFor(
   kind: GeographyKind,
-): React.ComponentProps<typeof Badge>["variant"] {
+): "geographyGlobal" | "geographyRegion" | "geographyCountry" {
   // Pick names that fit your existing design tokens.
   // If your Badge has a strict union, add these variants there.
   switch (kind) {
@@ -34,10 +34,10 @@ const GeographyBadge: React.FC<GeographyBadgeProps> = ({ text, display }) => {
 
   const kind = geographyKind(text_clean);
   return (
-    <Badge
+    <BadgeMaybeAbsent
       variant={variantFor(kind)}
       text={display ?? geographyLabel(text_clean)}
-    ></Badge>
+    ></BadgeMaybeAbsent>
   );
 };
 
