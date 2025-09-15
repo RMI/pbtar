@@ -149,7 +149,7 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       "Scenario C (empty sectors[], empty geo[], 1.5°C)",
     ]);
     expectHidden([
-      "Scenario B (Power, EU, 2°C)",
+      "Scenario B (Power, Europe, 2°C)",
       "Scenario D (Industry, Asia, no temp)",
     ]);
   });
@@ -165,7 +165,7 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       "Scenario C (empty sectors[], empty geo[], 1.5°C)",
     ]);
     expectHidden([
-      "Scenario B (Power, EU, 2°C)",
+      "Scenario B (Power, Europe, 2°C)",
       "Scenario D (Industry, Asia, no temp)",
     ]);
   });
