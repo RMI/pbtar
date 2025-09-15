@@ -25,12 +25,7 @@ jobs:
       - name: Ensure tags are available
         run: |
           git fetch --tags --force --prune
-
-      - name: Ensure PR head is available
-        env:
-          HEAD_BRANCH: ${{ github.head_ref }}
-        run: |
-          git fetch --tags --force --prune "origin/$HEAD_BRANCH"
+          git tag -l | sort -V | tail -n 10
 
       - name: Merge PR branch to PR target
         env:
