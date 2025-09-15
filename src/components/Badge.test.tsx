@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import Badge from "./Badge";
+import Badge, { BadgeMaybeAbsent } from "./Badge";
 import { pathwayTypeTooltips, sectorTooltips } from "../utils/tooltipUtils";
 
 describe("Badge component", () => {
@@ -60,11 +60,39 @@ describe("Badge component", () => {
     expect(badge).toHaveClass("border-rmiblue-200");
   });
 
-  it("applies region styling when variant is 'region'", () => {
+  it("applies geography styling when variant is 'geographyGlobal'", () => {
     const { container } = render(
       <Badge
         text="Global"
-        variant="region"
+        variant="geographyGlobal"
+      />,
+    );
+    const badge = container.firstChild as HTMLElement;
+
+    expect(badge).toHaveClass("bg-pinishgreen-800");
+    expect(badge).toHaveClass("text-pinishgreen-100");
+    expect(badge).toHaveClass("border-pinishgreen-100");
+  });
+
+  it("applies geography styling when variant is 'geographyRegion'", () => {
+    const { container } = render(
+      <Badge
+        text="RegionName"
+        variant="geographyRegion"
+      />,
+    );
+    const badge = container.firstChild as HTMLElement;
+
+    expect(badge).toHaveClass("bg-pinishgreen-200");
+    expect(badge).toHaveClass("text-pinishgreen-800");
+    expect(badge).toHaveClass("border-pinishgreen-800");
+  });
+
+  it("applies geography styling when variant is 'geographyCountry'", () => {
+    const { container } = render(
+      <Badge
+        text="CountryName"
+        variant="geographyCountry"
       />,
     );
     const badge = container.firstChild as HTMLElement;
@@ -230,5 +258,67 @@ describe("Badge component", () => {
         "0",
       );
     });
+  });
+});
+
+describe("BadgeMaybeAbsent", () => {
+  it("renders 'None' for undefined/null", () => {
+    const { rerender } = render(<BadgeMaybeAbsent text={undefined} />);
+    expect(screen.getByText("None")).toBeInTheDocument();
+    rerender(<BadgeMaybeAbsent text={null} />);
+    expect(screen.getByText("None")).toBeInTheDocument();
+  });
+
+  it("renders string as text", () => {
+    const { rerender } = render(<BadgeMaybeAbsent text="Power" />);
+    expect(screen.getByText("Power")).toBeInTheDocument();
+    rerender(<BadgeMaybeAbsent text={2030} />);
+    expect(screen.getByText("2030")).toBeInTheDocument();
+  });
+
+  it("uses toLabel only for present values", () => {
+    const toLabel = (v: number) => `Y${v}`;
+    const { rerender } = render(
+      <BadgeMaybeAbsent<number>
+        text={2030}
+        toLabel={toLabel}
+      />,
+    );
+    expect(screen.getByText("Y2030")).toBeInTheDocument();
+    rerender(
+      <BadgeMaybeAbsent<number>
+        text={undefined}
+        toLabel={toLabel}
+      />,
+    );
+    expect(screen.getByText("None")).toBeInTheDocument();
+  });
+
+  it("passes through ReactNode labels", () => {
+    const node = <span data-testid="inner">Inner</span>;
+    render(<BadgeMaybeAbsent text={node} />);
+    expect(screen.getByTestId("inner")).toBeInTheDocument();
+    expect(screen.getByText("Inner")).toBeInTheDocument();
+  });
+
+  it("supports noneLabel override", () => {
+    render(
+      <BadgeMaybeAbsent
+        text={undefined}
+        noneLabel="No Value"
+      />,
+    );
+    expect(screen.getByText("No Value")).toBeInTheDocument();
+  });
+
+  it("renderLabel decorates only string labels", () => {
+    const renderLabel = (label: string) => `**${label}**`;
+    render(
+      <BadgeMaybeAbsent
+        text="EUROPE"
+        renderLabel={renderLabel}
+      />,
+    );
+    expect(screen.getByText("**EUROPE**")).toBeInTheDocument();
   });
 });

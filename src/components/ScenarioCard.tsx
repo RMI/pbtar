@@ -1,11 +1,16 @@
 import React, { useMemo, useRef, useState, useEffect, RefObject } from "react";
 import { Link } from "react-router-dom";
-import Badge from "./Badge";
+import { BadgeMaybeAbsent } from "./Badge";
+import GeographyBadge from "../components/GeographyBadge";
+import {
+  geographyLabel,
+  sortGeographiesForDetails,
+} from "../utils/geographyUtils";
 import TextWithTooltip from "./TextWithTooltip";
 import { Scenario, PathwayType } from "../types";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
-import { prioritizeMatches } from "../utils/sortUtils";
+import { prioritizeMatches, prioritizeGeographies } from "../utils/sortUtils";
 import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
 
 interface ScenarioCardProps {
@@ -62,10 +67,14 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
   scenario,
   searchTerm = "",
 }) => {
-  // Sort regions and sectors to prioritize matches
-  const sortedRegions = useMemo(
-    () => prioritizeMatches(scenario.regions, searchTerm),
-    [scenario.regions, searchTerm],
+  // Sort geography and sectors to prioritize matches
+  const sortedGeography = useMemo(
+    () =>
+      prioritizeGeographies(
+        sortGeographiesForDetails(scenario.geography),
+        searchTerm,
+      ),
+    [scenario.geography, searchTerm],
   );
 
   const sortedSectors = useMemo(
@@ -74,16 +83,16 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
   );
 
   // Refs for the container elements
-  const regionsContainerRef = useRef<HTMLDivElement>(null);
+  const geographyContainerRef = useRef<HTMLDivElement>(null);
   const sectorsContainerRef = useRef<HTMLDivElement>(null);
 
   // Calculate how many badges can fit in each container
-  const regionBadgeWidth = 90; // Estimated average width of a region badge in pixels
+  const geographyBadgeWidth = 90; // Estimated average width of a geography badge in pixels
   const sectorBadgeWidth = 80; // Estimated average width of a sector badge in pixels
 
-  const visibleRegionsCount = useAvailableBadgeCount(
-    regionsContainerRef,
-    regionBadgeWidth,
+  const visibleGeographyCount = useAvailableBadgeCount(
+    geographyContainerRef,
+    geographyBadgeWidth,
   );
   const visibleSectorsCount = useAvailableBadgeCount(
     sectorsContainerRef,
@@ -114,12 +123,14 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
       <div className="p-5 flex flex-col h-full">
         <div className="mb-4">
-          <h2 className="text-xl font-semibold text-bluespruce mb-2">
-            <HighlightedText
-              text={scenario.name}
-              searchTerm={searchTerm}
-            />
-          </h2>
+          <Link to={`/scenario/${scenario.id}`}>
+            <h2 className="text-xl font-semibold text-bluespruce mb-2">
+              <HighlightedText
+                text={scenario.name}
+                searchTerm={searchTerm}
+              />
+            </h2>
+          </Link>
           <p className="text-rmigray-600 text-sm line-clamp-2">
             <HighlightedText
               text={scenario.description}
@@ -133,7 +144,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             Pathway type:
           </p>
           <div className="flex flex-wrap gap-2">
-            <Badge
+            <BadgeMaybeAbsent
               text={highlightTextIfSearchMatch(scenario.pathwayType)}
               tooltip={getPathwayTypeTooltip(
                 scenario.pathwayType as PathwayType,
@@ -146,50 +157,60 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Targets:</p>
           <div className="flex flex-wrap">
-            <Badge
+            <BadgeMaybeAbsent
               text={highlightTextIfSearchMatch(scenario.modelYearEnd)}
               variant="year"
             />
-            {scenario.modelTempIncrease && (
-              <Badge
-                text={highlightTextIfSearchMatch(
-                  `${scenario.modelTempIncrease.toString()}°C`,
-                )}
-                variant="temperature"
-              />
-            )}
+            <BadgeMaybeAbsent
+              text={scenario.modelTempIncrease}
+              variant="temperature"
+              toLabel={(t) => {
+                const s = String(t);
+                return s.endsWith("°C") ? s : `${s}°C`;
+              }}
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
+            />
           </div>
         </div>
 
-        {/* Regions section with dynamic badge count */}
+        {/* Geographies section with dynamic badge count */}
         <div className="mb-3">
-          <p className="text-xs font-medium text-rmigray-500 mb-1">Regions:</p>
+          <p className="text-xs font-medium text-rmigray-500 mb-1">
+            Geographies:
+          </p>
           <div
             className="flex flex-wrap"
-            ref={regionsContainerRef}
+            ref={geographyContainerRef}
           >
-            {sortedRegions.slice(0, visibleRegionsCount).map((region) => (
-              <Badge
-                key={region}
-                text={highlightTextIfSearchMatch(region)}
-                variant="region"
-              />
-            ))}
-            {scenario.regions.length > visibleRegionsCount && (
+            {sortedGeography
+              .slice(0, visibleGeographyCount)
+              .map((geography) => {
+                const label = geographyLabel(geography);
+                return (
+                  <GeographyBadge
+                    key={geography}
+                    text={geography}
+                    display={highlightTextIfSearchMatch(label)}
+                  />
+                );
+              })}
+            {scenario.geography.length > visibleGeographyCount && (
               <TextWithTooltip
                 text={
                   <span className="text-xs text-rmigray-500 ml-1 self-center">
-                    +{scenario.regions.length - visibleRegionsCount} more
+                    +{scenario.geography.length - visibleGeographyCount} more
                   </span>
                 }
                 tooltip={
                   <span>
-                    {sortedRegions
-                      .slice(visibleRegionsCount)
-                      .map((region, idx) => (
-                        <React.Fragment key={region}>
+                    {sortedGeography
+                      .slice(visibleGeographyCount)
+                      .map((geography, idx) => (
+                        <React.Fragment key={geography}>
                           {idx > 0 && ", "}
-                          <span className="whitespace-nowrap">{region}</span>
+                          <span className="whitespace-nowrap">
+                            {geographyLabel(geography)}
+                          </span>
                         </React.Fragment>
                       ))}
                   </span>
@@ -207,7 +228,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             ref={sectorsContainerRef}
           >
             {sortedSectors.slice(0, visibleSectorsCount).map((sector) => (
-              <Badge
+              <BadgeMaybeAbsent
                 key={sector.name}
                 text={highlightTextIfSearchMatch(sector.name)}
                 tooltip={getSectorTooltip(sector.name)}

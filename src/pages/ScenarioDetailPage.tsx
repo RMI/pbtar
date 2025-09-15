@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
+import Markdown from "../components/Markdown";
 import { scenariosData } from "../data/scenariosData";
 import { Scenario, PathwayType } from "../types";
-import Badge from "../components/Badge";
+import { BadgeMaybeAbsent } from "../components/Badge";
+import GeographyBadge from "../components/GeographyBadge";
+import { sortGeographiesForDetails } from "../utils/geographyUtils";
 import { ExternalLink, ArrowLeft } from "lucide-react";
 import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
 
@@ -81,23 +83,21 @@ const ScenarioDetailPage: React.FC = () => {
           <p className="text-white mb-4">{scenario.description}</p>
 
           <div className="flex flex-wrap gap-2 mb-4">
-            <Badge
+            <BadgeMaybeAbsent
               text={scenario.pathwayType}
               tooltip={getPathwayTypeTooltip(
                 scenario.pathwayType as PathwayType,
               )}
               variant="pathwayType"
             />
-            <Badge
+            <BadgeMaybeAbsent
               text={scenario.modelYearEnd}
               variant="year"
             />
-            {scenario.modelTempIncrease && (
-              <Badge
-                text={`${scenario.modelTempIncrease}°C`}
-                variant="temperature"
-              />
-            )}
+            <BadgeMaybeAbsent
+              text={`${scenario.modelTempIncrease}°C`}
+              variant="temperature"
+            />
           </div>
 
           <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
@@ -120,7 +120,7 @@ const ScenarioDetailPage: React.FC = () => {
                   Scenario Overview
                 </h2>
                 <div className="prose text-rmigray-700">
-                  <ReactMarkdown>{scenario.overview}</ReactMarkdown>
+                  <Markdown>{scenario.overview}</Markdown>
                 </div>
               </section>
 
@@ -129,7 +129,7 @@ const ScenarioDetailPage: React.FC = () => {
                   Expert Recommendations
                 </h2>
                 <div className="prose text-rmigray-700">
-                  <ReactMarkdown>{scenario.expertRecommendation}</ReactMarkdown>
+                  <Markdown>{scenario.expertRecommendation}</Markdown>
                 </div>
               </section>
 
@@ -138,9 +138,9 @@ const ScenarioDetailPage: React.FC = () => {
                   Data Source
                 </h2>
                 <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-                  <p className="text-rmigray-700 mb-4">
-                    {scenario.dataSource.description}
-                  </p>
+                  <div className="text-rmigray-700 mb-4 [&_a]:text-energy [&_a]:hover:text-energy-700">
+                    <Markdown>{scenario.dataSource.description}</Markdown>
+                  </div>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <a
                       href={scenario.dataSource.url}
@@ -162,16 +162,17 @@ const ScenarioDetailPage: React.FC = () => {
             <div className="md:col-span-4">
               <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
                 <h3 className="text-lg font-medium text-rmigray-800 mb-3">
-                  Regions
+                  Geographies
                 </h3>
                 <div className="flex flex-wrap">
-                  {scenario.regions.map((region, index) => (
-                    <Badge
-                      key={index}
-                      text={region}
-                      variant="region"
-                    />
-                  ))}
+                  {sortGeographiesForDetails(scenario.geography ?? []).map(
+                    (geography, index) => (
+                      <GeographyBadge
+                        key={index}
+                        text={geography}
+                      />
+                    ),
+                  )}
                 </div>
               </div>
 
@@ -181,7 +182,7 @@ const ScenarioDetailPage: React.FC = () => {
                 </h3>
                 <div className="flex flex-wrap">
                   {scenario.sectors.map((sector, index) => (
-                    <Badge
+                    <BadgeMaybeAbsent
                       key={index}
                       text={sector.name}
                       tooltip={getSectorTooltip(sector.name)}
