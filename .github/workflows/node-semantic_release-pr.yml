@@ -27,6 +27,8 @@ jobs:
           git fetch --tags --force --prune
 
       - name: Ensure PR head is available
+        env:
+          HEAD_BRANCH: ${{ github.head_ref }}
         run: |
           git fetch --tags --force --prune "origin/$HEAD_BRANCH"
 
