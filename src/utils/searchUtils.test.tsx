@@ -25,7 +25,7 @@ describe("searchUtils", () => {
     });
 
     it("filters by target year", () => {
-      const filters: SearchFilters = { modelYearEnd: 2050 };
+      const filters: SearchFilters = { modelYearNetzero: 2050 };
       const result = filterScenarios(mockScenarios, filters);
 
       expect(result.length).toBe(3);
@@ -90,7 +90,7 @@ describe("searchUtils", () => {
     it("returns empty array when no scenarios match filters", () => {
       const filters: SearchFilters = {
         pathwayType: "Policy",
-        modelYearEnd: "2030",
+        modelYearNetzero: "2030",
       };
       const result = filterScenarios(mockScenarios, filters);
 
@@ -127,9 +127,9 @@ describe("searchUtils", () => {
     });
 
     it("safely omits results for non-existing fields", () => {
-      //scenario 3 in the mock data has no modelYearEnd
+      //scenario 3 in the mock data has no modelYearNetzero
       const filters: SearchFilters = {
-        modelYearEnd: 2050,
+        modelYearNetzero: 2050,
       };
 
       const result = filterScenarios(mockScenarios, filters);

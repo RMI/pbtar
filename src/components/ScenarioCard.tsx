@@ -158,8 +158,9 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <p className="text-xs font-medium text-rmigray-500 mb-1">Targets:</p>
           <div className="flex flex-wrap">
             <BadgeMaybeAbsent
-              text={highlightTextIfSearchMatch(scenario.modelYearEnd)}
+              text={scenario.modelYearNetzero}
               variant="year"
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
             />
             <BadgeMaybeAbsent
               text={scenario.modelTempIncrease}

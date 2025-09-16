@@ -44,8 +44,10 @@ export const filterScenarios = (
     // Target year filter
     if (
       !matchesOptionalFacet(
-        filters.modelYearEnd == null ? [] : [String(filters.modelYearEnd)],
-        scenario.modelYearEnd,
+        filters.modelYearNetzero == null
+          ? []
+          : [String(filters.modelYearNetzero)],
+        scenario.modelYearNetzero,
       )
     )
       return false;
@@ -98,7 +100,7 @@ export const filterScenarios = (
         scenario.name,
         scenario.description,
         scenario.pathwayType,
-        scenario.modelYearEnd,
+        scenario.modelYearNetzero,
         scenario.modelTempIncrease,
         ...scenario.geography,
         ...scenario.geography.map((s) => geographyLabel(s)),

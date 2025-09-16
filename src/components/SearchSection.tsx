@@ -33,8 +33,8 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     scenariosData.map((d) => d.pathwayType),
   );
 
-  const modelYearEndOptions = buildOptionsFromValues(
-    scenariosData.map((d) => d.modelYearEnd),
+  const modelYearNetzeroOptions = buildOptionsFromValues(
+    scenariosData.map((d) => d.modelYearNetzero),
   );
 
   const temperatureOptions = buildOptionsFromValues(
@@ -67,7 +67,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       filters.pathwayType ||
       filters.geography ||
       filters.sector ||
-      filters.modelYearEnd ||
+      filters.modelYearNetzero ||
       filters.modelTempIncrease) !== null;
 
   return (
@@ -91,9 +91,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
 
         <FilterDropdown<string>
           label="Target Year"
-          options={modelYearEndOptions}
-          selectedValue={filters.modelYearEnd}
-          onChange={(value) => onFilterChange("modelYearEnd", value)}
+          options={modelYearNetzeroOptions}
+          selectedValue={filters.modelYearNetzero}
+          onChange={(value) => onFilterChange("modelYearNetzero", value)}
         />
 
         <FilterDropdown<number>
