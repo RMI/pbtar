@@ -213,7 +213,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Sectors:</p>
           <div
-            ref={geographyContainerRef}
+            ref={sectorsContainerRef}
             flex
             flex-wrap
           >
@@ -231,6 +231,11 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         {/* Sectors section with dynamic badge count */}
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Benchmark Metrics:</p>
+          <div
+            ref={sectorsContainerRef}
+            flex
+            flex-wrap
+          >
           <BadgeArray
             visibleCount={visibleMetricCount}
             variant="metric"
@@ -239,6 +244,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           >
             {scenario.metric}
           </BadgeArray>
+          </div>
         </div>
 
         <div className="mt-auto pt-3 border-t border-gray-100">
