@@ -62,10 +62,7 @@ jobs:
         env:
           VITE_BUILD_MODE: |
             ${{
-              ((github.event_name == 'push' && github.ref_name == 'production') && 'production') ||
-              ((github.event_name == 'push' && github.ref_name == 'main') && 'development') ||
               (github.event_name == 'push' && github.ref_name) ||
-              ((github.event_name == 'pull_request' && github.ref_name == 'next') && 'staging') ||
               (github.event_name == 'pull_request' && format('{0}-{1}', 'pr', github.event.pull_request.number)) ||
               github.ref_name
             }}
