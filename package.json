@@ -12,7 +12,7 @@
     "test:watch": "vitest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "lint:watch": "chokidar . --ignore \".git/**\" --ignore \"node_modules/**\" -c \"npm run lint --silent\"",
+    "lint:watch": "chokidar . --ignore \".git/**\" --ignore \"node_modules/**\" -c \"npm run lint -- --max-warnings=0 && echo '✔ Lint check complete (no errors or warnings)'\"",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "format:watch": "chokidar . --ignore \".git/**\" --ignore \"node_modules/**\" -c \"prettier --check .\"",
