@@ -3,7 +3,7 @@ import TextWithTooltip from "./TextWithTooltip";
 import { coalesceOptional, isAbsent } from "../utils/absent";
 
 interface BadgeProps {
-  children: React.ReactNode;
+  children: string | number;
   tooltip?: string;
   variant?:
     | "default"
@@ -68,8 +68,11 @@ const Badge: React.FC<BadgeProps> = ({
 export default Badge;
 // --- value-aware helpers (schema-agnostic) --------------------
 
-export type BadgeMaybeAbsentProps<T> = React.ComponentProps<typeof Badge> & {
-  /** Scalar value to show inside the badge. If null/undefined -> renders "None". */
+export type BadgeMaybeAbsentProps<T extends string | number> = Omit<
+  React.ComponentProps<typeof Badge>,
+  "children"
+> & {
+  /** Scalar children to show inside the badge (null/undefined => "None"). */
   children: T | null | undefined;
   /** Optional labeler for non-absent values (e.g., pretty format). */
   toLabel?: (v: T) => string;
@@ -79,26 +82,26 @@ export type BadgeMaybeAbsentProps<T> = React.ComponentProps<typeof Badge> & {
   renderLabel?: (label: string, isAbsent: boolean) => React.ReactNode;
 };
 
-export function BadgeMaybeAbsent<T>({
+export function BadgeMaybeAbsent<T extends string | number>({
   children,
   toLabel,
   noneLabel,
   renderLabel,
   ...rest
 }: BadgeMaybeAbsentProps<T>) {
-  const normalized = coalesceOptional(children as T | null | undefined);
+  const normalized = coalesceOptional(children);
   const absent = isAbsent(normalized);
 
-  let base: React.ReactNode;
+  let base: string | number;
   if (absent) {
     base = noneLabel ?? "None";
   } else if (toLabel) {
     base = toLabel(children as T);
   } else if (typeof children === "string" || typeof children === "number") {
-    base = String(children);
+    base = children;
   } else {
-    // Already a React node (e.g., <HighlightedText />) — use as-is
-    base = children as React.ReactNode;
+    // Should be unreachable at runtime due to typing, but keep a safe fallback
+    base = String(children as unknown as string | number);
   }
 
   const content =

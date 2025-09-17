@@ -9,6 +9,11 @@ describe("Badge component", () => {
     expect(screen.getByText("Test Badge")).toBeInTheDocument();
   });
 
+  it("renders numbers as content", () => {
+    render(<Badge>{123}</Badge>);
+    expect(screen.getByText("123")).toBeInTheDocument();
+  });
+
   it("uses default styling when no variant is provided", () => {
     const { container } = render(<Badge text="Default Badge" />);
     const badge = container.firstChild as HTMLElement;
@@ -18,11 +23,14 @@ describe("Badge component", () => {
     expect(badge).toHaveClass("border-rmigray-200");
   });
 
-  it("passes through ReactNode labels", () => {
-    const node = <span data-testid="inner">Inner</span>;
-    render(<Badge>{node}</Badge>);
-    expect(screen.getByTestId("inner")).toBeInTheDocument();
-    expect(screen.getByText("Inner")).toBeInTheDocument();
+  // Type assertions: children must be scalar (string|number)
+  it("disallows ReactNode children for Badge at compile-time", () => {
+    // @ts-expect-error - Badge children must be string | number
+    render(
+      <Badge>
+        <span>Not allowed</span>
+      </Badge>,
+    );
   });
 
   it("applies pathwayType styling when variant is 'pathwayType'", () => {
@@ -180,12 +188,7 @@ describe("Badge component", () => {
 
   // Testing tooltip visibility requires checking document.body, since tooltips are now in portals
   it("doesn't show tooltip initially", () => {
-    render(
-      <Badge
-        text="Hover Me"
-        tooltip="Hover tooltip"
-      />,
-    );
+    render(<Badge tooltip="Hover tooltip">Hover me</Badge>);
 
     // Initially the tooltip shouldn't be in document.body
     const tooltipElement = document.querySelector("[role='tooltip']");
@@ -297,11 +300,13 @@ describe("BadgeMaybeAbsent", () => {
     expect(screen.getByText("None")).toBeInTheDocument();
   });
 
-  it("passes through ReactNode labels", () => {
-    const node = <span data-testid="inner">Inner</span>;
-    render(<BadgeMaybeAbsent>{node}</BadgeMaybeAbsent>);
-    expect(screen.getByTestId("inner")).toBeInTheDocument();
-    expect(screen.getByText("Inner")).toBeInTheDocument();
+  it("disallows ReactNode children for BadgeMaybeAbsent at compile-time", () => {
+    // @ts-expect-error - BadgeMaybeAbsent children must be string | number | null | undefined
+    render(
+      <BadgeMaybeAbsent>
+        <span>Not allowed</span>
+      </BadgeMaybeAbsent>,
+    );
   });
 
   it("supports noneLabel override", () => {
