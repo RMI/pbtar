@@ -15,7 +15,7 @@ describe("Badge component", () => {
   });
 
   it("uses default styling when no variant is provided", () => {
-    const { container } = render(<Badge text="Default Badge" />);
+    const { container } = render(<Badge>Default Badge</Badge>);
     const badge = container.firstChild as HTMLElement;
 
     expect(badge).toHaveClass("bg-rmigray-100");

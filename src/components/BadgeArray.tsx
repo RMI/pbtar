@@ -62,7 +62,7 @@ export default function BadgeArray<T extends Scalar = Scalar>({
           {value}
         </BadgeMaybeAbsent>
       ))}
-      {arr.length > visibleCount && (
+      {typeof visibleCount === "number" && arr.length > visibleCount && (
         <TextWithTooltip
           text={
             <span className="text-xs text-rmigray-500 ml-1 self-center">
