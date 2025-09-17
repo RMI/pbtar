@@ -2,12 +2,13 @@ import React, { useMemo, useRef, useState, useEffect, RefObject } from "react";
 import { Link } from "react-router-dom";
 import { BadgeMaybeAbsent } from "./Badge";
 import BadgeArray from "./BadgeArray";
-import GeographyBadge from "../components/GeographyBadge";
 import {
+  geographyKind,
   geographyLabel,
+  geographyVariant,
+  normalizeGeography,
   sortGeographiesForDetails,
 } from "../utils/geographyUtils";
-import TextWithTooltip from "./TextWithTooltip";
 import { Scenario, PathwayType } from "../types";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
@@ -184,46 +185,16 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <p className="text-xs font-medium text-rmigray-500 mb-1">
             Geographies:
           </p>
-          <div
-            className="flex flex-wrap"
-            ref={geographyContainerRef}
-          >
-            {sortedGeography
-              .slice(0, visibleGeographyCount)
-              .map((geography) => {
-                const label = geographyLabel(geography);
-                return (
-                  <GeographyBadge
-                    key={geography}
-                    text={geography}
-                    display={highlightTextIfSearchMatch(label)}
-                  />
-                );
-              })}
-            {scenario.geography.length > visibleGeographyCount && (
-              <TextWithTooltip
-                text={
-                  <span className="text-xs text-rmigray-500 ml-1 self-center">
-                    +{scenario.geography.length - visibleGeographyCount} more
-                  </span>
-                }
-                tooltip={
-                  <span>
-                    {sortedGeography
-                      .slice(visibleGeographyCount)
-                      .map((geography, idx) => (
-                        <React.Fragment key={geography}>
-                          {idx > 0 && ", "}
-                          <span className="whitespace-nowrap">
-                            {geographyLabel(geography)}
-                          </span>
-                        </React.Fragment>
-                      ))}
-                  </span>
-                }
-              />
+          <BadgeArray
+            variant={sortedGeography.map(
+              (geo) => geographyVariant(geographyKind(geo)) as string,
             )}
-          </div>
+            toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
+            visibleCount={visibleGeographyCount}
+            renderLabel={(label) => highlightTextIfSearchMatch(label)}
+          >
+            {sortedGeography}
+          </BadgeArray>
         </div>
 
         {/* Sectors section with dynamic badge count */}

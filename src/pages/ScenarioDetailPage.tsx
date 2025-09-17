@@ -5,8 +5,13 @@ import { scenariosData } from "../data/scenariosData";
 import { Scenario, PathwayType } from "../types";
 import { BadgeMaybeAbsent } from "../components/Badge";
 import BadgeArray from "../components/BadgeArray";
-import GeographyBadge from "../components/GeographyBadge";
-import { sortGeographiesForDetails } from "../utils/geographyUtils";
+import {
+  geographyKind,
+  geographyLabel,
+  geographyVariant,
+  normalizeGeography,
+  sortGeographiesForDetails,
+} from "../utils/geographyUtils";
 import { ExternalLink, ArrowLeft } from "lucide-react";
 import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
 
@@ -170,16 +175,16 @@ const ScenarioDetailPage: React.FC = () => {
                 <h3 className="text-lg font-medium text-rmigray-800 mb-3">
                   Geographies
                 </h3>
-                <div className="flex flex-wrap">
-                  {sortGeographiesForDetails(scenario.geography ?? []).map(
-                    (geography, index) => (
-                      <GeographyBadge
-                        key={index}
-                        text={geography}
-                      />
-                    ),
+                <BadgeArray
+                  variant={sortGeographiesForDetails(
+                    scenario.geography ?? [],
+                  ).map(
+                    (geo) => geographyVariant(geographyKind(geo)) as string,
                   )}
-                </div>
+                  toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
+                >
+                  {sortGeographiesForDetails(scenario.geography ?? [])}
+                </BadgeArray>
               </div>
 
               <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">

@@ -285,6 +285,11 @@ describe("BadgeMaybeAbsent", () => {
     expect(screen.getByText("2030")).toBeInTheDocument();
   });
 
+  it("renders processed label", () => {
+    render(<BadgeMaybeAbsent>{"  Europe  "}</BadgeMaybeAbsent>);
+    expect(screen.getByText("Europe")).toBeInTheDocument();
+  });
+
   it("uses toLabel only for present values", () => {
     const toLabel = (v: number) => `Y${v}`;
     const { rerender } = render(
