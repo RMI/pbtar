@@ -98,7 +98,7 @@ export function BadgeMaybeAbsent<T extends string | number>({
   } else if (toLabel) {
     base = toLabel(children as T);
   } else if (typeof children === "string" || typeof children === "number") {
-    base = children;
+    base = String(children);
   } else {
     // Should be unreachable at runtime due to typing, but keep a safe fallback
     base = String(children as unknown as string | number);

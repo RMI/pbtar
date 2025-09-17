@@ -1,6 +1,7 @@
 import React, { useMemo, useRef, useState, useEffect, RefObject } from "react";
 import { Link } from "react-router-dom";
 import { BadgeMaybeAbsent } from "./Badge";
+import BadgeArray from "./BadgeArray";
 import GeographyBadge from "../components/GeographyBadge";
 import {
   geographyLabel,
@@ -149,8 +150,9 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
                 scenario.pathwayType as PathwayType,
               )}
               variant="pathwayType"
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
             >
-              {highlightTextIfSearchMatch(scenario.pathwayType)}
+              {scenario.pathwayType}
             </BadgeMaybeAbsent>
           </div>
         </div>
@@ -158,8 +160,11 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Targets:</p>
           <div className="flex flex-wrap">
-            <BadgeMaybeAbsent variant="year">
-              {highlightTextIfSearchMatch(scenario.modelYearEnd)}
+            <BadgeMaybeAbsent
+              variant="year"
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
+            >
+              {scenario.modelYearEnd}
             </BadgeMaybeAbsent>
             <BadgeMaybeAbsent
               variant="temperature"
@@ -224,43 +229,14 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         {/* Sectors section with dynamic badge count */}
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Sectors:</p>
-          <div
-            className="flex flex-wrap"
-            ref={sectorsContainerRef}
+          <BadgeArray
+            visibleCount={visibleSectorsCount}
+            variant="sector"
+            tooltipGetter={getSectorTooltip}
+            renderLabel={(label) => highlightTextIfSearchMatch(label)}
           >
-            {sortedSectors.slice(0, visibleSectorsCount).map((sector) => (
-              <BadgeMaybeAbsent
-                key={sector.name}
-                tooltip={getSectorTooltip(sector.name)}
-                variant="sector"
-              >
-                {highlightTextIfSearchMatch(sector.name)}
-              </BadgeMaybeAbsent>
-            ))}
-            {scenario.sectors.length > visibleSectorsCount && (
-              <TextWithTooltip
-                text={
-                  <span className="text-xs text-rmigray-500 ml-1 self-center">
-                    +{scenario.sectors.length - visibleSectorsCount} more
-                  </span>
-                }
-                tooltip={
-                  <span>
-                    {sortedSectors
-                      .slice(visibleSectorsCount)
-                      .map((sector, idx) => (
-                        <React.Fragment key={sector.name}>
-                          {idx > 0 && ", "}
-                          <span className="whitespace-nowrap">
-                            {sector.name}
-                          </span>
-                        </React.Fragment>
-                      ))}
-                  </span>
-                }
-              />
-            )}
-          </div>
+            {sortedSectors.map((sector) => sector.name)}
+          </BadgeArray>
         </div>
 
         <div className="mt-auto pt-3 border-t border-gray-100">

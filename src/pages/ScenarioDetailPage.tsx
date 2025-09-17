@@ -4,6 +4,7 @@ import Markdown from "../components/Markdown";
 import { scenariosData } from "../data/scenariosData";
 import { Scenario, PathwayType } from "../types";
 import { BadgeMaybeAbsent } from "../components/Badge";
+import BadgeArray from "../components/BadgeArray";
 import GeographyBadge from "../components/GeographyBadge";
 import { sortGeographiesForDetails } from "../utils/geographyUtils";
 import { ExternalLink, ArrowLeft } from "lucide-react";
@@ -185,16 +186,17 @@ const ScenarioDetailPage: React.FC = () => {
                 <h3 className="text-lg font-medium text-rmigray-800 mb-3">
                   Sectors
                 </h3>
-                <div className="flex flex-wrap">
-                  {scenario.sectors.map((sector, index) => (
-                    <BadgeMaybeAbsent
-                      key={index}
-                      tooltip={getSectorTooltip(sector.name)}
-                      variant="sector"
-                    >
-                      {sector.name}
-                    </BadgeMaybeAbsent>
-                  ))}
+                {/* Sectors section with dynamic badge count */}
+                <div className="mb-3">
+                  <p className="text-xs font-medium text-rmigray-500 mb-1">
+                    Sectors:
+                  </p>
+                  <BadgeArray
+                    variant="sector"
+                    tooltipGetter={getSectorTooltip}
+                  >
+                    {scenario.sectors.map((sector) => sector.name)}
+                  </BadgeArray>
                 </div>
               </div>
             </div>
