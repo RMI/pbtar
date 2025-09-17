@@ -13,7 +13,11 @@ import { Scenario, PathwayType } from "../types";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
 import { prioritizeMatches, prioritizeGeographies } from "../utils/sortUtils";
-import { getPathwayTypeTooltip, getSectorTooltip, getMetricTooltip } from "../utils/tooltipUtils";
+import {
+  getPathwayTypeTooltip,
+  getSectorTooltip,
+  getMetricTooltip,
+} from "../utils/tooltipUtils";
 
 interface ScenarioCardProps {
   scenario: Scenario;
@@ -230,20 +234,22 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
 
         {/* Sectors section with dynamic badge count */}
         <div className="mb-3">
-          <p className="text-xs font-medium text-rmigray-500 mb-1">Benchmark Metrics:</p>
+          <p className="text-xs font-medium text-rmigray-500 mb-1">
+            Benchmark Metrics:
+          </p>
           <div
             ref={sectorsContainerRef}
             flex
             flex-wrap
           >
-          <BadgeArray
-            visibleCount={visibleMetricCount}
-            variant="metric"
-            tooltipGetter={getMetricTooltip}
-            renderLabel={(label) => highlightTextIfSearchMatch(label)}
-          >
-            {scenario.metric}
-          </BadgeArray>
+            <BadgeArray
+              visibleCount={visibleMetricCount}
+              variant="metric"
+              tooltipGetter={getMetricTooltip}
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
+            >
+              {scenario.metric}
+            </BadgeArray>
           </div>
         </div>
 
