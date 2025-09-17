@@ -13,7 +13,7 @@ import { Scenario, PathwayType } from "../types";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
 import { prioritizeMatches, prioritizeGeographies } from "../utils/sortUtils";
-import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
+import { getPathwayTypeTooltip, getSectorTooltip, getMetricTooltip } from "../utils/tooltipUtils";
 
 interface ScenarioCardProps {
   scenario: Scenario;
@@ -87,10 +87,12 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
   // Refs for the container elements
   const geographyContainerRef = useRef<HTMLDivElement>(null);
   const sectorsContainerRef = useRef<HTMLDivElement>(null);
+  const metricContainerRef = useRef<HTMLDivElement>(null);
 
   // Calculate how many badges can fit in each container
   const geographyBadgeWidth = 90; // Estimated average width of a geography badge in pixels
   const sectorBadgeWidth = 80; // Estimated average width of a sector badge in pixels
+  const metricBadgeWidth = 80; // Estimated average width of a metric badge in pixels
 
   const visibleGeographyCount = useAvailableBadgeCount(
     geographyContainerRef,
@@ -99,6 +101,10 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
   const visibleSectorsCount = useAvailableBadgeCount(
     sectorsContainerRef,
     sectorBadgeWidth,
+  );
+  const visibleMetricCount = useAvailableBadgeCount(
+    metricContainerRef,
+    metricBadgeWidth,
   );
 
   // Helper function to conditionally highlight text based on search term
@@ -207,6 +213,19 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             renderLabel={(label) => highlightTextIfSearchMatch(label)}
           >
             {sortedSectors.map((sector) => sector.name)}
+          </BadgeArray>
+        </div>
+
+        {/* Sectors section with dynamic badge count */}
+        <div className="mb-3">
+          <p className="text-xs font-medium text-rmigray-500 mb-1">Benchmark Metrics:</p>
+          <BadgeArray
+            visibleCount={visibleMetricCount}
+            variant="metric"
+            tooltipGetter={getMetricTooltip}
+            renderLabel={(label) => highlightTextIfSearchMatch(label)}
+          >
+            {scenario.metric}
           </BadgeArray>
         </div>
 
