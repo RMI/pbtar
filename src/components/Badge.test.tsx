@@ -5,7 +5,7 @@ import { pathwayTypeTooltips, sectorTooltips } from "../utils/tooltipUtils";
 
 describe("Badge component", () => {
   it("renders with the provided text", () => {
-    render(<Badge text="Test Badge" />);
+    render(<Badge>Test Badge</Badge>);
     expect(screen.getByText("Test Badge")).toBeInTheDocument();
   });
 
@@ -16,6 +16,13 @@ describe("Badge component", () => {
     expect(badge).toHaveClass("bg-rmigray-100");
     expect(badge).toHaveClass("text-rmigray-800");
     expect(badge).toHaveClass("border-rmigray-200");
+  });
+
+  it("passes through ReactNode labels", () => {
+    const node = <span data-testid="inner">Inner</span>;
+    render(<Badge>{node}</Badge>);
+    expect(screen.getByTestId("inner")).toBeInTheDocument();
+    expect(screen.getByText("Inner")).toBeInTheDocument();
   });
 
   it("applies pathwayType styling when variant is 'pathwayType'", () => {
@@ -144,7 +151,7 @@ describe("Badge component", () => {
 
   // Tooltip tests
   it("does not render tooltip when no tooltip is provided", () => {
-    render(<Badge text="No Tooltip" />);
+    render(<Badge>No Tooltip</Badge>);
 
     // Find the badge span
     const badge = screen.getByText("No Tooltip");
@@ -155,12 +162,7 @@ describe("Badge component", () => {
   });
 
   it("uses TextWithTooltip when tooltip is provided", () => {
-    render(
-      <Badge
-        text="With Tooltip"
-        tooltip="This is a tooltip"
-      />,
-    );
+    render(<Badge tooltip="This is a tooltip">With Tooltip</Badge>);
 
     // Badge text should still be present
     const badgeText = screen.getByText("With Tooltip");
@@ -194,10 +196,11 @@ describe("Badge component", () => {
     it("displays correct tooltip for Normative pathway type", () => {
       render(
         <Badge
-          text="Normative"
           tooltip={pathwayTypeTooltips["Normative"]}
           variant="pathwayType"
-        />,
+        >
+          Normative
+        </Badge>,
       );
 
       const badge = screen.getByText("Normative");
@@ -211,10 +214,11 @@ describe("Badge component", () => {
     it("displays correct tooltip for Policy pathway type", () => {
       render(
         <Badge
-          text="Direct Policy"
           tooltip={pathwayTypeTooltips["Direct Policy"] as string}
           variant="pathwayType"
-        />,
+        >
+          Direct Policy
+        </Badge>,
       );
 
       const badge = screen.getByText("Direct Policy");
@@ -228,10 +232,11 @@ describe("Badge component", () => {
     it("displays correct tooltip for Power sector", () => {
       render(
         <Badge
-          text="Power"
           tooltip={sectorTooltips["Power"]}
           variant="sector"
-        />,
+        >
+          Power
+        </Badge>,
       );
 
       const badge = screen.getByText("Power");
@@ -245,10 +250,11 @@ describe("Badge component", () => {
     it("displays correct tooltip for Transport sector", () => {
       render(
         <Badge
-          text="Transport"
           tooltip={sectorTooltips["Transport"]}
           variant="sector"
-        />,
+        >
+          Transport
+        </Badge>,
       );
 
       const badge = screen.getByText("Transport");
@@ -270,19 +276,16 @@ describe("BadgeMaybeAbsent", () => {
   });
 
   it("renders string as text", () => {
-    const { rerender } = render(<BadgeMaybeAbsent text="Power" />);
+    const { rerender } = render(<BadgeMaybeAbsent>Power</BadgeMaybeAbsent>);
     expect(screen.getByText("Power")).toBeInTheDocument();
-    rerender(<BadgeMaybeAbsent text={2030} />);
+    rerender(<BadgeMaybeAbsent>2030</BadgeMaybeAbsent>);
     expect(screen.getByText("2030")).toBeInTheDocument();
   });
 
   it("uses toLabel only for present values", () => {
     const toLabel = (v: number) => `Y${v}`;
     const { rerender } = render(
-      <BadgeMaybeAbsent<number>
-        text={2030}
-        toLabel={toLabel}
-      />,
+      <BadgeMaybeAbsent<number> toLabel={toLabel}>2030</BadgeMaybeAbsent>,
     );
     expect(screen.getByText("Y2030")).toBeInTheDocument();
     rerender(
@@ -296,7 +299,7 @@ describe("BadgeMaybeAbsent", () => {
 
   it("passes through ReactNode labels", () => {
     const node = <span data-testid="inner">Inner</span>;
-    render(<BadgeMaybeAbsent text={node} />);
+    render(<BadgeMaybeAbsent>{node}</BadgeMaybeAbsent>);
     expect(screen.getByTestId("inner")).toBeInTheDocument();
     expect(screen.getByText("Inner")).toBeInTheDocument();
   });
@@ -314,10 +317,7 @@ describe("BadgeMaybeAbsent", () => {
   it("renderLabel decorates only string labels", () => {
     const renderLabel = (label: string) => `**${label}**`;
     render(
-      <BadgeMaybeAbsent
-        text="EUROPE"
-        renderLabel={renderLabel}
-      />,
+      <BadgeMaybeAbsent renderLabel={renderLabel}>EUROPE</BadgeMaybeAbsent>,
     );
     expect(screen.getByText("**EUROPE**")).toBeInTheDocument();
   });

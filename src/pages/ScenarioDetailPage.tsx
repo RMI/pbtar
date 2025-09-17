@@ -84,20 +84,25 @@ const ScenarioDetailPage: React.FC = () => {
 
           <div className="flex flex-wrap gap-2 mb-4">
             <BadgeMaybeAbsent
-              text={scenario.pathwayType}
               tooltip={getPathwayTypeTooltip(
                 scenario.pathwayType as PathwayType,
               )}
               variant="pathwayType"
-            />
+            >
+              {scenario.pathwayType}
+            </BadgeMaybeAbsent>
+            <BadgeMaybeAbsent variant="year">
+              {scenario.modelYearEnd}
+            </BadgeMaybeAbsent>
             <BadgeMaybeAbsent
-              text={scenario.modelYearEnd}
-              variant="year"
-            />
-            <BadgeMaybeAbsent
-              text={`${scenario.modelTempIncrease}°C`}
               variant="temperature"
-            />
+              toLabel={(t) => {
+                const s = String(t);
+                return s.endsWith("°C") ? s : `${s}°C`;
+              }}
+            >
+              {scenario.modelTempIncrease}
+            </BadgeMaybeAbsent>
           </div>
 
           <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
@@ -184,10 +189,11 @@ const ScenarioDetailPage: React.FC = () => {
                   {scenario.sectors.map((sector, index) => (
                     <BadgeMaybeAbsent
                       key={index}
-                      text={sector.name}
                       tooltip={getSectorTooltip(sector.name)}
                       variant="sector"
-                    />
+                    >
+                      {sector.name}
+                    </BadgeMaybeAbsent>
                   ))}
                 </div>
               </div>

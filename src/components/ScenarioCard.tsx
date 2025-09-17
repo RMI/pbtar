@@ -145,31 +145,32 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           </p>
           <div className="flex flex-wrap gap-2">
             <BadgeMaybeAbsent
-              text={highlightTextIfSearchMatch(scenario.pathwayType)}
               tooltip={getPathwayTypeTooltip(
                 scenario.pathwayType as PathwayType,
               )}
               variant="pathwayType"
-            />
+            >
+              {highlightTextIfSearchMatch(scenario.pathwayType)}
+            </BadgeMaybeAbsent>
           </div>
         </div>
 
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Targets:</p>
           <div className="flex flex-wrap">
+            <BadgeMaybeAbsent variant="year">
+              {highlightTextIfSearchMatch(scenario.modelYearEnd)}
+            </BadgeMaybeAbsent>
             <BadgeMaybeAbsent
-              text={highlightTextIfSearchMatch(scenario.modelYearEnd)}
-              variant="year"
-            />
-            <BadgeMaybeAbsent
-              text={scenario.modelTempIncrease}
               variant="temperature"
               toLabel={(t) => {
                 const s = String(t);
                 return s.endsWith("°C") ? s : `${s}°C`;
               }}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
-            />
+            >
+              {scenario.modelTempIncrease}
+            </BadgeMaybeAbsent>
           </div>
         </div>
 
@@ -230,10 +231,11 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             {sortedSectors.slice(0, visibleSectorsCount).map((sector) => (
               <BadgeMaybeAbsent
                 key={sector.name}
-                text={highlightTextIfSearchMatch(sector.name)}
                 tooltip={getSectorTooltip(sector.name)}
                 variant="sector"
-              />
+              >
+                {highlightTextIfSearchMatch(sector.name)}
+              </BadgeMaybeAbsent>
             ))}
             {scenario.sectors.length > visibleSectorsCount && (
               <TextWithTooltip

@@ -34,10 +34,9 @@ const GeographyBadge: React.FC<GeographyBadgeProps> = ({ text, display }) => {
 
   const kind = geographyKind(text_clean);
   return (
-    <BadgeMaybeAbsent
-      variant={variantFor(kind)}
-      text={display ?? geographyLabel(text_clean)}
-    ></BadgeMaybeAbsent>
+    <BadgeMaybeAbsent variant={variantFor(kind)}>
+      {display ?? geographyLabel(text_clean)}
+    </BadgeMaybeAbsent>
   );
 };
 
