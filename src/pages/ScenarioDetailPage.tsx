@@ -13,7 +13,11 @@ import {
   sortGeographiesForDetails,
 } from "../utils/geographyUtils";
 import { ExternalLink, ArrowLeft } from "lucide-react";
-import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
+import {
+  getPathwayTypeTooltip,
+  getSectorTooltip,
+  getMetricTooltip,
+} from "../utils/tooltipUtils";
 
 const ScenarioDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -187,7 +191,7 @@ const ScenarioDetailPage: React.FC = () => {
                 </BadgeArray>
               </div>
 
-              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
                 <h3 className="text-lg font-medium text-rmigray-800 mb-3">
                   Sectors
                 </h3>
@@ -203,6 +207,18 @@ const ScenarioDetailPage: React.FC = () => {
                     {scenario.sectors.map((sector) => sector.name)}
                   </BadgeArray>
                 </div>
+              </div>
+
+              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
+                  Benchmark Metrics
+                </h3>
+                <BadgeArray
+                  variant="metric"
+                  tooltipGetter={getMetricTooltip}
+                >
+                  {scenario.metric}
+                </BadgeArray>
               </div>
             </div>
           </div>
