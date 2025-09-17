@@ -185,29 +185,41 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <p className="text-xs font-medium text-rmigray-500 mb-1">
             Geographies:
           </p>
-          <BadgeArray
-            variant={sortedGeography.map(
-              (geo) => geographyVariant(geographyKind(geo)) as string,
-            )}
-            toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
-            visibleCount={visibleGeographyCount}
-            renderLabel={(label) => highlightTextIfSearchMatch(label)}
+          <div
+            ref={geographyContainerRef}
+            flex
+            flex-wrap
           >
-            {sortedGeography}
-          </BadgeArray>
+            <BadgeArray
+              variant={sortedGeography.map(
+                (geo) => geographyVariant(geographyKind(geo)) as string,
+              )}
+              toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
+              visibleCount={visibleGeographyCount}
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
+            >
+              {sortedGeography}
+            </BadgeArray>
+          </div>
         </div>
 
         {/* Sectors section with dynamic badge count */}
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Sectors:</p>
-          <BadgeArray
-            visibleCount={visibleSectorsCount}
-            variant="sector"
-            tooltipGetter={getSectorTooltip}
-            renderLabel={(label) => highlightTextIfSearchMatch(label)}
+          <div
+            ref={geographyContainerRef}
+            flex
+            flex-wrap
           >
-            {sortedSectors.map((sector) => sector.name)}
-          </BadgeArray>
+            <BadgeArray
+              visibleCount={visibleSectorsCount}
+              variant="sector"
+              tooltipGetter={getSectorTooltip}
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
+            >
+              {sortedSectors.map((sector) => sector.name)}
+            </BadgeArray>
+          </div>
         </div>
 
         <div className="mt-auto pt-3 border-t border-gray-100">
