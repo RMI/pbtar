@@ -131,6 +131,14 @@ describe("Badge component", () => {
     expect(badge).toHaveClass("border-solar-200");
   });
 
+  it("applies metric styling when variant is 'metric'", () => {
+    const { container } = render(<Badge variant="metric">Intensity</Badge>);
+    const badge = container.firstChild as HTMLElement;
+    expect(badge).toHaveClass("bg-rmipurple-100");
+    expect(badge).toHaveClass("text-rmipurple-800");
+    expect(badge).toHaveClass("border-rmipurple-200");
+  });
+
   it("always includes base badge styling", () => {
     // Testing that common styles are applied to all variants
     const { container } = render(
