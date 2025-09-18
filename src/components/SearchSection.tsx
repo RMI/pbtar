@@ -4,6 +4,7 @@ import MultiSelectDropdown from "./MultiSelectDropdown";
 import { scenariosData } from "../data/scenariosData";
 import { SearchFilters, Geography } from "../types";
 import { makeGeographyOptions } from "../utils/searchUtils";
+import type { FilterModes } from "../utils/searchUtils";
 import {
   buildOptionsFromValues,
   hasAbsent,
@@ -29,6 +30,13 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   onSearch,
   onClear,
 }) => {
+  const setMode = React.useCallback(
+    (facet: "geography" | "sector", m: "ANY" | "ALL") => {
+      onFilterChange("modes", { ...(filters.modes ?? {}), [facet]: m });
+    },
+    [filters.modes, onFilterChange],
+  );
+
   const pathwayTypeOptions = buildOptionsFromValues(
     scenariosData.map((d) => d.pathwayType),
   );
@@ -96,6 +104,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           options={pathwayTypeOptions}
           value={filters.pathwayType}
           onChange={(arr) => onFilterChange("pathwayType", arr)}
+          showModeToggle
+          mode={(filters.modes?.pathwayType ?? "ANY") as FilterModes}
+          onModeChange={(m) => setMode("pathwayType", m)}
         />
 
         <MultiSelectDropdown<number>
@@ -103,6 +114,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           options={modelYearEndOptions}
           value={filters.modelYearEnd}
           onChange={(arr) => onFilterChange("modelYearEnd", arr)}
+          showModeToggle
+          mode={(filters.modes?.modelYearEnd ?? "ANY") as FilterModes}
+          onModeChange={(m) => setMode("modelYearEnd", m)}
         />
 
         <MultiSelectDropdown<string | number>
@@ -110,6 +124,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           options={temperatureOptions}
           value={filters.modelTempIncrease}
           onChange={(arr) => onFilterChange("modelTempIncrease", arr)}
+          showModeToggle
+          mode={(filters.modes?.modelTempIncrease ?? "ANY") as FilterModes}
+          onModeChange={(m) => setMode("modelTempIncrease", m)}
         />
 
         <MultiSelectDropdown<string>
@@ -117,6 +134,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           options={geographyOptions}
           value={filters.geography}
           onChange={(arr) => onFilterChange("geography", arr)}
+          showModeToggle
+          mode={(filters.modes?.geography ?? "ANY") as FilterModes}
+          onModeChange={(m) => setMode("geography", m)}
         />
 
         <MultiSelectDropdown<string>
@@ -124,6 +144,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           options={sectorOptions}
           value={filters.sector}
           onChange={(arr) => onFilterChange("sector", arr)}
+          showModeToggle
+          mode={(filters.modes?.sector ?? "ANY") as FilterModes}
+          onModeChange={(m) => setMode("sector", m)}
         />
       </div>
       <div className="mt-4 ml-1">

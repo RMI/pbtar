@@ -98,6 +98,15 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       pathwayType: "BAU",
       modelYearEnd: 2030,
     },
+    {
+      id: "E",
+      name: "Scenario E (Power, Europe+Asia, 2°C)",
+      sectors: [{ name: "Power" }],
+      geography: ["Europe", "Asia"],
+      modelTempIncrease: "2°C",
+      pathwayType: "Net Zero",
+      modelYearEnd: 2050,
+    },
   ] as const;
 
   async function mountWithFixtures(): Promise<void> {
@@ -216,6 +225,30 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       "Scenario A (no sectors, no geo, no temp)",
       "Scenario C (empty sectors[], empty geo[], 1.5°C)",
       "Scenario D (Industry, Asia, no temp)",
+    ]);
+  });
+
+  it("Geography: ANY vs ALL toggle affects results (Europe + Asia)", async () => {
+    await openDropdown(/geography/i);
+    await selectOption("Europe");
+    await selectOption("Asia");
+
+    // ANY (default): shows anything with Europe OR Asia → B, D, E
+    expectVisible([
+      "Scenario B (Power, Europe, 2°C)",
+      "Scenario D (Industry, Asia, no temp)",
+      "Scenario E (Power, Europe+Asia, 2°C)",
+    ]);
+
+    // Switch to ALL inside the open menu
+    await u.click(screen.getByTitle("Match all (AND)"));
+    // Only E has both Europe and Asia
+    expectVisible(["Scenario E (Power, Europe+Asia, 2°C)"]);
+    expectHidden([
+      "Scenario B (Power, Europe, 2°C)",
+      "Scenario D (Industry, Asia, no temp)",
+      "Scenario A (no sectors, no geo, no temp)",
+      "Scenario C (empty sectors[], empty geo[], 1.5°C)",
     ]);
   });
 });

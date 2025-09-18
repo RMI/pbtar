@@ -1,3 +1,5 @@
+import type { FilterModes } from "../utils/searchUtils";
+
 export interface Scenario {
   id: string;
   name: string;
@@ -62,7 +64,10 @@ export interface SearchFilters {
   searchTerm: string;
   // Optional per-facet mode (used later by a UI toggle)
   modes?: {
-    geography?: "ANY" | "ALL";
-    sector?: "ANY" | "ALL";
+    pathwayType?: FilterModes;
+    modelYearEnd?: FilterModes;
+    modelTempIncrease?: FilterModes;
+    geography?: FilterModes;
+    sector?: FilterModes;
   } | null;
 }

@@ -117,4 +117,32 @@ describe("SearchSection", () => {
     expect(screen.getByText("Normative")).toBeInTheDocument();
     expect(screen.getByText("Predictive")).toBeInTheDocument();
   });
+
+  it("Geography: mode toggle to ALL dispatches modes update", () => {
+    render(<SearchSection {...defaultProps} />);
+    const label = screen.getByText("Geography");
+    const wrapper = label.parentElement as HTMLElement;
+    const trigger = wrapper.querySelector('button[aria-haspopup="listbox"]')!;
+    fireEvent.click(trigger);
+    fireEvent.click(screen.getByTitle("Match all (AND)"));
+    expect(defaultProps.onFilterChange).toHaveBeenCalledWith("modes", {
+      geography: "ALL",
+    });
+  });
+
+  it("Sector: mode toggle to ANY dispatches modes update (from existing ALL)", () => {
+    const props = {
+      ...defaultProps,
+      filters: { modes: { sector: "ALL" } } as unknown as SearchFilters,
+    };
+    render(<SearchSection {...props} />);
+    const label = screen.getByText("Sector");
+    const wrapper = label.parentElement as HTMLElement;
+    const trigger = wrapper.querySelector('button[aria-haspopup="listbox"]')!;
+    fireEvent.click(trigger);
+    fireEvent.click(screen.getByTitle("Match any (OR)"));
+    expect(defaultProps.onFilterChange).toHaveBeenCalledWith("modes", {
+      sector: "ANY",
+    });
+  });
 });
