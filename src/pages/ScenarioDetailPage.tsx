@@ -4,10 +4,20 @@ import Markdown from "../components/Markdown";
 import { scenariosData } from "../data/scenariosData";
 import { Scenario, PathwayType } from "../types";
 import { BadgeMaybeAbsent } from "../components/Badge";
-import GeographyBadge from "../components/GeographyBadge";
-import { sortGeographiesForDetails } from "../utils/geographyUtils";
+import BadgeArray from "../components/BadgeArray";
+import {
+  geographyKind,
+  geographyLabel,
+  geographyVariant,
+  normalizeGeography,
+  sortGeographiesForDetails,
+} from "../utils/geographyUtils";
 import { ExternalLink, ArrowLeft } from "lucide-react";
-import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
+import {
+  getPathwayTypeTooltip,
+  getSectorTooltip,
+  getMetricTooltip,
+} from "../utils/tooltipUtils";
 
 const ScenarioDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -84,20 +94,25 @@ const ScenarioDetailPage: React.FC = () => {
 
           <div className="flex flex-wrap gap-2 mb-4">
             <BadgeMaybeAbsent
-              text={scenario.pathwayType}
               tooltip={getPathwayTypeTooltip(
                 scenario.pathwayType as PathwayType,
               )}
               variant="pathwayType"
-            />
+            >
+              {scenario.pathwayType}
+            </BadgeMaybeAbsent>
+            <BadgeMaybeAbsent variant="year">
+              {scenario.modelYearEnd}
+            </BadgeMaybeAbsent>
             <BadgeMaybeAbsent
-              text={scenario.modelYearEnd}
-              variant="year"
-            />
-            <BadgeMaybeAbsent
-              text={`${scenario.modelTempIncrease}°C`}
               variant="temperature"
-            />
+              toLabel={(t) => {
+                const s = String(t);
+                return s.endsWith("°C") ? s : `${s}°C`;
+              }}
+            >
+              {scenario.modelTempIncrease}
+            </BadgeMaybeAbsent>
           </div>
 
           <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
@@ -164,32 +179,46 @@ const ScenarioDetailPage: React.FC = () => {
                 <h3 className="text-lg font-medium text-rmigray-800 mb-3">
                   Geographies
                 </h3>
-                <div className="flex flex-wrap">
-                  {sortGeographiesForDetails(scenario.geography ?? []).map(
-                    (geography, index) => (
-                      <GeographyBadge
-                        key={index}
-                        text={geography}
-                      />
-                    ),
+                <BadgeArray
+                  variant={sortGeographiesForDetails(
+                    scenario.geography ?? [],
+                  ).map(
+                    (geo) => geographyVariant(geographyKind(geo)) as string,
                   )}
-                </div>
+                  toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
+                >
+                  {sortGeographiesForDetails(scenario.geography ?? [])}
+                </BadgeArray>
               </div>
 
-              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
                 <h3 className="text-lg font-medium text-rmigray-800 mb-3">
                   Sectors
                 </h3>
-                <div className="flex flex-wrap">
-                  {scenario.sectors.map((sector, index) => (
-                    <BadgeMaybeAbsent
-                      key={index}
-                      text={sector.name}
-                      tooltip={getSectorTooltip(sector.name)}
-                      variant="sector"
-                    />
-                  ))}
+                {/* Sectors section with dynamic badge count */}
+                <div className="mb-3">
+                  <p className="text-xs font-medium text-rmigray-500 mb-1">
+                    Sectors:
+                  </p>
+                  <BadgeArray
+                    variant="sector"
+                    tooltipGetter={getSectorTooltip}
+                  >
+                    {scenario.sectors.map((sector) => sector.name)}
+                  </BadgeArray>
                 </div>
+              </div>
+
+              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
+                  Benchmark Metrics
+                </h3>
+                <BadgeArray
+                  variant="metric"
+                  tooltipGetter={getMetricTooltip}
+                >
+                  {scenario.metric}
+                </BadgeArray>
               </div>
             </div>
           </div>

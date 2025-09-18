@@ -3,7 +3,7 @@ import TextWithTooltip from "./TextWithTooltip";
 import { coalesceOptional, isAbsent } from "../utils/absent";
 
 interface BadgeProps {
-  text: React.ReactNode;
+  children: string | number;
   tooltip?: string;
   variant?:
     | "default"
@@ -18,7 +18,7 @@ interface BadgeProps {
 }
 
 const Badge: React.FC<BadgeProps> = ({
-  text,
+  children,
   tooltip,
   variant = "default",
   className,
@@ -39,6 +39,8 @@ const Badge: React.FC<BadgeProps> = ({
         return "bg-pinishgreen-100 text-pinishgreen-800 border-pinishgreen-200";
       case "sector":
         return "bg-solar-100 text-solar-800 border-solar-200";
+      case "metric":
+        return "bg-rmipurple-100 text-rmipurple-800 border-rmipurple-200";
       default:
         return "bg-rmigray-100 text-rmigray-800 border-rmigray-200";
     }
@@ -52,13 +54,13 @@ const Badge: React.FC<BadgeProps> = ({
   // If no tooltip, just return the basic badge
   // If no tooltip, just return the basic badge
   if (!tooltip) {
-    return <span className={badgeStyles}>{text}</span>;
+    return <span className={badgeStyles}>{children}</span>;
   }
 
   // With tooltip, use the TextWithTooltip component
   return (
     <TextWithTooltip
-      text={<span className={badgeStyles}>{text}</span>}
+      text={<span className={badgeStyles}>{children}</span>}
       tooltip={tooltip}
       position="right"
     />
@@ -68,9 +70,12 @@ const Badge: React.FC<BadgeProps> = ({
 export default Badge;
 // --- value-aware helpers (schema-agnostic) --------------------
 
-export type BadgeValueProps<T> = React.ComponentProps<typeof Badge> & {
-  /** Scalar value to show inside the badge. If null/undefined -> renders "None". */
-  text: T | null | undefined;
+export type BadgeMaybeAbsentProps<T extends string | number> = Omit<
+  React.ComponentProps<typeof Badge>,
+  "children"
+> & {
+  /** Scalar children to show inside the badge (null/undefined => "None"). */
+  children: T | null | undefined;
   /** Optional labeler for non-absent values (e.g., pretty format). */
   toLabel?: (v: T) => string;
   /** Visible text for the "None" case (default "None"). */
@@ -79,34 +84,29 @@ export type BadgeValueProps<T> = React.ComponentProps<typeof Badge> & {
   renderLabel?: (label: string, isAbsent: boolean) => React.ReactNode;
 };
 
-export function BadgeMaybeAbsent<T>({
-  text,
+export function BadgeMaybeAbsent<T extends string | number>({
+  children,
   toLabel,
   noneLabel,
   renderLabel,
   ...rest
-}: BadgeValueProps<T>) {
-  const normalized = coalesceOptional(text as T | null | undefined);
+}: BadgeMaybeAbsentProps<T>) {
+  const normalized = coalesceOptional(children);
   const absent = isAbsent(normalized);
 
-  let base: React.ReactNode;
+  let base: string | number;
   if (absent) {
     base = noneLabel ?? "None";
   } else if (toLabel) {
-    base = toLabel(text as T);
-  } else if (typeof text === "string" || typeof text === "number") {
-    base = String(text);
+    base = toLabel(children as T);
+  } else if (typeof children === "string" || typeof children === "number") {
+    base = String(children);
   } else {
-    // Already a React node (e.g., <HighlightedText />) — use as-is
-    base = text as React.ReactNode;
+    // Should be unreachable at runtime due to typing, but keep a safe fallback
+    base = String(children as unknown as string | number);
   }
 
   const content =
     renderLabel && typeof base === "string" ? renderLabel(base, absent) : base;
-  return (
-    <Badge
-      {...rest}
-      text={content}
-    ></Badge>
-  );
+  return <Badge {...rest}>{content}</Badge>;
 }
