@@ -1,9 +1,10 @@
 import React from "react";
 import SearchBox from "./SearchBox";
-import FilterDropdown from "./FilterDropdown";
+import MultiSelectDropdown from "./MultiSelectDropdown";
 import { scenariosData } from "../data/scenariosData";
 import { SearchFilters, Geography } from "../types";
 import { makeGeographyOptions } from "../utils/searchUtils";
+import type { FacetMode } from "../utils/searchUtils";
 import {
   buildOptionsFromValues,
   hasAbsent,
@@ -14,7 +15,7 @@ import { ABSENT_FILTER_TOKEN } from "../utils/absent";
 interface SearchSectionProps {
   filters: SearchFilters;
   scenariosNumber: number;
-  onFilterChange: <T extends string | number | null>(
+  onFilterChange: <T extends string | number | (string | number)[] | null>(
     key: keyof SearchFilters,
     value: T | null,
   ) => void;
@@ -29,6 +30,21 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   onSearch,
   onClear,
 }) => {
+  const setMode = React.useCallback(
+    (
+      facet:
+        | "geography"
+        | "sector"
+        | "pathwayType"
+        | "modelYearEnd"
+        | "modelTempIncrease",
+      m: FacetMode,
+    ) => {
+      onFilterChange("modes", { ...(filters.modes ?? {}), [facet]: m });
+    },
+    [filters.modes, onFilterChange],
+  );
+
   const pathwayTypeOptions = buildOptionsFromValues(
     scenariosData.map((d) => d.pathwayType),
   );
@@ -63,12 +79,21 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     : sectorOptionsBase;
 
   const areFiltersApplied =
-    (filters.searchTerm ||
-      filters.pathwayType ||
-      filters.geography ||
-      filters.sector ||
-      filters.modelYearEnd ||
-      filters.modelTempIncrease) !== null;
+    Boolean(filters.searchTerm) ||
+    Boolean(filters.pathwayType) ||
+    // array-backed facets: true only when non-empty; scalar: true when not null/undefined
+    (Array.isArray(filters.geography)
+      ? filters.geography.length > 0
+      : filters.geography != null) ||
+    (Array.isArray(filters.sector)
+      ? filters.sector.length > 0
+      : filters.sector != null) ||
+    (Array.isArray(filters.modelYearEnd)
+      ? filters.modelYearEnd.length > 0
+      : filters.modelYearEnd != null) ||
+    (Array.isArray(filters.modelTempIncrease)
+      ? filters.modelTempIncrease.length > 0
+      : filters.modelTempIncrease != null);
 
   return (
     <div className="bg-white">
@@ -82,39 +107,54 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <FilterDropdown<string>
+        <MultiSelectDropdown<string>
           label="Pathway Type"
           options={pathwayTypeOptions}
-          selectedValue={filters.pathwayType}
-          onChange={(value) => onFilterChange("pathwayType", value)}
+          value={filters.pathwayType}
+          onChange={(arr) => onFilterChange("pathwayType", arr)}
+          showModeToggle={false}
+          mode={filters.modes?.pathwayType ?? "ANY"}
+          onModeChange={(m) => setMode("pathwayType", m)}
         />
 
-        <FilterDropdown<string>
+        <MultiSelectDropdown<number>
           label="Target Year"
           options={modelYearEndOptions}
-          selectedValue={filters.modelYearEnd}
-          onChange={(value) => onFilterChange("modelYearEnd", value)}
+          value={filters.modelYearEnd}
+          onChange={(arr) => onFilterChange("modelYearEnd", arr)}
+          showModeToggle={false}
+          mode={filters.modes?.modelYearEnd ?? "ANY"}
+          onModeChange={(m) => setMode("modelYearEnd", m)}
         />
 
-        <FilterDropdown<number>
+        <MultiSelectDropdown<string | number>
           label="Temperature (°C)"
           options={temperatureOptions}
-          selectedValue={filters.modelTempIncrease}
-          onChange={(value) => onFilterChange("modelTempIncrease", value)}
+          value={filters.modelTempIncrease}
+          onChange={(arr) => onFilterChange("modelTempIncrease", arr)}
+          showModeToggle={false}
+          mode={filters.modes?.modelTempIncrease ?? "ANY"}
+          onModeChange={(m) => setMode("modelTempIncrease", m)}
         />
 
-        <FilterDropdown<string>
+        <MultiSelectDropdown<string>
           label="Geography"
           options={geographyOptions}
-          selectedValue={filters.geography}
-          onChange={(value) => onFilterChange("geography", value)}
+          value={filters.geography}
+          onChange={(arr) => onFilterChange("geography", arr)}
+          showModeToggle
+          mode={filters.modes?.geography ?? "ANY"}
+          onModeChange={(m) => setMode("geography", m)}
         />
 
-        <FilterDropdown<string>
+        <MultiSelectDropdown<string>
           label="Sector"
           options={sectorOptions}
-          selectedValue={filters.sector}
-          onChange={(value) => onFilterChange("sector", value)}
+          value={filters.sector}
+          onChange={(arr) => onFilterChange("sector", arr)}
+          showModeToggle
+          mode={filters.modes?.sector ?? "ANY"}
+          onModeChange={(m) => setMode("sector", m)}
         />
       </div>
       <div className="mt-4 ml-1">
