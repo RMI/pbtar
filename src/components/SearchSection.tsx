@@ -63,12 +63,21 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     : sectorOptionsBase;
 
   const areFiltersApplied =
-    (filters.searchTerm ||
-      filters.pathwayType ||
-      filters.geography ||
-      filters.sector ||
-      filters.modelYearEnd ||
-      filters.modelTempIncrease) !== null;
+    Boolean(filters.searchTerm) ||
+    Boolean(filters.pathwayType) ||
+    // array-backed facets: true only when non-empty; scalar: true when not null/undefined
+    (Array.isArray(filters.geography)
+      ? filters.geography.length > 0
+      : filters.geography != null) ||
+    (Array.isArray(filters.sector)
+      ? filters.sector.length > 0
+      : filters.sector != null) ||
+    (Array.isArray(filters.modelYearEnd)
+      ? filters.modelYearEnd.length > 0
+      : filters.modelYearEnd != null) ||
+    (Array.isArray(filters.modelTempIncrease)
+      ? filters.modelTempIncrease.length > 0
+      : filters.modelTempIncrease != null);
 
   return (
     <div className="bg-white">
@@ -99,10 +108,10 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           label="Target Year"
           options={modelYearEndOptions}
           value={
-            Array.isArray(filters.temperature)
-              ? (filters.modelYearEnd as string[])
-              : filters.modelYearEnd
-                ? [String(filters.modelYearEnd)]
+            Array.isArray(filters.modelYearEnd)
+              ? (filters.modelYearEnd as number[])
+              : filters.modelYearEnd != null
+                ? [filters.modelYearEnd as number]
                 : []
           }
           onChange={(arr) => onFilterChange("modelYearEnd", arr)}
@@ -117,7 +126,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
             Array.isArray(filters.modelTempIncrease)
               ? (filters.modelTempIncrease as (string | number)[])
               : filters.modelTempIncrease != null
-                ? [String(filters.modelTempIncrease as string | number)]
+                ? [filters.modelTempIncrease as string | number]
                 : []
           }
           onChange={(arr) => onFilterChange("modelTempIncrease", arr)}

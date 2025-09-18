@@ -4,11 +4,7 @@ import {
   geographyLabel,
   sortGeographiesForDetails,
 } from "./geographyUtils";
-import {
-  matchesOptionalFacet,
-  matchesOptionalFacetAny,
-  matchesOptionalFacetAll,
-} from "./facets";
+import { matchesOptionalFacetAny, matchesOptionalFacetAll } from "./facets";
 import { ABSENT_FILTER_TOKEN } from "./absent";
 
 export interface GeoOption {
@@ -26,13 +22,20 @@ export type FilterModes = Partial<{
 // Extend your existing Filters type minimally:
 // - geography/sector may be string | string[]
 // - optionally accept a modes map
-export type Arrayable = string | string[] | null | undefined;
+export type Arrayable =
+  | string
+  | string[]
+  | number
+  | number[]
+  | null
+  | undefined;
+
 export type FiltersWithArrays = {
   geography?: Arrayable;
   sector?: Arrayable;
-  pathwayType?: string | null;
-  modelYearEnd?: string | null;
-  modelTempIncrease?: string | null;
+  pathwayType?: Arrayable;
+  modelYearEnd?: Arrayable;
+  modelTempIncrease?: Arrayable;
   searchTerm?: string;
   // optional
   modes?: FilterModes;
@@ -41,6 +44,27 @@ export type FiltersWithArrays = {
 function toArray(v: Arrayable): string[] {
   if (v == null) return [];
   return Array.isArray(v) ? v.filter(Boolean) : [String(v)];
+}
+
+function toArrayMixed(v: Arrayable): (string | number)[] {
+  if (v == null) return [];
+  return Array.isArray(v)
+    ? v.filter((x) => x !== null && x !== undefined)
+    : [v];
+}
+
+function hasAbsentToken(arr: (string | number)[]): boolean {
+  return arr.some((t) => String(t) === ABSENT_FILTER_TOKEN);
+}
+
+function toNumberSet(arr: (string | number)[]): Set<number> {
+  const out = new Set<number>();
+  for (const t of arr) {
+    if (String(t) === ABSENT_FILTER_TOKEN) continue;
+    const n = typeof t === "number" ? t : Number(t);
+    if (Number.isFinite(n)) out.add(n);
+  }
+  return out;
 }
 
 function pickMode(facet: keyof FilterModes, modes?: FilterModes): FacetMode {
@@ -67,34 +91,46 @@ export const filterScenarios = (
   filters: FiltersWithArrays,
 ): Scenario[] => {
   return scenarios.filter((scenario) => {
-    // Pathway type filter
-    if (
-      !matchesOptionalFacet(
-        filters.pathwayType == null ? [] : [String(filters.pathwayType)],
-        scenario.pathwayType,
-      )
-    )
-      return false;
+    // ---- Pathway type: OR over selected tokens; empty array => no filter; ABSENT-aware
+    {
+      const selected = toArray(filters.pathwayType);
+      if (selected.length) {
+        const hasAbsent = selected.includes(ABSENT_FILTER_TOKEN);
+        const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
+        const v = scenario.pathwayType ?? null;
+        const ok =
+          (v == null && hasAbsent) ||
+          (v != null && (concrete.length ? concrete.includes(v) : false));
+        if (!ok) return false;
+      }
+    }
 
-    // Target year filter
-    if (
-      !matchesOptionalFacet(
-        filters.modelYearEnd == null ? [] : [String(filters.modelYearEnd)],
-        scenario.modelYearEnd,
-      )
-    )
-      return false;
+    // ---- Target year: OR over numbers; empty array => no filter; ABSENT-aware
+    {
+      const selected = toArrayMixed(filters.modelYearEnd);
+      if (selected.length) {
+        const hasAbsent = hasAbsentToken(selected);
+        const numericChoices = toNumberSet(selected);
+        const v = scenario.modelYearEnd; // number | null | undefined
+        const ok =
+          (v == null && hasAbsent) ||
+          (v != null && numericChoices.has(Number(v)));
+        if (!ok) return false;
+      }
+    }
 
-    // Target temperature filter (missing-aware: supports "__ABSENT__")
-    if (
-      !matchesOptionalFacet(
-        filters.modelTempIncrease == null
-          ? [] // no selection => don't filter by temperature
-          : [String(filters.modelTempIncrease)], // single-select dropdown -> 1 token
-        scenario.modelTempIncrease,
-      )
-    ) {
-      return false;
+    // ---- Temperature: OR over numbers; empty array => no filter; ABSENT-aware
+    {
+      const selected = toArrayMixed(filters.modelTempIncrease);
+      if (selected.length) {
+        const hasAbsent = hasAbsentToken(selected);
+        const numericChoices = toNumberSet(selected);
+        const v = scenario.modelTempIncrease; // number | null | undefined
+        const ok =
+          (v == null && hasAbsent) ||
+          (v != null && numericChoices.has(Number(v)));
+        if (!ok) return false;
+      }
     }
 
     // Geography filter (array + mode + missing-aware + normalization)
