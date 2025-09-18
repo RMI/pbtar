@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { filterScenarios } from "./searchUtils";
+import type { FiltersWithArrays } from "./searchUtils";
+import { ABSENT_FILTER_TOKEN } from "./absent";
 import { Scenario, SearchFilters } from "../types";
 
 import rawScenarioArray from "../../testdata/valid/scenarios_metadata_sample_array.json" assert { type: "json" };
@@ -201,5 +203,117 @@ describe("searchUtils - array results", () => {
         expect(result[0].id).toBe("scenario-simple-full");
       });
     });
+  });
+});
+
+describe("filterScenarios (array-backed facets)", () => {
+  const scenarios: Scenario[] = [
+    {
+      id: "A",
+      name: "A",
+      sectors: undefined,
+      geography: undefined,
+      modelTempIncrease: undefined,
+      pathwayType: undefined,
+      modelYearEnd: undefined,
+      publisher: undefined,
+      publicationYear: undefined,
+      description: undefined,
+    },
+    {
+      id: "B",
+      name: "B",
+      sectors: [{ name: "Power" }],
+      geography: ["Europe"],
+      modelTempIncrease: 2.0,
+      pathwayType: "Direct Policy",
+      modelYearEnd: 2040,
+      publisher: "X",
+      publicationYear: 2020,
+      description: "",
+    },
+    {
+      id: "C",
+      name: "C",
+      sectors: [{ name: "Industry" }],
+      geography: ["Asia"],
+      modelTempIncrease: 1.5,
+      pathwayType: "Exploratory",
+      modelYearEnd: 2030,
+      publisher: "X",
+      publicationYear: 2020,
+      description: "",
+    },
+  ];
+
+  it("pathwayType: OR over multiple selections; empty array = no filter", () => {
+    let out = filterScenarios(scenarios, {
+      pathwayType: ["Direct Policy", "Exploratory"],
+    } as FiltersWithArrays);
+    expect(out.map((s) => s.id)).toEqual(["B", "C"]);
+
+    out = filterScenarios(scenarios, { pathwayType: [] } as FiltersWithArrays);
+    expect(out.map((s) => s.id)).toEqual(["A", "B", "C"]);
+  });
+
+  it("pathwayType: ABSENT token matches missing value only", () => {
+    const out = filterScenarios(scenarios, {
+      pathwayType: [ABSENT_FILTER_TOKEN],
+    } as FiltersWithArrays);
+    expect(out.map((s) => s.id)).toEqual(["A"]);
+  });
+
+  it("numeric (modelYearEnd): OR over numbers, with ABSENT", () => {
+    let out = filterScenarios(scenarios, {
+      modelYearEnd: [2040, 2030],
+    } as FiltersWithArrays);
+    expect(out.map((s) => s.id)).toEqual(["B", "C"]);
+    out = filterScenarios(scenarios, {
+      modelYearEnd: [2040, ABSENT_FILTER_TOKEN],
+    } as FiltersWithArrays);
+    expect(out.map((s) => s.id)).toEqual(["A", "B"]);
+    out = filterScenarios(scenarios, {
+      modelYearEnd: [ABSENT_FILTER_TOKEN],
+    } as FiltersWithArrays);
+    expect(out.map((s) => s.id)).toEqual(["A"]);
+    out = filterScenarios(scenarios, {
+      modelYearEnd: [9999],
+    } as FiltersWithArrays);
+    expect(out.map((s) => s.id)).toEqual([]);
+  });
+
+  it("numeric (temperature): OR over numbers, with ABSENT", () => {
+    let out = filterScenarios(scenarios, {
+      modelTempIncrease: [1.5, 2.0],
+    } as FiltersWithArrays);
+    expect(out.map((s) => s.id)).toEqual(["B", "C"]);
+    out = filterScenarios(scenarios, {
+      modelTempIncrease: [ABSENT_FILTER_TOKEN],
+    } as FiltersWithArrays);
+    expect(out.map((s) => s.id)).toEqual(["A"]);
+  });
+
+  it("geography: ALL mode requires all tokens; ANY is default", () => {
+    // Add a scenario with two geos
+    const many: Scenario[] = [
+      ...scenarios,
+      {
+        ...scenarios[1],
+        id: "B2",
+        name: "B2",
+        geography: ["Europe", "Asia"],
+      },
+    ];
+    // ANY (default): Europe OR Asia → B, C, B2
+    let out = filterScenarios(many, {
+      geography: ["Europe", "Asia"],
+    } as FiltersWithArrays);
+    expect(out.map((s) => s.id)).toEqual(["B", "C", "B2"]);
+    // ALL: must have both → only B2
+    out = filterScenarios(many, {
+      geography: ["Europe", "Asia"],
+      modes: { geography: "ALL" },
+    } as FiltersWithArrays);
+    expect(out.map((s) => s.id)).toEqual(["B2"]);
   });
 });
