@@ -53,6 +53,14 @@ export type Sector =
   | "Agriculture"
   | "N/A";
 
+export type Metric =
+  | "Emissions Intensity"
+  | "Capacity"
+  | "Generation"
+  | "Technology Mix"
+  | "Absolute Emissions"
+  | "Carbon Price";
+
 export interface SearchFilters {
   pathwayType: PathwayType | null;
   modelYearEnd: YearTarget | null;
