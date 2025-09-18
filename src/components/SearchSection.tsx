@@ -94,70 +94,35 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         <MultiSelectDropdown<string>
           label="Pathway Type"
           options={pathwayTypeOptions}
-          value={
-            Array.isArray(filters.pathwayType)
-              ? (filters.pathwayType as string[])
-              : filters.pathwayType
-                ? [String(filters.pathwayType)]
-                : []
-          }
+          value={filters.pathwayType}
           onChange={(arr) => onFilterChange("pathwayType", arr)}
         />
 
         <MultiSelectDropdown<number>
           label="Target Year"
           options={modelYearEndOptions}
-          value={
-            Array.isArray(filters.modelYearEnd)
-              ? (filters.modelYearEnd as number[])
-              : filters.modelYearEnd != null
-                ? [filters.modelYearEnd as number]
-                : []
-          }
+          value={filters.modelYearEnd}
           onChange={(arr) => onFilterChange("modelYearEnd", arr)}
         />
 
         <MultiSelectDropdown<string | number>
           label="Temperature (°C)"
-          options={
-            temperatureOptions as { label: string; value: string | number }[]
-          }
-          value={
-            Array.isArray(filters.modelTempIncrease)
-              ? (filters.modelTempIncrease as (string | number)[])
-              : filters.modelTempIncrease != null
-                ? [filters.modelTempIncrease as string | number]
-                : []
-          }
+          options={temperatureOptions}
+          value={filters.modelTempIncrease}
           onChange={(arr) => onFilterChange("modelTempIncrease", arr)}
         />
 
         <MultiSelectDropdown<string>
           label="Geography"
           options={geographyOptions}
-          value={
-            Array.isArray(filters.geography)
-              ? (filters.geography as string[])
-              : filters.geography
-                ? [String(filters.geography)]
-                : []
-          }
-          onChange={(arr) =>
-            // cast to satisfy current onFilterChange signature without widening SearchFilters yet
-            onFilterChange("geography", arr)
-          }
+          value={filters.geography}
+          onChange={(arr) => onFilterChange("geography", arr)}
         />
 
         <MultiSelectDropdown<string>
           label="Sector"
           options={sectorOptions}
-          value={
-            Array.isArray(filters.sector)
-              ? (filters.sector as string[])
-              : filters.sector
-                ? [String(filters.sector)]
-                : []
-          }
+          value={filters.sector}
           onChange={(arr) => onFilterChange("sector", arr)}
         />
       </div>

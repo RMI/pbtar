@@ -11,7 +11,7 @@ export type FacetMode = "ANY" | "ALL";
 type Props<T extends string | number = string> = {
   label?: string;
   options: Option<T>[];
-  value?: T[] | null | undefined; // Accept null/undefined and coerce to []
+  value?: T | T[] | null | undefined; // Accept null/undefined; emit T[] via onChange
   onChange: (next: T[]) => void;
   placeholder?: string;
   className?: string;
@@ -60,8 +60,12 @@ export default function MultiSelectDropdown<
     };
   }, []);
 
-  // Null/undefined safe
-  const current: T[] = Array.isArray(value) ? value : [];
+  // Coerce scalar/null/undefined → T[]
+  const current: T[] = Array.isArray(value)
+    ? value
+    : value != null
+      ? ([value] as T[])
+      : [];
 
   // We compare using string forms to support number values safely
   const toKey = (v: T) => String(v);
