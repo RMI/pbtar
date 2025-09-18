@@ -1,12 +1,11 @@
 import React from "react";
+import type { FacetMode } from "../utils/searchUtils";
 
 export type Option<T extends string | number = string> = {
   value: T;
   label: string;
   disabled?: boolean;
 };
-
-export type FacetMode = "ANY" | "ALL";
 
 type Props<T extends string | number = string> = {
   label?: string;
