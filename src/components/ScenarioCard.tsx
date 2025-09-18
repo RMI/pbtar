@@ -1,12 +1,14 @@
 import React, { useMemo, useRef, useState, useEffect, RefObject } from "react";
 import { Link } from "react-router-dom";
 import { BadgeMaybeAbsent } from "./Badge";
-import GeographyBadge from "../components/GeographyBadge";
+import BadgeArray from "./BadgeArray";
 import {
+  geographyKind,
   geographyLabel,
+  geographyVariant,
+  normalizeGeography,
   sortGeographiesForDetails,
 } from "../utils/geographyUtils";
-import TextWithTooltip from "./TextWithTooltip";
 import { Scenario, PathwayType } from "../types";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
@@ -145,12 +147,14 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           </p>
           <div className="flex flex-wrap gap-2">
             <BadgeMaybeAbsent
-              text={highlightTextIfSearchMatch(scenario.pathwayType)}
               tooltip={getPathwayTypeTooltip(
                 scenario.pathwayType as PathwayType,
               )}
               variant="pathwayType"
-            />
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
+            >
+              {scenario.pathwayType}
+            </BadgeMaybeAbsent>
           </div>
         </div>
 
@@ -158,18 +162,21 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <p className="text-xs font-medium text-rmigray-500 mb-1">Targets:</p>
           <div className="flex flex-wrap">
             <BadgeMaybeAbsent
-              text={highlightTextIfSearchMatch(scenario.modelYearEnd)}
               variant="year"
-            />
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
+            >
+              {scenario.modelYearEnd}
+            </BadgeMaybeAbsent>
             <BadgeMaybeAbsent
-              text={scenario.modelTempIncrease}
               variant="temperature"
               toLabel={(t) => {
                 const s = String(t);
                 return s.endsWith("°C") ? s : `${s}°C`;
               }}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
-            />
+            >
+              {scenario.modelTempIncrease}
+            </BadgeMaybeAbsent>
           </div>
         </div>
 
@@ -179,44 +186,20 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             Geographies:
           </p>
           <div
-            className="flex flex-wrap"
             ref={geographyContainerRef}
+            flex
+            flex-wrap
           >
-            {sortedGeography
-              .slice(0, visibleGeographyCount)
-              .map((geography) => {
-                const label = geographyLabel(geography);
-                return (
-                  <GeographyBadge
-                    key={geography}
-                    text={geography}
-                    display={highlightTextIfSearchMatch(label)}
-                  />
-                );
-              })}
-            {scenario.geography.length > visibleGeographyCount && (
-              <TextWithTooltip
-                text={
-                  <span className="text-xs text-rmigray-500 ml-1 self-center">
-                    +{scenario.geography.length - visibleGeographyCount} more
-                  </span>
-                }
-                tooltip={
-                  <span>
-                    {sortedGeography
-                      .slice(visibleGeographyCount)
-                      .map((geography, idx) => (
-                        <React.Fragment key={geography}>
-                          {idx > 0 && ", "}
-                          <span className="whitespace-nowrap">
-                            {geographyLabel(geography)}
-                          </span>
-                        </React.Fragment>
-                      ))}
-                  </span>
-                }
-              />
-            )}
+            <BadgeArray
+              variant={sortedGeography.map(
+                (geo) => geographyVariant(geographyKind(geo)) as string,
+              )}
+              toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
+              visibleCount={visibleGeographyCount}
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
+            >
+              {sortedGeography}
+            </BadgeArray>
           </div>
         </div>
 
@@ -224,40 +207,18 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Sectors:</p>
           <div
-            className="flex flex-wrap"
-            ref={sectorsContainerRef}
+            ref={geographyContainerRef}
+            flex
+            flex-wrap
           >
-            {sortedSectors.slice(0, visibleSectorsCount).map((sector) => (
-              <BadgeMaybeAbsent
-                key={sector.name}
-                text={highlightTextIfSearchMatch(sector.name)}
-                tooltip={getSectorTooltip(sector.name)}
-                variant="sector"
-              />
-            ))}
-            {scenario.sectors.length > visibleSectorsCount && (
-              <TextWithTooltip
-                text={
-                  <span className="text-xs text-rmigray-500 ml-1 self-center">
-                    +{scenario.sectors.length - visibleSectorsCount} more
-                  </span>
-                }
-                tooltip={
-                  <span>
-                    {sortedSectors
-                      .slice(visibleSectorsCount)
-                      .map((sector, idx) => (
-                        <React.Fragment key={sector.name}>
-                          {idx > 0 && ", "}
-                          <span className="whitespace-nowrap">
-                            {sector.name}
-                          </span>
-                        </React.Fragment>
-                      ))}
-                  </span>
-                }
-              />
-            )}
+            <BadgeArray
+              visibleCount={visibleSectorsCount}
+              variant="sector"
+              tooltipGetter={getSectorTooltip}
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
+            >
+              {sortedSectors.map((sector) => sector.name)}
+            </BadgeArray>
           </div>
         </div>
 
