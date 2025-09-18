@@ -1,4 +1,4 @@
-import type { FilterModes } from "../utils/searchUtils";
+import type { FacetMode } from "../utils/searchUtils";
 
 export interface Scenario {
   id: string;
@@ -72,10 +72,10 @@ export interface SearchFilters {
   searchTerm: string;
   // Optional per-facet mode (used later by a UI toggle)
   modes?: {
-    pathwayType?: FilterModes;
-    modelYearEnd?: FilterModes;
-    modelTempIncrease?: FilterModes;
-    geography?: FilterModes;
-    sector?: FilterModes;
+    pathwayType?: FacetMode;
+    modelYearEnd?: FacetMode;
+    modelTempIncrease?: FacetMode;
+    geography?: FacetMode;
+    sector?: FacetMode;
   } | null;
 }

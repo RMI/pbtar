@@ -4,7 +4,7 @@ import MultiSelectDropdown from "./MultiSelectDropdown";
 import { scenariosData } from "../data/scenariosData";
 import { SearchFilters, Geography } from "../types";
 import { makeGeographyOptions } from "../utils/searchUtils";
-import type { FilterModes } from "../utils/searchUtils";
+import type { FacetMode } from "../utils/searchUtils";
 import {
   buildOptionsFromValues,
   hasAbsent,
@@ -31,7 +31,15 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   onClear,
 }) => {
   const setMode = React.useCallback(
-    (facet: "geography" | "sector", m: "ANY" | "ALL") => {
+    (
+      facet:
+        | "geography"
+        | "sector"
+        | "pathwayType"
+        | "modelYearEnd"
+        | "modelTempIncrease",
+      m: FacetMode,
+    ) => {
       onFilterChange("modes", { ...(filters.modes ?? {}), [facet]: m });
     },
     [filters.modes, onFilterChange],
@@ -105,7 +113,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           value={filters.pathwayType}
           onChange={(arr) => onFilterChange("pathwayType", arr)}
           showModeToggle
-          mode={(filters.modes?.pathwayType ?? "ANY") as FilterModes}
+          mode={filters.modes?.pathwayType ?? "ANY"}
           onModeChange={(m) => setMode("pathwayType", m)}
         />
 
@@ -115,7 +123,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           value={filters.modelYearEnd}
           onChange={(arr) => onFilterChange("modelYearEnd", arr)}
           showModeToggle
-          mode={(filters.modes?.modelYearEnd ?? "ANY") as FilterModes}
+          mode={filters.modes?.modelYearEnd ?? "ANY"}
           onModeChange={(m) => setMode("modelYearEnd", m)}
         />
 
@@ -125,7 +133,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           value={filters.modelTempIncrease}
           onChange={(arr) => onFilterChange("modelTempIncrease", arr)}
           showModeToggle
-          mode={(filters.modes?.modelTempIncrease ?? "ANY") as FilterModes}
+          mode={filters.modes?.modelTempIncrease ?? "ANY"}
           onModeChange={(m) => setMode("modelTempIncrease", m)}
         />
 
@@ -135,7 +143,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           value={filters.geography}
           onChange={(arr) => onFilterChange("geography", arr)}
           showModeToggle
-          mode={(filters.modes?.geography ?? "ANY") as FilterModes}
+          mode={filters.modes?.geography ?? "ANY"}
           onModeChange={(m) => setMode("geography", m)}
         />
 
@@ -145,7 +153,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           value={filters.sector}
           onChange={(arr) => onFilterChange("sector", arr)}
           showModeToggle
-          mode={(filters.modes?.sector ?? "ANY") as FilterModes}
+          mode={filters.modes?.sector ?? "ANY"}
           onModeChange={(m) => setMode("sector", m)}
         />
       </div>
