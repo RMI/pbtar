@@ -14,7 +14,7 @@ import { ABSENT_FILTER_TOKEN } from "../utils/absent";
 interface SearchSectionProps {
   filters: SearchFilters;
   scenariosNumber: number;
-  onFilterChange: <T extends string | number | null>(
+  onFilterChange: <T extends string | number | (string | number)[] | null>(
     key: keyof SearchFilters,
     value: T | null,
   ) => void;

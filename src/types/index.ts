@@ -54,10 +54,15 @@ export type Sector =
   | "N/A";
 
 export interface SearchFilters {
-  pathwayType: PathwayType | null;
-  modelYearEnd: YearTarget | null;
-  modelTempIncrease: TemperatureTarget | null;
-  geography: Geography | null;
-  sector: Sector | null;
+  pathwayType?: string | string[] | null;
+  modelYearEnd?: number | (number | string)[] | null;
+  modelTempIncrease?: number | string | (number | string)[] | null;
+  geography?: string | string[] | null;
+  sector?: string | string[] | null;
   searchTerm: string;
+  // Optional per-facet mode (used later by a UI toggle)
+  modes?: {
+    geography?: "ANY" | "ALL";
+    sector?: "ANY" | "ALL";
+  } | null;
 }
