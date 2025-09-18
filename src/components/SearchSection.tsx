@@ -112,7 +112,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           options={pathwayTypeOptions}
           value={filters.pathwayType}
           onChange={(arr) => onFilterChange("pathwayType", arr)}
-          showModeToggle
+          showModeToggle={false}
           mode={filters.modes?.pathwayType ?? "ANY"}
           onModeChange={(m) => setMode("pathwayType", m)}
         />
@@ -122,7 +122,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           options={modelYearEndOptions}
           value={filters.modelYearEnd}
           onChange={(arr) => onFilterChange("modelYearEnd", arr)}
-          showModeToggle
+          showModeToggle={false}
           mode={filters.modes?.modelYearEnd ?? "ANY"}
           onModeChange={(m) => setMode("modelYearEnd", m)}
         />
@@ -132,7 +132,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           options={temperatureOptions}
           value={filters.modelTempIncrease}
           onChange={(arr) => onFilterChange("modelTempIncrease", arr)}
-          showModeToggle
+          showModeToggle={false}
           mode={filters.modes?.modelTempIncrease ?? "ANY"}
           onModeChange={(m) => setMode("modelTempIncrease", m)}
         />

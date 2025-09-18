@@ -145,4 +145,26 @@ describe("SearchSection", () => {
       sector: "ANY",
     });
   });
+
+  describe("does NOT render ANY/ALL toggle for scalar facets", () => {
+    for (const facet of [
+      "Pathway Type",
+      "Target Year",
+      "Temperature (°C)",
+    ] as const) {
+      it(`facet: ${facet}`, () => {
+        render(<SearchSection {...defaultProps} />);
+        const label = screen.getByText(facet);
+        const wrapper = label.parentElement as HTMLElement;
+        const trigger = wrapper.querySelector(
+          'button[aria-haspopup="listbox"]',
+        )!;
+        fireEvent.click(trigger);
+        expect(screen.queryByTitle("Match any (OR)")).not.toBeInTheDocument();
+        expect(screen.queryByTitle("Match all (AND)")).not.toBeInTheDocument();
+        // close popover to avoid overlapping menus in the loop
+        fireEvent.keyDown(document, { key: "Escape" });
+      });
+    }
+  });
 });
