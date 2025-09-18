@@ -1,6 +1,6 @@
 import React from "react";
 import SearchBox from "./SearchBox";
-import FilterDropdown from "./FilterDropdown";
+import MultiSelectDropdown from "./MultiSelectDropdown";
 import { scenariosData } from "../data/scenariosData";
 import { SearchFilters, Geography } from "../types";
 import { makeGeographyOptions } from "../utils/searchUtils";
@@ -82,39 +82,72 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <FilterDropdown<string>
+        <MultiSelectDropdown
           label="Pathway Type"
           options={pathwayTypeOptions}
-          selectedValue={filters.pathwayType}
-          onChange={(value) => onFilterChange("pathwayType", value)}
+          value={
+            Array.isArray(filters.pathwayType)
+              ? (filters.pathwayType as string[])
+              : filters.pathwayType
+                ? [String(filters.pathwayType)]
+                : []
+          }
+          onChange={(arr) => onFilterChange("pathwayType", arr)}
         />
 
-        <FilterDropdown<string>
+        <MultiSelectDropdown
           label="Target Year"
           options={modelYearEndOptions}
-          selectedValue={filters.modelYearEnd}
-          onChange={(value) => onFilterChange("modelYearEnd", value)}
+          value={
+            Array.isArray(filters.temperature)
+              ? (filters.modelYearEnd as string[])
+              : filters.modelYearEnd
+                ? [String(filters.modelYearEnd)]
+                : []
+          }
+          onChange={(arr) => onFilterChange("modelYearEnd", arr)}
         />
 
-        <FilterDropdown<number>
+        <MultiSelectDropdown
           label="Temperature (°C)"
           options={temperatureOptions}
-          selectedValue={filters.modelTempIncrease}
-          onChange={(value) => onFilterChange("modelTempIncrease", value)}
+          value={
+            Array.isArray(filters.temperature)
+              ? (filters.temperature as string[])
+              : filters.temperature
+                ? [String(filters.temperature)]
+                : []
+          }
+          onChange={(arr) => onFilterChange("temperature", arr)}
         />
 
-        <FilterDropdown<string>
+        <MultiSelectDropdown
           label="Geography"
           options={geographyOptions}
-          selectedValue={filters.geography}
-          onChange={(value) => onFilterChange("geography", value)}
+          value={
+            Array.isArray(filters.geography)
+              ? (filters.geography as string[])
+              : filters.geography
+                ? [String(filters.geography)]
+                : []
+          }
+          onChange={(arr) =>
+            // cast to satisfy current onFilterChange signature without widening SearchFilters yet
+            onFilterChange("geography", arr)
+          }
         />
 
-        <FilterDropdown<string>
+        <MultiSelectDropdown
           label="Sector"
           options={sectorOptions}
-          selectedValue={filters.sector}
-          onChange={(value) => onFilterChange("sector", value)}
+          value={
+            Array.isArray(filters.sector)
+              ? (filters.sector as string[])
+              : filters.sector
+                ? [String(filters.sector)]
+                : []
+          }
+          onChange={(arr) => onFilterChange("sector", arr)}
         />
       </div>
       <div className="mt-4 ml-1">
