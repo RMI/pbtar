@@ -316,4 +316,143 @@ describe("filterScenarios (array-backed facets)", () => {
     } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual(["B2"]);
   });
+
+  it("pathwayType: ALL with two tokens yields no results (single-valued facet)", () => {
+    const out = filterScenarios(
+      [
+        {
+          id: "A",
+          name: "A",
+          sectors: [],
+          geography: [],
+          modelTempIncrease: 2,
+          pathwayType: "Net Zero",
+          modelYearEnd: 2050,
+          publisher: "",
+          publicationYear: 2020,
+          description: "",
+        },
+        {
+          id: "B",
+          name: "B",
+          sectors: [],
+          geography: [],
+          modelTempIncrease: 1.5,
+          pathwayType: "BAU",
+          modelYearEnd: 2030,
+          publisher: "",
+          publicationYear: 2020,
+          description: "",
+        },
+      ] as Scenario[],
+      { pathwayType: ["Net Zero", "BAU"], modes: { pathwayType: "ALL" } },
+    );
+    expect(out).toHaveLength(0);
+  });
+
+  it("modelYearEnd: ALL with [2030,2050] yields no results (single-valued facet)", () => {
+    const out = filterScenarios(
+      [
+        {
+          id: "A",
+          name: "A",
+          sectors: [],
+          geography: [],
+          modelTempIncrease: 2,
+          pathwayType: "X",
+          modelYearEnd: 2030,
+          publisher: "",
+          publicationYear: 2020,
+          description: "",
+        },
+        {
+          id: "B",
+          name: "B",
+          sectors: [],
+          geography: [],
+          modelTempIncrease: 2,
+          pathwayType: "Y",
+          modelYearEnd: 2050,
+          publisher: "",
+          publicationYear: 2020,
+          description: "",
+        },
+      ] as Scenario[],
+      { modelYearEnd: [2030, 2050], modes: { modelYearEnd: "ALL" } },
+    );
+    expect(out).toHaveLength(0);
+  });
+
+  it("modelTempIncrease: ALL with [1.5,2.0] yields no results (single-valued facet)", () => {
+    const out = filterScenarios(
+      [
+        {
+          id: "A",
+          name: "A",
+          sectors: [],
+          geography: [],
+          modelTempIncrease: 1.5,
+          pathwayType: "X",
+          modelYearEnd: 2030,
+          publisher: "",
+          publicationYear: 2020,
+          description: "",
+        },
+        {
+          id: "B",
+          name: "B",
+          sectors: [],
+          geography: [],
+          modelTempIncrease: 2.0,
+          pathwayType: "Y",
+          modelYearEnd: 2050,
+          publisher: "",
+          publicationYear: 2020,
+          description: "",
+        },
+      ] as Scenario[],
+      { modelTempIncrease: [1.5, 2.0], modes: { modelTempIncrease: "ALL" } },
+    );
+    expect(out).toHaveLength(0);
+  });
+
+  it("single-valued facets: ALL with one token behaves like equality; ABSENT-only matches null", () => {
+    const out1 = filterScenarios(
+      [
+        {
+          id: "A",
+          name: "A",
+          sectors: [],
+          geography: [],
+          modelTempIncrease: null,
+          pathwayType: null,
+          modelYearEnd: null,
+          publisher: "",
+          publicationYear: 2020,
+          description: "",
+        },
+      ] as Scenario[],
+      { pathwayType: [ABSENT_FILTER_TOKEN], modes: { pathwayType: "ALL" } },
+    );
+    expect(out1.map((s) => s.id)).toEqual(["A"]);
+
+    const out2 = filterScenarios(
+      [
+        {
+          id: "B",
+          name: "B",
+          sectors: [],
+          geography: [],
+          modelTempIncrease: 2.0,
+          pathwayType: "Net Zero",
+          modelYearEnd: 2030,
+          publisher: "",
+          publicationYear: 2020,
+          description: "",
+        },
+      ] as Scenario[],
+      { modelTempIncrease: [2.0], modes: { modelTempIncrease: "ALL" } },
+    );
+    expect(out2.map((s) => s.id)).toEqual(["B"]);
+  });
 });

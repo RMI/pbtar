@@ -94,16 +94,34 @@ export const filterScenarios = (
   filters: FiltersWithArrays,
 ): Scenario[] => {
   return scenarios.filter((scenario) => {
-    // ---- Pathway type: OR over selected tokens; empty array => no filter; ABSENT-aware
+    // ---- Pathway type: ANY/ALL over selected tokens; empty array => no filter; ABSENT-aware
     {
       const selected = toArray(filters.pathwayType);
       if (selected.length) {
         const hasAbsent = selected.includes(ABSENT_FILTER_TOKEN);
         const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
         const v = scenario.pathwayType ?? null;
-        const ok =
-          (v == null && hasAbsent) ||
-          (v != null && (concrete.length ? concrete.includes(v) : false));
+        const mode = pickMode("pathwayType", filters.modes as FilterModes);
+        let ok = true;
+
+        if (mode === "ANY") {
+          ok =
+            (v == null && hasAbsent) ||
+            (v != null && (concrete.length ? concrete.includes(v) : false));
+        } else {
+          // ALL: for single-valued fields, all selected tokens must hold.
+          // That is only possible when exactly one token is selected:
+          //  - [ABSENT]  -> v == null
+          //  - [X]       -> v == X
+          // Any combination (ABSENT + X, or X + Y) cannot be satisfied.
+          if (hasAbsent && concrete.length === 0) {
+            ok = v == null;
+          } else if (!hasAbsent && concrete.length === 1) {
+            ok = v != null && v === concrete[0];
+          } else {
+            ok = false;
+          }
+        }
         if (!ok) return false;
       }
     }
@@ -115,9 +133,26 @@ export const filterScenarios = (
         const hasAbsent = hasAbsentToken(selected);
         const numericChoices = toNumberSet(selected);
         const v = scenario.modelYearEnd; // number | null | undefined
-        const ok =
-          (v == null && hasAbsent) ||
-          (v != null && numericChoices.has(Number(v)));
+        const mode = pickMode("modelYearEnd", filters.modes as FilterModes);
+        let ok = true;
+
+        if (mode === "ANY") {
+          ok =
+            (v == null && hasAbsent) ||
+            (v != null && numericChoices.has(Number(v)));
+        } else {
+          // ALL: only possible when exactly one condition is chosen:
+          //  - [ABSENT]        -> v == null
+          //  - [single number] -> v == number
+          // Any other combination (ABSENT + number, or two numbers) is impossible.
+          if (hasAbsent && numericChoices.size === 0) {
+            ok = v == null;
+          } else if (!hasAbsent && numericChoices.size === 1) {
+            ok = v != null && numericChoices.has(Number(v));
+          } else {
+            ok = false;
+          }
+        }
         if (!ok) return false;
       }
     }
@@ -129,9 +164,25 @@ export const filterScenarios = (
         const hasAbsent = hasAbsentToken(selected);
         const numericChoices = toNumberSet(selected);
         const v = scenario.modelTempIncrease; // number | null | undefined
-        const ok =
-          (v == null && hasAbsent) ||
-          (v != null && numericChoices.has(Number(v)));
+        const mode = pickMode(
+          "modelTempIncrease",
+          filters.modes as FilterModes,
+        );
+        let ok = true;
+
+        if (mode === "ANY") {
+          ok =
+            (v == null && hasAbsent) ||
+            (v != null && numericChoices.has(Number(v)));
+        } else {
+          if (hasAbsent && numericChoices.size === 0) {
+            ok = v == null;
+          } else if (!hasAbsent && numericChoices.size === 1) {
+            ok = v != null && numericChoices.has(Number(v));
+          } else {
+            ok = false;
+          }
+        }
         if (!ok) return false;
       }
     }
