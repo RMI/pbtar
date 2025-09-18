@@ -112,9 +112,28 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
   }
 
   async function openDropdown(labelRegex: RegExp): Promise<HTMLButtonElement> {
-    // Assumes the FilterDropdown trigger is a button with visible label text.
-    // If your triggers aren't labeled, consider adding aria-labels for stability.
-    const trigger = await screen.findByRole("button", { name: labelRegex });
+    // Multiple nodes can match the regex (e.g., scenario cards: "no sectors"/"no temp").
+    // Pick the *label* whose parent contains the dropdown trigger button.
+    const labels = await screen.findAllByText(
+      labelRegex,
+      {},
+      { timeout: 2000 },
+    );
+    const label = labels.find((el) =>
+      el.parentElement?.querySelector('button[aria-haspopup="listbox"]'),
+    );
+    if (!label) {
+      // Helpful debug if this ever fails in CI
+      const all = labels.map((n) => `"${n.textContent}"`).join(", ");
+      throw new Error(
+        `Dropdown label not found for ${labelRegex}. Candidates: ${all}`,
+      );
+    }
+    const trigger = label.parentElement!.querySelector(
+      'button[aria-haspopup="listbox"]',
+    );
+    if (!trigger)
+      throw new Error(`Trigger button not found for ${label.textContent}`);
     await u.click(trigger);
     return trigger;
   }
@@ -181,7 +200,7 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       "Scenario D (Industry, Asia, no temp)",
     ]);
     expectHidden([
-      "Scenario B (Power, EU, 2°C)",
+      "Scenario B (Power, Europe, 2°C)",
       "Scenario C (empty sectors[], empty geo[], 1.5°C)",
     ]);
   });

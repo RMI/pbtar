@@ -26,16 +26,16 @@ describe("<MultiSelectDropdown>", () => {
     );
   }
 
-  it("emits string[] on selection toggles", async () => {
+  it("emits string[] on selection toggles (controlled)", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
     render(
-      <MultiSelectDropdown
+      <MultiSelectDropdownHarness
         options={[
           { value: "EU", label: "Europe" },
           { value: "US", label: "United States" },
         ]}
-        value={[]}
+        initial={[]}
         onChange={onChange}
       />,
     );
@@ -43,14 +43,17 @@ describe("<MultiSelectDropdown>", () => {
     // open
     await user.click(screen.getByText("Select…"));
 
+    // toggle EU → ["EU"]
     await user.click(screen.getByLabelText("Europe"));
     expect(onChange).toHaveBeenLastCalledWith(["EU"]);
 
-    //await user.click(screen.getByLabelText("United States"));
-    //expect(onChange).toHaveBeenLastCalledWith(["EU", "US"]);
-    //
-    //await user.click(screen.getByLabelText("Europe"));
-    //expect(onChange).toHaveBeenLastCalledWith(["US"]);
+    // toggle US → ["EU","US"]
+    await user.click(screen.getByLabelText("United States"));
+    expect(onChange).toHaveBeenLastCalledWith(["EU", "US"]);
+
+    // untoggle EU → ["US"]
+    await user.click(screen.getByLabelText("Europe"));
+    expect(onChange).toHaveBeenLastCalledWith(["US"]);
   });
 
   it("mode toggle calls onModeChange", async () => {
@@ -83,7 +86,7 @@ describe("<MultiSelectDropdown>", () => {
           { value: 2025, label: "2025" },
           { value: 2030, label: "2030" },
         ]}
-        value={null} // null-safe
+        initial={null} // null-safe
         onChange={onChange}
       />,
     );
@@ -99,4 +102,30 @@ describe("<MultiSelectDropdown>", () => {
     await user.click(screen.getByLabelText("2030"));
     expect(onChange).toHaveBeenLastCalledWith([2025, 2030]);
   });
+});
+
+it("closes on outside click but not when re-clicking the trigger", async () => {
+  const user = userEvent.setup();
+  render(
+    <MultiSelectDropdown
+      options={[
+        { value: "A", label: "A" },
+        { value: "B", label: "B" },
+      ]}
+      value={[]}
+      onChange={() => {}}
+    />,
+  );
+
+  // open
+  await user.click(screen.getByText("Select…"));
+  expect(screen.getByRole("listbox")).toBeInTheDocument();
+
+  // Click trigger again → still open (does not close)
+  await user.click(screen.getByText("Select…"));
+  expect(screen.getByRole("listbox")).toBeInTheDocument();
+
+  // Click outside → closed
+  await user.click(document.body);
+  expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
 });

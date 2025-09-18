@@ -27,6 +27,17 @@ describe("SearchSection", () => {
     vi.clearAllMocks();
   });
 
+  function openByLabel(labelText: string) {
+    const labelEl = screen.getByText(labelText);
+    const wrapper = labelEl.parentElement;
+    if (!wrapper) throw new Error("Wrapper not found for label: " + labelText);
+    const btn = wrapper.querySelector("button");
+    if (!btn)
+      throw new Error("Dropdown trigger button not found for: " + labelText);
+    fireEvent.click(btn);
+    return btn;
+  }
+
   it("renders all filter dropdowns", () => {
     render(<SearchSection {...defaultProps} />);
 
@@ -42,8 +53,7 @@ describe("SearchSection", () => {
     render(<SearchSection {...defaultProps} />);
 
     // Open sector dropdown
-    const sectorDropdown = screen.getByText("Sector");
-    fireEvent.click(sectorDropdown);
+    openByLabel("Sector");
 
     // Verify that all unique sector names from the mock data are in the dropdown
     expect(screen.getByText("Agriculture")).toBeInTheDocument();
@@ -56,32 +66,28 @@ describe("SearchSection", () => {
     render(<SearchSection {...defaultProps} />);
 
     // Open sector dropdown
-    const sectorDropdown = screen.getByText("Sector");
-    fireEvent.click(sectorDropdown);
+    openByLabel("Sector");
 
     // Select the "Power" sector
     const powerOption = screen.getByText("Land Use");
     fireEvent.click(powerOption);
 
-    // Verify the filter change is called with the correct parameter
-    expect(defaultProps.onFilterChange).toHaveBeenCalledWith(
-      "sector",
+    // Verify array-emitting multi-select
+    expect(defaultProps.onFilterChange).toHaveBeenCalledWith("sector", [
       "Land Use",
-    );
+    ]);
   });
 
-  it("properly displays selected sector in the dropdown button", () => {
-    // Create props with a selected sector
+  it("shows selected count in the sector trigger", () => {
     const propsWithSector = {
       ...defaultProps,
-      filters: { sector: "Power" } as SearchFilters,
+      filters: { sector: ["Power"] } as unknown as SearchFilters,
     };
-
     render(<SearchSection {...propsWithSector} />);
-
-    // The dropdown button should show the selected sector name
-    const sectorButton = screen.getByText("Power");
-    expect(sectorButton).toBeInTheDocument();
+    // Trigger shows "1 selected"
+    const labelEl = screen.getByText("Sector");
+    const wrapper = labelEl.parentElement as HTMLElement;
+    expect(wrapper.querySelector("button")?.textContent).toMatch(/1 selected/i);
   });
 
   it("can clear selected sector filter", () => {
@@ -93,31 +99,19 @@ describe("SearchSection", () => {
 
     render(<SearchSection {...propsWithSector} />);
 
-    // Find the clear button (X icon) next to the sector name
-    const powerText = screen.getByText("Power");
-    const clearButton = powerText.nextElementSibling;
-
-    // Add null check to handle potential null value
-    if (!clearButton) {
-      throw new Error("Clear button not found next to 'Power' text");
-    }
-
-    fireEvent.click(clearButton);
-
-    // Verify the filter was cleared
-    expect(defaultProps.onFilterChange).toHaveBeenCalledWith("sector", null);
+    // Open dropdown and click "Clear" control
+    openByLabel("Sector");
+    fireEvent.click(screen.getByText("Clear"));
+    expect(defaultProps.onFilterChange).toHaveBeenCalledWith("sector", []);
   });
 
   it("doesn't break when sectors are objects with name and tooltip properties", () => {
     render(<SearchSection {...defaultProps} />);
 
     // Try to open each dropdown to ensure they render without errors
-    const sectorDropdown = screen.getByText("Sector");
-    fireEvent.click(sectorDropdown);
-    expect(screen.getByText("Agriculture")).toBeInTheDocument();
+    openByLabel("Sector");
 
-    const pathwayDropdown = screen.getByText("Pathway Type");
-    fireEvent.click(pathwayDropdown);
+    openByLabel("Pathway Type");
     expect(screen.getByText("Direct Policy")).toBeInTheDocument();
     expect(screen.getByText("Exploratory")).toBeInTheDocument();
     expect(screen.getByText("Normative")).toBeInTheDocument();
