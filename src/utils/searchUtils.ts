@@ -15,11 +15,11 @@ export interface GeoOption {
 // New: allow AND/OR per facet. Defaults to "ANY" for backwards compatibility.
 export type FacetMode = "ANY" | "ALL";
 export type FilterModes = Partial<{
-  pathwayType: FilterModes;
-  modelYearEnd: FilterModes;
-  modelTempIncrease: FilterModes;
-  geography: FilterModes;
-  sector: FilterModes;
+  pathwayType: FacetMode;
+  modelYearEnd: FacetMode;
+  modelTempIncrease: FacetMode;
+  geography: FacetMode;
+  sector: FacetMode;
 }>;
 
 // Extend your existing Filters type minimally:
