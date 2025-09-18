@@ -82,7 +82,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <MultiSelectDropdown
+        <MultiSelectDropdown<string>
           label="Pathway Type"
           options={pathwayTypeOptions}
           value={
@@ -95,7 +95,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           onChange={(arr) => onFilterChange("pathwayType", arr)}
         />
 
-        <MultiSelectDropdown
+        <MultiSelectDropdown<number>
           label="Target Year"
           options={modelYearEndOptions}
           value={
@@ -108,20 +108,22 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           onChange={(arr) => onFilterChange("modelYearEnd", arr)}
         />
 
-        <MultiSelectDropdown
+        <MultiSelectDropdown<string | number>
           label="Temperature (°C)"
-          options={temperatureOptions}
+          options={
+            temperatureOptions as { label: string; value: string | number }[]
+          }
           value={
-            Array.isArray(filters.temperature)
-              ? (filters.temperature as string[])
-              : filters.temperature
-                ? [String(filters.temperature)]
+            Array.isArray(filters.modelTempIncrease)
+              ? (filters.modelTempIncrease as (string | number)[])
+              : filters.modelTempIncrease != null
+                ? [String(filters.modelTempIncrease as string | number)]
                 : []
           }
-          onChange={(arr) => onFilterChange("temperature", arr)}
+          onChange={(arr) => onFilterChange("modelTempIncrease", arr)}
         />
 
-        <MultiSelectDropdown
+        <MultiSelectDropdown<string>
           label="Geography"
           options={geographyOptions}
           value={
@@ -137,7 +139,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           }
         />
 
-        <MultiSelectDropdown
+        <MultiSelectDropdown<string>
           label="Sector"
           options={sectorOptions}
           value={
