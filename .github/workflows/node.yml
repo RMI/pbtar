@@ -62,3 +62,18 @@ jobs:
     if: ${{ always() && (needs.build-release.result == 'success' || needs.build-pr.result == 'success') }}
     uses: ./.github/workflows/azure-static-web-apps-deploy.yml
     secrets: inherit
+
+  scan:
+    uses: RMI/actions/actions/admin/forbidden-patterns@feat/forbidden-strings
+    with:
+      # Regex patterns (one per line)
+      patterns: |
+        ^<<<<<<<
+        ^>>>>>>>
+        \bTODO\b
+        \bFIXME\b
+        \bXXX\b
+        \bconsole\.log\(
+        \bdebugger\b
+      mode: regex
+      ignore_case: true
