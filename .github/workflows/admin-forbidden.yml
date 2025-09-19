@@ -1,0 +1,116 @@
+---
+name: Forbidden patterns scan
+
+on:
+  workflow_call:
+    inputs:
+      patterns:
+        description: "Newline-delimited patterns (regex by default)"
+        required: true
+        type: string
+      mode:
+        description: "regex | literal"
+        required: false
+        default: "regex"
+        type: string
+      ignore_case:
+        description: "Use case-insensitive matching"
+        required: false
+        default: true
+        type: boolean
+      include:
+        description: "Newline-delimited path globs to include (optional)"
+        required: false
+        type: string
+      exclude:
+        description: "Newline-delimited path globs/dirs to exclude (optional)"
+        required: false
+        type: string
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare inputs
+        id: prep
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf "%s\n" "${{ inputs.patterns }}" > .forbidden-patterns.txt
+
+          # Build flags
+          FLAGS="-nI --column"
+          if [[ "${{ inputs.mode }}" == "literal" ]]; then
+            FLAGS="$FLAGS -F"
+          else
+            FLAGS="$FLAGS -E"
+          fi
+          if [[ "${{ inputs.ignore_case }}" == "true" ]]; then
+            FLAGS="$FLAGS -i"
+          fi
+          echo "FLAGS=$FLAGS" >> "$GITHUB_OUTPUT"
+
+          # Build pathspecs for git grep
+          inc_args=()
+          if [[ -n "${{ inputs.include }}" ]]; then
+            while IFS= read -r inc; do
+              [[ -n "$inc" ]] && inc_args+=("$inc")
+            done <<< "${{ inputs.include }}"
+          fi
+          exc_args=()
+          if [[ -n "${{ inputs.exclude }}" ]]; then
+            while IFS= read -r exc; do
+              [[ -n "$exc" ]] && exc_args+=(":(exclude)$exc")
+            done <<< "${{ inputs.exclude }}"
+          fi
+          # Serialize arrays to files for reuse in the next step
+          printf "%s\n" "${inc_args[@]}" > .inc_paths.txt || true
+          printf "%s\n" "${exc_args[@]}" > .exc_paths.txt || true
+
+      - name: Scan repository
+        id: scan
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t INC < .inc_paths.txt || true
+          mapfile -t EXC < .exc_paths.txt || true
+          # Use git grep to search tracked files only
+          set +e
+          git grep ${{ steps.prep.outputs.FLAGS }} \
+            -f .forbidden-patterns.txt -- ${INC[@]} ${EXC[@]} > .matches.txt
+          rc=$?
+          set -e
+
+          if [[ $rc -eq 0 ]]; then
+            # Matches found
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            {
+              echo "### Forbidden pattern matches"
+              echo
+              echo '```'
+              cat .matches.txt
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+
+            # Emit annotations (cap at 200 to avoid noise)
+            c=0
+            while IFS= read -r line; do
+              file="${line%%:*}"
+              rest="${line#*:}"
+              lineno="${rest%%:*}"
+              snippet="${rest#*:}"
+              echo "::error file=$file,line=$lineno,title=Forbidden pattern found::$snippet"
+              c=$((c+1)); [[ $c -ge 200 ]] && break
+            done < .matches.txt
+            exit 1
+          elif [[ $rc -eq 1 ]]; then
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "No forbidden patterns found."
+          else
+            echo "git grep failed with exit code $rc"
+            exit $rc
+          fi
