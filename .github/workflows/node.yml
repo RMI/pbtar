@@ -92,3 +92,4 @@ jobs:
           # Common exclusions to reduce noise
           exclude: |
             package-lock.json
+            .github/**/*
