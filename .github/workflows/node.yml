@@ -74,7 +74,7 @@ jobs:
           patterns: |
             ^<<<<<<<
             ^>>>>>>>
-            TK
+            (^|[^[:alpha:]])TK([^[:alpha:]]|$)
             \bTODO\b
             \bFIXME\b
             \bXXX\b
