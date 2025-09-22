@@ -53,8 +53,8 @@ export function geographyKind(raw: string): GeographyKind {
   return "region";
 }
 
-// TODO: geographyLabel does not yet support mapping for ISO-3 country codes, region codes, or other ISO standards.
-//       Consider implementing support for ISO-3 codes and region mappings in addition to ISO-2 country codes.
+// geographyLabel does not support mapping for ISO-3 country codes, region
+// codes, or other ISO standards.
 export function geographyLabel(raw: string): string {
   const s = normalizeGeography(raw);
   if (!s) return "";

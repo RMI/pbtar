@@ -72,7 +72,6 @@ const HomePage: React.FC = () => {
       // Only update if state actually changes (performance optimization)
       if (scrollPosition > threshold !== isSticky) {
         setIsSticky(scrollPosition > threshold);
-        console.log("Sticky state changed to:", scrollPosition > threshold);
       }
     };
 
