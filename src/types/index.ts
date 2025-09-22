@@ -1,3 +1,5 @@
+import type { FacetMode } from "../utils/searchUtils";
+
 export interface Scenario {
   id: string;
   name: string;
@@ -62,10 +64,18 @@ export type Metric =
   | "Carbon Price";
 
 export interface SearchFilters {
-  pathwayType: PathwayType | null;
-  modelYearEnd: YearTarget | null;
-  modelTempIncrease: TemperatureTarget | null;
-  geography: Geography | null;
-  sector: Sector | null;
+  pathwayType?: string | string[] | null;
+  modelYearEnd?: number | (number | string)[] | null;
+  modelTempIncrease?: number | string | (number | string)[] | null;
+  geography?: string | string[] | null;
+  sector?: string | string[] | null;
   searchTerm: string;
+  // Optional per-facet mode (used later by a UI toggle)
+  modes?: {
+    pathwayType?: FacetMode;
+    modelYearEnd?: FacetMode;
+    modelTempIncrease?: FacetMode;
+    geography?: FacetMode;
+    sector?: FacetMode;
+  } | null;
 }

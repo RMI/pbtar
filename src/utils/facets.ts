@@ -137,6 +137,35 @@ export function matchesOptionalFacetAny<T>(
   return tokens.some((t) => concrete.includes(t));
 }
 
+/**
+ * Require that **all** selected tokens are present on the item.
+ * Preserves ABSENT token semantics: if ABSENT is selected,
+ * it matches when the item has no values after normalization.
+ */
+export function matchesOptionalFacetAll<T>(
+  selected: string[],
+  itemValues: T[] | undefined,
+  normalize: (v: T) => string,
+): boolean {
+  // no active filter → pass
+  if (!selected || selected.length === 0) return true;
+
+  const values = (itemValues ?? []).map(normalize);
+  const set = new Set(values);
+
+  // special handling for ABSENT: if selected includes ABSENT,
+  // then "all" is satisfied only when the set is empty.
+  if (selected.includes(ABSENT_FILTER_TOKEN)) {
+    // if ABSENT appears with other tokens, this can never be satisfied
+    // unless there are no concrete tokens and no item values.
+    const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
+    return concrete.length === 0 && set.size === 0;
+  }
+
+  // all selected must be present
+  return selected.every((s) => set.has(s));
+}
+
 // Detect if any value is null/undefined in a list (for auto “None”)
 export function hasAbsent<T>(values: Array<T | null | undefined>): boolean {
   return values.some((v) => v == null);
