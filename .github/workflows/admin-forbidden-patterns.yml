@@ -1,0 +1,39 @@
+on:
+  workflow_call:
+
+jobs:
+  scan:
+    name: Check for forbidden patterns
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Check for Forbidden Patterns
+        uses: RMI/actions/actions/admin/forbidden-patterns@main
+        with:
+          # Regex patterns (one per line)
+          patterns: |
+            # --- Debugging leftovers
+            console\.log\(
+            debugger
+            # --- Lint/TypeScript escape hatches
+            @ts-ignore
+            @ts-nocheck
+            eslint-disable(-next-line)?
+          default_patterns: true
+          mode: regex
+          ignore_case: true
+          include: |
+            **/*.ts
+            **/*.tsx
+            **/*.md
+            **/*.yml
+            **/*.yaml
+            **/*.json
+          # Common exclusions to reduce noise
+          exclude: |
+            package-lock.json
+            .github/**/*
