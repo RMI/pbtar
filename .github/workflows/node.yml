@@ -66,7 +66,8 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: RMI/actions/actions/admin/forbidden-patterns@feat/forbidden-strings
+      - name: Scan for Forbidden Patterns
+        uses: RMI/actions/actions/admin/forbidden-patterns@feat/forbidden-strings
         with:
           # Regex patterns (one per line)
           patterns: |
