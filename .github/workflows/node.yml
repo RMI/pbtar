@@ -77,5 +77,5 @@ jobs:
             \bXXX\b
             \bconsole\.log\(
             \bdebugger\b
-        mode: regex
-        ignore_case: true
+          mode: regex
+          ignore_case: true
