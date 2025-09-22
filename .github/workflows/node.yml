@@ -67,6 +67,8 @@ jobs:
     name: Check for forbidden patterns
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
       - name: Check for Forbidden Patterns
         uses: RMI/actions/actions/admin/forbidden-patterns@feat/forbidden-strings
         with:
