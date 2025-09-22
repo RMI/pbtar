@@ -64,16 +64,18 @@ jobs:
     secrets: inherit
 
   scan:
-    uses: RMI/actions/actions/admin/forbidden-patterns@feat/forbidden-strings
-    with:
-      # Regex patterns (one per line)
-      patterns: |
-        ^<<<<<<<
-        ^>>>>>>>
-        \bTODO\b
-        \bFIXME\b
-        \bXXX\b
-        \bconsole\.log\(
-        \bdebugger\b
-      mode: regex
-      ignore_case: true
+    runs-on: ubuntu-latest
+    steps:
+      uses: RMI/actions/actions/admin/forbidden-patterns@feat/forbidden-strings
+      with:
+        # Regex patterns (one per line)
+        patterns: |
+          ^<<<<<<<
+          ^>>>>>>>
+          \bTODO\b
+          \bFIXME\b
+          \bXXX\b
+          \bconsole\.log\(
+          \bdebugger\b
+        mode: regex
+        ignore_case: true
