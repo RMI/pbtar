@@ -82,3 +82,13 @@ jobs:
             \bdebugger\b
           mode: regex
           ignore_case: true
+          include: |
+            **/*.ts
+            **/*.tsx
+            **/*.md
+            **/*.yml
+            **/*.yaml
+            **/*.json
+          # Common exclusions to reduce noise
+          exclude: |
+            package-lock.json
