@@ -81,7 +81,6 @@ const SearchSection: React.FC<SearchSectionProps> = ({
 
   const metricOptions = buildOptionsFromValues(
     scenariosData.map((d) => d.metric).flat(),
-    //scenariosData.map((d) => d.metric)
   );
 
   const areFiltersApplied =
