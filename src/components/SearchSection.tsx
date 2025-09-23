@@ -59,7 +59,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
 
   const geographyOptionsRaw: Geography[] = React.useMemo(
     () => makeGeographyOptions(scenariosData),
-    [scenariosData],
+    [],
   ) as Geography[];
   const sawAbsentGeography = hasAbsent(scenariosData.map((d) => d.geography));
   const geographyOptions = withAbsentOption(

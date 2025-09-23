@@ -60,17 +60,17 @@ export default function MultiSelectDropdown<
   }, []);
 
   // Coerce scalar/null/undefined → T[]
-  const current: T[] = Array.isArray(value)
-    ? value
-    : value != null
-      ? ([value] as T[])
-      : [];
+  const current = React.useMemo<T[]>(
+    () =>
+      Array.isArray(value) ? value : value != null ? ([value] as T[]) : [],
+    [value],
+  );
 
   // We compare using string forms to support number values safely
-  const toKey = (v: T) => String(v);
+  const toKey = React.useCallback((v: T) => String(v), []);
   const selectedSet = React.useMemo(
     () => new Set(current.map(toKey)),
-    [current],
+    [current, toKey],
   );
 
   const toggle = (v: T) => {
