@@ -35,4 +35,5 @@ jobs:
           # Common exclusions to reduce noise
           exclude: |
             package-lock.json
+            scripts/schema-check-files.ts
             .github/**/*

@@ -15,6 +15,9 @@ async function main() {
 
   // throws (non-zero exit) on any problem
   validateScenarios(entries);
+  console.log(
+    `✔ Validated ${names.length} data file(s) from ${dir} against schema.`,
+  );
 }
 
 main().catch((e) => {
