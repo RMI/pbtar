@@ -32,8 +32,8 @@ export default tseslint.config(
       // Flags `classname` and other non-standard DOM props
       "react/no-unknown-property": ["error", { ignore: ["css"] }],
       // Instead of extending react-hooks' legacy preset, enable its rules explicitly:
-      //"react-hooks/rules-of-hooks": "error",
-      //"react-hooks/exhaustive-deps": "warn",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
       // react rules
       "react/react-in-jsx-scope": "off", // Not needed with React 17+
       "react/no-unescaped-entities": "off", // Allows ' and " in JSX
