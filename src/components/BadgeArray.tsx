@@ -1,4 +1,10 @@
-import React from "react";
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Badge, { BadgeMaybeAbsent } from "./Badge";
 import TextWithTooltip from "./TextWithTooltip";
 
@@ -13,8 +19,16 @@ export type BadgeArrayProps<T extends string | number> = Omit<
   children: Array<T | null | undefined>;
   /** Single variant for all badges or an array with the same length as children */
   variant?: Variant | Variant[];
+  /** Legacy override: if provided, skips auto-fit and shows exactly this many items. */
   visibleCount?: number;
+  /** Provide original item for tooltip content; still receives the raw item. */
   tooltipGetter?: (item: T) => React.ReactNode;
+  /** Optionally map each raw item to a display label (allows non-scalars). */
+  toLabel?: (item: T | null | undefined) => React.ReactNode;
+  /** Optionally post-process a mapped label (e.g., highlight). */
+  renderLabel?: (label: React.ReactNode) => React.ReactNode;
+  /** Max rows to display before collapsing into “+N more”. Use Infinity for unlimited rows. Default: 1. */
+  maxRows?: number;
 };
 
 export default function BadgeArray<T extends Scalar = Scalar>({
@@ -22,6 +36,9 @@ export default function BadgeArray<T extends Scalar = Scalar>({
   variant,
   visibleCount,
   tooltipGetter,
+  toLabel,
+  renderLabel,
+  maxRows = 1,
   ...rest
 }: BadgeArrayProps<T>) {
   const arr: ReadonlyArray<T | null | undefined> = Array.isArray(children)
@@ -32,7 +49,7 @@ export default function BadgeArray<T extends Scalar = Scalar>({
   const badIdx = arr.findIndex(
     (v) => v != null && typeof v !== "string" && typeof v !== "number",
   );
-  if (badIdx !== -1) {
+  if (badIdx !== -1 && !toLabel) {
     throw new Error(
       "BadgeArray: children must be string | number | null | undefined",
     );
@@ -50,29 +67,176 @@ export default function BadgeArray<T extends Scalar = Scalar>({
     variants = arr.map(() => variant);
   }
 
+  // --- Measurement refs/state
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const itemRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const moreMeasureRef = useRef<HTMLSpanElement | null>(null);
+  const [autoVisible, setAutoVisible] = useState<number | null>(null);
+  // bump this to force recomputation on resize/font load
+  const [measureSeq, setMeasureSeq] = useState(0);
+
+  // keep refs array in sync with children length
+  itemRefs.current = useMemo(
+    () => Array(arr.length).fill(null) as (HTMLSpanElement | null)[],
+    [arr.length],
+  );
+
+  // Helper: group elements into rows using their offsetTop
+  function groupIntoRows(els: HTMLElement[]): HTMLElement[][] {
+    const rows: HTMLElement[][] = [];
+    const tops: number[] = [];
+    for (const el of els) {
+      const top = el.offsetTop;
+      let rowIdx = tops.findIndex((t) => t === top);
+      if (rowIdx === -1) {
+        tops.push(top);
+        tops.sort((a, b) => a - b);
+        rowIdx = tops.findIndex((t) => t === top);
+      }
+      (rows[rowIdx] ||= []).push(el);
+    }
+    return rows;
+  }
+
+  // Compute how many badges to keep using natural wrapping, and make the token fit on the last allowed row
+  useLayoutEffect(() => {
+    // Legacy path: visibleCount explicitly provided
+    if (typeof visibleCount === "number") {
+      setAutoVisible(null);
+      return;
+    }
+    const container = containerRef.current;
+    if (!container || arr.length === 0) {
+      setAutoVisible(0);
+      return;
+    }
+    // Unlimited rows → show all, no token
+    if (!Number.isFinite(maxRows)) {
+      setAutoVisible(arr.length);
+      return;
+    }
+
+    const wrappers = itemRefs.current.filter(Boolean) as HTMLElement[];
+    if (wrappers.length === 0) return;
+
+    // Are we measuring the full list (all items rendered) or a trimmed subset?
+    const measuringFull = wrappers.length === arr.length;
+
+
+    // Let the browser lay everything out; then read rows.
+    const rows = groupIntoRows(wrappers);
+    const allowed = Math.max(1, Math.floor(maxRows));
+    const cRect = container.getBoundingClientRect();
+    const containerWidth = cRect.width || container.clientWidth || 0;
+
+    // If everything is within allowed rows, done.
+    if (rows.length <= allowed) {
+      // Only expand to "show all" if we are measuring the full list.
+      if (measuringFull) setAutoVisible(arr.length);
+      // If we're already trimmed, keep the current trimmed state to avoid oscillation.
+      return;
+    }
+
+    // Keep all items in rows before the last allowed row
+    const keptBeforeLast = rows.slice(0, allowed - 1).flat().length;
+
+    // Work within the last allowed row: trim from the end until "+N more" fits.
+    let keep = keptBeforeLast + rows[allowed - 1].length;
+    let overflow = arr.length - keep;
+
+    const measureMore = (n: number) => {
+      if (!moreMeasureRef.current) return 0;
+      moreMeasureRef.current.textContent = `+${n} more`;
+      return moreMeasureRef.current.offsetWidth || 0;
+    };
+
+    while (keep > keptBeforeLast) {
+      const lastEl = wrappers[keep - 1]!;
+      const r = lastEl.getBoundingClientRect();
+      // measure against container's left to stay in same coord space
+      const rightEdge = r.right - cRect.left;
+      const tokenWidth = measureMore(overflow);
+      // keep token on same row; no extra margins; prevent wrapping
+      if (rightEdge + tokenWidth <= containerWidth) break;
+      keep -= 1;
+      overflow += 1;
+    }
+
+    setAutoVisible(Math.max(1, keep));
+  }, [arr, visibleCount, maxRows, measureSeq]);
+
+  // Recompute on container resize and when fonts finish loading (labels can change width)
+  useEffect(() => {
+    if (typeof visibleCount === "number") return;
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => {
+      // bump a counter so the layout effect runs again
+      requestAnimationFrame(() => setMeasureSeq((n) => n + 1));
+    });
+    ro.observe(el);
+    let cancelled = false;
+    if ((document as any).fonts?.ready) {
+      (document as any).fonts.ready.then(() => {
+        if (!cancelled) requestAnimationFrame(() => setMeasureSeq((n) => n + 1));
+      });
+    }
+    // Also handle window resizes affecting ancestor width (optional but helpful)
+    const onWin = () => setMeasureSeq((n) => n + 1);
+    window.addEventListener("resize", onWin);
+    return () => {
+      cancelled = true;
+      ro.disconnect();
+      window.removeEventListener("resize", onWin);
+    };
+  }, [visibleCount]);
+
+  const finalVisible =
+    typeof visibleCount === "number"
+      ? visibleCount
+      : autoVisible ?? arr.length;
+  const showMore =
+    finalVisible < arr.length && Number.isFinite(maxRows) && finalVisible >= 0;
+
   return (
-    <div className="flex flex-wrap">
-      {arr.slice(0, visibleCount).map((value, idx) => (
-        <BadgeMaybeAbsent
+    <div ref={containerRef} className="flex flex-wrap">
+      {/* Hidden, dynamic measurer for the "+N more" token */}
+      <span
+        ref={moreMeasureRef}
+        aria-hidden="true"
+        className="invisible absolute whitespace-nowrap text-xs"
+        style={{ position: "absolute" }}
+      >
+        +0 more
+      </span>
+      {arr.slice(0, finalVisible).map((value, idx) => (
+        <span
           key={idx}
-          variant={variants[idx]}
-          tooltip={tooltipGetter?.(value as T)}
-          {...rest}
+          ref={(el) => (itemRefs.current[idx] = el)}
+          className="inline-block"
         >
-          {value}
-        </BadgeMaybeAbsent>
+          <BadgeMaybeAbsent
+            variant={variants[idx]}
+            tooltip={tooltipGetter?.(value as T)}
+            toLabel={toLabel}
+            renderLabel={renderLabel}
+            {...rest}
+          >
+            {value}
+          </BadgeMaybeAbsent>
+        </span>
       ))}
-      {typeof visibleCount === "number" && arr.length > visibleCount && (
+      {showMore && (
         <TextWithTooltip
           text={
-            <span className="text-xs text-rmigray-500 ml-1 self-center">
-              +{arr.length - visibleCount} more
+            <span className="text-xs text-rmigray-500 self-center whitespace-nowrap">
+              +{arr.length - finalVisible} more
             </span>
           }
           tooltip={
             <span>
-              {arr.slice(visibleCount).map((value, idx) => (
-                <React.Fragment key={value}>
+              {arr.slice(finalVisible).map((value, idx) => (
+                <React.Fragment key={idx}>
                   {idx > 0 && ", "}
                   <span className="whitespace-nowrap">{value}</span>
                 </React.Fragment>

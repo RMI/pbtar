@@ -88,29 +88,6 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
     [scenario.sectors, searchTerm],
   );
 
-  // Refs for the container elements
-  const geographyContainerRef = useRef<HTMLDivElement>(null);
-  const sectorsContainerRef = useRef<HTMLDivElement>(null);
-  const metricContainerRef = useRef<HTMLDivElement>(null);
-
-  // Calculate how many badges can fit in each container
-  const geographyBadgeWidth = 90; // Estimated average width of a geography badge in pixels
-  const sectorBadgeWidth = 80; // Estimated average width of a sector badge in pixels
-  const metricBadgeWidth = 80; // Estimated average width of a metric badge in pixels
-
-  const visibleGeographyCount = useAvailableBadgeCount(
-    geographyContainerRef,
-    geographyBadgeWidth,
-  );
-  const visibleSectorsCount = useAvailableBadgeCount(
-    sectorsContainerRef,
-    sectorBadgeWidth,
-  );
-  const visibleMetricCount = useAvailableBadgeCount(
-    metricContainerRef,
-    metricBadgeWidth,
-  );
-
   // Helper function to conditionally highlight text based on search term
   const highlightTextIfSearchMatch = (
     value: string | number | undefined | null | boolean,
@@ -196,7 +173,6 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             Geographies:
           </p>
           <div
-            ref={geographyContainerRef}
             className="flex flex-wrap"
           >
             <BadgeArray
@@ -204,8 +180,8 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
                 (geo) => geographyVariant(geographyKind(geo)) as string,
               )}
               toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
-              visibleCount={visibleGeographyCount}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
+              maxRows={1}
             >
               {sortedGeography}
             </BadgeArray>
@@ -216,14 +192,13 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Sectors:</p>
           <div
-            ref={sectorsContainerRef}
             className="flex flex-wrap"
           >
             <BadgeArray
-              visibleCount={visibleSectorsCount}
               variant="sector"
               tooltipGetter={getSectorTooltip}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
+              maxRows={1}
             >
               {sortedSectors.map((sector) => sector.name)}
             </BadgeArray>
@@ -236,14 +211,13 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
             Benchmark Metrics:
           </p>
           <div
-            ref={metricContainerRef}
             className="flex flex-wrap"
           >
             <BadgeArray
-              visibleCount={visibleMetricCount}
               variant="metric"
               tooltipGetter={getMetricTooltip}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
+              maxRows={1}
             >
               {scenario.metric}
             </BadgeArray>
