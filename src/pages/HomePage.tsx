@@ -20,6 +20,7 @@ const HomePage: React.FC = () => {
     modelTempIncrease: null,
     geography: null,
     sector: null,
+    metric: null,
     searchTerm: "",
   });
 
@@ -44,7 +45,8 @@ const HomePage: React.FC = () => {
         filters.modelTempIncrease !==
           prevFiltersRef.current.modelTempIncrease ||
         filters.geography !== prevFiltersRef.current.geography ||
-        filters.sector !== prevFiltersRef.current.sector;
+        filters.sector !== prevFiltersRef.current.sector ||
+        filters.metric !== prevFiltersRef.current.metric;
 
       // Scroll to top when filters change
       if (hasFilterChanged && topSectionRef.current) {
@@ -103,6 +105,7 @@ const HomePage: React.FC = () => {
       modelTempIncrease: null,
       geography: null,
       sector: null,
+      metric: null,
       searchTerm: "",
     });
   };
