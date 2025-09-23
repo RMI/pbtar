@@ -35,6 +35,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       facet:
         | "geography"
         | "sector"
+        | "metric"
         | "pathwayType"
         | "modelYearEnd"
         | "modelTempIncrease",
@@ -78,6 +79,11 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     ? [...sectorOptionsBase, { label: "None", value: ABSENT_FILTER_TOKEN }]
     : sectorOptionsBase;
 
+  const metricOptions = buildOptionsFromValues(
+    scenariosData.map((d) => d.metric).flat(),
+    //scenariosData.map((d) => d.metric)
+  );
+
   const areFiltersApplied =
     Boolean(filters.searchTerm) ||
     Boolean(filters.pathwayType) ||
@@ -88,6 +94,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     (Array.isArray(filters.sector)
       ? filters.sector.length > 0
       : filters.sector != null) ||
+    (Array.isArray(filters.metric)
+      ? filters.metric.length > 0
+      : filters.metric != null) ||
     (Array.isArray(filters.modelYearEnd)
       ? filters.modelYearEnd.length > 0
       : filters.modelYearEnd != null) ||
@@ -155,6 +164,16 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           showModeToggle
           mode={filters.modes?.sector ?? "ANY"}
           onModeChange={(m) => setMode("sector", m)}
+        />
+
+        <MultiSelectDropdown<string>
+          label="Benchmark Metric"
+          options={metricOptions}
+          value={filters.metric}
+          onChange={(arr) => onFilterChange("metric", arr)}
+          showModeToggle
+          mode={filters.modes?.metric ?? "ANY"}
+          onModeChange={(m) => setMode("metric", m)}
         />
       </div>
       <div className="mt-4 ml-1">
