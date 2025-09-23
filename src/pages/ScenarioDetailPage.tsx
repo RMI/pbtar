@@ -102,7 +102,7 @@ const ScenarioDetailPage: React.FC = () => {
               {scenario.pathwayType}
             </BadgeMaybeAbsent>
             <BadgeMaybeAbsent variant="year">
-              {scenario.modelYearEnd}
+              {scenario.modelYearNetzero}
             </BadgeMaybeAbsent>
             <BadgeMaybeAbsent
               variant="temperature"

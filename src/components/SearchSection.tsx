@@ -37,7 +37,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         | "sector"
         | "metric"
         | "pathwayType"
-        | "modelYearEnd"
+        | "modelYearNetzero"
         | "modelTempIncrease",
       m: FacetMode,
     ) => {
@@ -50,8 +50,8 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     scenariosData.map((d) => d.pathwayType),
   );
 
-  const modelYearEndOptions = buildOptionsFromValues(
-    scenariosData.map((d) => d.modelYearEnd),
+  const modelYearNetzeroOptions = buildOptionsFromValues(
+    scenariosData.map((d) => d.modelYearNetzero),
   );
 
   const temperatureOptions = buildOptionsFromValues(
@@ -96,9 +96,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     (Array.isArray(filters.metric)
       ? filters.metric.length > 0
       : filters.metric != null) ||
-    (Array.isArray(filters.modelYearEnd)
-      ? filters.modelYearEnd.length > 0
-      : filters.modelYearEnd != null) ||
+    (Array.isArray(filters.modelYearNetzero)
+      ? filters.modelYearNetzero.length > 0
+      : filters.modelYearNetzero != null) ||
     (Array.isArray(filters.modelTempIncrease)
       ? filters.modelTempIncrease.length > 0
       : filters.modelTempIncrease != null);
@@ -127,12 +127,12 @@ const SearchSection: React.FC<SearchSectionProps> = ({
 
         <MultiSelectDropdown<number>
           label="Target Year"
-          options={modelYearEndOptions}
-          value={filters.modelYearEnd}
-          onChange={(arr) => onFilterChange("modelYearEnd", arr)}
+          options={modelYearNetzeroOptions}
+          value={filters.modelYearNetzero}
+          onChange={(arr) => onFilterChange("modelYearNetzero", arr)}
           showModeToggle={false}
-          mode={filters.modes?.modelYearEnd ?? "ANY"}
-          onModeChange={(m) => setMode("modelYearEnd", m)}
+          mode={filters.modes?.modelYearNetzero ?? "ANY"}
+          onModeChange={(m) => setMode("modelYearNetzero", m)}
         />
 
         <MultiSelectDropdown<string | number>
