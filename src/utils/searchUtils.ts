@@ -20,7 +20,7 @@ export type FilterModes = Partial<{
   modelTempIncrease: FacetMode;
   geography: FacetMode;
   sector: FacetMode;
-  metrics: FacetMode;
+  metric: FacetMode;
 }>;
 
 // Extend your existing Filters type minimally:
@@ -37,7 +37,7 @@ export type Arrayable =
 export type FiltersWithArrays = {
   geography?: Arrayable;
   sector?: Arrayable;
-  metrics?: Arrayable;
+  metric?: Arrayable;
   pathwayType?: Arrayable;
   modelYearEnd?: Arrayable;
   modelTempIncrease?: Arrayable;
@@ -251,7 +251,7 @@ export const filterScenarios = (
         ...scenario.geography,
         ...scenario.geography.map((s) => geographyLabel(s)),
         ...scenario.sectors.map((s) => s.name),
-        ...scenario.metrics,
+        ...scenario.metric,
         scenario.publisher,
         scenario.publicationYear,
       ];
