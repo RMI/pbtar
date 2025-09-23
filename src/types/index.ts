@@ -8,6 +8,7 @@ export interface Scenario {
   modelYearEnd: string;
   modelTempIncrease?: number;
   geography: string[];
+  metric: string[];
   sectors: {
     name: Sector;
   }[];
@@ -69,6 +70,7 @@ export interface SearchFilters {
   modelTempIncrease?: number | string | (number | string)[] | null;
   geography?: string | string[] | null;
   sector?: string | string[] | null;
+  metric?: string | string[] | null;
   searchTerm: string;
   // Optional per-facet mode (used later by a UI toggle)
   modes?: {
@@ -77,5 +79,6 @@ export interface SearchFilters {
     modelTempIncrease?: FacetMode;
     geography?: FacetMode;
     sector?: FacetMode;
+    metric?: FacetMode;
   } | null;
 }

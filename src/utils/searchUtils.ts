@@ -20,6 +20,7 @@ export type FilterModes = Partial<{
   modelTempIncrease: FacetMode;
   geography: FacetMode;
   sector: FacetMode;
+  metric: FacetMode;
 }>;
 
 // Extend your existing Filters type minimally:
@@ -36,6 +37,7 @@ export type Arrayable =
 export type FiltersWithArrays = {
   geography?: Arrayable;
   sector?: Arrayable;
+  metric?: Arrayable;
   pathwayType?: Arrayable;
   modelYearEnd?: Arrayable;
   modelTempIncrease?: Arrayable;
@@ -224,6 +226,19 @@ export const filterScenarios = (
       if (!ok) return false;
     }
 
+    // metric filter
+    {
+      const selected = toArray(filters.metric);
+      const normalizedSelected = selected;
+      const mode = pickMode("metric", filters.modes);
+      const values = scenario.metric ?? [];
+      const ok =
+        mode === "ALL"
+          ? matchesOptionalFacetAll(normalizedSelected, values, (s) => s)
+          : matchesOptionalFacetAny(normalizedSelected, values, (s) => s);
+      if (!ok) return false;
+    }
+
     // Search term
     if (filters.searchTerm && filters.searchTerm.trim() !== "") {
       const searchTerm = filters.searchTerm.toLowerCase();
@@ -236,6 +251,7 @@ export const filterScenarios = (
         ...scenario.geography,
         ...scenario.geography.map((s) => geographyLabel(s)),
         ...scenario.sectors.map((s) => s.name),
+        ...scenario.metric,
         scenario.publisher,
         scenario.publicationYear,
       ];

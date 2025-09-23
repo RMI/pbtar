@@ -62,6 +62,14 @@ describe("searchUtils", () => {
       expect(result[0].id).toBe("sample-02");
     });
 
+    it("filters by metric", () => {
+      const filters: SearchFilters = { metric: "Capacity" };
+      const result = filterScenarios(mockScenarios, filters);
+
+      expect(result.length).toBe(2);
+      expect(result.map((x) => x.id)).toEqual(["sample-01", "sample-02"]);
+    });
+
     it("filters by search term in name", () => {
       const filters: SearchFilters = { searchTerm: "Scenario 01" };
       const result = filterScenarios(mockScenarios, filters);
