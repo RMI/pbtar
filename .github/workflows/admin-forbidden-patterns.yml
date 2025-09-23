@@ -26,14 +26,14 @@ jobs:
           mode: regex
           ignore_case: true
           include: |
+            **/*.json
+            **/*.md
             **/*.ts
             **/*.tsx
-            **/*.md
-            **/*.yml
             **/*.yaml
-            **/*.json
+            **/*.yml
           # Common exclusions to reduce noise
           exclude: |
+            .github/**/*
             package-lock.json
             scripts/schema-check-files.ts
-            .github/**/*
