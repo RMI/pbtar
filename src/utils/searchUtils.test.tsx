@@ -27,15 +27,11 @@ describe("searchUtils", () => {
     });
 
     it("filters by target year", () => {
-      const filters: SearchFilters = { modelYearEnd: 2050 };
+      const filters: SearchFilters = { modelYearNetzero: 2050 };
       const result = filterScenarios(mockScenarios, filters);
 
-      expect(result.length).toBe(3);
-      expect(result.map((x) => x.id)).toEqual([
-        "sample-01",
-        "sample-02",
-        "sample-04",
-      ]);
+      expect(result.length).toBe(2);
+      expect(result.map((x) => x.id)).toEqual(["sample-01", "sample-04"]);
     });
 
     it("filters by modeled temperature increase", () => {
@@ -100,7 +96,7 @@ describe("searchUtils", () => {
     it("returns empty array when no scenarios match filters", () => {
       const filters: SearchFilters = {
         pathwayType: "Policy",
-        modelYearEnd: "2030",
+        modelYearNetzero: "2030",
       };
       const result = filterScenarios(mockScenarios, filters);
 
@@ -137,18 +133,14 @@ describe("searchUtils", () => {
     });
 
     it("safely omits results for non-existing fields", () => {
-      //scenario 3 in the mock data has no modelYearEnd
+      //scenario 3 in the mock data has no modelYearNetzero
       const filters: SearchFilters = {
-        modelYearEnd: 2050,
+        modelYearNetzero: 2050,
       };
 
       const result = filterScenarios(mockScenarios, filters);
-      expect(result.length).toBe(3);
-      expect(result.map((x) => x.id)).toEqual([
-        "sample-01",
-        "sample-02",
-        "sample-04",
-      ]);
+      expect(result.length).toBe(2);
+      expect(result.map((x) => x.id)).toEqual(["sample-01", "sample-04"]);
     });
   });
 });
@@ -223,7 +215,7 @@ describe("filterScenarios (array-backed facets)", () => {
       geography: undefined,
       modelTempIncrease: undefined,
       pathwayType: undefined,
-      modelYearEnd: undefined,
+      modelYearNetzero: undefined,
       publisher: undefined,
       publicationYear: undefined,
       description: undefined,
@@ -235,7 +227,7 @@ describe("filterScenarios (array-backed facets)", () => {
       geography: ["Europe"],
       modelTempIncrease: 2.0,
       pathwayType: "Direct Policy",
-      modelYearEnd: 2040,
+      modelYearNetzero: 2040,
       publisher: "X",
       publicationYear: 2020,
       description: "",
@@ -247,7 +239,7 @@ describe("filterScenarios (array-backed facets)", () => {
       geography: ["Asia"],
       modelTempIncrease: 1.5,
       pathwayType: "Exploratory",
-      modelYearEnd: 2030,
+      modelYearNetzero: 2030,
       publisher: "X",
       publicationYear: 2020,
       description: "",
@@ -271,21 +263,21 @@ describe("filterScenarios (array-backed facets)", () => {
     expect(out.map((s) => s.id)).toEqual(["A"]);
   });
 
-  it("numeric (modelYearEnd): OR over numbers, with ABSENT", () => {
+  it("numeric (modelYearNetzero): OR over numbers, with ABSENT", () => {
     let out = filterScenarios(scenarios, {
-      modelYearEnd: [2040, 2030],
+      modelYearNetzero: [2040, 2030],
     } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual(["B", "C"]);
     out = filterScenarios(scenarios, {
-      modelYearEnd: [2040, ABSENT_FILTER_TOKEN],
+      modelYearNetzero: [2040, ABSENT_FILTER_TOKEN],
     } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual(["A", "B"]);
     out = filterScenarios(scenarios, {
-      modelYearEnd: [ABSENT_FILTER_TOKEN],
+      modelYearNetzero: [ABSENT_FILTER_TOKEN],
     } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual(["A"]);
     out = filterScenarios(scenarios, {
-      modelYearEnd: [9999],
+      modelYearNetzero: [9999],
     } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual([]);
   });
@@ -335,7 +327,7 @@ describe("filterScenarios (array-backed facets)", () => {
           geography: [],
           modelTempIncrease: 2,
           pathwayType: "Net Zero",
-          modelYearEnd: 2050,
+          modelYearNetzero: 2050,
           publisher: "",
           publicationYear: 2020,
           description: "",
@@ -347,7 +339,7 @@ describe("filterScenarios (array-backed facets)", () => {
           geography: [],
           modelTempIncrease: 1.5,
           pathwayType: "BAU",
-          modelYearEnd: 2030,
+          modelYearNetzero: 2030,
           publisher: "",
           publicationYear: 2020,
           description: "",
@@ -358,7 +350,7 @@ describe("filterScenarios (array-backed facets)", () => {
     expect(out).toHaveLength(0);
   });
 
-  it("modelYearEnd: ALL with [2030,2050] yields no results (single-valued facet)", () => {
+  it("modelYearNetzero: ALL with [2030,2050] yields no results (single-valued facet)", () => {
     const out = filterScenarios(
       [
         {
@@ -368,7 +360,7 @@ describe("filterScenarios (array-backed facets)", () => {
           geography: [],
           modelTempIncrease: 2,
           pathwayType: "X",
-          modelYearEnd: 2030,
+          modelYearNetzero: 2030,
           publisher: "",
           publicationYear: 2020,
           description: "",
@@ -380,13 +372,13 @@ describe("filterScenarios (array-backed facets)", () => {
           geography: [],
           modelTempIncrease: 2,
           pathwayType: "Y",
-          modelYearEnd: 2050,
+          modelYearNetzero: 2050,
           publisher: "",
           publicationYear: 2020,
           description: "",
         },
       ] as Scenario[],
-      { modelYearEnd: [2030, 2050], modes: { modelYearEnd: "ALL" } },
+      { modelYearNetzero: [2030, 2050], modes: { modelYearNetzero: "ALL" } },
     );
     expect(out).toHaveLength(0);
   });
@@ -401,7 +393,7 @@ describe("filterScenarios (array-backed facets)", () => {
           geography: [],
           modelTempIncrease: 1.5,
           pathwayType: "X",
-          modelYearEnd: 2030,
+          modelYearNetzero: 2030,
           publisher: "",
           publicationYear: 2020,
           description: "",
@@ -413,7 +405,7 @@ describe("filterScenarios (array-backed facets)", () => {
           geography: [],
           modelTempIncrease: 2.0,
           pathwayType: "Y",
-          modelYearEnd: 2050,
+          modelYearNetzero: 2050,
           publisher: "",
           publicationYear: 2020,
           description: "",
@@ -434,7 +426,7 @@ describe("filterScenarios (array-backed facets)", () => {
           geography: [],
           modelTempIncrease: null,
           pathwayType: null,
-          modelYearEnd: null,
+          modelYearNetzero: null,
           publisher: "",
           publicationYear: 2020,
           description: "",
@@ -453,7 +445,7 @@ describe("filterScenarios (array-backed facets)", () => {
           geography: [],
           modelTempIncrease: 2.0,
           pathwayType: "Net Zero",
-          modelYearEnd: 2030,
+          modelYearNetzero: 2030,
           publisher: "",
           publicationYear: 2020,
           description: "",

@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
 
   const [filters, setFilters] = useState<SearchFilters>({
     pathwayType: null,
-    modelYearEnd: null,
+    modelYearNetzero: null,
     modelTempIncrease: null,
     geography: null,
     sector: null,
@@ -41,7 +41,7 @@ const HomePage: React.FC = () => {
       const hasFilterChanged =
         filters.searchTerm !== prevFiltersRef.current.searchTerm ||
         filters.pathwayType !== prevFiltersRef.current.pathwayType ||
-        filters.modelYearEnd !== prevFiltersRef.current.modelYearEnd ||
+        filters.modelYearNetzero !== prevFiltersRef.current.modelYearNetzero ||
         filters.modelTempIncrease !==
           prevFiltersRef.current.modelTempIncrease ||
         filters.geography !== prevFiltersRef.current.geography ||
@@ -100,7 +100,7 @@ const HomePage: React.FC = () => {
   const handleClear = () => {
     setFilters({
       pathwayType: null,
-      modelYearEnd: null,
+      modelYearNetzero: null,
       modelTempIncrease: null,
       geography: null,
       sector: null,

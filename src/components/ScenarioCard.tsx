@@ -109,7 +109,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               variant="year"
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
             >
-              {scenario.modelYearEnd}
+              {scenario.modelYearNetzero}
             </BadgeMaybeAbsent>
             <BadgeMaybeAbsent
               variant="temperature"

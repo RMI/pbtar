@@ -6,6 +6,7 @@ export interface Scenario {
   description: string;
   pathwayType: string;
   modelYearEnd: string;
+  modelYearNetzero?: number;
   modelTempIncrease?: number;
   geography: string[];
   metric: string[];
@@ -66,7 +67,7 @@ export type Metric =
 
 export interface SearchFilters {
   pathwayType?: string | string[] | null;
-  modelYearEnd?: number | (number | string)[] | null;
+  modelYearNetzero?: number | (number | string)[] | null;
   modelTempIncrease?: number | string | (number | string)[] | null;
   geography?: string | string[] | null;
   sector?: string | string[] | null;
@@ -75,7 +76,7 @@ export interface SearchFilters {
   // Optional per-facet mode (used later by a UI toggle)
   modes?: {
     pathwayType?: FacetMode;
-    modelYearEnd?: FacetMode;
+    modelYearNetzero?: FacetMode;
     modelTempIncrease?: FacetMode;
     geography?: FacetMode;
     sector?: FacetMode;
