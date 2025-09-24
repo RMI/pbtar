@@ -88,7 +88,7 @@ describe("ScenarioCard component", () => {
   it("shows target year and temperature badges", () => {
     renderScenarioCard();
 
-    expect(screen.getByText(mockScenario.modelYearEnd)).toBeInTheDocument();
+    expect(screen.getByText(mockScenario.modelYearNetzero)).toBeInTheDocument();
     expect(
       screen.getByText(mockScenario.modelTempIncrease?.toString() + "°C"),
     ).toBeInTheDocument();
@@ -388,7 +388,7 @@ describe("tooltip functionality", () => {
       const s: Scenario = {
         ...mockScenario,
         // Using a double cast to satisfy TS, but this still presents as numeric at runtime.
-        modelYearEnd: 2030 as unknown as string, // number on purpose
+        modelYearNetzero: 2030 as unknown as string, // number on purpose
         publicationYear: 2024 as unknown as string, // number
       };
 
@@ -422,7 +422,7 @@ describe("tooltip functionality", () => {
       const s: Scenario = {
         ...mockScenario,
         // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
-        modelYearEnd: 2045 as unknown as string, // number on purpose
+        modelYearNetzero: 2045 as unknown as string, // number on purpose
       };
       const { container } = renderWithRouter(s, "2045");
       const marks = container.querySelectorAll("mark");

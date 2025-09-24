@@ -16,7 +16,7 @@ export interface GeoOption {
 export type FacetMode = "ANY" | "ALL";
 export type FilterModes = Partial<{
   pathwayType: FacetMode;
-  modelYearEnd: FacetMode;
+  modelYearNetzero: FacetMode;
   modelTempIncrease: FacetMode;
   geography: FacetMode;
   sector: FacetMode;
@@ -39,7 +39,7 @@ export type FiltersWithArrays = {
   sector?: Arrayable;
   metric?: Arrayable;
   pathwayType?: Arrayable;
-  modelYearEnd?: Arrayable;
+  modelYearNetzero?: Arrayable;
   modelTempIncrease?: Arrayable;
   searchTerm?: string;
   // optional
@@ -130,12 +130,12 @@ export const filterScenarios = (
 
     // ---- Target year: OR over numbers; empty array => no filter; ABSENT-aware
     {
-      const selected = toArrayMixed(filters.modelYearEnd);
+      const selected = toArrayMixed(filters.modelYearNetzero);
       if (selected.length) {
         const hasAbsent = hasAbsentToken(selected);
         const numericChoices = toNumberSet(selected);
-        const v = scenario.modelYearEnd; // number | null | undefined
-        const mode = pickMode("modelYearEnd", filters.modes as FilterModes);
+        const v = scenario.modelYearNetzero; // number | null | undefined
+        const mode = pickMode("modelYearNetzero", filters.modes as FilterModes);
         let ok = true;
 
         if (mode === "ANY") {
@@ -246,7 +246,7 @@ export const filterScenarios = (
         scenario.name,
         scenario.description,
         scenario.pathwayType,
-        scenario.modelYearEnd,
+        scenario.modelYearNetzero,
         scenario.modelTempIncrease,
         ...scenario.geography,
         ...scenario.geography.map((s) => geographyLabel(s)),

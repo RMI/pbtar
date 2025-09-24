@@ -69,7 +69,7 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       geography: undefined, // -> Geography "None"
       modelTempIncrease: undefined, // -> Temperature "None"
       pathwayType: "Net Zero",
-      modelYearEnd: 2050,
+      modelYearNetzero: 2050,
       metric: [],
     },
     {
@@ -79,7 +79,7 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       geography: ["Europe"],
       modelTempIncrease: "2°C",
       pathwayType: "Net Zero",
-      modelYearEnd: 2050,
+      modelYearNetzero: 2050,
       metric: ["Capacity"],
     },
     {
@@ -89,7 +89,7 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       geography: [], // -> Geography "None"
       modelTempIncrease: "1.5°C",
       pathwayType: "NZi2050",
-      modelYearEnd: 2040,
+      modelYearNetzero: 2040,
       metric: [],
     },
     {
@@ -99,7 +99,7 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       geography: ["Asia"],
       modelTempIncrease: undefined, // -> Temperature "None"
       pathwayType: "BAU",
-      modelYearEnd: 2030,
+      modelYearNetzero: 2030,
       metric: ["Capacity", "Generation"],
     },
     {
@@ -109,7 +109,7 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       geography: ["Europe", "Asia"],
       modelTempIncrease: "2°C",
       pathwayType: "Net Zero",
-      modelYearEnd: 2050,
+      modelYearNetzero: 2050,
       metric: ["Generation"],
     },
   ] as const;
