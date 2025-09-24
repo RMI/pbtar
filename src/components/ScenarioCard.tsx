@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState, useEffect, RefObject } from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { BadgeMaybeAbsent } from "./Badge";
 import BadgeArray from "./BadgeArray";
@@ -24,50 +24,7 @@ interface ScenarioCardProps {
   searchTerm?: string;
 }
 
-type MaybeHTMLElement = HTMLElement | null;
-
 // Custom hook to measure container width and calculate how many badges will fit
-const useAvailableBadgeCount = (
-  containerRef: RefObject<MaybeHTMLElement>,
-  itemWidth = 100,
-  gap = 8,
-) => {
-  const [availableBadgeCount, setAvailableBadgeCount] = useState(3); // Default to 3 as minimum
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const updateBadgeCount = () => {
-      const containerWidth = containerRef.current?.clientWidth || 0;
-      const possibleBadges = Math.floor(
-        (containerWidth + gap) / (itemWidth + gap),
-      );
-
-      // Ensure we show at least 1 badge, and cap at a reasonable maximum (e.g., 8)
-      const badgeCount = Math.max(1, Math.min(possibleBadges, 8));
-      setAvailableBadgeCount(badgeCount);
-    };
-
-    // Calculate on mount
-    updateBadgeCount();
-
-    // Recalculate when window resizes
-    const resizeObserver = new ResizeObserver(updateBadgeCount);
-    const observedElement = containerRef.current;
-    if (observedElement) {
-      resizeObserver.observe(observedElement);
-    }
-
-    return () => {
-      if (observedElement) {
-        resizeObserver.unobserve(observedElement);
-      }
-      resizeObserver.disconnect();
-    };
-  }, [containerRef, itemWidth, gap]);
-
-  return availableBadgeCount;
-};
 
 const ScenarioCard: React.FC<ScenarioCardProps> = ({
   scenario,

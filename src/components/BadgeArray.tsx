@@ -41,9 +41,11 @@ export default function BadgeArray<T extends Scalar = Scalar>({
   maxRows = 1,
   ...rest
 }: BadgeArrayProps<T>) {
-  const arr: ReadonlyArray<T | null | undefined> = Array.isArray(children)
-    ? children
-    : [children];
+  // Memoize to keep stable reference across renders and satisfy hooks deps.
+  const arr: ReadonlyArray<T | null | undefined> = useMemo(
+    () => (Array.isArray(children) ? children : [children]),
+    [children],
+  );
 
   // Runtime guard: only scalars/nullish are allowed
   const badIdx = arr.findIndex(
@@ -79,7 +81,7 @@ export default function BadgeArray<T extends Scalar = Scalar>({
 
   // keep refs array in sync with children length
   itemRefs.current = useMemo(
-    () => Array(arr.length).fill(null) as (HTMLSpanElement | null)[],
+    () => new Array<HTMLSpanElement | null>(arr.length).fill(null),
     [arr.length],
   );
 
@@ -121,9 +123,6 @@ export default function BadgeArray<T extends Scalar = Scalar>({
     const wrappers = itemRefs.current.filter(Boolean) as HTMLElement[];
     if (wrappers.length === 0) return;
 
-    // Are we measuring the full list (all items rendered) or a trimmed subset?
-    const measuringFull = wrappers.length === arr.length;
-
     // Let the browser lay everything out; then read rows.
     const rows = groupIntoRows(wrappers);
     const allowed = Math.max(1, Math.floor(maxRows));
@@ -155,7 +154,8 @@ export default function BadgeArray<T extends Scalar = Scalar>({
     };
 
     while (keep > keptBeforeLast) {
-      const lastEl = wrappers[keep - 1]!;
+      const lastEl = wrappers[keep - 1];
+      if (!lastEl) break; // type-safe guard instead of non-null assertion
       const r = lastEl.getBoundingClientRect();
       // measure against container's left to stay in same coord space
       const rightEdge = r.right - cRect.left;
@@ -184,13 +184,15 @@ export default function BadgeArray<T extends Scalar = Scalar>({
     });
     ro.observe(el);
     let cancelled = false;
-    if ((document as any).fonts?.ready) {
-      (document as any).fonts.ready.then(() => {
-        if (!cancelled)
+    const fontsReady: Promise<void> | undefined = document.fonts?.ready;
+    if (fontsReady) {
+      void fontsReady.then(() => {
+        if (!cancelled) {
           requestAnimationFrame(() => {
             setRenderAllOnce(true);
             setMeasureSeq((n) => n + 1);
           });
+        }
       });
     }
     // Also handle window resizes affecting ancestor width (optional but helpful)

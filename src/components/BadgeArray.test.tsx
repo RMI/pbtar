@@ -11,34 +11,33 @@ describe("BadgeArray", () => {
   });
 
   it("applies a single variant to all badges", () => {
-    const { container } = render(
-      <BadgeArray variant="sector">{["Power", "Transport"]}</BadgeArray>,
-    );
-    const spans = container.querySelectorAll("span");
-    // Both badges should have the 'sector' styling
-    spans.forEach((el) => {
-      // each Badge renders a <span> with these classes
-      expect(el).toHaveClass("bg-solar-100");
-      expect(el).toHaveClass("text-solar-800");
-      expect(el).toHaveClass("border-solar-200");
-    });
+    render(<BadgeArray variant="sector">{["Power", "Transport"]}</BadgeArray>);
+    const power = screen.getByText("Power").closest("span") as HTMLElement;
+    const transport = screen
+      .getByText("Transport")
+      .closest("span") as HTMLElement;
+    expect(power).toHaveClass("bg-solar-100");
+    expect(power).toHaveClass("text-solar-800");
+    expect(power).toHaveClass("border-solar-200");
+    expect(transport).toHaveClass("bg-solar-100");
+    expect(transport).toHaveClass("text-solar-800");
+    expect(transport).toHaveClass("border-solar-200");
   });
 
   it("applies per-item variants when variant is an array", () => {
-    const { container } = render(
+    render(
       <BadgeArray variant={["sector", "year"]}>{["Power", "2050"]}</BadgeArray>,
     );
-    const [first, second] = Array.from(container.querySelectorAll("span"));
-
+    const sectorSpan = screen.getByText("Power").closest("span") as HTMLElement;
+    const yearSpan = screen.getByText("2050").closest("span") as HTMLElement;
     // sector
-    expect(first).toHaveClass("bg-solar-100");
-    expect(first).toHaveClass("text-solar-800");
-    expect(first).toHaveClass("border-solar-200");
-
+    expect(sectorSpan).toHaveClass("bg-solar-100");
+    expect(sectorSpan).toHaveClass("text-solar-800");
+    expect(sectorSpan).toHaveClass("border-solar-200");
     // year
-    expect(second).toHaveClass("bg-rmiblue-100");
-    expect(second).toHaveClass("text-rmiblue-800");
-    expect(second).toHaveClass("border-rmiblue-200");
+    expect(yearSpan).toHaveClass("bg-rmiblue-100");
+    expect(yearSpan).toHaveClass("text-rmiblue-800");
+    expect(yearSpan).toHaveClass("border-rmiblue-200");
   });
 
   it("supports toLabel for present values", () => {
