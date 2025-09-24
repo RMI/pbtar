@@ -227,7 +227,6 @@ export default function BadgeArray<T extends Scalar = Scalar>({
         ref={moreMeasureRef}
         aria-hidden="true"
         className="invisible absolute whitespace-nowrap text-xs"
-        style={{ position: "absolute" }}
       >
         +0 more
       </span>
