@@ -7,6 +7,8 @@
 
 ## Running the application
 
+BLAH BLAH BLAH
+
 1. Clone the Repo
 
 ```sh
