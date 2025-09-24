@@ -72,6 +72,8 @@ export default function BadgeArray<T extends Scalar = Scalar>({
   const itemRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const moreMeasureRef = useRef<HTMLSpanElement | null>(null);
   const [autoVisible, setAutoVisible] = useState<number | null>(null);
+  // When true, render all badges for one frame to measure expansion capacity
+  const [renderAllOnce, setRenderAllOnce] = useState(false);
   // bump this to force recomputation on resize/font load
   const [measureSeq, setMeasureSeq] = useState(0);
 
@@ -129,11 +131,14 @@ export default function BadgeArray<T extends Scalar = Scalar>({
     const cRect = container.getBoundingClientRect();
     const containerWidth = cRect.width || container.clientWidth || 0;
 
-    // If everything is within allowed rows, done.
+    // If everything is within allowed rows:
     if (rows.length <= allowed) {
-      // Only expand to "show all" if we are measuring the full list.
-      if (measuringFull) setAutoVisible(arr.length);
-      // If we're already trimmed, keep the current trimmed state to avoid oscillation.
+      // Expand to all only if we measured the full list OR we explicitly rendered all for this pass.
+      if (wrappers.length === arr.length || renderAllOnce) {
+        setAutoVisible(arr.length);
+      }
+      // Clear the one-shot flag if it was set.
+      if (renderAllOnce) setRenderAllOnce(false);
       return;
     }
 
@@ -163,7 +168,8 @@ export default function BadgeArray<T extends Scalar = Scalar>({
     }
 
     setAutoVisible(Math.max(1, keep));
-  }, [arr, visibleCount, maxRows, measureSeq]);
+    if (renderAllOnce) setRenderAllOnce(false);
+  }, [arr, visibleCount, maxRows, measureSeq, renderAllOnce]);
 
   // Recompute on container resize and when fonts finish loading (labels can change width)
   useEffect(() => {
@@ -171,18 +177,28 @@ export default function BadgeArray<T extends Scalar = Scalar>({
     const el = containerRef.current;
     if (!el) return;
     const ro = new ResizeObserver(() => {
-      // bump a counter so the layout effect runs again
-      requestAnimationFrame(() => setMeasureSeq((n) => n + 1));
+      // On any size change, render all items for one frame so we can expand if needed.
+      requestAnimationFrame(() => {
+        setRenderAllOnce(true);
+        setMeasureSeq((n) => n + 1);
+      });
     });
     ro.observe(el);
     let cancelled = false;
     if ((document as any).fonts?.ready) {
       (document as any).fonts.ready.then(() => {
-        if (!cancelled) requestAnimationFrame(() => setMeasureSeq((n) => n + 1));
+        if (!cancelled)
+          requestAnimationFrame(() => {
+            setRenderAllOnce(true);
+            setMeasureSeq((n) => n + 1);
+          });
       });
     }
     // Also handle window resizes affecting ancestor width (optional but helpful)
-    const onWin = () => setMeasureSeq((n) => n + 1);
+    const onWin = () => {
+      setRenderAllOnce(true);
+      setMeasureSeq((n) => n + 1);
+    };
     window.addEventListener("resize", onWin);
     return () => {
       cancelled = true;
@@ -194,6 +210,8 @@ export default function BadgeArray<T extends Scalar = Scalar>({
   const finalVisible =
     typeof visibleCount === "number"
       ? visibleCount
+      : renderAllOnce
+      ? arr.length // temporarily render all to measure expansion capacity
       : autoVisible ?? arr.length;
   const showMore =
     finalVisible < arr.length && Number.isFinite(maxRows) && finalVisible >= 0;

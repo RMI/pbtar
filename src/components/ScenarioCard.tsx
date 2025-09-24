@@ -181,7 +181,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               )}
               toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
-              maxRows={1}
+              maxRows={2}
             >
               {sortedGeography}
             </BadgeArray>
@@ -198,7 +198,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               variant="sector"
               tooltipGetter={getSectorTooltip}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
-              maxRows={1}
+              maxRows={2}
             >
               {sortedSectors.map((sector) => sector.name)}
             </BadgeArray>
@@ -217,7 +217,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               variant="metric"
               tooltipGetter={getMetricTooltip}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
-              maxRows={1}
+              maxRows={2}
             >
               {scenario.metric}
             </BadgeArray>
