@@ -172,9 +172,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <p className="text-xs font-medium text-rmigray-500 mb-1">
             Geographies:
           </p>
-          <div
-            className="flex flex-wrap"
-          >
+          <div className="flex flex-wrap">
             <BadgeArray
               variant={sortedGeography.map(
                 (geo) => geographyVariant(geographyKind(geo)) as string,
@@ -191,9 +189,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
         {/* Sectors section with dynamic badge count */}
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Sectors:</p>
-          <div
-            className="flex flex-wrap"
-          >
+          <div className="flex flex-wrap">
             <BadgeArray
               variant="sector"
               tooltipGetter={getSectorTooltip}
@@ -210,9 +206,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <p className="text-xs font-medium text-rmigray-500 mb-1">
             Benchmark Metrics:
           </p>
-          <div
-            className="flex flex-wrap"
-          >
+          <div className="flex flex-wrap">
             <BadgeArray
               variant="metric"
               tooltipGetter={getMetricTooltip}

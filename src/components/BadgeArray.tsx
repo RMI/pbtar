@@ -124,7 +124,6 @@ export default function BadgeArray<T extends Scalar = Scalar>({
     // Are we measuring the full list (all items rendered) or a trimmed subset?
     const measuringFull = wrappers.length === arr.length;
 
-
     // Let the browser lay everything out; then read rows.
     const rows = groupIntoRows(wrappers);
     const allowed = Math.max(1, Math.floor(maxRows));
@@ -211,13 +210,16 @@ export default function BadgeArray<T extends Scalar = Scalar>({
     typeof visibleCount === "number"
       ? visibleCount
       : renderAllOnce
-      ? arr.length // temporarily render all to measure expansion capacity
-      : autoVisible ?? arr.length;
+        ? arr.length // temporarily render all to measure expansion capacity
+        : (autoVisible ?? arr.length);
   const showMore =
     finalVisible < arr.length && Number.isFinite(maxRows) && finalVisible >= 0;
 
   return (
-    <div ref={containerRef} className="flex flex-wrap">
+    <div
+      ref={containerRef}
+      className="flex flex-wrap"
+    >
       {/* Hidden, dynamic measurer for the "+N more" token */}
       <span
         ref={moreMeasureRef}
