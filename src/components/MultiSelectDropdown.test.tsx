@@ -1,8 +1,8 @@
 import React from "react";
-import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import MultiSelectDropdown from "./MultiSelectDropdown";
+import MultiSelectDropdown, { Option } from "./MultiSelectDropdown";
 
 describe("<MultiSelectDropdown>", () => {
   function MultiSelectDropdownHarness<T extends string | number>(props: {
@@ -128,4 +128,133 @@ it("closes on outside click but not when re-clicking the trigger", async () => {
   // Click outside → closed
   await user.click(document.body);
   expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+});
+
+const OPTIONS: Option<string>[] = [
+  { value: "a", label: "Alpha" },
+  { value: "b", label: "Beta" },
+];
+
+function openMenu() {
+  fireEvent.click(screen.getByRole("button"));
+}
+
+describe("MultiSelectDropdown – variable widths", () => {
+  const getBoundingClientRect = HTMLElement.prototype.getBoundingClientRect;
+
+  beforeEach(() => {
+    // Default: mock a 160px-wide trigger button
+    HTMLElement.prototype.getBoundingClientRect = vi.fn(function (
+      this: HTMLElement,
+    ) {
+      // Crude heuristic: if this is the trigger (has role="button"), give it width
+      if (
+        this.getAttribute("role") === "button" ||
+        this.tagName.toLowerCase() === "button"
+      ) {
+        return {
+          width: 160,
+          height: 32,
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          x: 0,
+          y: 0,
+          toJSON: () => {},
+        } as any;
+      }
+      return {
+        width: 0,
+        height: 0,
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        x: 0,
+        y: 0,
+        toJSON: () => {},
+      } as any;
+    }) as any;
+  });
+
+  afterEach(() => {
+    HTMLElement.prototype.getBoundingClientRect = getBoundingClientRect;
+  });
+
+  it("renders a trigger sized to content with a minimum width class", () => {
+    render(
+      <MultiSelectDropdown
+        label="Geography"
+        options={OPTIONS}
+        value={[]}
+        onChange={() => {}}
+      />,
+    );
+
+    const btn = screen.getByRole("button");
+    // Should not have a fixed width class like w-72
+    expect(btn.className).not.toMatch(/\bw-72\b/);
+    // Should have w-auto and the default min width class
+    expect(btn.className).toMatch(/\bw-auto\b/);
+    expect(btn.className).toMatch(/\bmin-w-32\b/);
+  });
+
+  it("ensures the menu is at least as wide as the trigger when opened", () => {
+    render(
+      <MultiSelectDropdown
+        label="Sector"
+        options={OPTIONS}
+        value={[]}
+        onChange={() => {}}
+      />,
+    );
+
+    openMenu();
+
+    // The menu container should have minWidth >= 160px (mocked trigger width)
+    // Grab the popup by role="listbox" parent; we use closest container div
+    const list = screen.getByRole("listbox");
+    const container = list.closest("div");
+    expect(container).toBeTruthy();
+    const style = (container as HTMLDivElement).getAttribute("style") || "";
+    expect(style.replace(/\s/g, "")).toMatch(/min-width:\s*160px/i);
+  });
+
+  it("uses menuWidthClassName when provided (fixed width) and skips inline minWidth", () => {
+    render(
+      <MultiSelectDropdown
+        label="Metric"
+        options={OPTIONS}
+        value={[]}
+        onChange={() => {}}
+        menuWidthClassName="w-96"
+      />,
+    );
+
+    openMenu();
+
+    const list = screen.getByRole("listbox");
+    const container = list.closest("div")!;
+    // Has fixed width class
+    expect(container.className).toMatch(/\bw-96\b/);
+    // And should not set an inline minWidth (style is absent or empty)
+    const style = container.getAttribute("style");
+    expect(style == null || style.trim() === "").toBe(true);
+  });
+
+  it("respects custom triggerMinWidthClassName", () => {
+    render(
+      <MultiSelectDropdown
+        label="Geography"
+        options={OPTIONS}
+        value={[]}
+        onChange={() => {}}
+        triggerMinWidthClassName="min-w-40"
+      />,
+    );
+
+    const btn = screen.getByRole("button");
+    expect(btn.className).toMatch(/\bmin-w-40\b/);
+  });
 });

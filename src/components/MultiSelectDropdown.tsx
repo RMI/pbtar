@@ -1,5 +1,6 @@
 import React from "react";
 import type { FacetMode } from "../utils/searchUtils";
+import clsx from "clsx";
 
 export type Option<T extends string | number = string> = {
   value: T;
@@ -14,7 +15,10 @@ type Props<T extends string | number = string> = {
   onChange: (next: T[]) => void;
   placeholder?: string;
   className?: string;
-
+  /** Minimum width for the trigger button (Tailwind class). Defaults to 'min-w-32'. */
+  triggerMinWidthClassName?: string;
+  /** Optional fixed width class for the menu panel (e.g., 'w-96'). If omitted, we compute a minWidth >= trigger width. */
+  menuWidthClassName?: string;
   // Optional ANY/ALL control (unused by default)
   mode?: FacetMode;
   onModeChange?: (m: FacetMode) => void;
@@ -31,6 +35,8 @@ export default function MultiSelectDropdown<
   onChange,
   placeholder = "Select…",
   className,
+  triggerMinWidthClassName = "min-w-32",
+  menuWidthClassName,
   mode = "ANY",
   onModeChange,
   showModeToggle = false,
@@ -40,6 +46,7 @@ export default function MultiSelectDropdown<
   const [open, setOpen] = React.useState(false);
   const triggerRef = React.useRef<HTMLButtonElement | null>(null);
   const menuRef = React.useRef<HTMLDivElement | null>(null);
+  const [menuMinWidthPx, setMenuMinWidthPx] = React.useState<number>(0);
 
   React.useEffect(() => {
     function onDocMouseDown(e: MouseEvent) {
@@ -95,6 +102,22 @@ export default function MultiSelectDropdown<
   const clear = () => onChange([]);
   const selectAll = () => onChange(enabled.map((o) => o.value));
 
+  // Track trigger width so the menu can be at least that wide.
+  const updateMenuMinWidth = React.useCallback(() => {
+    if (triggerRef.current) {
+      const w = triggerRef.current.getBoundingClientRect().width;
+      // floor to integer to avoid flapping styles in tests
+      setMenuMinWidthPx(Math.max(0, Math.floor(w)));
+    }
+  }, []);
+
+  React.useEffect(() => {
+    updateMenuMinWidth();
+    const onResize = () => updateMenuMinWidth();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [updateMenuMinWidth]);
+
   return (
     <div className={className}>
       {label ? (
@@ -104,7 +127,11 @@ export default function MultiSelectDropdown<
       <button
         ref={triggerRef}
         type="button"
-        className="rounded-xl border px-3 py-2 text-sm bg-white shadow-sm flex items-center justify-between w-72"
+        className={clsx(
+          // size to content; keep a sensible floor with min-width
+          "inline-flex w-auto items-center justify-between rounded-md border border-gray-300 bg-white px-3 py-2 text-left text-sm shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500",
+          triggerMinWidthClassName,
+        )}
         onClick={() => setOpen(true)} // only opens; closing is via outside click/Escape
         aria-haspopup="listbox"
         aria-expanded={open}
@@ -125,7 +152,22 @@ export default function MultiSelectDropdown<
           ref={menuRef}
           className="relative z-20"
         >
-          <div className="absolute mt-2 w-72 rounded-xl border bg-white shadow-lg p-2">
+          <div
+            className={clsx(
+              "absolute z-20 mt-2 origin-top-right rounded-md border border-gray-200 bg-white shadow-lg focus:outline-none",
+              // If a fixed width is provided, use it; else rely on minWidth style below
+              menuWidthClassName ?? null,
+            )}
+            style={
+              menuWidthClassName
+                ? undefined
+                : {
+                    minWidth: menuMinWidthPx
+                      ? `${menuMinWidthPx}px`
+                      : undefined,
+                  }
+            }
+          >
             <div className="flex items-center justify-between px-2 pb-2 text-xs">
               <div className="flex items-center gap-2">
                 <button

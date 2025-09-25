@@ -153,6 +153,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           showModeToggle
           mode={filters.modes?.geography ?? "ANY"}
           onModeChange={(m) => setMode("geography", m)}
+          menuWidthClassName="w-60"
         />
 
         <MultiSelectDropdown<string>
@@ -163,6 +164,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           showModeToggle
           mode={filters.modes?.sector ?? "ANY"}
           onModeChange={(m) => setMode("sector", m)}
+          menuWidthClassName="w-60"
         />
 
         <MultiSelectDropdown<string>
@@ -173,6 +175,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           showModeToggle
           mode={filters.modes?.metric ?? "ANY"}
           onModeChange={(m) => setMode("metric", m)}
+          menuWidthClassName="w-60"
         />
       </div>
       <div className="mt-4 ml-1">
