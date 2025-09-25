@@ -167,4 +167,32 @@ describe("SearchSection", () => {
       });
     }
   });
+
+  describe("Clear all filters button (inline with summary)", () => {
+    it("does not render the button when no filters are applied", () => {
+      render(<SearchSection {...defaultProps} />);
+      expect(screen.queryByTestId("clear-all-filters")).toBeNull();
+      // Summary still renders
+      expect(screen.getByText(/Found 2 scenarios/i)).toBeInTheDocument();
+    });
+
+    it("renders the inline button when any filter is applied and calls onClear", () => {
+      const props = {
+        ...defaultProps,
+        filters: { ...defaultProps.filters, geography: ["Europe"] },
+      };
+      render(<SearchSection {...props} />);
+
+      // Button should be present and visually near the summary (inline within the same <p>)
+      const paragraph = screen.getByText(/Found \d+ scenarios/i).closest("p");
+      expect(paragraph).toBeTruthy();
+      const clearBtn = screen.getByTestId("clear-all-filters");
+      expect(clearBtn).toBeInTheDocument();
+      // Ensure the button is inside the same paragraph node (inline placement)
+      expect(paragraph?.contains(clearBtn)).toBe(true);
+
+      clearBtn.click();
+      expect(defaultProps.onClear).toHaveBeenCalledTimes(1);
+    });
+  });
 });
