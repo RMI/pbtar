@@ -140,7 +140,8 @@ function openMenu() {
 }
 
 describe("MultiSelectDropdown – variable widths", () => {
-  const getBoundingClientRect = HTMLElement.prototype.getBoundingClientRect;
+  const getBoundingClientRect =
+    HTMLElement.prototype.getBoundingClientRect.bind(HTMLElement.prototype);
 
   beforeEach(() => {
     // Default: mock a 160px-wide trigger button
@@ -162,7 +163,7 @@ describe("MultiSelectDropdown – variable widths", () => {
           x: 0,
           y: 0,
           toJSON: () => {},
-        } as any;
+        };
       }
       return {
         width: 0,
@@ -174,8 +175,8 @@ describe("MultiSelectDropdown – variable widths", () => {
         x: 0,
         y: 0,
         toJSON: () => {},
-      } as any;
-    }) as any;
+      };
+    });
   });
 
   afterEach(() => {
