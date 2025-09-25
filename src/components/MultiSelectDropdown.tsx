@@ -1,6 +1,7 @@
 import React from "react";
 import type { FacetMode } from "../utils/searchUtils";
 import clsx from "clsx";
+import { ChevronDown, X } from "lucide-react";
 
 export type Option<T extends string | number = string> = {
   value: T;
@@ -136,25 +137,42 @@ export default function MultiSelectDropdown<
         type="button"
         className={clsx(
           "inline-flex w-auto items-center justify-between rounded-md px-3 py-2 text-left text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500",
-          // Active vs. neutral visual state (mirrors FilterDropdown)
           isActive
             ? "text-energy-800 bg-energy-100 border border-energy-100"
             : "text-rmigray-800 bg-white border border-gray-300 hover:bg-gray-50",
           triggerMinWidthClassName,
         )}
-        onClick={() => setOpen(true)} // only opens; closing is via outside click/Escape
+        onClick={() => setOpen(true)} // ← always opens, regardless of isActive
         aria-haspopup="listbox"
         aria-expanded={open}
       >
         <span className="truncate">
           {current.length === 0 ? placeholder : `${current.length} selected`}
         </span>
-        <span
-          aria-hidden
-          className="ml-2"
-        >
-          ▾
-        </span>
+
+        {isActive ? (
+          <span
+            role="button"
+            aria-label={`Clear ${label ?? "filter"}`}
+            className="ml-2 inline-flex h-5 w-5 items-center justify-center rounded cursor-pointer hover:bg-energy-200 focus:outline-none"
+            onClick={(e) => {
+              e.stopPropagation(); // don't open the menu
+              onChange([]);
+            }}
+            onMouseDown={(e) => e.preventDefault()} // prevent focusing/activating parent button
+          >
+            <X
+              size={16}
+              aria-hidden
+            />
+          </span>
+        ) : (
+          <ChevronDown
+            size={16}
+            className="ml-2"
+            aria-hidden
+          />
+        )}
       </button>
 
       {open && (

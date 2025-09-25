@@ -337,12 +337,113 @@ describe("MultiSelectDropdown – active visual state", () => {
         onChange={() => {}}
       />,
     );
-    const btn = screen.getByRole("button");
+    // The trigger's accessible name is the visible text inside it, e.g. "1 selected"
+    const btn = screen.getByRole("button", { name: /selected/i });
     // Active classes present
     expect(btn.className).toMatch(/\bbg-energy-100\b/);
     expect(btn.className).toMatch(/\bborder-energy-100\b/);
     expect(btn.className).toMatch(/\btext-energy-800\b/);
     // Neutral background absent
     expect(btn.className).not.toMatch(/\bbg-white\b/);
+  });
+});
+
+describe("MultiSelectDropdown – trigger affordance (ChevronDown vs X)", () => {
+  // Bind & restore to avoid unbound-method + invalid `this`
+  const originalGetBCR = HTMLElement.prototype.getBoundingClientRect.bind(
+    HTMLElement.prototype,
+  );
+
+  beforeEach(() => {
+    // Give buttons a reasonable width; others 0
+    HTMLElement.prototype.getBoundingClientRect = vi.fn(function (
+      this: HTMLElement,
+    ) {
+      if (
+        this.getAttribute("role") === "button" ||
+        this.tagName.toLowerCase() === "button"
+      ) {
+        return {
+          width: 160,
+          height: 32,
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          x: 0,
+          y: 0,
+          toJSON: () => {},
+        };
+      }
+      return {
+        width: 0,
+        height: 0,
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        x: 0,
+        y: 0,
+        toJSON: () => {},
+      };
+    });
+  });
+
+  afterEach(() => {
+    HTMLElement.prototype.getBoundingClientRect = originalGetBCR;
+  });
+
+  it("inactive: shows ChevronDown affordance (implicitly) and opens the menu on trigger click", async () => {
+    const user = userEvent.setup();
+    render(
+      <MultiSelectDropdown
+        label="Geography"
+        options={[
+          { value: "na", label: "North America" },
+          { value: "eu", label: "Europe" },
+        ]}
+        value={[]} // inactive
+        onChange={() => {}}
+      />,
+    );
+
+    // No clear control when inactive
+    expect(
+      screen.queryByRole("button", { name: /clear geography/i }),
+    ).toBeNull();
+
+    // Click trigger -> menu should open (listbox appears)
+    await user.click(screen.getByRole("button", { name: /select/i }));
+    expect(await screen.findByRole("listbox")).toBeInTheDocument();
+  });
+
+  it("active: shows X (clear); clicking X clears without opening; clicking trigger opens the menu", async () => {
+    const user = userEvent.setup();
+    const handleChange = vi.fn();
+    render(
+      <MultiSelectDropdown
+        label="Sector"
+        options={[
+          { value: "p", label: "Power" },
+          { value: "t", label: "Transport" },
+        ]}
+        value={["p"]} // active
+        onChange={handleChange}
+      />,
+    );
+
+    // Clear control is present (X replaces caret) – now role="button"
+    const clear = screen.getByRole("button", { name: /clear sector/i });
+    expect(clear).toBeInTheDocument();
+
+    // Clicking X clears but does not open the menu
+    await user.click(clear);
+    expect(handleChange).toHaveBeenCalledTimes(1);
+    expect(handleChange).toHaveBeenCalledWith([]);
+    expect(screen.queryByRole("listbox")).toBeNull();
+
+    // Simulate user adding a 3rd sector: clicking the trigger (still active) should open the menu
+    await user.click(screen.getByRole("button", { name: /selected/i })); // e.g., "1 selected"
+    expect(await screen.findByRole("listbox")).toBeInTheDocument();
   });
 });
