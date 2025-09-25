@@ -259,3 +259,90 @@ describe("MultiSelectDropdown – variable widths", () => {
     expect(btn.className).toMatch(/\bmin-w-40\b/);
   });
 });
+
+describe("MultiSelectDropdown – active visual state", () => {
+  // Bind original so we can restore safely (avoids unbound-method + invalid `this`)
+  const originalGetBCR = HTMLElement.prototype.getBoundingClientRect.bind(
+    HTMLElement.prototype,
+  );
+
+  beforeEach(() => {
+    HTMLElement.prototype.getBoundingClientRect = vi.fn(function (
+      this: HTMLElement,
+    ) {
+      if (
+        this.getAttribute("role") === "button" ||
+        this.tagName.toLowerCase() === "button"
+      ) {
+        return {
+          width: 160,
+          height: 32,
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          x: 0,
+          y: 0,
+          toJSON: () => {},
+        };
+      }
+      return {
+        width: 0,
+        height: 0,
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        x: 0,
+        y: 0,
+        toJSON: () => {},
+      };
+    });
+  });
+
+  afterEach(() => {
+    HTMLElement.prototype.getBoundingClientRect = originalGetBCR;
+  });
+
+  it("renders neutral trigger styles when there are no selections", () => {
+    render(
+      <MultiSelectDropdown
+        label="Geography"
+        options={[
+          { value: "na", label: "North America" },
+          { value: "eu", label: "Europe" },
+        ]}
+        value={[]}
+        onChange={() => {}}
+      />,
+    );
+    const btn = screen.getByRole("button");
+    // Neutral classes present
+    expect(btn.className).toMatch(/\bbg-white\b/);
+    expect(btn.className).toMatch(/\bborder-gray-300\b/);
+    // Active classes absent
+    expect(btn.className).not.toMatch(/\bbg-energy-100\b/);
+    expect(btn.className).not.toMatch(/\bborder-energy-100\b/);
+  });
+
+  it("renders active trigger styles when there is at least one selection", () => {
+    render(
+      <MultiSelectDropdown
+        label="Geography"
+        options={[
+          { value: "na", label: "North America" },
+          { value: "eu", label: "Europe" },
+        ]}
+        value={["eu"]}
+        onChange={() => {}}
+      />,
+    );
+    const btn = screen.getByRole("button");
+    // Active classes present
+    expect(btn.className).toMatch(/\bbg-energy-100\b/);
+    expect(btn.className).toMatch(/\bborder-energy-100\b/);
+    expect(btn.className).toMatch(/\btext-energy-800\b/);
+    // Neutral background absent
+    expect(btn.className).not.toMatch(/\bbg-white\b/);
+  });
+});

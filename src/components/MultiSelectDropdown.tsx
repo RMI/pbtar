@@ -67,11 +67,18 @@ export default function MultiSelectDropdown<
   }, []);
 
   // Coerce scalar/null/undefined → T[]
+  // Normalize current values to an array for easy checks
   const current = React.useMemo<T[]>(
     () =>
-      Array.isArray(value) ? value : value != null ? ([value] as T[]) : [],
+      Array.isArray(value)
+        ? value.filter((v): v is T => v !== null && v !== undefined)
+        : value === null || value === undefined
+          ? []
+          : [value],
     [value],
   );
+
+  const isActive = current.length > 0;
 
   // We compare using string forms to support number values safely
   const toKey = React.useCallback((v: T) => String(v), []);
@@ -128,8 +135,11 @@ export default function MultiSelectDropdown<
         ref={triggerRef}
         type="button"
         className={clsx(
-          // size to content; keep a sensible floor with min-width
-          "inline-flex w-auto items-center justify-between rounded-md border border-gray-300 bg-white px-3 py-2 text-left text-sm shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500",
+          "inline-flex w-auto items-center justify-between rounded-md px-3 py-2 text-left text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500",
+          // Active vs. neutral visual state (mirrors FilterDropdown)
+          isActive
+            ? "text-energy-800 bg-energy-100 border border-energy-100"
+            : "text-rmigray-800 bg-white border border-gray-300 hover:bg-gray-50",
           triggerMinWidthClassName,
         )}
         onClick={() => setOpen(true)} // only opens; closing is via outside click/Escape
