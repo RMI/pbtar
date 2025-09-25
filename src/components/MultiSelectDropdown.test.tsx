@@ -3,6 +3,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import MultiSelectDropdown, { Option } from "./MultiSelectDropdown";
+import type { FacetMode } from "../utils/searchUtils";
 
 describe("<MultiSelectDropdown>", () => {
   function MultiSelectDropdownHarness<T extends string | number>(props: {
@@ -445,5 +446,178 @@ describe("MultiSelectDropdown – trigger affordance (ChevronDown vs X)", () => 
     // Simulate user adding a 3rd sector: clicking the trigger (still active) should open the menu
     await user.click(screen.getByRole("button", { name: /selected/i })); // e.g., "1 selected"
     expect(await screen.findByRole("listbox")).toBeInTheDocument();
+  });
+});
+
+describe("MultiSelectDropdown – menu header layout & interactions", () => {
+  // Stable width mock so the menu open effect doesn't throw in JSDOM
+  const originalGetBCR = HTMLElement.prototype.getBoundingClientRect.bind(
+    HTMLElement.prototype,
+  );
+
+  beforeEach(() => {
+    HTMLElement.prototype.getBoundingClientRect = vi.fn(function (
+      this: HTMLElement,
+    ) {
+      if (
+        this.getAttribute("role") === "button" ||
+        this.tagName.toLowerCase() === "button"
+      ) {
+        return {
+          width: 200,
+          height: 32,
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          x: 0,
+          y: 0,
+          toJSON: () => {},
+        };
+      }
+      return {
+        width: 0,
+        height: 0,
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        x: 0,
+        y: 0,
+        toJSON: () => {},
+      };
+    });
+  });
+
+  afterEach(() => {
+    HTMLElement.prototype.getBoundingClientRect = originalGetBCR;
+  });
+
+  function renderOpenMenu(ui: React.ReactElement) {
+    render(ui);
+    // Find the trigger by aria-haspopup="listbox" (unique to the trigger)
+    const trigger = screen
+      .getAllByRole("button")
+      .find((el) => el.getAttribute("aria-haspopup") === "listbox");
+    if (!trigger) {
+      throw new Error("Trigger button with aria-haspopup='listbox' not found");
+    }
+    fireEvent.click(trigger);
+  }
+
+  it("shows left actions and right, bordered, right-justified explainer block", () => {
+    renderOpenMenu(
+      <MultiSelectDropdown
+        label="Geography"
+        options={[
+          { value: "na", label: "North America" },
+          { value: "eu", label: "Europe" },
+        ]}
+        value={[]}
+        onChange={() => {}}
+        showModeToggle
+        mode="ANY"
+        onModeChange={() => {}}
+      />,
+    );
+
+    // Left actions present; "Select all" uses whitespace-nowrap
+    const selectAll = screen.getByRole("button", { name: /select all/i });
+    const clearBtn = screen.getByRole("button", { name: /^clear$/i });
+    expect(selectAll).toBeInTheDocument();
+    expect(clearBtn).toBeInTheDocument();
+    expect(selectAll.className).toMatch(/\bwhitespace-nowrap\b/);
+
+    // Right block: two-line text and a bordered Any/All + "selected"
+    const explainer = screen.getByTestId("mode-explainer");
+    expect(explainer).toBeInTheDocument();
+    // Right-justified container
+    expect(explainer.parentElement?.className).toMatch(/\btext-right\b/);
+    // First line
+    expect(screen.getByText(/Show scenarios matching/i)).toBeInTheDocument();
+    // The grouped toggle exists and is bordered
+    const group = screen.getByRole("group", { name: /match mode/i });
+    // The border is applied to the inner wrapper of the buttons (closest div with border classes)
+    // Check the closest ancestor with border classes inside the group:
+    const bordered = group.closest("div")?.querySelector("div.border");
+    expect(bordered).toBeTruthy();
+    // Buttons and trailing "selected" text
+    expect(screen.getByRole("button", { name: /^Any$/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /^All$/i })).toBeInTheDocument();
+    expect(screen.getByText(/selected/i)).toBeInTheDocument();
+  });
+
+  it("disables 'Select all' when all options are already selected", () => {
+    // All selected -> Select all disabled, Clear enabled
+    renderOpenMenu(
+      <MultiSelectDropdown
+        label="Sector"
+        options={[
+          { value: "p", label: "Power" },
+          { value: "t", label: "Transport" },
+        ]}
+        value={["p", "t"]}
+        onChange={() => {}}
+        showModeToggle
+        mode="ANY"
+        onModeChange={() => {}}
+      />,
+    );
+    expect(screen.getByRole("button", { name: /select all/i })).toBeDisabled();
+    expect(screen.getByRole("button", { name: /^clear$/i })).not.toBeDisabled();
+  });
+
+  it("disables 'Clear' when none selected", () => {
+    // None selected -> Select all enabled, Clear disabled
+    renderOpenMenu(
+      <MultiSelectDropdown
+        label="Sector"
+        options={[
+          { value: "p", label: "Power" },
+          { value: "t", label: "Transport" },
+        ]}
+        value={[]}
+        onChange={() => {}}
+        showModeToggle
+        mode="ANY"
+        onModeChange={() => {}}
+      />,
+    );
+    expect(
+      screen.getByRole("button", { name: /select all/i }),
+    ).not.toBeDisabled();
+    expect(screen.getByRole("button", { name: /^clear$/i })).toBeDisabled();
+  });
+
+  it("toggles mode via Any/All and updates when controlled", async () => {
+    const user = userEvent.setup();
+    function Harness() {
+      const [mode, setMode] = React.useState<FacetMode>("ANY");
+      return (
+        <MultiSelectDropdown
+          label="Geography"
+          options={[
+            { value: "na", label: "North America" },
+            { value: "eu", label: "Europe" },
+          ]}
+          value={[]}
+          onChange={() => {}}
+          showModeToggle
+          mode={mode}
+          onModeChange={setMode}
+        />
+      );
+    }
+    render(<Harness />);
+    await user.click(screen.getByRole("button", { name: /select/i }));
+    const btnAny = screen.getByRole("button", { name: /^Any$/i });
+    const btnAll = screen.getByRole("button", { name: /^All$/i });
+    // starts at ANY
+    expect(btnAny.getAttribute("aria-pressed")).toBe("true");
+    expect(btnAll.getAttribute("aria-pressed")).toBe("false");
+    // click All -> switches
+    await user.click(btnAll);
+    expect(btnAny.getAttribute("aria-pressed")).toBe("false");
+    expect(btnAll.getAttribute("aria-pressed")).toBe("true");
   });
 });

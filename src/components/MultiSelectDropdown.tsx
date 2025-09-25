@@ -182,6 +182,7 @@ export default function MultiSelectDropdown<
         >
           <div
             className={clsx(
+              // enforce a sensible base width so the header can show L/R columns
               "absolute z-20 mt-2 origin-top-right rounded-md border border-gray-200 bg-white shadow-lg focus:outline-none",
               // If a fixed width is provided, use it; else rely on minWidth style below
               menuWidthClassName ?? null,
@@ -196,11 +197,12 @@ export default function MultiSelectDropdown<
                   }
             }
           >
-            <div className="flex items-center justify-between px-2 pb-2 text-xs">
-              <div className="flex items-center gap-2">
+            <div className="flex items-start justify-between px-2 pb-2 text-xs gap-2">
+              {/* Left column: actions. Allow wrapping, but keep "Select all" on one line */}
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                 <button
                   type="button"
-                  className="underline disabled:opacity-50"
+                  className="underline disabled:opacity-50 whitespace-nowrap"
                   onClick={selectAll}
                   disabled={allSelected || enabled.length === 0}
                 >
@@ -216,30 +218,46 @@ export default function MultiSelectDropdown<
                 </button>
               </div>
 
+              {/* Right column: bordered, right-justified explainer */}
               {showModeToggle && onModeChange ? (
-                <div
-                  className="flex items-center gap-1"
-                  role="group"
-                  aria-label="Match mode"
-                >
-                  <button
-                    type="button"
-                    className={`px-2 py-1 rounded ${mode === "ANY" ? "bg-gray-100" : ""}`}
-                    onClick={() => onModeChange("ANY")}
-                    aria-pressed={mode === "ANY"}
-                    title="Match any (OR)"
+                <div className="text-right text-rmigray-500 px-0 py-0 inline-block">
+                  <div className="whitespace-nowrap">
+                    Show scenarios matching
+                  </div>
+                  <div
+                    className="mt-1 flex items-center justify-end gap-1"
+                    role="group"
+                    aria-label="Match mode"
+                    data-testid="mode-explainer"
                   >
-                    Any
-                  </button>
-                  <button
-                    type="button"
-                    className={`px-2 py-1 rounded ${mode === "ALL" ? "bg-gray-100" : ""}`}
-                    onClick={() => onModeChange("ALL")}
-                    aria-pressed={mode === "ALL"}
-                    title="Match all (AND)"
-                  >
-                    All
-                  </button>
+                    <div className="border border-gray-200 rounded-md">
+                      <button
+                        type="button"
+                        className={clsx(
+                          "px-[2px] py-[2px] rounded",
+                          mode === "ANY" && "bg-gray-100",
+                        )}
+                        onClick={() => onModeChange("ANY")}
+                        aria-pressed={mode === "ANY"}
+                        title="Match any (OR)"
+                      >
+                        Any
+                      </button>
+                      <button
+                        type="button"
+                        className={clsx(
+                          "px-[2px] py-[2px] rounded",
+                          mode === "ALL" && "bg-gray-100",
+                        )}
+                        onClick={() => onModeChange("ALL")}
+                        aria-pressed={mode === "ALL"}
+                        title="Match all (AND)"
+                      >
+                        All
+                      </button>
+                    </div>
+                    <span>selected</span>
+                  </div>
                 </div>
               ) : null}
             </div>
