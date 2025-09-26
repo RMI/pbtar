@@ -42,7 +42,7 @@ describe("<MultiSelectDropdown>", () => {
     );
 
     // open
-    await user.click(screen.getByText("Select…"));
+    await user.click(screen.getByRole("button", { name: /select/i }));
 
     // toggle EU → ["EU"]
     await user.click(screen.getByLabelText("Europe"));
@@ -71,7 +71,7 @@ describe("<MultiSelectDropdown>", () => {
       />,
     );
 
-    await user.click(screen.getByText("Select…"));
+    await user.click(screen.getByRole("button", { name: /select/i }));
     await user.click(screen.getByTitle("Match all (AND)"));
     expect(onModeChange).toHaveBeenLastCalledWith("ALL");
   });
@@ -93,7 +93,7 @@ describe("<MultiSelectDropdown>", () => {
     );
 
     // open
-    await user.click(screen.getByText("Select…"));
+    await user.click(screen.getByRole("button", { name: /years/i }));
 
     // toggle 2025
     await user.click(screen.getByLabelText("2025"));
@@ -119,11 +119,11 @@ it("closes on outside click but not when re-clicking the trigger", async () => {
   );
 
   // open
-  await user.click(screen.getByText("Select…"));
+  await user.click(screen.getByRole("button", { name: /select/i }));
   expect(screen.getByRole("listbox")).toBeInTheDocument();
 
   // Click trigger again → still open (does not close)
-  await user.click(screen.getByText("Select…"));
+  await user.click(getTrigger());
   expect(screen.getByRole("listbox")).toBeInTheDocument();
 
   // Click outside → closed
@@ -136,8 +136,18 @@ const OPTIONS: Option<string>[] = [
   { value: "b", label: "Beta" },
 ];
 
+// Helper to uniquely select the trigger (not "Select all", not the clear X)
+function getTrigger(): HTMLButtonElement {
+  const el = screen
+    .getAllByRole("button")
+    .find((n) => n.getAttribute("aria-haspopup") === "listbox");
+  if (!el)
+    throw new Error("Trigger button with aria-haspopup='listbox' not found");
+  return el as HTMLButtonElement;
+}
+
 function openMenu() {
-  fireEvent.click(screen.getByRole("button"));
+  fireEvent.click(getTrigger());
 }
 
 describe("MultiSelectDropdown – variable widths", () => {
@@ -339,7 +349,7 @@ describe("MultiSelectDropdown – active visual state", () => {
       />,
     );
     // The trigger's accessible name is the visible text inside it, e.g. "1 selected"
-    const btn = screen.getByRole("button", { name: /selected/i });
+    const btn = getTrigger();
     // Active classes present
     expect(btn.className).toMatch(/\bbg-energy-100\b/);
     expect(btn.className).toMatch(/\bborder-energy-100\b/);
@@ -414,7 +424,7 @@ describe("MultiSelectDropdown – trigger affordance (ChevronDown vs X)", () => 
     ).toBeNull();
 
     // Click trigger -> menu should open (listbox appears)
-    await user.click(screen.getByRole("button", { name: /select/i }));
+    await user.click(screen.getByRole("button", { name: /Geography/i }));
     expect(await screen.findByRole("listbox")).toBeInTheDocument();
   });
 
@@ -444,7 +454,7 @@ describe("MultiSelectDropdown – trigger affordance (ChevronDown vs X)", () => 
     expect(screen.queryByRole("listbox")).toBeNull();
 
     // Simulate user adding a 3rd sector: clicking the trigger (still active) should open the menu
-    await user.click(screen.getByRole("button", { name: /selected/i })); // e.g., "1 selected"
+    await user.click(getTrigger());
     expect(await screen.findByRole("listbox")).toBeInTheDocument();
   });
 });
@@ -609,7 +619,7 @@ describe("MultiSelectDropdown – menu header layout & interactions", () => {
       );
     }
     render(<Harness />);
-    await user.click(screen.getByRole("button", { name: /select/i }));
+    await user.click(screen.getByRole("button", { name: /geography/i }));
     const btnAny = screen.getByRole("button", { name: /^Any$/i });
     const btnAll = screen.getByRole("button", { name: /^All$/i });
     // starts at ANY

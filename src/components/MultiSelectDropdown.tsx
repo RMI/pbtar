@@ -34,7 +34,7 @@ export default function MultiSelectDropdown<
   options,
   value,
   onChange,
-  placeholder = "Select…",
+  placeholder = "Select",
   className,
   triggerMinWidthClassName = "min-w-32",
   menuWidthClassName,
@@ -128,10 +128,6 @@ export default function MultiSelectDropdown<
 
   return (
     <div className={className}>
-      {label ? (
-        <div className="mb-1 text-sm font-medium text-rmigray-700">{label}</div>
-      ) : null}
-
       <button
         ref={triggerRef}
         type="button"
@@ -146,33 +142,50 @@ export default function MultiSelectDropdown<
         aria-haspopup="listbox"
         aria-expanded={open}
       >
-        <span className="truncate">
-          {current.length === 0 ? placeholder : `${current.length} selected`}
+        <span className="truncate inline-flex items-baseline">
+          <span className="relative inline-block [font-variant-numeric:tabular-nums]">
+            {/* Reserve space for label + ': 99' */}
+            <span
+              aria-hidden
+              className="opacity-0 select-none whitespace-pre"
+            >
+              {label ?? placeholder}: 99
+            </span>
+
+            {/* Actual content, overlayed */}
+            <span className="absolute inset-0 whitespace-pre">
+              {current.length === 0
+                ? `${label ?? placeholder}...`
+                : `${label ?? placeholder}: `}
+              {current.length > 0 && <strong>{current.length}</strong>}
+            </span>
+          </span>
         </span>
 
-        {isActive ? (
-          <span
-            role="button"
-            aria-label={`Clear ${label ?? "filter"}`}
-            className="ml-2 inline-flex h-5 w-5 items-center justify-center rounded cursor-pointer hover:bg-energy-200 focus:outline-none"
-            onClick={(e) => {
-              e.stopPropagation(); // don't open the menu
-              onChange([]);
-            }}
-            onMouseDown={(e) => e.preventDefault()} // prevent focusing/activating parent button
-          >
-            <X
+        <span className="ml-2 inline-flex h-5 w-5 items-center justify-center flex-shrink-0">
+          {isActive ? (
+            <span
+              role="button"
+              aria-label={`Clear ${label ?? "filter"}`}
+              className="inline-flex h-5 w-5 items-center justify-center rounded cursor-pointer hover:bg-energy-200 focus:outline-none"
+              onClick={(e) => {
+                e.stopPropagation(); // don't open the menu
+                onChange([]);
+              }}
+              onMouseDown={(e) => e.preventDefault()} // prevent focusing/activating parent button
+            >
+              <X
+                size={16}
+                aria-hidden
+              />
+            </span>
+          ) : (
+            <ChevronDown
               size={16}
               aria-hidden
             />
-          </span>
-        ) : (
-          <ChevronDown
-            size={16}
-            className="ml-2"
-            aria-hidden
-          />
-        )}
+          )}
+        </span>
       </button>
 
       {open && (
