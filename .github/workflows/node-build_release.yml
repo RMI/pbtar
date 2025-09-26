@@ -23,8 +23,8 @@ jobs:
           fetch-depth: 0
           # checkout base ref for PRs, or actual branch for pushes
           ref: ${{
-              (github.event_name == 'pull_request' && github.base_ref)
-              || github.ref
+            (github.event_name == 'pull_request' && github.base_ref)
+            || github.ref
             }}
 
       - name: Merge PR branch to PR target
