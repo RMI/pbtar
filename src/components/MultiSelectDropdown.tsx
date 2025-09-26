@@ -239,35 +239,41 @@ export default function MultiSelectDropdown<
                   </div>
                   <div
                     className="mt-1 flex items-center justify-end gap-1"
-                    role="group"
-                    aria-label="Match mode"
                     data-testid="mode-explainer"
                   >
-                    <div className="border border-gray-200 rounded-md">
-                      <button
-                        type="button"
+                    <div
+                      className="border border-gray-200 rounded-md cursor-pointer select-none"
+                      data-testid="mode-toggle"
+                      role="button"
+                      aria-label={`Toggle match mode (currently ${mode === "ANY" ? "Any" : "All"})`}
+                      aria-live="polite"
+                      tabIndex={0}
+                      onClick={() =>
+                        onModeChange?.(mode === "ANY" ? "ALL" : "ANY")
+                      }
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          onModeChange?.(mode === "ANY" ? "ALL" : "ANY");
+                        }
+                      }}
+                    >
+                      <span
                         className={clsx(
                           "px-[2px] py-[2px] rounded",
                           mode === "ANY" && "bg-gray-100",
                         )}
-                        onClick={() => onModeChange("ANY")}
-                        aria-pressed={mode === "ANY"}
-                        title="Match any (OR)"
                       >
                         Any
-                      </button>
-                      <button
-                        type="button"
+                      </span>
+                      <span
                         className={clsx(
                           "px-[2px] py-[2px] rounded",
                           mode === "ALL" && "bg-gray-100",
                         )}
-                        onClick={() => onModeChange("ALL")}
-                        aria-pressed={mode === "ALL"}
-                        title="Match all (AND)"
                       >
                         All
-                      </button>
+                      </span>
                     </div>
                     <span>selected</span>
                   </div>

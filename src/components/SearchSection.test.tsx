@@ -130,7 +130,7 @@ describe("SearchSection", () => {
     render(<SearchSection {...defaultProps} />);
     const trigger = screen.getByRole("button", { name: /^Geography\b/i });
     fireEvent.click(trigger);
-    fireEvent.click(screen.getByTitle("Match all (AND)"));
+    fireEvent.click(screen.getByTestId("mode-toggle"));
     expect(defaultProps.onFilterChange).toHaveBeenCalledWith("modes", {
       geography: "ALL",
     });
@@ -144,7 +144,7 @@ describe("SearchSection", () => {
     render(<SearchSection {...props} />);
     const trigger = screen.getByRole("button", { name: /^Sector\b/i });
     fireEvent.click(trigger);
-    fireEvent.click(screen.getByTitle("Match any (OR)"));
+    fireEvent.click(screen.getByTestId("mode-toggle"));
     expect(defaultProps.onFilterChange).toHaveBeenCalledWith("modes", {
       sector: "ANY",
     });

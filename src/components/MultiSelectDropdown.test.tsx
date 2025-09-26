@@ -1,9 +1,8 @@
 import React from "react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import MultiSelectDropdown, { Option } from "./MultiSelectDropdown";
-import type { FacetMode } from "../utils/searchUtils";
 
 describe("<MultiSelectDropdown>", () => {
   function MultiSelectDropdownHarness<T extends string | number>(props: {
@@ -55,25 +54,6 @@ describe("<MultiSelectDropdown>", () => {
     // untoggle EU → ["US"]
     await user.click(screen.getByLabelText("Europe"));
     expect(onChange).toHaveBeenLastCalledWith(["US"]);
-  });
-
-  it("mode toggle calls onModeChange", async () => {
-    const user = userEvent.setup();
-    const onModeChange = vi.fn();
-    render(
-      <MultiSelectDropdown
-        options={[{ value: "A", label: "A" }]}
-        value={[]}
-        onChange={() => {}}
-        showModeToggle
-        mode="ANY"
-        onModeChange={onModeChange}
-      />,
-    );
-
-    await user.click(screen.getByRole("button", { name: /select/i }));
-    await user.click(screen.getByTitle("Match all (AND)"));
-    expect(onModeChange).toHaveBeenLastCalledWith("ALL");
   });
 
   it("supports number values and null value without crashing", async () => {
@@ -545,15 +525,14 @@ describe("MultiSelectDropdown – menu header layout & interactions", () => {
     expect(explainer.parentElement?.className).toMatch(/\btext-right\b/);
     // First line
     expect(screen.getByText(/Show scenarios matching/i)).toBeInTheDocument();
-    // The grouped toggle exists and is bordered
-    const group = screen.getByRole("group", { name: /match mode/i });
-    // The border is applied to the inner wrapper of the buttons (closest div with border classes)
-    // Check the closest ancestor with border classes inside the group:
-    const bordered = group.closest("div")?.querySelector("div.border");
-    expect(bordered).toBeTruthy();
-    // Buttons and trailing "selected" text
-    expect(screen.getByRole("button", { name: /^Any$/i })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /^All$/i })).toBeInTheDocument();
+
+    const toggle = screen.getByTestId("mode-toggle");
+    expect(toggle).toHaveAttribute("role", "button"); // single large target
+    expect(within(toggle).getByText(/^Any$/)).toBeInTheDocument();
+    expect(within(toggle).getByText(/^All$/)).toBeInTheDocument();
+    // The toggle itself should carry the border class
+    expect(toggle.className).toMatch(/\bborder\b/);
+    // Trailing "selected" text is present
     expect(screen.getByText(/selected/i)).toBeInTheDocument();
   });
 
@@ -599,35 +578,49 @@ describe("MultiSelectDropdown – menu header layout & interactions", () => {
     expect(screen.getByRole("button", { name: /^clear$/i })).toBeDisabled();
   });
 
-  it("toggles mode via Any/All and updates when controlled", async () => {
+  it("mode toggle calls onModeChange", async () => {
     const user = userEvent.setup();
-    function Harness() {
-      const [mode, setMode] = React.useState<FacetMode>("ANY");
-      return (
-        <MultiSelectDropdown
-          label="Geography"
-          options={[
-            { value: "na", label: "North America" },
-            { value: "eu", label: "Europe" },
-          ]}
-          value={[]}
-          onChange={() => {}}
-          showModeToggle
-          mode={mode}
-          onModeChange={setMode}
-        />
-      );
-    }
-    render(<Harness />);
-    await user.click(screen.getByRole("button", { name: /geography/i }));
-    const btnAny = screen.getByRole("button", { name: /^Any$/i });
-    const btnAll = screen.getByRole("button", { name: /^All$/i });
-    // starts at ANY
-    expect(btnAny.getAttribute("aria-pressed")).toBe("true");
-    expect(btnAll.getAttribute("aria-pressed")).toBe("false");
-    // click All -> switches
-    await user.click(btnAll);
-    expect(btnAny.getAttribute("aria-pressed")).toBe("false");
-    expect(btnAll.getAttribute("aria-pressed")).toBe("true");
+    const onModeChange = vi.fn();
+    render(
+      <MultiSelectDropdown
+        options={[{ value: "A", label: "A" }]}
+        value={[]}
+        onChange={() => {}}
+        showModeToggle
+        mode="ANY"
+        onModeChange={onModeChange}
+      />,
+    );
+
+    await user.click(screen.getByRole("button", { name: /select/i }));
+    const toggle = screen.getByTestId("mode-toggle");
+    // Starts at ANY; one click switches to ALL
+    await user.click(toggle);
+    expect(onModeChange).toHaveBeenLastCalledWith("ALL");
+  });
+
+  it("toggles mode with keyboard (Space/Enter)", async () => {
+    const user = userEvent.setup();
+    const onModeChange = vi.fn();
+    render(
+      <MultiSelectDropdown
+        options={[{ value: "A", label: "A" }]}
+        value={[]}
+        onChange={() => {}}
+        showModeToggle
+        mode="ANY"
+        onModeChange={onModeChange}
+      />,
+    );
+
+    await user.click(screen.getByRole("button", { name: /select/i }));
+    const toggle = screen.getByTestId("mode-toggle");
+
+    toggle.focus();
+    await user.keyboard("[Space]");
+    expect(onModeChange).toHaveBeenLastCalledWith("ALL");
+
+    await user.keyboard("[Enter]");
+    expect(onModeChange).toHaveBeenLastCalledWith("ALL");
   });
 });
