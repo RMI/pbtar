@@ -90,7 +90,7 @@
       [
         "@semantic-release/commit-analyzer",
         {
-          "preset": "angular",
+          "preset": "conventionalcommits",
           "releaseRules": [
             {
               "type": "build",
@@ -113,8 +113,12 @@
               "release": "patch"
             },
             {
+              "type": "chore",
+              "release": false
+            },
+            {
               "type": "style",
-              "release": "patch"
+              "release": false
             },
             {
               "type": "test",
@@ -167,11 +171,16 @@
               {
                 "type": "style",
                 "section": "Style",
-                "hidden": false
+                "hidden": true
               },
               {
                 "type": "test",
                 "section": "Tests",
+                "hidden": false
+              },
+              {
+                "type": "chore",
+                "section": "Other",
                 "hidden": false
               }
             ]
