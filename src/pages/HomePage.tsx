@@ -16,10 +16,11 @@ const HomePage: React.FC = () => {
 
   const [filters, setFilters] = useState<SearchFilters>({
     pathwayType: null,
-    modelYearEnd: null,
+    modelYearNetzero: null,
     modelTempIncrease: null,
     geography: null,
     sector: null,
+    metric: null,
     searchTerm: "",
   });
 
@@ -40,11 +41,12 @@ const HomePage: React.FC = () => {
       const hasFilterChanged =
         filters.searchTerm !== prevFiltersRef.current.searchTerm ||
         filters.pathwayType !== prevFiltersRef.current.pathwayType ||
-        filters.modelYearEnd !== prevFiltersRef.current.modelYearEnd ||
+        filters.modelYearNetzero !== prevFiltersRef.current.modelYearNetzero ||
         filters.modelTempIncrease !==
           prevFiltersRef.current.modelTempIncrease ||
         filters.geography !== prevFiltersRef.current.geography ||
-        filters.sector !== prevFiltersRef.current.sector;
+        filters.sector !== prevFiltersRef.current.sector ||
+        filters.metric !== prevFiltersRef.current.metric;
 
       // Scroll to top when filters change
       if (hasFilterChanged && topSectionRef.current) {
@@ -72,7 +74,6 @@ const HomePage: React.FC = () => {
       // Only update if state actually changes (performance optimization)
       if (scrollPosition > threshold !== isSticky) {
         setIsSticky(scrollPosition > threshold);
-        console.log("Sticky state changed to:", scrollPosition > threshold);
       }
     };
 
@@ -99,10 +100,11 @@ const HomePage: React.FC = () => {
   const handleClear = () => {
     setFilters({
       pathwayType: null,
-      modelYearEnd: null,
+      modelYearNetzero: null,
       modelTempIncrease: null,
       geography: null,
       sector: null,
+      metric: null,
       searchTerm: "",
     });
   };

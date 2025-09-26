@@ -53,8 +53,8 @@ export function geographyKind(raw: string): GeographyKind {
   return "region";
 }
 
-// TODO: geographyLabel does not yet support mapping for ISO-3 country codes, region codes, or other ISO standards.
-//       Consider implementing support for ISO-3 codes and region mappings in addition to ISO-2 country codes.
+// geographyLabel does not support mapping for ISO-3 country codes, region
+// codes, or other ISO standards.
 export function geographyLabel(raw: string): string {
   const s = normalizeGeography(raw);
   if (!s) return "";
@@ -94,4 +94,19 @@ export function sortGeographiesForDetails(input: unknown[]): string[] {
     .sort((a, b) => (a.iso2! < b.iso2! ? -1 : a.iso2! > b.iso2! ? 1 : 0)); // A→Z by ISO2
 
   return [...globals, ...regions, ...countries].map((a) => a.raw);
+}
+
+export function geographyVariant(
+  kind: GeographyKind,
+): "geographyGlobal" | "geographyRegion" | "geographyCountry" {
+  // Pick names that fit your existing design tokens.
+  // If your Badge has a strict union, add these variants there.
+  switch (kind) {
+    case "global":
+      return "geographyGlobal"; // e.g., neutral/gray
+    case "region":
+      return "geographyRegion"; // e.g., indigo/blue
+    case "country":
+      return "geographyCountry"; // e.g., green
+  }
 }

@@ -1,67 +1,30 @@
-import React, { useMemo, useRef, useState, useEffect, RefObject } from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { BadgeMaybeAbsent } from "./Badge";
-import GeographyBadge from "../components/GeographyBadge";
+import BadgeArray from "./BadgeArray";
 import {
+  geographyKind,
   geographyLabel,
+  geographyVariant,
+  normalizeGeography,
   sortGeographiesForDetails,
 } from "../utils/geographyUtils";
-import TextWithTooltip from "./TextWithTooltip";
 import { Scenario, PathwayType } from "../types";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
 import { prioritizeMatches, prioritizeGeographies } from "../utils/sortUtils";
-import { getPathwayTypeTooltip, getSectorTooltip } from "../utils/tooltipUtils";
+import {
+  getPathwayTypeTooltip,
+  getSectorTooltip,
+  getMetricTooltip,
+} from "../utils/tooltipUtils";
 
 interface ScenarioCardProps {
   scenario: Scenario;
   searchTerm?: string;
 }
 
-type MaybeHTMLElement = HTMLElement | null;
-
 // Custom hook to measure container width and calculate how many badges will fit
-const useAvailableBadgeCount = (
-  containerRef: RefObject<MaybeHTMLElement>,
-  itemWidth = 100,
-  gap = 8,
-) => {
-  const [availableBadgeCount, setAvailableBadgeCount] = useState(3); // Default to 3 as minimum
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const updateBadgeCount = () => {
-      const containerWidth = containerRef.current?.clientWidth || 0;
-      const possibleBadges = Math.floor(
-        (containerWidth + gap) / (itemWidth + gap),
-      );
-
-      // Ensure we show at least 1 badge, and cap at a reasonable maximum (e.g., 8)
-      const badgeCount = Math.max(1, Math.min(possibleBadges, 8));
-      setAvailableBadgeCount(badgeCount);
-    };
-
-    // Calculate on mount
-    updateBadgeCount();
-
-    // Recalculate when window resizes
-    const resizeObserver = new ResizeObserver(updateBadgeCount);
-    const observedElement = containerRef.current;
-    if (observedElement) {
-      resizeObserver.observe(observedElement);
-    }
-
-    return () => {
-      if (observedElement) {
-        resizeObserver.unobserve(observedElement);
-      }
-      resizeObserver.disconnect();
-    };
-  }, [containerRef, itemWidth, gap]);
-
-  return availableBadgeCount;
-};
 
 const ScenarioCard: React.FC<ScenarioCardProps> = ({
   scenario,
@@ -80,23 +43,6 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
   const sortedSectors = useMemo(
     () => prioritizeMatches(scenario.sectors, searchTerm),
     [scenario.sectors, searchTerm],
-  );
-
-  // Refs for the container elements
-  const geographyContainerRef = useRef<HTMLDivElement>(null);
-  const sectorsContainerRef = useRef<HTMLDivElement>(null);
-
-  // Calculate how many badges can fit in each container
-  const geographyBadgeWidth = 90; // Estimated average width of a geography badge in pixels
-  const sectorBadgeWidth = 80; // Estimated average width of a sector badge in pixels
-
-  const visibleGeographyCount = useAvailableBadgeCount(
-    geographyContainerRef,
-    geographyBadgeWidth,
-  );
-  const visibleSectorsCount = useAvailableBadgeCount(
-    sectorsContainerRef,
-    sectorBadgeWidth,
   );
 
   // Helper function to conditionally highlight text based on search term
@@ -145,12 +91,14 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           </p>
           <div className="flex flex-wrap gap-2">
             <BadgeMaybeAbsent
-              text={highlightTextIfSearchMatch(scenario.pathwayType)}
               tooltip={getPathwayTypeTooltip(
                 scenario.pathwayType as PathwayType,
               )}
               variant="pathwayType"
-            />
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
+            >
+              {scenario.pathwayType}
+            </BadgeMaybeAbsent>
           </div>
         </div>
 
@@ -158,18 +106,21 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <p className="text-xs font-medium text-rmigray-500 mb-1">Targets:</p>
           <div className="flex flex-wrap">
             <BadgeMaybeAbsent
-              text={highlightTextIfSearchMatch(scenario.modelYearEnd)}
               variant="year"
-            />
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
+            >
+              {scenario.modelYearNetzero}
+            </BadgeMaybeAbsent>
             <BadgeMaybeAbsent
-              text={scenario.modelTempIncrease}
               variant="temperature"
               toLabel={(t) => {
                 const s = String(t);
                 return s.endsWith("°C") ? s : `${s}°C`;
               }}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
-            />
+            >
+              {scenario.modelTempIncrease}
+            </BadgeMaybeAbsent>
           </div>
         </div>
 
@@ -178,86 +129,49 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           <p className="text-xs font-medium text-rmigray-500 mb-1">
             Geographies:
           </p>
-          <div
-            className="flex flex-wrap"
-            ref={geographyContainerRef}
-          >
-            {sortedGeography
-              .slice(0, visibleGeographyCount)
-              .map((geography) => {
-                const label = geographyLabel(geography);
-                return (
-                  <GeographyBadge
-                    key={geography}
-                    text={geography}
-                    display={highlightTextIfSearchMatch(label)}
-                  />
-                );
-              })}
-            {scenario.geography.length > visibleGeographyCount && (
-              <TextWithTooltip
-                text={
-                  <span className="text-xs text-rmigray-500 ml-1 self-center">
-                    +{scenario.geography.length - visibleGeographyCount} more
-                  </span>
-                }
-                tooltip={
-                  <span>
-                    {sortedGeography
-                      .slice(visibleGeographyCount)
-                      .map((geography, idx) => (
-                        <React.Fragment key={geography}>
-                          {idx > 0 && ", "}
-                          <span className="whitespace-nowrap">
-                            {geographyLabel(geography)}
-                          </span>
-                        </React.Fragment>
-                      ))}
-                  </span>
-                }
-              />
-            )}
+          <div className="flex flex-wrap">
+            <BadgeArray
+              variant={sortedGeography.map(
+                (geo) => geographyVariant(geographyKind(geo)) as string,
+              )}
+              toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
+              maxRows={2}
+            >
+              {sortedGeography}
+            </BadgeArray>
           </div>
         </div>
 
         {/* Sectors section with dynamic badge count */}
         <div className="mb-3">
           <p className="text-xs font-medium text-rmigray-500 mb-1">Sectors:</p>
-          <div
-            className="flex flex-wrap"
-            ref={sectorsContainerRef}
-          >
-            {sortedSectors.slice(0, visibleSectorsCount).map((sector) => (
-              <BadgeMaybeAbsent
-                key={sector.name}
-                text={highlightTextIfSearchMatch(sector.name)}
-                tooltip={getSectorTooltip(sector.name)}
-                variant="sector"
-              />
-            ))}
-            {scenario.sectors.length > visibleSectorsCount && (
-              <TextWithTooltip
-                text={
-                  <span className="text-xs text-rmigray-500 ml-1 self-center">
-                    +{scenario.sectors.length - visibleSectorsCount} more
-                  </span>
-                }
-                tooltip={
-                  <span>
-                    {sortedSectors
-                      .slice(visibleSectorsCount)
-                      .map((sector, idx) => (
-                        <React.Fragment key={sector.name}>
-                          {idx > 0 && ", "}
-                          <span className="whitespace-nowrap">
-                            {sector.name}
-                          </span>
-                        </React.Fragment>
-                      ))}
-                  </span>
-                }
-              />
-            )}
+          <div className="flex flex-wrap">
+            <BadgeArray
+              variant="sector"
+              tooltipGetter={getSectorTooltip}
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
+              maxRows={2}
+            >
+              {sortedSectors.map((sector) => sector.name)}
+            </BadgeArray>
+          </div>
+        </div>
+
+        {/* Metrics section with dynamic badge count */}
+        <div className="mb-3">
+          <p className="text-xs font-medium text-rmigray-500 mb-1">
+            Benchmark Metrics:
+          </p>
+          <div className="flex flex-wrap">
+            <BadgeArray
+              variant="metric"
+              tooltipGetter={getMetricTooltip}
+              renderLabel={(label) => highlightTextIfSearchMatch(label)}
+              maxRows={2}
+            >
+              {scenario.metric}
+            </BadgeArray>
           </div>
         </div>
 

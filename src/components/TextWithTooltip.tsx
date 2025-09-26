@@ -73,7 +73,7 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
   };
 
   // Update tooltip position based on trigger position
-  const updatePosition = () => {
+  const updatePosition = React.useCallback(() => {
     if (!triggerRef.current) return;
 
     const rect = triggerRef.current.getBoundingClientRect();
@@ -112,14 +112,14 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
         left = rect.right + scrollX;
     }
     setTooltipPosition({ top, left });
-  };
+  }, [position]);
 
   // Add an effect to calculate initial position after mount
   useEffect(() => {
     if (triggerRef.current) {
       updatePosition();
     }
-  }, []);
+  }, [updatePosition]);
 
   // Add event handlers
   useEffect(() => {
@@ -162,7 +162,7 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
       window.removeEventListener("resize", updatePosition);
       window.removeEventListener("scroll", updatePosition);
     };
-  }, []);
+  }, [updatePosition]);
 
   // Get tooltip CSS classes based on position
   const getTooltipTransformClass = () => {

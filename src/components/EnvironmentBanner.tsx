@@ -7,10 +7,14 @@ const EnvironmentBanner: React.FC = () => {
   if (isProd) return null; // hide on real prod builds
 
   function getBgColor(mode: string): string {
-    if (mode.startsWith("develop")) {
-      return "bg-red-500";
-    } else if (mode.startsWith("staging")) {
+    if (mode === "main") {
+      return "bg-green-500";
+    } else if (mode === "next") {
       return "bg-yellow-500";
+    } else if (mode.startsWith("hotfix")) {
+      return "bg-orange-500";
+    } else if (mode.startsWith("develop")) {
+      return "bg-red-500";
     } else if (mode.startsWith("pr-")) {
       return "bg-indigo-500";
     } else {
