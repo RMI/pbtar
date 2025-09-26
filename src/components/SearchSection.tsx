@@ -153,6 +153,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           showModeToggle
           mode={filters.modes?.geography ?? "ANY"}
           onModeChange={(m) => setMode("geography", m)}
+          menuWidthClassName="w-60"
         />
 
         <MultiSelectDropdown<string>
@@ -163,6 +164,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           showModeToggle
           mode={filters.modes?.sector ?? "ANY"}
           onModeChange={(m) => setMode("sector", m)}
+          menuWidthClassName="w-60"
         />
 
         <MultiSelectDropdown<string>
@@ -173,12 +175,24 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           showModeToggle
           mode={filters.modes?.metric ?? "ANY"}
           onModeChange={(m) => setMode("metric", m)}
+          menuWidthClassName="w-60"
         />
       </div>
-      <div className="mt-4 ml-1">
+      <div className="mt-4 ml-1 flex items-center justify-between gap-3">
         <p className="text-sm text-rmigray-500">
           Found {scenariosNumber} scenarios
           {areFiltersApplied && " matching your criteria"}
+          {areFiltersApplied && (
+            <button
+              type="button"
+              aria-label="Clear all filters"
+              className="ml-2 text-sm text-indigo-600 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded"
+              onClick={onClear}
+              data-testid="clear-all-filters"
+            >
+              Clear all filters
+            </button>
+          )}
         </p>
       </div>
     </div>

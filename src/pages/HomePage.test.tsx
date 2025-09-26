@@ -126,30 +126,25 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
   }
 
   async function openDropdown(labelRegex: RegExp): Promise<HTMLButtonElement> {
-    // Multiple nodes can match the regex (e.g., scenario cards: "no sectors"/"no temp").
-    // Pick the *label* whose parent contains the dropdown trigger button.
-    const labels = await screen.findAllByText(
-      labelRegex,
-      {},
+    // Labels are now inside the trigger button’s accessible name (e.g., "Sector..." / "Sector: 2").
+    const triggers = await screen.findAllByRole(
+      "button",
+      { name: labelRegex },
       { timeout: 2000 },
     );
-    const label = labels.find((el) =>
-      el.parentElement?.querySelector('button[aria-haspopup="listbox"]'),
-    );
-    if (!label) {
-      // Helpful debug if this ever fails in CI
-      const all = labels.map((n) => `"${n.textContent}"`).join(", ");
+    const trigger =
+      triggers.find((b) => b.getAttribute("aria-haspopup") === "listbox") ??
+      triggers[0];
+    if (!trigger) {
+      const all = (await screen.findAllByRole("button"))
+        .map((n) => `"${n.textContent}"`)
+        .join(", ");
       throw new Error(
-        `Dropdown label not found for ${labelRegex}. Candidates: ${all}`,
+        `Dropdown trigger not found for ${labelRegex}. Button candidates: ${all}`,
       );
     }
-    const trigger = label.parentElement!.querySelector(
-      'button[aria-haspopup="listbox"]',
-    );
-    if (!trigger)
-      throw new Error(`Trigger button not found for ${label.textContent}`);
     await u.click(trigger);
-    return trigger;
+    return trigger as HTMLButtonElement;
   }
 
   async function selectOption(optionText: string): Promise<void> {

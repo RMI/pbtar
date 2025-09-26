@@ -28,12 +28,10 @@ describe("SearchSection", () => {
   });
 
   function openByLabel(labelText: string) {
-    const labelEl = screen.getByText(labelText);
-    const wrapper = labelEl.parentElement;
-    if (!wrapper) throw new Error("Wrapper not found for label: " + labelText);
-    const btn = wrapper.querySelector("button");
-    if (!btn)
-      throw new Error("Dropdown trigger button not found for: " + labelText);
+    // Labels now live inside the trigger’s accessible name (e.g., "Sector..." or "Sector: 3").
+    const btn = screen.getByRole("button", {
+      name: new RegExp(`^${labelText}\\b`, "i"),
+    });
     fireEvent.click(btn);
     return btn;
   }
@@ -41,11 +39,22 @@ describe("SearchSection", () => {
   it("renders all filter dropdowns", () => {
     render(<SearchSection {...defaultProps} />);
 
-    expect(screen.getByText("Pathway Type")).toBeInTheDocument();
-    expect(screen.getByText("Target Year")).toBeInTheDocument();
-    expect(screen.getByText("Temperature (°C)")).toBeInTheDocument();
-    expect(screen.getByText("Geography")).toBeInTheDocument();
-    expect(screen.getByText("Sector")).toBeInTheDocument();
+    // Labels are the button’s accessible name prefix (followed by "..." or ": N").
+    expect(
+      screen.getByRole("button", { name: /^Pathway Type\b/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /^Target Year\b/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /^Temperature\b/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /^Geography\b/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /^Sector\b/i }),
+    ).toBeInTheDocument();
   });
 
   // This test checks that sectors are properly extracted from the complex object structure
@@ -84,10 +93,9 @@ describe("SearchSection", () => {
       filters: { sector: ["Power"] } as unknown as SearchFilters,
     };
     render(<SearchSection {...propsWithSector} />);
-    // Trigger shows "1 selected"
-    const labelEl = screen.getByText("Sector");
-    const wrapper = labelEl.parentElement as HTMLElement;
-    expect(wrapper.querySelector("button")?.textContent).toMatch(/1 selected/i);
+    // Trigger shows "Sector: 1"
+    const trigger = screen.getByRole("button", { name: /^Sector\b/i });
+    expect(trigger).toHaveTextContent(/Sector:\s*1/i);
   });
 
   it("can clear selected sector filter", () => {
@@ -120,9 +128,7 @@ describe("SearchSection", () => {
 
   it("Geography: mode toggle to ALL dispatches modes update", () => {
     render(<SearchSection {...defaultProps} />);
-    const label = screen.getByText("Geography");
-    const wrapper = label.parentElement as HTMLElement;
-    const trigger = wrapper.querySelector('button[aria-haspopup="listbox"]')!;
+    const trigger = screen.getByRole("button", { name: /^Geography\b/i });
     fireEvent.click(trigger);
     fireEvent.click(screen.getByTitle("Match all (AND)"));
     expect(defaultProps.onFilterChange).toHaveBeenCalledWith("modes", {
@@ -136,9 +142,7 @@ describe("SearchSection", () => {
       filters: { modes: { sector: "ALL" } } as unknown as SearchFilters,
     };
     render(<SearchSection {...props} />);
-    const label = screen.getByText("Sector");
-    const wrapper = label.parentElement as HTMLElement;
-    const trigger = wrapper.querySelector('button[aria-haspopup="listbox"]')!;
+    const trigger = screen.getByRole("button", { name: /^Sector\b/i });
     fireEvent.click(trigger);
     fireEvent.click(screen.getByTitle("Match any (OR)"));
     expect(defaultProps.onFilterChange).toHaveBeenCalledWith("modes", {
@@ -150,15 +154,13 @@ describe("SearchSection", () => {
     for (const facet of [
       "Pathway Type",
       "Target Year",
-      "Temperature (°C)",
+      "Temperature",
     ] as const) {
       it(`facet: ${facet}`, () => {
         render(<SearchSection {...defaultProps} />);
-        const label = screen.getByText(facet);
-        const wrapper = label.parentElement as HTMLElement;
-        const trigger = wrapper.querySelector(
-          'button[aria-haspopup="listbox"]',
-        )!;
+        const trigger = screen.getByRole("button", {
+          name: new RegExp(`^${facet}\\b`, "i"),
+        });
         fireEvent.click(trigger);
         expect(screen.queryByTitle("Match any (OR)")).not.toBeInTheDocument();
         expect(screen.queryByTitle("Match all (AND)")).not.toBeInTheDocument();
@@ -166,5 +168,33 @@ describe("SearchSection", () => {
         fireEvent.keyDown(document, { key: "Escape" });
       });
     }
+  });
+
+  describe("Clear all filters button (inline with summary)", () => {
+    it("does not render the button when no filters are applied", () => {
+      render(<SearchSection {...defaultProps} />);
+      expect(screen.queryByTestId("clear-all-filters")).toBeNull();
+      // Summary still renders
+      expect(screen.getByText(/Found 2 scenarios/i)).toBeInTheDocument();
+    });
+
+    it("renders the inline button when any filter is applied and calls onClear", () => {
+      const props = {
+        ...defaultProps,
+        filters: { ...defaultProps.filters, geography: ["Europe"] },
+      };
+      render(<SearchSection {...props} />);
+
+      // Button should be present and visually near the summary (inline within the same <p>)
+      const paragraph = screen.getByText(/Found \d+ scenarios/i).closest("p");
+      expect(paragraph).toBeTruthy();
+      const clearBtn = screen.getByTestId("clear-all-filters");
+      expect(clearBtn).toBeInTheDocument();
+      // Ensure the button is inside the same paragraph node (inline placement)
+      expect(paragraph?.contains(clearBtn)).toBe(true);
+
+      clearBtn.click();
+      expect(defaultProps.onClear).toHaveBeenCalledTimes(1);
+    });
   });
 });
