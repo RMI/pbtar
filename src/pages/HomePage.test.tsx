@@ -255,7 +255,7 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
     ]);
 
     // Switch to ALL inside the open menu
-    await u.click(screen.getByTitle("Match all (AND)"));
+    await u.click(screen.getByTestId("mode-toggle"));
     // Only E has both Europe and Asia
     expectVisible(["Scenario E (Power, Europe+Asia, 2°C)"]);
     expectHidden([
@@ -283,7 +283,7 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
     ]);
 
     // Switch to ALL inside the open menu
-    await u.click(screen.getByTitle("Match all (AND)"));
+    await u.click(screen.getByTestId("mode-toggle"));
     // ALL
     expectVisible(["Scenario D (Industry, Asia, no temp)"]);
     expectHidden([
