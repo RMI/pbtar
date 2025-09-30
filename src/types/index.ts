@@ -62,8 +62,7 @@ export type Metric =
   | "Capacity"
   | "Generation"
   | "Technology Mix"
-  | "Absolute Emissions"
-  | "Carbon Price";
+  | "Absolute Emissions";
 
 export interface SearchFilters {
   pathwayType?: string | string[] | null;

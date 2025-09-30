@@ -177,6 +177,7 @@ const ScenarioDetailPage: React.FC = () => {
                     (geo) => geographyVariant(geographyKind(geo)) as string,
                   )}
                   toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
+                  visibleCount={Infinity}
                 >
                   {sortGeographiesForDetails(scenario.geography ?? [])}
                 </BadgeArray>
@@ -194,6 +195,7 @@ const ScenarioDetailPage: React.FC = () => {
                   <BadgeArray
                     variant="sector"
                     tooltipGetter={getSectorTooltip}
+                    visibleCount={Infinity}
                   >
                     {scenario.sectors.map((sector) => sector.name)}
                   </BadgeArray>
@@ -207,6 +209,7 @@ const ScenarioDetailPage: React.FC = () => {
                 <BadgeArray
                   variant="metric"
                   tooltipGetter={getMetricTooltip}
+                  visibleCount={Infinity}
                 >
                   {scenario.metric}
                 </BadgeArray>

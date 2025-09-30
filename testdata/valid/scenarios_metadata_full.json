@@ -80,8 +80,7 @@
       "Capacity",
       "Generation",
       "Technology Mix",
-      "Absolute Emissions",
-      "Carbon Price"
+      "Absolute Emissions"
     ],
     "dataSource": {
       "description": "Mock Data Source.",
