@@ -47,21 +47,6 @@ jobs:
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
         run: npm audit signatures
 
-      - name: Compute preview version
-        if: ${{ github.event_name == 'pull_request' }}
-        id: ver
-        run: |
-          echo "preview-version=0.0.0-pr.${{ github.event.pull_request.number }}.${{ github.run_number }}" >> $GITHUB_OUTPUT
-
-      # Update package.json locally (no commit, no tag)
-      - name: Set package.json version
-        if: ${{ github.event_name == 'pull_request' }}
-        env:
-          PREVIEW_VERSION: ${{ steps.ver.outputs.preview-version }}
-        run: |
-          npm version "$PREVIEW_VERSION" --no-git-tag-version
-          jq -r '.version' package.json  # sanity check
-
       - name: Build & Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -92,11 +77,14 @@ jobs:
         run: |
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
             unset GITHUB_ACTIONS
-            npm run prepare:tarball
             npx semantic-release \
               --dry-run \
               --no-ci | \
               tee /tmp/semantic-release-raw.txt
+            echo "preview-version=0.0.0-pr.${{ github.event.pull_request.number }}.${{ github.run_number }}" >> $GITHUB_OUTPUT
+            npm version "$PREVIEW_VERSION" --no-git-tag-version
+            jq -r '.version' package.json  # sanity check
+            npm run prepare:tarball
           else
             npx semantic-release
           fi
@@ -107,6 +95,7 @@ jobs:
           name: dist-tgz
           path: dist.tgz
           if-no-files-found: error
+
       - name: prepare semantic-release output for comment
         if: ${{ github.event_name == 'pull_request' }}
         env:
