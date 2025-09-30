@@ -23,6 +23,6 @@
       "url": "https://example.com/data-source",
       "downloadAvailable": true
     },
-    "metric": ["Emissions Intensity", "Carbon Price"]
+    "metric": ["Emissions Intensity"]
   }
 ]
