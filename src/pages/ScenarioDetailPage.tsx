@@ -130,7 +130,6 @@ const ScenarioDetailPage: React.FC = () => {
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
             <div className="md:col-span-8">
-
               <section className="mb-8">
                 <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
                   Expert Recommendations
