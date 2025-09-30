@@ -14,7 +14,7 @@
     "publisher": "Test Publisher",
     "publicationYear": 1900,
     "scenarioOverview": "This is a minimal scenario for testing purposes.",
-    "expertRecommendation": "Test recommendation.",
+    "expertOverview": "Test recommendation.",
     "metric": ["Capacity"],
     "dataSource": {
       "description": "Test Data Source.",

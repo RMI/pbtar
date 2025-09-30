@@ -167,7 +167,7 @@
         "pattern": "\\.$",
         "maxLength": 1000
       },
-      "expertRecommendation": {
+      "expertOverview": {
         "description": "Expert recommendation for the scenario.",
         "type": "string",
         "pattern": "\\.$",
@@ -223,7 +223,7 @@
       "sectors",
       "publisher",
       "publicationYear",
-      "expertRecommendation",
+      "expertOverview",
       "dataSource",
       "metric"
     ]

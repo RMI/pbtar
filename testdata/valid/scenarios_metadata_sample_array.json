@@ -17,7 +17,7 @@
     "publisher": "Example Publisher",
     "publicationYear": 2025,
     "scenarioOverview": "QWERTY Overview.",
-    "expertRecommendation": "Example Expert Recommendation.",
+    "expertOverview": "Example Expert Recommendation.",
     "metric": ["Emissions Intensity", "Capacity"],
     "dataSource": {
       "description": "Mock Data Source.",
@@ -40,7 +40,7 @@
     "publisher": "Example Publisher",
     "publicationYear": 2025,
     "scenarioOverview": "UIOP Overview.",
-    "expertRecommendation": "Example Expert Recommendation.",
+    "expertOverview": "Example Expert Recommendation.",
     "metric": ["Capacity", "Generation"],
     "dataSource": {
       "description": "Mock Data Source.",
@@ -63,7 +63,7 @@
     "publisher": "Example Publisher",
     "publicationYear": 2025,
     "scenarioOverview": "ASDF Overview.",
-    "expertRecommendation": "Example Expert Recommendation.",
+    "expertOverview": "Example Expert Recommendation.",
     "metric": ["Generation", "Technology Mix"],
     "dataSource": {
       "description": "Mock Data Source.",
@@ -88,7 +88,7 @@
     "publisher": "Example Publisher",
     "publicationYear": 2025,
     "scenarioOverview": "GHJKL Overview.",
-    "expertRecommendation": "Example Expert Recommendation.",
+    "expertOverview": "Example Expert Recommendation.",
     "metric": ["Emissions Intensity", "Technology Mix"],
     "dataSource": {
       "description": "Mock Data Source.",
