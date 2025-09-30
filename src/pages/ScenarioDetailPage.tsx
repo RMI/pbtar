@@ -132,10 +132,10 @@ const ScenarioDetailPage: React.FC = () => {
             <div className="md:col-span-8">
               <section className="mb-8">
                 <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
-                  Expert Recommendations
+                  Expert Overview
                 </h2>
                 <div className="prose text-rmigray-700">
-                  <Markdown>{scenario.expertRecommendation}</Markdown>
+                  <Markdown>{scenario.expertOverview}</Markdown>
                 </div>
               </section>
 
