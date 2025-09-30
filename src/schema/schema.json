@@ -207,8 +207,7 @@
             "Capacity",
             "Generation",
             "Technology Mix",
-            "Absolute Emissions",
-            "Carbon Price"
+            "Absolute Emissions"
           ]
         }
       }
