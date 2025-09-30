@@ -16,7 +16,7 @@
     ],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "QWERTY Overview.",
+    "scenarioOverview": "QWERTY Overview.",
     "expertRecommendation": "Example Expert Recommendation.",
     "metric": ["Emissions Intensity", "Capacity"],
     "dataSource": {
@@ -39,7 +39,7 @@
     "sectors": [{ "name": "Agriculture", "technologies": ["Agroforestry"] }],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "UIOP Overview.",
+    "scenarioOverview": "UIOP Overview.",
     "expertRecommendation": "Example Expert Recommendation.",
     "metric": ["Capacity", "Generation"],
     "dataSource": {
@@ -62,7 +62,7 @@
     ],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "ASDF Overview.",
+    "scenarioOverview": "ASDF Overview.",
     "expertRecommendation": "Example Expert Recommendation.",
     "metric": ["Generation", "Technology Mix"],
     "dataSource": {
@@ -87,7 +87,7 @@
     ],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "GHJKL Overview.",
+    "scenarioOverview": "GHJKL Overview.",
     "expertRecommendation": "Example Expert Recommendation.",
     "metric": ["Emissions Intensity", "Technology Mix"],
     "dataSource": {

@@ -120,7 +120,6 @@ describe("scenario schema enforces expected limits", () => {
     "sectors",
     "publisher",
     "publicationYear",
-    "overview",
     "expertRecommendation",
     "dataSource",
   ];
