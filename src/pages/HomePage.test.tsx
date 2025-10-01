@@ -69,7 +69,8 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       geography: undefined, // -> Geography "None"
       modelTempIncrease: undefined, // -> Temperature "None"
       pathwayType: "Net Zero",
-      modelYearEnd: 2050,
+      modelYearNetzero: 2050,
+      metric: [],
     },
     {
       id: "B",
@@ -78,7 +79,8 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       geography: ["Europe"],
       modelTempIncrease: "2°C",
       pathwayType: "Net Zero",
-      modelYearEnd: 2050,
+      modelYearNetzero: 2050,
+      metric: ["Capacity"],
     },
     {
       id: "C",
@@ -87,7 +89,8 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       geography: [], // -> Geography "None"
       modelTempIncrease: "1.5°C",
       pathwayType: "NZi2050",
-      modelYearEnd: 2040,
+      modelYearNetzero: 2040,
+      metric: [],
     },
     {
       id: "D",
@@ -96,7 +99,18 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       geography: ["Asia"],
       modelTempIncrease: undefined, // -> Temperature "None"
       pathwayType: "BAU",
-      modelYearEnd: 2030,
+      modelYearNetzero: 2030,
+      metric: ["Capacity", "Generation"],
+    },
+    {
+      id: "E",
+      name: "Scenario E (Power, Europe+Asia, 2°C)",
+      sectors: [{ name: "Power" }],
+      geography: ["Europe", "Asia"],
+      modelTempIncrease: "2°C",
+      pathwayType: "Net Zero",
+      modelYearNetzero: 2050,
+      metric: ["Generation"],
     },
   ] as const;
 
@@ -112,11 +126,25 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
   }
 
   async function openDropdown(labelRegex: RegExp): Promise<HTMLButtonElement> {
-    // Assumes the FilterDropdown trigger is a button with visible label text.
-    // If your triggers aren't labeled, consider adding aria-labels for stability.
-    const trigger = await screen.findByRole("button", { name: labelRegex });
+    // Labels are now inside the trigger button’s accessible name (e.g., "Sector..." / "Sector: 2").
+    const triggers = await screen.findAllByRole(
+      "button",
+      { name: labelRegex },
+      { timeout: 2000 },
+    );
+    const trigger =
+      triggers.find((b) => b.getAttribute("aria-haspopup") === "listbox") ??
+      triggers[0];
+    if (!trigger) {
+      const all = (await screen.findAllByRole("button"))
+        .map((n) => `"${n.textContent}"`)
+        .join(", ");
+      throw new Error(
+        `Dropdown trigger not found for ${labelRegex}. Button candidates: ${all}`,
+      );
+    }
     await u.click(trigger);
-    return trigger;
+    return trigger as HTMLButtonElement;
   }
 
   async function selectOption(optionText: string): Promise<void> {
@@ -181,7 +209,7 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       "Scenario D (Industry, Asia, no temp)",
     ]);
     expectHidden([
-      "Scenario B (Power, EU, 2°C)",
+      "Scenario B (Power, Europe, 2°C)",
       "Scenario C (empty sectors[], empty geo[], 1.5°C)",
     ]);
   });
@@ -197,6 +225,72 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
       "Scenario A (no sectors, no geo, no temp)",
       "Scenario C (empty sectors[], empty geo[], 1.5°C)",
       "Scenario D (Industry, Asia, no temp)",
+    ]);
+  });
+
+  it("Sector: selecting a concrete option (metric) filters correctly", async () => {
+    await openDropdown(/metric/i);
+    await selectOption("Capacity");
+    expectVisible([
+      "Scenario B (Power, Europe, 2°C)",
+      "Scenario D (Industry, Asia, no temp)",
+    ]);
+    expectHidden([
+      "Scenario A (no sectors, no geo, no temp)",
+      "Scenario C (empty sectors[], empty geo[], 1.5°C)",
+      "Scenario E (Power, Europe+Asia, 2°C)",
+    ]);
+  });
+
+  it("Geography: ANY vs ALL toggle affects results (Europe + Asia)", async () => {
+    await openDropdown(/geography/i);
+    await selectOption("Europe");
+    await selectOption("Asia");
+
+    // ANY (default): shows anything with Europe OR Asia → B, D, E
+    expectVisible([
+      "Scenario B (Power, Europe, 2°C)",
+      "Scenario D (Industry, Asia, no temp)",
+      "Scenario E (Power, Europe+Asia, 2°C)",
+    ]);
+
+    // Switch to ALL inside the open menu
+    await u.click(screen.getByTestId("mode-toggle"));
+    // Only E has both Europe and Asia
+    expectVisible(["Scenario E (Power, Europe+Asia, 2°C)"]);
+    expectHidden([
+      "Scenario B (Power, Europe, 2°C)",
+      "Scenario D (Industry, Asia, no temp)",
+      "Scenario A (no sectors, no geo, no temp)",
+      "Scenario C (empty sectors[], empty geo[], 1.5°C)",
+    ]);
+  });
+
+  it("Metric: ANY vs ALL toggle affects results (Europe + Asia)", async () => {
+    await openDropdown(/metric/i);
+    await selectOption("Capacity");
+    await selectOption("Generation");
+
+    // ANY
+    expectVisible([
+      "Scenario B (Power, Europe, 2°C)",
+      "Scenario D (Industry, Asia, no temp)",
+      "Scenario E (Power, Europe+Asia, 2°C)",
+    ]);
+    expectHidden([
+      "Scenario A (no sectors, no geo, no temp)",
+      "Scenario C (empty sectors[], empty geo[], 1.5°C)",
+    ]);
+
+    // Switch to ALL inside the open menu
+    await u.click(screen.getByTestId("mode-toggle"));
+    // ALL
+    expectVisible(["Scenario D (Industry, Asia, no temp)"]);
+    expectHidden([
+      "Scenario A (no sectors, no geo, no temp)",
+      "Scenario B (Power, Europe, 2°C)",
+      "Scenario C (empty sectors[], empty geo[], 1.5°C)",
+      "Scenario E (Power, Europe+Asia, 2°C)",
     ]);
   });
 });

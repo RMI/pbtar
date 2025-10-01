@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import ScenarioCard from "./ScenarioCard";
 import { Scenario } from "../types";
@@ -88,7 +88,7 @@ describe("ScenarioCard component", () => {
   it("shows target year and temperature badges", () => {
     renderScenarioCard();
 
-    expect(screen.getByText(mockScenario.modelYearEnd)).toBeInTheDocument();
+    expect(screen.getByText(mockScenario.modelYearNetzero)).toBeInTheDocument();
     expect(
       screen.getByText(mockScenario.modelTempIncrease?.toString() + "°C"),
     ).toBeInTheDocument();
@@ -153,32 +153,74 @@ describe("ScenarioCard component", () => {
   });
 
   describe("'+n more' tooltip functionality", () => {
-    it("shows '+n more' text when there are too many sectors to display", () => {
-      const { container } = renderScenarioCard(mockScenarioFull);
-
-      // Find the sectors section
-      const sectorsSection = Array.from(container.querySelectorAll("p")).find(
-        (p) => p.textContent === "Sectors:",
+    it("shows '+n more' text when there are too many sectors to display", async () => {
+      const { container } = withClientWidth(220, () =>
+        renderScenarioCard(mockScenarioFull),
       );
 
-      if (!sectorsSection) {
-        throw new Error("Sectors section not found");
-      }
+      // Find the "Sectors:" label
+      const sectorsP = Array.from(container.querySelectorAll("p")).find(
+        (p) => p.textContent === "Sectors:",
+      );
+      if (!sectorsP) throw new Error("Sectors section not found");
 
-      // Get the parent div of the Sectors section
-      const sectorsSectionContainer = sectorsSection.closest("div");
+      // The flex-wrap container is the sibling <div> following the <p>Sectors:</p>
+      const sectorsFlex =
+        (sectorsP.parentElement &&
+          sectorsP.parentElement.querySelector("div.flex.flex-wrap")) ||
+        null;
+      if (!sectorsFlex) throw new Error("Sectors flex container not found");
 
-      // Check if any "+n more" text exists within the sectors section
-      const moreTextElements = Array.from(
-        sectorsSectionContainer?.querySelectorAll("span") || [],
-      ).filter((span) => /\+\d+ more/.test(span.textContent || ""));
+      // Stub container rect so BadgeArray has a concrete width to compare against
+      const origGetRect = () => sectorsFlex.getBoundingClientRect();
+      sectorsFlex.getBoundingClientRect = () =>
+        ({ left: 0, right: 220, width: 220, top: 0, bottom: 0 }) as DOMRect;
 
-      // There should be at least one "+n more" element
-      expect(moreTextElements.length).toBeGreaterThan(0);
+      // Badge wrappers are the immediate children spans with inline-block
+      const wrappers = Array.from(
+        sectorsFlex.querySelectorAll("span.inline-block"),
+      );
+      // Force 3 rows via offsetTop: 0, 24, 48...
+      wrappers.forEach((el, i) => {
+        const top = i < 3 ? 0 : i < 6 ? 24 : 48;
+        Object.defineProperty(el, "offsetTop", {
+          configurable: true,
+          get() {
+            return top;
+          },
+        });
+      });
+
+      // Trigger recomputation (ResizeObserver/resize listener)
+      window.dispatchEvent(new Event("resize"));
+
+      // Wait for the measurement cycle to complete and the visible token to appear
+      await waitFor(() => {
+        const visibleTokens = Array.from(
+          sectorsFlex.querySelectorAll("span"),
+        ).filter(
+          (el) =>
+            /\+\d+ more/.test(el.textContent || "") &&
+            el.getAttribute("aria-hidden") !== "true" &&
+            !el.classList.contains("invisible"),
+        );
+        expect(visibleTokens.length).toBeGreaterThan(0);
+      });
+
+      // Restore original getBoundingClientRect (avoid side effects)
+      sectorsFlex.getBoundingClientRect = origGetRect;
 
       // The number in "+n more" should be positive
+      const visibleMoreText = Array.from(
+        sectorsFlex.querySelectorAll("span"),
+      ).filter(
+        (el) =>
+          /\+\d+ more/.test(el.textContent || "") &&
+          el.getAttribute("aria-hidden") !== "true" &&
+          !el.classList.contains("invisible"),
+      );
       const moreTextMatch =
-        moreTextElements[0].textContent?.match(/\+(\d+) more/);
+        visibleMoreText[0].textContent?.match(/\+(\d+) more/);
       expect(moreTextMatch).not.toBeNull();
       if (moreTextMatch) {
         const countNumber = parseInt(moreTextMatch[1]);
@@ -388,7 +430,7 @@ describe("tooltip functionality", () => {
       const s: Scenario = {
         ...mockScenario,
         // Using a double cast to satisfy TS, but this still presents as numeric at runtime.
-        modelYearEnd: 2030 as unknown as string, // number on purpose
+        modelYearNetzero: 2030 as unknown as string, // number on purpose
         publicationYear: 2024 as unknown as string, // number
       };
 
@@ -422,7 +464,7 @@ describe("tooltip functionality", () => {
       const s: Scenario = {
         ...mockScenario,
         // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
-        modelYearEnd: 2045 as unknown as string, // number on purpose
+        modelYearNetzero: 2045 as unknown as string, // number on purpose
       };
       const { container } = renderWithRouter(s, "2045");
       const marks = container.querySelectorAll("mark");

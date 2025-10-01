@@ -27,14 +27,34 @@ describe("SearchSection", () => {
     vi.clearAllMocks();
   });
 
+  function openByLabel(labelText: string) {
+    // Labels now live inside the trigger’s accessible name (e.g., "Sector..." or "Sector: 3").
+    const btn = screen.getByRole("button", {
+      name: new RegExp(`^${labelText}\\b`, "i"),
+    });
+    fireEvent.click(btn);
+    return btn;
+  }
+
   it("renders all filter dropdowns", () => {
     render(<SearchSection {...defaultProps} />);
 
-    expect(screen.getByText("Pathway Type")).toBeInTheDocument();
-    expect(screen.getByText("Target Year")).toBeInTheDocument();
-    expect(screen.getByText("Temperature (°C)")).toBeInTheDocument();
-    expect(screen.getByText("Geography")).toBeInTheDocument();
-    expect(screen.getByText("Sector")).toBeInTheDocument();
+    // Labels are the button’s accessible name prefix (followed by "..." or ": N").
+    expect(
+      screen.getByRole("button", { name: /^Pathway Type\b/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /^Target Year\b/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /^Temperature\b/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /^Geography\b/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /^Sector\b/i }),
+    ).toBeInTheDocument();
   });
 
   // This test checks that sectors are properly extracted from the complex object structure
@@ -42,8 +62,7 @@ describe("SearchSection", () => {
     render(<SearchSection {...defaultProps} />);
 
     // Open sector dropdown
-    const sectorDropdown = screen.getByText("Sector");
-    fireEvent.click(sectorDropdown);
+    openByLabel("Sector");
 
     // Verify that all unique sector names from the mock data are in the dropdown
     expect(screen.getByText("Agriculture")).toBeInTheDocument();
@@ -56,32 +75,27 @@ describe("SearchSection", () => {
     render(<SearchSection {...defaultProps} />);
 
     // Open sector dropdown
-    const sectorDropdown = screen.getByText("Sector");
-    fireEvent.click(sectorDropdown);
+    openByLabel("Sector");
 
     // Select the "Power" sector
     const powerOption = screen.getByText("Land Use");
     fireEvent.click(powerOption);
 
-    // Verify the filter change is called with the correct parameter
-    expect(defaultProps.onFilterChange).toHaveBeenCalledWith(
-      "sector",
+    // Verify array-emitting multi-select
+    expect(defaultProps.onFilterChange).toHaveBeenCalledWith("sector", [
       "Land Use",
-    );
+    ]);
   });
 
-  it("properly displays selected sector in the dropdown button", () => {
-    // Create props with a selected sector
+  it("shows selected count in the sector trigger", () => {
     const propsWithSector = {
       ...defaultProps,
-      filters: { sector: "Power" } as SearchFilters,
+      filters: { sector: ["Power"] } as unknown as SearchFilters,
     };
-
     render(<SearchSection {...propsWithSector} />);
-
-    // The dropdown button should show the selected sector name
-    const sectorButton = screen.getByText("Power");
-    expect(sectorButton).toBeInTheDocument();
+    // Trigger shows "Sector: 1"
+    const trigger = screen.getByRole("button", { name: /^Sector\b/i });
+    expect(trigger).toHaveTextContent(/Sector:\s*1/i);
   });
 
   it("can clear selected sector filter", () => {
@@ -93,34 +107,94 @@ describe("SearchSection", () => {
 
     render(<SearchSection {...propsWithSector} />);
 
-    // Find the clear button (X icon) next to the sector name
-    const powerText = screen.getByText("Power");
-    const clearButton = powerText.nextElementSibling;
-
-    // Add null check to handle potential null value
-    if (!clearButton) {
-      throw new Error("Clear button not found next to 'Power' text");
-    }
-
-    fireEvent.click(clearButton);
-
-    // Verify the filter was cleared
-    expect(defaultProps.onFilterChange).toHaveBeenCalledWith("sector", null);
+    // Open dropdown and click "Clear" control
+    openByLabel("Sector");
+    fireEvent.click(screen.getByText("Clear"));
+    expect(defaultProps.onFilterChange).toHaveBeenCalledWith("sector", []);
   });
 
   it("doesn't break when sectors are objects with name and tooltip properties", () => {
     render(<SearchSection {...defaultProps} />);
 
     // Try to open each dropdown to ensure they render without errors
-    const sectorDropdown = screen.getByText("Sector");
-    fireEvent.click(sectorDropdown);
-    expect(screen.getByText("Agriculture")).toBeInTheDocument();
+    openByLabel("Sector");
 
-    const pathwayDropdown = screen.getByText("Pathway Type");
-    fireEvent.click(pathwayDropdown);
+    openByLabel("Pathway Type");
     expect(screen.getByText("Direct Policy")).toBeInTheDocument();
     expect(screen.getByText("Exploratory")).toBeInTheDocument();
     expect(screen.getByText("Normative")).toBeInTheDocument();
     expect(screen.getByText("Predictive")).toBeInTheDocument();
+  });
+
+  it("Geography: mode toggle to ALL dispatches modes update", () => {
+    render(<SearchSection {...defaultProps} />);
+    const trigger = screen.getByRole("button", { name: /^Geography\b/i });
+    fireEvent.click(trigger);
+    fireEvent.click(screen.getByTestId("mode-toggle"));
+    expect(defaultProps.onFilterChange).toHaveBeenCalledWith("modes", {
+      geography: "ALL",
+    });
+  });
+
+  it("Sector: mode toggle to ANY dispatches modes update (from existing ALL)", () => {
+    const props = {
+      ...defaultProps,
+      filters: { modes: { sector: "ALL" } } as unknown as SearchFilters,
+    };
+    render(<SearchSection {...props} />);
+    const trigger = screen.getByRole("button", { name: /^Sector\b/i });
+    fireEvent.click(trigger);
+    fireEvent.click(screen.getByTestId("mode-toggle"));
+    expect(defaultProps.onFilterChange).toHaveBeenCalledWith("modes", {
+      sector: "ANY",
+    });
+  });
+
+  describe("does NOT render ANY/ALL toggle for scalar facets", () => {
+    for (const facet of [
+      "Pathway Type",
+      "Target Year",
+      "Temperature",
+    ] as const) {
+      it(`facet: ${facet}`, () => {
+        render(<SearchSection {...defaultProps} />);
+        const trigger = screen.getByRole("button", {
+          name: new RegExp(`^${facet}\\b`, "i"),
+        });
+        fireEvent.click(trigger);
+        expect(screen.queryByTitle("Match any (OR)")).not.toBeInTheDocument();
+        expect(screen.queryByTitle("Match all (AND)")).not.toBeInTheDocument();
+        // close popover to avoid overlapping menus in the loop
+        fireEvent.keyDown(document, { key: "Escape" });
+      });
+    }
+  });
+
+  describe("Clear all filters button (inline with summary)", () => {
+    it("does not render the button when no filters are applied", () => {
+      render(<SearchSection {...defaultProps} />);
+      expect(screen.queryByTestId("clear-all-filters")).toBeNull();
+      // Summary still renders
+      expect(screen.getByText(/Found 2 scenarios/i)).toBeInTheDocument();
+    });
+
+    it("renders the inline button when any filter is applied and calls onClear", () => {
+      const props = {
+        ...defaultProps,
+        filters: { ...defaultProps.filters, geography: ["Europe"] },
+      };
+      render(<SearchSection {...props} />);
+
+      // Button should be present and visually near the summary (inline within the same <p>)
+      const paragraph = screen.getByText(/Found \d+ scenarios/i).closest("p");
+      expect(paragraph).toBeTruthy();
+      const clearBtn = screen.getByTestId("clear-all-filters");
+      expect(clearBtn).toBeInTheDocument();
+      // Ensure the button is inside the same paragraph node (inline placement)
+      expect(paragraph?.contains(clearBtn)).toBe(true);
+
+      clearBtn.click();
+      expect(defaultProps.onClear).toHaveBeenCalledTimes(1);
+    });
   });
 });
