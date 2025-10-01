@@ -16,8 +16,8 @@
     ],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "Example Overview.",
-    "expertRecommendation": "Example Expert Recommendation.",
+    "scenarioOverview": "Example Overview.",
+    "expertOverview": "Example Expert Recommendation.",
     "dataSource": {
       "description": "Mock Data Source.",
       "url": "https://example.com/data-source",

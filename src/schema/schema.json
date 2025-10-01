@@ -161,13 +161,13 @@
         "minimum": 1900,
         "maximum": 2030
       },
-      "overview": {
+      "scenarioOverview": {
         "description": "Overview of the scenario.",
         "type": "string",
         "pattern": "\\.$",
         "maxLength": 1000
       },
-      "expertRecommendation": {
+      "expertOverview": {
         "description": "Expert recommendation for the scenario.",
         "type": "string",
         "pattern": "\\.$",
@@ -222,8 +222,7 @@
       "sectors",
       "publisher",
       "publicationYear",
-      "overview",
-      "expertRecommendation",
+      "expertOverview",
       "dataSource",
       "metric"
     ]

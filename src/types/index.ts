@@ -16,7 +16,7 @@ export interface Scenario {
   publisher: string;
   publicationYear: string;
   overview: string;
-  expertRecommendation: string;
+  expertOverview: string;
   dataSource: {
     description: string;
     url: string;
