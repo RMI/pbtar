@@ -134,7 +134,7 @@ jobs:
 
       - name: Find Comment
         # https://github.com/peter-evans/find-comment
-        uses: peter-evans/find-comment@v3
+        uses: peter-evans/find-comment@v4
         id: fc
         with:
           issue-number: ${{ github.event.pull_request.number }}
