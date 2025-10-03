@@ -1,9 +1,5 @@
-import {
-  defineConfig,
-  Plugin,
-  version as viteVersion,
-  type ViteDevServer,
-} from "vite";
+import { defineConfig, Plugin, version as viteVersion } from "vite";
+import type { PluginContext, ViteDevServer } from "vite";
 import react from "@vitejs/plugin-react";
 import { simpleGit } from "simple-git";
 import os from "os";
@@ -134,7 +130,7 @@ function dataValidationPlugin(dir: string = "src/data") {
     name: "data-validation",
     apply: "build",
     enforce: "pre",
-    async buildStart() {
+    async buildStart(this: PluginContext) {
       const names = (await fs.readdir(dir)).filter((f) => f.endsWith(".json"));
       const entries: FileEntry[] = [];
 
@@ -150,9 +146,11 @@ function dataValidationPlugin(dir: string = "src/data") {
       const includeInvalid = decideIncludeInvalid();
 
       // Validate + assemble; surface warnings via Vite's logger
-      const scenarios = assembleScenarios(entries, {
+      assembleScenarios(entries, {
         includeInvalid,
-        warn: (msg) => this.warn(msg),
+        warn: (msg: string): void => {
+          console.warn(msg);
+        },
       });
     },
   };
