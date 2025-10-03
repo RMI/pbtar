@@ -61,9 +61,14 @@ export function assembleScenarios(
   opts?: {
     includeInvalid?: boolean;
     warn?: (msg: string) => void;
+    /** Optional structured hook for callers that want to annotate files, etc. */
+    onInvalid?: (
+      problems: Array<{ name: string; errors: string[]; data?: Scenario[] }>,
+    ) => void;
   },
 ): Scenario[] {
   const includeInvalid = !!opts?.includeInvalid;
+  const onInvalid = opts?.onInvalid;
 
   const { valid, invalid } = validateScenariosCollect(entries);
 
@@ -81,6 +86,7 @@ export function assembleScenarios(
           : "These will be excluded from the output."
       }`,
     );
+    if (onInvalid) onInvalid(invalid);
   }
 
   if (!includeInvalid) return valid;

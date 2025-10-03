@@ -144,12 +144,35 @@ function dataValidationPlugin(dir: string = "src/data") {
 
       // Decide lenient vs strict
       const includeInvalid = decideIncludeInvalid();
+      const inCI =
+        String(process.env.GITHUB_ACTIONS || "").toLowerCase() === "true";
 
       // Validate + assemble; surface warnings via Vite's logger
       assembleScenarios(entries, {
         includeInvalid,
         warn: (msg: string): void => {
           console.warn(msg);
+        },
+        onInvalid: (problems): void => {
+          // Emit per-file annotations for Actions
+          if (inCI) {
+            for (const p of problems) {
+              const file = join(dir, p.name);
+              // one line per error keeps annotations readable; cap to 20
+              const errs = p.errors.slice(0, 20);
+              for (const e of errs) {
+                // GitHub Actions workflow command:
+                // ::warning file=<path>,line=<n>,col=<n>::message
+                // We don't have line/col (JSON), so omit them.
+                console.log(`::warning file=${file}::${e}`);
+              }
+              if (p.errors.length > errs.length) {
+                console.log(
+                  `::notice file=${file}::…and ${p.errors.length - errs.length} more error(s)`,
+                );
+              }
+            }
+          }
         },
       });
     },
