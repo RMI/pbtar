@@ -23,22 +23,6 @@
       "url": "https://example.com/data-source",
       "downloadAvailable": true
     },
-    "metric": ["Emissions Intensity"],
-    "keyFeatures": {
-      "emissionsPathway": "Fast decline",
-      "energyEfficiency": "Significant improvements",
-      "energyDemand": "Static energy demand",
-      "electrification": "Significant increase",
-      "policyTypes": ["Other"],
-      "technologyCostTrend": "Other",
-      "technologyDeploymentTrend": "Significant deployment of new technologies",
-      "emissionsScope": "CO2",
-      "policyAmbition": "NDCs and long term commitments",
-      "technologyCostsDetail": "Capital costs/O&M/etc.",
-      "newTechnologiesIncluded": ["Battery storage"],
-      "supplyChain": "Dynamic upstream fuel/material prices",
-      "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
-      "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
-    }
+    "metric": ["Emissions Intensity"]
   }
 ]
