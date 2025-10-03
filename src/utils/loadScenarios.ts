@@ -1,7 +1,7 @@
 // src/utils/loadScenarios.ts
 import type { Scenario } from "../types";
-import { validateScenariosCollect } from "./validateScenarios";
-import type { FileEntry } from "./validateScenarios";
+import { validateScenariosCollect } from "./validateScenarios.ts";
+import type { FileEntry } from "./validateScenarios.ts";
 
 type ViteEnv =
   | {

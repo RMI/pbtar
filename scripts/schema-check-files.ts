@@ -1,7 +1,10 @@
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
-import { validateScenarios } from "../src/utils/validateScenarios.ts";
 import type { FileEntry } from "../src/utils/validateScenarios.ts";
+import {
+  assembleScenarios,
+  decideIncludeInvalid,
+} from "../src/utils/loadScenarios.ts";
 
 async function main() {
   const dir = process.argv[2] ?? "src/data"; // default if not provided
@@ -13,8 +16,12 @@ async function main() {
     entries.push({ name, data: JSON.parse(raw) });
   }
 
-  // throws (non-zero exit) on any problem
-  validateScenarios(entries);
+  const includeInvalid = decideIncludeInvalid();
+
+  const scenarios = assembleScenarios(entries, {
+    includeInvalid,
+    warn: (msg: string) => console.warn(msg),
+  });
   console.log(
     `✔ Validated ${names.length} data file(s) from ${dir} against schema.`,
   );
