@@ -215,7 +215,6 @@
         "description": "Key features of the scenario.",
         "type": "object",
         "properties": {
-
           "emissionsPathway": {
             "description": "TKTK",
             "type": "string",
@@ -263,14 +262,19 @@
           },
           "policyTypes": {
             "description": "TKTK",
-            "type": "string",
-            "enum": [
-              "Carbon price",
-              "Phaseout dates",
-              "Subsidies",
-              "Target technology shares",
-              "Other"
-            ]
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Carbon price",
+                "Phaseout dates",
+                "Subsidies",
+                "Target technology shares",
+                "Other"
+              ]
+            }
           },
           "technologyCostTrend": {
             "description": "TKTK",
@@ -328,17 +332,22 @@
           },
           "newTechnologiesIncluded": {
             "description": "TKTK",
-            "type": "string",
-            "enum": [
-              "No information",
-              "CCUS",
-              "DAC",
-              "Green H2/ammonia",
-              "SAF",
-              "Battery storage",
-              "EGS/AGS",
-              "Other"
-            ]
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": [
+                "No information",
+                "CCUS",
+                "DAC",
+                "Green H2/ammonia",
+                "SAF",
+                "Battery storage",
+                "EGS/AGS",
+                "Other"
+              ]
+            }
           },
           "supplyChain": {
             "description": "TKTK",
@@ -368,7 +377,6 @@
               "By part of supply chain and maintenance/buildout"
             ]
           }
-
         },
         "additionalProperties": false,
         "required": [
