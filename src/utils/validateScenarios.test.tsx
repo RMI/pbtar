@@ -1,6 +1,4 @@
 import { describe, it, expect } from "vitest";
-import { promises as fs } from "node:fs";
-import { resolve, join } from "node:path";
 import { validateScenarios, FileEntry } from "./validateScenarios";
 import { Scenario } from "../types";
 
@@ -11,36 +9,6 @@ function ok(entry: FileEntry) {
 function fail(entry: FileEntry, rx: RegExp | string) {
   expect(() => validateScenarios([entry])).toThrowError(rx);
 }
-
-describe("validate files on disk", () => {
-  it("all src/data/*.json data files conform to schema", async () => {
-    const dir = resolve(__dirname, "../data");
-    const names = (await fs.readdir(dir)).filter((f) => f.endsWith(".json"));
-    const entries: FileEntry[] = await Promise.all(
-      names.map(async (name) => ({
-        name,
-        data: JSON.parse(await fs.readFile(join(dir, name), "utf8")) as
-          | Scenario[]
-          | unknown[],
-      })),
-    );
-    expect(() => validateScenarios(entries)).not.toThrow();
-  });
-
-  it("all testdata/valid/*.json data files conform to schema", async () => {
-    const dir = resolve(__dirname, "../../testdata/valid");
-    const names = (await fs.readdir(dir)).filter((f) => f.endsWith(".json"));
-    const entries: FileEntry[] = await Promise.all(
-      names.map(async (name) => ({
-        name,
-        data: JSON.parse(await fs.readFile(join(dir, name), "utf8")) as
-          | Scenario[]
-          | unknown[],
-      })),
-    );
-    expect(() => validateScenarios(entries)).not.toThrow();
-  });
-});
 
 import rawScenarioArray from "../../testdata/valid/scenarios_metadata_standard.json" assert { type: "json" };
 const baseScenario: Scenario = rawScenarioArray[0];

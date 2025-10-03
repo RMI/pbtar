@@ -72,7 +72,35 @@
       "Generation",
       "Technology Mix",
       "Absolute Emissions"
-    ]
+    ],
+    "keyFeatures": {
+      "emissionsPathway": "Fast decline",
+      "energyEfficiency": "Significant improvements",
+      "energyDemand": "Static energy demand",
+      "electrification": "Significant increase",
+      "policyTypes": [
+        "Carbon price",
+        "Phaseout dates",
+        "Subsidies",
+        "Target technology shares",
+        "Other"
+      ],
+      "technologyCostTrend": "Other",
+      "technologyDeploymentTrend": "Significant deployment of new technologies",
+      "emissionsScope": "CO2",
+      "policyAmbition": "NDCs and long term commitments",
+      "technologyCostsDetail": "Capital costs/O&M/etc.",
+      "newTechnologiesIncluded": [
+        "CCUS",
+        "DAC",
+        "Green H2/ammonia",
+        "SAF",
+        "Battery storage"
+      ],
+      "supplyChain": "Dynamic upstream fuel/material prices",
+      "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
+      "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
+    }
   },
   {
     "id": "IEA-STEPS-2024",
@@ -147,6 +175,34 @@
       "Generation",
       "Technology Mix",
       "Absolute Emissions"
-    ]
+    ],
+    "keyFeatures": {
+      "emissionsPathway": "Moderate decline",
+      "energyEfficiency": "Moderate improvements",
+      "energyDemand": "Moderate growth",
+      "electrification": "Moderate increase",
+      "policyTypes": [
+        "Carbon price",
+        "Phaseout dates",
+        "Subsidies",
+        "Target technology shares",
+        "Other"
+      ],
+      "technologyCostTrend": "Other",
+      "technologyDeploymentTrend": "Moderate deployment of new technologies",
+      "emissionsScope": "CO2",
+      "policyAmbition": "Current/legislated policies",
+      "technologyCostsDetail": "Capital costs/O&M/etc.",
+      "newTechnologiesIncluded": [
+        "CCUS",
+        "DAC",
+        "Green H2/ammonia",
+        "SAF",
+        "Battery storage"
+      ],
+      "supplyChain": "Dynamic upstream fuel/material prices",
+      "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
+      "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
+    }
   }
 ]
