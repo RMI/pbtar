@@ -23,12 +23,10 @@ async function main() {
     warn: (msg: string) => console.warn(msg),
   });
   // Check for invalid scenarios
-  const invalidScenarios = scenarios.filter(
-    (s: any) => s && s.valid === false
-  );
+  const invalidScenarios = scenarios.filter((s: any) => s && s.valid === false);
   if (invalidScenarios.length > 0) {
     console.error(
-      `✖ Found ${invalidScenarios.length} invalid scenario(s) in ${dir}:`
+      `✖ Found ${invalidScenarios.length} invalid scenario(s) in ${dir}:`,
     );
     for (const s of invalidScenarios) {
       console.error(`  - ${s.name || "(unnamed scenario)"}`);
@@ -36,7 +34,7 @@ async function main() {
     process.exit(1);
   } else {
     console.log(
-      `✔ Validated ${names.length} data file(s) from ${dir} against schema.`
+      `✔ Validated ${names.length} data file(s) from ${dir} against schema.`,
     );
   }
 }
