@@ -1,5 +1,9 @@
 import { Scenario } from "../types";
-import { validateScenarios, FileEntry } from "../utils/validateScenarios";
+import { FileEntry } from "../utils/validateScenarios";
+import {
+  assembleScenarios,
+  decideIncludeInvalid,
+} from "../utils/loadScenarios";
 
 // 1) Grab every JSON file in this folder
 //    `eager:true` = load at build time (no async), `import:'default'` = get the parsed JSON
@@ -15,4 +19,6 @@ const entries: FileEntry[] = Object.entries(modules)
   }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
-export const scenariosData: Scenario[] = validateScenarios(entries);
+export const scenariosData: Scenario[] = assembleScenarios(entries, {
+  includeInvalid: decideIncludeInvalid(),
+});
