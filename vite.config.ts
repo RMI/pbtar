@@ -7,7 +7,11 @@ import {
 import react from "@vitejs/plugin-react";
 import { simpleGit } from "simple-git";
 import os from "os";
-import { validateScenarios, FileEntry } from "./src/utils/validateScenarios";
+import { FileEntry } from "./src/utils/validateScenarios";
+import {
+  assembleScenarios,
+  decideIncludeInvalid,
+} from "./src/utils/loadScenarios";
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
 import { viteStaticCopy } from "vite-plugin-static-copy";
@@ -142,7 +146,14 @@ function dataValidationPlugin(dir: string = "src/data") {
         });
       }
 
-      validateScenarios(entries); // throws -> build fails
+      // Decide lenient vs strict
+      const includeInvalid = decideIncludeInvalid();
+
+      // Validate + assemble; surface warnings via Vite's logger
+      const scenarios = assembleScenarios(entries, {
+        includeInvalid,
+        warn: (msg) => this.warn(msg),
+      });
     },
   };
 }
