@@ -161,13 +161,13 @@
         "minimum": 1900,
         "maximum": 2030
       },
-      "overview": {
+      "scenarioOverview": {
         "description": "Overview of the scenario.",
         "type": "string",
         "pattern": "\\.$",
         "maxLength": 1000
       },
-      "expertRecommendation": {
+      "expertOverview": {
         "description": "Expert recommendation for the scenario.",
         "type": "string",
         "pattern": "\\.$",
@@ -216,7 +216,6 @@
         "description": "Key features of the scenario.",
         "type": "object",
         "properties": {
-
           "emissionsPathway": {
             "description": "TKTK",
             "type": "string",
@@ -264,14 +263,19 @@
           },
           "policyTypes": {
             "description": "TKTK",
-            "type": "string",
-            "enum": [
-              "Carbon price",
-              "Phaseout dates",
-              "Subsidies",
-              "Target technology shares",
-              "Other"
-            ]
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Carbon price",
+                "Phaseout dates",
+                "Subsidies",
+                "Target technology shares",
+                "Other"
+              ]
+            }
           },
           "technologyCostTrend": {
             "description": "TKTK",
@@ -329,17 +333,22 @@
           },
           "newTechnologiesIncluded": {
             "description": "TKTK",
-            "type": "string",
-            "enum": [
-              "No information",
-              "CCUS",
-              "DAC",
-              "Green H2/ammonia",
-              "SAF",
-              "Battery storage",
-              "EGS/AGS",
-              "Other"
-            ]
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": [
+                "No information",
+                "CCUS",
+                "DAC",
+                "Green H2/ammonia",
+                "SAF",
+                "Battery storage",
+                "EGS/AGS",
+                "Other"
+              ]
+            }
           },
           "supplyChain": {
             "description": "TKTK",
@@ -369,7 +378,6 @@
               "By part of supply chain and maintenance/buildout"
             ]
           }
-
         },
         "additionalProperties": false,
         "required": [
@@ -400,8 +408,7 @@
       "sectors",
       "publisher",
       "publicationYear",
-      "overview",
-      "expertRecommendation",
+      "expertOverview",
       "dataSource",
       "metric",
       "keyFeatures"
