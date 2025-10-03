@@ -22,9 +22,23 @@ async function main() {
     includeInvalid,
     warn: (msg: string) => console.warn(msg),
   });
-  console.log(
-    `✔ Validated ${names.length} data file(s) from ${dir} against schema.`,
+  // Check for invalid scenarios
+  const invalidScenarios = scenarios.filter(
+    (s: any) => s && s.valid === false
   );
+  if (invalidScenarios.length > 0) {
+    console.error(
+      `✖ Found ${invalidScenarios.length} invalid scenario(s) in ${dir}:`
+    );
+    for (const s of invalidScenarios) {
+      console.error(`  - ${s.name || "(unnamed scenario)"}`);
+    }
+    process.exit(1);
+  } else {
+    console.log(
+      `✔ Validated ${names.length} data file(s) from ${dir} against schema.`
+    );
+  }
 }
 
 main().catch((e) => {
