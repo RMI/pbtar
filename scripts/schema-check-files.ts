@@ -1,7 +1,10 @@
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
-import { validateScenarios } from "../src/utils/validateScenarios.ts";
 import type { FileEntry } from "../src/utils/validateScenarios.ts";
+import {
+  assembleScenarios,
+  decideIncludeInvalid,
+} from "../src/utils/loadScenarios.ts";
 
 async function main() {
   const dir = process.argv[2] ?? "src/data"; // default if not provided
@@ -13,11 +16,27 @@ async function main() {
     entries.push({ name, data: JSON.parse(raw) });
   }
 
-  // throws (non-zero exit) on any problem
-  validateScenarios(entries);
-  console.log(
-    `✔ Validated ${names.length} data file(s) from ${dir} against schema.`,
-  );
+  const includeInvalid = decideIncludeInvalid();
+
+  const scenarios = assembleScenarios(entries, {
+    includeInvalid,
+    warn: (msg: string) => console.warn(msg),
+  });
+  // Check for invalid scenarios
+  const invalidScenarios = scenarios.filter((s: any) => s && s.valid === false);
+  if (invalidScenarios.length > 0) {
+    console.error(
+      `✖ Found ${invalidScenarios.length} invalid scenario(s) in ${dir}:`,
+    );
+    for (const s of invalidScenarios) {
+      console.error(`  - ${s.name || "(unnamed scenario)"}`);
+    }
+    process.exit(1);
+  } else {
+    console.log(
+      `✔ Validated ${names.length} data file(s) from ${dir} against schema.`,
+    );
+  }
 }
 
 main().catch((e) => {
