@@ -22,7 +22,7 @@ jobs:
 
       - name: Set VITE_INCLUDE_INVALID
         id: set-include
-        if: ${{ github.event_name == 'pull_request' && github.head_ref != 'production'}}
+        if: ${{ github.event_name == 'pull_request' && github.base_ref != 'production'}}
         run: |
           echo "vite-include-invalid=true" >> $GITHUB_OUTPUT
 
