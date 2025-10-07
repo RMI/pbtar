@@ -16,7 +16,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "format:watch": "chokidar . --ignore \".git/**\" --ignore \"node_modules/**\" -c \"prettier --check .\"",
-    "json:check": "npm run json:check:srcdata && npm run json:check:testdata",
+    "json:check": "npx ts-node --esm scripts/schema-check-files.ts src/data testdata/valid",
     "json:check:srcdata": "npx ts-node --esm scripts/schema-check-files.ts src/data",
     "json:check:testdata": "npx ts-node --esm scripts/schema-check-files.ts testdata/valid",
     "docs:jsonSchema": "scripts/generate-schema-docs.sh",
