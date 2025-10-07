@@ -28,7 +28,7 @@ jobs:
 
       - name: Run ajv JSON validator
         env:
-          VITE_INCLUDE_INVALID: ${{ steps.set-include.output.vite-include-invalid }}
+          VITE_INCLUDE_INVALID: ${{ steps.set-include.outputs.vite-include-invalid }}
         run: npm run json:check
 
   schema-docs:
