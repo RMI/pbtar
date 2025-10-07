@@ -20,9 +20,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Set VITE_INCLUDE_INVALID
+        id: set-include
+        if: ${{ github.event_name == 'pull_request' && github.head_ref != 'production'}}
+        run: |
+          echo "vite-include-invalid=true" >> $GITHUB_OUTPUT
+
       - name: Run ajv JSON validator
         env:
-          VITE_INCLUDE_INVALID: ${{ (github.event_name == 'pull_request' && github.head_ref == 'production') && 'true' || 'false'}}
+          VITE_INCLUDE_INVALID: ${{ steps.set-include.output.vite-include-invalid }}
         run: npm run json:check
 
   schema-docs:
