@@ -21,6 +21,8 @@ jobs:
         run: npm ci
 
       - name: Run ajv JSON validator
+        env:
+          VITE_INCLUDE_INVALID: ${{ github.event_name == 'pull_request' && github.head_ref == 'production' && 'true' || 'false'}}
         run: npm run json:check
 
   schema-docs:
