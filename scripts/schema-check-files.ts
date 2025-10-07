@@ -6,7 +6,6 @@ import { validateScenariosCollect } from "../src/utils/validateScenarios.ts";
 import { decideIncludeInvalid } from "../src/utils/loadScenarios.ts";
 
 async function run(dir: string) {
-
   const names = (await fs.readdir(dir)).filter((f) => f.endsWith(".json"));
 
   const entries: FileEntry[] = [];
@@ -25,9 +24,14 @@ async function main() {
   const strict = !decideIncludeInvalid();
   const inCI =
     String(process.env.GITHUB_ACTIONS || "").toLowerCase() === "true";
+  const level = String(
+    process.env.VALIDATION_ANNOTATION_LEVEL || "warning",
+  ).toLowerCase(); // "warning" | "notice"
+  const annotate = level === "notice" ? "notice" : "warning";
 
   let totalValid = 0;
   let totalInvalid = 0;
+  let filesWithIssues = 0;
 
   const results = await Promise.all(dirs.map(run));
 
@@ -37,26 +41,23 @@ async function main() {
     totalInvalid += r.invalid.length;
 
     if (r.invalid.length === 0) {
-      // eslint-disable-next-line no-console
       console.log(`✔ ${r.dir}: OK (${r.validCount} items)`);
       continue;
     }
 
-    // eslint-disable-next-line no-console
     console.error(
       `✖ ${r.dir}: ${r.invalid.length} schema-invalid file(s) found:`,
     );
+    filesWithIssues += r.invalid.length;
 
     for (const p of r.invalid) {
       // Emit up to N errors per file as GH annotations
       const file = join(r.dir, p.name);
       const errs = p.errors.slice(0, 50);
       for (const e of errs) {
-        // eslint-disable-next-line no-console
-        console.log(`::warning file=${file}::${e}`);
+        console.log(`::${annotate} file=${file}::${e}`);
       }
       if (p.errors.length > errs.length) {
-        // eslint-disable-next-line no-console
         console.log(
           `::notice file=${file}::…and ${
             p.errors.length - errs.length
@@ -67,12 +68,35 @@ async function main() {
   }
 
   // Final summary
-  // eslint-disable-next-line no-console
   console.log(
     `\nSummary: ${totalValid} valid item(s), ${totalInvalid} invalid file(s) across ${dirs.length} director${
       dirs.length === 1 ? "y" : "ies"
     }.`,
   );
+
+  // Write a small Markdown summary for the job page
+  if (inCI && process.env.GITHUB_STEP_SUMMARY) {
+    const summary = [
+      `### Schema validation summary`,
+      ``,
+      `| Metric | Value |`,
+      `| :-- | --: |`,
+      `| Directories checked | ${dirs.length} |`,
+      `| Valid items | ${totalValid} |`,
+      `| Files with issues | ${filesWithIssues} |`,
+      `| Annotation level | ${annotate.toUpperCase()} |`,
+      ``,
+      filesWithIssues > 0
+        ? `_See per-file annotations above in the Logs tab._`
+        : `All good ✅`,
+      ``,
+    ].join("\n");
+    await fs.appendFile(
+      process.env.GITHUB_STEP_SUMMARY,
+      `${summary}\n`,
+      "utf8",
+    );
+  }
 
   // Optional failure gate
   if (strict && totalInvalid > 0) {
@@ -81,7 +105,6 @@ async function main() {
 }
 
 main().catch((e) => {
-  // eslint-disable-next-line no-console
   console.error(String(e?.stack || e));
   process.exit(1);
 });
