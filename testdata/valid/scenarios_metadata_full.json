@@ -82,6 +82,37 @@
       "Technology Mix",
       "Absolute Emissions"
     ],
+    "keyFeatures": {
+      "emissionsPathway": "No information",
+      "energyEfficiency": "No information",
+      "energyDemand": "No information",
+      "electrification": "No information",
+      "policyTypes": [
+        "Carbon price",
+        "Phaseout dates",
+        "Subsidies",
+        "Target technology shares",
+        "Other"
+      ],
+      "technologyCostTrend": "Other",
+      "technologyDeploymentTrend": "No information",
+      "emissionsScope": "No information",
+      "policyAmbition": "No information",
+      "technologyCostsDetail": "No information",
+      "newTechnologiesIncluded": [
+        "No information",
+        "CCUS",
+        "DAC",
+        "Green H2/ammonia",
+        "SAF",
+        "Battery storage",
+        "EGS/AGS",
+        "Other"
+      ],
+      "supplyChain": "No information",
+      "investmentNeeds": "No information",
+      "infrastructureRequirements": "No information"
+    },
     "dataSource": {
       "description": "Mock Data Source.",
       "url": "https://example.com/data-source",
