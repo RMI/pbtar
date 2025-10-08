@@ -39,7 +39,24 @@
       "Generation",
       "Technology Mix",
       "Absolute Emissions"
-    ]
+    ],
+
+    "keyFeatures": {
+      "emissionsPathway": "Continued growth",
+      "energyEfficiency": "Moderate improvements",
+      "energyDemand": "Significant growth",
+      "electrification": "Significant increase",
+      "policyTypes": ["Subsidies", "Target technology shares", "Other"],
+      "technologyCostTrend": "Other",
+      "technologyDeploymentTrend": "Moderate deployment of new technologies",
+      "emissionsScope": "Other",
+      "policyAmbition": "Current/legislated policies",
+      "technologyCostsDetail": "Capital costs/O&M/etc.",
+      "newTechnologiesIncluded": ["Battery storage"],
+      "supplyChain": "No information",
+      "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
+      "infrastructureRequirements": "No information"
+    }
   },
   {
     "id": "PMoE-CES1-2023",
@@ -81,7 +98,24 @@
       "Generation",
       "Technology Mix",
       "Absolute Emissions"
-    ]
+    ],
+
+    "keyFeatures": {
+      "emissionsPathway": "Continued growth",
+      "energyEfficiency": "Moderate improvements",
+      "energyDemand": "Significant growth",
+      "electrification": "Significant increase",
+      "policyTypes": ["Subsidies", "Target technology shares", "Other"],
+      "technologyCostTrend": "Other",
+      "technologyDeploymentTrend": "Moderate deployment of new technologies",
+      "emissionsScope": "Other",
+      "policyAmbition": "Other",
+      "technologyCostsDetail": "Capital costs/O&M/etc.",
+      "newTechnologiesIncluded": ["Battery storage"],
+      "supplyChain": "No information",
+      "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
+      "infrastructureRequirements": "No information"
+    }
   },
   {
     "id": "PMoE-CES2-2023",
@@ -123,6 +157,23 @@
       "Generation",
       "Technology Mix",
       "Absolute Emissions"
-    ]
+    ],
+
+    "keyFeatures": {
+      "emissionsPathway": "Continued growth",
+      "energyEfficiency": "Moderate improvements",
+      "energyDemand": "Significant growth",
+      "electrification": "Significant increase",
+      "policyTypes": ["Subsidies", "Target technology shares", "Other"],
+      "technologyCostTrend": "Other",
+      "technologyDeploymentTrend": "Moderate deployment of new technologies",
+      "emissionsScope": "Other",
+      "policyAmbition": "Other",
+      "technologyCostsDetail": "Capital costs/O&M/etc.",
+      "newTechnologiesIncluded": ["Battery storage"],
+      "supplyChain": "No information",
+      "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
+      "infrastructureRequirements": "No information"
+    }
   }
 ]
