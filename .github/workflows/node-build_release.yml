@@ -81,7 +81,9 @@ jobs:
               --dry-run \
               --no-ci | \
               tee /tmp/semantic-release-raw.txt
-            PREVIEW_VERSION="0.0.0-pr.${{ github.event.pull_request.number }}.${{ github.run_number }}"
+            RAW_VERSION=$(grep -oP '(?<=Release note for version )[^:]+' /tmp/semantic-release-raw.txt)
+            echo "RAW_VERSION=$RAW_VERSION"
+            PREVIEW_VERSION="$RAW_VERSION-pr.${{ github.event.pull_request.number }}.${{ github.run_number }}"
             echo "preview-version=$PREVIEW_VERSION"
             echo "preview-version=$PREVIEW_VERSION" >> $GITHUB_OUTPUT
             npm version "$PREVIEW_VERSION" --no-git-tag-version
