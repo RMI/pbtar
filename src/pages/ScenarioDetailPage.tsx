@@ -210,7 +210,12 @@ const ScenarioDetailPage: React.FC = () => {
                         <p className="text-xs font-medium text-rmigray-500 mb-1">
                           {LABELS[key] ?? rawKey}
                         </p>
-                        <BadgeArray visibleCount={Infinity}>{clean}</BadgeArray>
+                        <BadgeArray
+                          variant="keyFeature"
+                          visibleCount={Infinity}
+                        >
+                          {clean}
+                        </BadgeArray>
                       </div>
                     );
                   });
