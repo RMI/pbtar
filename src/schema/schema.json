@@ -216,7 +216,7 @@
         "type": "object",
         "properties": {
           "emissionsPathway": {
-            "description": "TKTK",
+            "description": "Describes the overall trend of greenhouse gas emissions over time, from continued growth to rapid decline.",
             "type": "string",
             "enum": [
               "No information",
@@ -228,7 +228,7 @@
             ]
           },
           "energyEfficiency": {
-            "description": "TKTK",
+            "description": "Indicates how efficiently energy is used to produce economic output across the sectors covered in the pathway.",
             "type": "string",
             "enum": [
               "No information",
@@ -239,7 +239,7 @@
             ]
           },
           "energyDemand": {
-            "description": "TKTK",
+            "description": "Captures the change in total energy consumption, driven by factors such as socio-economic development, technology shifts and and consumer behavior.",
             "type": "string",
             "enum": [
               "No information",
@@ -250,7 +250,7 @@
             ]
           },
           "electrification": {
-            "description": "TKTK",
+            "description": "Represents the extent to which energy end-uses transition from fossil fuels to electricity.",
             "type": "string",
             "enum": [
               "No information",
@@ -261,7 +261,7 @@
             ]
           },
           "policyTypes": {
-            "description": "TKTK",
+            "description": "Identifies the types of policies modeled as drivers of the scenario, such as carbon pricing, subsidies, or mandated phaseouts of specific technologies.",
             "type": "array",
             "uniqueItems": true,
             "minItems": 1,
@@ -277,7 +277,7 @@
             }
           },
           "technologyCostTrend": {
-            "description": "TKTK",
+            "description": "Describes how technology costs evolve over time, from static cost assumptions to rapidly declining costs (e.g., via learning curves).",
             "type": "string",
             "enum": [
               "No information",
@@ -288,7 +288,7 @@
             ]
           },
           "technologyDeploymentTrend": {
-            "description": "TKTK",
+            "description": "Indicates the scale and pace of new technology adoption within the scenario, where significant deployment means that several new technologies are adopted rapidly",
             "type": "string",
             "enum": [
               "No information",
@@ -298,7 +298,7 @@
             ]
           },
           "emissionsScope": {
-            "description": "TKTK",
+            "description": "Defines which greenhouse gases are covered in the scenario’s emissions accounting.",
             "type": "string",
             "enum": [
               "No information",
@@ -309,7 +309,7 @@
             ]
           },
           "policyAmbition": {
-            "description": "TKTK",
+            "description": "Represents the overall stringency and intent of modeled policies relative to climate targets, often reflecting if and how far the included policies go beyond currently legislated ones",
             "type": "string",
             "enum": [
               "No information",
@@ -321,7 +321,7 @@
             ]
           },
           "technologyCostsDetail": {
-            "description": "TKTK",
+            "description": "Specifies the level of granularity in cost data, such as total system costs or detailed CAPEX/OPEX breakdowns.",
             "type": "string",
             "enum": [
               "No information",
@@ -331,7 +331,7 @@
             ]
           },
           "newTechnologiesIncluded": {
-            "description": "TKTK",
+            "description": "Lists emerging or breakthrough technologies that are explicitly modeled within the pathway. These are considered in technology deployment too.",
             "type": "array",
             "uniqueItems": true,
             "minItems": 1,
@@ -350,7 +350,7 @@
             }
           },
           "supplyChain": {
-            "description": "TKTK",
+            "description": "Describes how upstream fuel or material price dynamics are represented in the scenario.",
             "type": "string",
             "enum": [
               "No information",
@@ -359,7 +359,7 @@
             ]
           },
           "investmentNeeds": {
-            "description": "TKTK",
+            "description": "Summarizes how investment requirements are quantified, from total system to sector-level or supply-chain detail.",
             "type": "string",
             "enum": [
               "No information",
@@ -369,7 +369,7 @@
             ]
           },
           "infrastructureRequirements": {
-            "description": "TKTK",
+            "description": "Describes how infrastructure buildout and maintenance needs are represented across the supply chain.",
             "type": "string",
             "enum": [
               "No information",
