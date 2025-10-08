@@ -210,6 +210,191 @@
             "Absolute Emissions"
           ]
         }
+      },
+      "keyFeatures": {
+        "description": "Key features of the scenario.",
+        "type": "object",
+        "properties": {
+          "emissionsPathway": {
+            "description": "Describes the overall trend of greenhouse gas emissions over time, from continued growth to rapid decline.",
+            "type": "string",
+            "enum": [
+              "No information",
+              "Continued growth",
+              "Plateau",
+              "Growth then decline",
+              "Moderate decline",
+              "Fast decline"
+            ]
+          },
+          "energyEfficiency": {
+            "description": "Indicates how efficiently energy is used to produce economic output across the sectors covered in the pathway.",
+            "type": "string",
+            "enum": [
+              "No information",
+              "Declining",
+              "Static energy efficiency",
+              "Moderate improvements",
+              "Significant improvements"
+            ]
+          },
+          "energyDemand": {
+            "description": "Captures the change in total energy consumption, driven by factors such as socio-economic development, technology shifts and and consumer behavior.",
+            "type": "string",
+            "enum": [
+              "No information",
+              "Decrease",
+              "Static energy demand",
+              "Moderate growth",
+              "Significant growth"
+            ]
+          },
+          "electrification": {
+            "description": "Represents the extent to which energy end-uses transition from fossil fuels to electricity.",
+            "type": "string",
+            "enum": [
+              "No information",
+              "Decrease",
+              "Stable electrification",
+              "Moderate increase",
+              "Significant increase"
+            ]
+          },
+          "policyTypes": {
+            "description": "Identifies the types of policies modeled as drivers of the scenario, such as carbon pricing, subsidies, or mandated phaseouts of specific technologies.",
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Carbon price",
+                "Phaseout dates",
+                "Subsidies",
+                "Target technology shares",
+                "Other"
+              ]
+            }
+          },
+          "technologyCostTrend": {
+            "description": "Describes how technology costs evolve over time, from static cost assumptions to rapidly declining costs (e.g., via learning curves).",
+            "type": "string",
+            "enum": [
+              "No information",
+              "Static",
+              "Linear trend",
+              "S-curves",
+              "Other"
+            ]
+          },
+          "technologyDeploymentTrend": {
+            "description": "Indicates the scale and pace of new technology adoption within the scenario, where significant deployment means that several new technologies are adopted rapidly",
+            "type": "string",
+            "enum": [
+              "No information",
+              "No deployment of new technologies",
+              "Moderate deployment of new technologies",
+              "Significant deployment of new technologies"
+            ]
+          },
+          "emissionsScope": {
+            "description": "Defines which greenhouse gases are covered in the scenario’s emissions accounting.",
+            "type": "string",
+            "enum": [
+              "No information",
+              "CO2",
+              "CO2e (Kyoto)",
+              "CO2e (CO2, Methane)",
+              "Other"
+            ]
+          },
+          "policyAmbition": {
+            "description": "Represents the overall stringency and intent of modeled policies relative to climate targets, often reflecting if and how far the included policies go beyond currently legislated ones",
+            "type": "string",
+            "enum": [
+              "No information",
+              "Current/legislated policies",
+              "NDCs",
+              "NDCs and long term commitments",
+              "Normative/Optimization-based",
+              "Other"
+            ]
+          },
+          "technologyCostsDetail": {
+            "description": "Specifies the level of granularity in cost data, such as total system costs or detailed CAPEX/OPEX breakdowns.",
+            "type": "string",
+            "enum": [
+              "No information",
+              "Total costs",
+              "Capital costs/O&M/etc.",
+              "Other"
+            ]
+          },
+          "newTechnologiesIncluded": {
+            "description": "Lists emerging or breakthrough technologies that are explicitly modeled within the pathway. These are considered in technology deployment too.",
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": [
+                "No information",
+                "CCUS",
+                "DAC",
+                "Green H2/ammonia",
+                "SAF",
+                "Battery storage",
+                "EGS/AGS",
+                "Other"
+              ]
+            }
+          },
+          "supplyChain": {
+            "description": "Describes how upstream fuel or material price dynamics are represented in the scenario.",
+            "type": "string",
+            "enum": [
+              "No information",
+              "Static upstream fuel/material prices",
+              "Dynamic upstream fuel/material prices"
+            ]
+          },
+          "investmentNeeds": {
+            "description": "Summarizes how investment requirements are quantified, from total system to sector-level or supply-chain detail.",
+            "type": "string",
+            "enum": [
+              "No information",
+              "Total investment",
+              "Sector-level",
+              "Sector-level by upstream/in-stream/downstream"
+            ]
+          },
+          "infrastructureRequirements": {
+            "description": "Describes how infrastructure buildout and maintenance needs are represented across the supply chain.",
+            "type": "string",
+            "enum": [
+              "No information",
+              "By part of supply chain",
+              "By part of supply chain and maintenance/buildout"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "emissionsPathway",
+          "energyEfficiency",
+          "energyDemand",
+          "electrification",
+          "policyTypes",
+          "technologyCostTrend",
+          "technologyDeploymentTrend",
+          "emissionsScope",
+          "policyAmbition",
+          "technologyCostsDetail",
+          "newTechnologiesIncluded",
+          "supplyChain",
+          "investmentNeeds",
+          "infrastructureRequirements"
+        ]
       }
     },
     "additionalProperties": false,
@@ -224,7 +409,8 @@
       "publicationYear",
       "expertOverview",
       "dataSource",
-      "metric"
+      "metric",
+      "keyFeatures"
     ]
   },
   "minItems": 1
