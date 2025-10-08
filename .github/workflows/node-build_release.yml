@@ -81,6 +81,7 @@ jobs:
               --dry-run \
               --no-ci | \
               tee /tmp/semantic-release-raw.txt
+            echo "preview-version=0.0.0-pr.${{ github.event.pull_request.number }}.${{ github.run_number }}"
             echo "preview-version=0.0.0-pr.${{ github.event.pull_request.number }}.${{ github.run_number }}" >> $GITHUB_OUTPUT
             npm version "$PREVIEW_VERSION" --no-git-tag-version
             jq -r '.version' package.json  # sanity check
