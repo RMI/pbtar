@@ -42,7 +42,7 @@ const Badge: React.FC<BadgeProps> = ({
       case "metric":
         return "bg-rmipurple-100 text-rmipurple-800 border-rmipurple-200";
       case "keyFeature":
-        return "bg-rmigray-100 text-rmigray-800 border-rmigray-200";
+        return "bg-rmiblue-100 text-rmiblue-800 border-rmiblue-200";
       default:
         return "bg-rmigray-100 text-rmigray-800 border-rmigray-200";
     }

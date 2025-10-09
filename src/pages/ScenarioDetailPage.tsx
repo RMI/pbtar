@@ -166,7 +166,7 @@ const ScenarioDetailPage: React.FC = () => {
             </div>
 
             <div className="md:col-span-4">
-              <div className="bg-rmiblue-100 border border-rmiblue-200 rounded-lg p-4 mb-6">
+              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
                 <h3 className="text-lg font-medium text-rmigray-800 mb-3">
                   Key Features
                 </h3>
