@@ -2,27 +2,33 @@
 on:
   workflow_call:
 
-name: Semantic Release Preview
+name: Build and Release
 
 permissions:
   contents: read # for checkout
 
 jobs:
-  release-preview:
-    name: Release Preview
+  build-release:
+    name: Build and Release
     runs-on: ubuntu-latest
     permissions:
       contents: write # to be able to publish a GitHub release
       issues: write # to be able to comment on released issues
       pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for npm provenance
     steps:
       - name: Checkout
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
-          ref: ${{ github.base_ref }}
+          # checkout base ref for PRs, or actual branch for pushes
+          ref: ${{
+            (github.event_name == 'pull_request' && github.base_ref)
+            || github.ref
+            }}
 
       - name: Merge PR branch to PR target
+        if: ${{ github.event_name == 'pull_request' }}
         env:
           HEAD_BRANCH: ${{ github.head_ref }}
         run: |
@@ -36,33 +42,18 @@ jobs:
           node-version: "lts/*"
 
       - name: Install dependencies
-        run: |
-          npm clean-install
+        run: npm clean-install
 
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
-        run: |
-          npm audit signatures
+        run: npm audit signatures
 
-      - name: Compute preview version
-        id: ver
-        run: |
-          echo "preview-version=0.0.0-pr.${{ github.event.pull_request.number }}.${{ github.run_number }}" >> $GITHUB_OUTPUT
-
-      # Update package.json locally (no commit, no tag)
-      - name: Set package.json version
+      - name: Build & Release
         env:
-          PREVIEW_VERSION: ${{ steps.ver.outputs.preview-version }}
-        run: |
-          npm version "$PREVIEW_VERSION" --no-git-tag-version
-          jq -r '.version' package.json  # sanity check
-
-      - name: Build
-        run: |
-          npm run prepare:tarball
-        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VITE_BUILD_MODE: |
             ${{
               (github.event_name == 'push' && github.ref_name) ||
+              (github.event_name == 'pull_request' && github.base_ref == 'next' && github.base_ref) ||
               (github.event_name == 'pull_request' && format('{0}-{1}', 'pr', github.event.pull_request.number)) ||
               github.ref_name
             }}
@@ -83,7 +74,24 @@ jobs:
           VITE_BUILD_OS_VERSION: ${{ runner.os-version }}
           VITE_BUILD_ARCH: ${{ runner.arch }}
           VITE_GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
-
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            unset GITHUB_ACTIONS
+            npx semantic-release \
+              --dry-run \
+              --no-ci | \
+              tee /tmp/semantic-release-raw.txt
+            RAW_VERSION=$(grep -oP '(?<=Release note for version )[^:]+' /tmp/semantic-release-raw.txt)
+            echo "RAW_VERSION=$RAW_VERSION"
+            PREVIEW_VERSION="$RAW_VERSION-pr.${{ github.event.pull_request.number }}.${{ github.run_number }}"
+            echo "preview-version=$PREVIEW_VERSION"
+            echo "preview-version=$PREVIEW_VERSION" >> $GITHUB_OUTPUT
+            npm version "$PREVIEW_VERSION" --no-git-tag-version
+            jq -r '.version' package.json  # sanity check
+            npm run prepare:tarball
+          else
+            npx semantic-release
+          fi
         # Reuse the artifact for downstream deploy
       - name: Upload dist.tgz as workflow artifact
         uses: actions/upload-artifact@v4
@@ -92,17 +100,8 @@ jobs:
           path: dist.tgz
           if-no-files-found: error
 
-      - name: Dry-run Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          unset GITHUB_ACTIONS
-          npx semantic-release \
-            --dry-run \
-            --no-ci | \
-          tee /tmp/semantic-release-raw.txt
-
       - name: prepare semantic-release output for comment
+        if: ${{ github.event_name == 'pull_request' }}
         env:
           HEAD_BRANCH: ${{ github.head_ref }}
         run: |
@@ -129,11 +128,12 @@ jobs:
           fi
 
       - name: preview semantic-release output for comment
+        if: ${{ github.event_name == 'pull_request' }}
         run: |
           cat /tmp/semantic-release-clean.txt
 
       - name: Find Comment
-        # https://github.com/peter-evans/find-comment
+        if: ${{ github.event_name == 'pull_request' }}
         uses: peter-evans/find-comment@v4
         id: fc
         with:
@@ -142,7 +142,7 @@ jobs:
           body-includes: "# Expected version change and release notes:"
 
       - name: Create or update comment
-        # https://github.com/peter-evans/create-or-update-comment
+        if: ${{ github.event_name == 'pull_request' }}
         uses: peter-evans/create-or-update-comment@v5
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}

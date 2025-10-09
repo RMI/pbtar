@@ -14,7 +14,6 @@ on:
     branches:
       - main
       - production
-      - next
 
 name: Node Package Checks
 concurrency:
@@ -44,22 +43,15 @@ jobs:
 
   build-release:
     name: "Build and Release"
-    if: ${{ github.event_name == 'push' }}
-    uses: ./.github/workflows/node-semantic_release.yml
-    secrets: inherit
-
-  build-pr:
-    name: "Build"
-    if: ${{ github.event_name == 'pull_request' && github.event.action != 'closed' }}
-    uses: ./.github/workflows/node-semantic_release-pr.yml
+    if: ${{ !( github.event_name == 'pull_request' && github.event.action == 'closed' ) }}
+    uses: ./.github/workflows/node-build_release.yml
     secrets: inherit
 
   deploy:
     name: "Deploy to SWA"
-    needs: [build-release, build-pr]
+    needs: [build-release]
     # always will trigger, and the "success" conditionals are there to ensure
     # that one or the other dependencies ran.
-    if: ${{ always() && (needs.build-release.result == 'success' || needs.build-pr.result == 'success') }}
     uses: ./.github/workflows/azure-static-web-apps-deploy.yml
     secrets: inherit
 
