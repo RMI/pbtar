@@ -132,19 +132,10 @@ const ScenarioDetailPage: React.FC = () => {
             <div className="md:col-span-8">
               <section className="mb-8">
                 <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
-                  Scenario Overview
+                  Expert Overview
                 </h2>
                 <div className="prose text-rmigray-700">
-                  <Markdown>{scenario.overview}</Markdown>
-                </div>
-              </section>
-
-              <section className="mb-8">
-                <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
-                  Expert Recommendations
-                </h2>
-                <div className="prose text-rmigray-700">
-                  <Markdown>{scenario.expertRecommendation}</Markdown>
+                  <Markdown>{scenario.expertOverview}</Markdown>
                 </div>
               </section>
 
@@ -177,6 +168,62 @@ const ScenarioDetailPage: React.FC = () => {
             <div className="md:col-span-4">
               <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
                 <h3 className="text-lg font-medium text-rmigray-800 mb-3">
+                  Key Features
+                </h3>
+                {(() => {
+                  // Pretty labels for keys from schema (kept small & explicit to avoid surprises)
+                  const LABELS: Record<keyof Scenario["keyFeatures"], string> =
+                    {
+                      emissionsPathway: "Emissions pathway",
+                      energyEfficiency: "Energy efficiency",
+                      energyDemand: "Energy demand",
+                      electrification: "Electrification",
+                      policyTypes: "Policy types",
+                      technologyCostTrend: "Technology cost trend",
+                      technologyDeploymentTrend: "Technology deployment trend",
+                      emissionsScope: "Emissions scope",
+                      policyAmbition: "Policy ambition",
+                      technologyCostsDetail: "Technology costs detail",
+                      newTechnologiesIncluded: "New technologies included",
+                      supplyChain: "Supply chain",
+                      investmentNeeds: "Investment needs",
+                      infrastructureRequirements: "Infrastructure requirements",
+                    };
+
+                  return Object.entries(
+                    scenario.keyFeatures as string | string[],
+                  ).map(([rawKey, rawVal]) => {
+                    const key = rawKey as keyof Scenario["keyFeatures"];
+                    // Normalize to an array of strings for BadgeArray
+                    const values = Array.isArray(rawVal) ? rawVal : [rawVal];
+                    // Defensive guard for any accidental empties
+                    const clean = values.filter((v): v is string =>
+                      Boolean(v && String(v).trim()),
+                    );
+                    if (clean.length === 0) return null;
+
+                    return (
+                      <div
+                        key={rawKey}
+                        className="mb-3"
+                      >
+                        <p className="text-xs font-medium text-rmigray-500 mb-1">
+                          {LABELS[key] ?? rawKey}
+                        </p>
+                        <BadgeArray
+                          variant="keyFeature"
+                          visibleCount={Infinity}
+                        >
+                          {clean}
+                        </BadgeArray>
+                      </div>
+                    );
+                  });
+                })()}
+              </div>
+
+              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
                   Geographies
                 </h3>
                 <BadgeArray
@@ -186,6 +233,7 @@ const ScenarioDetailPage: React.FC = () => {
                     (geo) => geographyVariant(geographyKind(geo)) as string,
                   )}
                   toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
+                  visibleCount={Infinity}
                 >
                   {sortGeographiesForDetails(scenario.geography ?? [])}
                 </BadgeArray>
@@ -203,6 +251,7 @@ const ScenarioDetailPage: React.FC = () => {
                   <BadgeArray
                     variant="sector"
                     tooltipGetter={getSectorTooltip}
+                    visibleCount={Infinity}
                   >
                     {scenario.sectors.map((sector) => sector.name)}
                   </BadgeArray>
@@ -216,6 +265,7 @@ const ScenarioDetailPage: React.FC = () => {
                 <BadgeArray
                   variant="metric"
                   tooltipGetter={getMetricTooltip}
+                  visibleCount={Infinity}
                 >
                   {scenario.metric}
                 </BadgeArray>

@@ -16,7 +16,7 @@ export interface Scenario {
   publisher: string;
   publicationYear: string;
   overview: string;
-  expertRecommendation: string;
+  expertOverview: string;
   dataSource: {
     description: string;
     url: string;
@@ -62,8 +62,7 @@ export type Metric =
   | "Capacity"
   | "Generation"
   | "Technology Mix"
-  | "Absolute Emissions"
-  | "Carbon Price";
+  | "Absolute Emissions";
 
 export interface SearchFilters {
   pathwayType?: string | string[] | null;

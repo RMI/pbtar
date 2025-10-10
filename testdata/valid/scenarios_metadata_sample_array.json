@@ -16,8 +16,36 @@
     ],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "QWERTY Overview.",
-    "expertRecommendation": "Example Expert Recommendation.",
+    "scenarioOverview": "QWERTY Overview.",
+    "expertOverview": "Example Expert Recommendation.",
+    "keyFeatures": {
+      "emissionsPathway": "Moderate decline",
+      "energyEfficiency": "Moderate improvements",
+      "energyDemand": "Moderate growth",
+      "electrification": "Moderate increase",
+      "policyTypes": [
+        "Carbon price",
+        "Phaseout dates",
+        "Subsidies",
+        "Target technology shares",
+        "Other"
+      ],
+      "technologyCostTrend": "Other",
+      "technologyDeploymentTrend": "Moderate deployment of new technologies",
+      "emissionsScope": "CO2",
+      "policyAmbition": "Current/legislated policies",
+      "technologyCostsDetail": "Capital costs/O&M/etc.",
+      "newTechnologiesIncluded": [
+        "CCUS",
+        "DAC",
+        "Green H2/ammonia",
+        "SAF",
+        "Battery storage"
+      ],
+      "supplyChain": "Dynamic upstream fuel/material prices",
+      "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
+      "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
+    },
     "metric": ["Emissions Intensity", "Capacity"],
     "dataSource": {
       "description": "Mock Data Source.",
@@ -39,8 +67,36 @@
     "sectors": [{ "name": "Agriculture", "technologies": ["Agroforestry"] }],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "UIOP Overview.",
-    "expertRecommendation": "Example Expert Recommendation.",
+    "scenarioOverview": "UIOP Overview.",
+    "expertOverview": "Example Expert Recommendation.",
+    "keyFeatures": {
+      "emissionsPathway": "Moderate decline",
+      "energyEfficiency": "Moderate improvements",
+      "energyDemand": "Moderate growth",
+      "electrification": "Moderate increase",
+      "policyTypes": [
+        "Carbon price",
+        "Phaseout dates",
+        "Subsidies",
+        "Target technology shares",
+        "Other"
+      ],
+      "technologyCostTrend": "Other",
+      "technologyDeploymentTrend": "Moderate deployment of new technologies",
+      "emissionsScope": "CO2",
+      "policyAmbition": "Current/legislated policies",
+      "technologyCostsDetail": "Capital costs/O&M/etc.",
+      "newTechnologiesIncluded": [
+        "CCUS",
+        "DAC",
+        "Green H2/ammonia",
+        "SAF",
+        "Battery storage"
+      ],
+      "supplyChain": "Dynamic upstream fuel/material prices",
+      "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
+      "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
+    },
     "metric": ["Capacity", "Generation"],
     "dataSource": {
       "description": "Mock Data Source.",
@@ -62,9 +118,37 @@
     ],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "ASDF Overview.",
-    "expertRecommendation": "Example Expert Recommendation.",
+    "scenarioOverview": "ASDF Overview.",
+    "expertOverview": "Example Expert Recommendation.",
     "metric": ["Generation", "Technology Mix"],
+    "keyFeatures": {
+      "emissionsPathway": "Moderate decline",
+      "energyEfficiency": "Moderate improvements",
+      "energyDemand": "Moderate growth",
+      "electrification": "Moderate increase",
+      "policyTypes": [
+        "Carbon price",
+        "Phaseout dates",
+        "Subsidies",
+        "Target technology shares",
+        "Other"
+      ],
+      "technologyCostTrend": "Other",
+      "technologyDeploymentTrend": "Moderate deployment of new technologies",
+      "emissionsScope": "CO2",
+      "policyAmbition": "Current/legislated policies",
+      "technologyCostsDetail": "Capital costs/O&M/etc.",
+      "newTechnologiesIncluded": [
+        "CCUS",
+        "DAC",
+        "Green H2/ammonia",
+        "SAF",
+        "Battery storage"
+      ],
+      "supplyChain": "Dynamic upstream fuel/material prices",
+      "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
+      "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
+    },
     "dataSource": {
       "description": "Mock Data Source.",
       "url": "https://example.com/data-source",
@@ -87,9 +171,37 @@
     ],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "GHJKL Overview.",
-    "expertRecommendation": "Example Expert Recommendation.",
+    "scenarioOverview": "GHJKL Overview.",
+    "expertOverview": "Example Expert Recommendation.",
     "metric": ["Emissions Intensity", "Technology Mix"],
+    "keyFeatures": {
+      "emissionsPathway": "Moderate decline",
+      "energyEfficiency": "Moderate improvements",
+      "energyDemand": "Moderate growth",
+      "electrification": "Moderate increase",
+      "policyTypes": [
+        "Carbon price",
+        "Phaseout dates",
+        "Subsidies",
+        "Target technology shares",
+        "Other"
+      ],
+      "technologyCostTrend": "Other",
+      "technologyDeploymentTrend": "Moderate deployment of new technologies",
+      "emissionsScope": "CO2",
+      "policyAmbition": "Current/legislated policies",
+      "technologyCostsDetail": "Capital costs/O&M/etc.",
+      "newTechnologiesIncluded": [
+        "CCUS",
+        "DAC",
+        "Green H2/ammonia",
+        "SAF",
+        "Battery storage"
+      ],
+      "supplyChain": "Dynamic upstream fuel/material prices",
+      "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
+      "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
+    },
     "dataSource": {
       "description": "Mock Data Source.",
       "url": "https://example.com/data-source",

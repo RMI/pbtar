@@ -1,13 +1,13 @@
-import {
-  defineConfig,
-  Plugin,
-  version as viteVersion,
-  type ViteDevServer,
-} from "vite";
+import { defineConfig, Plugin, version as viteVersion } from "vite";
+import type { PluginContext, ViteDevServer } from "vite";
 import react from "@vitejs/plugin-react";
 import { simpleGit } from "simple-git";
 import os from "os";
-import { validateScenarios, FileEntry } from "./src/utils/validateScenarios";
+import { FileEntry } from "./src/utils/validateScenarios";
+import {
+  assembleScenarios,
+  decideIncludeInvalid,
+} from "./src/utils/loadScenarios";
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
 import { viteStaticCopy } from "vite-plugin-static-copy";
@@ -130,7 +130,7 @@ function dataValidationPlugin(dir: string = "src/data") {
     name: "data-validation",
     apply: "build",
     enforce: "pre",
-    async buildStart() {
+    async buildStart(this: PluginContext) {
       const names = (await fs.readdir(dir)).filter((f) => f.endsWith(".json"));
       const entries: FileEntry[] = [];
 
@@ -142,7 +142,39 @@ function dataValidationPlugin(dir: string = "src/data") {
         });
       }
 
-      validateScenarios(entries); // throws -> build fails
+      // Decide lenient vs strict
+      const includeInvalid = decideIncludeInvalid();
+      const inCI =
+        String(process.env.GITHUB_ACTIONS || "").toLowerCase() === "true";
+
+      // Validate + assemble; surface warnings via Vite's logger
+      assembleScenarios(entries, {
+        includeInvalid,
+        warn: (msg: string): void => {
+          console.warn(msg);
+        },
+        onInvalid: (problems): void => {
+          // Emit per-file annotations for Actions
+          if (inCI) {
+            for (const p of problems) {
+              const file = join(dir, p.name);
+              // one line per error keeps annotations readable; cap to 20
+              const errs = p.errors.slice(0, 20);
+              for (const e of errs) {
+                // GitHub Actions workflow command:
+                // ::warning file=<path>,line=<n>,col=<n>::message
+                // We don't have line/col (JSON), so omit them.
+                console.log(`::warning file=${file}::${e}`);
+              }
+              if (p.errors.length > errs.length) {
+                console.log(
+                  `::notice file=${file}::…and ${p.errors.length - errs.length} more error(s)`,
+                );
+              }
+            }
+          }
+        },
+      });
     },
   };
 }

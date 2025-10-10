@@ -89,9 +89,8 @@ new_scenario_metadata <-
         ),
       publisher = "Example Publisher",
       publicationYear = 2021,
-      metric = I(c("Capacity")),
-      overview = "Text based overview long.",
-      expertRecommendation = "Text based expert recommendation long.",
+      metric = I(c("Capacity")), # `I()` is necessary so that jsonlite parses it as a length 1 array
+      expertOverview = "Text based expert recommendation long.",
       dataSource = list(
         description = "Data source description.",
         url = "https://www.example.com/",

@@ -47,8 +47,6 @@ export const metricTooltips: Record<string, string> = {
     "The breakdown of energy sources used for electricity generation (e.g., coal, solar, wind, nuclear). Reflects the diversity and sustainability of the energy portfolio",
   "Absolute Emissions":
     "Total greenhouse gas emissions produced, regardless of output. Measured in metric tons of CO₂ equivalent",
-  "Carbon Price":
-    "The cost assigned to emitting one ton of CO₂, used to incentivize lower emissions through market mechanisms or taxes",
 };
 
 export const unknownTooltip = "No tooltip available.";
