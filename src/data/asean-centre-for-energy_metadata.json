@@ -47,7 +47,7 @@
       "energyEfficiency": "Moderate improvements",
       "energyDemand": "Significant growth",
       "electrification": "Stable electrification",
-      "policyTypes": [],
+      "policyTypes": ["Other"],
       "technologyCostTrend": "Static",
       "technologyDeploymentTrend": "No deployment of new technologies",
       "emissionsScope": "No information",
