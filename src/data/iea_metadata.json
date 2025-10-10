@@ -211,7 +211,7 @@
     "name": "NZE",
     "description": "The IEA NZE is a normative global 1.5°C aligned pathway. It assumes net zero emissions by 2050.",
     "geography": ["Global"],
-    "publicationYear": 2023,
+    "publicationYear": 2024,
     "pathwayType": "Normative",
     "carbonBudget": 433,
     "modelTempIncrease": 1.5,
