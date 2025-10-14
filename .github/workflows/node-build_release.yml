@@ -118,7 +118,7 @@ jobs:
             echo "preparing preview version"
             PREVIEW_VERSION="$VERSION-pr.${{ github.event.pull_request.number }}.${{ github.run_number }}"
             echo "preview-version=$PREVIEW_VERSION"
-            echo "preview-version=$PREVIEW_VERSION" >> $GITHUB_OUTPUT
+            echo "preview-version=$PREVIEW_VERSION" >> "$GITHUB_OUTPUT"
             echo "versioning with npm version"
             npm version "$PREVIEW_VERSION" --no-git-tag-version
             jq -r '.version' package.json  # sanity check
