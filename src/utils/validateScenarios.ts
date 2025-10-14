@@ -1,9 +1,22 @@
 import Ajv from "ajv";
+import type { ValidateFunction } from "ajv";
 import addFormats from "ajv-formats";
 import schema from "../schema/schema.json" with { type: "json" };
 import type { Scenario } from "../types";
 
 export type FileEntry = { name: string; data: Scenario[] };
+
+export type ValidationProblem = {
+  name: string;
+  errors: string[];
+  /** Provided only when the blob is at least an array (even if schema-invalid). */
+  data?: Scenario[];
+};
+
+export type ValidationOutcome = {
+  valid: Scenario[];
+  invalid: ValidationProblem[];
+};
 
 function makeValidator() {
   const ajv = new Ajv({
@@ -15,32 +28,39 @@ function makeValidator() {
   return ajv.compile(schema);
 }
 
-// Validate a list of {name, data} blobs against the schema.
-// Returns a single flattened Scenario[] or throws with a nice aggregated error.
-export function validateScenarios(entries: FileEntry[]): Scenario[] {
-  const validate = makeValidator();
-  const out: Scenario[] = [];
-  const problems: string[] = [];
+export function validateScenariosCollect(
+  entries: FileEntry[],
+  validator: ValidateFunction = makeValidator(),
+): ValidationOutcome {
+  const valid: Scenario[] = [];
+  const invalid: ValidationProblem[] = [];
 
   for (const { name, data } of entries) {
-    const ok = validate(data);
-    if (!ok) {
-      const msgs = (validate.errors ?? [])
-        .map((e) => `${e.instancePath || "/"} ${e.message}`)
-        .join("\n  ");
-      problems.push(`✖ ${name}\n  ${msgs}`);
+    const ok = validator(data);
+    if (!ok || !Array.isArray(data)) {
+      const msgs =
+        validator.errors?.map((e) =>
+          `${e.instancePath || "/"} ${e.message ?? ""}`.trim(),
+        ) ?? [];
+      invalid.push({
+        name,
+        errors: msgs.length ? msgs : ["unknown validation error"],
+        data: Array.isArray(data) ? data : undefined,
+      });
       continue;
     }
-    if (!Array.isArray(data)) {
-      problems.push(`✖ ${name}\n  expected an array of Scenario items`);
-      continue;
-    }
-    out.push(...data);
+    valid.push(...data);
   }
+  return { valid, invalid };
+}
 
-  if (problems.length) {
-    throw new Error(`Schema validation failed:\n\n${problems.join("\n\n")}\n`);
+export function validateScenarios(entries: FileEntry[]): Scenario[] {
+  const { valid, invalid } = validateScenariosCollect(entries);
+  if (invalid.length) {
+    const problems = invalid
+      .map((p) => `✖ ${p.name}\n  ${p.errors.join("\n  ")}`)
+      .join("\n\n");
+    throw new Error(`Schema validation failed:\n\n${problems}\n`);
   }
-
-  return out;
+  return valid;
 }

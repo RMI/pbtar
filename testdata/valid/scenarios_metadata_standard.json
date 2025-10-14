@@ -16,13 +16,29 @@
     ],
     "publisher": "Example Publisher",
     "publicationYear": 2025,
-    "overview": "Example Overview.",
-    "expertRecommendation": "Example Expert Recommendation.",
+    "scenarioOverview": "Example Overview.",
+    "expertOverview": "Example Expert Recommendation.",
     "dataSource": {
       "description": "Mock Data Source.",
       "url": "https://example.com/data-source",
       "downloadAvailable": true
     },
-    "metric": ["Emissions Intensity", "Carbon Price"]
+    "metric": ["Emissions Intensity"],
+    "keyFeatures": {
+      "emissionsPathway": "Moderate decline",
+      "energyEfficiency": "Moderate improvements",
+      "energyDemand": "Moderate growth",
+      "electrification": "Moderate increase",
+      "policyTypes": ["Carbon price", "Phaseout dates"],
+      "technologyCostTrend": "Other",
+      "technologyDeploymentTrend": "Moderate deployment of new technologies",
+      "emissionsScope": "CO2",
+      "policyAmbition": "Current/legislated policies",
+      "technologyCostsDetail": "Capital costs/O&M/etc.",
+      "newTechnologiesIncluded": ["DAC", "Green H2/ammonia"],
+      "supplyChain": "Dynamic upstream fuel/material prices",
+      "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
+      "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
+    }
   }
 ]

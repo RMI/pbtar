@@ -1,0 +1,266 @@
+[
+  {
+    "id": "ACE-BAS-2024",
+    "publisher": "ASEAN Centre for Energy (ACE)",
+    "name": "Baseline Scenario (BAS)",
+    "description": "Continuation of historical trends of ASEAN energy systems w/o modelling of existing policy targets.",
+    "geography": ["South East Asia"],
+    "publicationYear": 2024,
+    "pathwayType": "Predictive",
+    "modelYearStart": 2023,
+    "modelYearEnd": 2050,
+    "sectors": [
+      { "name": "Land Use", "technologies": [] },
+      { "name": "Buildings", "technologies": [] },
+      { "name": "Industry", "technologies": [] },
+      {
+        "name": "Power",
+        "technologies": [
+          "Coal",
+          "Oil",
+          "Gas",
+          "Nuclear",
+          "Hydro",
+          "Wind",
+          "Solar",
+          "Biomass",
+          "Other"
+        ]
+      },
+      { "name": "Transport", "technologies": [] }
+    ],
+    "expertOverview": "#### Pathway Description\n\nThe ASEAN Centre for Energy (ACE) acts as the ASEAN energy data center and knowledge hub to provide a knowledge repository for the ASEAN Member States (AMS). The ACE ASEAN Energy Outlook is a publication of several scenarios which highlight some potential energy pathways at ASEAN level.\n\nThe ACE Baseline scenario (BAS) is an exploratory pathway that extrapolates observed historic trends of the ASEAN Member States (AMS) energy systems into the future. It assumes a business-as-usual level of effort and specifically disregards modelling any policy interventions, even existing ones to meet national energy efficiency (EE) and renewable energy (RE) targets. Hence, it also excludes firm plant capacity additions based on power development plans (PDP). The BAS provides a detailed description of a possible future of the ASEAN energy sector, but it does not quantify the probability of this outcome relative to others. The extrapolation of past trends also implies that technology costs remain static and new technologies do not benefit from learning rates.\n\nThe geographic scope of the BAS scenario and the underlying AEO is limited to ASEAN countries. Since this implies the model does not produce any global estimates, the Baseline scenario is not connected with any implied global temperature rise.\n\nWhile the assumptions of this scenario may be considered very conservative, the pathway provides a good benchmark for comparing metrics with other pathways and to understand how much faster the low carbon transition needs to happen.\n\n**Core drivers:**\n\n*Socio-economic trends:* Energy demand is mainly driven by population growth and economic growth, reflecting the reliance on past trends in the energy sector rather than any new interventions.\n\n*Policies:* Policies are not a driver in this pathway, as even legislated targets are not explicitly modelled.\n\n*Energy Efficiency, Electrification, Technology Costs:* Energy efficiency is assumed to remain constant. This is the case across sectors, where efficiency measures across sectors are held fixed at the latest level of input data. Changes at the unit level are also not expected for electrification and technology costs.\n\n*Energy demand growth:* Moderate energy demand growth is fully driven by GDP growth.\n\n*Emissions:* In sum, this leads to more than a doubling of annual emissions in the energy sector in ASEAN until 2050, if no further actions are taken.\n\n#### Application to transition assessment\n\nThe Baseline Scenario developed by the ASEAN Centre for Energy (ACE) serves as an explorative reference, projecting future energy trends based on the continuation of historical patterns. While useful for contextual analysis, this scenario presents several limitations when applied to policy evaluation and corporate risk assessment.\n\nThe Baseline scenario can be used as a conservative case pathway that could be useful for risk analysis under the assumption that existing policies are not properly enforced and the energy sector simply follows past trends. This corresponds to slower change in the market and as such it could be a useful scenario to consider in analysing transition risk.\n\nHowever, the scenario’s conservative nature makes it unsuitable for target setting. It does not reflect the scale of transformation required to meet ASEAN’s climate goals or global net-zero pathways. Therefore, it should not be used as a benchmark for strategic planning or investment decisions aimed at long-term decarbonization.\n\nThe Baseline Scenario provides a regional ASEAN pathway, which limits its applicability for assessing companies with operations concentrated in specific countries. It enables comparisons to the regional average. For analyses that focus on companies with operations in one country only, this may not always be an appropriate reference point, as it may obscure country-specific dynamics, regulatory environments, and market conditions. For regionally operating companies, it can be more appropriate. Where no country specific alternative is available, this regional pathway may still be more appropriate than global ones, although such regional mismatches should always be clarified in any analysis.\n\nFurthermore, the BAS cannot be directly linked to an Implied Temperature Rise (ITR) metric, as it does not model the global energy system and cannot make a statement about how global emissions will evolve.\n\nThe BAS provides benchmark data on 5-year intervals and using a moderately detailed breakdown of specific generation technologies, such as coal, wind, solar, biomass, and geothermal. This level of detail makes it well-suited to assessing specific decarbonization levers and project pipelines within company plans, where a comparison to the regional trend is of interest.",
+    "dataSource": {
+      "description": "ACE (2024). 8th ASEAN Energy Outlook (AEO8). ASEAN Centre for Energy (ACE), Jakarta.",
+      "url": "https://aseanenergy.org/",
+      "downloadAvailable": true
+    },
+    "metric": [
+      "Emissions Intensity",
+      "Capacity",
+      "Generation",
+      "Technology Mix",
+      "Absolute Emissions"
+    ],
+    "keyFeatures": {
+      "emissionsPathway": "Continued growth",
+      "energyEfficiency": "Moderate improvements",
+      "energyDemand": "Significant growth",
+      "electrification": "Stable electrification",
+      "policyTypes": ["Other"],
+      "technologyCostTrend": "Static",
+      "technologyDeploymentTrend": "No deployment of new technologies",
+      "emissionsScope": "No information",
+      "policyAmbition": "Current/legislated policies",
+      "technologyCostsDetail": "Capital costs/O&M/etc.",
+      "newTechnologiesIncluded": ["No information"],
+      "supplyChain": "No information",
+      "investmentNeeds": "Sector-level",
+      "infrastructureRequirements": "No information"
+    }
+  },
+  {
+    "id": "ACE-ATS-2024",
+    "publisher": "ASEAN Centre for Energy (ACE)",
+    "name": "ASEAN Member State Targets Scenario (ATS)",
+    "description": "Exploratory pathway that models official national policies and NDCs, including EE and RE targets.",
+    "geography": ["South East Asia"],
+    "publicationYear": 2024,
+    "pathwayType": "Exploratory",
+    "modelYearStart": 2023,
+    "modelYearEnd": 2050,
+    "sectors": [
+      { "name": "Land Use", "technologies": [] },
+      { "name": "Buildings", "technologies": [] },
+      { "name": "Industry", "technologies": [] },
+      {
+        "name": "Power",
+        "technologies": [
+          "Coal",
+          "Oil",
+          "Gas",
+          "Nuclear",
+          "Hydro",
+          "Wind",
+          "Solar",
+          "Biomass",
+          "Other"
+        ]
+      },
+      { "name": "Transport", "technologies": [] }
+    ],
+    "expertOverview": "#### Pathway Description\n\nThe ASEAN Centre for Energy (ACE) acts as the ASEAN energy data center and knowledge hub to provide a knowledge repository for the ASEAN Member States (AMS). The ACE ASEAN Energy Outlook is a publication of several scenarios which highlight some potential energy pathways at ASEAN level.\n\nThe ACE ASEAN Member States Targets Scenario (ATS) is an exploratory pathway which assumes that every ASEAN member state fully achieves its unconditional transition targets on time. This pathway models the impact of the existing national policies (NDCs) and measures (Power Development Plans). The ATS models more ambitious energy efficiency targets, as well as a faster deployment of low-carbon energy technologies, especially from renewable energy. Technologies are expected to see some efficiency improvements and power capacity is expected to grow in line with PDPs until the final year specified in each national PDP.\n\nThe geographic scope of the ATS pathway and the underlying AEO is limited to ASEAN countries. Since this implies the model does not produce any global estimates, the ATS pathway is not connected with any implied global temperature rise.\n\nThe assumptions of this pathway may be considered a comparatively likely outcome, as they are based on unconditional policy targets that are already in place. As such, this pathway can be used as a benchmark for a rather probable development of the energy sector. \n\n**Core drivers:**  \n\n*Policies:* The implementation of unconditional national policies are the primary driver of transition outcomes in the ATS pathway. Specifically, energy efficiency targets and renewable energy targets (share and capacity deployment) are expected to be met, including detailed plans from national power development plans.\n\n*Technology costs:* The ATS does not assume build out of new technologies necessarily follows a least cost approach. It assumes that power capacity deployment follows the plans detailed in NDCs and PDPs until the final year laid out in these policies and simulates further additions based on the technology mix at the end year of the policy plans.\n\n*Demand shifts, investment needs, and technology deployment:* These factors are described in detail in the ATS but are primarily or entirely driven by changes in national policies.\n\n*Emissions:* The ATS still corresponds to an average annual emissions growth of 0.8% across the energy sector, although there the unconditional policies lead to an average annual decrease in emissions from power generation of -2.4%, which translates to a decrease of around 74% of emissions in the power sector relative to the Baseline Scenario. However, the unconditional policies modelled by the ATS are not sufficient to lower absolute energy sector emissions below current levels.\n\n#### Application to transition assessment\n\nThe AMS Target Scenario (ATS) is an explorative scenario developed to reflect the stated energy and climate commitments of ASEAN member states. It is designed to capture the ambition of unconditional targets embedded in national policies and pledges, offering a forward-looking view of the region’s energy transition trajectory.\n\nThe ATS provides a regional ASEAN pathway, which limits its applicability for assessing companies with operations concentrated in specific countries. It enables comparisons to the regional average. For analyses that focus on companies with operations in one country only, this may not always be an appropriate reference point, as it may obscure country-specific dynamics, regulatory environments, and market conditions. For regionally operating companies, it can be more appropriate. Where no country specific alternative is available, this regional pathway may still be more appropriate than global ones, although such regional mismatches should always be clarified in any analysis.\n\nFurthermore, the ATS cannot be directly linked to an Implied Temperature Rise (ITR) metric, as it does not model the global energy system and cannot make a statement about how global emissions will evolve.\n\nThe ATS is particularly well-suited for evaluating the alignment of corporate targets, strategies, and investment pipelines with the stated ambitions of the jurisdictions in which they operate. Its strong policy orientation allows for a meaningful comparison between corporate actions and national development priorities. A misalignment with the ATS may signal potential exposure to future regulatory risks, such as non-compliance with evolving energy policies or reduced competitiveness in markets where low-carbon technologies are being prioritized. Alignment, in the other hand, may indicate that a company is strategically positioned to benefit from market shifts. However, it is important to note that the ATS includes aspirational targets and unimplemented policies. Therefore, misalignment does not necessarily imply exposure to current regulatory risk, but rather a potential gap in future readiness. A market comparison may be beneficial in that case.\n\nATS provides national targets. These targets are presented with fine granularity, enabling detailed national policy alignment assessments. The pathway also includes regional-level projections for generation and capacity on 5-year intervals and using a moderately detailed breakdown of by energy sources (such as coal, wind, solar, biomass, and geothermal). These are relevant and useful for analyzing specific decarbonization levers and project investment pipelines within company plans. While the regional granularity is still not optimal for analyzing companies that operate mainly in a single jurisdiction, they are still an improvement over global pathways for this kind of analysis.",
+    "dataSource": {
+      "description": "ACE (2024). 8th ASEAN Energy Outlook (AEO8). ASEAN Centre for Energy (ACE), Jakarta.",
+      "url": "https://aseanenergy.org/",
+      "downloadAvailable": true
+    },
+    "metric": [
+      "Emissions Intensity",
+      "Capacity",
+      "Generation",
+      "Technology Mix",
+      "Absolute Emissions"
+    ],
+    "keyFeatures": {
+      "emissionsPathway": "Continued growth",
+      "energyEfficiency": "Significant improvements",
+      "energyDemand": "Significant growth",
+      "electrification": "Moderate increase",
+      "policyTypes": [
+        "Carbon price",
+        "Phaseout dates",
+        "Subsidies",
+        "Target technology shares",
+        "Other"
+      ],
+      "technologyCostTrend": "Static",
+      "technologyDeploymentTrend": "Moderate deployment of new technologies",
+      "emissionsScope": "No information",
+      "policyAmbition": "NDCs",
+      "technologyCostsDetail": "Capital costs/O&M/etc.",
+      "newTechnologiesIncluded": ["Green H2/ammonia", "SAF"],
+      "supplyChain": "No information",
+      "investmentNeeds": "Sector-level",
+      "infrastructureRequirements": "No information"
+    }
+  },
+  {
+    "id": "ACE-RAS-2024",
+    "publisher": "ASEAN Centre for Energy (ACE)",
+    "name": "Regional Aspiration Scenario (RAS)",
+    "description": "Accelerated EE, RE, and EI targets. Reaches near-term APAEC targets and conditional NDC targets.",
+    "geography": ["South East Asia"],
+    "publicationYear": 2024,
+    "pathwayType": "Exploratory",
+    "modelYearStart": 2023,
+    "modelYearEnd": 2050,
+    "sectors": [
+      { "name": "Land Use", "technologies": [] },
+      { "name": "Buildings", "technologies": [] },
+      { "name": "Industry", "technologies": [] },
+      {
+        "name": "Power",
+        "technologies": [
+          "Coal",
+          "Oil",
+          "Gas",
+          "Nuclear",
+          "Hydro",
+          "Wind",
+          "Solar",
+          "Biomass",
+          "Other"
+        ]
+      },
+      { "name": "Transport", "technologies": [] }
+    ],
+    "expertOverview": "#### Pathway Description\n\nThe ASEAN Centre for Energy (ACE) acts as the ASEAN energy data center and knowledge hub to provide a knowledge repository for the ASEAN Member States (AMS). The ACE ASEAN Energy Outlook is a publication of several scenarios which highlight some potential energy pathways at ASEAN level.\n\nThe ACE Regional Aspiration Scenario (RAS) is an exploratory pathway which assumes that every ASEAN member state fully achieves both its unconditional and conditional transition targets on time. This pathway models the impact of the existing national policies (NDCs) and measures (Power Development Plans), assuming all aspirational targets are achieved, which means that it includes all key assumptions of the ACE ATS pathway and additionally covers conditional NDC targets, short-term regional targets of the APAEC Phase II, and national targets from the enhanced scenario of the AMS energy roadmap. The RAS also differs from the ACE BAS and ACE ATS pathways in that it uses a least-cost optimization approach, which allows for another composition of the energy supply mix. This shows both in faster build-out of renewables capacities and in lower utilisation rates to fossil fuel based power plants.\n\nThe geographic scope of the RAS pathway and the underlying AEO is limited to ASEAN countries. Since this implies the model does not produce any global estimates, the RAS pathway is not connected with any implied global temperature rise.\n\nThe assumptions of this pathway may be considered an optimistic outlook on ASEAN countries’ policy plans and capacities to fully implement them. As such, this pathway can be used as a benchmark for an optimistic – but not unrealistic – development of the energy sector. \n\n**Core Drivers:**\n\n*Policies:* The RAS pathway adds conditional NDC targets, national targets from the enhanced scenario of the AMS energy roadmap, and APAEC 2025 regional targets on top of the assumptions from the ACE ATS, which primarily increases the target share of renewable energy in TPES and power capacity, and requires a steeper reduction of energy intensity in transport and industry. These additional policies are the main driver of transition in the RAS.\n\n*Technology Costs and Technology Deployment:* A secondary driver of transition outcomes in the RAS is the least-cost approach to power capacity additions and generation. While this does not affect the underlying technology costs per unit output, it allows for a cost-driven approach to scaling up renewable energy. This impacts the technology mix in the power sector and also shows in lower utilization rates of fossil fuel fired power plants.\n\n*Demand shifts, investment needs, and infrastructure requirements:* These factors are described in detail in the RAS but are primarily or entirely driven by changes in national policies. One important difference that results from integration of the AIMS II targets is increased regional interconnection of power grids and enhancing multilateral electricity trading.\n\n*Emissions:* Emissions remain stable in the RAS until 2030, after which they start to decrease very slightly at a rate of approximately 0.1% per year across the energy sector.\nEmissions from power generation decrease much more rapidly to approximately a third of 2022 emissions by 2050. Emissions in the industry and residential sectors also drop significantly compared to the ATS.\n\n#### Application to transition assessment\n\nThe Regional Ambition Scenario (RAS) is an explorative pathway modeling the impact of national transition policies – including unconditional and conditional goals of Nationally Determined Contributions (NDCs), national Power Development Plans (PDPs) – on climate targets. In addition to these national-level commitments, the RAS integrates a second layer of regional ambition by incorporating the 2025 ASEAN Plan of Action for Energy Cooperation (APAEC) targets, specifically in the areas of renewable energy generation and energy efficiency.\n\nThe RAS is a regional ASEAN pathway, which limits its applicability for assessing companies with operations concentrated in specific countries. It enables comparisons to the regional average. For analyses that focus on companies with operations in one country only, this may not always be an appropriate reference point, as it may obscure country-specific dynamics, regulatory environments, and market conditions. For regionally operating companies, it can be more appropriate. Where no country specific alternative is available, this regional pathway may still be more appropriate than global ones, although such regional mismatches should always be clarified in any analysis.\n\nFurthermore, the RAS cannot be directly linked to an Implied Temperature Rise (ITR) metric, as it does not model the global energy system and cannot make a statement about how global emissions will evolve.\n\nThe RAS is designed to support alignment assessments with potential future policies, making it a valuable tool for evaluating corporate strategies and investment pipelines against both national and regional ambitions. For companies that aim to align their strategies with national policy targets, the RAS is a candidate for mildly ambitious target setting. It is important to note that – as the RAS includes aspirational targets and yet-to-be-implemented policies – misalignment does not necessarily imply exposure to current regulatory risk, but rather a potential gap in future readiness.\n\nHowever, the scenario provides power sector projections only at the regional level, which limits its suitability for assessing companies with operations concentrated in a single country, where national policy dynamics may differ significantly from the regional average. This is particularly relevant, when comparisons are to be made against model projections rather than policy targets.\n\nAnother key difference between RAS and ATS is that the RAS applies a least-cost optimization framework for its projections, which leads to significantly different outcomes of capacity buildouts and the generation technology mix. This modeling approach prioritizes cost-efficiency in technology deployment and system expansion, resulting in higher investment needs in the RAS. Changes of such scale highlight the pathway’s relevance for market feasibility assessments, particularly within the Company Transition Assessment framework, where cost-effectiveness and investment scalability are key considerations.",
+    "dataSource": {
+      "description": "ACE (2024). 8th ASEAN Energy Outlook (AEO8). ASEAN Centre for Energy (ACE), Jakarta.",
+      "url": "https://aseanenergy.org/",
+      "downloadAvailable": true
+    },
+    "metric": [
+      "Emissions Intensity",
+      "Capacity",
+      "Generation",
+      "Technology Mix",
+      "Absolute Emissions"
+    ],
+    "keyFeatures": {
+      "emissionsPathway": "Plateau",
+      "energyEfficiency": "Significant improvements",
+      "energyDemand": "Moderate growth",
+      "electrification": "Moderate increase",
+      "policyTypes": [
+        "Carbon price",
+        "Phaseout dates",
+        "Subsidies",
+        "Target technology shares",
+        "Other"
+      ],
+      "technologyCostTrend": "Static",
+      "technologyDeploymentTrend": "Moderate deployment of new technologies",
+      "emissionsScope": "No information",
+      "policyAmbition": "NDCs and long term commitments",
+      "technologyCostsDetail": "Capital costs/O&M/etc.",
+      "newTechnologiesIncluded": ["Battery storage", "Green H2/ammonia", "SAF"],
+      "supplyChain": "No information",
+      "investmentNeeds": "Sector-level",
+      "infrastructureRequirements": "No information"
+    }
+  },
+  {
+    "id": "ACE-CNS-2024",
+    "publisher": "ASEAN Centre for Energy (ACE)",
+    "name": "Carbon Neutrality Scenario (CNS)",
+    "description": "Pathway for ASEAN to achieve net-zero CO2 emissions by 2050. Includes rollout of CCUS technologies.",
+    "geography": ["South East Asia"],
+    "publicationYear": 2024,
+    "pathwayType": "Normative",
+    "modelYearStart": 2023,
+    "modelYearEnd": 2050,
+    "modelYearNetzero": 2050,
+    "sectors": [
+      { "name": "Land Use", "technologies": [] },
+      { "name": "Buildings", "technologies": [] },
+      { "name": "Industry", "technologies": [] },
+      {
+        "name": "Power",
+        "technologies": [
+          "Coal",
+          "Oil",
+          "Gas",
+          "Nuclear",
+          "Hydro",
+          "Wind",
+          "Solar",
+          "Biomass",
+          "Other"
+        ]
+      },
+      { "name": "Transport", "technologies": [] }
+    ],
+    "expertOverview": "#### Pathway Description\n\nThe ASEAN Centre for Energy (ACE) acts as the ASEAN energy data center and knowledge hub to provide a knowledge repository for the ASEAN Member States (AMS). The ACE ASEAN Energy Outlook is a publication of several scenarios which highlight some potential energy pathways at ASEAN level.\n\nThe Carbon Neutral Scenario is a normative pathway in which the ASEAN region achieves net-zero carbon emissions by 2050, both in energy and non-energy sectors. This pathway builds on the RAS by incorporating emissions constraints, adapting low-emission technologies and fuels on the demand side, gradual retirement of some coal and gas technologies, and exploring options for low-emission power generation. It assumes that countries improve their energy efficiency according to their full potential, develop and deploy renewable energy sources according to their individual potential, allow capacity additions beyond the PDP plans, prioritising dispatch of renewable energy, and that they start using emerging technologies, such as carbon capture and storage (CCS) in the electricity sector and relevant production processes on the supply side, facilitating the production of low-emission fuels. Like the RAS, the CNS uses a least-cost optimization approach, which allows for lower emission composition of the energy supply mix compared to BAS and ATS.\n\nThe geographic scope of the CNS pathway and the underlying AEO is limited to ASEAN countries. Since this implies the model does not produce any global estimates, the CNS pathway is not connected with any implied global temperature rise.\n\nThe assumptions of this pathway may be considered a theoretical best case outlook on how the energy sector could decarbonize in ASEAN countries. It is not the most probably outcome, as there are not currently the policies in place or even drafted that would support this development. Instead, this pathway can be used as a benchmark for a highly ambitious option to decarbonize the region and it can therefore be used to guide future targets for countries and companies in the region.\n\n**Core drivers:**\n\n*Emissions:* The CNS implements emissions constraints and combines this with a least-cost optimization approach. Emissions in the energy system start decreasing in the short term and they halve by 2050 relative to 2022 in the CNS. In the power generation sector, they drop rapidly, which shows the impact of emissions constraints paired with a least cost approach. Industry, transport, and buildings sectors all see significant emissions reductions, too.\n\n*Technology Deployment & Technology costs:* Emissions constraints and the least-cost approach lead to a more rapid build-out of low-carbon power capacity than in other ACE pathways, including a more rapid deployment of technologies that are less mature or not yet established in the region (such as nuclear geothermal, and tidal & wave power).\n\n*Policies:* Policies in the CNS are aligned with those in the ACE RAS pathway and, as such, are not the main driver above and beyond the results of the RAS. This means that NDCs are fully achieved, as are the regional targets of the APAEC.\n\n*Investment needs:* CNS forecasts massive investment in the power sector: 55 billion USD a year between 2023 and 2030, more than in any year of the ACE ATS pathway, and up to 371 bn USD between 2040-2050, more than twice the investment seen in the ACE RAS.\n\n#### Applications to Transition Assessment\n\nThe Carbon Neutral Scenario is a normative scenario, designed to explore the implications of achieving long-term carbon neutrality. However, since it has a limited regional scope, it is not directly associated with an Implied Temperature Rise (ITR) metric and cannot be used for temperature alignment applications.\n\nSince the CNS exceeds the ambition of current national pledges, misalignment with it does not necessarily imply misalignment with existing ASEAN policy targets. In fact, such misalignment may still reflect consistency with current national commitments, given CNS’s aspirational nature. As such, it can be used for ambitious target setting use cases that still aim for alignment with the most ambitious regional and national policy targets, such as NDCs, PDPs and the APAEC targets.\n\nThe CNS pathway includes regional-level projections for power generation and capacity on 5-year intervals and using a moderately detailed breakdown by energy sources (such as coal, wind, solar, biomass, and geothermal). These are relevant and useful for analyzing specific decarbonization levers and project investment pipelines within company plans. While the regional granularity is still not optimal for analyzing companies that operate mainly in a single jurisdiction, they are still an improvement over global pathways for this kind of analysis.\n\nThe CNS applies a least-cost optimization framework for its projections, which leads to significantly different outcomes of capacity buildouts and the generation technology mix then in simulated pathways, such as the ACE BAS and ATS. This modeling approach prioritizes cost-efficiency in technology deployment and system expansion, resulting in higher investment needs in the CNS. Changes of such scale highlight the pathway’s relevance for market feasibility assessments, particularly within the Company Transition Assessment framework, where cost-effectiveness and investment scalability are key considerations.",
+    "dataSource": {
+      "description": "ACE (2024). 8th ASEAN Energy Outlook (AEO8). ASEAN Centre for Energy (ACE), Jakarta.",
+      "url": "https://aseanenergy.org/",
+      "downloadAvailable": true
+    },
+    "metric": [
+      "Emissions Intensity",
+      "Capacity",
+      "Generation",
+      "Technology Mix",
+      "Absolute Emissions"
+    ],
+    "keyFeatures": {
+      "emissionsPathway": "Moderate decline",
+      "energyEfficiency": "Significant improvements",
+      "energyDemand": "Moderate growth",
+      "electrification": "Significant increase",
+      "policyTypes": [
+        "Carbon price",
+        "Phaseout dates",
+        "Subsidies",
+        "Target technology shares",
+        "Other"
+      ],
+      "technologyCostTrend": "Static",
+      "technologyDeploymentTrend": "Significant deployment of new technologies",
+      "emissionsScope": "No information",
+      "policyAmbition": "Normative/Optimization-based",
+      "technologyCostsDetail": "Capital costs/O&M/etc.",
+      "newTechnologiesIncluded": [
+        "Battery storage",
+        "CCUS",
+        "Green H2/ammonia",
+        "SAF"
+      ],
+      "supplyChain": "No information",
+      "investmentNeeds": "Sector-level",
+      "infrastructureRequirements": "No information"
+    }
+  }
+]
