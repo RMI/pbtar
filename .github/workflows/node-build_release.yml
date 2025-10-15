@@ -1,6 +1,16 @@
 ---
 on:
   workflow_call:
+    outputs:
+      has_artifact:
+        description: "Whether dist.tgz was produced in this run"
+        value: ${{ jobs.build-release.outputs.has_artifact }}
+      version:
+        description: "Version string derived in the build"
+        value: ${{ jobs.build-release.outputs.version }}
+      preview-version:
+        description: "Version string derived in the build"
+        value: ${{ jobs.build-release.outputs.preview-version }}
 
 name: Build and Release
 
@@ -10,6 +20,10 @@ permissions:
 jobs:
   build-release:
     name: Build and Release
+    outputs:
+      has_artifact: ${{ steps.check_artifact.outputs.has_artifact }}
+      version: ${{ steps.build-release.outputs.version }}
+      preview-version: ${{ steps.build-release.outputs.preview-version }}
     runs-on: ubuntu-latest
     permissions:
       contents: write # to be able to publish a GitHub release
@@ -48,12 +62,13 @@ jobs:
         run: npm audit signatures
 
       - name: Build & Release
+        id: build-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VITE_BUILD_MODE: |
             ${{
               (github.event_name == 'push' && github.ref_name) ||
-              (github.event_name == 'pull_request' && github.base_ref == 'next' && github.base_ref) ||
+              (github.event_name == 'pull_request' && github.base_ref == 'production' && github.head_ref) ||
               (github.event_name == 'pull_request' && format('{0}-{1}', 'pr', github.event.pull_request.number)) ||
               github.ref_name
             }}
@@ -76,24 +91,57 @@ jobs:
           VITE_GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
         run: |
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "unsetting GITHUB_ACTIONS"
             unset GITHUB_ACTIONS
+            echo "dry-running semantic-release"
             npx semantic-release \
               --dry-run \
               --no-ci | \
               tee /tmp/semantic-release-raw.txt
-            RAW_VERSION=$(grep -oP '(?<=Release note for version )[^:]+' /tmp/semantic-release-raw.txt)
-            echo "RAW_VERSION=$RAW_VERSION"
-            PREVIEW_VERSION="$RAW_VERSION-pr.${{ github.event.pull_request.number }}.${{ github.run_number }}"
+            echo "Inspecting output for version"
+            LOG="/tmp/semantic-release-raw.txt"
+            VERSION=$(grep -oE 'Release note for version [^:]+' "$LOG" 2>/dev/null \
+              | sed -E 's/.*Release note for version ([^:]+).*/\1/' \
+              || true)
+            if [[ -z "$VERSION" ]]; then
+              echo "No release note, looking for current version"
+              VERSION=$(grep -oE 'associated with version  [^:]+ on branch' "$LOG" 2>/dev/null \
+                | sed -E 's/.*associated with version  ([^:]+) on branch.*/\1/' \
+                || true)
+            fi
+            if [[ -z "$VERSION" ]]; then
+              echo "No current version found, using default"
+              VERSION=0.0.0-local
+            fi
+            echo "VERSION=$VERSION"
+            echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+            echo "preparing preview version"
+            PREVIEW_VERSION="$VERSION-pr.${{ github.event.pull_request.number }}.${{ github.run_number }}"
             echo "preview-version=$PREVIEW_VERSION"
-            echo "preview-version=$PREVIEW_VERSION" >> $GITHUB_OUTPUT
+            echo "preview-version=$PREVIEW_VERSION" >> "$GITHUB_OUTPUT"
+            echo "versioning with npm version"
             npm version "$PREVIEW_VERSION" --no-git-tag-version
             jq -r '.version' package.json  # sanity check
+            echo "preparing tarball"
             npm run prepare:tarball
           else
+            echo "running semantic release"
             npx semantic-release
           fi
+
+      - name: Check for dist.tgz
+        id: check_artifact
+        shell: bash
+        run: |
+          if [[ -f dist.tgz ]]; then
+            echo "has_artifact=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_artifact=false" >> "$GITHUB_OUTPUT"
+          fi
+
         # Reuse the artifact for downstream deploy
       - name: Upload dist.tgz as workflow artifact
+        if: ${{ steps.check_artifact.outputs.has_artifact == 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: dist-tgz

@@ -22,9 +22,20 @@ jobs:
 
       - name: Set VITE_INCLUDE_INVALID
         id: set-include
-        if: ${{ github.event_name == 'pull_request' && github.base_ref != 'production' }}
+        # Set VITE_INCLUDE_INVALID=true for:
+        # - All PRs EXCEPT those targeting production or next
+        # - Pushes to main
+        # - Pushes to any non-production, non-next branch
+        if: |
+          (github.event_name == 'pull_request'
+            && github.base_ref != 'production'
+            && github.base_ref != 'next')
+          || (github.event_name != 'pull_request'
+            && startsWith(github.ref, 'refs/heads/')
+            && github.ref != 'refs/heads/production'
+            && github.ref != 'refs/heads/next')
         run: |
-          echo "vite-include-invalid=true" >> $GITHUB_OUTPUT
+          echo "vite-include-invalid=true" >> "$GITHUB_OUTPUT"
 
       - name: Run ajv JSON validator
         env:

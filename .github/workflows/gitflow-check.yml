@@ -11,9 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check source branch name
+        shell: bash
+        env:
+          BRANCH: ${{ github.head_ref }}
         run: |
-          echo "Source branch: ${{ github.head_ref }}"
-          if [[ ! "${{ github.head_ref }}" == "next" ]]; then
-            echo "::error::Only `next` branch can be merged into production"
+          echo "Source branch: $BRANCH"
+
+          if [[ "$BRANCH" == "next" || "$BRANCH" == "hotfix/"* ]]; then
+            echo "Source branch allowed."
+            exit 0
+          else
+            echo "::error::Only 'next' or 'hotfix/*' branches can be merged into production (got '$BRANCH')"
             exit 1
           fi
