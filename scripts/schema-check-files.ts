@@ -6,12 +6,27 @@ import { validateScenariosCollect } from "../src/utils/validateScenarios.ts";
 import { decideIncludeInvalid } from "../src/utils/loadScenarios.ts";
 
 async function run(dir: string) {
-  const names = (await fs.readdir(dir)).filter((f) => f.endsWith(".json"));
+  async function getJsonFilesRecursive(base: string): Promise<string[]> {
+    const dirents = await fs.readdir(base, { withFileTypes: true });
+    const files: string[] = [];
+    for (const d of dirents) {
+      const full = join(base, d.name);
+      if (d.isDirectory()) {
+        files.push(...(await getJsonFilesRecursive(full)));
+      } else if (d.isFile() && d.name.endsWith(".json")) {
+        files.push(full);
+      }
+    }
+    return files;
+  }
+
+  const jsonFiles = await getJsonFilesRecursive(dir);
+  console.log(`Checking ${jsonFiles.length} JSON file(s) under ${dir}`);
 
   const entries: FileEntry[] = [];
-  for (const name of names) {
-    const raw = await fs.readFile(join(dir, name), "utf8");
-    entries.push({ name, data: JSON.parse(raw) });
+  for (const file of jsonFiles) {
+    const raw = await fs.readFile(file, "utf8");
+    entries.push({ name: file, data: JSON.parse(raw) });
   }
 
   const { valid, invalid } = validateScenariosCollect(entries);
