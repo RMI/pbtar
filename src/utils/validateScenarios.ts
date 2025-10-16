@@ -1,7 +1,7 @@
 import Ajv from "ajv";
 import type { ValidateFunction } from "ajv";
 import addFormats from "ajv-formats";
-import schema from "../schema/schema.json" with { type: "json" };
+import pathwayMetadata from "../schema/pathwayMetadata.json" with { type: "json" };
 import type { Scenario } from "../types";
 
 export type FileEntry = { name: string; data: Scenario[] };
@@ -25,7 +25,7 @@ function makeValidator() {
     multipleOfPrecision: 12,
   });
   addFormats(ajv);
-  return ajv.compile(schema);
+  return ajv.compile(pathwayMetadata);
 }
 
 export function validateScenariosCollect(
