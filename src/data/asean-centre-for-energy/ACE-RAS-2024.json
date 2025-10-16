@@ -1,4 +1,5 @@
 {
+  "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "ACE-RAS-2024",
   "publisher": "ASEAN Centre for Energy (ACE)",
   "name": "Regional Aspiration Scenario (RAS)",

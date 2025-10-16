@@ -1,4 +1,5 @@
 {
+  "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "IEA-APS-2024",
   "publisher": "IEA",
   "name": "APS",

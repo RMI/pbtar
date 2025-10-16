@@ -1,4 +1,5 @@
 {
+  "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "PMoE-CES2-2023",
   "publisher": "Philippines - Ministry of Energy",
   "name": "CES2",
