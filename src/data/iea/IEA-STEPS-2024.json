@@ -1,105 +1,103 @@
-[
-  {
-    "id": "IEA-STEPS-2024",
-    "publisher": "IEA",
-    "name": "STEPS",
-    "description": "Shows current trends of the energy economy. Uses active policies from sectors, countries, regions.",
-    "geography": [
-      "Global",
-      "East Asia and Pacific",
-      "Europe and Central Asia",
-      "Latin America and Caribbean",
-      "Middle East and North Africa",
-      "North America",
-      "South East Asia",
-      "Sub-Saharan Africa",
-      "US",
-      "BR",
-      "RU",
-      "CN",
-      "IN",
-      "JP"
-    ],
-    "publicationYear": 2024,
-    "pathwayType": "Exploratory",
-    "carbonBudget": 868,
-    "modelTempIncrease": 2.4,
-    "modelYearStart": 2023,
-    "modelYearEnd": 2100,
-    "ssp": "SSP2",
-    "sectors": [
-      { "name": "Buildings", "technologies": [] },
-      { "name": "Industry", "technologies": [] },
-      { "name": "Steel", "technologies": [] },
-      { "name": "Cement", "technologies": [] },
-      { "name": "Chemicals", "technologies": [] },
-      { "name": "Coal Mining", "technologies": [] },
-      { "name": "Oil (Upstream)", "technologies": [] },
-      { "name": "Gas (Upstream)", "technologies": [] },
-      {
-        "name": "Power",
-        "technologies": [
-          "Coal",
-          "Oil",
-          "Gas",
-          "Nuclear",
-          "Hydro",
-          "Wind",
-          "Solar",
-          "Biomass",
-          "Renewables",
-          "Other"
-        ]
-      },
-      { "name": "Transport", "technologies": [] },
-      { "name": "Road transport", "technologies": [] },
-      { "name": "Automotive", "technologies": [] },
-      { "name": "Aviation", "technologies": [] },
-      { "name": "Rail", "technologies": [] },
-      { "name": "Shipping", "technologies": [] },
-      { "name": "Other", "technologies": [] }
-    ],
-    "scenarioOverview": "The Stated Policies Scenario (STEPS) provides a sense of the energy sector’s direction of travel today, based on the latest market data, technology costs and in-depth analysis of the prevailing policy settings in countries around the world. STEPS is complemented by APS, a scenario which assumes that countries’ aspirational targets will be met in full. The difference between STEPS and APS highlights a commitment gap.",
-    "expertOverview": "The STEPS scenario is a scenario highlighting legislated in-place country action. This scenario from IEA has a high-standard baseline and documents short-term action very well. It can be a good fit for short term risk analyses. However, as it does not consider long term policies, it can raise some issues for analyses focusing on a longer term. It also lacks ambition as it models 2.4°C global warming, which makes it inadequate for target setting use cases.\n\n#### Emissions\nSTEPS provides GHG emissions, including CO2, CH4 and NO2, broken down by fuel and across regions for Electricity, Industry (Steel, Cement, Chemicals, Other), Transport (Road, Aviation, Shipping, Rail) and Buildings. Emissions peaks before 2030, then experience a moderate decrease of 1% a year until 2050, led by a 3% decrease in emissions from China. As a comparison with other scenarios provided by IEA, APS forecasts a 4% annual decrease after 2030, and NZE a 15% one.\n\n#### Energy demand\nThe fuel demand decrease is more ambitious where low carbon technology is already available. For example, oil demand slightly diminishes in STEPS, mostly driven by changes in road transportation (EV growth) and buildings (heat pump replacement). Gas demand peaks in 2030, but the 2050 level is still higher than 2023. Coal demand decreases by 40%, and 80% of that decrease is due to power generation.\n\n#### Supply assumptions\nRefined materials (graphite, rare earths, cobalt, lithium, copper) and manufactured products (batteries, solar PV, wind, electrolysers, heat pumps) used in the energy transition are highly concentrated in a few countries, leading to potential geopolitical tensions and other countries trying to diversify investments to counter this concentration of the supply chain.\nLarge LNG installations initially help reduce coal demand, but lock in additional gas supply in STEPS. Legislated subsidies and implemented CO2 prices struggle to help replace gas with low-carbon technologies. \n\n#### Demand Shifts\nSTEPS assumes little impact on energy demand from behavioural shifts. Electrification of end-uses is a major contributing factor to growing electricity demand across transport, industry, and buildings sectors. At the same time, this shift significantly reduces overall energy demand. As most countries have some plan to increase electrification in the coming years, the STEPS gap in electricity generation between STEPS and APS is till very modest in 2030 at 796 TWh. This changes drastically by 2050, with 12212 TWh less electricity generated in STEPS than in APS, highlighting the short-term impact of the legislated policies in STEPS that do not match the long-term impact in APS.\n\n#### Policies\nSTEPS does not include NDC targets in general but will include any legislated plan. Policies included are described in table B.6 to table B.11 of IEA WEO 2024.\nThe IEA also includes a CO2 price for the STEPS scenario, that covers the electricity, industrial and energy sectors. More info in table B.2.\n\n#### Technology Costs\nCosts in the power sector are broken down into capital costs (USD/kW), Fuel, CO2, and O&M costs (USD/MWh) and LCOE (USD/MWh). Wholesale fossil fuel prices are available for crude oil (USD/barrel), natural gas (USD/MBtu), steam coal (USD/ton).\nTechnology costs and supply assumptions are provided for the biggest markets (EU, US, India, China) in tables B.4 and B.5.\n\n#### Technology Deployment\nTechnology deployment is influenced by technology costs. Solar, wind and battery storage benefit from decreasing cost trajectories reflecting global learning curves and economies of scale. STEPS forecasts a slight increase of carbon removals until 2040 (30t of CO2 removed a year), increasing to 50t of CO2 removed in 2050 – which is a slow deployment of carbon removal technologies, an average annual growth of 14%\n\n#### Investment needs\nSTEPS provides a global investment figure for the power sector split by transmission & distribution, battery storage, nuclear, wind & solar, unabated fossil fuel, other low carbon technologies and other renewables. \nUnabated fossil fuels drop from 7% in 2023 to 2% of total power investment by 2030 and 2035. Wind and solar PV investments increase from 604 billion USD in 2023 to 742 billion USD in 2030, representing 45% of total power investment. In 2035, the investment in solar PV and wind is expected to return to the 2023 level. This is one of the limitations of STEPS: Due to its assumptions based on implemented policies, STEPS has a robust baseline and short-term assumptions, but it lacks credibility in the longer term, as legislations often focus on the short term. Investment in battery storage triples from 41 Bn USD in 2023 to 134 Bn USD in 2035.\n\n#### Infrastructure requirements\nTransmission and distribution investment increase from 375 billion USD in 2023 to 749 billion USD in 2035.\nThis investment relates to 1.6 million km of power grid replacements between 2026-2030 (constant across IEA scenarios) and 2 million km of extensions of the grid.",
-    "dataSource": {
-      "description": "The scenario data is integrated in the World Energy Outlook, a report published annually by the International Energy Agency, an inter-governmental organization in charge of assessing the state of the energy sector and forecast sector trends. Information about this pathway is drawn from [IEA World Energy Outlook](https://www.iea.org/reports/world-energy-outlook-2024).",
-      "url": "https://www.iea.org/data-and-statistics/data-product/world-energy-outlook-2024-extended-dataset",
-      "downloadAvailable": true
-    },
-    "metric": [
-      "Emissions Intensity",
-      "Capacity",
-      "Generation",
-      "Technology Mix",
-      "Absolute Emissions"
-    ],
-    "keyFeatures": {
-      "emissionsPathway": "Moderate decline",
-      "energyEfficiency": "Moderate improvements",
-      "energyDemand": "Moderate growth",
-      "electrification": "Moderate increase",
-      "policyTypes": [
-        "Carbon price",
-        "Phaseout dates",
-        "Subsidies",
-        "Target technology shares",
+{
+  "id": "IEA-STEPS-2024",
+  "publisher": "IEA",
+  "name": "STEPS",
+  "description": "Shows current trends of the energy economy. Uses active policies from sectors, countries, regions.",
+  "geography": [
+    "Global",
+    "East Asia and Pacific",
+    "Europe and Central Asia",
+    "Latin America and Caribbean",
+    "Middle East and North Africa",
+    "North America",
+    "South East Asia",
+    "Sub-Saharan Africa",
+    "US",
+    "BR",
+    "RU",
+    "CN",
+    "IN",
+    "JP"
+  ],
+  "publicationYear": 2024,
+  "pathwayType": "Exploratory",
+  "carbonBudget": 868,
+  "modelTempIncrease": 2.4,
+  "modelYearStart": 2023,
+  "modelYearEnd": 2100,
+  "ssp": "SSP2",
+  "sectors": [
+    { "name": "Buildings", "technologies": [] },
+    { "name": "Industry", "technologies": [] },
+    { "name": "Steel", "technologies": [] },
+    { "name": "Cement", "technologies": [] },
+    { "name": "Chemicals", "technologies": [] },
+    { "name": "Coal Mining", "technologies": [] },
+    { "name": "Oil (Upstream)", "technologies": [] },
+    { "name": "Gas (Upstream)", "technologies": [] },
+    {
+      "name": "Power",
+      "technologies": [
+        "Coal",
+        "Oil",
+        "Gas",
+        "Nuclear",
+        "Hydro",
+        "Wind",
+        "Solar",
+        "Biomass",
+        "Renewables",
         "Other"
-      ],
-      "technologyCostTrend": "Other",
-      "technologyDeploymentTrend": "Moderate deployment of new technologies",
-      "emissionsScope": "CO2",
-      "policyAmbition": "Current/legislated policies",
-      "technologyCostsDetail": "Capital costs/O&M/etc.",
-      "newTechnologiesIncluded": [
-        "CCUS",
-        "DAC",
-        "Green H2/ammonia",
-        "SAF",
-        "Battery storage"
-      ],
-      "supplyChain": "Dynamic upstream fuel/material prices",
-      "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
-      "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
-    }
+      ]
+    },
+    { "name": "Transport", "technologies": [] },
+    { "name": "Road transport", "technologies": [] },
+    { "name": "Automotive", "technologies": [] },
+    { "name": "Aviation", "technologies": [] },
+    { "name": "Rail", "technologies": [] },
+    { "name": "Shipping", "technologies": [] },
+    { "name": "Other", "technologies": [] }
+  ],
+  "scenarioOverview": "The Stated Policies Scenario (STEPS) provides a sense of the energy sector’s direction of travel today, based on the latest market data, technology costs and in-depth analysis of the prevailing policy settings in countries around the world. STEPS is complemented by APS, a scenario which assumes that countries’ aspirational targets will be met in full. The difference between STEPS and APS highlights a commitment gap.",
+  "expertOverview": "The STEPS scenario is a scenario highlighting legislated in-place country action. This scenario from IEA has a high-standard baseline and documents short-term action very well. It can be a good fit for short term risk analyses. However, as it does not consider long term policies, it can raise some issues for analyses focusing on a longer term. It also lacks ambition as it models 2.4°C global warming, which makes it inadequate for target setting use cases.\n\n#### Emissions\nSTEPS provides GHG emissions, including CO2, CH4 and NO2, broken down by fuel and across regions for Electricity, Industry (Steel, Cement, Chemicals, Other), Transport (Road, Aviation, Shipping, Rail) and Buildings. Emissions peaks before 2030, then experience a moderate decrease of 1% a year until 2050, led by a 3% decrease in emissions from China. As a comparison with other scenarios provided by IEA, APS forecasts a 4% annual decrease after 2030, and NZE a 15% one.\n\n#### Energy demand\nThe fuel demand decrease is more ambitious where low carbon technology is already available. For example, oil demand slightly diminishes in STEPS, mostly driven by changes in road transportation (EV growth) and buildings (heat pump replacement). Gas demand peaks in 2030, but the 2050 level is still higher than 2023. Coal demand decreases by 40%, and 80% of that decrease is due to power generation.\n\n#### Supply assumptions\nRefined materials (graphite, rare earths, cobalt, lithium, copper) and manufactured products (batteries, solar PV, wind, electrolysers, heat pumps) used in the energy transition are highly concentrated in a few countries, leading to potential geopolitical tensions and other countries trying to diversify investments to counter this concentration of the supply chain.\nLarge LNG installations initially help reduce coal demand, but lock in additional gas supply in STEPS. Legislated subsidies and implemented CO2 prices struggle to help replace gas with low-carbon technologies. \n\n#### Demand Shifts\nSTEPS assumes little impact on energy demand from behavioural shifts. Electrification of end-uses is a major contributing factor to growing electricity demand across transport, industry, and buildings sectors. At the same time, this shift significantly reduces overall energy demand. As most countries have some plan to increase electrification in the coming years, the STEPS gap in electricity generation between STEPS and APS is till very modest in 2030 at 796 TWh. This changes drastically by 2050, with 12212 TWh less electricity generated in STEPS than in APS, highlighting the short-term impact of the legislated policies in STEPS that do not match the long-term impact in APS.\n\n#### Policies\nSTEPS does not include NDC targets in general but will include any legislated plan. Policies included are described in table B.6 to table B.11 of IEA WEO 2024.\nThe IEA also includes a CO2 price for the STEPS scenario, that covers the electricity, industrial and energy sectors. More info in table B.2.\n\n#### Technology Costs\nCosts in the power sector are broken down into capital costs (USD/kW), Fuel, CO2, and O&M costs (USD/MWh) and LCOE (USD/MWh). Wholesale fossil fuel prices are available for crude oil (USD/barrel), natural gas (USD/MBtu), steam coal (USD/ton).\nTechnology costs and supply assumptions are provided for the biggest markets (EU, US, India, China) in tables B.4 and B.5.\n\n#### Technology Deployment\nTechnology deployment is influenced by technology costs. Solar, wind and battery storage benefit from decreasing cost trajectories reflecting global learning curves and economies of scale. STEPS forecasts a slight increase of carbon removals until 2040 (30t of CO2 removed a year), increasing to 50t of CO2 removed in 2050 – which is a slow deployment of carbon removal technologies, an average annual growth of 14%\n\n#### Investment needs\nSTEPS provides a global investment figure for the power sector split by transmission & distribution, battery storage, nuclear, wind & solar, unabated fossil fuel, other low carbon technologies and other renewables. \nUnabated fossil fuels drop from 7% in 2023 to 2% of total power investment by 2030 and 2035. Wind and solar PV investments increase from 604 billion USD in 2023 to 742 billion USD in 2030, representing 45% of total power investment. In 2035, the investment in solar PV and wind is expected to return to the 2023 level. This is one of the limitations of STEPS: Due to its assumptions based on implemented policies, STEPS has a robust baseline and short-term assumptions, but it lacks credibility in the longer term, as legislations often focus on the short term. Investment in battery storage triples from 41 Bn USD in 2023 to 134 Bn USD in 2035.\n\n#### Infrastructure requirements\nTransmission and distribution investment increase from 375 billion USD in 2023 to 749 billion USD in 2035.\nThis investment relates to 1.6 million km of power grid replacements between 2026-2030 (constant across IEA scenarios) and 2 million km of extensions of the grid.",
+  "dataSource": {
+    "description": "The scenario data is integrated in the World Energy Outlook, a report published annually by the International Energy Agency, an inter-governmental organization in charge of assessing the state of the energy sector and forecast sector trends. Information about this pathway is drawn from [IEA World Energy Outlook](https://www.iea.org/reports/world-energy-outlook-2024).",
+    "url": "https://www.iea.org/data-and-statistics/data-product/world-energy-outlook-2024-extended-dataset",
+    "downloadAvailable": true
+  },
+  "metric": [
+    "Emissions Intensity",
+    "Capacity",
+    "Generation",
+    "Technology Mix",
+    "Absolute Emissions"
+  ],
+  "keyFeatures": {
+    "emissionsPathway": "Moderate decline",
+    "energyEfficiency": "Moderate improvements",
+    "energyDemand": "Moderate growth",
+    "electrification": "Moderate increase",
+    "policyTypes": [
+      "Carbon price",
+      "Phaseout dates",
+      "Subsidies",
+      "Target technology shares",
+      "Other"
+    ],
+    "technologyCostTrend": "Other",
+    "technologyDeploymentTrend": "Moderate deployment of new technologies",
+    "emissionsScope": "CO2",
+    "policyAmbition": "Current/legislated policies",
+    "technologyCostsDetail": "Capital costs/O&M/etc.",
+    "newTechnologiesIncluded": [
+      "CCUS",
+      "DAC",
+      "Green H2/ammonia",
+      "SAF",
+      "Battery storage"
+    ],
+    "supplyChain": "Dynamic upstream fuel/material prices",
+    "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
+    "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
   }
-]
+}
