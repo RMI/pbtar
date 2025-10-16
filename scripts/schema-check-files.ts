@@ -2,8 +2,9 @@
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
 import type { FileEntry } from "../src/utils/validateScenarios.ts";
-import { validateScenariosCollect } from "../src/utils/validateScenarios.ts";
+import { validateFilesBySchema } from "../src/utils/validateScenarios.ts";
 import { decideIncludeInvalid } from "../src/utils/loadScenarios.ts";
+import pathwayMetadata from "../src/schema/pathwayMetadata.json" with { type: "json" };
 
 async function run(dir: string) {
   async function getJsonFilesRecursive(base: string): Promise<string[]> {
@@ -29,7 +30,7 @@ async function run(dir: string) {
     entries.push({ name: file, data: JSON.parse(raw) });
   }
 
-  const { valid, invalid } = validateScenariosCollect(entries);
+  const { valid, invalid } = validateFilesBySchema(entries, [pathwayMetadata]);
   return { dir, validCount: valid.length, invalid };
 }
 

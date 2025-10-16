@@ -89,6 +89,6 @@ export function assembleScenarios(
     if (onInvalid) onInvalid(invalid);
   }
 
-  if (!includeInvalid) return valid;
-  return [...valid, ...invalid.flatMap((p) => p.data ?? [])];
+  if (!includeInvalid) return valid.map((v) => v.data).flat();
+  return [...valid, ...invalid].map((v) => v.data).flat();
 }
