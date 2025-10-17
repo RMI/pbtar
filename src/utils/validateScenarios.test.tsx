@@ -1,45 +1,43 @@
 import { describe, it, expect } from "vitest";
-import { validateScenarios, FileEntry } from "./validateScenarios";
+import { validateScenariosCollect, FileEntry } from "./validateScenarios";
 import { Scenario } from "../types";
 
-function ok(entry: FileEntry) {
-  expect(() => validateScenarios([entry])).not.toThrow();
+function ok(entry: FileEntry | FileEntry[]) {
+  const arr = Array.isArray(entry) ? entry : [entry];
+  const { valid, invalid } = validateScenariosCollect(arr);
+  expect(valid.length).toBeGreaterThan(0);
+  expect(invalid.length).toBe(0);
 }
 
-function fail(entry: FileEntry, rx: RegExp | string) {
-  expect(() => validateScenarios([entry])).toThrowError(rx);
+function fail(entry: FileEntry | FileEntry[], rx?: RegExp | string) {
+  const arr = Array.isArray(entry) ? entry : [entry];
+  console.log("Arr:", arr);
+  const { valid, invalid } = validateScenariosCollect(arr);
+  console.log("rx:", rx);
+  console.log("Valid:", valid);
+  console.log("Invalid:", invalid);
+  expect(invalid.length).toBeGreaterThan(0);
+  if (rx) {
+    const messages = invalid.flatMap((p) => p.errors).join("\n");
+    expect(messages).toMatch(rx);
+  }
 }
 
-import rawScenarioArray from "../../testdata/valid/scenarios_metadata_standard.json" assert { type: "json" };
-const baseScenario: Scenario = rawScenarioArray[0];
+import baseScenario from "../../testdata/valid/scenarios_metadata_standard.json" assert { type: "json" };
 
 describe("scenario schema enforces expected limits", () => {
-  it("accepts a minimal valid array (minItems=1)", () => {
-    ok({ name: "ok.json", data: [baseScenario] });
-  });
-
-  it("fails when the array is empty (minItems=1)", () => {
-    fail({ name: "empty.json", data: [] }, /must NOT have fewer than/);
-  });
-
-  // Type guard: data must be an array of objects
-  it("fails when top-level is not an array", () => {
-    fail(
-      { name: "not-array.json", data: { ...baseScenario } as Scenario },
-      /must be array/i,
-    );
+  it("accepts a valid object", () => {
+    ok({ name: "ok.json", data: baseScenario });
   });
 
   it("fails when field is wrong type", () => {
     fail(
       {
         name: "start.json",
-        data: [
-          {
-            ...baseScenario,
-            modelYearStart: "1950" as string, // should be a number
-          },
-        ],
+        data: {
+          ...baseScenario,
+          modelYearStart: "1950" as string, // should be a number
+        },
       },
       /modelYearStart/,
     );
@@ -48,35 +46,36 @@ describe("scenario schema enforces expected limits", () => {
   it("accepts boundaries", () => {
     ok({
       name: "bounds.json",
-      data: [
-        {
-          ...baseScenario,
-          modelYearStart: 1900,
-          modelYearEnd: 2100,
-          publicationYear: 2030,
-          modelYearNetzero: 2030,
-          carbonBudget: 0,
-          modelTempIncrease: 0.5, // min
-          ssp: "SSP5",
-          geography: ["EU"],
-        },
-      ],
+      data: {
+        ...baseScenario,
+        modelYearStart: 1900,
+        modelYearEnd: 2100,
+        publicationYear: 2030,
+        modelYearNetzero: 2030,
+        carbonBudget: 0,
+        modelTempIncrease: 0.5, // min
+        ssp: "SSP5",
+        geography: ["EU"],
+      },
     });
   });
 
   it("accepts multiple items & unique geography", () => {
-    ok({
-      name: "multi.json",
-      data: [
-        baseScenario,
-        {
+    ok([
+      {
+        name: "multi.json",
+        data: { ...baseScenario },
+      },
+      {
+        name: "multi.json",
+        data: {
           ...baseScenario,
           id: "scn-2",
           name: "Other",
           geography: ["Global", "EU"],
         },
-      ],
-    });
+      },
+    ]);
   });
 
   const REQ = [
@@ -96,7 +95,7 @@ describe("scenario schema enforces expected limits", () => {
     it(`fails when required property '${key}' is missing`, () => {
       const rest = { ...baseScenario };
       delete (rest as Scenario)[key]; // remove the key
-      fail({ name: "missing.json", data: [rest] }, new RegExp(`${key}`));
+      fail({ name: "missing.json", data: rest }, new RegExp(`${key}`));
     });
   }
 
@@ -104,7 +103,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "pathwayType.json",
-        data: [{ ...baseScenario, pathwayType: "Wrong" }],
+        data: { ...baseScenario, pathwayType: "Wrong" },
       },
       /pathwayType/,
     );
@@ -114,7 +113,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "ssp.json",
-        data: [{ ...baseScenario, ssp: "SSP6" }],
+        data: { ...baseScenario, ssp: "SSP6" },
       },
       /ssp/,
     );
@@ -125,7 +124,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "maxlength.json",
-        data: [{ ...baseScenario, name: long }],
+        data: { ...baseScenario, name: long },
       },
       /name must NOT have more than 100 characters/,
     );
@@ -135,7 +134,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "start.json",
-        data: [{ ...baseScenario, modelYearStart: 1899 }],
+        data: { ...baseScenario, modelYearStart: 1899 },
       },
       /modelYearStart/,
     );
@@ -145,7 +144,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "end.json",
-        data: [{ ...baseScenario, modelYearEnd: 2101 }],
+        data: { ...baseScenario, modelYearEnd: 2101 },
       },
       /modelYearEnd/,
     );
@@ -155,7 +154,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "netzero.json",
-        data: [{ ...baseScenario, modelYearNetzero: 2029 }],
+        data: { ...baseScenario, modelYearNetzero: 2029 },
       },
       /modelYearNetzero/,
     );
@@ -165,7 +164,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "temp.json",
-        data: [{ ...baseScenario, modelTempIncrease: 0.55 }],
+        data: { ...baseScenario, modelTempIncrease: 0.55 },
       },
       /multiple of/,
     );
@@ -175,7 +174,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "geography.json",
-        data: [{ ...baseScenario, geography: ["EU", "EU"] }],
+        data: { ...baseScenario, geography: ["EU", "EU"] },
       },
       /must NOT have duplicate items/,
     );
@@ -185,12 +184,10 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "sectors.json",
-        data: [
-          {
-            ...baseScenario,
-            sectors: [{ name: "Power" }], // missing technologies
-          },
-        ],
+        data: {
+          ...baseScenario,
+          sectors: [{ name: "Power" }], // missing technologies
+        },
       },
       /required.*technologies/i,
     );
@@ -200,12 +197,10 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "sector-name.json",
-        data: [
-          {
-            ...baseScenario,
-            sectors: [{ name: "Yak Shaving", technologies: ["Other"] }],
-          },
-        ],
+        data: {
+          ...baseScenario,
+          sectors: [{ name: "Yak Shaving", technologies: ["Other"] }],
+        },
       },
       /must be equal to one of the allowed values/,
     );
@@ -215,12 +210,10 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "tech.json",
-        data: [
-          {
-            ...baseScenario,
-            sectors: [{ name: "Power", technologies: ["Cold Fusion"] }],
-          },
-        ],
+        data: {
+          ...baseScenario,
+          sectors: [{ name: "Power", technologies: ["Cold Fusion"] }],
+        },
       },
       /must be equal to one of the allowed values/,
     );
@@ -230,7 +223,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "extra-top.json",
-        data: [{ ...baseScenario, foobar: 1 } as Scenario],
+        data: { ...baseScenario, foobar: 1 } as Scenario,
       },
       /must NOT have additional properties/,
     );
@@ -240,12 +233,10 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "extra-sector.json",
-        data: [
-          {
-            ...baseScenario,
-            sectors: [{ name: "Power", technologies: ["Solar"], foobar: 1 }],
-          },
-        ],
+        data: {
+          ...baseScenario,
+          sectors: [{ name: "Power", technologies: ["Solar"], foobar: 1 }],
+        },
       },
       /must NOT have additional properties/,
     );
@@ -255,12 +246,10 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "extra-ds.json",
-        data: [
-          {
-            ...baseScenario,
-            dataSource: { ...baseScenario.dataSource, foobar: "x" },
-          },
-        ],
+        data: {
+          ...baseScenario,
+          dataSource: { ...baseScenario.dataSource, foobar: "x" },
+        },
       },
       /must NOT have additional properties/,
     );
