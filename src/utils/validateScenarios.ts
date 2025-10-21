@@ -1,10 +1,9 @@
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
-import type { SchemaObject } from "ajv";
+import type { SchemaObject, ErrorObject } from "ajv";
 import pathwayMetadata from "../schema/pathwayMetadata.json" with { type: "json" };
-import type { Scenario } from "../types";
 
-export type FileEntry = { name: string; data: Scenario[] };
+export type FileEntry = { name: string; data: unknown };
 
 function makeAjv(schemas: readonly (object | SchemaObject)[]) {
   const ajv = new Ajv({
@@ -17,10 +16,21 @@ function makeAjv(schemas: readonly (object | SchemaObject)[]) {
   return ajv;
 }
 
-function fmt(errors: any[] | null | undefined): string[] {
+function fmt(errors: ErrorObject[] | null | undefined): string[] {
   if (!errors || !errors.length) return [];
   return errors.map((e) =>
     `${e.instancePath || "/"} ${e.message ?? "validation error"}`.trim(),
+  );
+}
+
+// ---------- Safe $schema access ----------
+type HasSchemaString = { $schema: string };
+function hasSchemaString(x: unknown): x is HasSchemaString {
+  return (
+    typeof x === "object" &&
+    x !== null &&
+    "$schema" in (x as Record<string, unknown>) &&
+    typeof (x as Record<string, unknown>)["$schema"] === "string"
   );
 }
 
@@ -38,11 +48,11 @@ export function validateFilesBySchema(
   const invalid: ValidationProblem[] = [];
 
   for (const { name, data } of entries) {
-    const schemaId = (data as any)?.$schema;
-    if (typeof schemaId !== "string" || !schemaId) {
+    if (!hasSchemaString(data)) {
       invalid.push({ name, errors: ['missing or non-string "$schema"'] });
       continue;
     }
+    const schemaId = data.$schema;
     const validate = ajv.getSchema(schemaId);
     if (!validate) {
       invalid.push({
@@ -70,11 +80,9 @@ export function validateFilesBySchema(
 export function validateScenariosCollect(
   entries: FileEntry[],
 ): ValidationOutcome {
-  const META_ID = String((pathwayMetadata as any).$id);
+  const META_ID = String((pathwayMetadata as SchemaObject).$id);
   const metaEntries = entries.filter(
-    (e) =>
-      typeof (e.data as any)?.$schema === "string" &&
-      (e.data as any).$schema === META_ID,
+    (e) => hasSchemaString(e.data) && e.data.$schema === META_ID,
   );
   return validateFilesBySchema(metaEntries, [pathwayMetadata]);
 }
