@@ -2,7 +2,7 @@
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "IEA-STEPS-2024",
   "publisher": "IEA",
-  "name": "STEPS",
+  "name": "Stated Policies Scenario (STEPS)",
   "description": "Shows current trends of the energy economy. Uses active policies from sectors, countries, regions.",
   "geography": [
     "Global",

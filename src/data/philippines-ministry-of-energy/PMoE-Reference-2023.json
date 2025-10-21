@@ -2,7 +2,7 @@
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "PMoE-Reference-2023",
   "publisher": "Philippines - Ministry of Energy",
-  "name": "Reference",
+  "name": "Reference Scenario (Reference)",
   "description": "A scenario where current energy policies are maintained in the Philippines.",
   "geography": ["PH"],
   "publicationYear": 2023,

@@ -2,7 +2,7 @@
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "IEA-APS-2024",
   "publisher": "IEA",
-  "name": "APS",
+  "name": "Announced Pledges Scenario (APS)",
   "description": "Pathway where all countries fully meet their aspirational targets (incl. NDCs and net zero pledges).",
   "geography": [
     "Global",

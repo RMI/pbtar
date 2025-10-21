@@ -2,7 +2,7 @@
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "PMoE-CES2-2023",
   "publisher": "Philippines - Ministry of Energy",
-  "name": "CES2",
+  "name": "Clean Energy Scenario 2 (CES 2)",
   "description": "Philippines Power Development Plan following NREP with high offshore wind development.",
   "geography": ["PH"],
   "publicationYear": 2023,
