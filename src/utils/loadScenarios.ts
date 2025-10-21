@@ -1,7 +1,7 @@
 // src/utils/loadScenarios.ts
 import type { Scenario } from "../types";
 import { validateScenariosCollect } from "./validateScenarios.ts";
-import type { FileEntry } from "./validateScenarios.ts";
+import type { FileEntry, ValidationOutcome } from "./validateScenarios.ts";
 
 type ViteEnv =
   | {
@@ -70,13 +70,11 @@ export function assembleScenarios(
   const includeInvalid = !!opts?.includeInvalid;
   const onInvalid = opts?.onInvalid;
 
-  const { valid, invalid } = validateScenariosCollect(entries);
+  const { valid: valid, invalid: invalid }: ValidationOutcome =
+    validateScenariosCollect(entries);
 
   if (invalid.length && opts?.warn) {
-    const totalInvalid = invalid.reduce(
-      (sum, p) => sum + (p.data?.length ?? 0),
-      0,
-    );
+    const totalInvalid = invalid.length;
     opts.warn(
       `[loadScenarios] Warning: ${totalInvalid} invalid scenario${
         totalInvalid !== 1 ? "s" : ""

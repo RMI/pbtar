@@ -4,6 +4,20 @@ import type { SchemaObject, ErrorObject } from "ajv";
 import pathwayMetadata from "../schema/pathwayMetadata.json" with { type: "json" };
 
 export type FileEntry = { name: string; data: unknown };
+export type ValidationProblem = {
+  name: string;
+  errors: string[];
+  data?: unknown;
+};
+export type ValidationRecord = {
+  name: string;
+  schemaId: string;
+  data: unknown;
+};
+export type ValidationOutcome = {
+  valid: ValidationRecord[];
+  invalid: ValidationProblem[];
+};
 
 function makeAjv(schemas: readonly (object | SchemaObject)[]) {
   const ajv = new Ajv({
