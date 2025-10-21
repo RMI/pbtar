@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import pathwayMetadata from "../schema/pathwayMetadata.json";
+import pathwayMetadata from "../schema/pathwayMetadata.v1.json";
 import {
   pathwayTypeTooltips,
   sectorTooltips,

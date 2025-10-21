@@ -1,7 +1,7 @@
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
 import type { SchemaObject, ErrorObject } from "ajv";
-import pathwayMetadata from "../schema/pathwayMetadata.json" with { type: "json" };
+import pathwayMetadata from "../schema/pathwayMetadata.v1.json" with { type: "json" };
 
 export type FileEntry = { name: string; data: unknown };
 export type ValidationProblem = {

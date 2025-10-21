@@ -4,7 +4,7 @@ import { join } from "node:path";
 import type { FileEntry } from "../src/utils/validateScenarios.ts";
 import { validateFilesBySchema } from "../src/utils/validateScenarios.ts";
 import { decideIncludeInvalid } from "../src/utils/loadScenarios.ts";
-import pathwayMetadata from "../src/schema/pathwayMetadata.json" with { type: "json" };
+import pathwayMetadata from "../src/schema/pathwayMetadata.v1.json" with { type: "json" };
 
 async function run(dir: string) {
   async function getJsonFilesRecursive(base: string): Promise<string[]> {
