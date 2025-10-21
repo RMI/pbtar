@@ -11,11 +11,8 @@ function ok(entry: FileEntry | FileEntry[]) {
 
 function fail(entry: FileEntry | FileEntry[], rx?: RegExp | string) {
   const arr = Array.isArray(entry) ? entry : [entry];
-  console.log("Arr:", arr);
-  const { valid, invalid } = validateScenariosCollect(arr);
-  console.log("rx:", rx);
-  console.log("Valid:", valid);
-  console.log("Invalid:", invalid);
+  const rawValidation = validateScenariosCollect(arr);
+  const invalid = rawValidation.invalid;
   expect(invalid.length).toBeGreaterThan(0);
   if (rx) {
     const messages = invalid.flatMap((p) => p.errors).join("\n");
