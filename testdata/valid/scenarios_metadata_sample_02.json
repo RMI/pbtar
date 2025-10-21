@@ -1,0 +1,52 @@
+{
+  "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
+  "id": "sample-02",
+  "name": "Sample Scenario 02",
+  "description": "Second Sample Scenario. uiop description.",
+  "pathwayType": "Exploratory",
+  "carbonBudget": 200,
+  "modelYearStart": 2020,
+  "modelYearEnd": 2050,
+  "modelTempIncrease": 2,
+  "ssp": "SSP2",
+  "geography": ["EU"],
+  "sectors": [{ "name": "Agriculture", "technologies": ["Agroforestry"] }],
+  "publisher": "Example Publisher",
+  "publicationYear": 2025,
+  "scenarioOverview": "UIOP Overview.",
+  "expertOverview": "Example Expert Recommendation.",
+  "keyFeatures": {
+    "emissionsPathway": "Moderate decline",
+    "energyEfficiency": "Moderate improvements",
+    "energyDemand": "Moderate growth",
+    "electrification": "Moderate increase",
+    "policyTypes": [
+      "Carbon price",
+      "Phaseout dates",
+      "Subsidies",
+      "Target technology shares",
+      "Other"
+    ],
+    "technologyCostTrend": "Other",
+    "technologyDeploymentTrend": "Moderate deployment of new technologies",
+    "emissionsScope": "CO2",
+    "policyAmbition": "Current/legislated policies",
+    "technologyCostsDetail": "Capital costs/O&M/etc.",
+    "newTechnologiesIncluded": [
+      "CCUS",
+      "DAC",
+      "Green H2/ammonia",
+      "SAF",
+      "Battery storage"
+    ],
+    "supplyChain": "Dynamic upstream fuel/material prices",
+    "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
+    "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
+  },
+  "metric": ["Capacity", "Generation"],
+  "dataSource": {
+    "description": "Mock Data Source.",
+    "url": "https://example.com/data-source",
+    "downloadAvailable": true
+  }
+}

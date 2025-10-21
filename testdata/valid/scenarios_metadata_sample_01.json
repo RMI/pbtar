@@ -1,0 +1,55 @@
+{
+  "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
+  "id": "sample-01",
+  "name": "Sample Scenario 01",
+  "description": "First Sample Scenario. qwerty description.",
+  "pathwayType": "Normative",
+  "modelYearNetzero": 2050,
+  "carbonBudget": 100,
+  "modelYearStart": 2020,
+  "modelYearEnd": 2050,
+  "modelTempIncrease": 1,
+  "ssp": "SSP1",
+  "geography": ["Global"],
+  "sectors": [
+    { "name": "Land Use", "technologies": ["Precision Agriculture"] }
+  ],
+  "publisher": "Example Publisher",
+  "publicationYear": 2025,
+  "scenarioOverview": "QWERTY Overview.",
+  "expertOverview": "Example Expert Recommendation.",
+  "keyFeatures": {
+    "emissionsPathway": "Moderate decline",
+    "energyEfficiency": "Moderate improvements",
+    "energyDemand": "Moderate growth",
+    "electrification": "Moderate increase",
+    "policyTypes": [
+      "Carbon price",
+      "Phaseout dates",
+      "Subsidies",
+      "Target technology shares",
+      "Other"
+    ],
+    "technologyCostTrend": "Other",
+    "technologyDeploymentTrend": "Moderate deployment of new technologies",
+    "emissionsScope": "CO2",
+    "policyAmbition": "Current/legislated policies",
+    "technologyCostsDetail": "Capital costs/O&M/etc.",
+    "newTechnologiesIncluded": [
+      "CCUS",
+      "DAC",
+      "Green H2/ammonia",
+      "SAF",
+      "Battery storage"
+    ],
+    "supplyChain": "Dynamic upstream fuel/material prices",
+    "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
+    "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
+  },
+  "metric": ["Emissions Intensity", "Capacity"],
+  "dataSource": {
+    "description": "Mock Data Source.",
+    "url": "https://example.com/data-source",
+    "downloadAvailable": true
+  }
+}
