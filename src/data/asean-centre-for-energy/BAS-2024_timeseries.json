@@ -1,8 +1,8 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
-  "id": "TKTK",
-  "name": "TKTK",
-  "description": "TKTK.",
+  "id": "ACE-BAS-2024_TS",
+  "name": "Baseline Scenario (BAS) Timeseries Data",
+  "description": "Continuation of historical trends of ASEAN energy systems w/o modelling of existing policy targets.",
   "publisher": "ASEAN Centre for Energy (ACE)",
   "publicationName": "8th ASEAN Energy Outlook",
   "publicationYear": 2024,
