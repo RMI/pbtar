@@ -6,5 +6,8 @@
     "resolveJsonModule": true,
     "outDir": "dist-scripts"
   },
+  "ts-node": {
+    "esm": true
+  },
   "include": ["scripts/**/*", "src/validation/**/*", "src/schema/*.json"]
 }
