@@ -242,7 +242,7 @@
           ]
         },
         "energyDemand": {
-          "description": "Captures the change in total energy consumption, driven by factors such as socio-economic development, technology shifts and and consumer behavior.",
+          "description": "Captures the change in total energy consumption, driven by factors such as socio-economic development, technology shifts and consumer behavior.",
           "type": "string",
           "enum": [
             "No information",
