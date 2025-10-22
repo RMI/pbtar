@@ -226,58 +226,85 @@
           "metric",
           "unit"
         ],
-      "allOf": [
-        {
-          "if": {
-            "properties": { "sector": { "const": "Power" } },
-            "required": ["sector"]
-          },
-          "then": {
-            "properties": {
-              "technology": {
-                "type": ["string", "null"],
-                "enum": [
-                  "Coal","Oil","Gas","Nuclear","Hydro","Wind","Solar",
-                  "Biomass","Geothermal","Hydrogen","Renewables","Battery","Other", null
-                ]
-              },
-              "metric": {
-                "type": "string",
-                "enum": [
-                  "Emissions Intensity",
-                  "Absolute Emissions",
-                  "Capacity",
-                  "Generation",
-                  "Technology Mix"
-                ]
-              }
+        "if": {
+          "properties": { "sector": { "const": "Power" } },
+          "required": ["sector"]
+        },
+        "then": {
+          "properties": {
+            "technology": {
+              "type": ["string", "null"],
+              "enum": [
+                "Coal",
+                "Oil",
+                "Gas",
+                "Nuclear",
+                "Hydro",
+                "Wind",
+                "Solar",
+                "Biomass",
+                "Geothermal",
+                "Hydrogen",
+                "Renewables",
+                "Battery",
+                "Other",
+                null
+              ]
             },
-            "allOf": [
-              {
-                "if": { "properties": { "metric": { "const": "Emissions Intensity" } }, "required": ["metric"] },
-                "then": { "properties": { "unit": { "const": "tCO2e/MWh" } } }
+            "metric": {
+              "type": "string",
+              "enum": [
+                "Emissions Intensity",
+                "Absolute Emissions",
+                "Capacity",
+                "Generation",
+                "Technology Mix"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "metric": { "const": "Emissions Intensity" }
+                },
+                "required": ["metric"]
               },
-              {
-                "if": { "properties": { "metric": { "const": "Absolute Emissions" } }, "required": ["metric"] },
-                "then": { "properties": { "unit": { "const": "tCO2e" } } }
+              "then": { "properties": { "unit": { "const": "tCO2e/MWh" } } }
+            },
+            {
+              "if": {
+                "properties": {
+                  "metric": { "const": "Absolute Emissions" }
+                },
+                "required": ["metric"]
               },
-              {
-                "if": { "properties": { "metric": { "const": "Capacity" } }, "required": ["metric"] },
-                "then": { "properties": { "unit": { "const": "GW" } } }
+              "then": { "properties": { "unit": { "const": "tCO2e" } } }
+            },
+            {
+              "if": {
+                "properties": { "metric": { "const": "Capacity" } },
+                "required": ["metric"]
               },
-              {
-                "if": { "properties": { "metric": { "const": "Generation" } }, "required": ["metric"] },
-                "then": { "properties": { "unit": { "const": "TWh" } } }
+              "then": { "properties": { "unit": { "const": "GW" } } }
+            },
+            {
+              "if": {
+                "properties": { "metric": { "const": "Generation" } },
+                "required": ["metric"]
               },
-              {
-                "if": { "properties": { "metric": { "const": "Technology Mix" } }, "required": ["metric"] },
-                "then": { "properties": { "unit": { "const": "%" } } }
-              }
-            ]
-          }
+              "then": { "properties": { "unit": { "const": "TWh" } } }
+            },
+            {
+              "if": {
+                "properties": { "metric": { "const": "Technology Mix" } },
+                "required": ["metric"]
+              },
+              "then": { "properties": { "unit": { "const": "%" } } }
+            }
+          ]
         }
-      ]
-    }
+      }
     }
   },
   "additionalProperties": false,
