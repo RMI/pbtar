@@ -9,7 +9,7 @@
   "pathwayName": "Baseline Scenario (BAS)",
   "source": "ACE (2024). 8th ASEAN Energy Outlook (AEO8). ASEAN Centre for Energy (ACE), Jakarta. Available for download\nfrom https://aseanenergy.org/.",
   "emissionsScope": "No information",
-  "sectors": {
+  "sector": {
     "power": {
       "displayName": "Power",
       "technology": {

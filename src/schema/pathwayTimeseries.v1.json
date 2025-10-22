@@ -47,43 +47,6 @@
       "type": "string",
       "maxLength": 100
     },
-    "region": {
-      "description": "TKTK",
-      "type": "array",
-      "uniqueItems": true,
-      "items": {
-        "type": "string",
-        "minLength": 1,
-        "allOf": [
-          { "pattern": "^(?!\\s*$).+" },
-          { "not": { "pattern": "^[A-Za-z]{3}$" } }
-        ]
-      }
-    },
-    "sector": {
-            "type": "string",
-            "enum": [
-              "Land Use",
-              "Agriculture",
-              "Buildings",
-              "Industry",
-              "Steel",
-              "Cement",
-              "Chemicals",
-              "Coal Mining",
-              "Oil (Upstream)",
-              "Gas (Upstream)",
-              "Power",
-              "Automotive",
-              "Transport",
-              "Road transport",
-              "Aviation",
-              "Rail",
-              "Shipping",
-              "Other"
-            ]
-          },
-
     "source": {
       "description": "TKTK",
       "type": "string",
@@ -94,18 +57,150 @@
       "type": "string",
       "maxLength": 1000
     },
-    "sectorScope": {
+    "sector": {
       "description": "TKTK",
-      "type": "string",
-      "maxLength": 1000
-    },
-    "definitions": {
-      "description": "TKTK",
-      "type": "object"
+      "type": "object",
+      "patternProperties": {
+        "^[A-Za-z0-9 _-]{1,100}$": {
+          "type": "object",
+          "properties": {
+            "displayName": {
+              "description": "TKTK",
+              "type": "string",
+              "enum": [
+                "Land Use",
+                "Agriculture",
+                "Buildings",
+                "Industry",
+                "Steel",
+                "Cement",
+                "Chemicals",
+                "Coal Mining",
+                "Oil (Upstream)",
+                "Gas (Upstream)",
+                "Power",
+                "Automotive",
+                "Transport",
+                "Road transport",
+                "Aviation",
+                "Rail",
+                "Shipping",
+                "Other"
+              ]
+            },
+            "technology": {
+              "description": "TKTK",
+              "type": "object",
+              "patternProperties": {
+                "^[A-Za-z0-9 _-]{1,100}$": {
+                  "type": "object",
+                  "properties": {
+                    "displayName": {
+                      "description": "TKTK",
+                      "type": "string",
+                      "maxLength": 100
+                    },
+                    "definition": {
+                      "description": "TKTK",
+                      "type": "string",
+                      "maxLength": 1000
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": ["displayName", "definition"]
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1
+            },
+            "metric": {
+              "description": "TKTK",
+              "type": "object",
+              "patternProperties": {
+                "^[A-Za-z0-9 _-]{1,100}$": {
+                  "type": "object",
+                  "properties": {
+                    "displayName": {
+                      "description": "TKTK",
+                      "type": "string",
+                      "maxLength": 100
+                    },
+                    "definition": {
+                      "description": "TKTK",
+                      "type": "string",
+                      "maxLength": 1000
+                    },
+                    "sectorScope": {
+                      "description": "TKTK",
+                      "type": "string",
+                      "maxLength": 1000
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": ["displayName", "definition", "sectorScope"]
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1
+            }
+          }
+        }
+      },
+      "additionalProperties": false,
+      "minProperties": 1
     },
     "data": {
       "description": "TKTK",
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "description": "TKTK",
+            "type": "integer",
+            "minimum": 1900,
+            "maximum": 2100
+          },
+          "geography": {
+            "description": "Geographical areas that the scenario covers. Can include 'Global', country ISO-3166-1 alpha-2 codes (US, DE), or free-text region names (e.g., 'Europe', 'OECD'). Any 2-letter items in the array will be treated as an ISO code. Any 2-letter entries that do not map to a country will throw errors (EU). Do not use full country names, only ISO alpha-2 codes. To avoid typographical errors, items in this array may not be 3 letters long (USA)",
+            "type": "string",
+            "allOf": [
+              { "pattern": "^(?!\\s*$).+" },
+              { "not": { "pattern": "^[A-Za-z]{3}$" } }
+            ]
+          },
+          "sector": {
+            "description": "TKTK",
+            "type": "string"
+          },
+          "technology": {
+            "description": "TKTK",
+            "type": ["string", "null"]
+          },
+          "metric": {
+            "description": "TKTK",
+            "type": "string"
+          },
+          "value": {
+            "description": "TKTK",
+            "type": ["number", "null"]
+          },
+          "unit": {
+            "description": "TKTK",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "year",
+          "value",
+          "geography",
+          "sector",
+          "technology",
+          "metric",
+          "unit"
+        ]
+      }
     }
   },
   "additionalProperties": false,
@@ -117,12 +212,9 @@
     "publicationName",
     "publicationYear",
     "pathwayName",
-    "region",
-    "sector",
     "source",
     "emissionsScope",
-    "sectorScope",
-    "definitions",
+    "sector",
     "data"
   ]
 }
