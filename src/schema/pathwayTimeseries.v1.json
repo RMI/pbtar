@@ -1,9 +1,34 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
-  "title": "PBTAR Scenarios metadata Schema",
+  "title": "PBTAR Scenarios Timeseries Schema",
   "description": "A schema for the scenarios metadata dataset in PBTAR.",
   "type": "object",
+  "$defs": {
+    "sectorDisplayName": {
+      "type": "string",
+      "enum": [
+        "Land Use",
+        "Agriculture",
+        "Buildings",
+        "Industry",
+        "Steel",
+        "Cement",
+        "Chemicals",
+        "Coal Mining",
+        "Oil (Upstream)",
+        "Gas (Upstream)",
+        "Power",
+        "Automotive",
+        "Transport",
+        "Road transport",
+        "Aviation",
+        "Rail",
+        "Shipping",
+        "Other"
+      ]
+    }
+  },
   "properties": {
     "$schema": {
       "description": "URI of the schema that validates this document (see https://json-schema.org/).",
@@ -72,27 +97,7 @@
           "properties": {
             "displayName": {
               "description": "TKTK",
-              "type": "string",
-              "enum": [
-                "Land Use",
-                "Agriculture",
-                "Buildings",
-                "Industry",
-                "Steel",
-                "Cement",
-                "Chemicals",
-                "Coal Mining",
-                "Oil (Upstream)",
-                "Gas (Upstream)",
-                "Power",
-                "Automotive",
-                "Transport",
-                "Road transport",
-                "Aviation",
-                "Rail",
-                "Shipping",
-                "Other"
-              ]
+              "$ref": "#/$defs/sectorDisplayName"
             },
             "technology": {
               "description": "TKTK",
@@ -177,27 +182,7 @@
           },
           "sector": {
             "description": "TKTK",
-            "type": "string",
-            "enum": [
-              "Land Use",
-              "Agriculture",
-              "Buildings",
-              "Industry",
-              "Steel",
-              "Cement",
-              "Chemicals",
-              "Coal Mining",
-              "Oil (Upstream)",
-              "Gas (Upstream)",
-              "Power",
-              "Automotive",
-              "Transport",
-              "Road transport",
-              "Aviation",
-              "Rail",
-              "Shipping",
-              "Other"
-            ]
+            "$ref": "#/$defs/sectorDisplayName"
           },
           "technology": {
             "description": "TKTK",
