@@ -62,17 +62,17 @@
           "sectorScope": "Power generation"
         },
         "emissionsIntensity": {
-          "displayName": "Emissions intensity",
+          "displayName": "Emissions Intensity",
           "definition": "Amount of greenhouse gases emitted per unit of physical output. Indicates how low-carbon the output production is",
           "sectorScope": "Power generation"
         },
         "absoluteEmissions": {
-          "displayName": "Absolute emissions",
+          "displayName": "Absolute Emissions",
           "definition": "Total greenhouse gas emissions produced, regardless of output. Measured in metric tons of CO₂ equivalent",
           "sectorScope": "Power generation"
         },
         "technologyMix": {
-          "displayName": "Technology mix",
+          "displayName": "Technology Mix",
           "definition": "The breakdown of energy sources used for electricity generation (e.g., coal, solar, wind, nuclear). Reflects the diversity and sustainability of the energy portfolio",
           "sectorScope": "Power generation"
         }
@@ -1219,7 +1219,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": null,
-      "metric": "Emissions intensity",
+      "metric": "Emissions Intensity",
       "value": 0.606,
       "unit": "tCO2e/MWh"
     },
@@ -1228,7 +1228,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": null,
-      "metric": "Emissions intensity",
+      "metric": "Emissions Intensity",
       "value": 0.579,
       "unit": "tCO2e/MWh"
     },
@@ -1237,7 +1237,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": null,
-      "metric": "Emissions intensity",
+      "metric": "Emissions Intensity",
       "value": 0.542,
       "unit": "tCO2e/MWh"
     },
@@ -1246,7 +1246,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": null,
-      "metric": "Emissions intensity",
+      "metric": "Emissions Intensity",
       "value": 0.522,
       "unit": "tCO2e/MWh"
     },
@@ -1255,7 +1255,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": null,
-      "metric": "Emissions intensity",
+      "metric": "Emissions Intensity",
       "value": 0.507,
       "unit": "tCO2e/MWh"
     },
@@ -1264,7 +1264,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": null,
-      "metric": "Emissions intensity",
+      "metric": "Emissions Intensity",
       "value": 0.497,
       "unit": "tCO2e/MWh"
     },
@@ -1273,7 +1273,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": null,
-      "metric": "Emissions intensity",
+      "metric": "Emissions Intensity",
       "value": 0.493,
       "unit": "tCO2e/MWh"
     },
@@ -1282,7 +1282,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": null,
-      "metric": "Absolute emissions",
+      "metric": "Absolute Emissions",
       "value": 769.7,
       "unit": "tCO2e"
     },
@@ -1291,7 +1291,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": null,
-      "metric": "Absolute emissions",
+      "metric": "Absolute Emissions",
       "value": 811.1,
       "unit": "tCO2e"
     },
@@ -1300,7 +1300,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": null,
-      "metric": "Absolute emissions",
+      "metric": "Absolute Emissions",
       "value": 898.7,
       "unit": "tCO2e"
     },
@@ -1309,7 +1309,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": null,
-      "metric": "Absolute emissions",
+      "metric": "Absolute Emissions",
       "value": 1012.2,
       "unit": "tCO2e"
     },
@@ -1318,7 +1318,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": null,
-      "metric": "Absolute emissions",
+      "metric": "Absolute Emissions",
       "value": 1148.2,
       "unit": "tCO2e"
     },
@@ -1327,7 +1327,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": null,
-      "metric": "Absolute emissions",
+      "metric": "Absolute Emissions",
       "value": 1310.6,
       "unit": "tCO2e"
     },
@@ -1336,7 +1336,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": null,
-      "metric": "Absolute emissions",
+      "metric": "Absolute Emissions",
       "value": 1498.2,
       "unit": "tCO2e"
     },
@@ -1345,7 +1345,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Coal",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.419,
       "unit": "%"
     },
@@ -1354,7 +1354,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Coal",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.363,
       "unit": "%"
     },
@@ -1363,7 +1363,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Coal",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.339,
       "unit": "%"
     },
@@ -1372,7 +1372,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Coal",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.327,
       "unit": "%"
     },
@@ -1381,7 +1381,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Coal",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.318,
       "unit": "%"
     },
@@ -1390,7 +1390,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Coal",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.313,
       "unit": "%"
     },
@@ -1399,7 +1399,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Coal",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.312,
       "unit": "%"
     },
@@ -1408,7 +1408,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Oil",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.019,
       "unit": "%"
     },
@@ -1417,7 +1417,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Oil",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.031,
       "unit": "%"
     },
@@ -1426,7 +1426,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Oil",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.026,
       "unit": "%"
     },
@@ -1435,7 +1435,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Oil",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.023,
       "unit": "%"
     },
@@ -1444,7 +1444,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Oil",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.02,
       "unit": "%"
     },
@@ -1453,7 +1453,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Oil",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.018,
       "unit": "%"
     },
@@ -1462,7 +1462,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Oil",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.016,
       "unit": "%"
     },
@@ -1471,7 +1471,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Gas",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.27,
       "unit": "%"
     },
@@ -1480,7 +1480,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Gas",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.315,
       "unit": "%"
     },
@@ -1489,7 +1489,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Gas",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.322,
       "unit": "%"
     },
@@ -1498,7 +1498,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Gas",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.324,
       "unit": "%"
     },
@@ -1507,7 +1507,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Gas",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.327,
       "unit": "%"
     },
@@ -1516,7 +1516,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Gas",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.331,
       "unit": "%"
     },
@@ -1525,7 +1525,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Gas",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.336,
       "unit": "%"
     },
@@ -1534,7 +1534,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Nuclear",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": null,
       "unit": "%"
     },
@@ -1543,7 +1543,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Nuclear",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": null,
       "unit": "%"
     },
@@ -1552,7 +1552,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Nuclear",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": null,
       "unit": "%"
     },
@@ -1561,7 +1561,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Nuclear",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": null,
       "unit": "%"
     },
@@ -1570,7 +1570,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Nuclear",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": null,
       "unit": "%"
     },
@@ -1579,7 +1579,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Nuclear",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": null,
       "unit": "%"
     },
@@ -1588,7 +1588,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Nuclear",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": null,
       "unit": "%"
     },
@@ -1597,7 +1597,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Hydro",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.195,
       "unit": "%"
     },
@@ -1606,7 +1606,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Hydro",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.192,
       "unit": "%"
     },
@@ -1615,7 +1615,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Hydro",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.199,
       "unit": "%"
     },
@@ -1624,7 +1624,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Hydro",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.198,
       "unit": "%"
     },
@@ -1633,7 +1633,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Hydro",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.197,
       "unit": "%"
     },
@@ -1642,7 +1642,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Hydro",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.195,
       "unit": "%"
     },
@@ -1651,7 +1651,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Hydro",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.193,
       "unit": "%"
     },
@@ -1660,7 +1660,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Wind",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.011,
       "unit": "%"
     },
@@ -1669,7 +1669,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Wind",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.016,
       "unit": "%"
     },
@@ -1678,7 +1678,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Wind",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.018,
       "unit": "%"
     },
@@ -1687,7 +1687,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Wind",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.02,
       "unit": "%"
     },
@@ -1696,7 +1696,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Wind",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.023,
       "unit": "%"
     },
@@ -1705,7 +1705,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Wind",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.024,
       "unit": "%"
     },
@@ -1714,7 +1714,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Wind",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.023,
       "unit": "%"
     },
@@ -1723,7 +1723,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Solar",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.031,
       "unit": "%"
     },
@@ -1732,7 +1732,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Solar",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.033,
       "unit": "%"
     },
@@ -1741,7 +1741,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Solar",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.036,
       "unit": "%"
     },
@@ -1750,7 +1750,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Solar",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.038,
       "unit": "%"
     },
@@ -1759,7 +1759,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Solar",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.039,
       "unit": "%"
     },
@@ -1768,7 +1768,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Solar",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.04,
       "unit": "%"
     },
@@ -1777,7 +1777,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Solar",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.036,
       "unit": "%"
     },
@@ -1786,7 +1786,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Biomass",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.034,
       "unit": "%"
     },
@@ -1795,7 +1795,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Biomass",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.03,
       "unit": "%"
     },
@@ -1804,7 +1804,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Biomass",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.042,
       "unit": "%"
     },
@@ -1813,7 +1813,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Biomass",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.051,
       "unit": "%"
     },
@@ -1822,7 +1822,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Biomass",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.058,
       "unit": "%"
     },
@@ -1831,7 +1831,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Biomass",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.062,
       "unit": "%"
     },
@@ -1840,7 +1840,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Biomass",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.065,
       "unit": "%"
     },
@@ -1849,7 +1849,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Other",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.021,
       "unit": "%"
     },
@@ -1858,7 +1858,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Other",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.019,
       "unit": "%"
     },
@@ -1867,7 +1867,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Other",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.018,
       "unit": "%"
     },
@@ -1876,7 +1876,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Other",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.018,
       "unit": "%"
     },
@@ -1885,7 +1885,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Other",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.018,
       "unit": "%"
     },
@@ -1894,7 +1894,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Other",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.018,
       "unit": "%"
     },
@@ -1903,7 +1903,7 @@
       "geography": "South East Asia",
       "sector": "Power",
       "technology": "Other",
-      "metric": "Technology mix",
+      "metric": "Technology Mix",
       "value": 0.018,
       "unit": "%"
     }
