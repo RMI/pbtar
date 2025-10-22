@@ -50,12 +50,18 @@
     "source": {
       "description": "TKTK",
       "type": "string",
-      "maxLength": 1000
+      "maxLength": 500
     },
     "emissionsScope": {
-      "description": "TKTK",
+      "description": "Defines which greenhouse gases are covered in the scenario’s emissions accounting.",
       "type": "string",
-      "maxLength": 1000
+      "enum": [
+        "No information",
+        "CO2",
+        "CO2e (Kyoto)",
+        "CO2e (CO2, Methane)",
+        "Other"
+      ]
     },
     "sector": {
       "description": "TKTK",
@@ -171,7 +177,27 @@
           },
           "sector": {
             "description": "TKTK",
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Land Use",
+              "Agriculture",
+              "Buildings",
+              "Industry",
+              "Steel",
+              "Cement",
+              "Chemicals",
+              "Coal Mining",
+              "Oil (Upstream)",
+              "Gas (Upstream)",
+              "Power",
+              "Automotive",
+              "Transport",
+              "Road transport",
+              "Aviation",
+              "Rail",
+              "Shipping",
+              "Other"
+            ]
           },
           "technology": {
             "description": "TKTK",
