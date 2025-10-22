@@ -68,12 +68,12 @@
       "maximum": 2030
     },
     "pathwayName": {
-      "description": "TKTK",
+      "description": "Name of the assosciated scenario.",
       "type": "string",
       "maxLength": 100
     },
     "source": {
-      "description": "TKTK",
+      "description": "Data source for the scenario data.",
       "type": "string",
       "maxLength": 500
     },
@@ -89,30 +89,30 @@
       ]
     },
     "sector": {
-      "description": "TKTK",
+      "description": "Sectors that the scenario data covers.",
       "type": "object",
       "patternProperties": {
         "^[A-Za-z0-9 _-]{1,100}$": {
           "type": "object",
           "properties": {
             "displayName": {
-              "description": "TKTK",
+              "description": "Display name of the sector as presented in charts or tables.",
               "$ref": "#/$defs/sectorDisplayName"
             },
             "technology": {
-              "description": "TKTK",
+              "description": "Technologies that belong to this sector, each with a name and definition.",
               "type": "object",
               "patternProperties": {
                 "^[A-Za-z0-9 _-]{1,100}$": {
                   "type": "object",
                   "properties": {
                     "displayName": {
-                      "description": "TKTK",
+                      "description": "Display name of the technology as presented in charts or tables.",
                       "type": "string",
                       "maxLength": 100
                     },
                     "definition": {
-                      "description": "TKTK",
+                      "description": "Brief definition or description of the technology scope (e.g., what it includes or excludes).",
                       "type": "string",
                       "maxLength": 1000
                     }
@@ -125,24 +125,24 @@
               "minProperties": 1
             },
             "metric": {
-              "description": "TKTK",
+              "description": "Metrics available for this sector, describing what quantities are tracked (e.g., capacity, emissions).",
               "type": "object",
               "patternProperties": {
                 "^[A-Za-z0-9 _-]{1,100}$": {
                   "type": "object",
                   "properties": {
                     "displayName": {
-                      "description": "TKTK",
+                      "description": "Display name of the metric as presented in charts or tables.",
                       "type": "string",
                       "maxLength": 100
                     },
                     "definition": {
-                      "description": "TKTK",
+                      "description": "Brief definition or description of the metric.",
                       "type": "string",
                       "maxLength": 1000
                     },
                     "sectorScope": {
-                      "description": "TKTK",
+                      "description": "Specifies whether the metric applies to the whole sector or a sub-sector context.",
                       "type": "string",
                       "maxLength": 1000
                     }
@@ -161,13 +161,13 @@
       "minProperties": 1
     },
     "data": {
-      "description": "TKTK",
+      "description": "Array of yearly data points for each sector, technology, and metric defined in this timeseries.",
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
           "year": {
-            "description": "TKTK",
+            "description": "Calendar year of the data point.",
             "type": "integer",
             "minimum": 1900,
             "maximum": 2100
@@ -181,23 +181,23 @@
             ]
           },
           "sector": {
-            "description": "TKTK",
+            "description": "Sector to which this data point belongs (must match one of the defined sectors).",
             "$ref": "#/$defs/sectorDisplayName"
           },
           "technology": {
-            "description": "TKTK",
+            "description": "Technology represented in this record (e.g., Solar, Wind, or null if sector-level only).",
             "type": ["string", "null"]
           },
           "metric": {
-            "description": "TKTK",
+            "description": "Metric reported for this record (e.g., Capacity, Generation, Emissions Intensity).",
             "type": "string"
           },
           "value": {
-            "description": "TKTK",
+            "description": "Numeric value of the metric for the given year, sector, and technology.",
             "type": ["number", "null"]
           },
           "unit": {
-            "description": "TKTK",
+            "description": "Measurement unit associated with the metric value (e.g., GW, TWh, tCO2e).",
             "type": "string"
           }
         },
