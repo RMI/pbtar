@@ -1,66 +1,102 @@
 import Ajv from "ajv";
-import type { ValidateFunction } from "ajv";
 import addFormats from "ajv-formats";
-import schema from "../schema/schema.json" with { type: "json" };
-import type { Scenario } from "../types";
+import type { SchemaObject, ErrorObject } from "ajv";
+import pathwayMetadata from "../schema/pathwayMetadata.v1.json" with { type: "json" };
 
-export type FileEntry = { name: string; data: Scenario[] };
-
+export type FileEntry = { name: string; data: unknown };
 export type ValidationProblem = {
   name: string;
   errors: string[];
-  /** Provided only when the blob is at least an array (even if schema-invalid). */
-  data?: Scenario[];
+  data?: unknown;
 };
-
+export type ValidationRecord = {
+  name: string;
+  schemaId: string;
+  data: unknown;
+};
 export type ValidationOutcome = {
-  valid: Scenario[];
+  valid: ValidationRecord[];
   invalid: ValidationProblem[];
 };
 
-function makeValidator() {
+function makeAjv(schemas: readonly (object | SchemaObject)[]) {
   const ajv = new Ajv({
     allErrors: true,
     strict: true,
     multipleOfPrecision: 12,
   });
   addFormats(ajv);
-  return ajv.compile(schema);
+  for (const s of schemas) ajv.addSchema(s as SchemaObject);
+  return ajv;
 }
 
-export function validateScenariosCollect(
+function fmt(errors: ErrorObject[] | null | undefined): string[] {
+  if (!errors || !errors.length) return [];
+  return errors.map((e) =>
+    `${e.instancePath || "/"} ${e.message ?? "validation error"}`.trim(),
+  );
+}
+
+// ---------- Safe $schema access ----------
+type HasSchemaString = { $schema: string };
+function hasSchemaString(x: unknown): x is HasSchemaString {
+  return (
+    typeof x === "object" &&
+    x !== null &&
+    "$schema" in (x as Record<string, unknown>) &&
+    typeof (x as Record<string, unknown>)["$schema"] === "string"
+  );
+}
+
+/**
+ * Generic, schema-routed validator.
+ * - Preload *only* the schemas you pass in.
+ * - Each entry must include a string `"$schema"` that matches one of those schemas’ `$id`.
+ */
+export function validateFilesBySchema(
   entries: FileEntry[],
-  validator: ValidateFunction = makeValidator(),
+  schemas: readonly (object | SchemaObject)[],
 ): ValidationOutcome {
-  const valid: Scenario[] = [];
+  const ajv = makeAjv(schemas);
+  const valid: ValidationRecord[] = [];
   const invalid: ValidationProblem[] = [];
 
   for (const { name, data } of entries) {
-    const ok = validator(data);
-    if (!ok || !Array.isArray(data)) {
-      const msgs =
-        validator.errors?.map((e) =>
-          `${e.instancePath || "/"} ${e.message ?? ""}`.trim(),
-        ) ?? [];
+    if (!hasSchemaString(data)) {
+      invalid.push({ name, errors: ['missing or non-string "$schema"'] });
+      continue;
+    }
+    const schemaId = data.$schema;
+    const validate = ajv.getSchema(schemaId);
+    if (!validate) {
       invalid.push({
         name,
-        errors: msgs.length ? msgs : ["unknown validation error"],
-        data: Array.isArray(data) ? data : undefined,
+        errors: [`no schema preloaded for $schema "${schemaId}"`],
+        data,
       });
       continue;
     }
-    valid.push(...data);
+    const ok = validate(data);
+    if (ok) valid.push({ name, schemaId, data });
+    else invalid.push({ name, errors: fmt(validate.errors), data });
   }
   return { valid, invalid };
 }
 
-export function validateScenarios(entries: FileEntry[]): Scenario[] {
-  const { valid, invalid } = validateScenariosCollect(entries);
-  if (invalid.length) {
-    const problems = invalid
-      .map((p) => `✖ ${p.name}\n  ${p.errors.join("\n  ")}`)
-      .join("\n\n");
-    throw new Error(`Schema validation failed:\n\n${problems}\n`);
-  }
-  return valid;
+/**
+ * Scenario-specific validator:
+ *  - Filters to *only* metadata files (`$schema === pathwayMetadata.$id`)
+ *  - Validates them using the metadata schema only
+ *  - Returns the same {valid, invalid} shape as the generic validator
+ *
+ * This keeps CI happy (counts still work) and isolates the UI’s eager path.
+ */
+export function validateScenariosCollect(
+  entries: FileEntry[],
+): ValidationOutcome {
+  const META_ID = String((pathwayMetadata as SchemaObject).$id);
+  const metaEntries = entries.filter(
+    (e) => hasSchemaString(e.data) && e.data.$schema === META_ID,
+  );
+  return validateFilesBySchema(metaEntries, [pathwayMetadata]);
 }

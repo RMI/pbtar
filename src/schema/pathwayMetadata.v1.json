@@ -1,0 +1,418 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
+  "title": "PBTAR Scenarios metadata Schema",
+  "description": "A schema for the scenarios metadata dataset in PBTAR.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "description": "URI of the schema that validates this document (see https://json-schema.org/).",
+      "type": "string",
+      "maxLength": 1000
+    },
+    "id": {
+      "description": "The unique identifier for a scenario.",
+      "type": "string",
+      "maxLength": 100
+    },
+    "name": {
+      "description": "Name of the scenario.",
+      "type": "string",
+      "maxLength": 100
+    },
+    "description": {
+      "description": "Brief description of the scenario.",
+      "type": "string",
+      "pattern": "\\.$",
+      "maxLength": 100
+    },
+    "pathwayType": {
+      "description": "Type of the scenario pathway.",
+      "type": "string",
+      "enum": ["Normative", "Exploratory", "Direct Policy", "Predictive"]
+    },
+    "modelYearNetzero": {
+      "description": "Year by which net zero is reached in the scenario. If Scenario does not reach net zero, this field should be omitted.",
+      "type": "integer",
+      "minimum": 2030,
+      "maximum": 2100
+    },
+    "carbonBudget": {
+      "description": "Carbon budget of the scenario in gigatons of CO2 equivalent (GtCO2eq). If no carbon budget is defined, this field should be omitted. If the carbon budget is not applicable, it should be set to 0.",
+      "type": "number",
+      "minimum": 0
+    },
+    "modelYearStart": {
+      "description": "Year from which the model starts.",
+      "type": "integer",
+      "minimum": 1900,
+      "maximum": 2030
+    },
+    "modelYearEnd": {
+      "description": "Year in which the model ends.",
+      "type": "integer",
+      "minimum": 2030,
+      "maximum": 2100
+    },
+    "modelTempIncrease": {
+      "description": "Modeled temperature increase expected by the scenario (in degrees Celsius).",
+      "type": "number",
+      "multipleOf": 0.1,
+      "minimum": 0.5,
+      "maximum": 3
+    },
+    "ssp": {
+      "description": "Shared Socioeconomic Pathways (SSP) associated with the scenario.",
+      "type": "string",
+      "enum": ["SSP1", "SSP2", "SSP3", "SSP4", "SSP5"]
+    },
+    "geography": {
+      "description": "Geographical areas that the scenario covers. Can include 'Global', country ISO-3166-1 alpha-2 codes (US, DE), or free-text region names (e.g., 'Europe', 'OECD'). Any 2-letter items in the array will be treated as an ISO code. Any 2-letter entries that do not map to a country will throw errors (EU). Do not use full country names, only ISO alpha-2 codes. To avoid typographical errors, items in this array may not be 3 letters long (USA)",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "allOf": [
+          { "pattern": "^(?!\\s*$).+" },
+          { "not": { "pattern": "^[A-Za-z]{3}$" } }
+        ]
+      }
+    },
+    "sectors": {
+      "description": "Sectors that the scenario covers.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "Land Use",
+              "Agriculture",
+              "Buildings",
+              "Industry",
+              "Steel",
+              "Cement",
+              "Chemicals",
+              "Coal Mining",
+              "Oil (Upstream)",
+              "Gas (Upstream)",
+              "Power",
+              "Automotive",
+              "Transport",
+              "Road transport",
+              "Aviation",
+              "Rail",
+              "Shipping",
+              "Other"
+            ]
+          },
+          "technologies": {
+            "type": "array",
+            "description": "Technologies applicable to this sector.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Precision Agriculture",
+                "Agroforestry",
+                "Bioenergy Crops",
+                "Energy Efficiency",
+                "Smart Grids",
+                "Renewable Heating",
+                "Heat Pumps",
+                "Building Automation",
+                "Smart Appliances",
+                "Insulation",
+                "Carbon Capture and Storage",
+                "Electrification",
+                "Process Optimization",
+                "Hydrogen Use",
+                "Coal",
+                "Oil",
+                "Gas",
+                "Wind",
+                "Solar",
+                "Nuclear",
+                "Biomass",
+                "Hydro",
+                "Renewables",
+                "Electric Vehicles",
+                "Hydrogen Vehicles",
+                "Biofuels",
+                "Public Transport",
+                "Active Mobility",
+                "Aviation Efficiency",
+                "Maritime Efficiency",
+                "Other"
+              ]
+            }
+          }
+        },
+        "required": ["name", "technologies"],
+        "additionalProperties": false
+      }
+    },
+    "publisher": {
+      "description": "Publisher of the scenario.",
+      "type": "string",
+      "maxLength": 100
+    },
+    "publicationYear": {
+      "description": "Year that the scenario was published.",
+      "type": "integer",
+      "minimum": 1900,
+      "maximum": 2030
+    },
+    "scenarioOverview": {
+      "description": "Overview of the scenario.",
+      "type": "string",
+      "pattern": "\\.$",
+      "maxLength": 1000
+    },
+    "expertOverview": {
+      "description": "Expert recommendation for the scenario.",
+      "type": "string",
+      "pattern": "\\.$",
+      "maxLength": 10000
+    },
+    "dataSource": {
+      "description": "Data source for the scenario.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the data source.",
+          "type": "string",
+          "pattern": "\\.$",
+          "maxLength": 1000
+        },
+        "url": {
+          "description": "URL at which the data source can be accessed.",
+          "type": "string",
+          "pattern": "^(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*$"
+        },
+        "downloadAvailable": {
+          "description": "Flag indicating if the data source can be downloaded.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["description", "url", "downloadAvailable"]
+    },
+    "metric": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "description": "Metrics used in the pathway",
+        "type": "string",
+        "enum": [
+          "Emissions Intensity",
+          "Capacity",
+          "Generation",
+          "Technology Mix",
+          "Absolute Emissions"
+        ]
+      }
+    },
+    "keyFeatures": {
+      "description": "Key features of the scenario.",
+      "type": "object",
+      "properties": {
+        "emissionsPathway": {
+          "description": "Describes the overall trend of greenhouse gas emissions over time, from continued growth to rapid decline.",
+          "type": "string",
+          "enum": [
+            "No information",
+            "Continued growth",
+            "Plateau",
+            "Growth then decline",
+            "Moderate decline",
+            "Fast decline"
+          ]
+        },
+        "energyEfficiency": {
+          "description": "Indicates how efficiently energy is used to produce economic output across the sectors covered in the pathway.",
+          "type": "string",
+          "enum": [
+            "No information",
+            "Declining",
+            "Static energy efficiency",
+            "Moderate improvements",
+            "Significant improvements"
+          ]
+        },
+        "energyDemand": {
+          "description": "Captures the change in total energy consumption, driven by factors such as socio-economic development, technology shifts and consumer behavior.",
+          "type": "string",
+          "enum": [
+            "No information",
+            "Decrease",
+            "Static energy demand",
+            "Moderate growth",
+            "Significant growth"
+          ]
+        },
+        "electrification": {
+          "description": "Represents the extent to which energy end-uses transition from fossil fuels to electricity.",
+          "type": "string",
+          "enum": [
+            "No information",
+            "Decrease",
+            "Stable electrification",
+            "Moderate increase",
+            "Significant increase"
+          ]
+        },
+        "policyTypes": {
+          "description": "Identifies the types of policies modeled as drivers of the scenario, such as carbon pricing, subsidies, or mandated phaseouts of specific technologies.",
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "Carbon price",
+              "Phaseout dates",
+              "Subsidies",
+              "Target technology shares",
+              "Other"
+            ]
+          }
+        },
+        "technologyCostTrend": {
+          "description": "Describes how technology costs evolve over time, from static cost assumptions to rapidly declining costs (e.g., via learning curves).",
+          "type": "string",
+          "enum": [
+            "No information",
+            "Static",
+            "Linear trend",
+            "S-curves",
+            "Other"
+          ]
+        },
+        "technologyDeploymentTrend": {
+          "description": "Indicates the scale and pace of new technology adoption within the scenario, where significant deployment means that several new technologies are adopted rapidly",
+          "type": "string",
+          "enum": [
+            "No information",
+            "No deployment of new technologies",
+            "Moderate deployment of new technologies",
+            "Significant deployment of new technologies"
+          ]
+        },
+        "emissionsScope": {
+          "description": "Defines which greenhouse gases are covered in the scenario’s emissions accounting.",
+          "type": "string",
+          "enum": [
+            "No information",
+            "CO2",
+            "CO2e (Kyoto)",
+            "CO2e (CO2, Methane)",
+            "Other"
+          ]
+        },
+        "policyAmbition": {
+          "description": "Represents the overall stringency and intent of modeled policies relative to climate targets, often reflecting if and how far the included policies go beyond currently legislated ones",
+          "type": "string",
+          "enum": [
+            "No information",
+            "Current/legislated policies",
+            "NDCs",
+            "NDCs and long term commitments",
+            "Normative/Optimization-based",
+            "Other"
+          ]
+        },
+        "technologyCostsDetail": {
+          "description": "Specifies the level of granularity in cost data, such as total system costs or detailed CAPEX/OPEX breakdowns.",
+          "type": "string",
+          "enum": [
+            "No information",
+            "Total costs",
+            "Capital costs/O&M/etc.",
+            "Other"
+          ]
+        },
+        "newTechnologiesIncluded": {
+          "description": "Lists emerging or breakthrough technologies that are explicitly modeled within the pathway. These are considered in technology deployment too.",
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "No information",
+              "CCUS",
+              "DAC",
+              "Green H2/ammonia",
+              "SAF",
+              "Battery storage",
+              "EGS/AGS",
+              "Other"
+            ]
+          }
+        },
+        "supplyChain": {
+          "description": "Describes how upstream fuel or material price dynamics are represented in the scenario.",
+          "type": "string",
+          "enum": [
+            "No information",
+            "Static upstream fuel/material prices",
+            "Dynamic upstream fuel/material prices"
+          ]
+        },
+        "investmentNeeds": {
+          "description": "Summarizes how investment requirements are quantified, from total system to sector-level or supply-chain detail.",
+          "type": "string",
+          "enum": [
+            "No information",
+            "Total investment",
+            "Sector-level",
+            "Sector-level by upstream/in-stream/downstream"
+          ]
+        },
+        "infrastructureRequirements": {
+          "description": "Describes how infrastructure buildout and maintenance needs are represented across the supply chain.",
+          "type": "string",
+          "enum": [
+            "No information",
+            "By part of supply chain",
+            "By part of supply chain and maintenance/buildout"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "emissionsPathway",
+        "energyEfficiency",
+        "energyDemand",
+        "electrification",
+        "policyTypes",
+        "technologyCostTrend",
+        "technologyDeploymentTrend",
+        "emissionsScope",
+        "policyAmbition",
+        "technologyCostsDetail",
+        "newTechnologiesIncluded",
+        "supplyChain",
+        "investmentNeeds",
+        "infrastructureRequirements"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "description",
+    "pathwayType",
+    "geography",
+    "sectors",
+    "publisher",
+    "publicationYear",
+    "expertOverview",
+    "dataSource",
+    "metric",
+    "keyFeatures"
+  ]
+}

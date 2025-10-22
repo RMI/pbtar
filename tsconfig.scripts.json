@@ -9,5 +9,5 @@
   "ts-node": {
     "esm": true
   },
-  "include": ["scripts/**/*", "src/validation/**/*", "src/schema/schema.json"]
+  "include": ["scripts/**/*", "src/validation/**/*", "src/schema/*.json"]
 }
