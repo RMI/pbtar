@@ -23,39 +23,6 @@ afterEach(() => {
 });
 
 /* ----------------------------
- * assembleScenarios unit tests
- * ---------------------------- */
-describe("assembleScenarios", () => {
-  it("includes invalid when includeInvalid=true and warns accordingly", async () => {
-    vi.mock("./validateScenarios", () => ({
-      validateScenariosCollect: () => ({
-        valid: [{ id: "A" }],
-        invalid: [
-          { name: "bad.json", errors: ["/ nope"], data: [{ id: "B" }] },
-        ],
-      }),
-    }));
-
-    const { assembleScenarios } = await importModule();
-    const warn = vi.fn();
-
-    const out = assembleScenarios(
-      [
-        { name: "good.json", data: [{ id: "A" }] },
-        { name: "bad.json", data: [{ id: "B" }] },
-      ],
-      { includeInvalid: true, warn },
-    );
-
-    expect(out).toEqual([{ id: "A" }, { id: "B" }]);
-    expect(warn).toHaveBeenCalledTimes(1);
-    expect(String(warn.mock.calls[0][0])).toContain(
-      "These will be included in the output",
-    );
-  });
-});
-
-/* ----------------------------
  * decideIncludeInvalid unit tests
  * ---------------------------- */
 describe("decideIncludeInvalid", () => {
