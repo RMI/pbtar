@@ -1,41 +1,40 @@
-[
-  {
-    "id": "scenario-minimal",
-    "name": "Minimal Scenario",
-    "description": "A minimal scenario file that passes schema validation.",
-    "pathwayType": "Exploratory",
-    "geography": ["Country-Specific"],
-    "sectors": [
-      {
-        "name": "Other",
-        "technologies": ["Other"]
-      }
-    ],
-    "publisher": "Test Publisher",
-    "publicationYear": 1900,
-    "scenarioOverview": "This is a minimal scenario for testing purposes.",
-    "expertOverview": "Test recommendation.",
-    "metric": ["Capacity"],
-    "dataSource": {
-      "description": "Test Data Source.",
-      "url": "http://example.com/",
-      "downloadAvailable": false
-    },
-    "keyFeatures": {
-      "emissionsPathway": "No information",
-      "energyEfficiency": "No information",
-      "energyDemand": "No information",
-      "electrification": "No information",
-      "policyTypes": ["Other"],
-      "technologyCostTrend": "Other",
-      "technologyDeploymentTrend": "No information",
-      "emissionsScope": "No information",
-      "policyAmbition": "No information",
-      "technologyCostsDetail": "No information",
-      "newTechnologiesIncluded": ["No information"],
-      "supplyChain": "No information",
-      "investmentNeeds": "No information",
-      "infrastructureRequirements": "No information"
+{
+  "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
+  "id": "scenario-minimal",
+  "name": "Minimal Scenario",
+  "description": "A minimal scenario file that passes schema validation.",
+  "pathwayType": "Exploratory",
+  "geography": ["Country-Specific"],
+  "sectors": [
+    {
+      "name": "Other",
+      "technologies": ["Other"]
     }
+  ],
+  "publisher": "Test Publisher",
+  "publicationYear": 1900,
+  "scenarioOverview": "This is a minimal scenario for testing purposes.",
+  "expertOverview": "Test recommendation.",
+  "metric": ["Capacity"],
+  "dataSource": {
+    "description": "Test Data Source.",
+    "url": "http://example.com/",
+    "downloadAvailable": false
+  },
+  "keyFeatures": {
+    "emissionsPathway": "No information",
+    "energyEfficiency": "No information",
+    "energyDemand": "No information",
+    "electrification": "No information",
+    "policyTypes": ["Other"],
+    "technologyCostTrend": "Other",
+    "technologyDeploymentTrend": "No information",
+    "emissionsScope": "No information",
+    "policyAmbition": "No information",
+    "technologyCostsDetail": "No information",
+    "newTechnologiesIncluded": ["No information"],
+    "supplyChain": "No information",
+    "investmentNeeds": "No information",
+    "infrastructureRequirements": "No information"
   }
-]
+}
