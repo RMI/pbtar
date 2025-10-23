@@ -43,8 +43,8 @@ const ScenarioDetailPage: React.FC = () => {
   }, [id]);
 
   // Timeseries index state
-  const [tsIndexLoaded, setTsIndexLoaded] = React.useState(false);
-  const [datasets, setDatasets] = React.useState<
+  const [tsIndexLoaded, setTsIndexLoaded] = useState(false);
+  const [datasets, setDatasets] = useState<
     Array<{
       datasetId: string;
       label?: string;
@@ -53,27 +53,32 @@ const ScenarioDetailPage: React.FC = () => {
     }>
   >([]);
 
-  React.useEffect(() => {
-    let mounted = true;
-    (async () => {
-      const idx = await fetchTimeseriesIndex();
-      if (!mounted) return;
-      const pathwayId =
-        (scenario as any)?.id ??
-        (scenario as any)?.slug ??
-        (scenario as any)?.pathwayId ??
-        null;
-      if (idx && pathwayId) {
-        setDatasets(datasetsForPathway(idx, String(pathwayId)));
-      } else {
-        setDatasets([]);
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadDatasets = async (): Promise<void> => {
+      try {
+        const idx = await fetchTimeseriesIndex();
+        if (!isMounted) return;
+
+        const pathwayId: string = scenario?.id ?? "";
+
+        if (idx && pathwayId) {
+          setDatasets(datasetsForPathway(idx, pathwayId));
+        } else {
+          setDatasets([]);
+        }
+        setTsIndexLoaded(true);
+      } catch (err) {
+        console.error("Failed to load timeseries index:", err);
       }
-      setTsIndexLoaded(true);
-    })();
-    return () => {
-      mounted = false;
     };
-  }, [scenario?.id]);
+
+    void loadDatasets(); // explicitly mark ignored promise to satisfy no-floating-promises
+    return () => {
+      isMounted = false;
+    };
+  }, [scenario]); // depend on the full object to avoid eslint warning
 
   if (loading) {
     return (
