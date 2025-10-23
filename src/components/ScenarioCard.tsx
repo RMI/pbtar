@@ -91,9 +91,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           </p>
           <div className="flex flex-wrap gap-2">
             <BadgeMaybeAbsent
-              tooltip={getPathwayTypeTooltip(
-                scenario.pathwayType as PathwayType,
-              )}
+              tooltip={getPathwayTypeTooltip(scenario.pathwayType)}
               variant="pathwayType"
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
             >

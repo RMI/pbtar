@@ -94,9 +94,7 @@ const ScenarioDetailPage: React.FC = () => {
 
           <div className="flex flex-wrap gap-2 mb-4">
             <BadgeMaybeAbsent
-              tooltip={getPathwayTypeTooltip(
-                scenario.pathwayType as PathwayType,
-              )}
+              tooltip={getPathwayTypeTooltip(scenario.pathwayType)}
               variant="pathwayType"
             >
               {scenario.pathwayType}
