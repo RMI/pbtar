@@ -23,7 +23,7 @@ export default function DownloadDataset({
       ].join(" ")}
     >
       <div className="min-w-0">
-        <p className="text-rmigray-700 mb-4 ">{label}</p>
+        <p className="text-rmigray-700">{label}</p>
         {summary ? (
           <p className="text-xs text-neutral-500 mt-1 truncate">{summary}</p>
         ) : null}
