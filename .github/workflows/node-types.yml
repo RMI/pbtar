@@ -1,14 +1,5 @@
-name: Check JSON Schema and Generated Types Sync
-
 on:
-  push:
-    branches:
-      - main
-      - master
-      - develop
-  pull_request:
-    branches:
-      - "**"
+  workflow_call:
 
 jobs:
   types-check:
