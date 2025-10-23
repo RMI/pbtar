@@ -48,7 +48,12 @@ export interface PBTARScenariosTimeseriesSchema {
   /**
    * Defines which greenhouse gases are covered in the pathway's modeled emissions.
    */
-  emissionsScope: "No information" | "CO2" | "CO2e (Kyoto)" | "CO2e (CO2, Methane)" | "Other";
+  emissionsScope:
+    | "No information"
+    | "CO2"
+    | "CO2e (Kyoto)"
+    | "CO2e (CO2, Methane)"
+    | "Other";
   /**
    * Sectors that the scenario data covers.
    */
@@ -142,7 +147,12 @@ export interface PBTARScenariosTimeseriesSchema {
           /**
            * Display name of the metric as presented in charts or tables.
            */
-          displayName: "Emissions Intensity" | "Capacity" | "Generation" | "Technology Mix" | "Absolute Emissions";
+          displayName:
+            | "Emissions Intensity"
+            | "Capacity"
+            | "Generation"
+            | "Technology Mix"
+            | "Absolute Emissions";
           /**
            * Brief definition or description of the metric.
            */
@@ -231,7 +241,12 @@ export interface PBTARScenariosTimeseriesSchema {
     /**
      * Metric reported for this record (e.g., Capacity, Generation, Emissions Intensity).
      */
-    metric: "Emissions Intensity" | "Capacity" | "Generation" | "Technology Mix" | "Absolute Emissions";
+    metric:
+      | "Emissions Intensity"
+      | "Capacity"
+      | "Generation"
+      | "Technology Mix"
+      | "Absolute Emissions";
     /**
      * Numeric value of the metric for the given year, sector, and technology.
      */

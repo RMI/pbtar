@@ -152,7 +152,13 @@ export interface PBTARScenariosMetadataSchema {
      */
     downloadAvailable: boolean;
   };
-  metric: ("Emissions Intensity" | "Capacity" | "Generation" | "Technology Mix" | "Absolute Emissions")[];
+  metric: (
+    | "Emissions Intensity"
+    | "Capacity"
+    | "Generation"
+    | "Technology Mix"
+    | "Absolute Emissions"
+  )[];
   /**
    * Key features of the scenario.
    */
@@ -179,7 +185,12 @@ export interface PBTARScenariosMetadataSchema {
     /**
      * Captures the change in total energy consumption, driven by factors such as socio-economic development, technology shifts and consumer behavior.
      */
-    energyDemand: "No information" | "Decrease" | "Static energy demand" | "Moderate growth" | "Significant growth";
+    energyDemand:
+      | "No information"
+      | "Decrease"
+      | "Static energy demand"
+      | "Moderate growth"
+      | "Significant growth";
     /**
      * Represents the extent to which energy end-uses transition from fossil fuels to electricity.
      */
@@ -195,13 +206,30 @@ export interface PBTARScenariosMetadataSchema {
      * @minItems 1
      */
     policyTypes: [
-      "Carbon price" | "Phaseout dates" | "Subsidies" | "Target technology shares" | "Other",
-      ...("Carbon price" | "Phaseout dates" | "Subsidies" | "Target technology shares" | "Other")[]
+      (
+        | "Carbon price"
+        | "Phaseout dates"
+        | "Subsidies"
+        | "Target technology shares"
+        | "Other"
+      ),
+      ...(
+        | "Carbon price"
+        | "Phaseout dates"
+        | "Subsidies"
+        | "Target technology shares"
+        | "Other"
+      )[],
     ];
     /**
      * Describes how technology costs evolve over time, from static cost assumptions to rapidly declining costs (e.g., via learning curves).
      */
-    technologyCostTrend: "No information" | "Static" | "Linear trend" | "S-curves" | "Other";
+    technologyCostTrend:
+      | "No information"
+      | "Static"
+      | "Linear trend"
+      | "S-curves"
+      | "Other";
     /**
      * Indicates the scale and pace of new technology adoption within the scenario, where significant deployment means that several new technologies are adopted rapidly
      */
@@ -213,7 +241,12 @@ export interface PBTARScenariosMetadataSchema {
     /**
      * Defines which greenhouse gases are covered in the scenario’s emissions accounting.
      */
-    emissionsScope: "No information" | "CO2" | "CO2e (Kyoto)" | "CO2e (CO2, Methane)" | "Other";
+    emissionsScope:
+      | "No information"
+      | "CO2"
+      | "CO2e (Kyoto)"
+      | "CO2e (CO2, Methane)"
+      | "Other";
     /**
      * Represents the overall stringency and intent of modeled policies relative to climate targets, often reflecting if and how far the included policies go beyond currently legislated ones
      */
@@ -227,20 +260,45 @@ export interface PBTARScenariosMetadataSchema {
     /**
      * Specifies the level of granularity in cost data, such as total system costs or detailed CAPEX/OPEX breakdowns.
      */
-    technologyCostsDetail: "No information" | "Total costs" | "Capital costs/O&M/etc." | "Other";
+    technologyCostsDetail:
+      | "No information"
+      | "Total costs"
+      | "Capital costs/O&M/etc."
+      | "Other";
     /**
      * Lists emerging or breakthrough technologies that are explicitly modeled within the pathway. These are considered in technology deployment too.
      *
      * @minItems 1
      */
     newTechnologiesIncluded: [
-      "No information" | "CCUS" | "DAC" | "Green H2/ammonia" | "SAF" | "Battery storage" | "EGS/AGS" | "Other",
-      ...("No information" | "CCUS" | "DAC" | "Green H2/ammonia" | "SAF" | "Battery storage" | "EGS/AGS" | "Other")[]
+      (
+        | "No information"
+        | "CCUS"
+        | "DAC"
+        | "Green H2/ammonia"
+        | "SAF"
+        | "Battery storage"
+        | "EGS/AGS"
+        | "Other"
+      ),
+      ...(
+        | "No information"
+        | "CCUS"
+        | "DAC"
+        | "Green H2/ammonia"
+        | "SAF"
+        | "Battery storage"
+        | "EGS/AGS"
+        | "Other"
+      )[],
     ];
     /**
      * Describes how upstream fuel or material price dynamics are represented in the scenario.
      */
-    supplyChain: "No information" | "Static upstream fuel/material prices" | "Dynamic upstream fuel/material prices";
+    supplyChain:
+      | "No information"
+      | "Static upstream fuel/material prices"
+      | "Dynamic upstream fuel/material prices";
     /**
      * Summarizes how investment requirements are quantified, from total system to sector-level or supply-chain detail.
      */
