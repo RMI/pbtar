@@ -1,28 +1,23 @@
 import type { FacetMode } from "../utils/searchUtils";
+import type { PBTARScenariosMetadataSchema } from "./pathwayMetadata.v1";
 
-export interface Scenario {
-  id: string;
-  name: string;
-  description: string;
-  pathwayType: string;
-  modelYearEnd: string;
-  modelYearNetzero?: number;
-  modelTempIncrease?: number;
-  geography: string[];
-  metric: string[];
-  sectors: {
-    name: Sector;
-  }[];
-  publisher: string;
-  publicationYear: string;
-  overview: string;
-  expertOverview: string;
-  dataSource: {
-    description: string;
-    url: string;
-    downloadAvailable: boolean;
-  };
-}
+export type Scenario = Pick<
+  PBTARScenariosMetadataSchema,
+  | "id"
+  | "name"
+  | "description"
+  | "pathwayType"
+  | "modelYearNetzero"
+  | "modelTempIncrease"
+  | "geography"
+  | "metric"
+  | "sectors"
+  | "publisher"
+  | "publicationYear"
+  | "scenarioOverview"
+  | "expertOverview"
+  | "dataSource"
+>;
 
 export type PathwayType = "Normative" | "Projection" | "Policy" | "Exploration";
 
@@ -82,3 +77,5 @@ export interface SearchFilters {
     metric?: FacetMode;
   } | null;
 }
+
+export type { PBTARScenariosMetadataSchema };
