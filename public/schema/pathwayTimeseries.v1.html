@@ -477,7 +477,7 @@
               >
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
-            <span class="description"><p>Publisher of the scenario.</p> </span>
+            <span class="description"><p>Title of the publication.</p> </span>
 
             <p>
               <span
@@ -619,7 +619,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
             <span class="description"
-              ><p>Name of the assosciated scenario.</p>
+              ><p>Name of the associated scenario.</p>
             </span>
 
             <p>
@@ -764,8 +764,8 @@
             ><br />
             <span class="description"
               ><p>
-                Defines which greenhouse gases are covered in the scenario’s
-                emissions accounting.
+                Defines which greenhouse gases are covered in the pathway's
+                modeled emissions.
               </p>
             </span>
             <div
@@ -1467,7 +1467,7 @@
                                             </div>
                                             <span
                                               class="badge badge-dark value-type"
-                                              >Type: string</span
+                                              >Type: enum (of string)</span
                                             ><br />
                                             <span class="description"
                                               ><p>
@@ -1476,16 +1476,169 @@
                                                 tables.
                                               </p>
                                             </span>
-
-                                            <p>
-                                              <span
-                                                class="badge badge-light restriction max-length-restriction"
-                                                id="sector_pattern1_technology_pattern1_displayName_maxLength"
-                                                >Must be at most
-                                                <code>100</code> characters
-                                                long</span
-                                              >
-                                            </p>
+                                            <div
+                                              class="enum-value"
+                                              id="sector_pattern1_technology_pattern1_displayName_enum"
+                                            >
+                                              <h4>Must be one of:</h4>
+                                              <ul class="list-group">
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Precision Agriculture"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Agroforestry"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Bioenergy Crops"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Energy Efficiency"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Smart Grids"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Renewable Heating"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Heat Pumps"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Building Automation"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Smart Appliances"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Insulation"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Carbon Capture and Storage"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Electrification"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Process Optimization"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Hydrogen Use"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Coal"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Oil"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Gas"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Wind"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Solar"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Nuclear"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Biomass"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Hydro"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Renewables"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Electric Vehicles"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Hydrogen Vehicles"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Biofuels"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Public Transport"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Active Mobility"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Aviation Efficiency"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Maritime Efficiency"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Other"
+                                                </li>
+                                              </ul>
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
@@ -2020,7 +2173,7 @@
                                             </div>
                                             <span
                                               class="badge badge-dark value-type"
-                                              >Type: string</span
+                                              >Type: enum (of string)</span
                                             ><br />
                                             <span class="description"
                                               ><p>
@@ -2028,16 +2181,39 @@
                                                 presented in charts or tables.
                                               </p>
                                             </span>
-
-                                            <p>
-                                              <span
-                                                class="badge badge-light restriction max-length-restriction"
-                                                id="sector_pattern1_metric_pattern1_displayName_maxLength"
-                                                >Must be at most
-                                                <code>100</code> characters
-                                                long</span
-                                              >
-                                            </p>
+                                            <div
+                                              class="enum-value"
+                                              id="sector_pattern1_metric_pattern1_displayName_enum"
+                                            >
+                                              <h4>Must be one of:</h4>
+                                              <ul class="list-group">
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Emissions Intensity"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Capacity"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Generation"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Technology Mix"
+                                                </li>
+                                                <li
+                                                  class="list-group-item enum-item"
+                                                >
+                                                  "Absolute Emissions"
+                                                </li>
+                                              </ul>
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
@@ -2332,9 +2508,9 @@
                                             ><br />
                                             <span class="description"
                                               ><p>
-                                                Specifies whether the metric
-                                                applies to the whole sector or a
-                                                sub-sector context.
+                                                Specifies which parts of the
+                                                sector value chain the metric
+                                                applies to.
                                               </p>
                                             </span>
 
@@ -7037,15 +7213,15 @@
                         <br />
                         <span class="description"
                           ><p>
-                            Geographical areas that the scenario covers. Can
-                            include 'Global', country ISO-3166-1 alpha-2 codes
-                            (US, DE), or free-text region names (e.g., 'Europe',
-                            'OECD'). Any 2-letter items in the array will be
-                            treated as an ISO code. Any 2-letter entries that do
-                            not map to a country will throw errors (EU). Do not
-                            use full country names, only ISO alpha-2 codes. To
-                            avoid typographical errors, items in this array may
-                            not be 3 letters long (USA)
+                            Geographical area that the scenario covers. This
+                            should be a single string value: either 'Global', a
+                            country ISO-3166-1 alpha-2 code (e.g., 'US', 'DE'),
+                            or a free-text region name (e.g., 'North America',
+                            'South East Asia'). Only 2-letter codes are accepted
+                            for countries; do not use full country names or
+                            3-letter codes (e.g., 'USA' is not allowed). If a
+                            2-letter code does not map to a country (e.g.,
+                            'EU'), it will result in an error.
                           </p>
                         </span>
                         <div
@@ -7837,7 +8013,7 @@
                           >
                         </div>
                         <span class="badge badge-dark value-type"
-                          >Type: number or null</span
+                          >Type: number</span
                         ><br />
                         <span class="description"
                           ><p>
