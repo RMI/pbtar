@@ -9,7 +9,7 @@ import {
   normalizeGeography,
   sortGeographiesForDetails,
 } from "../utils/geographyUtils";
-import { Scenario, PathwayType } from "../types";
+import { Scenario } from "../types";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
 import { prioritizeMatches, prioritizeGeographies } from "../utils/sortUtils";

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Markdown from "../components/Markdown";
 import { scenariosData } from "../data/scenariosData";
-import { Scenario, PathwayType } from "../types";
+import { Scenario } from "../types";
 import { BadgeMaybeAbsent } from "../components/Badge";
 import BadgeArray from "../components/BadgeArray";
 import {
