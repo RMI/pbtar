@@ -109,7 +109,39 @@
                     "displayName": {
                       "description": "Display name of the technology as presented in charts or tables.",
                       "type": "string",
-                      "maxLength": 100
+                      "enum": [
+                        "Precision Agriculture",
+                        "Agroforestry",
+                        "Bioenergy Crops",
+                        "Energy Efficiency",
+                        "Smart Grids",
+                        "Renewable Heating",
+                        "Heat Pumps",
+                        "Building Automation",
+                        "Smart Appliances",
+                        "Insulation",
+                        "Carbon Capture and Storage",
+                        "Electrification",
+                        "Process Optimization",
+                        "Hydrogen Use",
+                        "Coal",
+                        "Oil",
+                        "Gas",
+                        "Wind",
+                        "Solar",
+                        "Nuclear",
+                        "Biomass",
+                        "Hydro",
+                        "Renewables",
+                        "Electric Vehicles",
+                        "Hydrogen Vehicles",
+                        "Biofuels",
+                        "Public Transport",
+                        "Active Mobility",
+                        "Aviation Efficiency",
+                        "Maritime Efficiency",
+                        "Other"
+                      ]
                     },
                     "definition": {
                       "description": "Brief definition or description of the technology scope (e.g., what it includes or excludes).",
@@ -134,7 +166,13 @@
                     "displayName": {
                       "description": "Display name of the metric as presented in charts or tables.",
                       "type": "string",
-                      "maxLength": 100
+                      "enum": [
+                        "Emissions Intensity",
+                        "Capacity",
+                        "Generation",
+                        "Technology Mix",
+                        "Absolute Emissions"
+                      ]
                     },
                     "definition": {
                       "description": "Brief definition or description of the metric.",
