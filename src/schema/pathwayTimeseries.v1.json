@@ -57,7 +57,7 @@
       "maxLength": 100
     },
     "publicationName": {
-      "description": "Publisher of the scenario.",
+      "description": "Title of the publication.",
       "type": "string",
       "maxLength": 100
     },
@@ -68,7 +68,7 @@
       "maximum": 2030
     },
     "pathwayName": {
-      "description": "Name of the assosciated scenario.",
+      "description": "Name of the associated scenario.",
       "type": "string",
       "maxLength": 100
     },
@@ -78,7 +78,7 @@
       "maxLength": 500
     },
     "emissionsScope": {
-      "description": "Defines which greenhouse gases are covered in the scenario’s emissions accounting.",
+      "description": "Defines which greenhouse gases are covered in the pathway's modeled emissions.",
       "type": "string",
       "enum": [
         "No information",
@@ -142,7 +142,7 @@
                       "maxLength": 1000
                     },
                     "sectorScope": {
-                      "description": "Specifies whether the metric applies to the whole sector or a sub-sector context.",
+                      "description": "Specifies which parts of the sector value chain the metric applies to.",
                       "type": "string",
                       "maxLength": 1000
                     }
@@ -173,7 +173,7 @@
             "maximum": 2100
           },
           "geography": {
-            "description": "Geographical areas that the scenario covers. Can include 'Global', country ISO-3166-1 alpha-2 codes (US, DE), or free-text region names (e.g., 'Europe', 'OECD'). Any 2-letter items in the array will be treated as an ISO code. Any 2-letter entries that do not map to a country will throw errors (EU). Do not use full country names, only ISO alpha-2 codes. To avoid typographical errors, items in this array may not be 3 letters long (USA)",
+            "description": "Geographical area that the scenario covers. This should be a single string value: either 'Global', a country ISO-3166-1 alpha-2 code (e.g., 'US', 'DE'), or a free-text region name (e.g., 'North America', 'South East Asia'). Only 2-letter codes are accepted for countries; do not use full country names or 3-letter codes (e.g., 'USA' is not allowed). If a 2-letter code does not map to a country (e.g., 'EU'), it will result in an error.",
             "type": "string",
             "allOf": [
               { "pattern": "^(?!\\s*$).+" },
