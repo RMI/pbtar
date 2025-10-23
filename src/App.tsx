@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 import ScenarioDetailPage from "./pages/ScenarioDetailPage";
+import LandingPage from "./pages/LandingPage";
 import EnvironmentBanner from "./components/EnvironmentBanner";
 
 // Export the inner content for testing
@@ -18,6 +19,10 @@ export const AppContent = () => {
         <Routes>
           <Route
             path="/"
+            element={<LandingPage />}
+          />
+          <Route
+            path="/scenario"
             element={<HomePage />}
           />
           <Route

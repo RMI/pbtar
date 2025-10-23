@@ -59,7 +59,7 @@ const ScenarioDetailPage: React.FC = () => {
           The scenario you're looking for doesn't exist or has been removed.
         </p>
         <Link
-          to="/"
+          to="/scenario"
           className="inline-flex items-center px-4 py-2 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200"
         >
           <ArrowLeft
