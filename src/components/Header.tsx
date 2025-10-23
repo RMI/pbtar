@@ -26,9 +26,9 @@ const Header: React.FC = () => {
 
         <nav className="flex mt-4 md:mt-0">
           <Link
-            to="/"
+            to="/scenario"
             className={`px-4 py-2 text-sm md:text-base font-medium transition-colors duration-200 hover:text-energy ${
-              location.pathname === "/"
+              location.pathname === "/scenario"
                 ? "text-energy border-b-2 border-energy"
                 : "text-white"
             }`}
