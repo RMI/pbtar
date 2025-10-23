@@ -1,23 +1,31 @@
 // scripts/build-timeseries-index.ts
 // Build a compact linkage index from arbitrary JSON under src/data/**.
-// - Identifies timeseries by $schema containing "pathwayTimeseries.v1.json" (or full URL).
-// - Normalizes fields:
-//     datasetId  := datasetId | id
-//     pathwayIDs := pathwayID (string|array) | pathwayIds | pathwayId
-//     label      := label | name
-// - Silently skips non-timeseries and unparsable JSON.
-// - Writes src/data/index.json with { byPathway, byDataset, schema }.
+//
+// Behavior (env flags):
+//   - TS_INDEX_STRICT=1 : exit(1) if any timeseries is malformed (missing datasetId/id or pathwayID)
+//   - TS_INDEX_DEBUG=1  : verbose logs for skipped files & reasons
+//
+// Detection & normalization:
+//   - Identify timeseries by $schema containing "pathwayTimeseries.v1.json" (or full URL).
+//   - datasetId  := datasetId | id
+//   - pathwayIDs := pathwayID (string|array) | pathwayIds | pathwayId
+//   - label      := label | name
+//
+// Output:
+//   - Writes src/data/index.json with { byPathway, byDataset, schema }.
 
 import { promises as fs } from "node:fs";
 import * as path from "node:path";
+
+const STRICT = process.env.TS_INDEX_STRICT === "1";
+const DEBUG = process.env.TS_INDEX_DEBUG === "1";
 
 type Header = {
   $schema?: string;
   datasetId?: string;
   id?: string;
-  // You said you use *singular* key "pathwayID" but the value is an array (or string).
+  // You use singular key "pathwayID" (array or string). We also accept common variants.
   pathwayID?: string | string[];
-  // Also accept alternate spellings just in case:
   pathwayIds?: string[];
   pathwayId?: string | string[];
   label?: string;
@@ -36,7 +44,13 @@ type TimeseriesIndex = {
   byPathway: Record<string, IndexItem[]>;
   byDataset: Record<
     string,
-    { datasetId: string; pathwayIds: string[]; label?: string; path: string; summary?: unknown }
+    {
+      datasetId: string;
+      pathwayIds: string[];
+      label?: string;
+      path: string;
+      summary?: unknown;
+    }
   >;
   schema: { version: 1; generatedAt: string };
 };
@@ -49,6 +63,19 @@ const TS_SCHEMA_MATCHERS = [
   "pathwayTimeseries.v1.json",
   "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
 ];
+
+function logDebug(...args: any[]) {
+  if (DEBUG) console.log("[timeseries-index][debug]", ...args);
+}
+function logInfo(...args: any[]) {
+  console.log("[timeseries-index]", ...args);
+}
+function logWarn(...args: any[]) {
+  console.warn("[timeseries-index]", ...args);
+}
+function logError(...args: any[]) {
+  console.error("[timeseries-index]", ...args);
+}
 
 async function isDir(p: string) {
   try {
@@ -69,10 +96,8 @@ async function* walk(dir: string): AsyncGenerator<string> {
 
 // Minimal comment stripping to tolerate // and /* */ in JSON files.
 function parseJsonWithComments(raw: string): any {
-  // Remove /* block */ comments:
-  let s = raw.replace(/\/\*[\s\S]*?\*\//g, "");
-  // Remove // line comments (not string-safe but sufficient for our data layout):
-  s = s.replace(/(^|\s)\/\/.*$/gm, "");
+  let s = raw.replace(/\/\*[\s\S]*?\*\//g, ""); // remove /* block */ comments
+  s = s.replace(/(^|\s)\/\/.*$/gm, ""); // remove // line comments (line-wise)
   return JSON.parse(s);
 }
 
@@ -88,7 +113,10 @@ function toWebPath(abs: string): string {
   const marker = `${path.sep}src${path.sep}data${path.sep}`;
   const i = abs.lastIndexOf(marker);
   if (i >= 0) {
-    const tail = abs.slice(i + `${path.sep}src${path.sep}`.length).split(path.sep).join("/");
+    const tail = abs
+      .slice(i + `${path.sep}src${path.sep}`.length)
+      .split(path.sep)
+      .join("/");
     // tail starts with "data/..."
     return "/" + tail; // "/data/..."
   }
@@ -98,13 +126,14 @@ function toWebPath(abs: string): string {
 
 function toArray(v: unknown): string[] | null {
   if (typeof v === "string") return [v];
-  if (Array.isArray(v) && v.every((x) => typeof x === "string")) return v as string[];
+  if (Array.isArray(v) && v.every((x) => typeof x === "string"))
+    return v as string[];
   return null;
 }
 
 async function main() {
   if (!(await isDir(DATA_DIR))) {
-    console.error(`[timeseries-index] Not found: ${DATA_DIR}`);
+    logError(`Not found: ${DATA_DIR}`);
     process.exit(1);
   }
 
@@ -112,19 +141,28 @@ async function main() {
   const byDataset: TimeseriesIndex["byDataset"] = {};
 
   const invalidTimeseries: string[] = [];
+  const debugParseErrors: string[] = [];
+  const debugNonTimeseries: string[] = [];
 
   for await (const file of walk(DATA_DIR)) {
     let parsed: Header | null = null;
 
-    // Silently skip JSON we can't parse; metadata files often include comments or different shapes.
+    // Silently skip JSON we can't parse; optionally record debug info.
     try {
       const raw = await fs.readFile(file, "utf8");
       parsed = parseJsonWithComments(raw) as Header;
-    } catch {
-      continue; // silent
+    } catch (e: any) {
+      if (DEBUG)
+        debugParseErrors.push(
+          `${path.relative(ROOT, file)} :: ${e?.message ?? "parse error"}`,
+        );
+      continue;
     }
 
-    if (!isTimeseriesHeader(parsed)) continue; // not a timeseries → skip silently
+    if (!isTimeseriesHeader(parsed)) {
+      if (DEBUG) debugNonTimeseries.push(path.relative(ROOT, file));
+      continue; // not a timeseries → skip silently (or debug-log)
+    }
 
     // ---- Normalize keys per your BAS file shape ----
     const datasetId = (parsed.datasetId ?? parsed.id) as string | undefined;
@@ -132,11 +170,13 @@ async function main() {
     // pathwayIDs: prefer singular key "pathwayID", else fallback to other common keys.
     let pids: string[] | null =
       toArray(parsed.pathwayID) ??
-      (Array.isArray(parsed.pathwayIds) ? parsed.pathwayIds : toArray(parsed.pathwayId));
+      (Array.isArray(parsed.pathwayIds)
+        ? parsed.pathwayIds
+        : toArray(parsed.pathwayId));
 
     if (!datasetId || !pids || pids.length === 0) {
-      invalidTimeseries.push(file);
-      continue; // skip this malformed timeseries without noise
+      invalidTimeseries.push(path.relative(ROOT, file));
+      continue; // skip malformed timeseries; strict mode may fail later
     }
 
     // Normalize label/summary/path
@@ -146,7 +186,7 @@ async function main() {
 
     const item: IndexItem = { datasetId, label, summary, path: webPath };
 
-    // byDataset (last one wins if duplicates; datasetId should be unique)
+    // byDataset (datasetId should be unique; last one wins deterministically by traversal)
     byDataset[datasetId] = {
       datasetId,
       pathwayIds: [...new Set(pids)].sort(),
@@ -175,19 +215,35 @@ async function main() {
 
   await fs.writeFile(OUT_FILE, JSON.stringify(out, null, 2) + "\n", "utf8");
 
-  // Keep logs minimal/non-noisy: one success line, plus an optional concise summary.
-  console.log(`[timeseries-index] Wrote ${path.relative(ROOT, OUT_FILE)}`);
+  // Logs
+  logInfo(`Wrote ${path.relative(ROOT, OUT_FILE)}`);
+
+  if (DEBUG) {
+    if (debugParseErrors.length) {
+      logDebug(`Parse-skipped files (${debugParseErrors.length}):`);
+      for (const m of debugParseErrors) logDebug("  -", m);
+    }
+    if (debugNonTimeseries.length) {
+      logDebug(`Non-timeseries JSON skipped (${debugNonTimeseries.length}):`);
+      for (const f of debugNonTimeseries) logDebug("  -", f);
+    }
+  }
+
   if (invalidTimeseries.length) {
-    const sample = invalidTimeseries.slice(0, 5).map((f) => path.relative(ROOT, f));
-    console.log(
-      `[timeseries-index] Skipped ${invalidTimeseries.length} invalid timeseries (missing datasetId/pathwayIDs). Example(s): ${sample.join(
-        ", "
-      )}`
+    const sample = invalidTimeseries.slice(0, 5);
+    logWarn(
+      `Skipped ${invalidTimeseries.length} invalid timeseries (missing datasetId/id or pathwayID). Example(s): ${sample.join(
+        ", ",
+      )}`,
     );
+    if (STRICT) {
+      logError("STRICT mode: failing due to invalid timeseries.");
+      process.exit(1);
+    }
   }
 }
 
 main().catch((e) => {
-  console.error("[timeseries-index] Fatal:", e instanceof Error ? e.message : String(e));
+  logError("Fatal:", e instanceof Error ? e.message : String(e));
   process.exit(1);
 });
