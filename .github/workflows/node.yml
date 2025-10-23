@@ -41,6 +41,11 @@ jobs:
     if: ${{ !( github.event_name == 'pull_request' && github.event.action == 'closed' ) }}
     uses: ./.github/workflows/node-json-schema.yml
 
+  types:
+    name: "JSON Schema <-> Types Validation"
+    if: ${{ !( github.event_name == 'pull_request' && github.event.action == 'closed' ) }}
+    uses: ./.github/workflows/node-types.yml
+
   build-release:
     name: "Build and Release"
     if: ${{ !( github.event_name == 'pull_request' && github.event.action == 'closed' ) }}
