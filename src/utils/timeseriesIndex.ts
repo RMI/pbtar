@@ -62,6 +62,19 @@ export function summarizeSummary(summary: unknown): string | undefined {
   const s = summary as Record<string, unknown>;
   const parts: string[] = [];
 
+  // Support yearRange: [minYear, maxYear]
+  const yr = Array.isArray(s["yearRange"])
+    ? (s["yearRange"] as unknown[])
+    : null;
+  if (
+    yr &&
+    yr.length === 2 &&
+    typeof yr[0] === "number" &&
+    typeof yr[1] === "number"
+  ) {
+    parts.push(`${yr[0]} → ${yr[1]}`);
+  }
+  // Back-compat: dateRange: [startISO, endISO]
   const dr = Array.isArray(s["dateRange"])
     ? (s["dateRange"] as unknown[])
     : null;
@@ -73,9 +86,11 @@ export function summarizeSummary(summary: unknown): string | undefined {
   ) {
     parts.push(`${dr[0]} → ${dr[1]}`);
   }
-  if (typeof s["seriesCount"] === "number")
-    parts.push(`${s["seriesCount"]} series`);
-  if (typeof s["rows"] === "number") parts.push(`${s["rows"]} rows`);
+  if (typeof s["sectorCount"] === "number")
+    parts.push(`${s["sectorCount"]} sectors`);
+  if (typeof s["geographyCount"] === "number")
+    parts.push(`${s["geographyCount"]} geographies`);
+  if (typeof s["rowCount"] === "number") parts.push(`${s["rowCount"]} rows`);
 
   return parts.length ? parts.join(" · ") : undefined;
 }

@@ -179,10 +179,61 @@ async function main() {
       continue; // skip malformed timeseries; strict mode may fail later
     }
 
-    // Normalize label/summary/path
+    // Normalize label/path
     const label = (parsed.label ?? parsed.name) as string | undefined;
-    const summary = parsed.summary;
     const webPath = toWebPath(file);
+
+    // ---------- Compute lightweight summary ----------
+    // We avoid heavy work; single pass over data if it exists.
+    const rawData: unknown = (parsed as any)?.data;
+    let computed: Record<string, unknown> = {};
+    if (Array.isArray(rawData) && rawData.length > 0) {
+      let minYear: number | undefined;
+      let maxYear: number | undefined;
+      let rowCount = 0;
+      const sectors = new Set<string>();
+      const geos = new Set<string>();
+
+      for (const row of rawData as any[]) {
+        rowCount++;
+        // Year from explicit 'year' or from 'date'
+        const y =
+          typeof row?.year === "number"
+            ? row.year
+            : row?.date
+              ? new Date(row.date).getUTCFullYear()
+              : undefined;
+        if (typeof y === "number" && Number.isFinite(y)) {
+          if (minYear === undefined || y < minYear) minYear = y;
+          if (maxYear === undefined || y > maxYear) maxYear = y;
+        }
+        // Unique sectors
+        if (typeof row?.sector === "string" && row.sector)
+          sectors.add(row.sector);
+        // Unique geographies (prefer 'geography', fallback 'region')
+        const g =
+          typeof row?.geography === "string"
+            ? row.geography
+            : typeof row?.region === "string"
+              ? row.region
+              : undefined;
+        if (g) geos.add(g);
+      }
+
+      if (rowCount > 0) computed.rowCount = rowCount;
+      if (minYear !== undefined && maxYear !== undefined) {
+        computed.yearRange = [minYear, maxYear];
+      }
+      if (sectors.size > 0) computed.sectorCount = sectors.size;
+      if (geos.size > 0) computed.geographyCount = geos.size;
+    }
+
+    // Merge with any author-provided summary in the file (computed wins on conflicts)
+    const userSummary =
+      parsed.summary && typeof parsed.summary === "object"
+        ? (parsed.summary as Record<string, unknown>)
+        : {};
+    const summary = { ...userSummary, ...computed };
 
     const item: IndexItem = { datasetId, label, summary, path: webPath };
 

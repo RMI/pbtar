@@ -4,6 +4,12 @@
       {
         "datasetId": "ACE-BAS-2024_TS",
         "label": "Baseline Scenario (BAS) Timeseries Data",
+        "summary": {
+          "rowCount": 182,
+          "yearRange": [2022, 2050],
+          "sectorCount": 1,
+          "geographyCount": 1
+        },
         "path": "/data/asean-centre-for-energy/BAS-2024_timeseries.json"
       }
     ]
@@ -11,15 +17,19 @@
   "byDataset": {
     "ACE-BAS-2024_TS": {
       "datasetId": "ACE-BAS-2024_TS",
-      "pathwayIds": [
-        "ACE-BAS-2024"
-      ],
+      "pathwayIds": ["ACE-BAS-2024"],
       "label": "Baseline Scenario (BAS) Timeseries Data",
+      "summary": {
+        "rowCount": 182,
+        "yearRange": [2022, 2050],
+        "sectorCount": 1,
+        "geographyCount": 1
+      },
       "path": "/data/asean-centre-for-energy/BAS-2024_timeseries.json"
     }
   },
   "schema": {
     "version": 1,
-    "generatedAt": "2025-10-23T17:52:09.642Z"
+    "generatedAt": "2025-10-23T18:03:36.667Z"
   }
 }
