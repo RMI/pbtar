@@ -273,69 +273,6 @@
       "year": 2022,
       "geography": "South East Asia",
       "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Capacity",
-      "value": null,
-      "unit": "GW"
-    },
-    {
-      "year": 2025,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Capacity",
-      "value": null,
-      "unit": "GW"
-    },
-    {
-      "year": 2030,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Capacity",
-      "value": null,
-      "unit": "GW"
-    },
-    {
-      "year": 2035,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Capacity",
-      "value": null,
-      "unit": "GW"
-    },
-    {
-      "year": 2040,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Capacity",
-      "value": null,
-      "unit": "GW"
-    },
-    {
-      "year": 2045,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Capacity",
-      "value": null,
-      "unit": "GW"
-    },
-    {
-      "year": 2050,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Capacity",
-      "value": null,
-      "unit": "GW"
-    },
-    {
-      "year": 2022,
-      "geography": "South East Asia",
-      "sector": "Power",
       "technology": "Hydro",
       "metric": "Capacity",
       "value": 62.3,
@@ -834,69 +771,6 @@
       "technology": "Gas",
       "metric": "Generation",
       "value": 1021.6,
-      "unit": "TWh"
-    },
-    {
-      "year": 2022,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Generation",
-      "value": null,
-      "unit": "TWh"
-    },
-    {
-      "year": 2025,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Generation",
-      "value": null,
-      "unit": "TWh"
-    },
-    {
-      "year": 2030,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Generation",
-      "value": null,
-      "unit": "TWh"
-    },
-    {
-      "year": 2035,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Generation",
-      "value": null,
-      "unit": "TWh"
-    },
-    {
-      "year": 2040,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Generation",
-      "value": null,
-      "unit": "TWh"
-    },
-    {
-      "year": 2045,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Generation",
-      "value": null,
-      "unit": "TWh"
-    },
-    {
-      "year": 2050,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Generation",
-      "value": null,
       "unit": "TWh"
     },
     {
@@ -1527,69 +1401,6 @@
       "technology": "Gas",
       "metric": "Technology Mix",
       "value": 0.336,
-      "unit": "%"
-    },
-    {
-      "year": 2022,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Technology Mix",
-      "value": null,
-      "unit": "%"
-    },
-    {
-      "year": 2025,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Technology Mix",
-      "value": null,
-      "unit": "%"
-    },
-    {
-      "year": 2030,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Technology Mix",
-      "value": null,
-      "unit": "%"
-    },
-    {
-      "year": 2035,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Technology Mix",
-      "value": null,
-      "unit": "%"
-    },
-    {
-      "year": 2040,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Technology Mix",
-      "value": null,
-      "unit": "%"
-    },
-    {
-      "year": 2045,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Technology Mix",
-      "value": null,
-      "unit": "%"
-    },
-    {
-      "year": 2050,
-      "geography": "South East Asia",
-      "sector": "Power",
-      "technology": "Nuclear",
-      "metric": "Technology Mix",
-      "value": null,
       "unit": "%"
     },
     {

@@ -232,7 +232,7 @@
           },
           "value": {
             "description": "Numeric value of the metric for the given year, sector, and technology.",
-            "type": ["number", "null"]
+            "type": "number"
           },
           "unit": {
             "description": "Measurement unit associated with the metric value (e.g., GW, TWh, tCO2e).",
