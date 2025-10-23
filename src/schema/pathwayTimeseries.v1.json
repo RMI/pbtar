@@ -224,11 +224,52 @@
           },
           "technology": {
             "description": "Technology represented in this record (e.g., Solar, Wind, or null if sector-level only).",
-            "type": ["string", "null"]
+            "type": ["string", "null"],
+            "enum": [
+              "Precision Agriculture",
+              "Agroforestry",
+              "Bioenergy Crops",
+              "Energy Efficiency",
+              "Smart Grids",
+              "Renewable Heating",
+              "Heat Pumps",
+              "Building Automation",
+              "Smart Appliances",
+              "Insulation",
+              "Carbon Capture and Storage",
+              "Electrification",
+              "Process Optimization",
+              "Hydrogen Use",
+              "Coal",
+              "Oil",
+              "Gas",
+              "Wind",
+              "Solar",
+              "Nuclear",
+              "Biomass",
+              "Hydro",
+              "Renewables",
+              "Electric Vehicles",
+              "Hydrogen Vehicles",
+              "Biofuels",
+              "Public Transport",
+              "Active Mobility",
+              "Aviation Efficiency",
+              "Maritime Efficiency",
+              "Other",
+              null
+            ]
           },
           "metric": {
             "description": "Metric reported for this record (e.g., Capacity, Generation, Emissions Intensity).",
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Emissions Intensity",
+              "Capacity",
+              "Generation",
+              "Technology Mix",
+              "Absolute Emissions"
+            ]
           },
           "value": {
             "description": "Numeric value of the metric for the given year, sector, and technology.",
