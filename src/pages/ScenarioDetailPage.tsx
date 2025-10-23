@@ -18,6 +18,12 @@ import {
   getSectorTooltip,
   getMetricTooltip,
 } from "../utils/tooltipUtils";
+import DownloadDataset from "../components/DownloadDataset";
+import {
+  fetchTimeseriesIndex,
+  datasetsForPathway,
+  summarizeSummary,
+} from "../utils/timeseriesIndex";
 
 const ScenarioDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -35,6 +41,39 @@ const ScenarioDetailPage: React.FC = () => {
 
     return () => clearTimeout(timer);
   }, [id]);
+
+  // Timeseries index state
+  const [tsIndexLoaded, setTsIndexLoaded] = React.useState(false);
+  const [datasets, setDatasets] = React.useState<
+    Array<{
+      datasetId: string;
+      label?: string;
+      path: string;
+      summary?: unknown;
+    }>
+  >([]);
+
+  React.useEffect(() => {
+    let mounted = true;
+    (async () => {
+      const idx = await fetchTimeseriesIndex();
+      if (!mounted) return;
+      const pathwayId =
+        (scenario as any)?.id ??
+        (scenario as any)?.slug ??
+        (scenario as any)?.pathwayId ??
+        null;
+      if (idx && pathwayId) {
+        setDatasets(datasetsForPathway(idx, String(pathwayId)));
+      } else {
+        setDatasets([]);
+      }
+      setTsIndexLoaded(true);
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, [scenario?.id]);
 
   if (loading) {
     return (
@@ -163,6 +202,28 @@ const ScenarioDetailPage: React.FC = () => {
                   </div>
                 </div>
               </section>
+
+              {tsIndexLoaded && datasets.length > 0 ? (
+                <section className="mt-8">
+                  <h3 className="text-sm font-semibold text-neutral-600 mb-3">
+                    Related datasets
+                  </h3>
+                  <div className="grid gap-3">
+                    {datasets.map((d) => {
+                      const label = d.label ?? d.datasetId;
+                      const summary = summarizeSummary(d.summary);
+                      return (
+                        <DownloadDataset
+                          key={d.datasetId}
+                          label={label}
+                          href={d.path}
+                          summary={summary}
+                        />
+                      );
+                    })}
+                  </div>
+                </section>
+              ) : null}
             </div>
 
             <div className="md:col-span-4">
