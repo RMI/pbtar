@@ -5,6 +5,7 @@ import type { FileEntry } from "../src/utils/validateScenarios.ts";
 import { validateFilesBySchema } from "../src/utils/validateScenarios.ts";
 import { decideIncludeInvalid } from "../src/utils/loadScenarios.ts";
 import pathwayMetadata from "../src/schema/pathwayMetadata.v1.json" with { type: "json" };
+import pathwayTimeseries from "../src/schema/pathwayTimeseries.v1.json" with { type: "json" };
 
 async function run(dir: string) {
   async function getJsonFilesRecursive(base: string): Promise<string[]> {
@@ -30,7 +31,10 @@ async function run(dir: string) {
     entries.push({ name: file, data: JSON.parse(raw) });
   }
 
-  const { valid, invalid } = validateFilesBySchema(entries, [pathwayMetadata]);
+  const { valid, invalid } = validateFilesBySchema(entries, [
+    pathwayMetadata,
+    pathwayTimeseries,
+  ]);
   return { dir, validCount: valid.length, invalid };
 }
 
