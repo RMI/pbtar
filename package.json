@@ -20,7 +20,9 @@
     "json:check:srcdata": "npx ts-node --esm scripts/schema-check-files.ts src/data",
     "json:check:testdata": "npx ts-node --esm scripts/schema-check-files.ts testdata/valid",
     "docs:jsonSchema": "scripts/generate-schema-docs.sh",
-    "prepare:tarball": "npm ci && npm run build && tar -czf dist.tgz -C dist ."
+    "prepare:tarball": "npm ci && npm run build && tar -czf dist.tgz -C dist .",
+    "build:index:timeseries": "npx ts-node --esm scripts/build-timeseries-index.ts",
+    "prebuild": "npm run build:index:timeseries"
   },
   "author": "RMI",
   "license": "MIT",
