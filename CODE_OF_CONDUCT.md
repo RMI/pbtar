@@ -7,4 +7,4 @@ We are committed to fostering a welcoming and inclusive environment for everyone
 - Communicate constructively and with empathy.
 - Respect differing viewpoints and experiences.
 
-Let’s work together to keep this project a positive space to work together.
+Let’s work together to keep this project a positive space.
