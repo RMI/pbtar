@@ -264,10 +264,73 @@ async function main() {
     schema: { version: 1, generatedAt: new Date().toISOString() },
   };
 
-  await fs.writeFile(OUT_FILE, JSON.stringify(out, null, 2) + "\n", "utf8");
+  // -------------------------------
+  // Copy dataset files to public/ and rewrite paths to /data/...
+  // -------------------------------
+  // Build reverse index so we can rewrite all occurrences in byPathway
+  const itemsByDatasetId: Record<
+    string,
+    { arr: Array<{ path: string }>; idx: number }[]
+  > = {};
+  for (const [, arr] of Object.entries(out.byPathway)) {
+    arr.forEach((item, idx) => {
+      const key = item.datasetId;
+      if (!itemsByDatasetId[key]) itemsByDatasetId[key] = [];
+      itemsByDatasetId[key].push({ arr, idx });
+    });
+  }
 
-  // Logs
-  logInfo(`Wrote ${path.relative(ROOT, OUT_FILE)}`);
+  const PUBLIC_DATA_DIR = path.join(ROOT, "public", "data");
+  await fs.mkdir(PUBLIC_DATA_DIR, { recursive: true });
+
+  for (const [dsId, ds] of Object.entries(out.byDataset)) {
+    // ds.path currently looks like "/data/…file.json" (derived from src earlier).
+    // Convert to an absolute src path:
+    const srcAbs = path.join(ROOT, "src", ds.path.replace(/^\//, "")); // -> "<root>/src/data/.../file.json"
+    // Preserve subfolders under data/
+    const relUnderData = ds.path.replace(/^\/?data\/?/, ""); // "foo/bar.json"
+    const destAbs = path.join(PUBLIC_DATA_DIR, relUnderData); // "<root>/public/data/foo/bar.json"
+    await fs.mkdir(path.dirname(destAbs), { recursive: true });
+    try {
+      await fs.copyFile(srcAbs, destAbs);
+      const publicUrl = `/data/${relUnderData}`;
+      // Rewrite in byDataset
+      ds.path = publicUrl;
+      // Rewrite all appearances in byPathway
+      const slots = itemsByDatasetId[dsId] ?? [];
+      for (const slot of slots) {
+        slot.arr[slot.idx].path = publicUrl;
+      }
+    } catch {
+      // If copy fails, leave original path (SWA won't find it, but we don't crash the build).
+      if (DEBUG) logDebug("copyFile failed (skipping):", srcAbs);
+    }
+  }
+  logInfo(`Copied dataset files to ${path.relative(ROOT, PUBLIC_DATA_DIR)}`);
+
+  // -------------------------------
+  // Emit TS module for build-time import + JSON for inspection/fetch
+  // -------------------------------
+  const GEN_TS = path.join(ROOT, "src", "data", "index.gen.ts");
+  const banner =
+    "/* AUTO-GENERATED FILE. DO NOT EDIT.\n   Created by scripts/build-timeseries-index.ts */\n";
+  const tsExport =
+    banner +
+    `export type TimeseriesIndexItem = { datasetId: string; label?: string; path: string; summary?: unknown };
+export type TimeseriesIndex = {
+  byPathway: Record<string, TimeseriesIndexItem[]>;
+  byDataset: Record<string, { datasetId: string; pathwayIds: string[]; label?: string; path: string; summary?: unknown }>;
+  schema: { version: number; generatedAt: string };
+};
+export const index: TimeseriesIndex = ${JSON.stringify(out, null, 2)} as const;
+export default index;
+`;
+  await fs.writeFile(GEN_TS, tsExport, "utf8");
+  logInfo(`Wrote ${path.relative(ROOT, GEN_TS)}.`);
+
+  const PUBLIC_INDEX = path.join(PUBLIC_DATA_DIR, "index.json");
+  await fs.writeFile(PUBLIC_INDEX, JSON.stringify(out, null, 2) + "\n", "utf8");
+  logInfo(`Wrote ${path.relative(ROOT, PUBLIC_INDEX)}`);
 
   if (DEBUG) {
     if (debugParseErrors.length) {

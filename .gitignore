@@ -26,3 +26,7 @@ pnpm-debug.log*
 
 # Python venv
 .venv/
+
+# Generated/copied files
+public/data/**/*
+src/data/index.gen.ts
