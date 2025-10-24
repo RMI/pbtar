@@ -4,8 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AboutPage from "./pages/AboutPage";
-import HomePage from "./pages/HomePage";
+import ScenarioSearch from "./pages/ScenarioSearch";
 import ScenarioDetailPage from "./pages/ScenarioDetailPage";
+import LandingPage from "./pages/LandingPage";
 import EnvironmentBanner from "./components/EnvironmentBanner";
 
 // Export the inner content for testing
@@ -18,7 +19,11 @@ export const AppContent = () => {
         <Routes>
           <Route
             path="/"
-            element={<HomePage />}
+            element={<LandingPage />}
+          />
+          <Route
+            path="/scenario"
+            element={<ScenarioSearch />}
           />
           <Route
             path="/scenario/:id"

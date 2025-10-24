@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import HomePage from "./HomePage";
+import ScenarioSearch from "./ScenarioSearch";
 import { scenariosData } from "../data/scenariosData";
 import { Scenario } from "../types";
 import userEvent from "@testing-library/user-event";
@@ -18,17 +18,17 @@ vi.mock("../components/ScenarioCard", () => ({
   ),
 }));
 
-describe("HomePage component", () => {
-  const renderHomePage = () => {
+describe("ScenarioSearch component", () => {
+  const renderScenarioSearch = () => {
     return render(
       <MemoryRouter>
-        <HomePage />
+        <ScenarioSearch />
       </MemoryRouter>,
     );
   };
 
   it("renders the main heading", () => {
-    renderHomePage();
+    renderScenarioSearch();
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "Find Climate Transition Scenarios",
@@ -36,7 +36,7 @@ describe("HomePage component", () => {
   });
 
   it("displays the introductory paragraph", () => {
-    renderHomePage();
+    renderScenarioSearch();
 
     expect(
       screen.getByText(
@@ -46,17 +46,17 @@ describe("HomePage component", () => {
   });
 
   it("renders a ScenarioCard for each scenario in the data", () => {
-    renderHomePage();
+    renderScenarioSearch();
     // Check that the correct number of scenario cards are rendered
     const scenarioCards = screen.getAllByTestId("scenario-card");
     expect(scenarioCards).toHaveLength(scenariosData.length);
   });
 });
 
-describe("HomePage integration: dropdowns render and filter with 'None'", () => {
-  // IMPORTANT: we dynamically render HomePage AFTER mocking scenariosData,
+describe("ScenarioSearch integration: dropdowns render and filter with 'None'", () => {
+  // IMPORTANT: we dynamically render ScenarioSearch AFTER mocking scenariosData,
   // so these tests don't interfere with any existing unit tests in this file.
-  let HomePageUnderTest: React.ComponentType<unknown>;
+  let ScenarioSearchUnderTest: React.ComponentType<unknown>;
 
   // Use a typed userEvent instance to avoid "no-unsafe-call" on user interactions
   let u: ReturnType<typeof userEvent.setup>;
@@ -117,12 +117,12 @@ describe("HomePage integration: dropdowns render and filter with 'None'", () => 
   async function mountWithFixtures(): Promise<void> {
     // Reset module graph so our mock applies to the next import.
     vi.resetModules();
-    // Mock BEFORE importing HomePage
+    // Mock BEFORE importing ScenarioSearch
     vi.doMock("../data/scenariosData", () => ({ scenariosData: fixtures }), {
       virtual: true,
     });
-    HomePageUnderTest = (await import("./HomePage")).default;
-    render(<HomePageUnderTest />);
+    ScenarioSearchUnderTest = (await import("./ScenarioSearch")).default;
+    render(<ScenarioSearchUnderTest />);
   }
 
   async function openDropdown(labelRegex: RegExp): Promise<HTMLButtonElement> {

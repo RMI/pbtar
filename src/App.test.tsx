@@ -12,8 +12,8 @@ vi.mock("./components/Footer", () => ({
   default: () => <footer data-testid="mock-footer">Footer</footer>,
 }));
 
-vi.mock("./pages/HomePage", () => ({
-  default: () => <div data-testid="mock-homepage">HomePage</div>,
+vi.mock("./pages/LandingPage", () => ({
+  default: () => <div data-testid="mock-homepage">LandingPage</div>,
 }));
 
 describe("App component", () => {
@@ -35,7 +35,7 @@ describe("App component", () => {
     expect(screen.getByTestId("mock-footer")).toBeInTheDocument();
   });
 
-  it("renders the HomePage component", () => {
+  it("renders the LandingPage component", () => {
     render(
       <MemoryRouter>
         <AppContent />
