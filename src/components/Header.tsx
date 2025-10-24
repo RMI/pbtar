@@ -9,7 +9,7 @@ const Header: React.FC = () => {
     <header className="bg-bluespruce text-white shadow-md">
       <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
         <Link
-          to="/"
+          to="/scenario"
           className="flex items-center space-x-3 group transition-all duration-300"
         >
           <BarChart3
