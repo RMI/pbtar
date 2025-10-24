@@ -11,7 +11,7 @@ Thank you for your interest in contributing to this project! We welcome contribu
 - Open a PR from your fork and request review **only when your changes are ready**.
 - A maintainer will review and merge your PR as appropriate.
 
-### For RMI Organization Members
+### For RMI Organization Members (`write` privileges)
 
 - Create a branch directly in the repository.
 - Open a PR into `main` when ready.
