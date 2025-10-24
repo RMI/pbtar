@@ -19,7 +19,9 @@ Thank you for your interest in contributing to this project! We welcome contribu
 
 ## Commit Message Guidelines
 
-- Every pull request (PR) must contain at least one [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/). Not all commits in the PR need to be conventional, but at least one is required.
+- Every pull request (PR) must contain at least one [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/).
+  - Not all commits in the PR need to be conventional, but at least one is required.
+  - This repo has an action set up to comment on PRs with the expected change log, and if there are no conventional commits, that comment will say so.
 
 ## General Guidelines
 
