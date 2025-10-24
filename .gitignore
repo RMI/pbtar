@@ -29,4 +29,3 @@ pnpm-debug.log*
 
 # Generated/copied files
 public/data/**/*
-src/data/index.gen.ts
