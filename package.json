@@ -19,6 +19,9 @@
     "json:check": "npx ts-node --esm scripts/schema-check-files.ts src/data testdata/valid",
     "json:check:srcdata": "npx ts-node --esm scripts/schema-check-files.ts src/data",
     "json:check:testdata": "npx ts-node --esm scripts/schema-check-files.ts testdata/valid",
+    "json:generate:types": "npm run json:generate:types:metadata && npm run json:generate:types:timeseries",
+    "json:generate:types:metadata": "npx json-schema-to-typescript src/schema/pathwayMetadata.v1.json src/types/pathwayMetadata.v1.d.ts",
+    "json:generate:types:timeseries": "npx json-schema-to-typescript src/schema/pathwayTimeseries.v1.json src/types/pathwayTimeseries.v1.d.ts",
     "docs:jsonSchema": "scripts/generate-schema-docs.sh",
     "prepare:tarball": "npm ci && npm run build && tar -czf dist.tgz -C dist ."
   },
@@ -29,6 +32,7 @@
     "ajv-formats": "^3.0.1",
     "clsx": "^2.1.1",
     "i18n-iso-countries": "^7.14.0",
+    "json-schema-to-typescript": "^15.0.4",
     "lucide-react": "^0.546.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

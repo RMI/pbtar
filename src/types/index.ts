@@ -1,30 +1,29 @@
 import type { FacetMode } from "../utils/searchUtils";
+import type { PBTARScenariosMetadataSchema } from "./pathwayMetadata.v1";
 
-export interface Scenario {
-  id: string;
-  name: string;
-  description: string;
-  pathwayType: string;
-  modelYearEnd: string;
-  modelYearNetzero?: number;
-  modelTempIncrease?: number;
-  geography: string[];
-  metric: string[];
-  sectors: {
-    name: Sector;
-  }[];
-  publisher: string;
-  publicationYear: string;
-  overview: string;
-  expertOverview: string;
-  dataSource: {
-    description: string;
-    url: string;
-    downloadAvailable: boolean;
-  };
-}
+export type Scenario = Pick<
+  PBTARScenariosMetadataSchema,
+  | "id"
+  | "name"
+  | "description"
+  | "pathwayType"
+  | "modelYearNetzero"
+  | "modelTempIncrease"
+  | "geography"
+  | "metric"
+  | "sectors"
+  | "publisher"
+  | "publicationYear"
+  | "scenarioOverview"
+  | "expertOverview"
+  | "dataSource"
+>;
 
-export type PathwayType = "Normative" | "Projection" | "Policy" | "Exploration";
+// Enum-like types derived from the schema
+export type PathwayType = PBTARScenariosMetadataSchema["pathwayType"];
+export type Geography = PBTARScenariosMetadataSchema["geography"][number];
+export type Sector = PBTARScenariosMetadataSchema["sectors"][number]["name"];
+export type Metric = PBTARScenariosMetadataSchema["metric"][number];
 
 export type TemperatureTarget = number;
 
@@ -36,33 +35,6 @@ export type YearTarget =
   | "2070"
   | "2100"
   | "N/A";
-
-export type Geography =
-  | "Global"
-  | "EU"
-  | "SEA"
-  | "Americas"
-  | "Africa"
-  | "Asia Pacific"
-  | "N/A";
-
-export type Sector =
-  | "Power"
-  | "Oil & Gas"
-  | "Coal"
-  | "Renewables"
-  | "Industrial"
-  | "Transport"
-  | "Buildings"
-  | "Agriculture"
-  | "N/A";
-
-export type Metric =
-  | "Emissions Intensity"
-  | "Capacity"
-  | "Generation"
-  | "Technology Mix"
-  | "Absolute Emissions";
 
 export interface SearchFilters {
   pathwayType?: string | string[] | null;
@@ -82,3 +54,5 @@ export interface SearchFilters {
     metric?: FacetMode;
   } | null;
 }
+
+export type { PBTARScenariosMetadataSchema };
