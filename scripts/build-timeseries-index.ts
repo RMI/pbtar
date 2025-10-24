@@ -283,9 +283,13 @@ async function main() {
   const PUBLIC_DATA_DIR = path.join(ROOT, "public", "data");
   await fs.mkdir(PUBLIC_DATA_DIR, { recursive: true });
 
-  function jsonToCsv(data: any[]): string {
+  function jsonToCsv(data: any[], metadata: Record<string, any>): string {
     if (!Array.isArray(data) || data.length === 0) return "";
-    const keys = Array.from(new Set(data.flatMap((row) => Object.keys(row))));
+    // Merge metadata into each row
+    const mergedRows = data.map((row) => ({ ...metadata, ...row }));
+    const keys = Array.from(
+      new Set(mergedRows.flatMap((row) => Object.keys(row))),
+    );
     const escape = (v: any) =>
       typeof v === "string"
         ? `"${v.replace(/"/g, '""')}"`
@@ -293,7 +297,9 @@ async function main() {
           ? ""
           : String(v);
     const header = keys.join(",");
-    const rows = data.map((row) => keys.map((k) => escape(row[k])).join(","));
+    const rows = mergedRows.map((row) =>
+      keys.map((k) => escape(row[k])).join(","),
+    );
     return [header, ...rows].join("\n");
   }
 
@@ -311,9 +317,18 @@ async function main() {
       // --- CSV conversion ---
       const raw = await fs.readFile(srcAbs, "utf8");
       const parsed = parseJsonWithComments(raw);
+      // Extract metadata fields you want as columns
+      const metadata = {
+        publisher: parsed.publisher,
+        publicationName: parsed.publicationName,
+        publicationYear: parsed.publicationYear,
+        pathwayName: parsed.pathwayName,
+        description: parsed.description,
+        // Add more fields as needed
+      };
       const csvData =
         Array.isArray(parsed?.data) && parsed.data.length > 0
-          ? jsonToCsv(parsed.data)
+          ? jsonToCsv(parsed.data, metadata)
           : "";
       const destAbsCsv = destAbsJson.replace(/\.json$/i, ".csv");
       await fs.writeFile(destAbsCsv, csvData, "utf8");
