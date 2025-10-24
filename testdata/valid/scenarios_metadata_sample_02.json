@@ -1,43 +1,52 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
-  "id": "scenario-simple-standard",
-  "name": "Simple Standard Scenario",
-  "description": "This is a simple standard scenario for demonstration purposes, with all fields filled out.",
-  "pathwayType": "Normative",
-  "modelYearNetzero": 2050,
-  "carbonBudget": 500,
+  "id": "sample-02",
+  "name": "Sample Scenario 02",
+  "description": "Second Sample Scenario. uiop description.",
+  "pathwayType": "Exploratory",
+  "carbonBudget": 200,
   "modelYearStart": 2020,
   "modelYearEnd": 2050,
-  "modelTempIncrease": 1.5,
-  "ssp": "SSP1",
-  "geography": ["Global"],
-  "sectors": [
-    { "name": "Land Use", "technologies": ["Precision Agriculture"] }
-  ],
+  "modelTempIncrease": 2,
+  "ssp": "SSP2",
+  "geography": ["EU"],
+  "sectors": [{ "name": "Agriculture", "technologies": ["Agroforestry"] }],
   "publisher": "Example Publisher",
   "publicationYear": 2025,
-  "scenarioOverview": "Example Overview.",
+  "scenarioOverview": "UIOP Overview.",
   "expertOverview": "Example Expert Recommendation.",
-  "dataSource": {
-    "description": "Mock Data Source.",
-    "url": "https://example.com/data-source",
-    "downloadAvailable": true
-  },
-  "metric": ["Emissions Intensity"],
   "keyFeatures": {
     "emissionsPathway": "Moderate decline",
     "energyEfficiency": "Moderate improvements",
     "energyDemand": "Moderate growth",
     "electrification": "Moderate increase",
-    "policyTypes": ["Carbon price", "Phaseout dates"],
+    "policyTypes": [
+      "Carbon price",
+      "Phaseout dates",
+      "Subsidies",
+      "Target technology shares",
+      "Other"
+    ],
     "technologyCostTrend": "Other",
     "technologyDeploymentTrend": "Moderate deployment of new technologies",
     "emissionsScope": "CO2",
     "policyAmbition": "Current/legislated policies",
     "technologyCostsDetail": "Capital costs/O&M/etc.",
-    "newTechnologiesIncluded": ["DAC", "Green H2/ammonia"],
+    "newTechnologiesIncluded": [
+      "CCUS",
+      "DAC",
+      "Green H2/ammonia",
+      "SAF",
+      "Battery storage"
+    ],
     "supplyChain": "Dynamic upstream fuel/material prices",
     "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
     "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
+  },
+  "metric": ["Capacity", "Generation"],
+  "dataSource": {
+    "description": "Mock Data Source.",
+    "url": "https://example.com/data-source",
+    "downloadAvailable": true
   }
 }

@@ -4,8 +4,11 @@ import type { FiltersWithArrays } from "./searchUtils";
 import { ABSENT_FILTER_TOKEN } from "./absent";
 import { Scenario, SearchFilters } from "../types";
 
-import rawScenarioArray from "../../testdata/valid/scenarios_metadata_sample_array.json" assert { type: "json" };
-const mockScenarios: Scenario[] = rawScenarioArray;
+import sample01 from "../../testdata/valid/scenarios_metadata_sample_01.json" assert { type: "json" };
+import sample02 from "../../testdata/valid/scenarios_metadata_sample_02.json" assert { type: "json" };
+import sample03 from "../../testdata/valid/scenarios_metadata_sample_03.json" assert { type: "json" };
+import sample04 from "../../testdata/valid/scenarios_metadata_sample_04.json" assert { type: "json" };
+const mockScenarios: Scenario[] = [sample01, sample02, sample03, sample04];
 
 describe("searchUtils", () => {
   // Mock scenario data
@@ -145,8 +148,8 @@ describe("searchUtils", () => {
   });
 });
 
-import rawFullScenarioArray from "../../testdata/valid/scenarios_metadata_full.json" assert { type: "json" };
-const mockFullScenarios: Scenario[] = rawFullScenarioArray;
+import rawFullScenario from "../../testdata/valid/scenarios_metadata_full.json" assert { type: "json" };
+const mockFullScenarios: Scenario[] = [rawFullScenario];
 
 describe("searchUtils - array results", () => {
   //

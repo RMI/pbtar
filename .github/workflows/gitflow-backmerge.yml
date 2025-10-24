@@ -4,11 +4,6 @@ concurrency: backmerge-production-to-main
 
 on:
   workflow_dispatch:
-  pull_request:
-    types: [closed]
-    branches:
-      - production
-    if: github.event.pull_request.merged == true
   push:
     branches:
       - production

@@ -1,5 +1,5 @@
 {
-  "name": "gitflow-next",
+  "name": "gitflow-next-pr",
   "target": "branch",
   "source_type": "Repository",
   "source": "RMI/pbtar",
@@ -15,9 +15,6 @@
       "type": "non_fast_forward"
     },
     {
-      "type": "creation"
-    },
-    {
       "type": "update"
     },
     {
@@ -31,21 +28,6 @@
         "automatic_copilot_code_review_enabled": false,
         "allowed_merge_methods": ["merge"]
       }
-    },
-    {
-      "type": "deletion"
-    }
-  ],
-  "bypass_actors": [
-    {
-      "actor_id": 2,
-      "actor_type": "RepositoryRole",
-      "bypass_mode": "pull_request"
-    },
-    {
-      "actor_id": 5,
-      "actor_type": "RepositoryRole",
-      "bypass_mode": "pull_request"
     }
   ]
 }

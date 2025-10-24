@@ -5,16 +5,18 @@ import {
   decideIncludeInvalid,
 } from "../utils/loadScenarios";
 
-// 1) Grab every JSON file in this folder
+// 1) Grab every JSON file in this folder **and subfolders**
 //    `eager:true` = load at build time (no async), `import:'default'` = get the parsed JSON
-const modules = import.meta.glob("./*.json", {
+const modules = import.meta.glob("./**/*.json", {
   eager: true,
   import: "default",
 });
 
 const entries: FileEntry[] = Object.entries(modules)
   .map(([path, data]) => ({
-    name: path.split("/").pop()!, // e.g. "scenarios_metadata_1.json"
+    // Use a stable, relative file path to disambiguate duplicates across subdirs
+    // Example: "nested/scenarios_metadata_1.json"
+    name: path.replace(/^\.\/?/, ""),
     data, // file contents
   }))
   .sort((a, b) => a.name.localeCompare(b.name));

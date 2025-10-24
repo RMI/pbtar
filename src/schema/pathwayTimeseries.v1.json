@@ -1,0 +1,398 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
+  "title": "PBTAR Scenarios Timeseries Schema",
+  "description": "A schema for the scenarios metadata dataset in PBTAR.",
+  "type": "object",
+  "$defs": {
+    "sectorDisplayName": {
+      "type": "string",
+      "enum": [
+        "Land Use",
+        "Agriculture",
+        "Buildings",
+        "Industry",
+        "Steel",
+        "Cement",
+        "Chemicals",
+        "Coal Mining",
+        "Oil (Upstream)",
+        "Gas (Upstream)",
+        "Power",
+        "Automotive",
+        "Transport",
+        "Road transport",
+        "Aviation",
+        "Rail",
+        "Shipping",
+        "Other"
+      ]
+    }
+  },
+  "properties": {
+    "$schema": {
+      "description": "URI of the schema that validates this document (see https://json-schema.org/).",
+      "type": "string",
+      "maxLength": 1000
+    },
+    "id": {
+      "description": "The unique identifier for a scenario.",
+      "type": "string",
+      "maxLength": 100
+    },
+    "pathwayId": {
+      "description": "Identifiers of the associated scenario pathways.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 100,
+        "minLength": 1
+      }
+    },
+    "name": {
+      "description": "Name of the scenario.",
+      "type": "string",
+      "maxLength": 100
+    },
+    "description": {
+      "description": "Brief description of the scenario.",
+      "type": "string",
+      "pattern": "\\.$",
+      "maxLength": 100
+    },
+    "publisher": {
+      "description": "Publisher of the scenario.",
+      "type": "string",
+      "maxLength": 100
+    },
+    "publicationName": {
+      "description": "Title of the publication.",
+      "type": "string",
+      "maxLength": 100
+    },
+    "publicationYear": {
+      "description": "Year that the scenario was published.",
+      "type": "integer",
+      "minimum": 1900,
+      "maximum": 2030
+    },
+    "pathwayName": {
+      "description": "Name of the associated scenario.",
+      "type": "string",
+      "maxLength": 100
+    },
+    "source": {
+      "description": "Data source for the scenario data.",
+      "type": "string",
+      "maxLength": 500
+    },
+    "emissionsScope": {
+      "description": "Defines which greenhouse gases are covered in the pathway's modeled emissions.",
+      "type": "string",
+      "enum": [
+        "No information",
+        "CO2",
+        "CO2e (Kyoto)",
+        "CO2e (CO2, Methane)",
+        "Other"
+      ]
+    },
+    "sector": {
+      "description": "Sectors that the scenario data covers.",
+      "type": "object",
+      "patternProperties": {
+        "^[A-Za-z0-9 _-]{1,100}$": {
+          "type": "object",
+          "properties": {
+            "displayName": {
+              "description": "Display name of the sector as presented in charts or tables.",
+              "$ref": "#/$defs/sectorDisplayName"
+            },
+            "technology": {
+              "description": "Technologies that belong to this sector, each with a name and definition.",
+              "type": "object",
+              "patternProperties": {
+                "^[A-Za-z0-9 _-]{1,100}$": {
+                  "type": "object",
+                  "properties": {
+                    "displayName": {
+                      "description": "Display name of the technology as presented in charts or tables.",
+                      "type": "string",
+                      "enum": [
+                        "Precision Agriculture",
+                        "Agroforestry",
+                        "Bioenergy Crops",
+                        "Energy Efficiency",
+                        "Smart Grids",
+                        "Renewable Heating",
+                        "Heat Pumps",
+                        "Building Automation",
+                        "Smart Appliances",
+                        "Insulation",
+                        "Carbon Capture and Storage",
+                        "Electrification",
+                        "Process Optimization",
+                        "Hydrogen Use",
+                        "Coal",
+                        "Oil",
+                        "Gas",
+                        "Wind",
+                        "Solar",
+                        "Nuclear",
+                        "Biomass",
+                        "Hydro",
+                        "Renewables",
+                        "Electric Vehicles",
+                        "Hydrogen Vehicles",
+                        "Biofuels",
+                        "Public Transport",
+                        "Active Mobility",
+                        "Aviation Efficiency",
+                        "Maritime Efficiency",
+                        "Other"
+                      ]
+                    },
+                    "definition": {
+                      "description": "Brief definition or description of the technology scope (e.g., what it includes or excludes).",
+                      "type": "string",
+                      "maxLength": 1000
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": ["displayName", "definition"]
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1
+            },
+            "metric": {
+              "description": "Metrics available for this sector, describing what quantities are tracked (e.g., capacity, emissions).",
+              "type": "object",
+              "patternProperties": {
+                "^[A-Za-z0-9 _-]{1,100}$": {
+                  "type": "object",
+                  "properties": {
+                    "displayName": {
+                      "description": "Display name of the metric as presented in charts or tables.",
+                      "type": "string",
+                      "enum": [
+                        "Emissions Intensity",
+                        "Capacity",
+                        "Generation",
+                        "Technology Mix",
+                        "Absolute Emissions"
+                      ]
+                    },
+                    "definition": {
+                      "description": "Brief definition or description of the metric.",
+                      "type": "string",
+                      "maxLength": 1000
+                    },
+                    "sectorScope": {
+                      "description": "Specifies which parts of the sector value chain the metric applies to.",
+                      "type": "string",
+                      "maxLength": 1000
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": ["displayName", "definition", "sectorScope"]
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1
+            }
+          }
+        }
+      },
+      "additionalProperties": false,
+      "minProperties": 1
+    },
+    "data": {
+      "description": "Array of yearly data points for each sector, technology, and metric defined in this timeseries.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "description": "Calendar year of the data point.",
+            "type": "integer",
+            "minimum": 1900,
+            "maximum": 2100
+          },
+          "geography": {
+            "description": "Geographical area that the scenario covers. This should be a single string value: either 'Global', a country ISO-3166-1 alpha-2 code (e.g., 'US', 'DE'), or a free-text region name (e.g., 'North America', 'South East Asia'). Only 2-letter codes are accepted for countries; do not use full country names or 3-letter codes (e.g., 'USA' is not allowed). If a 2-letter code does not map to a country (e.g., 'EU'), it will result in an error.",
+            "type": "string",
+            "allOf": [
+              { "pattern": "^(?!\\s*$).+" },
+              { "not": { "pattern": "^[A-Za-z]{3}$" } }
+            ]
+          },
+          "sector": {
+            "description": "Sector to which this data point belongs (must match one of the defined sectors).",
+            "$ref": "#/$defs/sectorDisplayName"
+          },
+          "technology": {
+            "description": "Technology represented in this record (e.g., Solar, Wind, or null if sector-level only).",
+            "type": ["string", "null"],
+            "enum": [
+              "Precision Agriculture",
+              "Agroforestry",
+              "Bioenergy Crops",
+              "Energy Efficiency",
+              "Smart Grids",
+              "Renewable Heating",
+              "Heat Pumps",
+              "Building Automation",
+              "Smart Appliances",
+              "Insulation",
+              "Carbon Capture and Storage",
+              "Electrification",
+              "Process Optimization",
+              "Hydrogen Use",
+              "Coal",
+              "Oil",
+              "Gas",
+              "Wind",
+              "Solar",
+              "Nuclear",
+              "Biomass",
+              "Hydro",
+              "Renewables",
+              "Electric Vehicles",
+              "Hydrogen Vehicles",
+              "Biofuels",
+              "Public Transport",
+              "Active Mobility",
+              "Aviation Efficiency",
+              "Maritime Efficiency",
+              "Other",
+              null
+            ]
+          },
+          "metric": {
+            "description": "Metric reported for this record (e.g., Capacity, Generation, Emissions Intensity).",
+            "type": "string",
+            "enum": [
+              "Emissions Intensity",
+              "Capacity",
+              "Generation",
+              "Technology Mix",
+              "Absolute Emissions"
+            ]
+          },
+          "value": {
+            "description": "Numeric value of the metric for the given year, sector, and technology.",
+            "type": "number"
+          },
+          "unit": {
+            "description": "Measurement unit associated with the metric value (e.g., GW, TWh, tCO2e).",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "year",
+          "value",
+          "geography",
+          "sector",
+          "technology",
+          "metric",
+          "unit"
+        ],
+        "if": {
+          "properties": { "sector": { "const": "Power" } },
+          "required": ["sector"]
+        },
+        "then": {
+          "properties": {
+            "technology": {
+              "type": ["string", "null"],
+              "enum": [
+                "Coal",
+                "Oil",
+                "Gas",
+                "Nuclear",
+                "Hydro",
+                "Wind",
+                "Solar",
+                "Biomass",
+                "Geothermal",
+                "Hydrogen",
+                "Renewables",
+                "Battery",
+                "Other",
+                null
+              ]
+            },
+            "metric": {
+              "type": "string",
+              "enum": [
+                "Emissions Intensity",
+                "Absolute Emissions",
+                "Capacity",
+                "Generation",
+                "Technology Mix"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "metric": { "const": "Emissions Intensity" }
+                },
+                "required": ["metric"]
+              },
+              "then": { "properties": { "unit": { "const": "tCO2e/MWh" } } }
+            },
+            {
+              "if": {
+                "properties": {
+                  "metric": { "const": "Absolute Emissions" }
+                },
+                "required": ["metric"]
+              },
+              "then": { "properties": { "unit": { "const": "tCO2e" } } }
+            },
+            {
+              "if": {
+                "properties": { "metric": { "const": "Capacity" } },
+                "required": ["metric"]
+              },
+              "then": { "properties": { "unit": { "const": "GW" } } }
+            },
+            {
+              "if": {
+                "properties": { "metric": { "const": "Generation" } },
+                "required": ["metric"]
+              },
+              "then": { "properties": { "unit": { "const": "TWh" } } }
+            },
+            {
+              "if": {
+                "properties": { "metric": { "const": "Technology Mix" } },
+                "required": ["metric"]
+              },
+              "then": { "properties": { "unit": { "const": "%" } } }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "pathwayId",
+    "name",
+    "description",
+    "publisher",
+    "publicationName",
+    "publicationYear",
+    "pathwayName",
+    "source",
+    "emissionsScope",
+    "sector",
+    "data"
+  ]
+}

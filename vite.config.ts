@@ -186,7 +186,8 @@ export default defineConfig({
     buildInfoPlugin(),
     dataValidationPlugin("src/data"),
     viteStaticCopy({
-      targets: [{ src: "src/schema/schema.json", dest: "" }],
+      // Copy the entire schema dir to /schema in the built output
+      targets: [{ src: "src/schema/**/*", dest: "schema" }],
     }),
   ],
   server: {
@@ -194,19 +195,34 @@ export default defineConfig({
     port: 3000,
   },
   configureServer(server: ViteDevServer) {
+    // Serve any file under src/schema at /schema/* during dev
     server.middlewares.use(
-      "/schema.json",
+      "/schema",
       (
-        _req: IncomingMessage,
+        req: IncomingMessage,
         res: ServerResponse,
         next: (err?: unknown) => void,
-      ) => {
-        readFile(resolve("src/schema/schema.json"), "utf8")
-          .then((json) => {
-            res.setHeader("Content-Type", "application/json");
-            res.end(json);
-          })
-          .catch(next);
+      ): void => {
+        try {
+          const baseDir = resolve("src/schema");
+          const relPath = decodeURIComponent(
+            (req.url || "").replace(/^\/schema\/?/, ""),
+          );
+          if (!relPath) return next(); // no file requested, let Vite handle
+          const absPath = resolve(baseDir, relPath);
+          // prevent path traversal
+          if (!absPath.startsWith(baseDir)) return next();
+          // only serve JSON files
+          if (!absPath.endsWith(".json")) return next();
+          readFile(absPath, "utf8")
+            .then((json) => {
+              res.setHeader("Content-Type", "application/json");
+              res.end(json);
+            })
+            .catch(next);
+        } catch (err) {
+          next(err);
+        }
       },
     );
   },

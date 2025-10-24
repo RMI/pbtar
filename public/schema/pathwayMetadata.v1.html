@@ -1,0 +1,4398 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Overpass:300,400,600,800"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="schema_doc.css"
+    />
+    <script src="https://use.fontawesome.com/facf9fa52c.js"></script>
+    <script src="schema_doc.min.js"></script>
+    <meta charset="utf-8" />
+
+    <title>PBTAR Scenarios metadata Schema</title>
+  </head>
+  <body
+    onload="anchorOnLoad();"
+    id="root"
+  >
+    <div class="text-right">
+      <button
+        class="btn btn-primary"
+        type="button"
+        data-toggle="collapse"
+        data-target=".collapse:not(.show)"
+        aria-expanded="false"
+      >
+        Expand all
+      </button>
+      <button
+        class="btn btn-primary"
+        type="button"
+        data-toggle="collapse"
+        data-target=".collapse.show"
+        aria-expanded="false"
+      >
+        Collapse all
+      </button>
+    </div>
+
+    <div class="breadcrumbs"></div>
+    <h1>PBTAR Scenarios metadata Schema</h1>
+    <span class="badge badge-dark value-type">Type: object</span><br />
+    <span class="description"
+      ><p>A schema for the scenarios metadata dataset in PBTAR.</p>
+    </span>
+    <span class="badge badge-info no-additional">No Additional Properties</span>
+
+    <div
+      class="accordion"
+      id="accordionschema"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingschema"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#schema"
+              aria-expanded=""
+              aria-controls="schema"
+              onclick="setAnchor('#schema')"
+            >
+              <span class="property-name">$schema</span>
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="schema"
+          class="collapse property-definition-div"
+          aria-labelledby="headingschema"
+          data-parent="#accordionschema"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#schema"
+                onclick="anchorLink('schema')"
+                >$schema</a
+              >
+            </div>
+            <span class="badge badge-dark value-type">Type: string</span><br />
+            <span class="description"
+              ><p>
+                URI of the schema that validates this document (see
+                https://json-schema.org/).
+              </p>
+            </span>
+
+            <p>
+              <span
+                class="badge badge-light restriction max-length-restriction"
+                id="schema_maxLength"
+                >Must be at most <code>1000</code> characters long</span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionid"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingid"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#id"
+              aria-expanded=""
+              aria-controls="id"
+              onclick="setAnchor('#id')"
+            >
+              <span class="property-name">id</span>
+              <span class="badge badge-warning required-property"
+                >Required</span
+              >
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="id"
+          class="collapse property-definition-div"
+          aria-labelledby="headingid"
+          data-parent="#accordionid"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#id"
+                onclick="anchorLink('id')"
+                >id</a
+              >
+            </div>
+            <span class="badge badge-dark value-type">Type: string</span><br />
+            <span class="description"
+              ><p>The unique identifier for a scenario.</p>
+            </span>
+
+            <p>
+              <span
+                class="badge badge-light restriction max-length-restriction"
+                id="id_maxLength"
+                >Must be at most <code>100</code> characters long</span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionname"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingname"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#name"
+              aria-expanded=""
+              aria-controls="name"
+              onclick="setAnchor('#name')"
+            >
+              <span class="property-name">name</span>
+              <span class="badge badge-warning required-property"
+                >Required</span
+              >
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="name"
+          class="collapse property-definition-div"
+          aria-labelledby="headingname"
+          data-parent="#accordionname"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#name"
+                onclick="anchorLink('name')"
+                >name</a
+              >
+            </div>
+            <span class="badge badge-dark value-type">Type: string</span><br />
+            <span class="description"><p>Name of the scenario.</p> </span>
+
+            <p>
+              <span
+                class="badge badge-light restriction max-length-restriction"
+                id="name_maxLength"
+                >Must be at most <code>100</code> characters long</span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordiondescription"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingdescription"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#description"
+              aria-expanded=""
+              aria-controls="description"
+              onclick="setAnchor('#description')"
+            >
+              <span class="property-name">description</span>
+              <span class="badge badge-warning required-property"
+                >Required</span
+              >
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="description"
+          class="collapse property-definition-div"
+          aria-labelledby="headingdescription"
+          data-parent="#accordiondescription"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#description"
+                onclick="anchorLink('description')"
+                >description</a
+              >
+            </div>
+            <span class="badge badge-dark value-type">Type: string</span><br />
+            <span class="description"
+              ><p>Brief description of the scenario.</p> </span
+            ><span
+              class="pattern-value"
+              id="description_pattern"
+              >Must match regular expression: <code>\.$</code></span
+            >
+
+            <p>
+              <span
+                class="badge badge-light restriction max-length-restriction"
+                id="description_maxLength"
+                >Must be at most <code>100</code> characters long</span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionpathwayType"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingpathwayType"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#pathwayType"
+              aria-expanded=""
+              aria-controls="pathwayType"
+              onclick="setAnchor('#pathwayType')"
+            >
+              <span class="property-name">pathwayType</span>
+              <span class="badge badge-warning required-property"
+                >Required</span
+              >
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="pathwayType"
+          class="collapse property-definition-div"
+          aria-labelledby="headingpathwayType"
+          data-parent="#accordionpathwayType"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#pathwayType"
+                onclick="anchorLink('pathwayType')"
+                >pathwayType</a
+              >
+            </div>
+            <span class="badge badge-dark value-type"
+              >Type: enum (of string)</span
+            ><br />
+            <span class="description"
+              ><p>Type of the scenario pathway.</p>
+            </span>
+            <div
+              class="enum-value"
+              id="pathwayType_enum"
+            >
+              <h4>Must be one of:</h4>
+              <ul class="list-group">
+                <li class="list-group-item enum-item">"Normative"</li>
+                <li class="list-group-item enum-item">"Exploratory"</li>
+                <li class="list-group-item enum-item">"Direct Policy"</li>
+                <li class="list-group-item enum-item">"Predictive"</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionmodelYearNetzero"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingmodelYearNetzero"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#modelYearNetzero"
+              aria-expanded=""
+              aria-controls="modelYearNetzero"
+              onclick="setAnchor('#modelYearNetzero')"
+            >
+              <span class="property-name">modelYearNetzero</span>
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="modelYearNetzero"
+          class="collapse property-definition-div"
+          aria-labelledby="headingmodelYearNetzero"
+          data-parent="#accordionmodelYearNetzero"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#modelYearNetzero"
+                onclick="anchorLink('modelYearNetzero')"
+                >modelYearNetzero</a
+              >
+            </div>
+            <span class="badge badge-dark value-type">Type: integer</span><br />
+            <span class="description"
+              ><p>
+                Year by which net zero is reached in the scenario. If Scenario
+                does not reach net zero, this field should be omitted.
+              </p>
+            </span>
+
+            <p>
+              <span
+                class="badge badge-light restriction numeric-restriction"
+                id="modelYearNetzero_number"
+                >Value must be greater or equal to <code>2030</code> and lesser
+                or equal to <code>2100</code></span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordioncarbonBudget"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingcarbonBudget"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#carbonBudget"
+              aria-expanded=""
+              aria-controls="carbonBudget"
+              onclick="setAnchor('#carbonBudget')"
+            >
+              <span class="property-name">carbonBudget</span>
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="carbonBudget"
+          class="collapse property-definition-div"
+          aria-labelledby="headingcarbonBudget"
+          data-parent="#accordioncarbonBudget"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#carbonBudget"
+                onclick="anchorLink('carbonBudget')"
+                >carbonBudget</a
+              >
+            </div>
+            <span class="badge badge-dark value-type">Type: number</span><br />
+            <span class="description"
+              ><p>
+                Carbon budget of the scenario in gigatons of CO2 equivalent
+                (GtCO2eq). If no carbon budget is defined, this field should be
+                omitted. If the carbon budget is not applicable, it should be
+                set to 0.
+              </p>
+            </span>
+
+            <p>
+              <span
+                class="badge badge-light restriction numeric-restriction"
+                id="carbonBudget_number"
+                >Value must be greater or equal to <code>0</code></span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionmodelYearStart"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingmodelYearStart"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#modelYearStart"
+              aria-expanded=""
+              aria-controls="modelYearStart"
+              onclick="setAnchor('#modelYearStart')"
+            >
+              <span class="property-name">modelYearStart</span>
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="modelYearStart"
+          class="collapse property-definition-div"
+          aria-labelledby="headingmodelYearStart"
+          data-parent="#accordionmodelYearStart"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#modelYearStart"
+                onclick="anchorLink('modelYearStart')"
+                >modelYearStart</a
+              >
+            </div>
+            <span class="badge badge-dark value-type">Type: integer</span><br />
+            <span class="description"
+              ><p>Year from which the model starts.</p>
+            </span>
+
+            <p>
+              <span
+                class="badge badge-light restriction numeric-restriction"
+                id="modelYearStart_number"
+                >Value must be greater or equal to <code>1900</code> and lesser
+                or equal to <code>2030</code></span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionmodelYearEnd"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingmodelYearEnd"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#modelYearEnd"
+              aria-expanded=""
+              aria-controls="modelYearEnd"
+              onclick="setAnchor('#modelYearEnd')"
+            >
+              <span class="property-name">modelYearEnd</span>
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="modelYearEnd"
+          class="collapse property-definition-div"
+          aria-labelledby="headingmodelYearEnd"
+          data-parent="#accordionmodelYearEnd"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#modelYearEnd"
+                onclick="anchorLink('modelYearEnd')"
+                >modelYearEnd</a
+              >
+            </div>
+            <span class="badge badge-dark value-type">Type: integer</span><br />
+            <span class="description"
+              ><p>Year in which the model ends.</p>
+            </span>
+
+            <p>
+              <span
+                class="badge badge-light restriction numeric-restriction"
+                id="modelYearEnd_number"
+                >Value must be greater or equal to <code>2030</code> and lesser
+                or equal to <code>2100</code></span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionmodelTempIncrease"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingmodelTempIncrease"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#modelTempIncrease"
+              aria-expanded=""
+              aria-controls="modelTempIncrease"
+              onclick="setAnchor('#modelTempIncrease')"
+            >
+              <span class="property-name">modelTempIncrease</span>
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="modelTempIncrease"
+          class="collapse property-definition-div"
+          aria-labelledby="headingmodelTempIncrease"
+          data-parent="#accordionmodelTempIncrease"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#modelTempIncrease"
+                onclick="anchorLink('modelTempIncrease')"
+                >modelTempIncrease</a
+              >
+            </div>
+            <span class="badge badge-dark value-type">Type: number</span><br />
+            <span class="description"
+              ><p>
+                Modeled temperature increase expected by the scenario (in
+                degrees Celsius).
+              </p>
+            </span>
+
+            <p>
+              <span
+                class="badge badge-light restriction numeric-restriction"
+                id="modelTempIncrease_number"
+                >Value must be greater or equal to <code>0.5</code> and lesser
+                or equal to <code>3</code> and a multiple of
+                <code>0.1</code></span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionssp"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingssp"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#ssp"
+              aria-expanded=""
+              aria-controls="ssp"
+              onclick="setAnchor('#ssp')"
+            >
+              <span class="property-name">ssp</span>
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="ssp"
+          class="collapse property-definition-div"
+          aria-labelledby="headingssp"
+          data-parent="#accordionssp"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#ssp"
+                onclick="anchorLink('ssp')"
+                >ssp</a
+              >
+            </div>
+            <span class="badge badge-dark value-type"
+              >Type: enum (of string)</span
+            ><br />
+            <span class="description"
+              ><p>
+                Shared Socioeconomic Pathways (SSP) associated with the
+                scenario.
+              </p>
+            </span>
+            <div
+              class="enum-value"
+              id="ssp_enum"
+            >
+              <h4>Must be one of:</h4>
+              <ul class="list-group">
+                <li class="list-group-item enum-item">"SSP1"</li>
+                <li class="list-group-item enum-item">"SSP2"</li>
+                <li class="list-group-item enum-item">"SSP3"</li>
+                <li class="list-group-item enum-item">"SSP4"</li>
+                <li class="list-group-item enum-item">"SSP5"</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordiongeography"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headinggeography"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#geography"
+              aria-expanded=""
+              aria-controls="geography"
+              onclick="setAnchor('#geography')"
+            >
+              <span class="property-name">geography</span>
+              <span class="badge badge-warning required-property"
+                >Required</span
+              >
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="geography"
+          class="collapse property-definition-div"
+          aria-labelledby="headinggeography"
+          data-parent="#accordiongeography"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#geography"
+                onclick="anchorLink('geography')"
+                >geography</a
+              >
+            </div>
+            <span class="badge badge-dark value-type"
+              >Type: array of string</span
+            ><br />
+            <span class="description"
+              ><p>
+                Geographical areas that the scenario covers. Can include
+                'Global', country ISO-3166-1 alpha-2 codes (US, DE), or
+                free-text region names (e.g., 'Europe', 'OECD'). Any 2-letter
+                items in the array will be treated as an ISO code. Any 2-letter
+                entries that do not map to a country will throw errors (EU). Do
+                not use full country names, only ISO alpha-2 codes. To avoid
+                typographical errors, items in this array may not be 3 letters
+                long (USA)
+              </p>
+            </span>
+
+            <p>
+              <span
+                class="badge badge-light restriction unique-items-restriction"
+                id="geography_uniqueItems"
+                >All items must be unique</span
+              >
+            </p>
+            <span class="badge badge-info no-additional"
+              >No Additional Items</span
+            >
+            <h4>Each item of this array must be:</h4>
+            <div class="card">
+              <div
+                class="card-body items-definition"
+                id="geography_items"
+              >
+                <div class="breadcrumbs">
+                  root
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-arrow-right-short"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                    />
+                  </svg>
+                  <a
+                    href="#geography"
+                    onclick="anchorLink('geography')"
+                    >geography</a
+                  >
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-arrow-right-short"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                    />
+                  </svg>
+                  <a
+                    href="#geography_items"
+                    onclick="anchorLink('geography_items')"
+                    >geography items</a
+                  >
+                </div>
+                <br />
+                <div
+                  class="all-of-value"
+                  id="geography_items_allOf"
+                >
+                  <h2 class="handle">
+                    <label>All of</label>
+                  </h2>
+                  <ul
+                    class="nav nav-tabs"
+                    id="tabsgeography_items_allOf_allOf"
+                    role="tablist"
+                  >
+                    <li class="nav-item">
+                      <a
+                        class="nav-link active allOf-option"
+                        id="geography_items_allOf_i0"
+                        data-toggle="tab"
+                        href="#tab-pane_geography_items_allOf_i0"
+                        role="tab"
+                        onclick="setAnchor('#geography_items_allOf_i0')"
+                        >Requirement 1</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        class="nav-link allOf-option"
+                        id="geography_items_allOf_i1"
+                        data-toggle="tab"
+                        href="#tab-pane_geography_items_allOf_i1"
+                        role="tab"
+                        onclick="setAnchor('#geography_items_allOf_i1')"
+                        >Requirement 2</a
+                      >
+                    </li>
+                  </ul>
+                  <div class="tab-content card">
+                    <div
+                      class="tab-pane fade card-body active show"
+                      id="tab-pane_geography_items_allOf_i0"
+                      role="tabpanel"
+                    >
+                      <div class="breadcrumbs">
+                        root
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-arrow-right-short"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                          />
+                        </svg>
+                        <a
+                          href="#geography"
+                          onclick="anchorLink('geography')"
+                          >geography</a
+                        >
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-arrow-right-short"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                          />
+                        </svg>
+                        <a
+                          href="#geography_items"
+                          onclick="anchorLink('geography_items')"
+                          >geography items</a
+                        >
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-arrow-right-short"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                          />
+                        </svg>
+                        <a
+                          href="#geography_items_allOf"
+                          onclick="anchorLink('geography_items_allOf')"
+                          >allOf</a
+                        >
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-arrow-right-short"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                          />
+                        </svg>
+                        <a
+                          href="#geography_items_allOf_i0"
+                          onclick="anchorLink('geography_items_allOf_i0')"
+                          >item 0</a
+                        >
+                      </div>
+                      <span class="badge badge-dark value-type"
+                        >Type: object</span
+                      ><br />
+                      <span
+                        class="pattern-value"
+                        id="geography_items_allOf_i0_pattern"
+                        >Must match regular expression:
+                        <code>^(?!\s*$).+</code></span
+                      >
+                    </div>
+                    <div
+                      class="tab-pane fade card-body"
+                      id="tab-pane_geography_items_allOf_i1"
+                      role="tabpanel"
+                    >
+                      <div class="breadcrumbs">
+                        root
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-arrow-right-short"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                          />
+                        </svg>
+                        <a
+                          href="#geography"
+                          onclick="anchorLink('geography')"
+                          >geography</a
+                        >
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-arrow-right-short"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                          />
+                        </svg>
+                        <a
+                          href="#geography_items"
+                          onclick="anchorLink('geography_items')"
+                          >geography items</a
+                        >
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-arrow-right-short"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                          />
+                        </svg>
+                        <a
+                          href="#geography_items_allOf"
+                          onclick="anchorLink('geography_items_allOf')"
+                          >allOf</a
+                        >
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-arrow-right-short"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                          />
+                        </svg>
+                        <a
+                          href="#geography_items_allOf_i1"
+                          onclick="anchorLink('geography_items_allOf_i1')"
+                          >item 1</a
+                        >
+                      </div>
+                      <br />
+                      <div class="not-value">
+                        <h4>Must <strong>not</strong> be:</h4>
+                        <div class="card">
+                          <div
+                            class="card-body"
+                            id=""
+                          >
+                            <div class="breadcrumbs">
+                              root
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#geography"
+                                onclick="anchorLink('geography')"
+                                >geography</a
+                              >
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#geography_items"
+                                onclick="anchorLink('geography_items')"
+                                >geography items</a
+                              >
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#geography_items_allOf"
+                                onclick="anchorLink('geography_items_allOf')"
+                                >allOf</a
+                              >
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#geography_items_allOf_i1"
+                                onclick="anchorLink('geography_items_allOf_i1')"
+                                >item 1</a
+                              >
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#geography_items_allOf_i1_not"
+                                onclick="anchorLink('geography_items_allOf_i1_not')"
+                                >not</a
+                              >
+                            </div>
+                            <span class="badge badge-dark value-type"
+                              >Type: object</span
+                            ><br />
+                            <span
+                              class="pattern-value"
+                              id="geography_items_allOf_i1_not_pattern"
+                              >Must match regular expression:
+                              <code>^[A-Za-z]{3}$</code></span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <p>
+                  <span
+                    class="badge badge-light restriction min-length-restriction"
+                    id="geography_items_minLength"
+                    >Must be at least <code>1</code> characters long</span
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionsectors"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingsectors"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#sectors"
+              aria-expanded=""
+              aria-controls="sectors"
+              onclick="setAnchor('#sectors')"
+            >
+              <span class="property-name">sectors</span>
+              <span class="badge badge-warning required-property"
+                >Required</span
+              >
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="sectors"
+          class="collapse property-definition-div"
+          aria-labelledby="headingsectors"
+          data-parent="#accordionsectors"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#sectors"
+                onclick="anchorLink('sectors')"
+                >sectors</a
+              >
+            </div>
+            <span class="badge badge-dark value-type"
+              >Type: array of object</span
+            ><br />
+            <span class="description"
+              ><p>Sectors that the scenario covers.</p>
+            </span>
+
+            <span class="badge badge-info no-additional"
+              >No Additional Items</span
+            >
+            <h4>Each item of this array must be:</h4>
+            <div class="card">
+              <div
+                class="card-body items-definition"
+                id="sectors_items"
+              >
+                <div class="breadcrumbs">
+                  root
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-arrow-right-short"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                    />
+                  </svg>
+                  <a
+                    href="#sectors"
+                    onclick="anchorLink('sectors')"
+                    >sectors</a
+                  >
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-arrow-right-short"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                    />
+                  </svg>
+                  <a
+                    href="#sectors_items"
+                    onclick="anchorLink('sectors_items')"
+                    >sectors items</a
+                  >
+                </div>
+                <span class="badge badge-dark value-type">Type: object</span
+                ><br />
+                <span class="badge badge-info no-additional"
+                  >No Additional Properties</span
+                >
+
+                <div
+                  class="accordion"
+                  id="accordionsectors_items_name"
+                >
+                  <div class="card">
+                    <div
+                      class="card-header"
+                      id="headingsectors_items_name"
+                    >
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link property-name-button"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#sectors_items_name"
+                          aria-expanded=""
+                          aria-controls="sectors_items_name"
+                          onclick="setAnchor('#sectors_items_name')"
+                        >
+                          <span class="property-name">name</span>
+                          <span class="badge badge-warning required-property"
+                            >Required</span
+                          >
+                        </button>
+                      </h2>
+                    </div>
+
+                    <div
+                      id="sectors_items_name"
+                      class="collapse property-definition-div"
+                      aria-labelledby="headingsectors_items_name"
+                      data-parent="#accordionsectors_items_name"
+                    >
+                      <div class="card-body pl-5">
+                        <div class="breadcrumbs">
+                          root
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#sectors"
+                            onclick="anchorLink('sectors')"
+                            >sectors</a
+                          >
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#sectors_items"
+                            onclick="anchorLink('sectors_items')"
+                            >sectors items</a
+                          >
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#sectors_items_name"
+                            onclick="anchorLink('sectors_items_name')"
+                            >name</a
+                          >
+                        </div>
+                        <span class="badge badge-dark value-type"
+                          >Type: enum (of string)</span
+                        ><br />
+                        <div
+                          class="enum-value"
+                          id="sectors_items_name_enum"
+                        >
+                          <h4>Must be one of:</h4>
+                          <ul class="list-group">
+                            <li class="list-group-item enum-item">
+                              "Land Use"
+                            </li>
+                            <li class="list-group-item enum-item">
+                              "Agriculture"
+                            </li>
+                            <li class="list-group-item enum-item">
+                              "Buildings"
+                            </li>
+                            <li class="list-group-item enum-item">
+                              "Industry"
+                            </li>
+                            <li class="list-group-item enum-item">"Steel"</li>
+                            <li class="list-group-item enum-item">"Cement"</li>
+                            <li class="list-group-item enum-item">
+                              "Chemicals"
+                            </li>
+                            <li class="list-group-item enum-item">
+                              "Coal Mining"
+                            </li>
+                            <li class="list-group-item enum-item">
+                              "Oil (Upstream)"
+                            </li>
+                            <li class="list-group-item enum-item">
+                              "Gas (Upstream)"
+                            </li>
+                            <li class="list-group-item enum-item">"Power"</li>
+                            <li class="list-group-item enum-item">
+                              "Automotive"
+                            </li>
+                            <li class="list-group-item enum-item">
+                              "Transport"
+                            </li>
+                            <li class="list-group-item enum-item">
+                              "Road transport"
+                            </li>
+                            <li class="list-group-item enum-item">
+                              "Aviation"
+                            </li>
+                            <li class="list-group-item enum-item">"Rail"</li>
+                            <li class="list-group-item enum-item">
+                              "Shipping"
+                            </li>
+                            <li class="list-group-item enum-item">"Other"</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="accordion"
+                  id="accordionsectors_items_technologies"
+                >
+                  <div class="card">
+                    <div
+                      class="card-header"
+                      id="headingsectors_items_technologies"
+                    >
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link property-name-button"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#sectors_items_technologies"
+                          aria-expanded=""
+                          aria-controls="sectors_items_technologies"
+                          onclick="setAnchor('#sectors_items_technologies')"
+                        >
+                          <span class="property-name">technologies</span>
+                          <span class="badge badge-warning required-property"
+                            >Required</span
+                          >
+                        </button>
+                      </h2>
+                    </div>
+
+                    <div
+                      id="sectors_items_technologies"
+                      class="collapse property-definition-div"
+                      aria-labelledby="headingsectors_items_technologies"
+                      data-parent="#accordionsectors_items_technologies"
+                    >
+                      <div class="card-body pl-5">
+                        <div class="breadcrumbs">
+                          root
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#sectors"
+                            onclick="anchorLink('sectors')"
+                            >sectors</a
+                          >
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#sectors_items"
+                            onclick="anchorLink('sectors_items')"
+                            >sectors items</a
+                          >
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#sectors_items_technologies"
+                            onclick="anchorLink('sectors_items_technologies')"
+                            >technologies</a
+                          >
+                        </div>
+                        <span class="badge badge-dark value-type"
+                          >Type: array of enum (of string)</span
+                        ><br />
+                        <span class="description"
+                          ><p>Technologies applicable to this sector.</p>
+                        </span>
+
+                        <span class="badge badge-info no-additional"
+                          >No Additional Items</span
+                        >
+                        <h4>Each item of this array must be:</h4>
+                        <div class="card">
+                          <div
+                            class="card-body items-definition"
+                            id="sectors_items_technologies_items"
+                          >
+                            <div class="breadcrumbs">
+                              root
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#sectors"
+                                onclick="anchorLink('sectors')"
+                                >sectors</a
+                              >
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#sectors_items"
+                                onclick="anchorLink('sectors_items')"
+                                >sectors items</a
+                              >
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#sectors_items_technologies"
+                                onclick="anchorLink('sectors_items_technologies')"
+                                >technologies</a
+                              >
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#sectors_items_technologies_items"
+                                onclick="anchorLink('sectors_items_technologies_items')"
+                                >technologies items</a
+                              >
+                            </div>
+                            <span class="badge badge-dark value-type"
+                              >Type: enum (of string)</span
+                            ><br />
+                            <div
+                              class="enum-value"
+                              id="sectors_items_technologies_items_enum"
+                            >
+                              <h4>Must be one of:</h4>
+                              <ul class="list-group">
+                                <li class="list-group-item enum-item">
+                                  "Precision Agriculture"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Agroforestry"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Bioenergy Crops"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Energy Efficiency"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Smart Grids"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Renewable Heating"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Heat Pumps"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Building Automation"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Smart Appliances"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Insulation"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Carbon Capture and Storage"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Electrification"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Process Optimization"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Hydrogen Use"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Coal"
+                                </li>
+                                <li class="list-group-item enum-item">"Oil"</li>
+                                <li class="list-group-item enum-item">"Gas"</li>
+                                <li class="list-group-item enum-item">
+                                  "Wind"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Solar"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Nuclear"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Biomass"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Hydro"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Renewables"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Electric Vehicles"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Hydrogen Vehicles"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Biofuels"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Public Transport"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Active Mobility"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Aviation Efficiency"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Maritime Efficiency"
+                                </li>
+                                <li class="list-group-item enum-item">
+                                  "Other"
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionpublisher"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingpublisher"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#publisher"
+              aria-expanded=""
+              aria-controls="publisher"
+              onclick="setAnchor('#publisher')"
+            >
+              <span class="property-name">publisher</span>
+              <span class="badge badge-warning required-property"
+                >Required</span
+              >
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="publisher"
+          class="collapse property-definition-div"
+          aria-labelledby="headingpublisher"
+          data-parent="#accordionpublisher"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#publisher"
+                onclick="anchorLink('publisher')"
+                >publisher</a
+              >
+            </div>
+            <span class="badge badge-dark value-type">Type: string</span><br />
+            <span class="description"><p>Publisher of the scenario.</p> </span>
+
+            <p>
+              <span
+                class="badge badge-light restriction max-length-restriction"
+                id="publisher_maxLength"
+                >Must be at most <code>100</code> characters long</span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionpublicationYear"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingpublicationYear"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#publicationYear"
+              aria-expanded=""
+              aria-controls="publicationYear"
+              onclick="setAnchor('#publicationYear')"
+            >
+              <span class="property-name">publicationYear</span>
+              <span class="badge badge-warning required-property"
+                >Required</span
+              >
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="publicationYear"
+          class="collapse property-definition-div"
+          aria-labelledby="headingpublicationYear"
+          data-parent="#accordionpublicationYear"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#publicationYear"
+                onclick="anchorLink('publicationYear')"
+                >publicationYear</a
+              >
+            </div>
+            <span class="badge badge-dark value-type">Type: integer</span><br />
+            <span class="description"
+              ><p>Year that the scenario was published.</p>
+            </span>
+
+            <p>
+              <span
+                class="badge badge-light restriction numeric-restriction"
+                id="publicationYear_number"
+                >Value must be greater or equal to <code>1900</code> and lesser
+                or equal to <code>2030</code></span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionscenarioOverview"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingscenarioOverview"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#scenarioOverview"
+              aria-expanded=""
+              aria-controls="scenarioOverview"
+              onclick="setAnchor('#scenarioOverview')"
+            >
+              <span class="property-name">scenarioOverview</span>
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="scenarioOverview"
+          class="collapse property-definition-div"
+          aria-labelledby="headingscenarioOverview"
+          data-parent="#accordionscenarioOverview"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#scenarioOverview"
+                onclick="anchorLink('scenarioOverview')"
+                >scenarioOverview</a
+              >
+            </div>
+            <span class="badge badge-dark value-type">Type: string</span><br />
+            <span class="description"><p>Overview of the scenario.</p> </span
+            ><span
+              class="pattern-value"
+              id="scenarioOverview_pattern"
+              >Must match regular expression: <code>\.$</code></span
+            >
+
+            <p>
+              <span
+                class="badge badge-light restriction max-length-restriction"
+                id="scenarioOverview_maxLength"
+                >Must be at most <code>1000</code> characters long</span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionexpertOverview"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingexpertOverview"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#expertOverview"
+              aria-expanded=""
+              aria-controls="expertOverview"
+              onclick="setAnchor('#expertOverview')"
+            >
+              <span class="property-name">expertOverview</span>
+              <span class="badge badge-warning required-property"
+                >Required</span
+              >
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="expertOverview"
+          class="collapse property-definition-div"
+          aria-labelledby="headingexpertOverview"
+          data-parent="#accordionexpertOverview"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#expertOverview"
+                onclick="anchorLink('expertOverview')"
+                >expertOverview</a
+              >
+            </div>
+            <span class="badge badge-dark value-type">Type: string</span><br />
+            <span class="description"
+              ><p>Expert recommendation for the scenario.</p> </span
+            ><span
+              class="pattern-value"
+              id="expertOverview_pattern"
+              >Must match regular expression: <code>\.$</code></span
+            >
+
+            <p>
+              <span
+                class="badge badge-light restriction max-length-restriction"
+                id="expertOverview_maxLength"
+                >Must be at most <code>10000</code> characters long</span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordiondataSource"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingdataSource"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#dataSource"
+              aria-expanded=""
+              aria-controls="dataSource"
+              onclick="setAnchor('#dataSource')"
+            >
+              <span class="property-name">dataSource</span>
+              <span class="badge badge-warning required-property"
+                >Required</span
+              >
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="dataSource"
+          class="collapse property-definition-div"
+          aria-labelledby="headingdataSource"
+          data-parent="#accordiondataSource"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#dataSource"
+                onclick="anchorLink('dataSource')"
+                >dataSource</a
+              >
+            </div>
+            <span class="badge badge-dark value-type">Type: object</span><br />
+            <span class="description"
+              ><p>Data source for the scenario.</p>
+            </span>
+            <span class="badge badge-info no-additional"
+              >No Additional Properties</span
+            >
+
+            <div
+              class="accordion"
+              id="accordiondataSource_description"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingdataSource_description"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#dataSource_description"
+                      aria-expanded=""
+                      aria-controls="dataSource_description"
+                      onclick="setAnchor('#dataSource_description')"
+                    >
+                      <span class="property-name">description</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="dataSource_description"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingdataSource_description"
+                  data-parent="#accordiondataSource_description"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#dataSource"
+                        onclick="anchorLink('dataSource')"
+                        >dataSource</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#dataSource_description"
+                        onclick="anchorLink('dataSource_description')"
+                        >description</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type">Type: string</span
+                    ><br />
+                    <span class="description"
+                      ><p>Description of the data source.</p> </span
+                    ><span
+                      class="pattern-value"
+                      id="dataSource_description_pattern"
+                      >Must match regular expression: <code>\.$</code></span
+                    >
+
+                    <p>
+                      <span
+                        class="badge badge-light restriction max-length-restriction"
+                        id="dataSource_description_maxLength"
+                        >Must be at most <code>1000</code> characters long</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordiondataSource_url"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingdataSource_url"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#dataSource_url"
+                      aria-expanded=""
+                      aria-controls="dataSource_url"
+                      onclick="setAnchor('#dataSource_url')"
+                    >
+                      <span class="property-name">url</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="dataSource_url"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingdataSource_url"
+                  data-parent="#accordiondataSource_url"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#dataSource"
+                        onclick="anchorLink('dataSource')"
+                        >dataSource</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#dataSource_url"
+                        onclick="anchorLink('dataSource_url')"
+                        >url</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type">Type: string</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        URL at which the data source can be accessed.
+                      </p> </span
+                    ><span
+                      class="pattern-value"
+                      id="dataSource_url_pattern"
+                      >Must match regular expression:
+                      <code>^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$</code></span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordiondataSource_downloadAvailable"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingdataSource_downloadAvailable"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#dataSource_downloadAvailable"
+                      aria-expanded=""
+                      aria-controls="dataSource_downloadAvailable"
+                      onclick="setAnchor('#dataSource_downloadAvailable')"
+                    >
+                      <span class="property-name">downloadAvailable</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="dataSource_downloadAvailable"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingdataSource_downloadAvailable"
+                  data-parent="#accordiondataSource_downloadAvailable"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#dataSource"
+                        onclick="anchorLink('dataSource')"
+                        >dataSource</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#dataSource_downloadAvailable"
+                        onclick="anchorLink('dataSource_downloadAvailable')"
+                        >downloadAvailable</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: boolean</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Flag indicating if the data source can be downloaded.
+                      </p>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionmetric"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingmetric"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#metric"
+              aria-expanded=""
+              aria-controls="metric"
+              onclick="setAnchor('#metric')"
+            >
+              <span class="property-name">metric</span>
+              <span class="badge badge-warning required-property"
+                >Required</span
+              >
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="metric"
+          class="collapse property-definition-div"
+          aria-labelledby="headingmetric"
+          data-parent="#accordionmetric"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#metric"
+                onclick="anchorLink('metric')"
+                >metric</a
+              >
+            </div>
+            <span class="badge badge-dark value-type"
+              >Type: array of enum (of string)</span
+            ><br />
+
+            <p>
+              <span
+                class="badge badge-light restriction unique-items-restriction"
+                id="metric_uniqueItems"
+                >All items must be unique</span
+              >
+            </p>
+            <span class="badge badge-info no-additional"
+              >No Additional Items</span
+            >
+            <h4>Each item of this array must be:</h4>
+            <div class="card">
+              <div
+                class="card-body items-definition"
+                id="metric_items"
+              >
+                <div class="breadcrumbs">
+                  root
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-arrow-right-short"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                    />
+                  </svg>
+                  <a
+                    href="#metric"
+                    onclick="anchorLink('metric')"
+                    >metric</a
+                  >
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-arrow-right-short"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                    />
+                  </svg>
+                  <a
+                    href="#metric_items"
+                    onclick="anchorLink('metric_items')"
+                    >metric items</a
+                  >
+                </div>
+                <span class="badge badge-dark value-type"
+                  >Type: enum (of string)</span
+                ><br />
+                <span class="description"
+                  ><p>Metrics used in the pathway</p>
+                </span>
+                <div
+                  class="enum-value"
+                  id="metric_items_enum"
+                >
+                  <h4>Must be one of:</h4>
+                  <ul class="list-group">
+                    <li class="list-group-item enum-item">
+                      "Emissions Intensity"
+                    </li>
+                    <li class="list-group-item enum-item">"Capacity"</li>
+                    <li class="list-group-item enum-item">"Generation"</li>
+                    <li class="list-group-item enum-item">"Technology Mix"</li>
+                    <li class="list-group-item enum-item">
+                      "Absolute Emissions"
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionkeyFeatures"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingkeyFeatures"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#keyFeatures"
+              aria-expanded=""
+              aria-controls="keyFeatures"
+              onclick="setAnchor('#keyFeatures')"
+            >
+              <span class="property-name">keyFeatures</span>
+              <span class="badge badge-warning required-property"
+                >Required</span
+              >
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="keyFeatures"
+          class="collapse property-definition-div"
+          aria-labelledby="headingkeyFeatures"
+          data-parent="#accordionkeyFeatures"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#keyFeatures"
+                onclick="anchorLink('keyFeatures')"
+                >keyFeatures</a
+              >
+            </div>
+            <span class="badge badge-dark value-type">Type: object</span><br />
+            <span class="description"
+              ><p>Key features of the scenario.</p>
+            </span>
+            <span class="badge badge-info no-additional"
+              >No Additional Properties</span
+            >
+
+            <div
+              class="accordion"
+              id="accordionkeyFeatures_emissionsPathway"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingkeyFeatures_emissionsPathway"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#keyFeatures_emissionsPathway"
+                      aria-expanded=""
+                      aria-controls="keyFeatures_emissionsPathway"
+                      onclick="setAnchor('#keyFeatures_emissionsPathway')"
+                    >
+                      <span class="property-name">emissionsPathway</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="keyFeatures_emissionsPathway"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingkeyFeatures_emissionsPathway"
+                  data-parent="#accordionkeyFeatures_emissionsPathway"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures"
+                        onclick="anchorLink('keyFeatures')"
+                        >keyFeatures</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures_emissionsPathway"
+                        onclick="anchorLink('keyFeatures_emissionsPathway')"
+                        >emissionsPathway</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: enum (of string)</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Describes the overall trend of greenhouse gas emissions
+                        over time, from continued growth to rapid decline.
+                      </p>
+                    </span>
+                    <div
+                      class="enum-value"
+                      id="keyFeatures_emissionsPathway_enum"
+                    >
+                      <h4>Must be one of:</h4>
+                      <ul class="list-group">
+                        <li class="list-group-item enum-item">
+                          "No information"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Continued growth"
+                        </li>
+                        <li class="list-group-item enum-item">"Plateau"</li>
+                        <li class="list-group-item enum-item">
+                          "Growth then decline"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Moderate decline"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Fast decline"
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionkeyFeatures_energyEfficiency"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingkeyFeatures_energyEfficiency"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#keyFeatures_energyEfficiency"
+                      aria-expanded=""
+                      aria-controls="keyFeatures_energyEfficiency"
+                      onclick="setAnchor('#keyFeatures_energyEfficiency')"
+                    >
+                      <span class="property-name">energyEfficiency</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="keyFeatures_energyEfficiency"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingkeyFeatures_energyEfficiency"
+                  data-parent="#accordionkeyFeatures_energyEfficiency"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures"
+                        onclick="anchorLink('keyFeatures')"
+                        >keyFeatures</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures_energyEfficiency"
+                        onclick="anchorLink('keyFeatures_energyEfficiency')"
+                        >energyEfficiency</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: enum (of string)</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Indicates how efficiently energy is used to produce
+                        economic output across the sectors covered in the
+                        pathway.
+                      </p>
+                    </span>
+                    <div
+                      class="enum-value"
+                      id="keyFeatures_energyEfficiency_enum"
+                    >
+                      <h4>Must be one of:</h4>
+                      <ul class="list-group">
+                        <li class="list-group-item enum-item">
+                          "No information"
+                        </li>
+                        <li class="list-group-item enum-item">"Declining"</li>
+                        <li class="list-group-item enum-item">
+                          "Static energy efficiency"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Moderate improvements"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Significant improvements"
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionkeyFeatures_energyDemand"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingkeyFeatures_energyDemand"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#keyFeatures_energyDemand"
+                      aria-expanded=""
+                      aria-controls="keyFeatures_energyDemand"
+                      onclick="setAnchor('#keyFeatures_energyDemand')"
+                    >
+                      <span class="property-name">energyDemand</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="keyFeatures_energyDemand"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingkeyFeatures_energyDemand"
+                  data-parent="#accordionkeyFeatures_energyDemand"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures"
+                        onclick="anchorLink('keyFeatures')"
+                        >keyFeatures</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures_energyDemand"
+                        onclick="anchorLink('keyFeatures_energyDemand')"
+                        >energyDemand</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: enum (of string)</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Captures the change in total energy consumption, driven
+                        by factors such as socio-economic development,
+                        technology shifts and consumer behavior.
+                      </p>
+                    </span>
+                    <div
+                      class="enum-value"
+                      id="keyFeatures_energyDemand_enum"
+                    >
+                      <h4>Must be one of:</h4>
+                      <ul class="list-group">
+                        <li class="list-group-item enum-item">
+                          "No information"
+                        </li>
+                        <li class="list-group-item enum-item">"Decrease"</li>
+                        <li class="list-group-item enum-item">
+                          "Static energy demand"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Moderate growth"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Significant growth"
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionkeyFeatures_electrification"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingkeyFeatures_electrification"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#keyFeatures_electrification"
+                      aria-expanded=""
+                      aria-controls="keyFeatures_electrification"
+                      onclick="setAnchor('#keyFeatures_electrification')"
+                    >
+                      <span class="property-name">electrification</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="keyFeatures_electrification"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingkeyFeatures_electrification"
+                  data-parent="#accordionkeyFeatures_electrification"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures"
+                        onclick="anchorLink('keyFeatures')"
+                        >keyFeatures</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures_electrification"
+                        onclick="anchorLink('keyFeatures_electrification')"
+                        >electrification</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: enum (of string)</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Represents the extent to which energy end-uses
+                        transition from fossil fuels to electricity.
+                      </p>
+                    </span>
+                    <div
+                      class="enum-value"
+                      id="keyFeatures_electrification_enum"
+                    >
+                      <h4>Must be one of:</h4>
+                      <ul class="list-group">
+                        <li class="list-group-item enum-item">
+                          "No information"
+                        </li>
+                        <li class="list-group-item enum-item">"Decrease"</li>
+                        <li class="list-group-item enum-item">
+                          "Stable electrification"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Moderate increase"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Significant increase"
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionkeyFeatures_policyTypes"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingkeyFeatures_policyTypes"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#keyFeatures_policyTypes"
+                      aria-expanded=""
+                      aria-controls="keyFeatures_policyTypes"
+                      onclick="setAnchor('#keyFeatures_policyTypes')"
+                    >
+                      <span class="property-name">policyTypes</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="keyFeatures_policyTypes"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingkeyFeatures_policyTypes"
+                  data-parent="#accordionkeyFeatures_policyTypes"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures"
+                        onclick="anchorLink('keyFeatures')"
+                        >keyFeatures</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures_policyTypes"
+                        onclick="anchorLink('keyFeatures_policyTypes')"
+                        >policyTypes</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: array of enum (of string)</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Identifies the types of policies modeled as drivers of
+                        the scenario, such as carbon pricing, subsidies, or
+                        mandated phaseouts of specific technologies.
+                      </p>
+                    </span>
+
+                    <p>
+                      <span
+                        class="badge badge-light restriction min-items-restriction"
+                        id="keyFeatures_policyTypes_minItems"
+                        >Must contain a minimum of <code>1</code> items</span
+                      >
+                    </p>
+                    <p>
+                      <span
+                        class="badge badge-light restriction unique-items-restriction"
+                        id="keyFeatures_policyTypes_uniqueItems"
+                        >All items must be unique</span
+                      >
+                    </p>
+                    <span class="badge badge-info no-additional"
+                      >No Additional Items</span
+                    >
+                    <h4>Each item of this array must be:</h4>
+                    <div class="card">
+                      <div
+                        class="card-body items-definition"
+                        id="keyFeatures_policyTypes_items"
+                      >
+                        <div class="breadcrumbs">
+                          root
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#keyFeatures"
+                            onclick="anchorLink('keyFeatures')"
+                            >keyFeatures</a
+                          >
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#keyFeatures_policyTypes"
+                            onclick="anchorLink('keyFeatures_policyTypes')"
+                            >policyTypes</a
+                          >
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#keyFeatures_policyTypes_items"
+                            onclick="anchorLink('keyFeatures_policyTypes_items')"
+                            >policyTypes items</a
+                          >
+                        </div>
+                        <span class="badge badge-dark value-type"
+                          >Type: enum (of string)</span
+                        ><br />
+                        <div
+                          class="enum-value"
+                          id="keyFeatures_policyTypes_items_enum"
+                        >
+                          <h4>Must be one of:</h4>
+                          <ul class="list-group">
+                            <li class="list-group-item enum-item">
+                              "Carbon price"
+                            </li>
+                            <li class="list-group-item enum-item">
+                              "Phaseout dates"
+                            </li>
+                            <li class="list-group-item enum-item">
+                              "Subsidies"
+                            </li>
+                            <li class="list-group-item enum-item">
+                              "Target technology shares"
+                            </li>
+                            <li class="list-group-item enum-item">"Other"</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionkeyFeatures_technologyCostTrend"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingkeyFeatures_technologyCostTrend"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#keyFeatures_technologyCostTrend"
+                      aria-expanded=""
+                      aria-controls="keyFeatures_technologyCostTrend"
+                      onclick="setAnchor('#keyFeatures_technologyCostTrend')"
+                    >
+                      <span class="property-name">technologyCostTrend</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="keyFeatures_technologyCostTrend"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingkeyFeatures_technologyCostTrend"
+                  data-parent="#accordionkeyFeatures_technologyCostTrend"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures"
+                        onclick="anchorLink('keyFeatures')"
+                        >keyFeatures</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures_technologyCostTrend"
+                        onclick="anchorLink('keyFeatures_technologyCostTrend')"
+                        >technologyCostTrend</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: enum (of string)</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Describes how technology costs evolve over time, from
+                        static cost assumptions to rapidly declining costs
+                        (e.g., via learning curves).
+                      </p>
+                    </span>
+                    <div
+                      class="enum-value"
+                      id="keyFeatures_technologyCostTrend_enum"
+                    >
+                      <h4>Must be one of:</h4>
+                      <ul class="list-group">
+                        <li class="list-group-item enum-item">
+                          "No information"
+                        </li>
+                        <li class="list-group-item enum-item">"Static"</li>
+                        <li class="list-group-item enum-item">
+                          "Linear trend"
+                        </li>
+                        <li class="list-group-item enum-item">"S-curves"</li>
+                        <li class="list-group-item enum-item">"Other"</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionkeyFeatures_technologyDeploymentTrend"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingkeyFeatures_technologyDeploymentTrend"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#keyFeatures_technologyDeploymentTrend"
+                      aria-expanded=""
+                      aria-controls="keyFeatures_technologyDeploymentTrend"
+                      onclick="setAnchor('#keyFeatures_technologyDeploymentTrend')"
+                    >
+                      <span class="property-name"
+                        >technologyDeploymentTrend</span
+                      >
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="keyFeatures_technologyDeploymentTrend"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingkeyFeatures_technologyDeploymentTrend"
+                  data-parent="#accordionkeyFeatures_technologyDeploymentTrend"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures"
+                        onclick="anchorLink('keyFeatures')"
+                        >keyFeatures</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures_technologyDeploymentTrend"
+                        onclick="anchorLink('keyFeatures_technologyDeploymentTrend')"
+                        >technologyDeploymentTrend</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: enum (of string)</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Indicates the scale and pace of new technology adoption
+                        within the scenario, where significant deployment means
+                        that several new technologies are adopted rapidly
+                      </p>
+                    </span>
+                    <div
+                      class="enum-value"
+                      id="keyFeatures_technologyDeploymentTrend_enum"
+                    >
+                      <h4>Must be one of:</h4>
+                      <ul class="list-group">
+                        <li class="list-group-item enum-item">
+                          "No information"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "No deployment of new technologies"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Moderate deployment of new technologies"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Significant deployment of new technologies"
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionkeyFeatures_emissionsScope"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingkeyFeatures_emissionsScope"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#keyFeatures_emissionsScope"
+                      aria-expanded=""
+                      aria-controls="keyFeatures_emissionsScope"
+                      onclick="setAnchor('#keyFeatures_emissionsScope')"
+                    >
+                      <span class="property-name">emissionsScope</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="keyFeatures_emissionsScope"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingkeyFeatures_emissionsScope"
+                  data-parent="#accordionkeyFeatures_emissionsScope"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures"
+                        onclick="anchorLink('keyFeatures')"
+                        >keyFeatures</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures_emissionsScope"
+                        onclick="anchorLink('keyFeatures_emissionsScope')"
+                        >emissionsScope</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: enum (of string)</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Defines which greenhouse gases are covered in the
+                        scenario’s emissions accounting.
+                      </p>
+                    </span>
+                    <div
+                      class="enum-value"
+                      id="keyFeatures_emissionsScope_enum"
+                    >
+                      <h4>Must be one of:</h4>
+                      <ul class="list-group">
+                        <li class="list-group-item enum-item">
+                          "No information"
+                        </li>
+                        <li class="list-group-item enum-item">"CO2"</li>
+                        <li class="list-group-item enum-item">
+                          "CO2e (Kyoto)"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "CO2e (CO2, Methane)"
+                        </li>
+                        <li class="list-group-item enum-item">"Other"</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionkeyFeatures_policyAmbition"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingkeyFeatures_policyAmbition"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#keyFeatures_policyAmbition"
+                      aria-expanded=""
+                      aria-controls="keyFeatures_policyAmbition"
+                      onclick="setAnchor('#keyFeatures_policyAmbition')"
+                    >
+                      <span class="property-name">policyAmbition</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="keyFeatures_policyAmbition"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingkeyFeatures_policyAmbition"
+                  data-parent="#accordionkeyFeatures_policyAmbition"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures"
+                        onclick="anchorLink('keyFeatures')"
+                        >keyFeatures</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures_policyAmbition"
+                        onclick="anchorLink('keyFeatures_policyAmbition')"
+                        >policyAmbition</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: enum (of string)</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Represents the overall stringency and intent of modeled
+                        policies relative to climate targets, often reflecting
+                        if and how far the included policies go beyond currently
+                        legislated ones
+                      </p>
+                    </span>
+                    <div
+                      class="enum-value"
+                      id="keyFeatures_policyAmbition_enum"
+                    >
+                      <h4>Must be one of:</h4>
+                      <ul class="list-group">
+                        <li class="list-group-item enum-item">
+                          "No information"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Current/legislated policies"
+                        </li>
+                        <li class="list-group-item enum-item">"NDCs"</li>
+                        <li class="list-group-item enum-item">
+                          "NDCs and long term commitments"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Normative/Optimization-based"
+                        </li>
+                        <li class="list-group-item enum-item">"Other"</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionkeyFeatures_technologyCostsDetail"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingkeyFeatures_technologyCostsDetail"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#keyFeatures_technologyCostsDetail"
+                      aria-expanded=""
+                      aria-controls="keyFeatures_technologyCostsDetail"
+                      onclick="setAnchor('#keyFeatures_technologyCostsDetail')"
+                    >
+                      <span class="property-name">technologyCostsDetail</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="keyFeatures_technologyCostsDetail"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingkeyFeatures_technologyCostsDetail"
+                  data-parent="#accordionkeyFeatures_technologyCostsDetail"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures"
+                        onclick="anchorLink('keyFeatures')"
+                        >keyFeatures</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures_technologyCostsDetail"
+                        onclick="anchorLink('keyFeatures_technologyCostsDetail')"
+                        >technologyCostsDetail</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: enum (of string)</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Specifies the level of granularity in cost data, such as
+                        total system costs or detailed CAPEX/OPEX breakdowns.
+                      </p>
+                    </span>
+                    <div
+                      class="enum-value"
+                      id="keyFeatures_technologyCostsDetail_enum"
+                    >
+                      <h4>Must be one of:</h4>
+                      <ul class="list-group">
+                        <li class="list-group-item enum-item">
+                          "No information"
+                        </li>
+                        <li class="list-group-item enum-item">"Total costs"</li>
+                        <li class="list-group-item enum-item">
+                          "Capital costs/O&M/etc."
+                        </li>
+                        <li class="list-group-item enum-item">"Other"</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionkeyFeatures_newTechnologiesIncluded"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingkeyFeatures_newTechnologiesIncluded"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#keyFeatures_newTechnologiesIncluded"
+                      aria-expanded=""
+                      aria-controls="keyFeatures_newTechnologiesIncluded"
+                      onclick="setAnchor('#keyFeatures_newTechnologiesIncluded')"
+                    >
+                      <span class="property-name">newTechnologiesIncluded</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="keyFeatures_newTechnologiesIncluded"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingkeyFeatures_newTechnologiesIncluded"
+                  data-parent="#accordionkeyFeatures_newTechnologiesIncluded"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures"
+                        onclick="anchorLink('keyFeatures')"
+                        >keyFeatures</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures_newTechnologiesIncluded"
+                        onclick="anchorLink('keyFeatures_newTechnologiesIncluded')"
+                        >newTechnologiesIncluded</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: array of enum (of string)</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Lists emerging or breakthrough technologies that are
+                        explicitly modeled within the pathway. These are
+                        considered in technology deployment too.
+                      </p>
+                    </span>
+
+                    <p>
+                      <span
+                        class="badge badge-light restriction min-items-restriction"
+                        id="keyFeatures_newTechnologiesIncluded_minItems"
+                        >Must contain a minimum of <code>1</code> items</span
+                      >
+                    </p>
+                    <p>
+                      <span
+                        class="badge badge-light restriction unique-items-restriction"
+                        id="keyFeatures_newTechnologiesIncluded_uniqueItems"
+                        >All items must be unique</span
+                      >
+                    </p>
+                    <span class="badge badge-info no-additional"
+                      >No Additional Items</span
+                    >
+                    <h4>Each item of this array must be:</h4>
+                    <div class="card">
+                      <div
+                        class="card-body items-definition"
+                        id="keyFeatures_newTechnologiesIncluded_items"
+                      >
+                        <div class="breadcrumbs">
+                          root
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#keyFeatures"
+                            onclick="anchorLink('keyFeatures')"
+                            >keyFeatures</a
+                          >
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#keyFeatures_newTechnologiesIncluded"
+                            onclick="anchorLink('keyFeatures_newTechnologiesIncluded')"
+                            >newTechnologiesIncluded</a
+                          >
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#keyFeatures_newTechnologiesIncluded_items"
+                            onclick="anchorLink('keyFeatures_newTechnologiesIncluded_items')"
+                            >newTechnologiesIncluded items</a
+                          >
+                        </div>
+                        <span class="badge badge-dark value-type"
+                          >Type: enum (of string)</span
+                        ><br />
+                        <div
+                          class="enum-value"
+                          id="keyFeatures_newTechnologiesIncluded_items_enum"
+                        >
+                          <h4>Must be one of:</h4>
+                          <ul class="list-group">
+                            <li class="list-group-item enum-item">
+                              "No information"
+                            </li>
+                            <li class="list-group-item enum-item">"CCUS"</li>
+                            <li class="list-group-item enum-item">"DAC"</li>
+                            <li class="list-group-item enum-item">
+                              "Green H2/ammonia"
+                            </li>
+                            <li class="list-group-item enum-item">"SAF"</li>
+                            <li class="list-group-item enum-item">
+                              "Battery storage"
+                            </li>
+                            <li class="list-group-item enum-item">"EGS/AGS"</li>
+                            <li class="list-group-item enum-item">"Other"</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionkeyFeatures_supplyChain"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingkeyFeatures_supplyChain"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#keyFeatures_supplyChain"
+                      aria-expanded=""
+                      aria-controls="keyFeatures_supplyChain"
+                      onclick="setAnchor('#keyFeatures_supplyChain')"
+                    >
+                      <span class="property-name">supplyChain</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="keyFeatures_supplyChain"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingkeyFeatures_supplyChain"
+                  data-parent="#accordionkeyFeatures_supplyChain"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures"
+                        onclick="anchorLink('keyFeatures')"
+                        >keyFeatures</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures_supplyChain"
+                        onclick="anchorLink('keyFeatures_supplyChain')"
+                        >supplyChain</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: enum (of string)</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Describes how upstream fuel or material price dynamics
+                        are represented in the scenario.
+                      </p>
+                    </span>
+                    <div
+                      class="enum-value"
+                      id="keyFeatures_supplyChain_enum"
+                    >
+                      <h4>Must be one of:</h4>
+                      <ul class="list-group">
+                        <li class="list-group-item enum-item">
+                          "No information"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Static upstream fuel/material prices"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Dynamic upstream fuel/material prices"
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionkeyFeatures_investmentNeeds"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingkeyFeatures_investmentNeeds"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#keyFeatures_investmentNeeds"
+                      aria-expanded=""
+                      aria-controls="keyFeatures_investmentNeeds"
+                      onclick="setAnchor('#keyFeatures_investmentNeeds')"
+                    >
+                      <span class="property-name">investmentNeeds</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="keyFeatures_investmentNeeds"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingkeyFeatures_investmentNeeds"
+                  data-parent="#accordionkeyFeatures_investmentNeeds"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures"
+                        onclick="anchorLink('keyFeatures')"
+                        >keyFeatures</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures_investmentNeeds"
+                        onclick="anchorLink('keyFeatures_investmentNeeds')"
+                        >investmentNeeds</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: enum (of string)</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Summarizes how investment requirements are quantified,
+                        from total system to sector-level or supply-chain
+                        detail.
+                      </p>
+                    </span>
+                    <div
+                      class="enum-value"
+                      id="keyFeatures_investmentNeeds_enum"
+                    >
+                      <h4>Must be one of:</h4>
+                      <ul class="list-group">
+                        <li class="list-group-item enum-item">
+                          "No information"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Total investment"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Sector-level"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Sector-level by upstream/in-stream/downstream"
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionkeyFeatures_infrastructureRequirements"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingkeyFeatures_infrastructureRequirements"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#keyFeatures_infrastructureRequirements"
+                      aria-expanded=""
+                      aria-controls="keyFeatures_infrastructureRequirements"
+                      onclick="setAnchor('#keyFeatures_infrastructureRequirements')"
+                    >
+                      <span class="property-name"
+                        >infrastructureRequirements</span
+                      >
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="keyFeatures_infrastructureRequirements"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingkeyFeatures_infrastructureRequirements"
+                  data-parent="#accordionkeyFeatures_infrastructureRequirements"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures"
+                        onclick="anchorLink('keyFeatures')"
+                        >keyFeatures</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#keyFeatures_infrastructureRequirements"
+                        onclick="anchorLink('keyFeatures_infrastructureRequirements')"
+                        >infrastructureRequirements</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: enum (of string)</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Describes how infrastructure buildout and maintenance
+                        needs are represented across the supply chain.
+                      </p>
+                    </span>
+                    <div
+                      class="enum-value"
+                      id="keyFeatures_infrastructureRequirements_enum"
+                    >
+                      <h4>Must be one of:</h4>
+                      <ul class="list-group">
+                        <li class="list-group-item enum-item">
+                          "No information"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "By part of supply chain"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "By part of supply chain and maintenance/buildout"
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p class="generated-by-footer">
+        Generated using
+        <a href="https://github.com/coveooss/json-schema-for-humans"
+          >json-schema-for-humans</a
+        >
+      </p>
+    </footer>
+  </body>
+</html>

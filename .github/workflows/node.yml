@@ -49,9 +49,8 @@ jobs:
 
   deploy:
     name: "Deploy to SWA"
+    if: ${{ needs.build-release.outputs.has_artifact }}
     needs: [build-release]
-    # always will trigger, and the "success" conditionals are there to ensure
-    # that one or the other dependencies ran.
     uses: ./.github/workflows/azure-static-web-apps-deploy.yml
     secrets: inherit
 

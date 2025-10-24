@@ -261,7 +261,7 @@ export default function MultiSelectDropdown<
                       <span
                         className={clsx(
                           "px-[2px] py-[2px] rounded",
-                          mode === "ANY" && "bg-gray-100",
+                          mode === "ANY" && "bg-energy-100 text-energy-800",
                         )}
                       >
                         Any
@@ -269,7 +269,7 @@ export default function MultiSelectDropdown<
                       <span
                         className={clsx(
                           "px-[2px] py-[2px] rounded",
-                          mode === "ALL" && "bg-gray-100",
+                          mode === "ALL" && "bg-energy-100 text-energy-800",
                         )}
                       >
                         All
