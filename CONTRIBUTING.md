@@ -16,6 +16,7 @@ Thank you for your interest in contributing to this project! We welcome contribu
 - Create a branch directly in the repository.
 - Open a PR into `main` when ready.
 - After your PR is approved, **merge it yourself**.
+  - This workflow allows you to get a "conceptual" review on design and have a discussion, or to tidy up a last minute change prior to merging (updates dismiss reviews and require re-approval).
 
 ## Commit Message Guidelines
 
