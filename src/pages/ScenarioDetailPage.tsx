@@ -75,7 +75,7 @@ const ScenarioDetailPage: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <Link
-        to="/"
+        to="/scenario"
         className="inline-flex items-center text-rmigray-600 hover:text-energy-700 mb-6 transition-colors duration-200"
       >
         <ArrowLeft
