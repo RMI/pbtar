@@ -18,6 +18,10 @@ export interface PBTARScenariosTimeseriesSchema {
    */
   id: string;
   /**
+   * Identifiers of the associated scenario pathways.
+   */
+  pathwayId: string[];
+  /**
    * Name of the scenario.
    */
   name: string;
