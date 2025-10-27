@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 import ScenarioDetailPage from "./pages/ScenarioDetailPage";
+import ScenarioTimeSeries from "./pages/ScenarioTimeSeries";
 import EnvironmentBanner from "./components/EnvironmentBanner";
 
 // Export the inner content for testing
@@ -23,6 +24,10 @@ export const AppContent = () => {
           <Route
             path="/scenario/:id"
             element={<ScenarioDetailPage />}
+          />
+          <Route
+            path="/scenario/timeseries/:id"
+            element={<ScenarioTimeSeries />}
           />
           <Route
             path="/about"
