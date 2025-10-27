@@ -63,8 +63,8 @@ export default function MultiLineChart({
       .join("path")
       .attr("class", "line")
       .attr("fill", "none")
-      .attr("stroke", "currentColor")
-      .attr("stroke", (d) => groupColor(d[0]))
+      .attr("stroke", "var(--color-calm)")
+      //.attr("stroke", (d) => groupColor(d[0]))
       .attr("stroke-width", 1.5)
       .attr("d", (d) => line(d[1]));
 
@@ -85,29 +85,20 @@ export default function MultiLineChart({
       .attr("data-sector", (d) => d.sector)
       .attr("data-technology", (d) => d.technology)
       .attr("data-unit", (d) => d.unit)
-      .attr("r", 2.5);
+      .attr("r", 0);
   }, [d3data]);
 
-  const filterData = (selectedTech) =>
-    setD3data(
-      data.data.filter(
-        (d) =>
-          (d.sector == "Power") &
-          (d.technology == selectedTech) &
-          (d.metric == "Capacity"),
-      ),
-    );
-
-  const showAll = () =>
-    setD3data(
-      data.data.filter((d) => (d.sector == "Power") & (d.metric == "Capacity")),
-    );
+  const highlightSelectedTech = (selectedTech) => {
+    d3.select(lines.current)
+      .selectAll(".line")
+      .attr("stroke", (d) => d[0] == selectedTech ? "var(--color-pine)" : "var(--color-calm)");
+  }
 
   return (
     <>
       <label>
         Highlight:
-        <select onChange={(e) => filterData(e.target.value)}>
+        <select onChange={(e) => highlightSelectedTech(e.target.value)}>
           <option value="Coal">Coal</option>
           <option value="Oil">Oil</option>
           <option value="Gas">Gas</option>
