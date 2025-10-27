@@ -3,12 +3,14 @@ import {
   ChevronLeft,
   ChevronRight,
   Home,
-  Waypoints,
+  GitFork,
   Thermometer,
-  Globe,
-  Building,
+  Earth,
+  Factory,
   ChevronUp,
   ChevronDown,
+  Timer,
+  Ruler,
 } from "lucide-react";
 
 export interface FilterStep {
@@ -26,48 +28,66 @@ export interface FilterStep {
 const steps: FilterStep[] = [
   {
     id: "pathway-type",
-    title: "What type of pathway are you looking for?",
+    title: "Pathway Type",
     description:
       "Different pathway types tell different stories about the future.",
-    icon: <Waypoints className="h-6 w-6" />,
+    icon: <GitFork className="h-6 w-6" />,
     options: [
       { id: "forecasting", title: "Forecasting", value: "forecasting" },
       { id: "backcasting", title: "Backcasting", value: "backcasting" },
-      // Add more options as needed
+    ],
+  },
+  {
+    id: "model-year-netzero",
+    title: "Target Year",
+    description: "Choose scenarios based on their target net-zero year.",
+    icon: <Timer className="h-6 w-6" />,
+    options: [
+      { id: "2030", title: "2030", value: "2030" },
+      { id: "2040", title: "2040", value: "2040" },
+      { id: "2050", title: "2050", value: "2050" },
     ],
   },
   {
     id: "temperature",
-    title: "What temperature scenario interests you?",
+    title: "Temperature Outcome",
     description:
       "Choose scenarios aligned with different temperature outcomes.",
     icon: <Thermometer className="h-6 w-6" />,
     options: [
-      { id: "1.5c", title: "1.5°C", value: "1.5" },
-      { id: "2c", title: "2°C", value: "2.0" },
-      // Add more options as needed
+      { id: "1.5", title: "1.5°C", value: "1.5" },
+      { id: "2.0", title: "2°C", value: "2.0" },
     ],
   },
   {
-    id: "region",
-    title: "Which region do you want to focus on?",
+    id: "geography",
+    title: "Geography",
     description: "Select scenarios for specific geographical areas.",
-    icon: <Globe className="h-6 w-6" />,
+    icon: <Earth className="h-6 w-6" />,
     options: [
       { id: "global", title: "Global", value: "global" },
       { id: "regional", title: "Regional", value: "regional" },
-      // Add more options as needed
     ],
   },
   {
-    id: "benchmark",
-    title: "What benchmark metrics matter most?",
+    id: "sector",
+    title: "Sector",
+    description: "Focus on scenarios covering specific economic sectors.",
+    icon: <Factory className="h-6 w-6" />,
+    options: [
+      { id: "energy", title: "Energy", value: "energy" },
+      { id: "industry", title: "Industry", value: "industry" },
+      { id: "transport", title: "Transport", value: "transport" },
+    ],
+  },
+  {
+    id: "metric",
+    title: "Benchmark Metric",
     description: "Choose scenarios with specific benchmark indicators.",
-    icon: <Building className="h-6 w-6" />,
+    icon: <Ruler className="h-6 w-6" />,
     options: [
       { id: "emissions", title: "Emissions", value: "emissions" },
       { id: "energy", title: "Energy Use", value: "energy" },
-      // Add more options as needed
     ],
   },
 ];
@@ -143,12 +163,12 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
             Use our filters to find the scenarios that best fit the story you
             want to tell.
           </p>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-6 gap-10">
             {steps.map((step, index) => (
               <button
                 key={step.id}
                 onClick={() => setCurrentView(index)}
-                className="p-4 border rounded-lg hover:border-energy hover:bg-energy-50 transition-colors"
+                className="aspect-square p-6 border rounded-lg hover:border-energy hover:bg-energy-50 transition-colors flex flex-col items-center justify-center"
               >
                 <div className="flex flex-col items-center text-center">
                   {step.icon}

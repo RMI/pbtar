@@ -117,9 +117,15 @@ const HomePage: React.FC = () => {
     const newFilters: SearchFilters = {
       ...filters,
       pathwayType: stepFilters["pathway-type"]?.[0] || null,
-      modelTempIncrease: stepFilters["temperature"]?.[0] || null,
-      geography: stepFilters["region"]?.[0] || null,
-      metric: stepFilters["benchmark"]?.[0] || null,
+      modelYearNetzero: stepFilters["model-year-netzero"]?.[0]
+        ? parseInt(stepFilters["model-year-netzero"][0])
+        : null,
+      modelTempIncrease: stepFilters["temperature"]?.[0]
+        ? parseFloat(stepFilters["temperature"][0])
+        : null,
+      geography: stepFilters["geography"]?.[0] || null,
+      sector: stepFilters["sector"]?.[0] || null,
+      metric: stepFilters["metric"]?.[0] || null,
     };
     setFilters(newFilters);
   };
