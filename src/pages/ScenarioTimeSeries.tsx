@@ -8,7 +8,11 @@ import {
   fetchTimeseriesIndex,
   datasetsForPathway,
 } from "../utils/timeseriesIndex";
-import LinePlot from "../components/LinePlot";
+import DonutChart from "../components/DonutChart";
+import MultiLineChart from "../components/MultiLineChart";
+import NormalizedStackedAreaChart from "../components/NormalizedStackedAreaChart";
+import RadarChart from "../components/RadarChart";
+import VerticalBarChart from "../components/VerticalBarChart";
 
 const ScenarioTimeSeries: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -174,12 +178,92 @@ const ScenarioTimeSeries: React.FC = () => {
               <div class="mb-4">
                 <h2 class="text-lg font-semibold text-bluespruce mb-2">
                   <span class="">
-                    Supply
+                    Normalized stacked area chart
                   </span>
                 </h2>
               </div>
               <div class="mb-3">
-                <LinePlot
+                <NormalizedStackedAreaChart
+                  key={datasets[0].datasetId}
+                  data={timeseriesdata}
+                />
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        {timeseriesdata ? (
+          <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
+            <div class="p-5 flex flex-col h-full">
+              <div class="mb-4">
+                <h2 class="text-lg font-semibold text-bluespruce mb-2">
+                  <span class="">
+                    Donut chart
+                  </span>
+                </h2>
+              </div>
+              <div class="mb-3">
+                <DonutChart
+                  key={datasets[0].datasetId}
+                  data={timeseriesdata}
+                />
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        {timeseriesdata ? (
+          <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
+            <div class="p-5 flex flex-col h-full">
+              <div class="mb-4">
+                <h2 class="text-lg font-semibold text-bluespruce mb-2">
+                  <span class="">
+                    Vertical bar chart
+                  </span>
+                </h2>
+              </div>
+              <div class="mb-3">
+                <VerticalBarChart
+                  key={datasets[0].datasetId}
+                  data={timeseriesdata}
+                />
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        {timeseriesdata ? (
+          <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
+            <div class="p-5 flex flex-col h-full">
+              <div class="mb-4">
+                <h2 class="text-lg font-semibold text-bluespruce mb-2">
+                  <span class="">
+                    Multi line chart
+                  </span>
+                </h2>
+              </div>
+              <div class="mb-3">
+                <MultiLineChart
+                  key={datasets[0].datasetId}
+                  data={timeseriesdata}
+                />
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        {timeseriesdata ? (
+          <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
+            <div class="p-5 flex flex-col h-full">
+              <div class="mb-4">
+                <h2 class="text-lg font-semibold text-bluespruce mb-2">
+                  <span class="">
+                    Radar chart
+                  </span>
+                </h2>
+              </div>
+              <div class="mb-3">
+                <RadarChart
                   key={datasets[0].datasetId}
                   data={timeseriesdata}
                 />
