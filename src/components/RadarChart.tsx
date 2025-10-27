@@ -98,23 +98,16 @@ export default function RadarChart({
       ),
     );
 
-  const showAll = () =>
-    setD3data(
-      data.data.filter((d) => (d.sector == "Power") & (d.metric == "Capacity")),
-    );
-
   return (
     <>
       <label>
         Year:
         <select onChange={(e) => filterData(e.target.value)}>
-          <option value="Coal">Coal</option>
-          <option value="Oil">Oil</option>
-          <option value="Gas">Gas</option>
-          <option value="Wind">Wind</option>
-          <option value="Solar">Solar</option>
-          <option value="Biomass">Biomass</option>
-          <option value="Hydro">Hydro</option>
+          {d3data && d3data.reduce(function(a, b) { return (a.indexOf(b.year) < 0) ? a.concat([b.year]) : a; }, []).sort().map(e => (
+            <>
+              <option value = {e}>{e}</option>
+            < />
+          ))}
         </select>
       </label>
       <svg
