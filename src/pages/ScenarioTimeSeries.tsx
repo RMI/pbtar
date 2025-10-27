@@ -126,6 +126,25 @@ const ScenarioTimeSeries: React.FC = () => {
                   data={timeseriesdata}
                 />
               </div>
+              <h2 className="text-lg font-semibold text-neutral-600 mb-3">
+                Metadata
+              </h2>
+              <pre>
+                <code>
+                  {JSON.stringify(
+                    Object.keys(timeseriesdata)
+                      .filter((key) => key != "data")
+                      .reduce((obj, key) => {
+                        return {
+                          ...obj,
+                          [key]: timeseriesdata[key],
+                        };
+                      }, {}),
+                    null,
+                    4,
+                  )}
+                </code>
+              </pre>
             </section>
           ) : null}
         </div>
