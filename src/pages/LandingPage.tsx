@@ -28,7 +28,7 @@ const Card: React.FC<{
 
 const LandingPage: React.FC = () => {
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-12 min-h-screen flex items-center">
       <div className="flex flex-col md:flex-row gap-10 items-stretch">
         {/* Left Column */}
         <div className="md:w-1/2 flex flex-col justify-center">
