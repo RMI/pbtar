@@ -155,7 +155,14 @@ const ScenarioTimeSeries: React.FC = () => {
                     Global filters/selectors
                   </span>
                 </h2>
-
+                <select>
+                  <option value="someOption">Some option</option>
+                  <option value="otherOption">Other option</option>
+                </select>
+                <select>
+                  <option value="someOption">Some option</option>
+                  <option value="otherOption">Other option</option>
+                </select>
               </div>
             </div>
           </div>
