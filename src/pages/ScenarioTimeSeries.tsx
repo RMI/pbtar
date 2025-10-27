@@ -118,10 +118,19 @@ const ScenarioTimeSeries: React.FC = () => {
         {timeseriesdata ? (
           <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
             <div class="p-5 flex flex-col h-full">
-              <h2 className="text-lg font-semibold text-neutral-600 mb-3">
-                {timeseriesdata.name}
-              </h2>
-              <div className="grid gap-3">
+              <div class="mb-4">
+                <h2 class="text-xl font-semibold text-bluespruce mb-2">
+                  <span class="">
+                    {timeseriesdata.name}
+                  </span>
+                </h2>
+                <p class="text-rmigray-600 text-sm line-clamp-2">
+                  <span class="">
+                    {timeseriesdata.description}
+                  </span>
+                </p>
+              </div>
+              <div class="mb-3">
                 <LinePlot
                   key={datasets[0].datasetId}
                   data={timeseriesdata}
@@ -134,25 +143,33 @@ const ScenarioTimeSeries: React.FC = () => {
         {timeseriesdata ? (
           <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
             <div class="p-5 flex flex-col h-full">
-              <h2 className="text-lg font-semibold text-neutral-600 mb-3">
-                Metadata
-              </h2>
-              <pre>
-                <code>
-                  {JSON.stringify(
-                    Object.keys(timeseriesdata)
-                      .filter((key) => key != "data")
-                      .reduce((obj, key) => {
-                        return {
-                          ...obj,
-                          [key]: timeseriesdata[key],
-                        };
-                      }, {}),
-                    null,
-                    4,
-                  )}
-                </code>
-              </pre>
+              <div class="mb-4">
+                <h2 class="text-xl font-semibold text-bluespruce mb-2">
+                  <span class="">
+                    Metadata
+                  </span>
+                </h2>
+              </div>
+              <div class="mb-3">
+                <span class="">
+                  <pre>
+                    <code>
+                      {JSON.stringify(
+                        Object.keys(timeseriesdata)
+                          .filter((key) => key != "data")
+                          .reduce((obj, key) => {
+                            return {
+                              ...obj,
+                              [key]: timeseriesdata[key],
+                            };
+                          }, {}),
+                        null,
+                        4,
+                      )}
+                    </code>
+                  </pre>
+                </span>
+              </div>
             </div>
           </div>
         ) : null}
