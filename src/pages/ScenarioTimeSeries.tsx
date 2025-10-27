@@ -112,11 +112,12 @@ const ScenarioTimeSeries: React.FC = () => {
   }
 
   return (
-    <div className="p-6">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-        <div className="md:col-span-8">
-          {timeseriesdata ? (
-            <section className="mt-8">
+    <div class="container mx-auto px-4 py-8">
+      <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6 transition-opacity duration-300 opacity-100">
+
+        {timeseriesdata ? (
+          <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
+            <div class="p-5 flex flex-col h-full">
               <h2 className="text-lg font-semibold text-neutral-600 mb-3">
                 {timeseriesdata.name}
               </h2>
@@ -126,6 +127,13 @@ const ScenarioTimeSeries: React.FC = () => {
                   data={timeseriesdata}
                 />
               </div>
+            </div>
+          </div>
+        ) : null}
+
+        {timeseriesdata ? (
+          <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
+            <div class="p-5 flex flex-col h-full">
               <h2 className="text-lg font-semibold text-neutral-600 mb-3">
                 Metadata
               </h2>
@@ -145,9 +153,10 @@ const ScenarioTimeSeries: React.FC = () => {
                   )}
                 </code>
               </pre>
-            </section>
-          ) : null}
-        </div>
+            </div>
+          </div>
+        ) : null}
+
       </div>
     </div>
   );
