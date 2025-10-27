@@ -36,7 +36,11 @@ const LandingPage: React.FC = () => {
             Navigating the Energy Transition
           </h1>
           <p className="text-lg text-rmigray-600 mb-8">
-            Transition pathways illustrate how the energy transition will reshape sectors and systems, giving financial institutions, corporates, and other organizations greater confidence in developing, assessing, and implementing plans in a changing energy landscape.
+            Transition pathways illustrate how the energy transition will
+            reshape sectors and systems, giving financial institutions,
+            corporates, and other organizations greater confidence in
+            developing, assessing, and implementing plans in a changing energy
+            landscape.
           </p>
           <Link
             to="/scenario"
@@ -53,7 +57,9 @@ const LandingPage: React.FC = () => {
             linkText="Learn more →"
             linkHref="https://rmi.org/insight/creating-transition-intelligence-enhancing-corporate-transition-assessments-for-financial-decision-making"
           >
-            Drawing on a range of transition pathways turns corporate data into actionable intelligence, helping organizations test strategies, manage risks, and engage stakeholders.
+            Drawing on a range of transition pathways turns corporate data into
+            actionable intelligence, helping organizations test strategies,
+            manage risks, and engage stakeholders.
           </Card>
           <Card
             title="RMI’s Approach"
@@ -61,7 +67,9 @@ const LandingPage: React.FC = () => {
             linkText="Learn more →"
             linkHref="https://rmi.org/insight/leveraging-transition-pathways/"
           >
-            This repository connects users with the right transition pathways for their needs, with structured guidance for navigating diverse pathway types, geographies, developers, and methodologies.
+            This repository connects users with the right transition pathways
+            for their needs, with structured guidance for navigating diverse
+            pathway types, geographies, developers, and methodologies.
           </Card>
         </div>
       </div>
