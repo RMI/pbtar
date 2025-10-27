@@ -217,7 +217,7 @@ const ScenarioDetailPage: React.FC = () => {
                     {datasets.map((d) => {
                       const label = d.label ?? d.datasetId;
                       const summary = summarizeSummary(d.summary);
-                      const plothref = "timeseries/" + id;
+                      const plothref = "../scenario/timeseries/" + id;
 
                       return (
                         <DownloadDataset
