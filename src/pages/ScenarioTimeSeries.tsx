@@ -113,6 +113,18 @@ const ScenarioTimeSeries: React.FC = () => {
 
   return (
     <div class="container mx-auto px-4 py-8">
+
+      <Link
+        to={'/scenario/' + id}
+        className="inline-flex items-center text-rmigray-600 hover:text-energy-700 mb-6 transition-colors duration-200"
+      >
+        <ArrowLeft
+          size={16}
+          className="mr-1"
+        />
+        Back to scenario detail
+      </Link>
+
       <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6 transition-opacity duration-300 opacity-100">
 
         {timeseriesdata ? (
