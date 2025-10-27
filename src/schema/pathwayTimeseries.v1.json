@@ -40,6 +40,15 @@
       "type": "string",
       "maxLength": 100
     },
+    "pathwayId": {
+      "description": "Identifiers of the associated scenario pathways.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 100,
+        "minLength": 1
+      }
+    },
     "name": {
       "description": "Name of the scenario.",
       "type": "string",
@@ -374,6 +383,7 @@
   "additionalProperties": false,
   "required": [
     "id",
+    "pathwayId",
     "name",
     "description",
     "publisher",

@@ -18,6 +18,12 @@ import {
   getSectorTooltip,
   getMetricTooltip,
 } from "../utils/tooltipUtils";
+import DownloadDataset from "../components/DownloadDataset";
+import {
+  fetchTimeseriesIndex,
+  datasetsForPathway,
+  summarizeSummary,
+} from "../utils/timeseriesIndex";
 
 const ScenarioDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -35,6 +41,44 @@ const ScenarioDetailPage: React.FC = () => {
 
     return () => clearTimeout(timer);
   }, [id]);
+
+  // Timeseries index state
+  const [tsIndexLoaded, setTsIndexLoaded] = useState(false);
+  const [datasets, setDatasets] = useState<
+    Array<{
+      datasetId: string;
+      label?: string;
+      path: string;
+      summary?: unknown;
+    }>
+  >([]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadDatasets = async (): Promise<void> => {
+      try {
+        const idx = await fetchTimeseriesIndex();
+        if (!isMounted) return;
+
+        const pathwayId: string = scenario?.id ?? "";
+
+        if (idx && pathwayId) {
+          setDatasets(datasetsForPathway(idx, pathwayId));
+        } else {
+          setDatasets([]);
+        }
+        setTsIndexLoaded(true);
+      } catch (err) {
+        console.error("Failed to load timeseries index:", err);
+      }
+    };
+
+    void loadDatasets(); // explicitly mark ignored promise to satisfy no-floating-promises
+    return () => {
+      isMounted = false;
+    };
+  }, [scenario]); // depend on the full object to avoid eslint warning
 
   if (loading) {
     return (
@@ -161,6 +205,28 @@ const ScenarioDetailPage: React.FC = () => {
                   </div>
                 </div>
               </section>
+
+              {tsIndexLoaded && datasets.length > 0 ? (
+                <section className="mt-8">
+                  <h3 className="text-sm font-semibold text-neutral-600 mb-3">
+                    Related datasets
+                  </h3>
+                  <div className="grid gap-3">
+                    {datasets.map((d) => {
+                      const label = d.label ?? d.datasetId;
+                      const summary = summarizeSummary(d.summary);
+                      return (
+                        <DownloadDataset
+                          key={d.datasetId}
+                          label={label}
+                          href={d.path}
+                          summary={summary}
+                        />
+                      );
+                    })}
+                  </div>
+                </section>
+              ) : null}
             </div>
 
             <div className="md:col-span-4">

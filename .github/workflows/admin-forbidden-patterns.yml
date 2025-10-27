@@ -38,3 +38,4 @@ jobs:
             package-lock.json
             scripts/schema-check-files.ts
             src/types/*.d.ts
+            scripts/build-timeseries-index.ts

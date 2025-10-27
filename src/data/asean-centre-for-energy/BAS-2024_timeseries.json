@@ -1,6 +1,7 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
   "id": "ACE-BAS-2024_TS",
+  "pathwayId": ["ACE-BAS-2024"],
   "name": "Baseline Scenario (BAS) Timeseries Data",
   "description": "Continuation of historical trends of ASEAN energy systems w/o modelling of existing policy targets.",
   "publisher": "ASEAN Centre for Energy (ACE)",
