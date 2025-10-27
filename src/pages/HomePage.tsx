@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import ScenarioCard from "../components/ScenarioCard";
 import SearchSection from "../components/SearchSection";
+import StepByStepGuide from "../components/StepByStepGuide";
 import { scenariosData } from "../data/scenariosData";
 import { filterScenarios } from "../utils/searchUtils";
 import { SearchFilters, Scenario } from "../types";
@@ -109,12 +110,30 @@ const HomePage: React.FC = () => {
     });
   };
 
+  const handleStepByStepFilterChange = (
+    stepFilters: Record<string, string[]>,
+  ) => {
+    // Map the step-by-step guide filters to your search filters
+    const newFilters: SearchFilters = {
+      ...filters,
+      pathwayType: stepFilters["pathway-type"]?.[0] || null,
+      modelTempIncrease: stepFilters["temperature"]?.[0] || null,
+      geography: stepFilters["region"]?.[0] || null,
+      metric: stepFilters["benchmark"]?.[0] || null,
+    };
+    setFilters(newFilters);
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <section
         ref={topSectionRef}
         className="mb-8"
       >
+        {/* Step by Step Guide */}
+        <div className="mb-8">
+          <StepByStepGuide onFilterChange={handleStepByStepFilterChange} />
+        </div>
         <h1 className="text-2xl font-bold text-rmigray-800 mb-2">
           Find Climate Transition Scenarios
         </h1>
