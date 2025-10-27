@@ -31,7 +31,7 @@ const steps: FilterStep[] = [
     title: "Pathway Type",
     description:
       "Different pathway types tell different stories about the future.",
-    icon: <GitFork className="h-6 w-6" />,
+    icon: <GitFork className="h-8 w-8" />,
     options: [
       { id: "forecasting", title: "Forecasting", value: "forecasting" },
       { id: "backcasting", title: "Backcasting", value: "backcasting" },
@@ -41,7 +41,7 @@ const steps: FilterStep[] = [
     id: "model-year-netzero",
     title: "Target Year",
     description: "Choose scenarios based on their target net-zero year.",
-    icon: <Timer className="h-6 w-6" />,
+    icon: <Timer className="h-8 w-8" />,
     options: [
       { id: "2030", title: "2030", value: "2030" },
       { id: "2040", title: "2040", value: "2040" },
@@ -53,7 +53,7 @@ const steps: FilterStep[] = [
     title: "Temperature Outcome",
     description:
       "Choose scenarios aligned with different temperature outcomes.",
-    icon: <Thermometer className="h-6 w-6" />,
+    icon: <Thermometer className="h-8 w-8" />,
     options: [
       { id: "1.5", title: "1.5°C", value: "1.5" },
       { id: "2.0", title: "2°C", value: "2.0" },
@@ -63,7 +63,7 @@ const steps: FilterStep[] = [
     id: "geography",
     title: "Geography",
     description: "Select scenarios for specific geographical areas.",
-    icon: <Earth className="h-6 w-6" />,
+    icon: <Earth className="h-8 w-8" />,
     options: [
       { id: "global", title: "Global", value: "global" },
       { id: "regional", title: "Regional", value: "regional" },
@@ -73,7 +73,7 @@ const steps: FilterStep[] = [
     id: "sector",
     title: "Sector",
     description: "Focus on scenarios covering specific economic sectors.",
-    icon: <Factory className="h-6 w-6" />,
+    icon: <Factory className="h-8 w-8" />,
     options: [
       { id: "energy", title: "Energy", value: "energy" },
       { id: "industry", title: "Industry", value: "industry" },
@@ -84,7 +84,7 @@ const steps: FilterStep[] = [
     id: "metric",
     title: "Benchmark Metric",
     description: "Choose scenarios with specific benchmark indicators.",
-    icon: <Ruler className="h-6 w-6" />,
+    icon: <Ruler className="h-8 w-8" />,
     options: [
       { id: "emissions", title: "Emissions", value: "emissions" },
       { id: "energy", title: "Energy Use", value: "energy" },
@@ -172,7 +172,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
               >
                 <div className="flex flex-col items-center text-center">
                   {step.icon}
-                  <span className="mt-2 text-sm font-medium">{step.title}</span>
+                  <span className="mt-2 text-lg font-normal">{step.title}</span>
                 </div>
               </button>
             ))}
