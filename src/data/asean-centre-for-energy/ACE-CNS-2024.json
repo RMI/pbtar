@@ -1,0 +1,73 @@
+{
+  "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
+  "id": "ACE-CNS-2024",
+  "publisher": "ASEAN Centre for Energy (ACE)",
+  "name": "Carbon Neutrality Scenario (CNS)",
+  "description": "Pathway for ASEAN to achieve net-zero CO2 emissions by 2050. Includes rollout of CCUS technologies.",
+  "geography": ["South East Asia"],
+  "publicationYear": 2024,
+  "pathwayType": "Normative",
+  "modelYearStart": 2023,
+  "modelYearEnd": 2050,
+  "modelYearNetzero": 2050,
+  "sectors": [
+    { "name": "Land Use", "technologies": [] },
+    { "name": "Buildings", "technologies": [] },
+    { "name": "Industry", "technologies": [] },
+    {
+      "name": "Power",
+      "technologies": [
+        "Coal",
+        "Oil",
+        "Gas",
+        "Nuclear",
+        "Hydro",
+        "Wind",
+        "Solar",
+        "Biomass",
+        "Other"
+      ]
+    },
+    { "name": "Transport", "technologies": [] }
+  ],
+  "expertOverview": "#### Pathway Description\n\nThe ASEAN Centre for Energy (ACE) acts as the ASEAN energy data center and knowledge hub to provide a knowledge repository for the ASEAN Member States (AMS). The ACE ASEAN Energy Outlook is a publication of several scenarios which highlight some potential energy pathways at ASEAN level.\n\nThe Carbon Neutral Scenario is a normative pathway in which the ASEAN region achieves net-zero carbon emissions by 2050, both in energy and non-energy sectors. This pathway builds on the RAS by incorporating emissions constraints, adapting low-emission technologies and fuels on the demand side, gradual retirement of some coal and gas technologies, and exploring options for low-emission power generation. It assumes that countries improve their energy efficiency according to their full potential, develop and deploy renewable energy sources according to their individual potential, allow capacity additions beyond the PDP plans, prioritising dispatch of renewable energy, and that they start using emerging technologies, such as carbon capture and storage (CCS) in the electricity sector and relevant production processes on the supply side, facilitating the production of low-emission fuels. Like the RAS, the CNS uses a least-cost optimization approach, which allows for lower emission composition of the energy supply mix compared to BAS and ATS.\n\nThe geographic scope of the CNS pathway and the underlying AEO is limited to ASEAN countries. Since this implies the model does not produce any global estimates, the CNS pathway is not connected with any implied global temperature rise.\n\nThe assumptions of this pathway may be considered a theoretical best case outlook on how the energy sector could decarbonize in ASEAN countries. It is not the most probably outcome, as there are not currently the policies in place or even drafted that would support this development. Instead, this pathway can be used as a benchmark for a highly ambitious option to decarbonize the region and it can therefore be used to guide future targets for countries and companies in the region.\n\n**Core drivers:**\n\n*Emissions:* The CNS implements emissions constraints and combines this with a least-cost optimization approach. Emissions in the energy system start decreasing in the short term and they halve by 2050 relative to 2022 in the CNS. In the power generation sector, they drop rapidly, which shows the impact of emissions constraints paired with a least cost approach. Industry, transport, and buildings sectors all see significant emissions reductions, too.\n\n*Technology Deployment & Technology costs:* Emissions constraints and the least-cost approach lead to a more rapid build-out of low-carbon power capacity than in other ACE pathways, including a more rapid deployment of technologies that are less mature or not yet established in the region (such as nuclear geothermal, and tidal & wave power).\n\n*Policies:* Policies in the CNS are aligned with those in the ACE RAS pathway and, as such, are not the main driver above and beyond the results of the RAS. This means that NDCs are fully achieved, as are the regional targets of the APAEC.\n\n*Investment needs:* CNS forecasts massive investment in the power sector: 55 billion USD a year between 2023 and 2030, more than in any year of the ACE ATS pathway, and up to 371 bn USD between 2040-2050, more than twice the investment seen in the ACE RAS.\n\n#### Applications to Transition Assessment\n\nThe Carbon Neutral Scenario is a normative scenario, designed to explore the implications of achieving long-term carbon neutrality. However, since it has a limited regional scope, it is not directly associated with an Implied Temperature Rise (ITR) metric and cannot be used for temperature alignment applications.\n\nSince the CNS exceeds the ambition of current national pledges, misalignment with it does not necessarily imply misalignment with existing ASEAN policy targets. In fact, such misalignment may still reflect consistency with current national commitments, given CNS’s aspirational nature. As such, it can be used for ambitious target setting use cases that still aim for alignment with the most ambitious regional and national policy targets, such as NDCs, PDPs and the APAEC targets.\n\nThe CNS pathway includes regional-level projections for power generation and capacity on 5-year intervals and using a moderately detailed breakdown by energy sources (such as coal, wind, solar, biomass, and geothermal). These are relevant and useful for analyzing specific decarbonization levers and project investment pipelines within company plans. While the regional granularity is still not optimal for analyzing companies that operate mainly in a single jurisdiction, they are still an improvement over global pathways for this kind of analysis.\n\nThe CNS applies a least-cost optimization framework for its projections, which leads to significantly different outcomes of capacity buildouts and the generation technology mix then in simulated pathways, such as the ACE BAS and ATS. This modeling approach prioritizes cost-efficiency in technology deployment and system expansion, resulting in higher investment needs in the CNS. Changes of such scale highlight the pathway’s relevance for market feasibility assessments, particularly within the Company Transition Assessment framework, where cost-effectiveness and investment scalability are key considerations.",
+  "dataSource": {
+    "description": "ACE (2024). 8th ASEAN Energy Outlook (AEO8). ASEAN Centre for Energy (ACE), Jakarta.",
+    "url": "https://aseanenergy.org/",
+    "downloadAvailable": true
+  },
+  "metric": [
+    "Emissions Intensity",
+    "Capacity",
+    "Generation",
+    "Technology Mix",
+    "Absolute Emissions"
+  ],
+  "keyFeatures": {
+    "emissionsPathway": "Moderate decline",
+    "energyEfficiency": "Significant improvements",
+    "energyDemand": "Moderate growth",
+    "electrification": "Significant increase",
+    "policyTypes": [
+      "Carbon price",
+      "Phaseout dates",
+      "Subsidies",
+      "Target technology shares",
+      "Other"
+    ],
+    "technologyCostTrend": "Static",
+    "technologyDeploymentTrend": "Significant deployment of new technologies",
+    "emissionsScope": "No information",
+    "policyAmbition": "Normative/Optimization-based",
+    "technologyCostsDetail": "Capital costs/O&M/etc.",
+    "newTechnologiesIncluded": [
+      "Battery storage",
+      "CCUS",
+      "Green H2/ammonia",
+      "SAF"
+    ],
+    "supplyChain": "No information",
+    "investmentNeeds": "Sector-level",
+    "infrastructureRequirements": "No information"
+  }
+}

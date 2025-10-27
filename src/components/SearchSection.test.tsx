@@ -5,11 +5,28 @@ import { SearchFilters } from "../types";
 
 // Mock the scenariosData import
 vi.mock("../data/scenariosData", async () => {
-  const mockScenarios = (
-    await import("../../testdata/valid/scenarios_metadata_sample_array.json", {
+  const [s1, s2, s3, s4] = await Promise.all([
+    import("../../testdata/valid/scenarios_metadata_sample_01.json", {
       assert: { type: "json" },
-    })
-  ).default as import("../types").Scenario[];
+    }),
+    import("../../testdata/valid/scenarios_metadata_sample_02.json", {
+      assert: { type: "json" },
+    }),
+    import("../../testdata/valid/scenarios_metadata_sample_03.json", {
+      assert: { type: "json" },
+    }),
+    import("../../testdata/valid/scenarios_metadata_sample_04.json", {
+      assert: { type: "json" },
+    }),
+  ]);
+
+  const mockScenarios = [
+    s1.default,
+    s2.default,
+    s3.default,
+    s4.default,
+  ] as import("../types").Scenario[];
+
   return { scenariosData: mockScenarios };
 });
 

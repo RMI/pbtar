@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import rawSchema from "../schema/schema.json";
+import pathwayMetadata from "../schema/pathwayMetadata.v1.json";
 import {
   pathwayTypeTooltips,
   sectorTooltips,
@@ -8,7 +8,7 @@ import {
   unknownTooltip,
 } from "./tooltipUtils";
 
-const schema: unknown = rawSchema;
+const schema: unknown = pathwayMetadata;
 
 // ✅ Type guards to keep ESLint happy about "unsafe" usage
 const isRecord = (v: unknown): v is Record<string, unknown> =>
@@ -108,7 +108,7 @@ const CHECKS: Array<{
 }> = [
   {
     label: "pathwayType",
-    schemaPath: ["items", "properties", "pathwayType", "enum"] as const,
+    schemaPath: ["properties", "pathwayType", "enum"] as const,
     record: pathwayTypeTooltips,
     getter: getPathwayTypeTooltip,
   },
@@ -116,7 +116,6 @@ const CHECKS: Array<{
     label: "sectors.name",
     // schema.items.properties.sectors.items.properties.name.enum
     schemaPath: [
-      "items",
       "properties",
       "sectors",
       "items",
