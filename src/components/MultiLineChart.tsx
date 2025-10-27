@@ -91,7 +91,7 @@ export default function MultiLineChart({
   const highlightSelectedTech = (selectedTech) => {
     d3.select(lines.current)
       .selectAll(".line")
-      .attr("stroke", (d) => d[0] == selectedTech ? "var(--color-pine)" : "var(--color-calm)");
+      .attr("stroke", (d) => d[0] == selectedTech ? "var(--color-donate)" : "var(--color-calm)");
   }
 
   return (
