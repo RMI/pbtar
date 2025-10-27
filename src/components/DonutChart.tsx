@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import { useRef, useEffect, useState } from "react";
 
-export default function LinePlot({
+export default function DonutChart({
   data,
   width = 640,
   height = 400,
@@ -105,14 +105,8 @@ export default function LinePlot({
 
   return (
     <>
-      <button
-        onClick={showAll}
-        className="px-4 py-2 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200"
-      >
-        showAll
-      </button>
       <label>
-        Pick a technology:
+        Year:
         <select onChange={(e) => filterData(e.target.value)}>
           <option value="Coal">Coal</option>
           <option value="Oil">Oil</option>
