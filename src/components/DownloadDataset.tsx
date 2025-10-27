@@ -4,6 +4,7 @@ import React from "react";
 type Props = {
   label: string;
   href: string;
+  plothref: string;
   summary?: string;
   className?: string;
 };
@@ -11,6 +12,7 @@ type Props = {
 export default function DownloadDataset({
   label,
   href,
+  plothref,
   summary,
   className,
 }: Props) {
@@ -36,6 +38,12 @@ export default function DownloadDataset({
         className="inline-flex items-center px-4 py-2 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200"
       >
         Download
+      </a>
+      <a
+        href={plothref}
+        className="inline-flex items-center px-4 py-2 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200"
+      >
+        Plot
       </a>
     </div>
   );
