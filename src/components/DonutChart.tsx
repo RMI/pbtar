@@ -3,89 +3,44 @@ import { useRef, useEffect, useState } from "react";
 
 export default function DonutChart({
   data,
-  width = 640,
-  height = 400,
+  width = 600,
   marginTop = 20,
   marginRight = 20,
-  marginBottom = 30,
-  marginLeft = 40,
+  marginBottom = 20,
+  marginLeft = 20,
 }) {
   const [d3data, setD3data] = useState(
-    data.data.filter((d) => (d.sector == "Power") & (d.metric == "Capacity")),
+    data.data.filter((d) => (d.sector == "Power") & (d.metric == "Capacity") & (d.year == 2022)),
   );
   const ref = useRef();
-  const gx = useRef();
-  const gy = useRef();
-  const lines = useRef();
-  const dots = useRef();
+
+  const height = Math.min(500, width / 2);
 
   useEffect(() => {
     const svgElement = d3.select(ref.current);
-    const linesGroup = d3.select(lines.current);
-    const dotsGroup = d3.select(dots.current);
 
-    const utc = d3.utcParse("%Y");
-    const years = d3.extent(d3data, (d) => utc(d.year));
-    const values = d3.extent(d3data, (d) => d.value);
-    const xticks = [...new Set(d3data.map((d) => d.year))].map(utc);
+    const outerRadius = (height) / 2 - 10;
+    const innerRadius = outerRadius * 0.40;
+    const tau = 2 * Math.PI;
+    const color = d3.scaleOrdinal(d3.schemeObservable10);
 
-    const x = d3.scaleUtc(years, [marginLeft, width - marginRight]);
-    const y = d3.scaleLinear(values, [height - marginBottom, marginTop]);
-    const line = d3
-      .line()
-      .x((d) => x(utc(d.year)))
-      .y((d) => y(d.value));
+    const arc = d3.arc()
+      .innerRadius(innerRadius)
+      .outerRadius(outerRadius);
 
-    d3.select(gx.current)
-      .transition()
-      .duration(750)
-      .call(d3.axisBottom(x).tickValues(xticks));
-    d3.select(gy.current).transition().duration(750).call(d3.axisLeft(y));
+    const pie = d3.pie().sort(null).value((d) => d.value);
 
-    const groupedData = d3.groups(d3data, (d) => d.technology);
-    const groupNames = groupedData.map((d) => d[0]);
-    const groupColor = d3
-      .scaleOrdinal()
-      .domain(["Biomass", "Wind", "Hydro", "Solar", "Oil", "Coal", "Gas"])
-      .range([
-        "var(--color-slate)",
-        "var(--color-pine)",
-        "var(--color-donate)",
-        "var(--color-solar)",
-        "var(--color-deficient)",
-        "var(--color-coal)",
-        "var(--color-calm)",
-      ]);
+    svgElement.attr("viewBox", [-width/2, -height/2, width, height]);
 
-    linesGroup
-      .selectAll(".line")
-      .data(groupedData)
+    svgElement.datum(d3data).selectAll("path")
+      .data(pie)
       .join("path")
-      .attr("class", "line")
-      .attr("fill", "none")
-      .attr("stroke", "currentColor")
-      .attr("stroke", (d) => groupColor(d[0]))
-      .attr("stroke-width", 1.5)
-      .attr("d", (d) => line(d[1]));
-
-    dotsGroup
-      .selectAll("circle")
-      .data(d3data)
-      .join("circle")
-      .attr("key", (d, i) => i)
-      .attr("cx", (d) => x(utc(d.year)))
-      .attr("cy", (d) => y(d.value))
-      .attr("fill", (d) => groupColor(d.technology))
-      .attr("stroke", (d) => groupColor(d.technology))
-      .attr("stroke-width", 1.5)
-      .attr("data-year", (d) => d.year)
-      .attr("data-value", (d) => d.value)
-      .attr("data-geography", (d) => d.geography)
-      .attr("data-metric", (d) => d.metric)
-      .attr("data-sector", (d) => d.sector)
-      .attr("data-technology", (d) => d.technology)
-      .attr("data-unit", (d) => d.unit)
-      .attr("r", 2.5);
+        .attr("fill", (d, i) => color(i))
+        .attr("d", arc)
+        .attr("data-year", (d) => d.year)
+        .attr("data-value", (d) => d.value)
+        .attr("data-technology", (d) => d.technology)
+        .each(function(d) { this._current = d; }); // store the initial angles
   }, [d3data]);
 
   const filterData = (selectedTech) =>
@@ -115,16 +70,6 @@ export default function DonutChart({
         width={width}
         height={height}
       >
-        <g
-          ref={gx}
-          transform={`translate(0, ${height - marginBottom})`}
-        />
-        <g
-          ref={gy}
-          transform={`translate(${marginLeft}, 0)`}
-        />
-        <g ref={lines} />
-        <g ref={dots} />
       </svg>
     </>
   );
