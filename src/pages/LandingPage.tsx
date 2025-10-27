@@ -33,40 +33,35 @@ const LandingPage: React.FC = () => {
         {/* Left Column */}
         <div className="md:w-1/2 flex flex-col justify-center">
           <h1 className="text-5xl font-bold text-rmigray-800 mb-6">
-            Navigating Climate Transitions
+            Navigating the Energy Transition
           </h1>
           <p className="text-lg text-rmigray-600 mb-8">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Pellentesque euismod, urna eu tincidunt consectetur, nisi nisl
-            aliquam nunc, eget aliquam massa nisl quis neque.
+            Transition pathways illustrate how the energy transition will reshape sectors and systems, giving financial institutions, corporates, and other organizations greater confidence in developing, assessing, and implementing plans in a changing energy landscape.
           </p>
           <Link
             to="/scenario"
             className="inline-block px-8 py-4 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200 text-lg font-semibold"
           >
-            Explore Scenarios
+            Explore Pathways
           </Link>
         </div>
         {/* Right Column */}
         <div className="md:w-1/2 flex flex-col justify-center">
           <Card
-            title="Why Climate Transition Assessments?"
+            title="Creating Transition Intelligence"
             icon={<TrendingUp className="h-7 w-7 text-energy" />}
-            linkText="Learn More →"
-            linkHref="https://rmi.org"
+            linkText="Learn more →"
+            linkHref="https://rmi.org/insight/creating-transition-intelligence-enhancing-corporate-transition-assessments-for-financial-decision-making"
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-            euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc.
+            Drawing on a range of transition pathways turns corporate data into actionable intelligence, helping organizations test strategies, manage risks, and engage stakeholders.
           </Card>
           <Card
-            title="RMI's Motivation"
+            title="RMI’s Approach"
             icon={<Lightbulb className="h-7 w-7 text-energy" />}
-            linkText="Our Methodology →"
-            linkHref="https://rmi.org"
+            linkText="Learn more →"
+            linkHref="https://rmi.org/insight/leveraging-transition-pathways/"
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Pellentesque euismod, urna eu tincidunt consectetur, nisi nisl
-            aliquam nunc.
+            This repository connects users with the right transition pathways for their needs, with structured guidance for navigating diverse pathway types, geographies, developers, and methodologies.
           </Card>
         </div>
       </div>
