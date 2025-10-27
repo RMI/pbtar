@@ -142,6 +142,35 @@ const ScenarioTimeSeries: React.FC = () => {
                   </span>
                 </p>
               </div>
+            </div>
+          </div>
+        ) : null}
+
+        {timeseriesdata ? (
+          <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
+            <div class="p-5 flex flex-col h-full">
+              <div class="mb-4">
+                <h2 class="text-lg font-semibold text-bluespruce mb-2">
+                  <span class="">
+                    Global filters/selectors
+                  </span>
+                </h2>
+
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        {timeseriesdata ? (
+          <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
+            <div class="p-5 flex flex-col h-full">
+              <div class="mb-4">
+                <h2 class="text-lg font-semibold text-bluespruce mb-2">
+                  <span class="">
+                    Composition
+                  </span>
+                </h2>
+              </div>
               <div class="mb-3">
                 <LinePlot
                   key={datasets[0].datasetId}
