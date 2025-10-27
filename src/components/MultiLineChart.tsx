@@ -3,7 +3,7 @@ import { useRef, useEffect, useState } from "react";
 
 export default function MultiLineChart({
   data,
-  width = 640,
+  width = 600,
   height = 400,
   marginTop = 20,
   marginRight = 20,
@@ -25,73 +25,57 @@ export default function MultiLineChart({
     const dotsGroup = d3.select(dots.current);
 
     const utc = d3.utcParse("%Y");
-    const years = d3.extent(d3data, (d) => utc(d.year));
-    const values = d3.extent(d3data, (d) => d.value);
-    const xticks = [...new Set(d3data.map((d) => d.year))].map(utc);
+    const years = d3.extent(d3data, d => utc(d.year));
+    const values = d3.extent(d3data, d => d.value);
+    const xticks = [...new Set(d3data.map(d => d.year))].map(utc);
 
     const x = d3.scaleUtc(years, [marginLeft, width - marginRight]);
     const y = d3.scaleLinear(values, [height - marginBottom, marginTop]);
-    const line = d3
-      .line()
-      .x((d) => x(utc(d.year)))
-      .y((d) => y(d.value));
+    const line = d3.line()
+      .x(d => x(utc(d.year)))
+      .y(d => y(d.value));
 
     d3.select(gx.current)
       .transition()
       .duration(750)
-      .call(d3.axisBottom(x).tickValues(xticks));
-    d3.select(gy.current).transition().duration(750).call(d3.axisLeft(y));
+      .call(d3.axisBottom(x)
+      .tickValues(xticks));
 
-    const groupedData = d3.groups(d3data, (d) => d.technology);
-    const groupNames = groupedData.map((d) => d[0]);
-    const groupColor = d3
-      .scaleOrdinal()
-      .domain(["Biomass", "Wind", "Hydro", "Solar", "Oil", "Coal", "Gas"])
-      .range([
-        "var(--color-slate)",
-        "var(--color-pine)",
-        "var(--color-donate)",
-        "var(--color-solar)",
-        "var(--color-deficient)",
-        "var(--color-coal)",
-        "var(--color-calm)",
-      ]);
+    d3.select(gy.current)
+      .transition()
+      .duration(750)
+      .call(d3.axisLeft(y));
+
+    const groupedData = d3.groups(d3data, d => d.technology);
 
     linesGroup
       .selectAll(".line")
       .data(groupedData)
       .join("path")
-      .attr("class", "line")
-      .attr("fill", "none")
-      .attr("stroke", "var(--color-calm)")
-      //.attr("stroke", (d) => groupColor(d[0]))
-      .attr("stroke-width", 1.5)
-      .attr("d", (d) => line(d[1]));
-
-    dotsGroup
-      .selectAll("circle")
-      .data(d3data)
-      .join("circle")
-      .attr("key", (d, i) => i)
-      .attr("cx", (d) => x(utc(d.year)))
-      .attr("cy", (d) => y(d.value))
-      .attr("fill", (d) => groupColor(d.technology))
-      .attr("stroke", (d) => groupColor(d.technology))
-      .attr("stroke-width", 1.5)
-      .attr("data-year", (d) => d.year)
-      .attr("data-value", (d) => d.value)
-      .attr("data-geography", (d) => d.geography)
-      .attr("data-metric", (d) => d.metric)
-      .attr("data-sector", (d) => d.sector)
-      .attr("data-technology", (d) => d.technology)
-      .attr("data-unit", (d) => d.unit)
-      .attr("r", 0);
+        .attr("class", "line")
+        .attr("fill", "none")
+        .attr("stroke", "var(--color-coal)")
+        .attr("stroke-width", 1)
+        .attr("d", d => line(d[1]))
+        .attr("data-year", d => d[1].year)
+        .attr("data-value", d => d[1].value)
+        .attr("data-geography", d => d[1].geography)
+        .attr("data-metric", d => d[1].metric)
+        .attr("data-sector", d => d[1].sector)
+        .attr("data-technology", d => d[1].technology)
+        .attr("data-unit", d => d[1].unit);
   }, [d3data]);
 
   const highlightSelectedTech = (selectedTech) => {
     d3.select(lines.current)
       .selectAll(".line")
-      .attr("stroke", (d) => d[0] == selectedTech ? "var(--color-donate)" : "var(--color-calm)");
+      .attr("stroke", d => d[0] == selectedTech ? "var(--color-donate)" : "var(--color-coal)")
+      .attr("stroke-width", d => d[0] == selectedTech ? 3 : 1);
+  }
+
+  function uniqueTechs(data) {
+    return data.data
+      .reduce((a, b) => a.indexOf(b.technology) < 0 ? a.concat([b.technology]) : a, [])
   }
 
   return (
@@ -99,13 +83,10 @@ export default function MultiLineChart({
       <label>
         Highlight:
         <select onChange={(e) => highlightSelectedTech(e.target.value)}>
-          <option value="Coal">Coal</option>
-          <option value="Oil">Oil</option>
-          <option value="Gas">Gas</option>
-          <option value="Wind">Wind</option>
-          <option value="Solar">Solar</option>
-          <option value="Biomass">Biomass</option>
-          <option value="Hydro">Hydro</option>
+          <option value=""></option>
+          {data && uniqueTechs(data).map(e => (
+            <option value={e}>{e}</option>
+          ))}
         </select>
       </label>
       <svg
