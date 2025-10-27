@@ -174,7 +174,7 @@ const ScenarioTimeSeries: React.FC = () => {
               <div class="mb-4">
                 <h2 class="text-lg font-semibold text-bluespruce mb-2">
                   <span class="">
-                    Composition
+                    Supply
                   </span>
                 </h2>
               </div>
