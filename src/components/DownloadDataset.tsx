@@ -1,5 +1,6 @@
 // src/components/DownloadDataset.tsx
 import React from "react";
+import { Link } from "react-router-dom";
 
 type Props = {
   label: string;
@@ -39,12 +40,12 @@ export default function DownloadDataset({
       >
         Download
       </a>
-      <a
-        href={plothref}
+      <Link
+        to={plothref}
         className="inline-flex items-center px-4 py-2 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200"
       >
         Plot
-      </a>
+      </Link>
     </div>
   );
 }
