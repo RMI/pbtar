@@ -324,8 +324,7 @@ async function main() {
         publicationYear: parsed.publicationYear,
         pathwayName: parsed.pathwayName,
         description: parsed.description,
-        source: parsed.source,
-        emissionsScope: parsed.emissionsScope,
+        // Add more fields as needed
       };
       const csvData =
         Array.isArray(parsed?.data) && parsed.data.length > 0
