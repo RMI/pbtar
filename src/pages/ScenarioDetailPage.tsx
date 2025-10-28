@@ -24,6 +24,10 @@ import {
   datasetsForPathway,
   summarizeSummary,
 } from "../utils/timeseriesIndex";
+import NormalizedStackedAreaChart from "../components/NormalizedStackedAreaChart";
+import DonutChart from "../components/DonutChart";
+import MultiLineChart from "../components/MultiLineChart";
+import RadarChart from "../components/RadarChart";
 
 const ScenarioDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -79,6 +83,16 @@ const ScenarioDetailPage: React.FC = () => {
       isMounted = false;
     };
   }, [scenario]); // depend on the full object to avoid eslint warning
+
+  const [timeseriesdata, setTimeseriesdata] = useState();
+  useEffect(() => {
+    if (datasets.length > 0) {
+      fetch(datasets[0].path.replace(/\.csv$/, ".json"))
+        .then((response) => response.json())
+        .then((data) => setTimeseriesdata(data))
+        .catch((error) => console.error("Error fetching JSON:", error));
+    }
+  }, [datasets]);
 
   if (loading) {
     return (
@@ -180,6 +194,54 @@ const ScenarioDetailPage: React.FC = () => {
                   <Markdown>{scenario.expertOverview}</Markdown>
                 </div>
               </section>
+
+              {timeseriesdata &&
+                <section className="mb-8">
+                  <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
+                    Composition
+                  </h2>
+                  <div class="row" style={{display: 'flex'}}>
+                    <div class="column" style={{flex: '60%', padding: '30px'}}>
+                      <NormalizedStackedAreaChart
+                        key={datasets[0].datasetId}
+                        data={timeseriesdata}
+                        width={500}
+                      />
+                    </div>
+                    <div class="column" style={{flex: '40%', padding: '30px'}}>
+                      <DonutChart
+                        key={datasets[0].datasetId}
+                        data={timeseriesdata}
+                        width={350}
+                      />
+                    </div>
+                  </div>
+                </section>
+              }
+
+              {timeseriesdata &&
+                <section className="mb-8">
+                  <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
+                    Supply
+                  </h2>
+                  <div class="row" style={{display: 'flex'}}>
+                    <div class="column" style={{flex: '60%', padding: '30px'}}>
+                      <MultiLineChart
+                        key={datasets[0].datasetId}
+                        data={timeseriesdata}
+                        width={500}
+                      />
+                    </div>
+                    <div class="column" style={{flex: '40%', padding: '30px'}}>
+                      <RadarChart
+                        key={datasets[0].datasetId}
+                        data={timeseriesdata}
+                        width={350}
+                      />
+                    </div>
+                  </div>
+                </section>
+              }
 
               <section>
                 <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
