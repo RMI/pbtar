@@ -304,6 +304,7 @@ async function main() {
   }
 
   for (const [dsId, ds] of Object.entries(out.byDataset)) {
+    logDebug(`Processing datasetId: ${dsId}`);
     // ds.path currently looks like "/data/…file.json" (derived from src earlier).
     // Convert to an absolute src path:
     const srcAbs = path.join(ROOT, "src", ds.path.replace(/^\//, "")); // -> "<root>/src/data/.../file.json"
@@ -317,23 +318,64 @@ async function main() {
       // --- CSV conversion ---
       const raw = await fs.readFile(srcAbs, "utf8");
       const parsed = parseJsonWithComments(raw);
-      // Extract metadata fields you want as columns
-      const metadata = {
-        publisher: parsed.publisher,
-        publicationName: parsed.publicationName,
-        publicationYear: parsed.publicationYear,
-        pathwayName: parsed.pathwayName,
-        description: parsed.description,
-        source: parsed.source,
-        emissionsScope: parsed.emissionsScope,
+
+      const getRowMetadata = (
+        sector: string,
+        metric: string,
+        technology: string,
+      ): object => {
+        logDebug(
+          `  getRowMetadata: sector=${sector}, metric=${metric}, technology=${technology}`,
+        );
+        const out = {
+          publisher: parsed.publisher,
+          publicationName: parsed.publicationName,
+          publicationYear: parsed.publicationYear,
+          pathwayName: parsed.pathwayName,
+          description: parsed.description,
+          source: parsed.source,
+          emissionsScope: parsed.emissionsScope,
+          sectorScope: parsed.sector?.[sector]?.metric?.[metric]?.sectorScope,
+          metric: parsed.sector?.[sector]?.metric?.[metric]?.displayName,
+          definitionMetric:
+            parsed.sector?.[sector]?.metric?.[metric]?.definition,
+          technology:
+            parsed.sector?.[sector]?.technology?.[technology]?.displayName,
+          definitionTechnology:
+            parsed.sector?.[sector]?.technology?.[technology]?.definition,
+        };
+        logDebug(`    returning metadata: ${JSON.stringify(out)}`);
+        return out;
       };
-      const csvData =
-        Array.isArray(parsed?.data) && parsed.data.length > 0
-          ? jsonToCsv(parsed.data, metadata)
-          : "";
+
+      logDebug(
+        `  parsed.data has ${Array.isArray(parsed.data) ? parsed.data.length : 0} rows.`,
+      );
+
+      // Build “export-ready” rows by mapping parsed.data
+      const exportRows =
+        Array.isArray(parsed.data) && parsed.data.length > 0
+          ? parsed.data.map((rowRaw) => {
+              logDebug(`    Processing row: ${JSON.stringify(rowRaw)}`);
+              const row = rowRaw as Record<string, unknown>;
+              const sector = String(row.sector ?? "");
+              const metric = String(row.metric ?? "");
+              const technology = String(row.technology ?? "");
+              const rowMetadata = getRowMetadata(sector, metric, technology);
+              return {
+                ...row,
+                ...rowMetadata,
+              };
+            })
+          : [];
+
+      logDebug(`  Preparing to export ${exportRows.length} rows to CSV.`);
+
+      const csvData = exportRows.length > 0 ? jsonToCsv(exportRows) : "";
       const destAbsCsv = destAbsJson.replace(/\.json$/i, ".csv");
       await fs.writeFile(destAbsCsv, csvData, "utf8");
       const publicUrl = `/data/${relUnderData.replace(/\.json$/i, ".csv")}`;
+      logDebug(`  Generated CSV: ${publicUrl}`);
 
       // Rewrite in byDataset
       ds.path = publicUrl;
@@ -342,7 +384,8 @@ async function main() {
       for (const slot of slots) {
         slot.arr[slot.idx].path = publicUrl;
       }
-    } catch {
+    } catch (err) {
+      console.error("Error copying or processing file:", srcAbs, err);
       // If copy fails, leave original path (SWA won't find it, but we don't crash the build).
       if (DEBUG) logDebug("copyFile or CSV failed (skipping):", srcAbs);
     }
