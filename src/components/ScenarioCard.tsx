@@ -9,7 +9,7 @@ import {
   normalizeGeography,
   sortGeographiesForDetails,
 } from "../utils/geographyUtils";
-import { Scenario, PathwayType } from "../types";
+import { Scenario } from "../types";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
 import { prioritizeMatches, prioritizeGeographies } from "../utils/sortUtils";
@@ -91,9 +91,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           </p>
           <div className="flex flex-wrap gap-2">
             <BadgeMaybeAbsent
-              tooltip={getPathwayTypeTooltip(
-                scenario.pathwayType as PathwayType,
-              )}
+              tooltip={getPathwayTypeTooltip(scenario.pathwayType)}
               variant="pathwayType"
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
             >
