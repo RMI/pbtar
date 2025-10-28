@@ -10,7 +10,7 @@ export default function DonutChart({
   marginLeft = 20,
 }) {
   const [d3data, setD3data] = useState(
-    data.data.filter(d => (d.sector == "Power") & (d.metric == "Capacity") & (d.year == 2022)),
+    data.data.filter(d => (d.sector == "power") & (d.metric == "capacity") & (d.year == 2022)),
   );
   const ref = useRef();
 
@@ -60,8 +60,8 @@ export default function DonutChart({
     setD3data(
       data.data.filter(
         d =>
-          d.sector == "Power" &
-          d.metric == "Capacity" &
+          d.sector == "power" &
+          d.metric == "capacity" &
           d.year == selectedYear
       )
     );
