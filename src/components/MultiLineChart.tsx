@@ -18,6 +18,7 @@ export default function MultiLineChart({
   const gy = useRef();
   const lines = useRef();
   const dots = useRef();
+  const selectRef = useRef();
 
   useEffect(() => {
     const svgElement = d3.select(ref.current);
@@ -48,14 +49,16 @@ export default function MultiLineChart({
 
     const groupedData = d3.groups(d3data, d => d.technology);
 
+    const selectedTech = selectRef.current.value;
+
     linesGroup
       .selectAll(".line")
       .data(groupedData)
       .join("path")
         .attr("class", "line")
         .attr("fill", "none")
-        .attr("stroke", "var(--color-coal)")
-        .attr("stroke-width", 1)
+        .attr("stroke", d => d[0] == selectedTech ? "var(--color-donate)" : "var(--color-coal)")
+        .attr("stroke-width", d => d[0] == selectedTech ? 3 : 1)
         .attr("d", d => line(d[1]))
         .attr("data-year", d => d[1].year)
         .attr("data-value", d => d[1].value)
@@ -75,7 +78,6 @@ export default function MultiLineChart({
       	.attr("y", d => y(d[1].slice(-1)[0].value))
       	.attr("dx", 12)
       	.attr("dy", 5);
-        ;
   }, [d3data]);
 
   const highlightSelectedTech = (selectedTech) => {
@@ -93,8 +95,7 @@ export default function MultiLineChart({
     <>
       <label>
         Highlight:
-        <select onChange={(e) => highlightSelectedTech(e.target.value)}>
-          <option value=""></option>
+        <select ref={selectRef} onChange={(e) => highlightSelectedTech(e.target.value)}>
           {data && uniqueTechs(data).map(e => (
             <option value={e}>{e}</option>
           ))}
