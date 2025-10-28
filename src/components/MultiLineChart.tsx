@@ -6,7 +6,7 @@ export default function MultiLineChart({
   width = 600,
   height = 400,
   marginTop = 20,
-  marginRight = 20,
+  marginRight = 80,
   marginBottom = 30,
   marginLeft = 40,
 }) {
@@ -64,6 +64,18 @@ export default function MultiLineChart({
         .attr("data-sector", d => d[1].sector)
         .attr("data-technology", d => d[1].technology)
         .attr("data-unit", d => d[1].unit);
+
+    linesGroup
+      .selectAll(".label")
+      .data(groupedData)
+      .join("text")
+        .text(d => d[0])
+        .attr("class", "label")
+      	.attr("x", d => x(new Date(d[1].slice(-1)[0].year, 0, 1, 0, 0)))
+      	.attr("y", d => y(d[1].slice(-1)[0].value))
+      	.attr("dx", 12)
+      	.attr("dy", 5);
+        ;
   }, [d3data]);
 
   const highlightSelectedTech = (selectedTech) => {
