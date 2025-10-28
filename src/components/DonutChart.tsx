@@ -22,7 +22,8 @@ export default function DonutChart({
 
   const arc = d3.arc()
     .innerRadius(innerRadius)
-    .outerRadius(outerRadius);
+    .outerRadius(outerRadius)
+    .padAngle(0.005);
 
   function show(d) {
     const big_percent = 0.15
