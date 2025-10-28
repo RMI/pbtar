@@ -22,8 +22,8 @@
     "docs:jsonSchema": "scripts/generate-schema-docs.sh",
     "prepare:tarball": "npm ci && npm run build && tar -czf dist.tgz -C dist .",
     "build:timeseries": "npx ts-node --esm scripts/build-timeseries-files.ts && prettier --write \"src/data/index.gen.ts\"",
-    "prebuild": "npm run build:index:timeseries",
-    "predev": "npm run build:index:timeseries"
+    "prebuild": "npm run build:timeseries",
+    "predev": "npm run build:timeseries"
   },
   "author": "RMI",
   "license": "MIT",
