@@ -52,7 +52,6 @@ type TimeseriesIndex = {
       summary?: unknown;
     }
   >;
-  schema: { version: 1; generatedAt: string };
 };
 
 const ROOT = process.cwd();
@@ -261,7 +260,6 @@ async function main() {
   const out: TimeseriesIndex = {
     byPathway,
     byDataset,
-    schema: { version: 1, generatedAt: new Date().toISOString() },
   };
 
   // -------------------------------
@@ -283,17 +281,111 @@ async function main() {
   const PUBLIC_DATA_DIR = path.join(ROOT, "public", "data");
   await fs.mkdir(PUBLIC_DATA_DIR, { recursive: true });
 
+  function jsonToCsv(data: any[]): string {
+    if (!Array.isArray(data) || data.length === 0) return "";
+    // Merge metadata into each row
+    const keys = Array.from(new Set(data.flatMap((row) => Object.keys(row))));
+    const escape = (v: any) =>
+      typeof v === "string"
+        ? `"${v.replace(/"/g, '""')}"`
+        : v === null || v === undefined
+          ? ""
+          : String(v);
+    const header = keys.join(",");
+    const rows = data.map((row) => keys.map((k) => escape(row[k])).join(","));
+    return [header, ...rows].join("\n");
+  }
+
   for (const [dsId, ds] of Object.entries(out.byDataset)) {
+    logDebug(`Processing datasetId: ${dsId}`);
     // ds.path currently looks like "/data/…file.json" (derived from src earlier).
     // Convert to an absolute src path:
     const srcAbs = path.join(ROOT, "src", ds.path.replace(/^\//, "")); // -> "<root>/src/data/.../file.json"
     // Preserve subfolders under data/
     const relUnderData = ds.path.replace(/^\/?data\/?/, ""); // "foo/bar.json"
-    const destAbs = path.join(PUBLIC_DATA_DIR, relUnderData); // "<root>/public/data/foo/bar.json"
-    await fs.mkdir(path.dirname(destAbs), { recursive: true });
+    const destAbsJson = path.join(PUBLIC_DATA_DIR, relUnderData); // "<root>/public/data/foo/bar.json"
+    await fs.mkdir(path.dirname(destAbsJson), { recursive: true });
     try {
-      await fs.copyFile(srcAbs, destAbs);
-      const publicUrl = `/data/${relUnderData}`;
+      await fs.copyFile(srcAbs, destAbsJson);
+
+      // --- CSV conversion ---
+      const raw = await fs.readFile(srcAbs, "utf8");
+      const parsed = parseJsonWithComments(raw);
+
+      const getRowMetadata = (
+        sector: string,
+        metric: string,
+        technology: string,
+      ): object => {
+        logDebug(
+          `  getRowMetadata: sector=${sector}, metric=${metric}, technology=${technology}`,
+        );
+        const out = {
+          publisher: parsed.publisher,
+          publicationName: parsed.publicationName,
+          publicationYear: parsed.publicationYear,
+          pathwayName: parsed.pathwayName,
+          source: parsed.source,
+          sector: parsed.sector?.[sector]?.displayName,
+          emissionsScope: parsed.emissionsScope,
+          sectorScope: parsed.sector?.[sector]?.metric?.[metric]?.sectorScope,
+          metric: parsed.sector?.[sector]?.metric?.[metric]?.displayName,
+          definitionMetric:
+            parsed.sector?.[sector]?.metric?.[metric]?.definition,
+          technology:
+            parsed.sector?.[sector]?.technology?.[technology]?.displayName,
+          definitionTechnology:
+            parsed.sector?.[sector]?.technology?.[technology]?.definition,
+        };
+        logDebug(`    returning metadata: ${JSON.stringify(out)}`);
+        return out;
+      };
+
+      logDebug(
+        `  parsed.data has ${Array.isArray(parsed.data) ? parsed.data.length : 0} rows.`,
+      );
+
+      // Build “export-ready” rows by mapping parsed.data
+      const exportRows =
+        Array.isArray(parsed.data) && parsed.data.length > 0
+          ? parsed.data.map((rowRaw) => {
+              logDebug(`    Processing row: ${JSON.stringify(rowRaw)}`);
+              const row = rowRaw as Record<string, unknown>;
+              const sector = String(row.sector ?? "");
+              const metric = String(row.metric ?? "");
+              const technology = String(row.technology ?? "");
+              const rowMetadata = getRowMetadata(sector, metric, technology);
+              const out = {
+                publisher: rowMetadata.publisher,
+                publication_name: rowMetadata.publicationName,
+                publication_year: rowMetadata.publicationYear,
+                pathway_name: rowMetadata.pathwayName,
+                year: row.year,
+                geography: row.geography,
+                sector: rowMetadata.sector,
+                technology: rowMetadata.technology,
+                metric: rowMetadata.metric,
+                value: row.value,
+                unit: row.unit,
+                source: rowMetadata.source,
+                emissions_scope: rowMetadata.emissionsScope,
+                sector_scope: rowMetadata.sectorScope,
+                definition_technology: rowMetadata.definitionTechnology,
+                definition_metric: rowMetadata.definitionMetric,
+              };
+              logDebug(`    Export row: ${JSON.stringify(out)}`);
+              return out;
+            })
+          : [];
+
+      logDebug(`  Preparing to export ${exportRows.length} rows to CSV.`);
+
+      const csvData = exportRows.length > 0 ? jsonToCsv(exportRows) : "";
+      const destAbsCsv = destAbsJson.replace(/\.json$/i, ".csv");
+      await fs.writeFile(destAbsCsv, csvData, "utf8");
+      const publicUrl = `/data/${relUnderData.replace(/\.json$/i, ".csv")}`;
+      logDebug(`  Generated CSV: ${publicUrl}`);
+
       // Rewrite in byDataset
       ds.path = publicUrl;
       // Rewrite all appearances in byPathway
@@ -301,13 +393,15 @@ async function main() {
       for (const slot of slots) {
         slot.arr[slot.idx].path = publicUrl;
       }
-    } catch {
+    } catch (err) {
+      console.error("Error copying or processing file:", srcAbs, err);
       // If copy fails, leave original path (SWA won't find it, but we don't crash the build).
-      if (DEBUG) logDebug("copyFile failed (skipping):", srcAbs);
+      if (DEBUG) logDebug("copyFile or CSV failed (skipping):", srcAbs);
     }
   }
-  logInfo(`Copied dataset files to ${path.relative(ROOT, PUBLIC_DATA_DIR)}`);
-
+  logInfo(
+    `Copied dataset files to ${path.relative(ROOT, PUBLIC_DATA_DIR)} and generated CSVs.`,
+  );
   // -------------------------------
   // Emit TS module for build-time import + JSON for inspection/fetch
   // -------------------------------
