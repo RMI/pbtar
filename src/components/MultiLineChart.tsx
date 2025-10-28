@@ -11,7 +11,7 @@ export default function MultiLineChart({
   marginLeft = 40,
 }) {
   const [d3data, setD3data] = useState(
-    data.data.filter((d) => (d.sector == "Power") & (d.metric == "Capacity")),
+    data.data.filter(d => (d.sector == "Power") & (d.metric == "Capacity")),
   );
   const ref = useRef();
   const gx = useRef();
@@ -31,6 +31,7 @@ export default function MultiLineChart({
 
     const x = d3.scaleUtc(years, [marginLeft, width - marginRight]);
     const y = d3.scaleLinear(values, [height - marginBottom, marginTop]);
+
     const line = d3.line()
       .x(d => x(utc(d.year)))
       .y(d => y(d.value));
@@ -38,8 +39,7 @@ export default function MultiLineChart({
     d3.select(gx.current)
       .transition()
       .duration(750)
-      .call(d3.axisBottom(x)
-      .tickValues(xticks));
+      .call(d3.axisBottom(x).tickValues(xticks));
 
     d3.select(gy.current)
       .transition()
