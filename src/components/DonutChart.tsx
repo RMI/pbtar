@@ -18,12 +18,21 @@ export default function DonutChart({
   const outerRadius = height / 2 - 10;
   const innerRadius = outerRadius * 0.5;
 
-  const tau = 2 * Math.PI;
   const color = d3.scaleOrdinal(d3.schemeObservable10);
 
   const arc = d3.arc()
     .innerRadius(innerRadius)
     .outerRadius(outerRadius);
+
+  function show(d) {
+    const big_percent = 0.15
+    const threshold = (Math.PI * 2) * big_percent
+    return d.endAngle - d.startAngle > threshold ? 'visible' : 'hidden'
+  }
+
+  function percent(d) {
+    return Math.round(((d.endAngle - d.startAngle) / (Math.PI * 2)) * 100) + '%'
+  }
 
   const pie = d3.pie().sort(null).value(d => d.value);
 
@@ -42,6 +51,17 @@ export default function DonutChart({
         .transition()
         .duration(750)
         .attrTween("d", arcTween);
+window.pie = pie; window.arc = arc; window.d3data = d3data; window.d3 = d3; window.show = show; window.precent = percent;
+    svgElement.datum(d3data).selectAll("text")
+      .data(pie)
+      .join("text")
+        .text(d => d.data.technology + '\n ' + percent(d))
+        .attr("class", "label")
+      	.attr("x", d => arc.centroid(d)[0])
+      	.attr("dx", -25)
+      	.attr("y", d => arc.centroid(d)[1])
+      	.attr('alignment-baseline', 'middle')
+      	.attr("visibility", d => show(d));
   }, [d3data]);
 
   function arcTween(a) {
