@@ -225,7 +225,7 @@ describe("Badge component", () => {
     it("displays correct tooltip for Policy pathway type", () => {
       render(
         <Badge
-          tooltip={pathwayTypeTooltips["Direct Policy"] as string}
+          tooltip={pathwayTypeTooltips["Direct Policy"]}
           variant="pathwayType"
         >
           Direct Policy

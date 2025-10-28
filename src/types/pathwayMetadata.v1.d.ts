@@ -1,0 +1,314 @@
+//DO NOT MODIFY BY HAND.
+//use json:generate:types script.
+
+/**
+ * A schema for the scenarios metadata dataset in PBTAR.
+ */
+export interface PathwayMetadata {
+  /**
+   * URI of the schema that validates this document (see https://json-schema.org/).
+   */
+  $schema?: string;
+  /**
+   * The unique identifier for a scenario.
+   */
+  id: string;
+  /**
+   * Name of the scenario.
+   */
+  name: string;
+  /**
+   * Brief description of the scenario.
+   */
+  description: string;
+  /**
+   * Type of the scenario pathway.
+   */
+  pathwayType: "Normative" | "Exploratory" | "Direct Policy" | "Predictive";
+  /**
+   * Year by which net zero is reached in the scenario. If Scenario does not reach net zero, this field should be omitted.
+   */
+  modelYearNetzero?: number;
+  /**
+   * Carbon budget of the scenario in gigatons of CO2 equivalent (GtCO2eq). If no carbon budget is defined, this field should be omitted. If the carbon budget is not applicable, it should be set to 0.
+   */
+  carbonBudget?: number;
+  /**
+   * Year from which the model starts.
+   */
+  modelYearStart?: number;
+  /**
+   * Year in which the model ends.
+   */
+  modelYearEnd?: number;
+  /**
+   * Modeled temperature increase expected by the scenario (in degrees Celsius).
+   */
+  modelTempIncrease?: number;
+  /**
+   * Shared Socioeconomic Pathways (SSP) associated with the scenario.
+   */
+  ssp?: "SSP1" | "SSP2" | "SSP3" | "SSP4" | "SSP5";
+  /**
+   * Geographical areas that the scenario covers. Can include 'Global', country ISO-3166-1 alpha-2 codes (US, DE), or free-text region names (e.g., 'Europe', 'OECD'). Any 2-letter items in the array will be treated as an ISO code. Any 2-letter entries that do not map to a country will throw errors (EU). Do not use full country names, only ISO alpha-2 codes. To avoid typographical errors, items in this array may not be 3 letters long (USA)
+   */
+  geography: ({
+    [k: string]: unknown;
+  } & string)[];
+  /**
+   * Sectors that the scenario covers.
+   */
+  sectors: {
+    name:
+      | "Land Use"
+      | "Agriculture"
+      | "Buildings"
+      | "Industry"
+      | "Steel"
+      | "Cement"
+      | "Chemicals"
+      | "Coal Mining"
+      | "Oil (Upstream)"
+      | "Gas (Upstream)"
+      | "Power"
+      | "Automotive"
+      | "Transport"
+      | "Road transport"
+      | "Aviation"
+      | "Rail"
+      | "Shipping"
+      | "Other";
+    /**
+     * Technologies applicable to this sector.
+     */
+    technologies: (
+      | "Precision Agriculture"
+      | "Agroforestry"
+      | "Bioenergy Crops"
+      | "Energy Efficiency"
+      | "Smart Grids"
+      | "Renewable Heating"
+      | "Heat Pumps"
+      | "Building Automation"
+      | "Smart Appliances"
+      | "Insulation"
+      | "Carbon Capture and Storage"
+      | "Electrification"
+      | "Process Optimization"
+      | "Hydrogen Use"
+      | "Coal"
+      | "Oil"
+      | "Gas"
+      | "Wind"
+      | "Solar"
+      | "Nuclear"
+      | "Biomass"
+      | "Hydro"
+      | "Renewables"
+      | "Electric Vehicles"
+      | "Hydrogen Vehicles"
+      | "Biofuels"
+      | "Public Transport"
+      | "Active Mobility"
+      | "Aviation Efficiency"
+      | "Maritime Efficiency"
+      | "Other"
+    )[];
+  }[];
+  /**
+   * Publisher of the scenario.
+   */
+  publisher: string;
+  /**
+   * Year that the scenario was published.
+   */
+  publicationYear: number;
+  /**
+   * Overview of the scenario.
+   */
+  scenarioOverview?: string;
+  /**
+   * Expert recommendation for the scenario.
+   */
+  expertOverview: string;
+  /**
+   * Data source for the scenario.
+   */
+  dataSource: {
+    /**
+     * Description of the data source.
+     */
+    description: string;
+    /**
+     * URL at which the data source can be accessed.
+     */
+    url: string;
+    /**
+     * Flag indicating if the data source can be downloaded.
+     */
+    downloadAvailable: boolean;
+  };
+  metric: (
+    | "Emissions Intensity"
+    | "Capacity"
+    | "Generation"
+    | "Technology Mix"
+    | "Absolute Emissions"
+  )[];
+  /**
+   * Key features of the scenario.
+   */
+  keyFeatures: {
+    /**
+     * Describes the overall trend of greenhouse gas emissions over time, from continued growth to rapid decline.
+     */
+    emissionsPathway:
+      | "No information"
+      | "Continued growth"
+      | "Plateau"
+      | "Growth then decline"
+      | "Moderate decline"
+      | "Fast decline";
+    /**
+     * Indicates how efficiently energy is used to produce economic output across the sectors covered in the pathway.
+     */
+    energyEfficiency:
+      | "No information"
+      | "Declining"
+      | "Static energy efficiency"
+      | "Moderate improvements"
+      | "Significant improvements";
+    /**
+     * Captures the change in total energy consumption, driven by factors such as socio-economic development, technology shifts and consumer behavior.
+     */
+    energyDemand:
+      | "No information"
+      | "Decrease"
+      | "Static energy demand"
+      | "Moderate growth"
+      | "Significant growth";
+    /**
+     * Represents the extent to which energy end-uses transition from fossil fuels to electricity.
+     */
+    electrification:
+      | "No information"
+      | "Decrease"
+      | "Stable electrification"
+      | "Moderate increase"
+      | "Significant increase";
+    /**
+     * Identifies the types of policies modeled as drivers of the scenario, such as carbon pricing, subsidies, or mandated phaseouts of specific technologies.
+     *
+     * @minItems 1
+     */
+    policyTypes: [
+      (
+        | "Carbon price"
+        | "Phaseout dates"
+        | "Subsidies"
+        | "Target technology shares"
+        | "Other"
+      ),
+      ...(
+        | "Carbon price"
+        | "Phaseout dates"
+        | "Subsidies"
+        | "Target technology shares"
+        | "Other"
+      )[],
+    ];
+    /**
+     * Describes how technology costs evolve over time, from static cost assumptions to rapidly declining costs (e.g., via learning curves).
+     */
+    technologyCostTrend:
+      | "No information"
+      | "Static"
+      | "Linear trend"
+      | "S-curves"
+      | "Other";
+    /**
+     * Indicates the scale and pace of new technology adoption within the scenario, where significant deployment means that several new technologies are adopted rapidly
+     */
+    technologyDeploymentTrend:
+      | "No information"
+      | "No deployment of new technologies"
+      | "Moderate deployment of new technologies"
+      | "Significant deployment of new technologies";
+    /**
+     * Defines which greenhouse gases are covered in the scenario’s emissions accounting.
+     */
+    emissionsScope:
+      | "No information"
+      | "CO2"
+      | "CO2e (Kyoto)"
+      | "CO2e (CO2, Methane)"
+      | "Other";
+    /**
+     * Represents the overall stringency and intent of modeled policies relative to climate targets, often reflecting if and how far the included policies go beyond currently legislated ones
+     */
+    policyAmbition:
+      | "No information"
+      | "Current/legislated policies"
+      | "NDCs"
+      | "NDCs and long term commitments"
+      | "Normative/Optimization-based"
+      | "Other";
+    /**
+     * Specifies the level of granularity in cost data, such as total system costs or detailed CAPEX/OPEX breakdowns.
+     */
+    technologyCostsDetail:
+      | "No information"
+      | "Total costs"
+      | "Capital costs/O&M/etc."
+      | "Other";
+    /**
+     * Lists emerging or breakthrough technologies that are explicitly modeled within the pathway. These are considered in technology deployment too.
+     *
+     * @minItems 1
+     */
+    newTechnologiesIncluded: [
+      (
+        | "No information"
+        | "CCUS"
+        | "DAC"
+        | "Green H2/ammonia"
+        | "SAF"
+        | "Battery storage"
+        | "EGS/AGS"
+        | "Other"
+      ),
+      ...(
+        | "No information"
+        | "CCUS"
+        | "DAC"
+        | "Green H2/ammonia"
+        | "SAF"
+        | "Battery storage"
+        | "EGS/AGS"
+        | "Other"
+      )[],
+    ];
+    /**
+     * Describes how upstream fuel or material price dynamics are represented in the scenario.
+     */
+    supplyChain:
+      | "No information"
+      | "Static upstream fuel/material prices"
+      | "Dynamic upstream fuel/material prices";
+    /**
+     * Summarizes how investment requirements are quantified, from total system to sector-level or supply-chain detail.
+     */
+    investmentNeeds:
+      | "No information"
+      | "Total investment"
+      | "Sector-level"
+      | "Sector-level by upstream/in-stream/downstream";
+    /**
+     * Describes how infrastructure buildout and maintenance needs are represented across the supply chain.
+     */
+    infrastructureRequirements:
+      | "No information"
+      | "By part of supply chain"
+      | "By part of supply chain and maintenance/buildout";
+  };
+}
