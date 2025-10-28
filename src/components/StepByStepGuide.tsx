@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -12,114 +12,133 @@ import {
   Timer,
   Ruler,
 } from "lucide-react";
+import { SearchFilters } from "../types";
+import { getUniqueFilterValues } from "../utils/filterUtils";
 
 export interface FilterStep {
-  id: string;
+  id: keyof SearchFilters;
   title: string;
   description: string;
   icon: React.ReactNode;
   options: Array<{
     id: string;
     title: string;
-    value: string;
+    value: string | number;
   }>;
 }
 
-const steps: FilterStep[] = [
-  {
-    id: "pathway-type",
-    title: "Pathway Type",
-    description:
-      "Different pathway types tell different stories about the future.",
-    icon: <GitFork className="h-8 w-8" />,
-    options: [
-      { id: "forecasting", title: "Forecasting", value: "forecasting" },
-      { id: "backcasting", title: "Backcasting", value: "backcasting" },
-    ],
-  },
-  {
-    id: "model-year-netzero",
-    title: "Target Year",
-    description: "Choose scenarios based on their target net-zero year.",
-    icon: <Timer className="h-8 w-8" />,
-    options: [
-      { id: "2030", title: "2030", value: "2030" },
-      { id: "2040", title: "2040", value: "2040" },
-      { id: "2050", title: "2050", value: "2050" },
-    ],
-  },
-  {
-    id: "temperature",
-    title: "Temperature Outcome",
-    description:
-      "Choose scenarios aligned with different temperature outcomes.",
-    icon: <Thermometer className="h-8 w-8" />,
-    options: [
-      { id: "1.5", title: "1.5°C", value: "1.5" },
-      { id: "2.0", title: "2°C", value: "2.0" },
-    ],
-  },
-  {
-    id: "geography",
-    title: "Geography",
-    description: "Select scenarios for specific geographical areas.",
-    icon: <Earth className="h-8 w-8" />,
-    options: [
-      { id: "global", title: "Global", value: "global" },
-      { id: "regional", title: "Regional", value: "regional" },
-    ],
-  },
-  {
-    id: "sector",
-    title: "Sector",
-    description: "Focus on scenarios covering specific economic sectors.",
-    icon: <Factory className="h-8 w-8" />,
-    options: [
-      { id: "energy", title: "Energy", value: "energy" },
-      { id: "industry", title: "Industry", value: "industry" },
-      { id: "transport", title: "Transport", value: "transport" },
-    ],
-  },
-  {
-    id: "metric",
-    title: "Benchmark Metric",
-    description: "Choose scenarios with specific benchmark indicators.",
-    icon: <Ruler className="h-8 w-8" />,
-    options: [
-      { id: "emissions", title: "Emissions", value: "emissions" },
-      { id: "energy", title: "Energy Use", value: "energy" },
-    ],
-  },
-];
-
 interface StepByStepGuideProps {
-  onFilterChange: (filters: Record<string, string[]>) => void;
+  filters: SearchFilters;
+  onFilterChange: (filters: SearchFilters) => void;
 }
 
 const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
+  filters,
   onFilterChange,
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentView, setCurrentView] = useState<"home" | number>("home");
-  const [selectedFilters, setSelectedFilters] = useState<
-    Record<string, string[]>
-  >({});
+  const filterValues = getUniqueFilterValues();
 
-  const handleOptionSelect = (stepId: string, optionValue: string) => {
-    setSelectedFilters((prev) => {
-      const current = prev[stepId] || [];
-      const updated = current.includes(optionValue)
-        ? current.filter((v) => v !== optionValue)
-        : [...current, optionValue];
+  const steps: FilterStep[] = [
+    {
+      id: "pathwayType",
+      title: "Pathway Type",
+      description: "Different pathway types tell different stories about the future.",
+      icon: <GitFork className="h-8 w-8" />,
+      options: filterValues.pathwayTypes.map(type => ({
+        id: type,
+        title: type,
+        value: type
+      }))
+    },
+    {
+      id: "modelYearNetzero",
+      title: "Target Year",
+      description: "Choose scenarios based on their target net-zero year.",
+      icon: <Timer className="h-8 w-8" />,
+      options: filterValues.targetYears.map(year => ({
+        id: year.toString(),
+        title: year.toString(),
+        value: year
+      }))
+    },
+    {
+      id: "modelTempIncrease",
+      title: "Temperature Outcome",
+      description: "Choose scenarios aligned with different temperature outcomes.",
+      icon: <Thermometer className="h-8 w-8" />,
+      options: filterValues.temperatures.map(temp => ({
+        id: temp.toString(),
+        title: `${temp}°C`,
+        value: temp
+      }))
+    },
+    {
+      id: "geography",
+      title: "Geography",
+      description: "Select scenarios for specific geographical areas.",
+      icon: <Earth className="h-8 w-8" />,
+      options: filterValues.geographies.map(geo => ({
+        id: geo,
+        title: geo,
+        value: geo
+      }))
+    },
+    {
+      id: "sector",
+      title: "Sector",
+      description: "Focus on scenarios covering specific economic sectors.",
+      icon: <Factory className="h-8 w-8" />,
+      options: filterValues.sectors.map(sector => ({
+        id: sector,
+        title: sector,
+        value: sector
+      }))
+    },
+    {
+      id: "metric",
+      title: "Benchmark Metric",
+      description: "Choose scenarios with specific benchmark indicators.",
+      icon: <Ruler className="h-8 w-8" />,
+      options: filterValues.metrics.map(metric => ({
+        id: metric,
+        title: metric,
+        value: metric
+      }))
+    }
+  ];
 
-      const newFilters = {
-        ...prev,
-        [stepId]: updated,
-      };
+  const handleOptionSelect = (stepId: keyof SearchFilters, optionValue: string | number) => {
+    const newFilters = { ...filters };
 
-      onFilterChange(newFilters);
-      return newFilters;
-    });
+    // Convert string values to numbers for numeric fields
+    const value = stepId === "modelYearNetzero" || stepId === "modelTempIncrease"
+      ? Number(optionValue)
+      : optionValue;
+
+    if (Array.isArray(filters[stepId])) {
+      // Handle array values
+      const currentValues = (filters[stepId] as (string | number)[]) || [];
+      if (currentValues.includes(value)) {
+        newFilters[stepId] = currentValues.filter(v => v !== value);
+      } else {
+        newFilters[stepId] = [...currentValues, value];
+      }
+    } else {
+      // Handle single values
+      newFilters[stepId] = filters[stepId] === value ? null : value;
+    }
+
+    onFilterChange(newFilters);
+  };
+
+  const isOptionSelected = (stepId: keyof SearchFilters, value: string | number) => {
+    const currentValue = filters[stepId];
+    if (Array.isArray(currentValue)) {
+      return currentValue.includes(value);
+    }
+    return currentValue === value;
   };
 
   if (isCollapsed) {
@@ -139,13 +158,11 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
   return (
     <div className="bg-white shadow-md p-6">
       <div className="flex justify-between items-center mb-4">
-        <div className="flex-1" /> {/* Left spacer */}
-        <h2 className="text-2xl font-bold text-bluespruce text-center">
+        <div className="w-12" />
+        <h2 className="text-2xl font-bold text-bluespruce text-center mx-auto">
           Choose the right scenarios for your needs
         </h2>
-        <div className="flex-1 flex justify-end">
-          {" "}
-          {/* Right container with chevron */}
+        <div className="w-12 flex justify-end">
           <button
             onClick={() => setIsCollapsed(true)}
             className="text-energy hover:text-energy-700"
@@ -168,7 +185,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
               <button
                 key={step.id}
                 onClick={() => setCurrentView(index)}
-                className="aspect-square p-6 border rounded-lg hover:border-energy hover:bg-energy-50 transition-colors flex flex-col items-center justify-center"
+                className="aspect-square p-6 border rounded-lg bg-gray-50 hover:border-energy hover:bg-energy-50 transition-colors flex flex-col items-center justify-center"
               >
                 <div className="flex flex-col items-center text-center">
                   {step.icon}
@@ -191,23 +208,23 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
 
           <div className="grid grid-cols-4 gap-4">
             {steps[currentView as number].options.map((option) => {
-              const isSelected = selectedFilters[
-                steps[currentView as number].id
-              ]?.includes(option.value);
+              const isSelected = isOptionSelected(
+                steps[currentView as number].id,
+                option.value
+              );
               return (
                 <button
                   key={option.id}
                   onClick={() =>
                     handleOptionSelect(
                       steps[currentView as number].id,
-                      option.value,
+                      option.value
                     )
                   }
-                  className={`p-4 border rounded-lg transition-colors ${
-                    isSelected
+                  className={`p-4 border rounded-lg transition-colors bg-gray-50 ${isSelected
                       ? "border-energy bg-energy-50"
                       : "hover:border-energy hover:bg-energy-50"
-                  }`}
+                    }`}
                 >
                   {option.title}
                 </button>
@@ -221,9 +238,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                 <button
                   key={index}
                   onClick={() => setCurrentView(index)}
-                  className={`w-2 h-2 rounded-full ${
-                    currentView === index ? "bg-energy" : "bg-gray-300"
-                  }`}
+                  className={`w-2 h-2 rounded-full ${currentView === index ? "bg-energy" : "bg-gray-300"
+                    }`}
                 />
               ))}
             </div>
@@ -247,7 +263,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
               <button
                 onClick={() =>
                   setCurrentView(
-                    Math.min(steps.length - 1, (currentView as number) + 1),
+                    Math.min(steps.length - 1, (currentView as number) + 1)
                   )
                 }
                 disabled={currentView === steps.length - 1}
