@@ -4,7 +4,7 @@
 /**
  * A schema for the scenarios metadata dataset in PBTAR.
  */
-export interface PBTARScenariosTimeseriesSchema {
+export interface PathwayTimeseries {
   /**
    * URI of the schema that validates this document (see https://json-schema.org/).
    */

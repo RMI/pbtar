@@ -1,8 +1,8 @@
 import type { FacetMode } from "../utils/searchUtils";
-import type { PBTARScenariosMetadataSchema } from "./pathwayMetadata.v1";
+import type { PathwayMetadata } from "./pathwayMetadata.v1";
 
 export type Scenario = Pick<
-  PBTARScenariosMetadataSchema,
+  PathwayMetadata,
   | "id"
   | "name"
   | "description"
@@ -20,13 +20,12 @@ export type Scenario = Pick<
 >;
 
 // Enum-like types derived from the schema
-export type PathwayType = PBTARScenariosMetadataSchema["pathwayType"];
-export type Geography = PBTARScenariosMetadataSchema["geography"][number];
-export type Sector = PBTARScenariosMetadataSchema["sectors"][number]["name"];
-export type Metric = PBTARScenariosMetadataSchema["metric"][number];
+export type PathwayType = PathwayMetadata["pathwayType"];
+export type Geography = PathwayMetadata["geography"][number];
+export type Sector = PathwayMetadata["sectors"][number]["name"];
+export type Metric = PathwayMetadata["metric"][number];
 
 export type TemperatureTarget = number;
-
 export type YearTarget =
   | "2030"
   | "2040"
@@ -55,4 +54,4 @@ export interface SearchFilters {
   } | null;
 }
 
-export type { PBTARScenariosMetadataSchema };
+export type { PathwayMetadata };
