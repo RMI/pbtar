@@ -70,9 +70,10 @@ const ScenarioTimeSeries: React.FC = () => {
   const [timeseriesdata, setTimeseriesdata] = useState();
   useEffect(() => {
     if (datasets.length > 0) {
-      fetch(datasets[0].path)
+      fetch(datasets[0].path.replace(/\.csv$/, ".json"))
         .then((response) => response.json())
         .then((data) => {
+          console.log("data: ", data); window.data = data;
           setTimeseriesdata(data);
         })
         .catch((error) => console.error("Error fetching JSON:", error));

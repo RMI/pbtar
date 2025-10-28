@@ -11,7 +11,7 @@ export default function NormalizedStackedAreaChart({
   marginLeft = 40,
 }) {
   const [d3data, setD3data] = useState(
-    data.data.filter(d => (d.sector == "Power") & (d.metric == "Capacity"))
+    data.data.filter(d => (d.sector == "power") & (d.metric == "capacity"))
   );
   const ref = useRef();
   const gx = useRef();
