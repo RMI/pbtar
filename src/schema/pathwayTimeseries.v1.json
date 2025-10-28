@@ -352,7 +352,7 @@
                 },
                 "required": ["metric"]
               },
-              "then": { "properties": { "unit": { "const": "tCO2e" } } }
+              "then": { "properties": { "unit": { "const": "MtCO2e" } } }
             },
             {
               "if": {
