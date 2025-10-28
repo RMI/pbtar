@@ -52,7 +52,6 @@ type TimeseriesIndex = {
       summary?: unknown;
     }
   >;
-  schema: { version: 1; generatedAt: string };
 };
 
 const ROOT = process.cwd();
@@ -261,7 +260,6 @@ async function main() {
   const out: TimeseriesIndex = {
     byPathway,
     byDataset,
-    schema: { version: 1, generatedAt: new Date().toISOString() },
   };
 
   // -------------------------------
