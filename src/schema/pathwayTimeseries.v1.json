@@ -286,7 +286,8 @@
           },
           "unit": {
             "description": "Measurement unit associated with the metric value (e.g., GW, TWh, tCO2e).",
-            "type": "string"
+            "type": "string",
+            "enum": ["tCO2e/MWh", "MtCO2e", "GW", "TWh", "%"]
           }
         },
         "additionalProperties": false,
@@ -352,7 +353,7 @@
                 },
                 "required": ["metric"]
               },
-              "then": { "properties": { "unit": { "const": "tCO2e" } } }
+              "then": { "properties": { "unit": { "const": "MtCO2e" } } }
             },
             {
               "if": {

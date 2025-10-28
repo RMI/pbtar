@@ -1159,7 +1159,7 @@
       "technology": null,
       "metric": "absoluteEmissions",
       "value": 769.7,
-      "unit": "tCO2e"
+      "unit": "MtCO2e"
     },
     {
       "year": 2025,
@@ -1168,7 +1168,7 @@
       "technology": null,
       "metric": "absoluteEmissions",
       "value": 811.1,
-      "unit": "tCO2e"
+      "unit": "MtCO2e"
     },
     {
       "year": 2030,
@@ -1177,7 +1177,7 @@
       "technology": null,
       "metric": "absoluteEmissions",
       "value": 898.7,
-      "unit": "tCO2e"
+      "unit": "MtCO2e"
     },
     {
       "year": 2035,
@@ -1186,7 +1186,7 @@
       "technology": null,
       "metric": "absoluteEmissions",
       "value": 1012.2,
-      "unit": "tCO2e"
+      "unit": "MtCO2e"
     },
     {
       "year": 2040,
@@ -1195,7 +1195,7 @@
       "technology": null,
       "metric": "absoluteEmissions",
       "value": 1148.2,
-      "unit": "tCO2e"
+      "unit": "MtCO2e"
     },
     {
       "year": 2045,
@@ -1204,7 +1204,7 @@
       "technology": null,
       "metric": "absoluteEmissions",
       "value": 1310.6,
-      "unit": "tCO2e"
+      "unit": "MtCO2e"
     },
     {
       "year": 2050,
@@ -1213,7 +1213,7 @@
       "technology": null,
       "metric": "absoluteEmissions",
       "value": 1498.2,
-      "unit": "tCO2e"
+      "unit": "MtCO2e"
     },
     {
       "year": 2022,
