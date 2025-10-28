@@ -86,8 +86,7 @@ export default function MultiLineChart({
   }
 
   function uniqueTechs(data) {
-    return data.data
-      .reduce((a, b) => a.indexOf(b.technology) < 0 ? a.concat([b.technology]) : a, [])
+    return [...d3.union(data.data.map(a => a.technology).filter(n => n))]
   }
 
   return (
