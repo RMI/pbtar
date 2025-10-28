@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
-      - run: npm run json:generate:types && npx prettier --write src/types/
+      - run: npm run json:generate:types
       - name: Check for uncommitted changes in generated types
         run: |
           if ! git diff --exit-code -- src/types/; then
