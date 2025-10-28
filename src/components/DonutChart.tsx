@@ -57,11 +57,13 @@ export default function DonutChart({
       .join("text")
         .text(d => d.data.technology + '\n ' + percent(d))
         .attr("class", "label")
+      	.attr("text-anchor", "middle")
+      	.attr("alignment-baseline", "middle")
+      	.attr("visibility", d => show(d))
+      	.transition()
       	.attr("x", d => arc.centroid(d)[0])
-      	.attr("dx", -25)
       	.attr("y", d => arc.centroid(d)[1])
-      	.attr('alignment-baseline', 'middle')
-      	.attr("visibility", d => show(d));
+        .duration(750);
   }, [d3data]);
 
   function arcTween(a) {
