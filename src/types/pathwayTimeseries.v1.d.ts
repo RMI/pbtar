@@ -258,6 +258,6 @@ export interface PBTARScenariosTimeseriesSchema {
     /**
      * Measurement unit associated with the metric value (e.g., GW, TWh, tCO2e).
      */
-    unit: string;
+    unit: "tCO2e/MWh" | "MtCO2e" | "GW" | "TWh" | "%";
   }[];
 }
