@@ -51,7 +51,7 @@ export default function DonutChart({
         .transition()
         .duration(750)
         .attrTween("d", arcTween);
-window.pie = pie; window.arc = arc; window.d3data = d3data; window.d3 = d3; window.show = show; window.precent = percent;
+
     svgElement.datum(d3data).selectAll("text")
       .data(pie)
       .join("text")
