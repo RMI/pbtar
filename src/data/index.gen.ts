@@ -32,7 +32,7 @@ export const index: TimeseriesIndex = {
           sectorCount: 1,
           geographyCount: 1,
         },
-        path: "/data/asean-centre-for-energy/BAS-2024_timeseries.json",
+        path: "/data/asean-centre-for-energy/BAS-2024_timeseries.csv",
       },
     ],
   },
@@ -47,12 +47,8 @@ export const index: TimeseriesIndex = {
         sectorCount: 1,
         geographyCount: 1,
       },
-      path: "/data/asean-centre-for-energy/BAS-2024_timeseries.json",
+      path: "/data/asean-centre-for-energy/BAS-2024_timeseries.csv",
     },
-  },
-  schema: {
-    version: 1,
-    generatedAt: "2025-10-24T08:58:01.398Z",
   },
 } as const;
 export default index;
