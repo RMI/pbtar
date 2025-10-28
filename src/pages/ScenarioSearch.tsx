@@ -5,7 +5,7 @@ import { scenariosData } from "../data/scenariosData";
 import { filterScenarios } from "../utils/searchUtils";
 import { SearchFilters, Scenario } from "../types";
 
-const HomePage: React.FC = () => {
+const ScenarioSearch: React.FC = () => {
   // Ref for the top section to handle scrolling
   const topSectionRef = useRef<HTMLDivElement>(null);
   // Ref for the search section to detect sticky state
@@ -171,4 +171,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+export default ScenarioSearch;
