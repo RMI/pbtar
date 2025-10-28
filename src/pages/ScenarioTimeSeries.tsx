@@ -218,12 +218,12 @@ const ScenarioTimeSeries: React.FC = () => {
               <div class="mb-4">
                 <h2 class="text-lg font-semibold text-bluespruce mb-2">
                   <span class="">
-                    Vertical bar chart
+                    Multi line chart
                   </span>
                 </h2>
               </div>
               <div class="mb-3">
-                <VerticalBarChart
+                <MultiLineChart
                   key={datasets[0].datasetId}
                   data={timeseriesdata}
                 />
@@ -238,12 +238,12 @@ const ScenarioTimeSeries: React.FC = () => {
               <div class="mb-4">
                 <h2 class="text-lg font-semibold text-bluespruce mb-2">
                   <span class="">
-                    Multi line chart
+                    Vertical bar chart
                   </span>
                 </h2>
               </div>
               <div class="mb-3">
-                <MultiLineChart
+                <VerticalBarChart
                   key={datasets[0].datasetId}
                   data={timeseriesdata}
                 />
