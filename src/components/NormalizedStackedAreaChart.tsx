@@ -49,12 +49,15 @@ export default function NormalizedStackedAreaChart({
     d3.select(gx.current)
       .transition()
       .duration(750)
-      .call(d3.axisBottom(x).tickValues(xticks));
+      .call(d3.axisBottom(x).tickValues(xticks))
+      .style("font-size", "14px")
+      .style("font-weight", "bold");
 
     d3.select(gy.current)
       .transition()
       .duration(750)
-      .call(d3.axisLeft(y).ticks(5, "%"));
+      .call(d3.axisLeft(y).ticks(5, "%"))
+      .style("font-size", "12px");
 
     areasGroup
       .selectAll()

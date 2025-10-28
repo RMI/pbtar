@@ -40,12 +40,15 @@ export default function MultiLineChart({
     d3.select(gx.current)
       .transition()
       .duration(750)
-      .call(d3.axisBottom(x).tickValues(xticks));
+      .call(d3.axisBottom(x).tickValues(xticks))
+      .style("font-size", "14px")
+      .style("font-weight", "bold");
 
     d3.select(gy.current)
       .transition()
       .duration(750)
-      .call(d3.axisLeft(y));
+      .call(d3.axisLeft(y))
+      .style("font-size", "12px");
 
     const groupedData = d3.groups(d3data, d => d.technology);
 
