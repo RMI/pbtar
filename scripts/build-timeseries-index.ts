@@ -327,8 +327,8 @@ async function main() {
           publicationName: parsed.publicationName,
           publicationYear: parsed.publicationYear,
           pathwayName: parsed.pathwayName,
-          description: parsed.description,
           source: parsed.source,
+          sector: parsed.sector?.[sector]?.displayName,
           emissionsScope: parsed.emissionsScope,
           sectorScope: parsed.sector?.[sector]?.metric?.[metric]?.sectorScope,
           metric: parsed.sector?.[sector]?.metric?.[metric]?.displayName,
@@ -357,10 +357,26 @@ async function main() {
               const metric = String(row.metric ?? "");
               const technology = String(row.technology ?? "");
               const rowMetadata = getRowMetadata(sector, metric, technology);
-              return {
-                ...row,
-                ...rowMetadata,
+              const out = {
+                publisher: rowMetadata.publisher,
+                publication_name: rowMetadata.publicationName,
+                publication_year: rowMetadata.publicationYear,
+                pathway_name: rowMetadata.pathwayName,
+                year: row.year,
+                geography: row.geography,
+                sector: rowMetadata.sector,
+                technology: rowMetadata.technology,
+                metric: rowMetadata.metric,
+                value: row.value,
+                unit: row.unit,
+                source: rowMetadata.source,
+                emissions_scope: rowMetadata.emissionsScope,
+                sector_scope: rowMetadata.sectorScope,
+                definition_technology: rowMetadata.definitionTechnology,
+                definition_metric: rowMetadata.definitionMetric,
               };
+              logDebug(`    Export row: ${JSON.stringify(out)}`);
+              return out;
             })
           : [];
 
