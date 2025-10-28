@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Markdown from "../components/Markdown";
 import { scenariosData } from "../data/scenariosData";
-import { Scenario, PathwayType } from "../types";
+import { Scenario } from "../types";
 import { BadgeMaybeAbsent } from "../components/Badge";
 import BadgeArray from "../components/BadgeArray";
 import {
@@ -138,9 +138,7 @@ const ScenarioDetailPage: React.FC = () => {
 
           <div className="flex flex-wrap gap-2 mb-4">
             <BadgeMaybeAbsent
-              tooltip={getPathwayTypeTooltip(
-                scenario.pathwayType as PathwayType,
-              )}
+              tooltip={getPathwayTypeTooltip(scenario.pathwayType)}
               variant="pathwayType"
             >
               {scenario.pathwayType}

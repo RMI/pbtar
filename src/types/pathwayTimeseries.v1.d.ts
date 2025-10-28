@@ -1,0 +1,259 @@
+//DO NOT MODIFY BY HAND.
+//use json:generate:types script.
+
+/**
+ * A schema for the scenarios metadata dataset in PBTAR.
+ */
+export interface PathwayTimeseries {
+  /**
+   * URI of the schema that validates this document (see https://json-schema.org/).
+   */
+  $schema?: string;
+  /**
+   * The unique identifier for a scenario.
+   */
+  id: string;
+  /**
+   * Identifiers of the associated scenario pathways.
+   */
+  pathwayId: string[];
+  /**
+   * Name of the scenario.
+   */
+  name: string;
+  /**
+   * Brief description of the scenario.
+   */
+  description: string;
+  /**
+   * Publisher of the scenario.
+   */
+  publisher: string;
+  /**
+   * Title of the publication.
+   */
+  publicationName: string;
+  /**
+   * Year that the scenario was published.
+   */
+  publicationYear: number;
+  /**
+   * Name of the associated scenario.
+   */
+  pathwayName: string;
+  /**
+   * Data source for the scenario data.
+   */
+  source: string;
+  /**
+   * Defines which greenhouse gases are covered in the pathway's modeled emissions.
+   */
+  emissionsScope:
+    | "No information"
+    | "CO2"
+    | "CO2e (Kyoto)"
+    | "CO2e (CO2, Methane)"
+    | "Other";
+  /**
+   * Sectors that the scenario data covers.
+   */
+  sector: {
+    /**
+     * This interface was referenced by `undefined`'s JSON-Schema definition
+     * via the `patternProperty` "^[A-Za-z0-9 _-]{1,100}$".
+     */
+    [k: string]: {
+      /**
+       * Display name of the sector as presented in charts or tables.
+       */
+      displayName?:
+        | "Land Use"
+        | "Agriculture"
+        | "Buildings"
+        | "Industry"
+        | "Steel"
+        | "Cement"
+        | "Chemicals"
+        | "Coal Mining"
+        | "Oil (Upstream)"
+        | "Gas (Upstream)"
+        | "Power"
+        | "Automotive"
+        | "Transport"
+        | "Road transport"
+        | "Aviation"
+        | "Rail"
+        | "Shipping"
+        | "Other";
+      /**
+       * Technologies that belong to this sector, each with a name and definition.
+       */
+      technology?: {
+        /**
+         * This interface was referenced by `undefined`'s JSON-Schema definition
+         * via the `patternProperty` "^[A-Za-z0-9 _-]{1,100}$".
+         */
+        [k: string]: {
+          /**
+           * Display name of the technology as presented in charts or tables.
+           */
+          displayName:
+            | "Precision Agriculture"
+            | "Agroforestry"
+            | "Bioenergy Crops"
+            | "Energy Efficiency"
+            | "Smart Grids"
+            | "Renewable Heating"
+            | "Heat Pumps"
+            | "Building Automation"
+            | "Smart Appliances"
+            | "Insulation"
+            | "Carbon Capture and Storage"
+            | "Electrification"
+            | "Process Optimization"
+            | "Hydrogen Use"
+            | "Coal"
+            | "Oil"
+            | "Gas"
+            | "Wind"
+            | "Solar"
+            | "Nuclear"
+            | "Biomass"
+            | "Hydro"
+            | "Renewables"
+            | "Electric Vehicles"
+            | "Hydrogen Vehicles"
+            | "Biofuels"
+            | "Public Transport"
+            | "Active Mobility"
+            | "Aviation Efficiency"
+            | "Maritime Efficiency"
+            | "Other";
+          /**
+           * Brief definition or description of the technology scope (e.g., what it includes or excludes).
+           */
+          definition: string;
+        };
+      };
+      /**
+       * Metrics available for this sector, describing what quantities are tracked (e.g., capacity, emissions).
+       */
+      metric?: {
+        /**
+         * This interface was referenced by `undefined`'s JSON-Schema definition
+         * via the `patternProperty` "^[A-Za-z0-9 _-]{1,100}$".
+         */
+        [k: string]: {
+          /**
+           * Display name of the metric as presented in charts or tables.
+           */
+          displayName:
+            | "Emissions Intensity"
+            | "Capacity"
+            | "Generation"
+            | "Technology Mix"
+            | "Absolute Emissions";
+          /**
+           * Brief definition or description of the metric.
+           */
+          definition: string;
+          /**
+           * Specifies which parts of the sector value chain the metric applies to.
+           */
+          sectorScope: string;
+        };
+      };
+      [k: string]: unknown;
+    };
+  };
+  /**
+   * Array of yearly data points for each sector, technology, and metric defined in this timeseries.
+   */
+  data: {
+    /**
+     * Calendar year of the data point.
+     */
+    year: number;
+    /**
+     * Geographical area that the scenario covers. This should be a single string value: either 'Global', a country ISO-3166-1 alpha-2 code (e.g., 'US', 'DE'), or a free-text region name (e.g., 'North America', 'South East Asia'). Only 2-letter codes are accepted for countries; do not use full country names or 3-letter codes (e.g., 'USA' is not allowed). If a 2-letter code does not map to a country (e.g., 'EU'), it will result in an error.
+     */
+    geography: {
+      [k: string]: unknown;
+    } & string;
+    /**
+     * Sector to which this data point belongs (must match one of the defined sectors).
+     */
+    sector:
+      | "landUse"
+      | "agriculture"
+      | "buildings"
+      | "industry"
+      | "steel"
+      | "cement"
+      | "chemicals"
+      | "coalMining"
+      | "oilUpstream"
+      | "gasUpstream"
+      | "power"
+      | "automotive"
+      | "transport"
+      | "roadtransport"
+      | "aviation"
+      | "rail"
+      | "shipping"
+      | "other";
+    /**
+     * Technology represented in this record (e.g., Solar, Wind, or null if sector-level only).
+     */
+    technology:
+      | "precisionAgriculture"
+      | "agroforestry"
+      | "bioenergyCrops"
+      | "energyEfficiency"
+      | "smartGrids"
+      | "renewableHeating"
+      | "heatPumps"
+      | "buildingAutomation"
+      | "smartAppliances"
+      | "insulation"
+      | "carbonCaptureandStorage"
+      | "electrification"
+      | "processOptimization"
+      | "hydrogenUse"
+      | "coal"
+      | "oil"
+      | "gas"
+      | "wind"
+      | "solar"
+      | "nuclear"
+      | "biomass"
+      | "hydro"
+      | "renewables"
+      | "electricVehicles"
+      | "hydrogenVehicles"
+      | "biofuels"
+      | "publicTransport"
+      | "activeMobility"
+      | "aviationEfficiency"
+      | "maritimeEfficiency"
+      | "other"
+      | null;
+    /**
+     * Metric reported for this record (e.g., Capacity, Generation, Emissions Intensity).
+     */
+    metric:
+      | "emissionsIntensity"
+      | "capacity"
+      | "generation"
+      | "technologyMix"
+      | "absoluteEmissions";
+    /**
+     * Numeric value of the metric for the given year, sector, and technology.
+     */
+    value: number;
+    /**
+     * Measurement unit associated with the metric value (e.g., GW, TWh, tCO2e).
+     */
+    unit: "tCO2e/MWh" | "MtCO2e" | "GW" | "TWh" | "%";
+  }[];
+}
