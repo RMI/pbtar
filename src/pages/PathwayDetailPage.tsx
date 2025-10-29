@@ -97,10 +97,10 @@ const PathwayDetailPage: React.FC = () => {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
         <h2 className="text-2xl font-bold text-rmigray-800 mb-4">
-          Scenario Not Found
+          Pathway Not Found
         </h2>
         <p className="text-rmigray-600 mb-6">
-          The scenario you're looking for doesn't exist or has been removed.
+          The pathway you're looking for doesn't exist or has been removed.
         </p>
         <Link
           to="/scenario"
@@ -110,7 +110,7 @@ const PathwayDetailPage: React.FC = () => {
             size={16}
             className="mr-2"
           />
-          Back to Scenarios
+          Back to Pathways
         </Link>
       </div>
     );
@@ -126,7 +126,7 @@ const PathwayDetailPage: React.FC = () => {
           size={16}
           className="mr-1"
         />
-        Back to scenarios
+        Back to pathways
       </Link>
 
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
