@@ -3,8 +3,8 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import SearchSection from "./SearchSection";
 import { SearchFilters } from "../types";
 
-// Mock the scenariosData import
-vi.mock("../data/scenariosData", async () => {
+// Mock the pathwayMetadata import
+vi.mock("../data/pathwayMetadata", async () => {
   const [s1, s2, s3, s4] = await Promise.all([
     import("../../testdata/valid/pathwayMetadata_sample_01.json", {
       assert: { type: "json" },
@@ -27,7 +27,7 @@ vi.mock("../data/scenariosData", async () => {
     s4.default,
   ] as import("../types").Scenario[];
 
-  return { scenariosData: mockScenarios };
+  return { pathwayMetadata: mockScenarios };
 });
 
 describe("SearchSection", () => {

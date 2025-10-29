@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import ScenarioCard from "../components/ScenarioCard";
 import SearchSection from "../components/SearchSection";
-import { scenariosData } from "../data/scenariosData";
+import { pathwayMetadata } from "../data/pathwayMetadata";
 import { filterScenarios } from "../utils/searchUtils";
 import { SearchFilters, Scenario } from "../types";
 
@@ -25,7 +25,7 @@ const ScenarioSearch: React.FC = () => {
   });
 
   const [filteredScenarios, setFilteredScenarios] =
-    useState<Scenario[]>(scenariosData);
+    useState<Scenario[]>(pathwayMetadata);
   const [isFiltering, setIsFiltering] = useState(false);
 
   // Track previous filter state to detect changes
@@ -34,7 +34,7 @@ const ScenarioSearch: React.FC = () => {
   useEffect(() => {
     const applyFilters = () => {
       setIsFiltering(true);
-      const result = filterScenarios(scenariosData, filters);
+      const result = filterScenarios(pathwayMetadata, filters);
       setFilteredScenarios(result);
 
       // Check if filters have changed meaningfully

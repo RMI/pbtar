@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBox from "./SearchBox";
 import MultiSelectDropdown from "./MultiSelectDropdown";
-import { scenariosData } from "../data/scenariosData";
+import { pathwayMetadata } from "../data/pathwayMetadata";
 import { SearchFilters, Geography } from "../types";
 import { makeGeographyOptions } from "../utils/searchUtils";
 import type { FacetMode } from "../utils/searchUtils";
@@ -47,32 +47,32 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   );
 
   const pathwayTypeOptions = buildOptionsFromValues(
-    scenariosData.map((d) => d.pathwayType),
+    pathwayMetadata.map((d) => d.pathwayType),
   );
 
   const modelYearNetzeroOptions = buildOptionsFromValues(
-    scenariosData.map((d) => d.modelYearNetzero),
+    pathwayMetadata.map((d) => d.modelYearNetzero),
   );
 
   const temperatureOptions = buildOptionsFromValues(
-    scenariosData.map((d) => d.modelTempIncrease),
+    pathwayMetadata.map((d) => d.modelTempIncrease),
   );
 
   const geographyOptionsRaw: Geography[] = React.useMemo(
-    () => makeGeographyOptions(scenariosData),
+    () => makeGeographyOptions(pathwayMetadata),
     [],
   ) as Geography[];
-  const sawAbsentGeography = hasAbsent(scenariosData.map((d) => d.geography));
+  const sawAbsentGeography = hasAbsent(pathwayMetadata.map((d) => d.geography));
   const geographyOptions = withAbsentOption(
     geographyOptionsRaw,
     sawAbsentGeography,
   );
 
-  const sectorNames = scenariosData.flatMap(
+  const sectorNames = pathwayMetadata.flatMap(
     (d) => d.sectors?.map((s) => s.name) ?? [],
   );
   const sectorOptionsBase = buildOptionsFromValues(sectorNames);
-  const sawAbsentSectors = scenariosData.some(
+  const sawAbsentSectors = pathwayMetadata.some(
     (d) => !d.sectors || d.sectors.length === 0,
   );
   const sectorOptions = sawAbsentSectors
@@ -80,7 +80,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     : sectorOptionsBase;
 
   const metricOptions = buildOptionsFromValues(
-    scenariosData.map((d) => d.metric).flat(),
+    pathwayMetadata.map((d) => d.metric).flat(),
   );
 
   const areFiltersApplied =

@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import ScenarioSearch from "./ScenarioSearch";
-import { scenariosData } from "../data/scenariosData";
+import { pathwayMetadata } from "../data/pathwayMetadata";
 import { Scenario } from "../types";
 import userEvent from "@testing-library/user-event";
 
@@ -49,12 +49,12 @@ describe("ScenarioSearch component", () => {
     renderScenarioSearch();
     // Check that the correct number of scenario cards are rendered
     const scenarioCards = screen.getAllByTestId("scenario-card");
-    expect(scenarioCards).toHaveLength(scenariosData.length);
+    expect(scenarioCards).toHaveLength(pathwayMetadata.length);
   });
 });
 
 describe("ScenarioSearch integration: dropdowns render and filter with 'None'", () => {
-  // IMPORTANT: we dynamically render ScenarioSearch AFTER mocking scenariosData,
+  // IMPORTANT: we dynamically render ScenarioSearch AFTER mocking pathwayMetadata,
   // so these tests don't interfere with any existing unit tests in this file.
   let ScenarioSearchUnderTest: React.ComponentType<unknown>;
 
@@ -118,9 +118,13 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
     // Reset module graph so our mock applies to the next import.
     vi.resetModules();
     // Mock BEFORE importing ScenarioSearch
-    vi.doMock("../data/scenariosData", () => ({ scenariosData: fixtures }), {
-      virtual: true,
-    });
+    vi.doMock(
+      "../data/pathwayMetadata",
+      () => ({ pathwayMetadata: fixtures }),
+      {
+        virtual: true,
+      },
+    );
     ScenarioSearchUnderTest = (await import("./ScenarioSearch")).default;
     render(<ScenarioSearchUnderTest />);
   }

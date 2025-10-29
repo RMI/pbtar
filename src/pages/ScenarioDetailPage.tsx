@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Markdown from "../components/Markdown";
-import { scenariosData } from "../data/scenariosData";
+import { pathwayMetadata } from "../data/pathwayMetadata";
 import { Scenario } from "../types";
 import { BadgeMaybeAbsent } from "../components/Badge";
 import BadgeArray from "../components/BadgeArray";
@@ -34,7 +34,7 @@ const ScenarioDetailPage: React.FC = () => {
     setLoading(true);
     // Simulate API call with timeout
     const timer = setTimeout(() => {
-      const foundScenario = scenariosData.find((s) => s.id === id) || null;
+      const foundScenario = pathwayMetadata.find((s) => s.id === id) || null;
       setScenario(foundScenario);
       setLoading(false);
     }, 300);

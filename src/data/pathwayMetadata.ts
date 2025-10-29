@@ -1,7 +1,7 @@
 import { Scenario } from "../types";
 import { FileEntry } from "../utils/validateData";
 import { assembleData, decideIncludeInvalid } from "../utils/loadData";
-import pathwayMetadata from "../schema/pathwayMetadata.v1.json" with { type: "json" };
+import pathwayMetadataSchema from "../schema/pathwayMetadata.v1.json" with { type: "json" };
 
 // 1) Grab every JSON file in this folder **and subfolders**
 //    `eager:true` = load at build time (no async), `import:'default'` = get the parsed JSON
@@ -19,9 +19,9 @@ const entries: FileEntry[] = Object.entries(modules)
   }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
-export const scenariosData: Scenario[] = assembleData(
+export const pathwayMetadata: Scenario[] = assembleData(
   entries,
-  pathwayMetadata,
+  pathwayMetadataSchema,
   {
     includeInvalid: decideIncludeInvalid(),
   },
