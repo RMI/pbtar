@@ -5,10 +5,10 @@ import ScenarioCard from "./ScenarioCard";
 import { Scenario } from "../types";
 
 // Mock scenario data
-import mockScenario from "../../testdata/valid/scenarios_metadata_standard.json" assert { type: "json" };
+import mockScenario from "../../testdata/valid/pathwayMetadata_standard.json" assert { type: "json" };
 
 // Mock full scenario data
-import mockScenarioFull from "../../testdata/valid/scenarios_metadata_full.json" assert { type: "json" };
+import mockScenarioFull from "../../testdata/valid/pathwayMetadata_full.json" assert { type: "json" };
 
 // Helper function to render component with router context
 const renderScenarioCard = (scenario: Scenario = mockScenario) => {

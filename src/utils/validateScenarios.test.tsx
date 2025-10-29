@@ -20,7 +20,7 @@ function fail(entry: FileEntry | FileEntry[], rx?: RegExp | string) {
   }
 }
 
-import baseScenario from "../../testdata/valid/scenarios_metadata_standard.json" assert { type: "json" };
+import baseScenario from "../../testdata/valid/pathwayMetadata_standard.json" assert { type: "json" };
 
 describe("scenario schema enforces expected limits", () => {
   it("accepts a valid object", () => {

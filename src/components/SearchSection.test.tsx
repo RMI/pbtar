@@ -6,16 +6,16 @@ import { SearchFilters } from "../types";
 // Mock the scenariosData import
 vi.mock("../data/scenariosData", async () => {
   const [s1, s2, s3, s4] = await Promise.all([
-    import("../../testdata/valid/scenarios_metadata_sample_01.json", {
+    import("../../testdata/valid/pathwayMetadata_sample_01.json", {
       assert: { type: "json" },
     }),
-    import("../../testdata/valid/scenarios_metadata_sample_02.json", {
+    import("../../testdata/valid/pathwayMetadata_sample_02.json", {
       assert: { type: "json" },
     }),
-    import("../../testdata/valid/scenarios_metadata_sample_03.json", {
+    import("../../testdata/valid/pathwayMetadata_sample_03.json", {
       assert: { type: "json" },
     }),
-    import("../../testdata/valid/scenarios_metadata_sample_04.json", {
+    import("../../testdata/valid/pathwayMetadata_sample_04.json", {
       assert: { type: "json" },
     }),
   ]);
