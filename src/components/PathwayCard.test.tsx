@@ -1,21 +1,21 @@
 import { describe, it, expect } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import ScenarioCard from "./ScenarioCard";
+import PathwayCard from "./PathwayCard";
 import { Scenario } from "../types";
 
-// Mock scenario data
-import mockScenario from "../../testdata/valid/pathwayMetadata_standard.json" assert { type: "json" };
+// Mock pathway data
+import mockPathway from "../../testdata/valid/pathwayMetadata_standard.json" assert { type: "json" };
 
-// Mock full scenario data
-import mockScenarioFull from "../../testdata/valid/pathwayMetadata_full.json" assert { type: "json" };
+// Mock full pathway data
+import mockPathwayFull from "../../testdata/valid/pathwayMetadata_full.json" assert { type: "json" };
 
 // Helper function to render component with router context
-const renderScenarioCard = (scenario: Scenario = mockScenario) => {
+const renderPathwayCard = (pathway: Scenario = mockPathway) => {
   return render(
     <MemoryRouter>
-      <ScenarioCard
-        scenario={scenario}
+      <PathwayCard
+        pathway={pathway}
         searchTerm=""
       />
     </MemoryRouter>,
@@ -52,80 +52,80 @@ function withClientWidth<T>(width: number, run: () => T): T {
   }
 }
 
-describe("ScenarioCard component", () => {
+describe("PathwayCard component", () => {
   // Helper function to render component with router context
-  const renderScenarioCard = (scenario: Scenario = mockScenario) => {
+  const renderPathwayCard = (pathway: Scenario = mockPathway) => {
     return render(
       <MemoryRouter>
-        <ScenarioCard scenario={scenario} />
+        <PathwayCard pathway={pathway} />
       </MemoryRouter>,
     );
   };
 
-  it("renders the scenario name and description", () => {
-    renderScenarioCard();
+  it("renders the pathway name and description", () => {
+    renderPathwayCard();
 
-    expect(screen.getByText(mockScenario.name)).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.description)).toBeInTheDocument();
+    expect(screen.getByText(mockPathway.name)).toBeInTheDocument();
+    expect(screen.getByText(mockPathway.description)).toBeInTheDocument();
   });
 
-  it("links to the correct scenario detail page", () => {
-    const { container } = renderScenarioCard();
+  it("links to the correct pathway detail page", () => {
+    const { container } = renderPathwayCard();
 
     const link = container.querySelector("a");
-    expect(link).toHaveAttribute("href", `/scenario/${mockScenario.id}`);
+    expect(link).toHaveAttribute("href", `/scenario/${mockPathway.id}`);
   });
 
   it("displays the pathwayType badge", () => {
-    renderScenarioCard();
+    renderPathwayCard();
 
-    const pathwayTypeBadge = screen.getByText(mockScenario.pathwayType);
+    const pathwayTypeBadge = screen.getByText(mockPathway.pathwayType);
     expect(pathwayTypeBadge).toBeInTheDocument();
   });
 
   it("shows target year and temperature badges", () => {
-    renderScenarioCard();
+    renderPathwayCard();
 
-    expect(screen.getByText(mockScenario.modelYearNetzero)).toBeInTheDocument();
+    expect(screen.getByText(mockPathway.modelYearNetzero)).toBeInTheDocument();
     expect(
-      screen.getByText(mockScenario.modelTempIncrease?.toString() + "°C"),
+      screen.getByText(mockPathway.modelTempIncrease?.toString() + "°C"),
     ).toBeInTheDocument();
   });
 
   it("displays geography information with some geography visible", () => {
-    renderScenarioCard();
+    renderPathwayCard();
 
     expect(screen.getByText("Geographies:")).toBeInTheDocument();
 
     // Check that at least the first geography is displayed
-    expect(screen.getByText(mockScenario.geography[0])).toBeInTheDocument();
+    expect(screen.getByText(mockPathway.geography[0])).toBeInTheDocument();
   });
 
   it("displays sector information with some sectors visible", () => {
-    renderScenarioCard();
+    renderPathwayCard();
 
     expect(screen.getByText("Sectors:")).toBeInTheDocument();
 
     // Check that at least the first sector is displayed
-    expect(screen.getByText(mockScenario.sectors[0].name)).toBeInTheDocument();
+    expect(screen.getByText(mockPathway.sectors[0].name)).toBeInTheDocument();
   });
 
   it("shows publisher information", () => {
-    renderScenarioCard();
+    renderPathwayCard();
 
     expect(screen.getByText("Publisher:")).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.publisher)).toBeInTheDocument();
+    expect(screen.getByText(mockPathway.publisher)).toBeInTheDocument();
   });
 
   it("shows published date information", () => {
-    renderScenarioCard();
+    renderPathwayCard();
 
     expect(screen.getByText("Published:")).toBeInTheDocument();
-    expect(screen.getByText(mockScenario.publicationYear)).toBeInTheDocument();
+    expect(screen.getByText(mockPathway.publicationYear)).toBeInTheDocument();
   });
 
   it("displays the 'View details' text with icon", () => {
-    renderScenarioCard();
+    renderPathwayCard();
 
     expect(screen.getByText("View details")).toBeInTheDocument();
 
@@ -136,7 +136,7 @@ describe("ScenarioCard component", () => {
 
   // Testing responsive layout classes
   it("has the main container classes for styling", () => {
-    const { container } = renderScenarioCard();
+    const { container } = renderPathwayCard();
 
     const card = container.firstChild;
     if (!(card instanceof HTMLElement)) {
@@ -153,7 +153,7 @@ describe("ScenarioCard component", () => {
   describe("'+n more' tooltip functionality", () => {
     it("shows '+n more' text when there are too many sectors to display", async () => {
       const { container } = withClientWidth(220, () =>
-        renderScenarioCard(mockScenarioFull),
+        renderPathwayCard(mockPathwayFull),
       );
 
       // Find the "Sectors:" label
@@ -227,13 +227,13 @@ describe("ScenarioCard component", () => {
     });
 
     it("handles geography display appropriately based on available space", () => {
-      // Create a scenario with only 2 geographies
-      const scenarioWithFewGeography = {
-        ...mockScenarioFull,
+      // Create a pathway with only 2 geographies
+      const pathwayWithFewGeography = {
+        ...mockPathwayFull,
         geography: ["Global", "EU"], // Only 2 geography
       };
 
-      const { container } = renderScenarioCard(scenarioWithFewGeography);
+      const { container } = renderPathwayCard(pathwayWithFewGeography);
 
       // Find the geography section
       const geographySection = Array.from(container.querySelectorAll("p")).find(
@@ -272,14 +272,14 @@ describe("ScenarioCard component", () => {
   });
 
   it("renders mapped country names on badges (not ISO2 codes)", () => {
-    const scenario = {
-      ...mockScenario,
+    const pathway = {
+      ...mockPathway,
       geography: ["Global", "APAC", "DE"], // CN should render as "China"
     };
 
     // Make the container wide enough for 3+ badges in JSDOM
     withClientWidth(1000, () => {
-      renderScenarioCard(scenario);
+      renderPathwayCard(pathway);
 
       expect(screen.getByText("Global")).toBeInTheDocument();
       expect(screen.getByText("APAC")).toBeInTheDocument();
@@ -289,12 +289,12 @@ describe("ScenarioCard component", () => {
   });
 });
 
-describe("ScenarioCard search highlighting", () => {
-  const mockScenario: Scenario = {
-    ...mockScenarioFull,
-    geography: [...mockScenarioFull.geography, "Hidden Match Geography"],
+describe("PathwayCard search highlighting", () => {
+  const mockPathway: Scenario = {
+    ...mockPathwayFull,
+    geography: [...mockPathwayFull.geography, "Hidden Match Geography"],
     sectors: [
-      ...mockScenarioFull.sectors,
+      ...mockPathwayFull.sectors,
       { name: "Hidden Match Sector", technologies: ["Other"] },
     ],
   };
@@ -302,8 +302,8 @@ describe("ScenarioCard search highlighting", () => {
   const renderWithRouter = (searchTerm = "") => {
     return render(
       <MemoryRouter>
-        <ScenarioCard
-          scenario={mockScenario}
+        <PathwayCard
+          pathway={mockPathway}
           searchTerm={searchTerm}
         />
       </MemoryRouter>,
@@ -378,12 +378,12 @@ describe("ScenarioCard search highlighting", () => {
 
 describe("tooltip functionality", () => {
   it("uses correct tooltip for Policy pathway type", () => {
-    const scenarioWithPolicy: Scenario = {
-      ...mockScenario,
+    const pathwayWithPolicy: Scenario = {
+      ...mockPathway,
       pathwayType: "Direct Policy",
     };
 
-    renderScenarioCard(scenarioWithPolicy);
+    renderPathwayCard(pathwayWithPolicy);
 
     const badge = screen.getByText("Direct Policy");
     expect(badge).toBeInTheDocument();
@@ -396,12 +396,12 @@ describe("tooltip functionality", () => {
   });
 
   it("uses correct tooltip for Power sector", () => {
-    const scenarioWithPowerSector: Scenario = {
-      ...mockScenario,
+    const pathwayWithPowerSector: Scenario = {
+      ...mockPathway,
       sectors: [{ name: "Power" }],
     };
 
-    renderScenarioCard(scenarioWithPowerSector);
+    renderPathwayCard(pathwayWithPowerSector);
 
     const badge = screen.getByText("Power");
     expect(badge).toBeInTheDocument();
@@ -413,12 +413,12 @@ describe("tooltip functionality", () => {
     );
   });
 
-  describe("ScenarioCard robustness with non-string values", () => {
-    const renderWithRouter = (scenario: Scenario, searchTerm = "") =>
+  describe("PathwayCard robustness with non-string values", () => {
+    const renderWithRouter = (pathway: Scenario, searchTerm = "") =>
       render(
         <MemoryRouter>
-          <ScenarioCard
-            scenario={scenario}
+          <PathwayCard
+            pathway={pathway}
             searchTerm={searchTerm}
           />
         </MemoryRouter>,
@@ -426,7 +426,7 @@ describe("tooltip functionality", () => {
 
     it("does not crash when highlighting numeric fields", () => {
       const s: Scenario = {
-        ...mockScenario,
+        ...mockPathway,
         // Using a double cast to satisfy TS, but this still presents as numeric at runtime.
         modelYearNetzero: 2030 as unknown as string, // number on purpose
         publicationYear: 2024 as unknown as string, // number
@@ -444,7 +444,7 @@ describe("tooltip functionality", () => {
 
     it("does not crash with null / undefined text fields", () => {
       const s: Scenario = {
-        ...mockScenario,
+        ...mockPathway,
         // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
         description: null as unknown as string, // null
         publisher: undefined as unknown as string, // undefined
@@ -460,7 +460,7 @@ describe("tooltip functionality", () => {
 
     it("highlights matches inside stringified numbers", () => {
       const s: Scenario = {
-        ...mockScenario,
+        ...mockPathway,
         // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
         modelYearNetzero: 2045 as unknown as string, // number on purpose
       };

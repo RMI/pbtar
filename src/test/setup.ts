@@ -7,7 +7,7 @@ afterEach(() => {
   cleanup();
 });
 
-// Mock ResizeObserver for ScenarioCard component
+// Mock ResizeObserver for PathwayCard component
 // This is necessary because ResizeObserver is not available in the test environment.
 class MockResizeObserver {
   observe() {}

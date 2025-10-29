@@ -6,8 +6,8 @@ import { pathwayMetadata } from "../data/pathwayMetadata";
 import { Scenario } from "../types";
 import userEvent from "@testing-library/user-event";
 
-// Mock the ScenarioCard component to simplify testing
-vi.mock("../components/ScenarioCard", () => ({
+// Mock the PathwayCard component to simplify testing
+vi.mock("../components/PathwayCard", () => ({
   default: ({ scenario }: { scenario: Scenario }) => (
     <div
       data-testid="scenario-card"
@@ -45,7 +45,7 @@ describe("ScenarioSearch component", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders a ScenarioCard for each scenario in the data", () => {
+  it("renders a PathwayCard for each scenario in the data", () => {
     renderScenarioSearch();
     // Check that the correct number of scenario cards are rendered
     const scenarioCards = screen.getAllByTestId("scenario-card");

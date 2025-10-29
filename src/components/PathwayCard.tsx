@@ -19,30 +19,30 @@ import {
   getMetricTooltip,
 } from "../utils/tooltipUtils";
 
-interface ScenarioCardProps {
-  scenario: Scenario;
+interface PathwayCardProps {
+  pathway: Scenario;
   searchTerm?: string;
 }
 
 // Custom hook to measure container width and calculate how many badges will fit
 
-const ScenarioCard: React.FC<ScenarioCardProps> = ({
-  scenario,
+const PathwayCard: React.FC<PathwayCardProps> = ({
+  pathway,
   searchTerm = "",
 }) => {
   // Sort geography and sectors to prioritize matches
   const sortedGeography = useMemo(
     () =>
       prioritizeGeographies(
-        sortGeographiesForDetails(scenario.geography),
+        sortGeographiesForDetails(pathway.geography),
         searchTerm,
       ),
-    [scenario.geography, searchTerm],
+    [pathway.geography, searchTerm],
   );
 
   const sortedSectors = useMemo(
-    () => prioritizeMatches(scenario.sectors, searchTerm),
-    [scenario.sectors, searchTerm],
+    () => prioritizeMatches(pathway.sectors, searchTerm),
+    [pathway.sectors, searchTerm],
   );
 
   // Helper function to conditionally highlight text based on search term
@@ -69,17 +69,17 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
       <div className="p-5 flex flex-col h-full">
         <div className="mb-4">
-          <Link to={`/scenario/${scenario.id}`}>
+          <Link to={`/scenario/${pathway.id}`}>
             <h2 className="text-xl font-semibold text-bluespruce mb-2">
               <HighlightedText
-                text={scenario.name}
+                text={pathway.name}
                 searchTerm={searchTerm}
               />
             </h2>
           </Link>
           <p className="text-rmigray-600 text-sm line-clamp-2">
             <HighlightedText
-              text={scenario.description}
+              text={pathway.description}
               searchTerm={searchTerm}
             />
           </p>
@@ -91,11 +91,11 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           </p>
           <div className="flex flex-wrap gap-2">
             <BadgeMaybeAbsent
-              tooltip={getPathwayTypeTooltip(scenario.pathwayType)}
+              tooltip={getPathwayTypeTooltip(pathway.pathwayType)}
               variant="pathwayType"
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
             >
-              {scenario.pathwayType}
+              {pathway.pathwayType}
             </BadgeMaybeAbsent>
           </div>
         </div>
@@ -107,7 +107,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               variant="year"
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
             >
-              {scenario.modelYearNetzero}
+              {pathway.modelYearNetzero}
             </BadgeMaybeAbsent>
             <BadgeMaybeAbsent
               variant="temperature"
@@ -117,7 +117,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               }}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
             >
-              {scenario.modelTempIncrease}
+              {pathway.modelTempIncrease}
             </BadgeMaybeAbsent>
           </div>
         </div>
@@ -168,7 +168,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
               maxRows={2}
             >
-              {scenario.metric}
+              {pathway.metric}
             </BadgeArray>
           </div>
         </div>
@@ -179,7 +179,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               <p className="text-xs text-rmigray-500">Publisher:</p>
               <p className="text-sm font-medium text-rmigray-800">
                 <HighlightedText
-                  text={scenario.publisher}
+                  text={pathway.publisher}
                   searchTerm={searchTerm}
                 />
               </p>
@@ -188,7 +188,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
               <p className="text-xs text-rmigray-500">Published:</p>
               <p className="text-sm font-medium text-rmigray-800">
                 <HighlightedText
-                  text={scenario.publicationYear}
+                  text={pathway.publicationYear}
                   searchTerm={searchTerm}
                 />
               </p>
@@ -196,7 +196,7 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
           </div>
           <div className="mt-2 flex justify-end">
             <Link
-              to={`/scenario/${scenario.id}`}
+              to={`/scenario/${pathway.id}`}
               className="text-energy text-sm font-medium flex items-center transition-colors duration-200 hover:text-energy-700"
             >
               <span className="flex items-center">
@@ -214,4 +214,4 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({
   );
 };
 
-export default ScenarioCard;
+export default PathwayCard;

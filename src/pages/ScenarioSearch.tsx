@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import ScenarioCard from "../components/ScenarioCard";
+import PathwayCard from "../components/PathwayCard";
 import SearchSection from "../components/SearchSection";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 import { filterScenarios } from "../utils/searchUtils";
@@ -143,7 +143,7 @@ const ScenarioSearch: React.FC = () => {
         className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300 ${isFiltering ? "opacity-50" : "opacity-100"}`}
       >
         {filteredScenarios.map((scenario) => (
-          <ScenarioCard
+          <PathwayCard
             key={scenario.id}
             scenario={scenario}
             searchTerm={filters.searchTerm}
