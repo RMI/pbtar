@@ -1,7 +1,6 @@
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
 import type { SchemaObject, ErrorObject } from "ajv";
-import pathwayMetadata from "../schema/pathwayMetadata.v1.json" with { type: "json" };
 
 export type FileEntry = { name: string; data: unknown };
 export type ValidationProblem = {
@@ -91,12 +90,13 @@ export function validateFilesBySchema(
  *
  * This keeps CI happy (counts still work) and isolates the UI’s eager path.
  */
-export function validateScenariosCollect(
+export function validateDataCollect(
   entries: FileEntry[],
+  schema: object | SchemaObject,
 ): ValidationOutcome {
-  const META_ID = String((pathwayMetadata as SchemaObject).$id);
+  const META_ID = String((schema as SchemaObject).$id);
   const metaEntries = entries.filter(
     (e) => hasSchemaString(e.data) && e.data.$schema === META_ID,
   );
-  return validateFilesBySchema(metaEntries, [pathwayMetadata]);
+  return validateFilesBySchema(metaEntries, [schema]);
 }

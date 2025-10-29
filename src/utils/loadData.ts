@@ -1,7 +1,6 @@
-// src/utils/loadScenarios.ts
-import type { Scenario } from "../types";
-import { validateScenariosCollect } from "./validateScenarios.ts";
-import type { FileEntry, ValidationOutcome } from "./validateScenarios.ts";
+import { validateDataCollect } from "./validateData.ts";
+import type { FileEntry, ValidationOutcome } from "./validateData.ts";
+import type { SchemaObject } from "ajv";
 
 type ViteEnv =
   | {
@@ -54,29 +53,30 @@ export function decideIncludeInvalid(): boolean {
 
 /**
  * Core assembly: takes already-parsed entries, validates them, and returns the
- * scenarios list. When includeInvalid=true, invalid blobs are appended.
+ * list. When includeInvalid=true, invalid blobs are appended.
  */
-export function assembleScenarios(
+export function assembleData<T>(
   entries: FileEntry[],
+  schema: object | SchemaObject,
   opts?: {
     includeInvalid?: boolean;
     warn?: (msg: string) => void;
     /** Optional structured hook for callers that want to annotate files, etc. */
     onInvalid?: (
-      problems: Array<{ name: string; errors: string[]; data?: Scenario[] }>,
+      problems: Array<{ name: string; errors: string[]; data?: T[] }>,
     ) => void;
   },
-): Scenario[] {
+): T[] {
   const includeInvalid = !!opts?.includeInvalid;
   const onInvalid = opts?.onInvalid;
 
   const { valid: valid, invalid: invalid }: ValidationOutcome =
-    validateScenariosCollect(entries);
+    validateDataCollect(entries, schema);
 
   if (invalid.length && opts?.warn) {
     const totalInvalid = invalid.length;
     opts.warn(
-      `[loadScenarios] Warning: ${totalInvalid} invalid scenario${
+      `[assembleData] Warning: ${totalInvalid} invalid data files{
         totalInvalid !== 1 ? "s" : ""
       } found in ${invalid.length} file${invalid.length !== 1 ? "s" : ""}. ${
         includeInvalid

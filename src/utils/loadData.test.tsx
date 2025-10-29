@@ -5,7 +5,7 @@ import { promises as fs } from "node:fs";
 
 // We will import the module under test *lazily* after setting up any vi.mocks,
 // so that mocked dependencies are wired correctly.
-const importModule = async () => await import("./loadScenarios");
+const importModule = async () => await import("./loadData");
 
 /** Reset module cache & env between tests */
 beforeEach(() => {
@@ -69,8 +69,8 @@ describe("validate files on disk", () => {
     );
     // In app code we now *filter* invalid blobs rather than throw.
     const warn = vi.fn();
-    const { assembleScenarios } = await importModule();
-    const list = assembleScenarios(entries, { includeInvalid: false, warn });
+    const { assembleData } = await importModule();
+    const list = assembleData(entries, { includeInvalid: false, warn });
     expect(Array.isArray(list)).toBe(true);
     // We don't assert on warn count, because it depends on repo data state.
     // But we *do* ensure warn is callable without throwing:
@@ -90,8 +90,8 @@ describe("validate files on disk", () => {
     );
     // In app code we now *filter* invalid blobs rather than throw.
     const warn = vi.fn();
-    const { assembleScenarios } = await importModule();
-    const list = assembleScenarios(entries, { includeInvalid: false, warn });
+    const { assembleData } = await importModule();
+    const list = assembleData(entries, { includeInvalid: false, warn });
     expect(Array.isArray(list)).toBe(true);
     // We don't assert on warn count, because it depends on repo data state.
     // But we *do* ensure warn is callable without throwing:

@@ -1,17 +1,18 @@
 import { describe, it, expect } from "vitest";
-import { validateScenariosCollect, FileEntry } from "./validateScenarios";
+import { validateDataCollect, FileEntry } from "./validateData";
 import { Scenario } from "../types";
+import pathwayMetadata from "../schema/pathwayMetadata.v1.json" with { type: "json" };
 
 function ok(entry: FileEntry | FileEntry[]) {
   const arr = Array.isArray(entry) ? entry : [entry];
-  const { valid, invalid } = validateScenariosCollect(arr);
+  const { valid, invalid } = validateDataCollect(arr, pathwayMetadata);
   expect(valid.length).toBeGreaterThan(0);
   expect(invalid.length).toBe(0);
 }
 
 function fail(entry: FileEntry | FileEntry[], rx?: RegExp | string) {
   const arr = Array.isArray(entry) ? entry : [entry];
-  const rawValidation = validateScenariosCollect(arr);
+  const rawValidation = validateDataCollect(arr, pathwayMetadata);
   const invalid = rawValidation.invalid;
   expect(invalid.length).toBeGreaterThan(0);
   if (rx) {
