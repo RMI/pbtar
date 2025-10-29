@@ -116,10 +116,10 @@ const PathwaySearch: React.FC = () => {
         className="mb-8"
       >
         <h1 className="text-2xl font-bold text-rmigray-800 mb-2">
-          Find Climate Transition Scenarios
+          Find Climate Transition Pathways
         </h1>
         <p className="text-rmigray-600">
-          Browse our repository of climate transition scenarios to find the most
+          Browse our repository of climate transition pathways to find the most
           relevant ones for your assessment needs.
         </p>
       </section>
@@ -131,7 +131,7 @@ const PathwaySearch: React.FC = () => {
         <div className="container mx-auto px-4 py-2">
           <SearchSection
             filters={filters}
-            scenariosNumber={filteredPathways.length}
+            pathwaysNumber={filteredPathways.length}
             onFilterChange={handleFilterChange}
             onSearch={handleSearch}
             onClear={handleClear}
@@ -154,7 +154,7 @@ const PathwaySearch: React.FC = () => {
       {filteredPathways.length === 0 && (
         <div className="text-center py-12">
           <h3 className="text-lg font-medium text-rmigray-700 mb-2">
-            No scenarios found
+            No pathways found
           </h3>
           <p className="text-rmigray-500 mb-4">
             Try adjusting your search filters.
