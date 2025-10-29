@@ -145,7 +145,7 @@ const ScenarioSearch: React.FC = () => {
         {filteredScenarios.map((scenario) => (
           <PathwayCard
             key={scenario.id}
-            scenario={scenario}
+            pathway={scenario}
             searchTerm={filters.searchTerm}
           />
         ))}
