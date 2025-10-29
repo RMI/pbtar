@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AboutPage from "./pages/AboutPage";
-import ScenarioSearch from "./pages/ScenarioSearch";
+import PathwaySearch from "./pages/PathwaySearch";
 import PathwayDetailPage from "./pages/PathwayDetailPage";
 import LandingPage from "./pages/LandingPage";
 import EnvironmentBanner from "./components/EnvironmentBanner";
@@ -26,7 +26,7 @@ export const AppContent = () => {
           />
           <Route
             path="/scenario"
-            element={<ScenarioSearch />}
+            element={<PathwaySearch />}
           />
           <Route
             path="/scenario/:id"

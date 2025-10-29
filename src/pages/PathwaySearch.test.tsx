@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import ScenarioSearch from "./ScenarioSearch";
+import PathwaySearch from "./PathwaySearch";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 import { Scenario } from "../types";
 import userEvent from "@testing-library/user-event";
@@ -10,25 +10,25 @@ import userEvent from "@testing-library/user-event";
 vi.mock("../components/PathwayCard", () => ({
   default: ({ pathway }: { pathway: Scenario }) => (
     <div
-      data-testid="scenario-card"
-      data-scenario-id={pathway.id}
+      data-testid="pathway-card"
+      data-pathway-id={pathway.id}
     >
       {pathway.name}
     </div>
   ),
 }));
 
-describe("ScenarioSearch component", () => {
-  const renderScenarioSearch = () => {
+describe("PathwaySearch component", () => {
+  const renderPathwaySearch = () => {
     return render(
       <MemoryRouter>
-        <ScenarioSearch />
+        <PathwaySearch />
       </MemoryRouter>,
     );
   };
 
   it("renders the main heading", () => {
-    renderScenarioSearch();
+    renderPathwaySearch();
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "Find Climate Transition Scenarios",
@@ -36,7 +36,7 @@ describe("ScenarioSearch component", () => {
   });
 
   it("displays the introductory paragraph", () => {
-    renderScenarioSearch();
+    renderPathwaySearch();
 
     expect(
       screen.getByText(
@@ -45,18 +45,18 @@ describe("ScenarioSearch component", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders a PathwayCard for each scenario in the data", () => {
-    renderScenarioSearch();
-    // Check that the correct number of scenario cards are rendered
-    const scenarioCards = screen.getAllByTestId("scenario-card");
-    expect(scenarioCards).toHaveLength(pathwayMetadata.length);
+  it("renders a PathwayCard for each pathway in the data", () => {
+    renderPathwaySearch();
+    // Check that the correct number of pathway cards are rendered
+    const pathwayCards = screen.getAllByTestId("pathway-card");
+    expect(pathwayCards).toHaveLength(pathwayMetadata.length);
   });
 });
 
-describe("ScenarioSearch integration: dropdowns render and filter with 'None'", () => {
-  // IMPORTANT: we dynamically render ScenarioSearch AFTER mocking pathwayMetadata,
+describe("PathwaySearch integration: dropdowns render and filter with 'None'", () => {
+  // IMPORTANT: we dynamically render PathwaySearch AFTER mocking pathwayMetadata,
   // so these tests don't interfere with any existing unit tests in this file.
-  let ScenarioSearchUnderTest: React.ComponentType<unknown>;
+  let PathwaySearchUnderTest: React.ComponentType<unknown>;
 
   // Use a typed userEvent instance to avoid "no-unsafe-call" on user interactions
   let u: ReturnType<typeof userEvent.setup>;
@@ -117,7 +117,7 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
   async function mountWithFixtures(): Promise<void> {
     // Reset module graph so our mock applies to the next import.
     vi.resetModules();
-    // Mock BEFORE importing ScenarioSearch
+    // Mock BEFORE importing PathwaySearch
     vi.doMock(
       "../data/pathwayMetadata",
       () => ({ pathwayMetadata: fixtures }),
@@ -125,8 +125,8 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
         virtual: true,
       },
     );
-    ScenarioSearchUnderTest = (await import("./ScenarioSearch")).default;
-    render(<ScenarioSearchUnderTest />);
+    PathwaySearchUnderTest = (await import("./PathwaySearch")).default;
+    render(<PathwaySearchUnderTest />);
   }
 
   async function openDropdown(labelRegex: RegExp): Promise<HTMLButtonElement> {
@@ -170,12 +170,12 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
     await mountWithFixtures();
   });
 
-  it("Sector: shows 'None' when any scenario has no sectors, selecting it filters correctly", async () => {
+  it("Sector: shows 'None' when any pathway has no sectors, selecting it filters correctly", async () => {
     await openDropdown(/sector/i);
     expect(await screen.findByText("None")).toBeInTheDocument();
     await selectOption("None");
 
-    // Only scenarios with no sectors: A (undefined), C (empty array)
+    // Only pathways with no sectors: A (undefined), C (empty array)
     expectVisible([
       "Scenario A (no sectors, no geo, no temp)",
       "Scenario C (empty sectors[], empty geo[], 1.5°C)",
@@ -186,12 +186,12 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
     ]);
   });
 
-  it("Geography: shows 'None' when any scenario has missing/empty geography, selecting it filters correctly", async () => {
+  it("Geography: shows 'None' when any pathway has missing/empty geography, selecting it filters correctly", async () => {
     await openDropdown(/geography/i);
     expect(await screen.findByText("None")).toBeInTheDocument();
     await selectOption("None");
 
-    // Only scenarios with no geography: A (undefined), C (empty array)
+    // Only pathways with no geography: A (undefined), C (empty array)
     expectVisible([
       "Scenario A (no sectors, no geo, no temp)",
       "Scenario C (empty sectors[], empty geo[], 1.5°C)",
@@ -202,7 +202,7 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
     ]);
   });
 
-  it("Temperature: shows 'None' when any scenario omits temperature, selecting it filters correctly", async () => {
+  it("Temperature: shows 'None' when any pathway omits temperature, selecting it filters correctly", async () => {
     await openDropdown(/temperature|temp(?:erature)?/i);
     expect(await screen.findByText("None")).toBeInTheDocument();
     await selectOption("None");
@@ -218,7 +218,7 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
     ]);
   });
 
-  // Concrete selection (requested): pick a real value and ensure only matching scenarios remain
+  // Concrete selection (requested): pick a real value and ensure only matching pathways remain
   it("Sector: selecting a concrete option (Power) filters correctly", async () => {
     await openDropdown(/sector/i);
     // Select a real sector option

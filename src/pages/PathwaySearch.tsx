@@ -5,7 +5,7 @@ import { pathwayMetadata } from "../data/pathwayMetadata";
 import { filterScenarios } from "../utils/searchUtils";
 import { SearchFilters, Scenario } from "../types";
 
-const ScenarioSearch: React.FC = () => {
+const PathwaySearch: React.FC = () => {
   // Ref for the top section to handle scrolling
   const topSectionRef = useRef<HTMLDivElement>(null);
   // Ref for the search section to detect sticky state
@@ -24,7 +24,7 @@ const ScenarioSearch: React.FC = () => {
     searchTerm: "",
   });
 
-  const [filteredScenarios, setFilteredScenarios] =
+  const [filteredPathways, setFilteredPathways] =
     useState<Scenario[]>(pathwayMetadata);
   const [isFiltering, setIsFiltering] = useState(false);
 
@@ -35,7 +35,7 @@ const ScenarioSearch: React.FC = () => {
     const applyFilters = () => {
       setIsFiltering(true);
       const result = filterScenarios(pathwayMetadata, filters);
-      setFilteredScenarios(result);
+      setFilteredPathways(result);
 
       // Check if filters have changed meaningfully
       const hasFilterChanged =
@@ -131,7 +131,7 @@ const ScenarioSearch: React.FC = () => {
         <div className="container mx-auto px-4 py-2">
           <SearchSection
             filters={filters}
-            scenariosNumber={filteredScenarios.length}
+            scenariosNumber={filteredPathways.length}
             onFilterChange={handleFilterChange}
             onSearch={handleSearch}
             onClear={handleClear}
@@ -142,16 +142,16 @@ const ScenarioSearch: React.FC = () => {
       <div
         className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300 ${isFiltering ? "opacity-50" : "opacity-100"}`}
       >
-        {filteredScenarios.map((scenario) => (
+        {filteredPathways.map((pathway) => (
           <PathwayCard
-            key={scenario.id}
-            pathway={scenario}
+            key={pathway.id}
+            pathway={pathway}
             searchTerm={filters.searchTerm}
           />
         ))}
       </div>
 
-      {filteredScenarios.length === 0 && (
+      {filteredPathways.length === 0 && (
         <div className="text-center py-12">
           <h3 className="text-lg font-medium text-rmigray-700 mb-2">
             No scenarios found
@@ -171,4 +171,4 @@ const ScenarioSearch: React.FC = () => {
   );
 };
 
-export default ScenarioSearch;
+export default PathwaySearch;
