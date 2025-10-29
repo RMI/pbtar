@@ -8,12 +8,12 @@ import userEvent from "@testing-library/user-event";
 
 // Mock the PathwayCard component to simplify testing
 vi.mock("../components/PathwayCard", () => ({
-  default: ({ scenario }: { scenario: Scenario }) => (
+  default: ({ pathway }: { pathway: Scenario }) => (
     <div
       data-testid="scenario-card"
-      data-scenario-id={scenario.id}
+      data-scenario-id={pathway.id}
     >
-      {scenario.name}
+      {pathway.name}
     </div>
   ),
 }));
