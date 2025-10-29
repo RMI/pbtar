@@ -25,17 +25,17 @@ import {
   summarizeSummary,
 } from "../utils/timeseriesIndex";
 
-const ScenarioDetailPage: React.FC = () => {
+const PathwayDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [scenario, setScenario] = useState<Scenario | null>(null);
+  const [pathway, setPathway] = useState<Scenario | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
     // Simulate API call with timeout
     const timer = setTimeout(() => {
-      const foundScenario = pathwayMetadata.find((s) => s.id === id) || null;
-      setScenario(foundScenario);
+      const foundPathway = pathwayMetadata.find((s) => s.id === id) || null;
+      setPathway(foundPathway);
       setLoading(false);
     }, 300);
 
@@ -61,7 +61,7 @@ const ScenarioDetailPage: React.FC = () => {
         const idx = await fetchTimeseriesIndex();
         if (!isMounted) return;
 
-        const pathwayId: string = scenario?.id ?? "";
+        const pathwayId: string = pathway?.id ?? "";
 
         if (idx && pathwayId) {
           setDatasets(datasetsForPathway(idx, pathwayId));
@@ -78,7 +78,7 @@ const ScenarioDetailPage: React.FC = () => {
     return () => {
       isMounted = false;
     };
-  }, [scenario]); // depend on the full object to avoid eslint warning
+  }, [pathway]); // depend on the full object to avoid eslint warning
 
   if (loading) {
     return (
@@ -93,7 +93,7 @@ const ScenarioDetailPage: React.FC = () => {
     );
   }
 
-  if (!scenario) {
+  if (!pathway) {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
         <h2 className="text-2xl font-bold text-rmigray-800 mb-4">
@@ -132,19 +132,19 @@ const ScenarioDetailPage: React.FC = () => {
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="bg-bluespruce p-6 text-white">
           <h1 className="text-2xl md:text-3xl font-bold mb-2">
-            {scenario.name}
+            {pathway.name}
           </h1>
-          <p className="text-white mb-4">{scenario.description}</p>
+          <p className="text-white mb-4">{pathway.description}</p>
 
           <div className="flex flex-wrap gap-2 mb-4">
             <BadgeMaybeAbsent
-              tooltip={getPathwayTypeTooltip(scenario.pathwayType)}
+              tooltip={getPathwayTypeTooltip(pathway.pathwayType)}
               variant="pathwayType"
             >
-              {scenario.pathwayType}
+              {pathway.pathwayType}
             </BadgeMaybeAbsent>
             <BadgeMaybeAbsent variant="year">
-              {scenario.modelYearNetzero}
+              {pathway.modelYearNetzero}
             </BadgeMaybeAbsent>
             <BadgeMaybeAbsent
               variant="temperature"
@@ -153,18 +153,17 @@ const ScenarioDetailPage: React.FC = () => {
                 return s.endsWith("°C") ? s : `${s}°C`;
               }}
             >
-              {scenario.modelTempIncrease}
+              {pathway.modelTempIncrease}
             </BadgeMaybeAbsent>
           </div>
 
           <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
             <p className="mb-1 sm:mb-0">
-              <span className="text-white">Publisher:</span>{" "}
-              {scenario.publisher}
+              <span className="text-white">Publisher:</span> {pathway.publisher}
             </p>
             <p>
               <span className="text-white">Published:</span>{" "}
-              {scenario.publicationYear}
+              {pathway.publicationYear}
             </p>
           </div>
         </div>
@@ -177,7 +176,7 @@ const ScenarioDetailPage: React.FC = () => {
                   Expert Overview
                 </h2>
                 <div className="prose text-rmigray-700">
-                  <Markdown>{scenario.expertOverview}</Markdown>
+                  <Markdown>{pathway.expertOverview}</Markdown>
                 </div>
               </section>
 
@@ -187,11 +186,11 @@ const ScenarioDetailPage: React.FC = () => {
                 </h2>
                 <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
                   <div className="text-rmigray-700 mb-4 [&_a]:text-energy [&_a]:hover:text-energy-700">
-                    <Markdown>{scenario.dataSource.description}</Markdown>
+                    <Markdown>{pathway.dataSource.description}</Markdown>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <a
-                      href={scenario.dataSource.url}
+                      href={pathway.dataSource.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center px-4 py-2 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200"
@@ -255,7 +254,7 @@ const ScenarioDetailPage: React.FC = () => {
                     };
 
                   return Object.entries(
-                    scenario.keyFeatures as string | string[],
+                    pathway.keyFeatures as string | string[],
                   ).map(([rawKey, rawVal]) => {
                     const key = rawKey as keyof Scenario["keyFeatures"];
                     // Normalize to an array of strings for BadgeArray
@@ -292,14 +291,14 @@ const ScenarioDetailPage: React.FC = () => {
                 </h3>
                 <BadgeArray
                   variant={sortGeographiesForDetails(
-                    scenario.geography ?? [],
+                    pathway.geography ?? [],
                   ).map(
                     (geo) => geographyVariant(geographyKind(geo)) as string,
                   )}
                   toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
                   visibleCount={Infinity}
                 >
-                  {sortGeographiesForDetails(scenario.geography ?? [])}
+                  {sortGeographiesForDetails(pathway.geography ?? [])}
                 </BadgeArray>
               </div>
 
@@ -317,7 +316,7 @@ const ScenarioDetailPage: React.FC = () => {
                     tooltipGetter={getSectorTooltip}
                     visibleCount={Infinity}
                   >
-                    {scenario.sectors.map((sector) => sector.name)}
+                    {pathway.sectors.map((sector) => sector.name)}
                   </BadgeArray>
                 </div>
               </div>
@@ -331,7 +330,7 @@ const ScenarioDetailPage: React.FC = () => {
                   tooltipGetter={getMetricTooltip}
                   visibleCount={Infinity}
                 >
-                  {scenario.metric}
+                  {pathway.metric}
                 </BadgeArray>
               </div>
             </div>
@@ -342,4 +341,4 @@ const ScenarioDetailPage: React.FC = () => {
   );
 };
 
-export default ScenarioDetailPage;
+export default PathwayDetailPage;
