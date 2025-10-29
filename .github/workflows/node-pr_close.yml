@@ -1,0 +1,13 @@
+---
+on:
+  pull_request:
+    types:
+      - closed
+
+name: Node Package Checks
+
+jobs:
+  close-swa:
+    name: "Close SWA environment"
+    uses: ./.github/workflows/azure-static-web-apps-close.yml
+    secrets: inherit
