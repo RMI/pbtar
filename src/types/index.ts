@@ -1,5 +1,8 @@
 import type { FacetMode } from "../utils/searchUtils";
-import type { PathwayMetadata } from "./pathwayMetadata.v1";
+import type { PathwayMetadataV1 } from "./pathwayMetadata.v1";
+
+// Re-export the (current) versioned pathway metadata type as generic
+export type PathwayMetadata = PathwayMetadataV1;
 
 export type Scenario = Pick<
   PathwayMetadata,
@@ -53,5 +56,3 @@ export interface SearchFilters {
     metric?: FacetMode;
   } | null;
 }
-
-export type { PathwayMetadata };

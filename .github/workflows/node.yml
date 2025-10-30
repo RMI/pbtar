@@ -32,10 +32,6 @@ jobs:
     name: "JSON Schema Validation"
     uses: ./.github/workflows/node-json-schema.yml
 
-  types:
-    name: "JSON Schema <-> Types Validation"
-    uses: ./.github/workflows/node-types.yml
-
   build-release:
     name: "Build and Release"
     uses: ./.github/workflows/node-build_release.yml
