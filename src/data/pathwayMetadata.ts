@@ -13,7 +13,7 @@ const modules = import.meta.glob("./**/*.json", {
 const entries: FileEntry[] = Object.entries(modules)
   .map(([path, data]) => ({
     // Use a stable, relative file path to disambiguate duplicates across subdirs
-    // Example: "nested/scenarios_metadata_1.json"
+    // Example: "nested/pathway_metadata_1.json"
     name: path.replace(/^\.\/?/, ""),
     data, // file contents
   }))
