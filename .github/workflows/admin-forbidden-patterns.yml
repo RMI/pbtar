@@ -37,5 +37,5 @@ jobs:
             .github/**/*
             package-lock.json
             scripts/build-timeseries-files.ts
-            scripts/generate-types.ts.ts
+            scripts/generate-types.ts
             scripts/schema-check-files.ts
