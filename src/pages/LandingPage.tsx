@@ -43,7 +43,7 @@ const LandingPage: React.FC = () => {
             landscape.
           </p>
           <Link
-            to="/scenario"
+            to="/pathway"
             className="inline-block px-8 py-4 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200 text-lg font-semibold"
           >
             Explore Pathways

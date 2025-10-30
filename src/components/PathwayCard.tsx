@@ -69,7 +69,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
       <div className="p-5 flex flex-col h-full">
         <div className="mb-4">
-          <Link to={`/scenario/${pathway.id}`}>
+          <Link to={`/pathway/${pathway.id}`}>
             <h2 className="text-xl font-semibold text-bluespruce mb-2">
               <HighlightedText
                 text={pathway.name}
@@ -196,7 +196,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
           </div>
           <div className="mt-2 flex justify-end">
             <Link
-              to={`/scenario/${pathway.id}`}
+              to={`/pathway/${pathway.id}`}
               className="text-energy text-sm font-medium flex items-center transition-colors duration-200 hover:text-energy-700"
             >
               <span className="flex items-center">

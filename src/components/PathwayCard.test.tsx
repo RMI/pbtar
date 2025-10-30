@@ -73,7 +73,7 @@ describe("PathwayCard component", () => {
     const { container } = renderPathwayCard();
 
     const link = container.querySelector("a");
-    expect(link).toHaveAttribute("href", `/scenario/${mockPathway.id}`);
+    expect(link).toHaveAttribute("href", `/pathway/${mockPathway.id}`);
   });
 
   it("displays the pathwayType badge", () => {

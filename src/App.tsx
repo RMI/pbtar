@@ -25,11 +25,11 @@ export const AppContent = () => {
             element={<LandingPage />}
           />
           <Route
-            path="/scenario"
+            path="/pathway"
             element={<PathwaySearch />}
           />
           <Route
-            path="/scenario/:id"
+            path="/pathway/:id"
             element={<PathwayDetailPage />}
           />
           <Route
