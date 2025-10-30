@@ -62,7 +62,7 @@
     <h1>Pathway Metadata</h1>
     <span class="badge badge-dark value-type">Type: object</span><br />
     <span class="description"
-      ><p>A schema for the scenarios metadata dataset in PBTAR.</p>
+      ><p>A schema for the pathway metadata dataset in PBTAR.</p>
     </span>
     <span class="badge badge-info no-additional">No Additional Properties</span>
 
@@ -194,7 +194,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
             <span class="description"
-              ><p>The unique identifier for a scenario.</p>
+              ><p>The unique identifier for a pathway.</p>
             </span>
 
             <p>
@@ -264,7 +264,7 @@
               >
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
-            <span class="description"><p>Name of the scenario.</p> </span>
+            <span class="description"><p>Name of the pathway.</p> </span>
 
             <p>
               <span
@@ -334,7 +334,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
             <span class="description"
-              ><p>Brief description of the scenario.</p> </span
+              ><p>Brief description of the pathway.</p> </span
             ><span
               class="pattern-value"
               id="description_pattern"
@@ -411,7 +411,7 @@
               >Type: enum (of string)</span
             ><br />
             <span class="description"
-              ><p>Type of the scenario pathway.</p>
+              ><p>Type of the pathway pathway.</p>
             </span>
             <div
               class="enum-value"
@@ -484,7 +484,7 @@
             <span class="badge badge-dark value-type">Type: integer</span><br />
             <span class="description"
               ><p>
-                Year by which net zero is reached in the scenario. If Scenario
+                Year by which net zero is reached in the pathway. If Pathway
                 does not reach net zero, this field should be omitted.
               </p>
             </span>
@@ -556,7 +556,7 @@
             <span class="badge badge-dark value-type">Type: number</span><br />
             <span class="description"
               ><p>
-                Carbon budget of the scenario in gigatons of CO2 equivalent
+                Carbon budget of the pathway in gigatons of CO2 equivalent
                 (GtCO2eq). If no carbon budget is defined, this field should be
                 omitted. If the carbon budget is not applicable, it should be
                 set to 0.
@@ -767,8 +767,8 @@
             <span class="badge badge-dark value-type">Type: number</span><br />
             <span class="description"
               ><p>
-                Modeled temperature increase expected by the scenario (in
-                degrees Celsius).
+                Modeled temperature increase expected by the pathway (in degrees
+                Celsius).
               </p>
             </span>
 
@@ -842,8 +842,7 @@
             ><br />
             <span class="description"
               ><p>
-                Shared Socioeconomic Pathways (SSP) associated with the
-                scenario.
+                Shared Socioeconomic Pathways (SSP) associated with the pathway.
               </p>
             </span>
             <div
@@ -923,7 +922,7 @@
             ><br />
             <span class="description"
               ><p>
-                Geographical areas that the scenario covers. Can include
+                Geographical areas that the pathway covers. Can include
                 'Global', country ISO-3166-1 alpha-2 codes (US, DE), or
                 free-text region names (e.g., 'Europe', 'OECD'). Any 2-letter
                 items in the array will be treated as an ISO code. Any 2-letter
@@ -1385,7 +1384,7 @@
               >Type: array of object</span
             ><br />
             <span class="description"
-              ><p>Sectors that the scenario covers.</p>
+              ><p>Sectors that the pathway covers.</p>
             </span>
 
             <span class="badge badge-info no-additional"
@@ -1942,7 +1941,7 @@
               >
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
-            <span class="description"><p>Publisher of the scenario.</p> </span>
+            <span class="description"><p>Publisher of the pathway.</p> </span>
 
             <p>
               <span
@@ -2012,7 +2011,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: integer</span><br />
             <span class="description"
-              ><p>Year that the scenario was published.</p>
+              ><p>Year that the pathway was published.</p>
             </span>
 
             <p>
@@ -2029,33 +2028,33 @@
     </div>
     <div
       class="accordion"
-      id="accordionscenarioOverview"
+      id="accordionpathwayOverview"
     >
       <div class="card">
         <div
           class="card-header"
-          id="headingscenarioOverview"
+          id="headingpathwayOverview"
         >
           <h2 class="mb-0">
             <button
               class="btn btn-link property-name-button"
               type="button"
               data-toggle="collapse"
-              data-target="#scenarioOverview"
+              data-target="#pathwayOverview"
               aria-expanded=""
-              aria-controls="scenarioOverview"
-              onclick="setAnchor('#scenarioOverview')"
+              aria-controls="pathwayOverview"
+              onclick="setAnchor('#pathwayOverview')"
             >
-              <span class="property-name">scenarioOverview</span>
+              <span class="property-name">pathwayOverview</span>
             </button>
           </h2>
         </div>
 
         <div
-          id="scenarioOverview"
+          id="pathwayOverview"
           class="collapse property-definition-div"
-          aria-labelledby="headingscenarioOverview"
-          data-parent="#accordionscenarioOverview"
+          aria-labelledby="headingpathwayOverview"
+          data-parent="#accordionpathwayOverview"
         >
           <div class="card-body pl-5">
             <div class="breadcrumbs">
@@ -2074,23 +2073,23 @@
                 />
               </svg>
               <a
-                href="#scenarioOverview"
-                onclick="anchorLink('scenarioOverview')"
-                >scenarioOverview</a
+                href="#pathwayOverview"
+                onclick="anchorLink('pathwayOverview')"
+                >pathwayOverview</a
               >
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
-            <span class="description"><p>Overview of the scenario.</p> </span
+            <span class="description"><p>Overview of the pathway.</p> </span
             ><span
               class="pattern-value"
-              id="scenarioOverview_pattern"
+              id="pathwayOverview_pattern"
               >Must match regular expression: <code>\.$</code></span
             >
 
             <p>
               <span
                 class="badge badge-light restriction max-length-restriction"
-                id="scenarioOverview_maxLength"
+                id="pathwayOverview_maxLength"
                 >Must be at most <code>1000</code> characters long</span
               >
             </p>
@@ -2155,7 +2154,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
             <span class="description"
-              ><p>Expert recommendation for the scenario.</p> </span
+              ><p>Expert recommendation for the pathway.</p> </span
             ><span
               class="pattern-value"
               id="expertOverview_pattern"
@@ -2230,7 +2229,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: object</span><br />
             <span class="description"
-              ><p>Data source for the scenario.</p>
+              ><p>Data source for the pathway.</p>
             </span>
             <span class="badge badge-info no-additional"
               >No Additional Properties</span
@@ -2708,7 +2707,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: object</span><br />
             <span class="description"
-              ><p>Key features of the scenario.</p>
+              ><p>Key features of the pathway.</p>
             </span>
             <span class="badge badge-info no-additional"
               >No Additional Properties</span
@@ -3226,7 +3225,7 @@
                     <span class="description"
                       ><p>
                         Identifies the types of policies modeled as drivers of
-                        the scenario, such as carbon pricing, subsidies, or
+                        the pathway, such as carbon pricing, subsidies, or
                         mandated phaseouts of specific technologies.
                       </p>
                     </span>
@@ -3526,7 +3525,7 @@
                     <span class="description"
                       ><p>
                         Indicates the scale and pace of new technology adoption
-                        within the scenario, where significant deployment means
+                        within the pathway, where significant deployment means
                         that several new technologies are adopted rapidly
                       </p>
                     </span>
@@ -3633,7 +3632,7 @@
                     <span class="description"
                       ><p>
                         Defines which greenhouse gases are covered in the
-                        scenario’s emissions accounting.
+                        pathway’s emissions accounting.
                       </p>
                     </span>
                     <div
@@ -4145,7 +4144,7 @@
                     <span class="description"
                       ><p>
                         Describes how upstream fuel or material price dynamics
-                        are represented in the scenario.
+                        are represented in the pathway.
                       </p>
                     </span>
                     <div

@@ -5,7 +5,7 @@
  */
 
 /**
- * A schema for the scenarios metadata dataset in PBTAR.
+ * A schema for the pathway timeseries dataset in PBTAR.
  */
 export interface PathwayTimeseriesV1 {
   /**
@@ -13,23 +13,23 @@ export interface PathwayTimeseriesV1 {
    */
   $schema?: string;
   /**
-   * The unique identifier for a scenario.
+   * The unique identifier for a pathway.
    */
   id: string;
   /**
-   * Identifiers of the associated scenario pathways.
+   * Identifiers of the associated pathways.
    */
   pathwayId: string[];
   /**
-   * Name of the scenario.
+   * Name of the timeseries.
    */
   name: string;
   /**
-   * Brief description of the scenario.
+   * Brief description of the timeseries.
    */
   description: string;
   /**
-   * Publisher of the scenario.
+   * Publisher of the timeseries.
    */
   publisher: string;
   /**
@@ -37,15 +37,15 @@ export interface PathwayTimeseriesV1 {
    */
   publicationName: string;
   /**
-   * Year that the scenario was published.
+   * Year that the timeseries was published.
    */
   publicationYear: number;
   /**
-   * Name of the associated scenario.
+   * Name of the associated pathway.
    */
   pathwayName: string;
   /**
-   * Data source for the scenario data.
+   * Data source for the timeseries data.
    */
   source: string;
   /**
@@ -58,7 +58,7 @@ export interface PathwayTimeseriesV1 {
     | "CO2e (CO2, Methane)"
     | "Other";
   /**
-   * Sectors that the scenario data covers.
+   * Sectors that the timeseries data covers.
    */
   sector: {
     /**
@@ -177,7 +177,7 @@ export interface PathwayTimeseriesV1 {
      */
     year: number;
     /**
-     * Geographical area that the scenario covers. This should be a single string value: either 'Global', a country ISO-3166-1 alpha-2 code (e.g., 'US', 'DE'), or a free-text region name (e.g., 'North America', 'South East Asia'). Only 2-letter codes are accepted for countries; do not use full country names or 3-letter codes (e.g., 'USA' is not allowed). If a 2-letter code does not map to a country (e.g., 'EU'), it will result in an error.
+     * Geographical area that the data covers. This should be a single string value: either 'Global', a country ISO-3166-1 alpha-2 code (e.g., 'US', 'DE'), or a free-text region name (e.g., 'North America', 'South East Asia'). Only 2-letter codes are accepted for countries; do not use full country names or 3-letter codes (e.g., 'USA' is not allowed). If a 2-letter code does not map to a country (e.g., 'EU'), it will result in an error.
      */
     geography: {
       [k: string]: unknown;
