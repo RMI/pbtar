@@ -75,7 +75,7 @@ describe("searchUtils", () => {
     });
 
     it("filters by search term in name", () => {
-      const filters: SearchFilters = { searchTerm: "Scenario 01" };
+      const filters: SearchFilters = { searchTerm: "Pathway 01" };
       const result = filterPathways(mockPathways, filters);
 
       expect(result.length).toBe(1);
@@ -198,7 +198,7 @@ describe("searchUtils - array results", () => {
         const result = filterPathways(mockFullPathways, filters);
 
         expect(result.length).toBe(1);
-        expect(result[0].id).toBe("scenario-simple-full");
+        expect(result[0].id).toBe("pathway-simple-full");
       });
     });
 
@@ -208,7 +208,7 @@ describe("searchUtils - array results", () => {
         const result = filterPathways(mockFullPathways, filters);
 
         expect(result.length).toBe(1);
-        expect(result[0].id).toBe("scenario-simple-full");
+        expect(result[0].id).toBe("pathway-simple-full");
       });
     });
   });

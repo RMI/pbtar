@@ -1,8 +1,8 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "sample-02",
-  "name": "Sample Scenario 02",
-  "description": "Second Sample Scenario. uiop description.",
+  "name": "Sample Pathway 02",
+  "description": "Second Sample Pathway. uiop description.",
   "pathwayType": "Exploratory",
   "carbonBudget": 200,
   "modelYearStart": 2020,

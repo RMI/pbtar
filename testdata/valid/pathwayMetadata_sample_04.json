@@ -1,8 +1,8 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "sample-04",
-  "name": "Sample Scenario 04",
-  "description": "Fourth Sample Scenario. ghjkl description.",
+  "name": "Sample Pathway 04",
+  "description": "Fourth Sample Pathway. ghjkl description.",
   "pathwayType": "Predictive",
   "modelYearNetzero": 2050,
   "modelYearStart": 2020,

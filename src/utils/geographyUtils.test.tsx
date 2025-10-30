@@ -109,7 +109,7 @@ describe("assertKnownCountryISO2 (strict ISO2 validation)", () => {
 const mkPathway = (id: string, geography: string[]): PathwayMetadataType =>
   ({
     id,
-    name: `Scenario ${id}`,
+    name: `Pathway ${id}`,
     description: "",
     pathwayType: "Mitigation",
     modelYearEnd: 2050,

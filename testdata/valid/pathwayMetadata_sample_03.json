@@ -1,8 +1,8 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "sample-03",
-  "name": "Sample Scenario 03",
-  "description": "Third Sample Scenario. asdf description.",
+  "name": "Sample Pathway 03",
+  "description": "Third Sample Pathway. asdf description.",
   "pathwayType": "Direct Policy",
   "modelTempIncrease": 3,
   "ssp": "SSP3",

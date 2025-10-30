@@ -1,8 +1,8 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
-  "id": "scenario-simple-standard",
-  "name": "Simple Standard Scenario",
-  "description": "This is a simple standard scenario for demonstration purposes, with all fields filled out.",
+  "id": "pathway-simple-standard",
+  "name": "Simple Standard Pathway",
+  "description": "This is a simple standard pathway for demonstration purposes, with all fields filled out.",
   "pathwayType": "Normative",
   "modelYearNetzero": 2050,
   "carbonBudget": 500,
