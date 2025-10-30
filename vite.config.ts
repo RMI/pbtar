@@ -136,7 +136,7 @@ function dataValidationPlugin(dir: string = "src/data") {
         const raw = await fs.readFile(join(dir, name), "utf8");
         entries.push({
           name,
-          data: JSON.parse(raw) as Scenario[] | unknown[],
+          data: JSON.parse(raw) as unknown[],
         });
       }
 
