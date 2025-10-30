@@ -35,7 +35,7 @@ export function decideIncludeInvalid(): boolean {
     typeof process !== "undefined" &&
     process.env?.VITE_INCLUDE_INVALID?.toLowerCase() === "true";
 
-  // In prod builds we never include invalid scenarios.
+  // In prod builds we never include invalid pathways.
   const nodeProd =
     typeof process !== "undefined" &&
     (process.env?.NODE_ENV === "production" ||

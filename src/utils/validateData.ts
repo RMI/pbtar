@@ -83,7 +83,6 @@ export function validateFilesBySchema(
 }
 
 /**
- * Scenario-specific validator:
  *  - Filters to *only* metadata files (`$schema === pathwayMetadata.$id`)
  *  - Validates them using the metadata schema only
  *  - Returns the same {valid, invalid} shape as the generic validator
