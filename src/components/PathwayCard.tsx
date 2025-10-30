@@ -9,7 +9,7 @@ import {
   normalizeGeography,
   sortGeographiesForDetails,
 } from "../utils/geographyUtils";
-import { Scenario } from "../types";
+import { PathwayMetadataType } from "../types";
 import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
 import { prioritizeMatches, prioritizeGeographies } from "../utils/sortUtils";
@@ -20,7 +20,7 @@ import {
 } from "../utils/tooltipUtils";
 
 interface PathwayCardProps {
-  pathway: Scenario;
+  pathway: PathwayMetadataType;
   searchTerm?: string;
 }
 

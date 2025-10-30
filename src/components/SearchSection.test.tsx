@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import SearchSection from "./SearchSection";
 import { SearchFilters } from "../types";
+import { PathwayMetadataType } from "../types";
 
 // Mock the pathwayMetadata import
 vi.mock("../data/pathwayMetadata", async () => {
@@ -25,7 +26,7 @@ vi.mock("../data/pathwayMetadata", async () => {
     s2.default,
     s3.default,
     s4.default,
-  ] as import("../types").Scenario[];
+  ] as PathwayMetadataType[];
 
   return { pathwayMetadata: mockScenarios };
 });

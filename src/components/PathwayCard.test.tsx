@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import PathwayCard from "./PathwayCard";
-import { Scenario } from "../types";
+import { PathwayMetadataType } from "../types";
 
 // Mock pathway data
 import mockPathway from "../../testdata/valid/pathwayMetadata_standard.json" assert { type: "json" };
@@ -11,7 +11,7 @@ import mockPathway from "../../testdata/valid/pathwayMetadata_standard.json" ass
 import mockPathwayFull from "../../testdata/valid/pathwayMetadata_full.json" assert { type: "json" };
 
 // Helper function to render component with router context
-const renderPathwayCard = (pathway: Scenario = mockPathway) => {
+const renderPathwayCard = (pathway: PathwayMetadataType = mockPathway) => {
   return render(
     <MemoryRouter>
       <PathwayCard
@@ -54,7 +54,7 @@ function withClientWidth<T>(width: number, run: () => T): T {
 
 describe("PathwayCard component", () => {
   // Helper function to render component with router context
-  const renderPathwayCard = (pathway: Scenario = mockPathway) => {
+  const renderPathwayCard = (pathway: PathwayMetadataType = mockPathway) => {
     return render(
       <MemoryRouter>
         <PathwayCard pathway={pathway} />
@@ -290,7 +290,7 @@ describe("PathwayCard component", () => {
 });
 
 describe("PathwayCard search highlighting", () => {
-  const mockPathway: Scenario = {
+  const mockPathway: PathwayMetadataType = {
     ...mockPathwayFull,
     geography: [...mockPathwayFull.geography, "Hidden Match Geography"],
     sectors: [
@@ -378,7 +378,7 @@ describe("PathwayCard search highlighting", () => {
 
 describe("tooltip functionality", () => {
   it("uses correct tooltip for Policy pathway type", () => {
-    const pathwayWithPolicy: Scenario = {
+    const pathwayWithPolicy: PathwayMetadataType = {
       ...mockPathway,
       pathwayType: "Direct Policy",
     };
@@ -396,7 +396,7 @@ describe("tooltip functionality", () => {
   });
 
   it("uses correct tooltip for Power sector", () => {
-    const pathwayWithPowerSector: Scenario = {
+    const pathwayWithPowerSector: PathwayMetadataType = {
       ...mockPathway,
       sectors: [{ name: "Power" }],
     };
@@ -414,7 +414,7 @@ describe("tooltip functionality", () => {
   });
 
   describe("PathwayCard robustness with non-string values", () => {
-    const renderWithRouter = (pathway: Scenario, searchTerm = "") =>
+    const renderWithRouter = (pathway: PathwayMetadataType, searchTerm = "") =>
       render(
         <MemoryRouter>
           <PathwayCard
@@ -425,7 +425,7 @@ describe("tooltip functionality", () => {
       );
 
     it("does not crash when highlighting numeric fields", () => {
-      const s: Scenario = {
+      const s: PathwayMetadataType = {
         ...mockPathway,
         // Using a double cast to satisfy TS, but this still presents as numeric at runtime.
         modelYearNetzero: 2030 as unknown as string, // number on purpose
@@ -443,7 +443,7 @@ describe("tooltip functionality", () => {
     });
 
     it("does not crash with null / undefined text fields", () => {
-      const s: Scenario = {
+      const s: PathwayMetadataType = {
         ...mockPathway,
         // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
         description: null as unknown as string, // null
@@ -459,7 +459,7 @@ describe("tooltip functionality", () => {
     });
 
     it("highlights matches inside stringified numbers", () => {
-      const s: Scenario = {
+      const s: PathwayMetadataType = {
         ...mockPathway,
         // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
         modelYearNetzero: 2045 as unknown as string, // number on purpose
