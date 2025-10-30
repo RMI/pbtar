@@ -81,6 +81,7 @@ jobs:
   types-check:
     name: "Check generated types"
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -96,7 +97,8 @@ jobs:
         run: npm ci
 
       - name: Run JSON Types render
-      - run: npm run json:generate:types
+        run: npm run json:generate:types
+
       - name: Compare Results
         run: |
           git add --all
@@ -111,4 +113,3 @@ jobs:
             echo "No changes found after generating."
             exit 0
           fi
-
