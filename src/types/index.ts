@@ -2,10 +2,10 @@ import type { FacetMode } from "../utils/searchUtils";
 import type { PathwayMetadataV1 } from "./pathwayMetadata.v1";
 
 // Re-export the (current) versioned pathway metadata type as generic
-export type PathwayMetadata = PathwayMetadataV1;
+export type PathwayMetadataType = PathwayMetadataV1;
 
 export type Scenario = Pick<
-  PathwayMetadata,
+  PathwayMetadataType,
   | "id"
   | "name"
   | "description"
@@ -23,10 +23,10 @@ export type Scenario = Pick<
 >;
 
 // Enum-like types derived from the schema
-export type PathwayType = PathwayMetadata["pathwayType"];
-export type Geography = PathwayMetadata["geography"][number];
-export type Sector = PathwayMetadata["sectors"][number]["name"];
-export type Metric = PathwayMetadata["metric"][number];
+export type PathwayType = PathwayMetadataType["pathwayType"];
+export type Geography = PathwayMetadataType["geography"][number];
+export type Sector = PathwayMetadataType["sectors"][number]["name"];
+export type Metric = PathwayMetadataType["metric"][number];
 
 export type TemperatureTarget = number;
 export type YearTarget =
