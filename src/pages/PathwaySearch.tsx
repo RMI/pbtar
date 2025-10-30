@@ -3,7 +3,7 @@ import PathwayCard from "../components/PathwayCard";
 import SearchSection from "../components/SearchSection";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 import { filterScenarios } from "../utils/searchUtils";
-import { SearchFilters, Scenario } from "../types";
+import { SearchFilters, PathwayMetadataType } from "../types";
 
 const PathwaySearch: React.FC = () => {
   // Ref for the top section to handle scrolling
@@ -25,7 +25,7 @@ const PathwaySearch: React.FC = () => {
   });
 
   const [filteredPathways, setFilteredPathways] =
-    useState<Scenario[]>(pathwayMetadata);
+    useState<PathwayMetadataType[]>(pathwayMetadata);
   const [isFiltering, setIsFiltering] = useState(false);
 
   // Track previous filter state to detect changes

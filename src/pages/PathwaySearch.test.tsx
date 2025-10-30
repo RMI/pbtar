@@ -3,12 +3,12 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import PathwaySearch from "./PathwaySearch";
 import { pathwayMetadata } from "../data/pathwayMetadata";
-import { Scenario } from "../types";
+import { PathwayMetadataType } from "../types";
 import userEvent from "@testing-library/user-event";
 
 // Mock the PathwayCard component to simplify testing
 vi.mock("../components/PathwayCard", () => ({
-  default: ({ pathway }: { pathway: Scenario }) => (
+  default: ({ pathway }: { pathway: PathwayMetadataType }) => (
     <div
       data-testid="pathway-card"
       data-pathway-id={pathway.id}

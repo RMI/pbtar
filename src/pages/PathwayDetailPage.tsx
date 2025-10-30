@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Markdown from "../components/Markdown";
 import { pathwayMetadata } from "../data/pathwayMetadata";
-import { Scenario } from "../types";
+import { PathwayMetadataType } from "../types";
 import { BadgeMaybeAbsent } from "../components/Badge";
 import BadgeArray from "../components/BadgeArray";
 import {
@@ -27,7 +27,7 @@ import {
 
 const PathwayDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [pathway, setPathway] = useState<Scenario | null>(null);
+  const [pathway, setPathway] = useState<PathwayMetadataType | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -235,28 +235,31 @@ const PathwayDetailPage: React.FC = () => {
                 </h3>
                 {(() => {
                   // Pretty labels for keys from schema (kept small & explicit to avoid surprises)
-                  const LABELS: Record<keyof Scenario["keyFeatures"], string> =
-                    {
-                      emissionsPathway: "Emissions pathway",
-                      energyEfficiency: "Energy efficiency",
-                      energyDemand: "Energy demand",
-                      electrification: "Electrification",
-                      policyTypes: "Policy types",
-                      technologyCostTrend: "Technology cost trend",
-                      technologyDeploymentTrend: "Technology deployment trend",
-                      emissionsScope: "Emissions scope",
-                      policyAmbition: "Policy ambition",
-                      technologyCostsDetail: "Technology costs detail",
-                      newTechnologiesIncluded: "New technologies included",
-                      supplyChain: "Supply chain",
-                      investmentNeeds: "Investment needs",
-                      infrastructureRequirements: "Infrastructure requirements",
-                    };
+                  const LABELS: Record<
+                    keyof PathwayMetadataType["keyFeatures"],
+                    string
+                  > = {
+                    emissionsPathway: "Emissions pathway",
+                    energyEfficiency: "Energy efficiency",
+                    energyDemand: "Energy demand",
+                    electrification: "Electrification",
+                    policyTypes: "Policy types",
+                    technologyCostTrend: "Technology cost trend",
+                    technologyDeploymentTrend: "Technology deployment trend",
+                    emissionsScope: "Emissions scope",
+                    policyAmbition: "Policy ambition",
+                    technologyCostsDetail: "Technology costs detail",
+                    newTechnologiesIncluded: "New technologies included",
+                    supplyChain: "Supply chain",
+                    investmentNeeds: "Investment needs",
+                    infrastructureRequirements: "Infrastructure requirements",
+                  };
 
                   return Object.entries(
                     pathway.keyFeatures as string | string[],
                   ).map(([rawKey, rawVal]) => {
-                    const key = rawKey as keyof Scenario["keyFeatures"];
+                    const key =
+                      rawKey as keyof PathwayMetadataType["keyFeatures"];
                     // Normalize to an array of strings for BadgeArray
                     const values = Array.isArray(rawVal) ? rawVal : [rawVal];
                     // Defensive guard for any accidental empties
