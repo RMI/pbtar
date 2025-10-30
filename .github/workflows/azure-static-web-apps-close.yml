@@ -19,4 +19,3 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_GLACIER_0F640931E }}
           action: "close"
-          skip_deploy_on_missing_secrets: ${{ github.actor == 'dependabot[bot]' }}
