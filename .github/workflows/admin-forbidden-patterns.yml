@@ -22,7 +22,6 @@ jobs:
             @ts-ignore
             @ts-nocheck
             eslint-disable(-next-line)?
-            scenario
           default_patterns: true
           mode: regex
           ignore_case: true
