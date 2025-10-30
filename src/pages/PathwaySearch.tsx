@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import PathwayCard from "../components/PathwayCard";
 import SearchSection from "../components/SearchSection";
 import { pathwayMetadata } from "../data/pathwayMetadata";
-import { filterScenarios } from "../utils/searchUtils";
+import { filterPathways } from "../utils/searchUtils";
 import { SearchFilters, PathwayMetadataType } from "../types";
 
 const PathwaySearch: React.FC = () => {
@@ -34,7 +34,7 @@ const PathwaySearch: React.FC = () => {
   useEffect(() => {
     const applyFilters = () => {
       setIsFiltering(true);
-      const result = filterScenarios(pathwayMetadata, filters);
+      const result = filterPathways(pathwayMetadata, filters);
       setFilteredPathways(result);
 
       // Check if filters have changed meaningfully

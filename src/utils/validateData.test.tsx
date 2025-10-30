@@ -21,11 +21,11 @@ function fail(entry: FileEntry | FileEntry[], rx?: RegExp | string) {
   }
 }
 
-import baseScenario from "../../testdata/valid/pathwayMetadata_standard.json" assert { type: "json" };
+import basePathway from "../../testdata/valid/pathwayMetadata_standard.json" assert { type: "json" };
 
-describe("scenario schema enforces expected limits", () => {
+describe("pathway schema enforces expected limits", () => {
   it("accepts a valid object", () => {
-    ok({ name: "ok.json", data: baseScenario });
+    ok({ name: "ok.json", data: basePathway });
   });
 
   it("fails when field is wrong type", () => {
@@ -33,7 +33,7 @@ describe("scenario schema enforces expected limits", () => {
       {
         name: "start.json",
         data: {
-          ...baseScenario,
+          ...basePathway,
           modelYearStart: "1950" as string, // should be a number
         },
       },
@@ -45,7 +45,7 @@ describe("scenario schema enforces expected limits", () => {
     ok({
       name: "bounds.json",
       data: {
-        ...baseScenario,
+        ...basePathway,
         modelYearStart: 1900,
         modelYearEnd: 2100,
         publicationYear: 2030,
@@ -62,12 +62,12 @@ describe("scenario schema enforces expected limits", () => {
     ok([
       {
         name: "multi.json",
-        data: { ...baseScenario },
+        data: { ...basePathway },
       },
       {
         name: "multi.json",
         data: {
-          ...baseScenario,
+          ...basePathway,
           id: "scn-2",
           name: "Other",
           geography: ["Global", "EU"],
@@ -91,7 +91,7 @@ describe("scenario schema enforces expected limits", () => {
 
   for (const key of REQ) {
     it(`fails when required property '${key}' is missing`, () => {
-      const rest = { ...baseScenario };
+      const rest = { ...basePathway };
       delete (rest as PathwayMetadataType)[key]; // remove the key
       fail({ name: "missing.json", data: rest }, new RegExp(`${key}`));
     });
@@ -101,7 +101,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "pathwayType.json",
-        data: { ...baseScenario, pathwayType: "Wrong" },
+        data: { ...basePathway, pathwayType: "Wrong" },
       },
       /pathwayType/,
     );
@@ -111,7 +111,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "ssp.json",
-        data: { ...baseScenario, ssp: "SSP6" },
+        data: { ...basePathway, ssp: "SSP6" },
       },
       /ssp/,
     );
@@ -122,7 +122,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "maxlength.json",
-        data: { ...baseScenario, name: long },
+        data: { ...basePathway, name: long },
       },
       /name must NOT have more than 100 characters/,
     );
@@ -132,7 +132,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "start.json",
-        data: { ...baseScenario, modelYearStart: 1899 },
+        data: { ...basePathway, modelYearStart: 1899 },
       },
       /modelYearStart/,
     );
@@ -142,7 +142,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "end.json",
-        data: { ...baseScenario, modelYearEnd: 2101 },
+        data: { ...basePathway, modelYearEnd: 2101 },
       },
       /modelYearEnd/,
     );
@@ -152,7 +152,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "netzero.json",
-        data: { ...baseScenario, modelYearNetzero: 2029 },
+        data: { ...basePathway, modelYearNetzero: 2029 },
       },
       /modelYearNetzero/,
     );
@@ -162,7 +162,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "temp.json",
-        data: { ...baseScenario, modelTempIncrease: 0.55 },
+        data: { ...basePathway, modelTempIncrease: 0.55 },
       },
       /multiple of/,
     );
@@ -172,7 +172,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "geography.json",
-        data: { ...baseScenario, geography: ["EU", "EU"] },
+        data: { ...basePathway, geography: ["EU", "EU"] },
       },
       /must NOT have duplicate items/,
     );
@@ -183,7 +183,7 @@ describe("scenario schema enforces expected limits", () => {
       {
         name: "sectors.json",
         data: {
-          ...baseScenario,
+          ...basePathway,
           sectors: [{ name: "Power" }], // missing technologies
         },
       },
@@ -196,7 +196,7 @@ describe("scenario schema enforces expected limits", () => {
       {
         name: "sector-name.json",
         data: {
-          ...baseScenario,
+          ...basePathway,
           sectors: [{ name: "Yak Shaving", technologies: ["Other"] }],
         },
       },
@@ -209,7 +209,7 @@ describe("scenario schema enforces expected limits", () => {
       {
         name: "tech.json",
         data: {
-          ...baseScenario,
+          ...basePathway,
           sectors: [{ name: "Power", technologies: ["Cold Fusion"] }],
         },
       },
@@ -221,7 +221,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "extra-top.json",
-        data: { ...baseScenario, foobar: 1 } as PathwayMetadataType,
+        data: { ...basePathway, foobar: 1 } as PathwayMetadataType,
       },
       /must NOT have additional properties/,
     );
@@ -232,7 +232,7 @@ describe("scenario schema enforces expected limits", () => {
       {
         name: "extra-sector.json",
         data: {
-          ...baseScenario,
+          ...basePathway,
           sectors: [{ name: "Power", technologies: ["Solar"], foobar: 1 }],
         },
       },
@@ -245,8 +245,8 @@ describe("scenario schema enforces expected limits", () => {
       {
         name: "extra-ds.json",
         data: {
-          ...baseScenario,
-          dataSource: { ...baseScenario.dataSource, foobar: "x" },
+          ...basePathway,
+          dataSource: { ...basePathway.dataSource, foobar: "x" },
         },
       },
       /must NOT have additional properties/,

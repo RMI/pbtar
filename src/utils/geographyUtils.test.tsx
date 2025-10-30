@@ -106,7 +106,7 @@ describe("assertKnownCountryISO2 (strict ISO2 validation)", () => {
   });
 });
 
-const mkScenario = (id: string, geography: string[]): PathwayMetadataType =>
+const mkPathway = (id: string, geography: string[]): PathwayMetadataType =>
   ({
     id,
     name: `Scenario ${id}`,
@@ -122,13 +122,13 @@ const mkScenario = (id: string, geography: string[]): PathwayMetadataType =>
 
 describe("makeGeographyOptions", () => {
   it("uses full names for ISO2 and preserves badge ordering", () => {
-    const scenarios = [
-      mkScenario("A", ["US", "Europe", "Global"]),
-      mkScenario("B", ["DE", "APAC", "CN"]),
-      mkScenario("C", ["US"]), // duplicate, should be deduped
+    const pathways = [
+      mkPathway("A", ["US", "Europe", "Global"]),
+      mkPathway("B", ["DE", "APAC", "CN"]),
+      mkPathway("C", ["US"]), // duplicate, should be deduped
     ];
 
-    const opts = makeGeographyOptions(scenarios);
+    const opts = makeGeographyOptions(pathways);
 
     // Expect order: Global → Regions (first-seen order: Europe, APAC) → Countries (A→Z by ISO2: CN, DE, US)
     expect(opts.map((o) => o.value)).toEqual([
@@ -150,15 +150,15 @@ describe("makeGeographyOptions", () => {
   });
 
   it("treats unknown 2-letter strings as regions (e.g., 'EU')", () => {
-    const scenarios = [mkScenario("X", ["EU", "Global"])];
-    const opts = makeGeographyOptions(scenarios);
+    const pathways = [mkPathway("X", ["EU", "Global"])];
+    const opts = makeGeographyOptions(pathways);
     expect(opts.map((o) => o.value)).toEqual(["Global", "EU"]);
     expect(opts.map((o) => o.label)).toEqual(["Global", "EU"]);
   });
 
   it("drops empty / whitespace entries", () => {
-    const scenarios = [mkScenario("X", ["", "  ", "\u200B", "CN"])];
-    const opts = makeGeographyOptions(scenarios);
+    const pathways = [mkPathway("X", ["", "  ", "\u200B", "CN"])];
+    const opts = makeGeographyOptions(pathways);
     expect(opts.map((o) => o.value)).toEqual(["CN"]);
     expect(opts.map((o) => o.label)).toEqual(["People's Republic of China"]);
   });
