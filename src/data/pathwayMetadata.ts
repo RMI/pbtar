@@ -1,4 +1,4 @@
-import { Scenario } from "../types";
+import { PathwayMetadataType } from "../types";
 import { FileEntry } from "../utils/validateData";
 import { assembleData, decideIncludeInvalid } from "../utils/loadData";
 import pathwayMetadataSchema from "../schema/pathwayMetadata.v1.json" with { type: "json" };
@@ -19,7 +19,7 @@ const entries: FileEntry[] = Object.entries(modules)
   }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
-export const pathwayMetadata: Scenario[] = assembleData(
+export const pathwayMetadata: PathwayMetadataType[] = assembleData(
   entries,
   pathwayMetadataSchema,
   {
