@@ -4,24 +4,6 @@ import type { PathwayMetadataV1 } from "./pathwayMetadata.v1";
 // Re-export the (current) versioned pathway metadata type as generic
 export type PathwayMetadataType = PathwayMetadataV1;
 
-export type Scenario = Pick<
-  PathwayMetadataType,
-  | "id"
-  | "name"
-  | "description"
-  | "pathwayType"
-  | "modelYearNetzero"
-  | "modelTempIncrease"
-  | "geography"
-  | "metric"
-  | "sectors"
-  | "publisher"
-  | "publicationYear"
-  | "scenarioOverview"
-  | "expertOverview"
-  | "dataSource"
->;
-
 // Enum-like types derived from the schema
 export type PathwayType = PathwayMetadataType["pathwayType"];
 export type Geography = PathwayMetadataType["geography"][number];
