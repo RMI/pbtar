@@ -13,7 +13,7 @@
   ],
   "publisher": "Test Publisher",
   "publicationYear": 1900,
-  "scenarioOverview": "This is a minimal pathway for testing purposes.",
+  "pathwayOverview": "This is a minimal pathway for testing purposes.",
   "expertOverview": "Test recommendation.",
   "metric": ["Capacity"],
   "dataSource": {

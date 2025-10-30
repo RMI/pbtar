@@ -13,7 +13,7 @@
   ],
   "publisher": "Example Publisher",
   "publicationYear": 2025,
-  "scenarioOverview": "ASDF Overview.",
+  "pathwayOverview": "ASDF Overview.",
   "expertOverview": "Example Expert Recommendation.",
   "metric": ["Generation", "Technology Mix"],
   "keyFeatures": {

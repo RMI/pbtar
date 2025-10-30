@@ -15,7 +15,7 @@
   ],
   "publisher": "Example Publisher",
   "publicationYear": 2025,
-  "scenarioOverview": "GHJKL Overview.",
+  "pathwayOverview": "GHJKL Overview.",
   "expertOverview": "Example Expert Recommendation.",
   "metric": ["Emissions Intensity", "Technology Mix"],
   "keyFeatures": {

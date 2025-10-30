@@ -16,7 +16,7 @@
   ],
   "publisher": "Example Publisher",
   "publicationYear": 2025,
-  "scenarioOverview": "QWERTY Overview.",
+  "pathwayOverview": "QWERTY Overview.",
   "expertOverview": "Example Expert Recommendation.",
   "keyFeatures": {
     "emissionsPathway": "Moderate decline",

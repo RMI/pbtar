@@ -13,7 +13,7 @@
   "sectors": [{ "name": "Agriculture", "technologies": ["Agroforestry"] }],
   "publisher": "Example Publisher",
   "publicationYear": 2025,
-  "scenarioOverview": "UIOP Overview.",
+  "pathwayOverview": "UIOP Overview.",
   "expertOverview": "Example Expert Recommendation.",
   "keyFeatures": {
     "emissionsPathway": "Moderate decline",

@@ -73,7 +73,7 @@
   ],
   "publisher": "Example Publisher",
   "publicationYear": 2025,
-  "scenarioOverview": "Example Overview.",
+  "pathwayOverview": "Example Overview.",
   "expertOverview": "Example Expert Recommendation.",
   "metric": [
     "Emissions Intensity",
