@@ -1,4 +1,4 @@
-import { Scenario } from "../types";
+import { PathwayMetadataType } from "../types";
 import {
   normalizeGeography,
   geographyLabel,
@@ -76,7 +76,9 @@ function pickMode(facet: keyof FilterModes, modes?: FilterModes): FacetMode {
   return modes?.[facet] ?? "ANY";
 }
 
-export function makeGeographyOptions(scenarios: Scenario[]): GeoOption[] {
+export function makeGeographyOptions(
+  scenarios: PathwayMetadataType[],
+): GeoOption[] {
   const seen = new Set<string>();
   for (const s of scenarios) {
     for (const g of s.geography ?? []) {
@@ -92,9 +94,9 @@ export function makeGeographyOptions(scenarios: Scenario[]): GeoOption[] {
 }
 
 export const filterScenarios = (
-  scenarios: Scenario[],
+  scenarios: PathwayMetadataType[],
   filters: FiltersWithArrays,
-): Scenario[] => {
+): PathwayMetadataType[] => {
   return scenarios.filter((scenario) => {
     // ---- Pathway type: ANY/ALL over selected tokens; empty array => no filter; ABSENT-aware
     {

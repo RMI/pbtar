@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import type { Scenario } from "../types";
+import type { PathwayMetadataType } from "../types";
 import { join, resolve } from "path";
 import { promises as fs } from "node:fs";
 
@@ -63,7 +63,7 @@ describe("validate files on disk", () => {
       names.map(async (name) => ({
         name,
         data: JSON.parse(await fs.readFile(join(dir, name), "utf8")) as
-          | Scenario[]
+          | PathwayMetadataType[]
           | unknown[],
       })),
     );
@@ -84,7 +84,7 @@ describe("validate files on disk", () => {
       names.map(async (name) => ({
         name,
         data: JSON.parse(await fs.readFile(join(dir, name), "utf8")) as
-          | Scenario[]
+          | PathwayMetadataType[]
           | unknown[],
       })),
     );

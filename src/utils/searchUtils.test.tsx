@@ -2,13 +2,18 @@ import { describe, it, expect } from "vitest";
 import { filterScenarios } from "./searchUtils";
 import type { FiltersWithArrays } from "./searchUtils";
 import { ABSENT_FILTER_TOKEN } from "./absent";
-import { Scenario, SearchFilters } from "../types";
+import { PathwayMetadataType, SearchFilters } from "../types";
 
 import sample01 from "../../testdata/valid/pathwayMetadata_sample_01.json" assert { type: "json" };
 import sample02 from "../../testdata/valid/pathwayMetadata_sample_02.json" assert { type: "json" };
 import sample03 from "../../testdata/valid/pathwayMetadata_sample_03.json" assert { type: "json" };
 import sample04 from "../../testdata/valid/pathwayMetadata_sample_04.json" assert { type: "json" };
-const mockScenarios: Scenario[] = [sample01, sample02, sample03, sample04];
+const mockScenarios: PathwayMetadataType[] = [
+  sample01,
+  sample02,
+  sample03,
+  sample04,
+];
 
 describe("searchUtils", () => {
   // Mock scenario data
@@ -149,7 +154,7 @@ describe("searchUtils", () => {
 });
 
 import rawFullScenario from "../../testdata/valid/pathwayMetadata_full.json" assert { type: "json" };
-const mockFullScenarios: Scenario[] = [rawFullScenario];
+const mockFullScenarios: PathwayMetadataType[] = [rawFullScenario];
 
 describe("searchUtils - array results", () => {
   //
@@ -210,7 +215,7 @@ describe("searchUtils - array results", () => {
 });
 
 describe("filterScenarios (array-backed facets)", () => {
-  const scenarios: Scenario[] = [
+  const scenarios: PathwayMetadataType[] = [
     {
       id: "A",
       name: "A",
@@ -298,7 +303,7 @@ describe("filterScenarios (array-backed facets)", () => {
 
   it("geography: ALL mode requires all tokens; ANY is default", () => {
     // Add a scenario with two geos
-    const many: Scenario[] = [
+    const many: PathwayMetadataType[] = [
       ...scenarios,
       {
         ...scenarios[1],
@@ -347,7 +352,7 @@ describe("filterScenarios (array-backed facets)", () => {
           publicationYear: 2020,
           description: "",
         },
-      ] as Scenario[],
+      ] as PathwayMetadataType[],
       { pathwayType: ["Net Zero", "BAU"], modes: { pathwayType: "ALL" } },
     );
     expect(out).toHaveLength(0);
@@ -380,7 +385,7 @@ describe("filterScenarios (array-backed facets)", () => {
           publicationYear: 2020,
           description: "",
         },
-      ] as Scenario[],
+      ] as PathwayMetadataType[],
       { modelYearNetzero: [2030, 2050], modes: { modelYearNetzero: "ALL" } },
     );
     expect(out).toHaveLength(0);
@@ -413,7 +418,7 @@ describe("filterScenarios (array-backed facets)", () => {
           publicationYear: 2020,
           description: "",
         },
-      ] as Scenario[],
+      ] as PathwayMetadataType[],
       { modelTempIncrease: [1.5, 2.0], modes: { modelTempIncrease: "ALL" } },
     );
     expect(out).toHaveLength(0);
@@ -434,7 +439,7 @@ describe("filterScenarios (array-backed facets)", () => {
           publicationYear: 2020,
           description: "",
         },
-      ] as Scenario[],
+      ] as PathwayMetadataType[],
       { pathwayType: [ABSENT_FILTER_TOKEN], modes: { pathwayType: "ALL" } },
     );
     expect(out1.map((s) => s.id)).toEqual(["A"]);
@@ -453,7 +458,7 @@ describe("filterScenarios (array-backed facets)", () => {
           publicationYear: 2020,
           description: "",
         },
-      ] as Scenario[],
+      ] as PathwayMetadataType[],
       { modelTempIncrease: [2.0], modes: { modelTempIncrease: "ALL" } },
     );
     expect(out2.map((s) => s.id)).toEqual(["B"]);

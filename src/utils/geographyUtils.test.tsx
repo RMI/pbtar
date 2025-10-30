@@ -6,7 +6,7 @@ import {
   assertKnownCountryISO2,
 } from "./geographyUtils";
 import { makeGeographyOptions } from "./searchUtils";
-import type { Scenario } from "../types";
+import type { PathwayMetadataType } from "../types";
 
 describe("normalizeGeography", () => {
   it("normalizeGeography drops zero-width and NBSP then trims", () => {
@@ -106,7 +106,7 @@ describe("assertKnownCountryISO2 (strict ISO2 validation)", () => {
   });
 });
 
-const mkScenario = (id: string, geography: string[]): Scenario =>
+const mkScenario = (id: string, geography: string[]): PathwayMetadataType =>
   ({
     id,
     name: `Scenario ${id}`,
@@ -118,7 +118,7 @@ const mkScenario = (id: string, geography: string[]): Scenario =>
     sectors: [],
     publisher: "RMI",
     publicationYear: 2024,
-  }) as unknown as Scenario;
+  }) as unknown as PathwayMetadataType;
 
 describe("makeGeographyOptions", () => {
   it("uses full names for ISO2 and preserves badge ordering", () => {

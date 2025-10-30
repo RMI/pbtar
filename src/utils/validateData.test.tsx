@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { validateDataCollect, FileEntry } from "./validateData";
-import { Scenario } from "../types";
+import { PathwayMetadataType } from "../types";
 import pathwayMetadata from "../schema/pathwayMetadata.v1.json" with { type: "json" };
 
 function ok(entry: FileEntry | FileEntry[]) {
@@ -92,7 +92,7 @@ describe("scenario schema enforces expected limits", () => {
   for (const key of REQ) {
     it(`fails when required property '${key}' is missing`, () => {
       const rest = { ...baseScenario };
-      delete (rest as Scenario)[key]; // remove the key
+      delete (rest as PathwayMetadataType)[key]; // remove the key
       fail({ name: "missing.json", data: rest }, new RegExp(`${key}`));
     });
   }
@@ -221,7 +221,7 @@ describe("scenario schema enforces expected limits", () => {
     fail(
       {
         name: "extra-top.json",
-        data: { ...baseScenario, foobar: 1 } as Scenario,
+        data: { ...baseScenario, foobar: 1 } as PathwayMetadataType,
       },
       /must NOT have additional properties/,
     );
