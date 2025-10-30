@@ -14,7 +14,7 @@ import { ABSENT_FILTER_TOKEN } from "../utils/absent";
 
 interface SearchSectionProps {
   filters: SearchFilters;
-  scenariosNumber: number;
+  pathwaysNumber: number;
   onFilterChange: <T extends string | number | (string | number)[] | null>(
     key: keyof SearchFilters,
     value: T | null,
@@ -25,7 +25,7 @@ interface SearchSectionProps {
 
 const SearchSection: React.FC<SearchSectionProps> = ({
   filters,
-  scenariosNumber,
+  pathwaysNumber,
   onFilterChange,
   onSearch,
   onClear,
@@ -180,7 +180,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       </div>
       <div className="mt-4 ml-1 flex items-center justify-between gap-3">
         <p className="text-sm text-rmigray-500">
-          Found {scenariosNumber} pathways
+          Found {pathwaysNumber} pathways
           {areFiltersApplied && " matching your criteria"}
           {areFiltersApplied && (
             <button

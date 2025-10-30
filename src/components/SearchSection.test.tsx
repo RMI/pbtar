@@ -21,21 +21,21 @@ vi.mock("../data/pathwayMetadata", async () => {
     }),
   ]);
 
-  const mockScenarios = [
+  const mockPathways = [
     s1.default,
     s2.default,
     s3.default,
     s4.default,
   ] as PathwayMetadataType[];
 
-  return { pathwayMetadata: mockScenarios };
+  return { pathwayMetadata: mockPathways };
 });
 
 describe("SearchSection", () => {
   // Default props for the component
   const defaultProps = {
     filters: {} as SearchFilters,
-    scenariosNumber: 2,
+    pathwaysNumber: 2,
     onFilterChange: vi.fn(),
     onSearch: vi.fn(),
     onClear: vi.fn(),
