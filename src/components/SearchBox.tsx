@@ -40,7 +40,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
         onKeyDown={handleKeyDown}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        placeholder="Search scenarios..."
+        placeholder="Search pathways..."
         className="w-full py-3 px-3 text-rmigray-700 focus:outline-none text-sm md:text-base"
         maxLength={250}
       />

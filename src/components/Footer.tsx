@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
               className="text-white mr-2"
             />
             <span className="text-sm font-medium text-white">
-              Climate Transition Scenarios Repository
+              Climate Transition Pathways Repository
             </span>
           </div>
 

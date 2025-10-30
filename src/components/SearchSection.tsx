@@ -180,7 +180,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       </div>
       <div className="mt-4 ml-1 flex items-center justify-between gap-3">
         <p className="text-sm text-rmigray-500">
-          Found {scenariosNumber} scenarios
+          Found {scenariosNumber} pathways
           {areFiltersApplied && " matching your criteria"}
           {areFiltersApplied && (
             <button

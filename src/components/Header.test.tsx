@@ -26,7 +26,7 @@ describe("Header component", () => {
 
   it("renders the navigation links to Home and About pages", () => {
     renderHeader();
-    expect(screen.getByText("Scenarios")).toBeInTheDocument();
+    expect(screen.getByText("Pathways")).toBeInTheDocument();
     expect(screen.getByText("About")).toBeInTheDocument();
   });
 });

@@ -524,7 +524,7 @@ describe("MultiSelectDropdown – menu header layout & interactions", () => {
     // Right-justified container
     expect(explainer.parentElement?.className).toMatch(/\btext-right\b/);
     // First line
-    expect(screen.getByText(/Show scenarios matching/i)).toBeInTheDocument();
+    expect(screen.getByText(/Show pathways matching/i)).toBeInTheDocument();
 
     const toggle = screen.getByTestId("mode-toggle");
     expect(toggle).toHaveAttribute("role", "button"); // single large target

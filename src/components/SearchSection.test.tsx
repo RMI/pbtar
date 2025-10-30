@@ -193,7 +193,7 @@ describe("SearchSection", () => {
       render(<SearchSection {...defaultProps} />);
       expect(screen.queryByTestId("clear-all-filters")).toBeNull();
       // Summary still renders
-      expect(screen.getByText(/Found 2 scenarios/i)).toBeInTheDocument();
+      expect(screen.getByText(/Found 2 pathways/i)).toBeInTheDocument();
     });
 
     it("renders the inline button when any filter is applied and calls onClear", () => {
@@ -204,7 +204,7 @@ describe("SearchSection", () => {
       render(<SearchSection {...props} />);
 
       // Button should be present and visually near the summary (inline within the same <p>)
-      const paragraph = screen.getByText(/Found \d+ scenarios/i).closest("p");
+      const paragraph = screen.getByText(/Found \d+ pathways/i).closest("p");
       expect(paragraph).toBeTruthy();
       const clearBtn = screen.getByTestId("clear-all-filters");
       expect(clearBtn).toBeInTheDocument();
