@@ -4,7 +4,8 @@ import { useRef, useEffect, useState } from "react";
 export default function RadarChart({
   data,
   width = 400,
-  margin = 20,
+  marginVertical = 0,
+  marginHorizontal = 30
 }) {
   const [d3data, setD3data] = useState(
     data.data.filter(d => (d.sector == "power") & (d.metric == "capacity") & (d.year == 2022)),
@@ -12,8 +13,8 @@ export default function RadarChart({
   const ref = useRef();
 
   const height = width;
-  const containerWidth = width - (margin * 2);
-  const containerHeight = height - (margin * 2);
+  const containerWidth = width - (marginHorizontal * 2);
+  const containerHeight = height - (marginVertical * 2);
 
   useEffect(() => {
 window.d3 = d3; window.d3data = d3data;
@@ -23,8 +24,8 @@ window.d3 = d3; window.d3data = d3data;
 
     const axisLabelFactor = 1.12;
     const axisCircles = 5;
-    const dotRadius = 5;
-    const radius = (width / 2) - (2 * margin);
+    const dotRadius = 3;
+    const radius = (width / 2) - (2 * marginHorizontal);
     const axesDomain = Array.from(d3.union(d3data.map(d => d.technology)));
     const maxValue = d3.max(d3data, d => d.value);
     const angleSlice = Math.PI / 2 / axesDomain.length * 4;
@@ -39,10 +40,12 @@ window.d3 = d3; window.d3data = d3data;
       .domain(d3.extent(d3data, d => d.value))
       .range([0, radius]);
 
+    svg.selectAll('g').remove();
+
     const container = svg.append('g')
       .attr("width", containerWidth)
       .attr("height", containerHeight)
-      .attr('transform', 'translate(' + ((width / 2) + margin) + ',' + ((height / 2) + margin) + ')');
+      .attr('transform', 'translate(' + ((width / 2) + marginHorizontal) + ',' + ((height / 2) + marginVertical) + ')');
 
   	var axisGrid = container.append("g")
       .attr("class", "axisWrapper");
@@ -80,27 +83,23 @@ window.d3 = d3; window.d3data = d3data;
   		.attr("y", (d, i) => rScale(maxValue * axisLabelFactor) * Math.sin(angleSlice*i - Math.PI/2))
   		.text(d => d);
 
-    const plots = container.append('g')
-      .selectAll('g')
-      .data(d3data)
-      .join('g')
-        .attr("fill", "none")
-        .attr("stroke", "steelblue");
+    const plots = container.append("g")
+      .attr("class", "plot");
 
     plots.append('path')
-      .attr("d", d => radarLine(d3data.map(d => d.value)))
+      .attr("d", radarLine(d3data.map(d => d.value)))
       .attr("fill", "steelblue")
-      .attr("fill-opacity", 0.1)
+      .attr("fill-opacity", 0.5)
       .attr("stroke", "steelblue")
       .attr("stroke-width", 2);
 
   	plots.selectAll("circle")
-  		.data(d => d)
+  		.data(d3data)
       .join("circle")
   		  .attr("r", dotRadius)
   		  .attr("cx", (d,i) => rScale(d.value) * Math.cos(angleSlice*i - Math.PI/2))
   		  .attr("cy", (d,i) => rScale(d.value) * Math.sin(angleSlice*i - Math.PI/2))
-  		  .style("fill-opacity", 0.8);
+  		  .attr("fill", "steelblue");
   }, [d3data]);
 
   function uniqueYears(data) {
