@@ -3,11 +3,8 @@ import type { PluginContext, ViteDevServer } from "vite";
 import react from "@vitejs/plugin-react";
 import { simpleGit } from "simple-git";
 import os from "os";
-import { FileEntry } from "./src/utils/validateScenarios";
-import {
-  assembleScenarios,
-  decideIncludeInvalid,
-} from "./src/utils/loadScenarios";
+import { FileEntry } from "./src/utils/validateData";
+import { assembleData, decideIncludeInvalid } from "./src/utils/loadData";
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
 import { viteStaticCopy } from "vite-plugin-static-copy";
@@ -15,6 +12,7 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import pkg from "./package.json";
+import pathwayMetadata from "./src/schema/pathwayMetadata.v1.json" with { type: "json" };
 
 // Safe wrapper for OS functions with proper typing
 const getOsInfo = (): {
@@ -138,7 +136,7 @@ function dataValidationPlugin(dir: string = "src/data") {
         const raw = await fs.readFile(join(dir, name), "utf8");
         entries.push({
           name,
-          data: JSON.parse(raw) as Scenario[] | unknown[],
+          data: JSON.parse(raw) as unknown[],
         });
       }
 
@@ -148,7 +146,7 @@ function dataValidationPlugin(dir: string = "src/data") {
         String(process.env.GITHUB_ACTIONS || "").toLowerCase() === "true";
 
       // Validate + assemble; surface warnings via Vite's logger
-      assembleScenarios(entries, {
+      assembleData(entries, pathwayMetadata as object, {
         includeInvalid,
         warn: (msg: string): void => {
           console.warn(msg);

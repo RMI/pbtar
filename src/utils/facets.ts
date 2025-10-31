@@ -92,7 +92,7 @@ export function buildOptionsFromValues<T extends string | number>(
 /**
  * Missing-aware matcher for optional facets.
  * - selected: array of tokens from FilterDropdown (e.g., ["2°C", "__ABSENT__"])
- * - value: field value from the scenario (string | number | null | undefined)
+ * - value: field value from the pathway (string | number | null | undefined)
  */
 export function matchesOptionalFacet<T extends string | number>(
   selected: readonly string[] | undefined,
@@ -115,7 +115,7 @@ export function matchesOptionalFacet<T extends string | number>(
 /**
  * Missing-aware matcher for ARRAY facets (e.g., sectors[]).
  * - selected: tokens from a FilterDropdown (e.g., ["Power", "__ABSENT__"])
- * - values: array of scenario values (strings/objects), or null/undefined
+ * - values: array of pathway values (strings/objects), or null/undefined
  * - toToken: map each item to a compare string (e.g., s => s.name)
  */
 export function matchesOptionalFacetAny<T>(

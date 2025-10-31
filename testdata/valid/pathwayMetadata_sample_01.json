@@ -1,8 +1,8 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "sample-01",
-  "name": "Sample Scenario 01",
-  "description": "First Sample Scenario. qwerty description.",
+  "name": "Sample Pathway 01",
+  "description": "First Sample Pathway. qwerty description.",
   "pathwayType": "Normative",
   "modelYearNetzero": 2050,
   "carbonBudget": 100,
@@ -16,7 +16,7 @@
   ],
   "publisher": "Example Publisher",
   "publicationYear": 2025,
-  "scenarioOverview": "QWERTY Overview.",
+  "pathwayOverview": "QWERTY Overview.",
   "expertOverview": "Example Expert Recommendation.",
   "keyFeatures": {
     "emissionsPathway": "Moderate decline",

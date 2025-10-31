@@ -1,20 +1,21 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
-  "id": "sample-02",
-  "name": "Sample Scenario 02",
-  "description": "Second Sample Scenario. uiop description.",
-  "pathwayType": "Exploratory",
-  "carbonBudget": 200,
-  "modelYearStart": 2020,
-  "modelYearEnd": 2050,
-  "modelTempIncrease": 2,
-  "ssp": "SSP2",
-  "geography": ["EU"],
-  "sectors": [{ "name": "Agriculture", "technologies": ["Agroforestry"] }],
+  "id": "sample-03",
+  "name": "Sample Pathway 03",
+  "description": "Third Sample Pathway. asdf description.",
+  "pathwayType": "Direct Policy",
+  "modelTempIncrease": 3,
+  "ssp": "SSP3",
+  "geography": ["Americas"],
+  "sectors": [
+    { "name": "Land Use", "technologies": ["Precision Agriculture"] },
+    { "name": "Steel", "technologies": ["Carbon Capture and Storage"] }
+  ],
   "publisher": "Example Publisher",
   "publicationYear": 2025,
-  "scenarioOverview": "UIOP Overview.",
+  "pathwayOverview": "ASDF Overview.",
   "expertOverview": "Example Expert Recommendation.",
+  "metric": ["Generation", "Technology Mix"],
   "keyFeatures": {
     "emissionsPathway": "Moderate decline",
     "energyEfficiency": "Moderate improvements",
@@ -43,7 +44,6 @@
     "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
     "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
   },
-  "metric": ["Capacity", "Generation"],
   "dataSource": {
     "description": "Mock Data Source.",
     "url": "https://example.com/data-source",

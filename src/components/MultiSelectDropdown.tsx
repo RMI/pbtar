@@ -235,7 +235,7 @@ export default function MultiSelectDropdown<
               {showModeToggle && onModeChange ? (
                 <div className="text-right text-rmigray-500 px-0 py-0 inline-block">
                   <div className="whitespace-nowrap">
-                    Show scenarios matching
+                    Show pathways matching
                   </div>
                   <div
                     className="mt-1 flex items-center justify-end gap-1"

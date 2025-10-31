@@ -62,7 +62,7 @@
     <h1>Pathway Timeseries</h1>
     <span class="badge badge-dark value-type">Type: object</span><br />
     <span class="description"
-      ><p>A schema for the scenarios metadata dataset in PBTAR.</p>
+      ><p>A schema for the pathway timeseries dataset in PBTAR.</p>
     </span>
     <span class="badge badge-info no-additional">No Additional Properties</span>
 
@@ -194,7 +194,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
             <span class="description"
-              ><p>The unique identifier for a scenario.</p>
+              ><p>The unique identifier for a pathway.</p>
             </span>
 
             <p>
@@ -267,7 +267,7 @@
               >Type: array of string</span
             ><br />
             <span class="description"
-              ><p>Identifiers of the associated scenario pathways.</p>
+              ><p>Identifiers of the associated pathways.</p>
             </span>
 
             <span class="badge badge-info no-additional"
@@ -397,7 +397,7 @@
               >
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
-            <span class="description"><p>Name of the scenario.</p> </span>
+            <span class="description"><p>Name of the timeseries.</p> </span>
 
             <p>
               <span
@@ -467,7 +467,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
             <span class="description"
-              ><p>Brief description of the scenario.</p> </span
+              ><p>Brief description of the timeseries.</p> </span
             ><span
               class="pattern-value"
               id="description_pattern"
@@ -541,7 +541,9 @@
               >
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
-            <span class="description"><p>Publisher of the scenario.</p> </span>
+            <span class="description"
+              ><p>Publisher of the timeseries.</p>
+            </span>
 
             <p>
               <span
@@ -680,7 +682,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: integer</span><br />
             <span class="description"
-              ><p>Year that the scenario was published.</p>
+              ><p>Year that the timeseries was published.</p>
             </span>
 
             <p>
@@ -752,7 +754,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
             <span class="description"
-              ><p>Name of the associated scenario.</p>
+              ><p>Name of the associated pathway.</p>
             </span>
 
             <p>
@@ -823,7 +825,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
             <span class="description"
-              ><p>Data source for the scenario data.</p>
+              ><p>Data source for the timeseries data.</p>
             </span>
 
             <p>
@@ -975,7 +977,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: object</span><br />
             <span class="description"
-              ><p>Sectors that the scenario data covers.</p>
+              ><p>Sectors that the timeseries data covers.</p>
             </span>
             <span class="badge badge-info no-additional"
               >No Additional Properties</span
@@ -7346,15 +7348,15 @@
                         <br />
                         <span class="description"
                           ><p>
-                            Geographical area that the scenario covers. This
-                            should be a single string value: either 'Global', a
-                            country ISO-3166-1 alpha-2 code (e.g., 'US', 'DE'),
-                            or a free-text region name (e.g., 'North America',
-                            'South East Asia'). Only 2-letter codes are accepted
-                            for countries; do not use full country names or
-                            3-letter codes (e.g., 'USA' is not allowed). If a
-                            2-letter code does not map to a country (e.g.,
-                            'EU'), it will result in an error.
+                            Geographical area that the data covers. This should
+                            be a single string value: either 'Global', a country
+                            ISO-3166-1 alpha-2 code (e.g., 'US', 'DE'), or a
+                            free-text region name (e.g., 'North America', 'South
+                            East Asia'). Only 2-letter codes are accepted for
+                            countries; do not use full country names or 3-letter
+                            codes (e.g., 'USA' is not allowed). If a 2-letter
+                            code does not map to a country (e.g., 'EU'), it will
+                            result in an error.
                           </p>
                         </span>
                         <div

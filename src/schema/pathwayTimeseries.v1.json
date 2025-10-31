@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
   "title": "Pathway Timeseries",
-  "description": "A schema for the scenarios metadata dataset in PBTAR.",
+  "description": "A schema for the pathway timeseries dataset in PBTAR.",
   "type": "object",
   "$defs": {
     "sectorDisplayName": {
@@ -36,12 +36,12 @@
       "maxLength": 1000
     },
     "id": {
-      "description": "The unique identifier for a scenario.",
+      "description": "The unique identifier for a pathway.",
       "type": "string",
       "maxLength": 100
     },
     "pathwayId": {
-      "description": "Identifiers of the associated scenario pathways.",
+      "description": "Identifiers of the associated pathways.",
       "type": "array",
       "items": {
         "type": "string",
@@ -50,18 +50,18 @@
       }
     },
     "name": {
-      "description": "Name of the scenario.",
+      "description": "Name of the timeseries.",
       "type": "string",
       "maxLength": 100
     },
     "description": {
-      "description": "Brief description of the scenario.",
+      "description": "Brief description of the timeseries.",
       "type": "string",
       "pattern": "\\.$",
       "maxLength": 100
     },
     "publisher": {
-      "description": "Publisher of the scenario.",
+      "description": "Publisher of the timeseries.",
       "type": "string",
       "maxLength": 100
     },
@@ -71,18 +71,18 @@
       "maxLength": 100
     },
     "publicationYear": {
-      "description": "Year that the scenario was published.",
+      "description": "Year that the timeseries was published.",
       "type": "integer",
       "minimum": 1900,
       "maximum": 2030
     },
     "pathwayName": {
-      "description": "Name of the associated scenario.",
+      "description": "Name of the associated pathway.",
       "type": "string",
       "maxLength": 100
     },
     "source": {
-      "description": "Data source for the scenario data.",
+      "description": "Data source for the timeseries data.",
       "type": "string",
       "maxLength": 500
     },
@@ -98,7 +98,7 @@
       ]
     },
     "sector": {
-      "description": "Sectors that the scenario data covers.",
+      "description": "Sectors that the timeseries data covers.",
       "type": "object",
       "patternProperties": {
         "^[A-Za-z0-9 _-]{1,100}$": {
@@ -220,7 +220,7 @@
             "maximum": 2100
           },
           "geography": {
-            "description": "Geographical area that the scenario covers. This should be a single string value: either 'Global', a country ISO-3166-1 alpha-2 code (e.g., 'US', 'DE'), or a free-text region name (e.g., 'North America', 'South East Asia'). Only 2-letter codes are accepted for countries; do not use full country names or 3-letter codes (e.g., 'USA' is not allowed). If a 2-letter code does not map to a country (e.g., 'EU'), it will result in an error.",
+            "description": "Geographical area that the data covers. This should be a single string value: either 'Global', a country ISO-3166-1 alpha-2 code (e.g., 'US', 'DE'), or a free-text region name (e.g., 'North America', 'South East Asia'). Only 2-letter codes are accepted for countries; do not use full country names or 3-letter codes (e.g., 'USA' is not allowed). If a 2-letter code does not map to a country (e.g., 'EU'), it will result in an error.",
             "type": "string",
             "allOf": [
               { "pattern": "^(?!\\s*$).+" },

@@ -1,23 +1,20 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
-  "id": "sample-04",
-  "name": "Sample Scenario 04",
-  "description": "Fourth Sample Scenario. ghjkl description.",
-  "pathwayType": "Predictive",
-  "modelYearNetzero": 2050,
+  "id": "sample-02",
+  "name": "Sample Pathway 02",
+  "description": "Second Sample Pathway. uiop description.",
+  "pathwayType": "Exploratory",
+  "carbonBudget": 200,
   "modelYearStart": 2020,
   "modelYearEnd": 2050,
-  "ssp": "SSP4",
-  "geography": ["CN"],
-  "sectors": [
-    { "name": "Land Use", "technologies": ["Precision Agriculture"] },
-    { "name": "Buildings", "technologies": ["Other"] }
-  ],
+  "modelTempIncrease": 2,
+  "ssp": "SSP2",
+  "geography": ["EU"],
+  "sectors": [{ "name": "Agriculture", "technologies": ["Agroforestry"] }],
   "publisher": "Example Publisher",
   "publicationYear": 2025,
-  "scenarioOverview": "GHJKL Overview.",
+  "pathwayOverview": "UIOP Overview.",
   "expertOverview": "Example Expert Recommendation.",
-  "metric": ["Emissions Intensity", "Technology Mix"],
   "keyFeatures": {
     "emissionsPathway": "Moderate decline",
     "energyEfficiency": "Moderate improvements",
@@ -46,6 +43,7 @@
     "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
     "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
   },
+  "metric": ["Capacity", "Generation"],
   "dataSource": {
     "description": "Mock Data Source.",
     "url": "https://example.com/data-source",
