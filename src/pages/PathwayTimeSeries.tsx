@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
 import { pathwayMetadata } from "../data/pathwayMetadata";
-import { Scenario } from "../types";
+import { PathwayType } from "../types";
 import {
   fetchTimeseriesIndex,
   datasetsForPathway,
@@ -14,17 +14,17 @@ import NormalizedStackedAreaChart from "../components/NormalizedStackedAreaChart
 import RadarChart from "../components/RadarChart";
 import VerticalBarChart from "../components/VerticalBarChart";
 
-const ScenarioTimeSeries: React.FC = () => {
+const PathwayTimeSeries: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [scenario, setScenario] = useState<Scenario | null>(null);
+  const [pathway, setPathway] = useState<PathwayType | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
     // Simulate API call with timeout
     const timer = setTimeout(() => {
-      const foundScenario = scenariosData.find((s) => s.id === id) || null;
-      setScenario(foundScenario);
+      const foundPathway = pathwayMetadata.find((s) => s.id === id) || null;
+      setPathway(foundPathway);
       setLoading(false);
     }, 300);
 
@@ -49,7 +49,7 @@ const ScenarioTimeSeries: React.FC = () => {
         const idx = await fetchTimeseriesIndex();
         if (!isMounted) return;
 
-        const pathwayId: string = scenario?.id ?? "";
+        const pathwayId: string = pathway?.id ?? "";
 
         if (idx && pathwayId) {
           setDatasets(datasetsForPathway(idx, pathwayId));
@@ -65,7 +65,7 @@ const ScenarioTimeSeries: React.FC = () => {
     return () => {
       isMounted = false;
     };
-  }, [scenario]); // depend on the full object to avoid eslint warning
+  }, [pathway]); // depend on the full object to avoid eslint warning
 
   const [timeseriesdata, setTimeseriesdata] = useState();
   useEffect(() => {
@@ -107,7 +107,7 @@ const ScenarioTimeSeries: React.FC = () => {
             size={16}
             className="mr-2"
           />
-          Back to Scenarios
+          Back to Pathways
         </Link>
       </div>
     );
@@ -117,14 +117,14 @@ const ScenarioTimeSeries: React.FC = () => {
     <div class="container mx-auto px-4 py-8">
 
       <Link
-        to={'/scenario/' + id}
+        to={'/pathway/' + id}
         className="inline-flex items-center text-rmigray-600 hover:text-energy-700 mb-6 transition-colors duration-200"
       >
         <ArrowLeft
           size={16}
           className="mr-1"
         />
-        Back to scenario detail
+        Back to pathway detail
       </Link>
 
       <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6 transition-opacity duration-300 opacity-100">
@@ -309,4 +309,4 @@ const ScenarioTimeSeries: React.FC = () => {
   );
 };
 
-export default ScenarioTimeSeries;
+export default PathwayTimeSeries;
