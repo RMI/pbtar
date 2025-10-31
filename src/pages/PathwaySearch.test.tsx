@@ -1,62 +1,62 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import ScenarioSearch from "./ScenarioSearch";
-import { scenariosData } from "../data/scenariosData";
-import { Scenario } from "../types";
+import PathwaySearch from "./PathwaySearch";
+import { pathwayMetadata } from "../data/pathwayMetadata";
+import { PathwayMetadataType } from "../types";
 import userEvent from "@testing-library/user-event";
 
-// Mock the ScenarioCard component to simplify testing
-vi.mock("../components/ScenarioCard", () => ({
-  default: ({ scenario }: { scenario: Scenario }) => (
+// Mock the PathwayCard component to simplify testing
+vi.mock("../components/PathwayCard", () => ({
+  default: ({ pathway }: { pathway: PathwayMetadataType }) => (
     <div
-      data-testid="scenario-card"
-      data-scenario-id={scenario.id}
+      data-testid="pathway-card"
+      data-pathway-id={pathway.id}
     >
-      {scenario.name}
+      {pathway.name}
     </div>
   ),
 }));
 
-describe("ScenarioSearch component", () => {
-  const renderScenarioSearch = () => {
+describe("PathwaySearch component", () => {
+  const renderPathwaySearch = () => {
     return render(
       <MemoryRouter>
-        <ScenarioSearch />
+        <PathwaySearch />
       </MemoryRouter>,
     );
   };
 
   it("renders the main heading", () => {
-    renderScenarioSearch();
+    renderPathwaySearch();
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Find Climate Transition Scenarios",
+      "Find Climate Transition Pathways",
     );
   });
 
   it("displays the introductory paragraph", () => {
-    renderScenarioSearch();
+    renderPathwaySearch();
 
     expect(
       screen.getByText(
-        "Browse our repository of climate transition scenarios to find the most relevant ones for your assessment needs.",
+        "Browse our repository of climate transition pathways to find the most relevant ones for your assessment needs.",
       ),
     ).toBeInTheDocument();
   });
 
-  it("renders a ScenarioCard for each scenario in the data", () => {
-    renderScenarioSearch();
-    // Check that the correct number of scenario cards are rendered
-    const scenarioCards = screen.getAllByTestId("scenario-card");
-    expect(scenarioCards).toHaveLength(scenariosData.length);
+  it("renders a PathwayCard for each pathway in the data", () => {
+    renderPathwaySearch();
+    // Check that the correct number of pathway cards are rendered
+    const pathwayCards = screen.getAllByTestId("pathway-card");
+    expect(pathwayCards).toHaveLength(pathwayMetadata.length);
   });
 });
 
-describe("ScenarioSearch integration: dropdowns render and filter with 'None'", () => {
-  // IMPORTANT: we dynamically render ScenarioSearch AFTER mocking scenariosData,
+describe("PathwaySearch integration: dropdowns render and filter with 'None'", () => {
+  // IMPORTANT: we dynamically render PathwaySearch AFTER mocking pathwayMetadata,
   // so these tests don't interfere with any existing unit tests in this file.
-  let ScenarioSearchUnderTest: React.ComponentType<unknown>;
+  let PathwaySearchUnderTest: React.ComponentType<unknown>;
 
   // Use a typed userEvent instance to avoid "no-unsafe-call" on user interactions
   let u: ReturnType<typeof userEvent.setup>;
@@ -64,7 +64,7 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
   const fixtures = [
     {
       id: "A",
-      name: "Scenario A (no sectors, no geo, no temp)",
+      name: "Pathway A (no sectors, no geo, no temp)",
       sectors: undefined, // -> Sector "None"
       geography: undefined, // -> Geography "None"
       modelTempIncrease: undefined, // -> Temperature "None"
@@ -74,7 +74,7 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
     },
     {
       id: "B",
-      name: "Scenario B (Power, Europe, 2°C)",
+      name: "Pathway B (Power, Europe, 2°C)",
       sectors: [{ name: "Power" }],
       geography: ["Europe"],
       modelTempIncrease: "2°C",
@@ -84,7 +84,7 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
     },
     {
       id: "C",
-      name: "Scenario C (empty sectors[], empty geo[], 1.5°C)",
+      name: "Pathway C (empty sectors[], empty geo[], 1.5°C)",
       sectors: [], // -> Sector "None"
       geography: [], // -> Geography "None"
       modelTempIncrease: "1.5°C",
@@ -94,7 +94,7 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
     },
     {
       id: "D",
-      name: "Scenario D (Industry, Asia, no temp)",
+      name: "Pathway D (Industry, Asia, no temp)",
       sectors: [{ name: "Industry" }],
       geography: ["Asia"],
       modelTempIncrease: undefined, // -> Temperature "None"
@@ -104,7 +104,7 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
     },
     {
       id: "E",
-      name: "Scenario E (Power, Europe+Asia, 2°C)",
+      name: "Pathway E (Power, Europe+Asia, 2°C)",
       sectors: [{ name: "Power" }],
       geography: ["Europe", "Asia"],
       modelTempIncrease: "2°C",
@@ -117,12 +117,16 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
   async function mountWithFixtures(): Promise<void> {
     // Reset module graph so our mock applies to the next import.
     vi.resetModules();
-    // Mock BEFORE importing ScenarioSearch
-    vi.doMock("../data/scenariosData", () => ({ scenariosData: fixtures }), {
-      virtual: true,
-    });
-    ScenarioSearchUnderTest = (await import("./ScenarioSearch")).default;
-    render(<ScenarioSearchUnderTest />);
+    // Mock BEFORE importing PathwaySearch
+    vi.doMock(
+      "../data/pathwayMetadata",
+      () => ({ pathwayMetadata: fixtures }),
+      {
+        virtual: true,
+      },
+    );
+    PathwaySearchUnderTest = (await import("./PathwaySearch")).default;
+    render(<PathwaySearchUnderTest />);
   }
 
   async function openDropdown(labelRegex: RegExp): Promise<HTMLButtonElement> {
@@ -166,65 +170,65 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
     await mountWithFixtures();
   });
 
-  it("Sector: shows 'None' when any scenario has no sectors, selecting it filters correctly", async () => {
+  it("Sector: shows 'None' when any pathway has no sectors, selecting it filters correctly", async () => {
     await openDropdown(/sector/i);
     expect(await screen.findByText("None")).toBeInTheDocument();
     await selectOption("None");
 
-    // Only scenarios with no sectors: A (undefined), C (empty array)
+    // Only pathways with no sectors: A (undefined), C (empty array)
     expectVisible([
-      "Scenario A (no sectors, no geo, no temp)",
-      "Scenario C (empty sectors[], empty geo[], 1.5°C)",
+      "Pathway A (no sectors, no geo, no temp)",
+      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
     ]);
     expectHidden([
-      "Scenario B (Power, Europe, 2°C)",
-      "Scenario D (Industry, Asia, no temp)",
+      "Pathway B (Power, Europe, 2°C)",
+      "Pathway D (Industry, Asia, no temp)",
     ]);
   });
 
-  it("Geography: shows 'None' when any scenario has missing/empty geography, selecting it filters correctly", async () => {
+  it("Geography: shows 'None' when any pathway has missing/empty geography, selecting it filters correctly", async () => {
     await openDropdown(/geography/i);
     expect(await screen.findByText("None")).toBeInTheDocument();
     await selectOption("None");
 
-    // Only scenarios with no geography: A (undefined), C (empty array)
+    // Only pathways with no geography: A (undefined), C (empty array)
     expectVisible([
-      "Scenario A (no sectors, no geo, no temp)",
-      "Scenario C (empty sectors[], empty geo[], 1.5°C)",
+      "Pathway A (no sectors, no geo, no temp)",
+      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
     ]);
     expectHidden([
-      "Scenario B (Power, Europe, 2°C)",
-      "Scenario D (Industry, Asia, no temp)",
+      "Pathway B (Power, Europe, 2°C)",
+      "Pathway D (Industry, Asia, no temp)",
     ]);
   });
 
-  it("Temperature: shows 'None' when any scenario omits temperature, selecting it filters correctly", async () => {
+  it("Temperature: shows 'None' when any pathway omits temperature, selecting it filters correctly", async () => {
     await openDropdown(/temperature|temp(?:erature)?/i);
     expect(await screen.findByText("None")).toBeInTheDocument();
     await selectOption("None");
 
-    // Scenarios with no temperature: A and D
+    // Pathways with no temperature: A and D
     expectVisible([
-      "Scenario A (no sectors, no geo, no temp)",
-      "Scenario D (Industry, Asia, no temp)",
+      "Pathway A (no sectors, no geo, no temp)",
+      "Pathway D (Industry, Asia, no temp)",
     ]);
     expectHidden([
-      "Scenario B (Power, Europe, 2°C)",
-      "Scenario C (empty sectors[], empty geo[], 1.5°C)",
+      "Pathway B (Power, Europe, 2°C)",
+      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
     ]);
   });
 
-  // Concrete selection (requested): pick a real value and ensure only matching scenarios remain
+  // Concrete selection (requested): pick a real value and ensure only matching pathways remain
   it("Sector: selecting a concrete option (Power) filters correctly", async () => {
     await openDropdown(/sector/i);
     // Select a real sector option
     await selectOption("Power");
-    // Only Scenario B has sector "Power"
-    expectVisible(["Scenario B (Power, Europe, 2°C)"]);
+    // Only Pathway B has sector "Power"
+    expectVisible(["Pathway B (Power, Europe, 2°C)"]);
     expectHidden([
-      "Scenario A (no sectors, no geo, no temp)",
-      "Scenario C (empty sectors[], empty geo[], 1.5°C)",
-      "Scenario D (Industry, Asia, no temp)",
+      "Pathway A (no sectors, no geo, no temp)",
+      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
+      "Pathway D (Industry, Asia, no temp)",
     ]);
   });
 
@@ -232,13 +236,13 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
     await openDropdown(/metric/i);
     await selectOption("Capacity");
     expectVisible([
-      "Scenario B (Power, Europe, 2°C)",
-      "Scenario D (Industry, Asia, no temp)",
+      "Pathway B (Power, Europe, 2°C)",
+      "Pathway D (Industry, Asia, no temp)",
     ]);
     expectHidden([
-      "Scenario A (no sectors, no geo, no temp)",
-      "Scenario C (empty sectors[], empty geo[], 1.5°C)",
-      "Scenario E (Power, Europe+Asia, 2°C)",
+      "Pathway A (no sectors, no geo, no temp)",
+      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
+      "Pathway E (Power, Europe+Asia, 2°C)",
     ]);
   });
 
@@ -249,20 +253,20 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
 
     // ANY (default): shows anything with Europe OR Asia → B, D, E
     expectVisible([
-      "Scenario B (Power, Europe, 2°C)",
-      "Scenario D (Industry, Asia, no temp)",
-      "Scenario E (Power, Europe+Asia, 2°C)",
+      "Pathway B (Power, Europe, 2°C)",
+      "Pathway D (Industry, Asia, no temp)",
+      "Pathway E (Power, Europe+Asia, 2°C)",
     ]);
 
     // Switch to ALL inside the open menu
     await u.click(screen.getByTestId("mode-toggle"));
     // Only E has both Europe and Asia
-    expectVisible(["Scenario E (Power, Europe+Asia, 2°C)"]);
+    expectVisible(["Pathway E (Power, Europe+Asia, 2°C)"]);
     expectHidden([
-      "Scenario B (Power, Europe, 2°C)",
-      "Scenario D (Industry, Asia, no temp)",
-      "Scenario A (no sectors, no geo, no temp)",
-      "Scenario C (empty sectors[], empty geo[], 1.5°C)",
+      "Pathway B (Power, Europe, 2°C)",
+      "Pathway D (Industry, Asia, no temp)",
+      "Pathway A (no sectors, no geo, no temp)",
+      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
     ]);
   });
 
@@ -273,24 +277,24 @@ describe("ScenarioSearch integration: dropdowns render and filter with 'None'", 
 
     // ANY
     expectVisible([
-      "Scenario B (Power, Europe, 2°C)",
-      "Scenario D (Industry, Asia, no temp)",
-      "Scenario E (Power, Europe+Asia, 2°C)",
+      "Pathway B (Power, Europe, 2°C)",
+      "Pathway D (Industry, Asia, no temp)",
+      "Pathway E (Power, Europe+Asia, 2°C)",
     ]);
     expectHidden([
-      "Scenario A (no sectors, no geo, no temp)",
-      "Scenario C (empty sectors[], empty geo[], 1.5°C)",
+      "Pathway A (no sectors, no geo, no temp)",
+      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
     ]);
 
     // Switch to ALL inside the open menu
     await u.click(screen.getByTestId("mode-toggle"));
     // ALL
-    expectVisible(["Scenario D (Industry, Asia, no temp)"]);
+    expectVisible(["Pathway D (Industry, Asia, no temp)"]);
     expectHidden([
-      "Scenario A (no sectors, no geo, no temp)",
-      "Scenario B (Power, Europe, 2°C)",
-      "Scenario C (empty sectors[], empty geo[], 1.5°C)",
-      "Scenario E (Power, Europe+Asia, 2°C)",
+      "Pathway A (no sectors, no geo, no temp)",
+      "Pathway B (Power, Europe, 2°C)",
+      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
+      "Pathway E (Power, Europe+Asia, 2°C)",
     ]);
   });
 });

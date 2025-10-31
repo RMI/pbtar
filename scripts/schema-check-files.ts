@@ -1,9 +1,9 @@
 // scripts/schema-check-files.ts
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
-import type { FileEntry } from "../src/utils/validateScenarios.ts";
-import { validateFilesBySchema } from "../src/utils/validateScenarios.ts";
-import { decideIncludeInvalid } from "../src/utils/loadScenarios.ts";
+import type { FileEntry } from "../src/utils/validateData.ts";
+import { validateFilesBySchema } from "../src/utils/validateData.ts";
+import { decideIncludeInvalid } from "../src/utils/loadData.ts";
 import pathwayMetadata from "../src/schema/pathwayMetadata.v1.json" with { type: "json" };
 import pathwayTimeseries from "../src/schema/pathwayTimeseries.v1.json" with { type: "json" };
 

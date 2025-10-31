@@ -1,8 +1,8 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
-  "id": "scenario-minimal",
-  "name": "Minimal Scenario",
-  "description": "A minimal scenario file that passes schema validation.",
+  "id": "pathway-minimal",
+  "name": "Minimal Pathway",
+  "description": "A minimal pathway file that passes schema validation.",
   "pathwayType": "Exploratory",
   "geography": ["Country-Specific"],
   "sectors": [
@@ -13,7 +13,7 @@
   ],
   "publisher": "Test Publisher",
   "publicationYear": 1900,
-  "scenarioOverview": "This is a minimal scenario for testing purposes.",
+  "pathwayOverview": "This is a minimal pathway for testing purposes.",
   "expertOverview": "Test recommendation.",
   "metric": ["Capacity"],
   "dataSource": {

@@ -1,4 +1,4 @@
-import { Scenario } from "../types";
+import { PathwayMetadataType } from "../types";
 import {
   normalizeGeography,
   geographyLabel,
@@ -76,9 +76,11 @@ function pickMode(facet: keyof FilterModes, modes?: FilterModes): FacetMode {
   return modes?.[facet] ?? "ANY";
 }
 
-export function makeGeographyOptions(scenarios: Scenario[]): GeoOption[] {
+export function makeGeographyOptions(
+  pathways: PathwayMetadataType[],
+): GeoOption[] {
   const seen = new Set<string>();
-  for (const s of scenarios) {
+  for (const s of pathways) {
     for (const g of s.geography ?? []) {
       const v = normalizeGeography(g);
       if (v) seen.add(v);
@@ -91,18 +93,18 @@ export function makeGeographyOptions(scenarios: Scenario[]): GeoOption[] {
   return sorted.map((v) => ({ value: v, label: geographyLabel(v) }));
 }
 
-export const filterScenarios = (
-  scenarios: Scenario[],
+export const filterPathways = (
+  pathways: PathwayMetadataType[],
   filters: FiltersWithArrays,
-): Scenario[] => {
-  return scenarios.filter((scenario) => {
+): PathwayMetadataType[] => {
+  return pathways.filter((pathway) => {
     // ---- Pathway type: ANY/ALL over selected tokens; empty array => no filter; ABSENT-aware
     {
       const selected = toArray(filters.pathwayType);
       if (selected.length) {
         const hasAbsent = selected.includes(ABSENT_FILTER_TOKEN);
         const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
-        const v = scenario.pathwayType ?? null;
+        const v = pathway.pathwayType ?? null;
         const mode = pickMode("pathwayType", filters.modes as FilterModes);
         let ok = true;
 
@@ -134,7 +136,7 @@ export const filterScenarios = (
       if (selected.length) {
         const hasAbsent = hasAbsentToken(selected);
         const numericChoices = toNumberSet(selected);
-        const v = scenario.modelYearNetzero; // number | null | undefined
+        const v = pathway.modelYearNetzero; // number | null | undefined
         const mode = pickMode("modelYearNetzero", filters.modes as FilterModes);
         let ok = true;
 
@@ -165,7 +167,7 @@ export const filterScenarios = (
       if (selected.length) {
         const hasAbsent = hasAbsentToken(selected);
         const numericChoices = toNumberSet(selected);
-        const v = scenario.modelTempIncrease; // number | null | undefined
+        const v = pathway.modelTempIncrease; // number | null | undefined
         const mode = pickMode(
           "modelTempIncrease",
           filters.modes as FilterModes,
@@ -202,12 +204,12 @@ export const filterScenarios = (
         mode === "ALL"
           ? matchesOptionalFacetAll(
               normalizedSelected,
-              scenario.geography ?? [],
+              pathway.geography ?? [],
               (g) => norm(g),
             )
           : matchesOptionalFacetAny(
               normalizedSelected,
-              scenario.geography ?? [],
+              pathway.geography ?? [],
               (g) => norm(g),
             );
       if (!ok) return false;
@@ -218,7 +220,7 @@ export const filterScenarios = (
       const selected = toArray(filters.sector);
       const normalizedSelected = selected; // sector tokens look canonical already
       const mode = pickMode("sector", filters.modes);
-      const values = (scenario.sectors ?? []).map((s) => s.name);
+      const values = (pathway.sectors ?? []).map((s) => s.name);
       const ok =
         mode === "ALL"
           ? matchesOptionalFacetAll(normalizedSelected, values, (s) => s)
@@ -231,7 +233,7 @@ export const filterScenarios = (
       const selected = toArray(filters.metric);
       const normalizedSelected = selected;
       const mode = pickMode("metric", filters.modes);
-      const values = scenario.metric ?? [];
+      const values = pathway.metric ?? [];
       const ok =
         mode === "ALL"
           ? matchesOptionalFacetAll(normalizedSelected, values, (s) => s)
@@ -243,17 +245,17 @@ export const filterScenarios = (
     if (filters.searchTerm && filters.searchTerm.trim() !== "") {
       const searchTerm = filters.searchTerm.toLowerCase();
       const searchFields = [
-        scenario.name,
-        scenario.description,
-        scenario.pathwayType,
-        scenario.modelYearNetzero,
-        scenario.modelTempIncrease,
-        ...scenario.geography,
-        ...scenario.geography.map((s) => geographyLabel(s)),
-        ...scenario.sectors.map((s) => s.name),
-        ...scenario.metric,
-        scenario.publisher,
-        scenario.publicationYear,
+        pathway.name,
+        pathway.description,
+        pathway.pathwayType,
+        pathway.modelYearNetzero,
+        pathway.modelTempIncrease,
+        ...pathway.geography,
+        ...pathway.geography.map((s) => geographyLabel(s)),
+        ...pathway.sectors.map((s) => s.name),
+        ...pathway.metric,
+        pathway.publisher,
+        pathway.publicationYear,
       ];
 
       return searchFields.some((field) =>

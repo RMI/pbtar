@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import ScenarioCard from "../components/ScenarioCard";
+import PathwayCard from "../components/PathwayCard";
 import SearchSection from "../components/SearchSection";
-import { scenariosData } from "../data/scenariosData";
-import { filterScenarios } from "../utils/searchUtils";
-import { SearchFilters, Scenario } from "../types";
+import { pathwayMetadata } from "../data/pathwayMetadata";
+import { filterPathways } from "../utils/searchUtils";
+import { SearchFilters, PathwayMetadataType } from "../types";
 
-const ScenarioSearch: React.FC = () => {
+const PathwaySearch: React.FC = () => {
   // Ref for the top section to handle scrolling
   const topSectionRef = useRef<HTMLDivElement>(null);
   // Ref for the search section to detect sticky state
@@ -24,8 +24,8 @@ const ScenarioSearch: React.FC = () => {
     searchTerm: "",
   });
 
-  const [filteredScenarios, setFilteredScenarios] =
-    useState<Scenario[]>(scenariosData);
+  const [filteredPathways, setFilteredPathways] =
+    useState<PathwayMetadataType[]>(pathwayMetadata);
   const [isFiltering, setIsFiltering] = useState(false);
 
   // Track previous filter state to detect changes
@@ -34,8 +34,8 @@ const ScenarioSearch: React.FC = () => {
   useEffect(() => {
     const applyFilters = () => {
       setIsFiltering(true);
-      const result = filterScenarios(scenariosData, filters);
-      setFilteredScenarios(result);
+      const result = filterPathways(pathwayMetadata, filters);
+      setFilteredPathways(result);
 
       // Check if filters have changed meaningfully
       const hasFilterChanged =
@@ -116,10 +116,10 @@ const ScenarioSearch: React.FC = () => {
         className="mb-8"
       >
         <h1 className="text-2xl font-bold text-rmigray-800 mb-2">
-          Find Climate Transition Scenarios
+          Find Climate Transition Pathways
         </h1>
         <p className="text-rmigray-600">
-          Browse our repository of climate transition scenarios to find the most
+          Browse our repository of climate transition pathways to find the most
           relevant ones for your assessment needs.
         </p>
       </section>
@@ -131,7 +131,7 @@ const ScenarioSearch: React.FC = () => {
         <div className="container mx-auto px-4 py-2">
           <SearchSection
             filters={filters}
-            scenariosNumber={filteredScenarios.length}
+            pathwaysNumber={filteredPathways.length}
             onFilterChange={handleFilterChange}
             onSearch={handleSearch}
             onClear={handleClear}
@@ -142,19 +142,19 @@ const ScenarioSearch: React.FC = () => {
       <div
         className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300 ${isFiltering ? "opacity-50" : "opacity-100"}`}
       >
-        {filteredScenarios.map((scenario) => (
-          <ScenarioCard
-            key={scenario.id}
-            scenario={scenario}
+        {filteredPathways.map((pathway) => (
+          <PathwayCard
+            key={pathway.id}
+            pathway={pathway}
             searchTerm={filters.searchTerm}
           />
         ))}
       </div>
 
-      {filteredScenarios.length === 0 && (
+      {filteredPathways.length === 0 && (
         <div className="text-center py-12">
           <h3 className="text-lg font-medium text-rmigray-700 mb-2">
-            No scenarios found
+            No pathways found
           </h3>
           <p className="text-rmigray-500 mb-4">
             Try adjusting your search filters.
@@ -171,4 +171,4 @@ const ScenarioSearch: React.FC = () => {
   );
 };
 
-export default ScenarioSearch;
+export default PathwaySearch;

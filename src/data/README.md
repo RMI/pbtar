@@ -1,4 +1,4 @@
-# Scenario metadata for the pbtar repo
+# Pathway metadata for the pbtar repo
 
 The `src/data` directory in the [pbtar](https://github.com/RMI/pbtar) repo contains all of the data shown on the Pathways-based transition assessment repository site.
 Each JSON file in this directory contains one or more pathway definitions.
@@ -14,7 +14,7 @@ Therefore, any new JSON added through a PR on main must pass all of the tests be
 
 After preparing a JSON file, you can run `npm run json:check`, which will trigger validation (locally) against all JSON files in this directory.
 You can preview a JSON file as it will appear in the UI with `npm run dev`.
-To add a new scenario, a new JSON file in the correct format needs to be added to this repo in a pull request on `main`.
+To add a new Pathway, a new JSON file in the correct format needs to be added to this repo in a pull request on `main`.
 
 ## Examples
 
@@ -73,7 +73,7 @@ Once the above functions have been loaded in your R environment, a new `<list>` 
 ```r
 # Note that single-element arrays must be wrapped with I(), the identity function, to ensure that `jsonlite` processes them as arrays, rather than length-1 vectors (everything is a vector in R).
 
-new_scenario_metadata <-
+new_pathway_metadata <-
   list(
     list(
       id = "R-import-example",
@@ -99,9 +99,9 @@ new_scenario_metadata <-
     )
   )
 
-validate_json(new_scenario_metadata)
+validate_json(new_pathway_metadata)
 
-write_json(new_scenario_metadata, "test.json")
+write_json(new_pathway_metadata, "test.json")
 ```
 
 If the `<list>` is not valid, the functions will return a data frame with information about what was invalid.
@@ -109,4 +109,4 @@ If the `<list>` is not valid, the functions will return a data frame with inform
 This README should be the definitive source of information about these JSON files and how to add them or modify them.
 As this repo is currently under heavy development, such details may change rapidly, and this README should be kept up to date with those changes as they happen.
 If you're developing in this repo, please remember to make appropriate changes to this README when relevant changes are made to the underlying code.
-If you're maintaining/modifying/adding the scenario data, please refer to the [live version of this README](https://github.com/RMI/pbtar/blob/main/src/data/README.md) on `main` for the most up-to-date details.
+If you're maintaining/modifying/adding the pathway data, please refer to the [live version of this README](https://github.com/RMI/pbtar/blob/main/src/data/README.md) on `main` for the most up-to-date details.

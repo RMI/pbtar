@@ -5,7 +5,7 @@
  */
 
 /**
- * A schema for the scenarios metadata dataset in PBTAR.
+ * A schema for the pathway metadata dataset in PBTAR.
  */
 export interface PathwayMetadataV1 {
   /**
@@ -13,27 +13,27 @@ export interface PathwayMetadataV1 {
    */
   $schema?: string;
   /**
-   * The unique identifier for a scenario.
+   * The unique identifier for a pathway.
    */
   id: string;
   /**
-   * Name of the scenario.
+   * Name of the pathway.
    */
   name: string;
   /**
-   * Brief description of the scenario.
+   * Brief description of the pathway.
    */
   description: string;
   /**
-   * Type of the scenario pathway.
+   * Type of the pathway pathway.
    */
   pathwayType: "Normative" | "Exploratory" | "Direct Policy" | "Predictive";
   /**
-   * Year by which net zero is reached in the scenario. If Scenario does not reach net zero, this field should be omitted.
+   * Year by which net zero is reached in the pathway. If Pathway does not reach net zero, this field should be omitted.
    */
   modelYearNetzero?: number;
   /**
-   * Carbon budget of the scenario in gigatons of CO2 equivalent (GtCO2eq). If no carbon budget is defined, this field should be omitted. If the carbon budget is not applicable, it should be set to 0.
+   * Carbon budget of the pathway in gigatons of CO2 equivalent (GtCO2eq). If no carbon budget is defined, this field should be omitted. If the carbon budget is not applicable, it should be set to 0.
    */
   carbonBudget?: number;
   /**
@@ -45,21 +45,21 @@ export interface PathwayMetadataV1 {
    */
   modelYearEnd?: number;
   /**
-   * Modeled temperature increase expected by the scenario (in degrees Celsius).
+   * Modeled temperature increase expected by the pathway (in degrees Celsius).
    */
   modelTempIncrease?: number;
   /**
-   * Shared Socioeconomic Pathways (SSP) associated with the scenario.
+   * Shared Socioeconomic Pathways (SSP) associated with the pathway.
    */
   ssp?: "SSP1" | "SSP2" | "SSP3" | "SSP4" | "SSP5";
   /**
-   * Geographical areas that the scenario covers. Can include 'Global', country ISO-3166-1 alpha-2 codes (US, DE), or free-text region names (e.g., 'Europe', 'OECD'). Any 2-letter items in the array will be treated as an ISO code. Any 2-letter entries that do not map to a country will throw errors (EU). Do not use full country names, only ISO alpha-2 codes. To avoid typographical errors, items in this array may not be 3 letters long (USA)
+   * Geographical areas that the pathway covers. Can include 'Global', country ISO-3166-1 alpha-2 codes (US, DE), or free-text region names (e.g., 'Europe', 'OECD'). Any 2-letter items in the array will be treated as an ISO code. Any 2-letter entries that do not map to a country will throw errors (EU). Do not use full country names, only ISO alpha-2 codes. To avoid typographical errors, items in this array may not be 3 letters long (USA)
    */
   geography: ({
     [k: string]: unknown;
   } & string)[];
   /**
-   * Sectors that the scenario covers.
+   * Sectors that the pathway covers.
    */
   sectors: {
     name:
@@ -119,23 +119,23 @@ export interface PathwayMetadataV1 {
     )[];
   }[];
   /**
-   * Publisher of the scenario.
+   * Publisher of the pathway.
    */
   publisher: string;
   /**
-   * Year that the scenario was published.
+   * Year that the pathway was published.
    */
   publicationYear: number;
   /**
-   * Overview of the scenario.
+   * Overview of the pathway.
    */
-  scenarioOverview?: string;
+  pathwayOverview?: string;
   /**
-   * Expert recommendation for the scenario.
+   * Expert recommendation for the pathway.
    */
   expertOverview: string;
   /**
-   * Data source for the scenario.
+   * Data source for the pathway.
    */
   dataSource: {
     /**
@@ -159,7 +159,7 @@ export interface PathwayMetadataV1 {
     | "Absolute Emissions"
   )[];
   /**
-   * Key features of the scenario.
+   * Key features of the pathway.
    */
   keyFeatures: {
     /**
@@ -200,7 +200,7 @@ export interface PathwayMetadataV1 {
       | "Moderate increase"
       | "Significant increase";
     /**
-     * Identifies the types of policies modeled as drivers of the scenario, such as carbon pricing, subsidies, or mandated phaseouts of specific technologies.
+     * Identifies the types of policies modeled as drivers of the pathway, such as carbon pricing, subsidies, or mandated phaseouts of specific technologies.
      *
      * @minItems 1
      */
@@ -230,7 +230,7 @@ export interface PathwayMetadataV1 {
       | "S-curves"
       | "Other";
     /**
-     * Indicates the scale and pace of new technology adoption within the scenario, where significant deployment means that several new technologies are adopted rapidly
+     * Indicates the scale and pace of new technology adoption within the pathway, where significant deployment means that several new technologies are adopted rapidly
      */
     technologyDeploymentTrend:
       | "No information"
@@ -238,7 +238,7 @@ export interface PathwayMetadataV1 {
       | "Moderate deployment of new technologies"
       | "Significant deployment of new technologies";
     /**
-     * Defines which greenhouse gases are covered in the scenario’s emissions accounting.
+     * Defines which greenhouse gases are covered in the pathway’s emissions accounting.
      */
     emissionsScope:
       | "No information"
@@ -292,7 +292,7 @@ export interface PathwayMetadataV1 {
       )[],
     ];
     /**
-     * Describes how upstream fuel or material price dynamics are represented in the scenario.
+     * Describes how upstream fuel or material price dynamics are represented in the pathway.
      */
     supplyChain:
       | "No information"

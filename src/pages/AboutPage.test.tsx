@@ -17,7 +17,7 @@ describe("AboutPage component", () => {
     renderAboutPage();
     // Assuming your AboutPage has a site title text
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "About the Climate Transition Scenarios Repository",
+      "About the Climate Transition Pathways Repository",
     );
   });
 
@@ -34,9 +34,9 @@ describe("AboutPage component", () => {
   it("shows all steps in the usage guide", () => {
     renderAboutPage();
     // Check for the numbered steps
-    expect(screen.getByText("1. Browse Scenarios")).toBeInTheDocument();
+    expect(screen.getByText("1. Browse Pathways")).toBeInTheDocument();
     expect(screen.getByText("2. Filter and Search")).toBeInTheDocument();
-    expect(screen.getByText("3. Compare Scenarios")).toBeInTheDocument();
+    expect(screen.getByText("3. Compare Pathways")).toBeInTheDocument();
     expect(screen.getByText("4. Access Data")).toBeInTheDocument();
   });
 
@@ -90,7 +90,7 @@ describe("AboutPage component", () => {
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        /CTAs are most effective when they consider multiple transition scenarios/i,
+        /CTAs are most effective when they consider multiple transition pathways/i,
       ),
     ).toBeInTheDocument();
   });
@@ -124,7 +124,7 @@ describe("AboutPage component", () => {
     it("uses container class for layout", () => {
       renderAboutPage();
       const container = screen
-        .getByText("About the Climate Transition Scenarios Repository")
+        .getByText("About the Climate Transition Pathways Repository")
         .closest("div.container");
       expect(container).toBeInTheDocument();
     });

@@ -1,21 +1,23 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
-  "id": "sample-03",
-  "name": "Sample Scenario 03",
-  "description": "Third Sample Scenario. asdf description.",
-  "pathwayType": "Direct Policy",
-  "modelTempIncrease": 3,
-  "ssp": "SSP3",
-  "geography": ["Americas"],
+  "id": "sample-04",
+  "name": "Sample Pathway 04",
+  "description": "Fourth Sample Pathway. ghjkl description.",
+  "pathwayType": "Predictive",
+  "modelYearNetzero": 2050,
+  "modelYearStart": 2020,
+  "modelYearEnd": 2050,
+  "ssp": "SSP4",
+  "geography": ["CN"],
   "sectors": [
     { "name": "Land Use", "technologies": ["Precision Agriculture"] },
-    { "name": "Steel", "technologies": ["Carbon Capture and Storage"] }
+    { "name": "Buildings", "technologies": ["Other"] }
   ],
   "publisher": "Example Publisher",
   "publicationYear": 2025,
-  "scenarioOverview": "ASDF Overview.",
+  "pathwayOverview": "GHJKL Overview.",
   "expertOverview": "Example Expert Recommendation.",
-  "metric": ["Generation", "Technology Mix"],
+  "metric": ["Emissions Intensity", "Technology Mix"],
   "keyFeatures": {
     "emissionsPathway": "Moderate decline",
     "energyEfficiency": "Moderate improvements",
