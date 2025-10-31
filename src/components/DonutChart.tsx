@@ -37,6 +37,12 @@ export default function DonutChart({
 
   const pie = d3.pie().sort(null).value(d => d.value);
 
+  function isDark(color) {
+    //http://www.w3.org/TR/AERT#color-contrast
+    var rgb = d3.rgb(color);
+    return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000 < 128;
+  }
+
   useEffect(() => {
     const svgElement = d3.select(ref.current);
 
@@ -60,6 +66,7 @@ export default function DonutChart({
         .attr("class", "label")
       	.attr("text-anchor", "middle")
       	.attr("alignment-baseline", "middle")
+      	.attr("fill", (d, i) => isDark(color(i)) ? "white" : "black")
       	.attr("visibility", d => show(d))
       	.transition()
       	.attr("x", d => arc.centroid(d)[0])
