@@ -235,7 +235,7 @@ const PathwayDetailPage: React.FC = () => {
                       <RadarChart
                         key={datasets[0].datasetId}
                         data={timeseriesdata}
-                        width={350}
+                        width={400}
                       />
                     </div>
                   </div>
