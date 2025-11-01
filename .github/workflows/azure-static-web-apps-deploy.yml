@@ -27,6 +27,9 @@ jobs:
       - name: List files in the repository
         run: |
             ls ${{ github.workspace }}
+            ls ${{ github.workspace }}/dist_extracted
+            ls
+            ls ../
 
       - name: Build And Deploy
         id: deploy
