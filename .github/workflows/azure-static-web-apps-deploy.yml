@@ -26,13 +26,6 @@ jobs:
           mkdir dist_extracted
           tar -xzf dist.tgz -C dist_extracted
 
-      - name: List files in the repository
-        run: |
-            ls ${{ github.workspace }}
-            ls ${{ github.workspace }}/dist_extracted
-            ls
-            ls ../
-
       - name: Build And Deploy
         id: deploy
         uses: Azure/static-web-apps-deploy@v1
@@ -51,4 +44,3 @@ jobs:
           skip_app_build: true # Skipps app build (read from extracted tarball)
           skip_api_build: true # Skips API (functions) build step
           production_branch: "production" # all other branches are preview builds
-          config_file_location: "."
