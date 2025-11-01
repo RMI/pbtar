@@ -17,7 +17,6 @@ export default function RadarChart({
   const containerHeight = height - (marginVertical * 2);
 
   useEffect(() => {
-window.d3 = d3; window.d3data = d3data;
     const svg = d3.select(ref.current)
       .attr("width", width)
       .attr("height", height);
