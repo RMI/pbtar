@@ -42,3 +42,4 @@ jobs:
           skip_app_build: true # Skipps app build (read from extracted tarball)
           skip_api_build: true # Skips API (functions) build step
           production_branch: "production" # all other branches are preview builds
+          config_file_location: "."
