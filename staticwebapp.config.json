@@ -1,13 +1,6 @@
 {
-  "routes": [
-    {
-      "route": "/pathway/*",
-      "serve": "/index.html",
-      "statusCode": 200
-    }
-  ],
   "navigationFallback": {
-    "rewrite": "/index.html",
+    "rewrite": "index.html",
     "exclude": ["/images/*.{png,jpg,gif}", "/css/*", "/js/*"]
   }
 }
