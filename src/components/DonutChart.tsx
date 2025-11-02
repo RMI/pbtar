@@ -4,10 +4,6 @@ import { useRef, useEffect, useState } from "react";
 export default function DonutChart({
   data,
   width = 400,
-  marginTop = 20,
-  marginRight = 20,
-  marginBottom = 20,
-  marginLeft = 20,
 }) {
   const [d3data, setD3data] = useState(
     data.data.filter(d => (d.sector == "power") & (d.metric == "capacity") & (d.year == 2022)),
