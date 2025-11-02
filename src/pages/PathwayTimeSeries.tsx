@@ -115,9 +115,8 @@ const PathwayTimeSeries: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-
       <Link
-        to={'/pathway/' + id}
+        to={"/pathway/" + id}
         className="inline-flex items-center text-rmigray-600 hover:text-energy-700 mb-6 transition-colors duration-200"
       >
         <ArrowLeft
@@ -128,20 +127,15 @@ const PathwayTimeSeries: React.FC = () => {
       </Link>
 
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6 transition-opacity duration-300 opacity-100">
-
         {timeseriesdata ? (
           <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
             <div className="p-5 flex flex-col h-full">
               <div className="mb-4">
                 <h2 className="text-xl font-semibold text-bluespruce mb-2">
-                  <span className="">
-                    {timeseriesdata.name}
-                  </span>
+                  <span className="">{timeseriesdata.name}</span>
                 </h2>
                 <p className="text-rmigray-600 text-sm line-clamp-2">
-                  <span className="">
-                    {timeseriesdata.description}
-                  </span>
+                  <span className="">{timeseriesdata.description}</span>
                 </p>
               </div>
             </div>
@@ -153,9 +147,7 @@ const PathwayTimeSeries: React.FC = () => {
             <div className="p-5 flex flex-col h-full">
               <div className="mb-4">
                 <h2 className="text-lg font-semibold text-bluespruce mb-2">
-                  <span className="">
-                    Global filters/selectors
-                  </span>
+                  <span className="">Global filters/selectors</span>
                 </h2>
                 <select>
                   <option value="someOption">Some option</option>
@@ -175,9 +167,7 @@ const PathwayTimeSeries: React.FC = () => {
             <div className="p-5 flex flex-col h-full">
               <div className="mb-4">
                 <h2 className="text-lg font-semibold text-bluespruce mb-2">
-                  <span className="">
-                    Normalized stacked area chart
-                  </span>
+                  <span className="">Normalized stacked area chart</span>
                 </h2>
               </div>
               <div className="mb-3">
@@ -195,9 +185,7 @@ const PathwayTimeSeries: React.FC = () => {
             <div className="p-5 flex flex-col h-full">
               <div className="mb-4">
                 <h2 className="text-lg font-semibold text-bluespruce mb-2">
-                  <span className="">
-                    Donut chart
-                  </span>
+                  <span className="">Donut chart</span>
                 </h2>
               </div>
               <div className="mb-3">
@@ -215,9 +203,7 @@ const PathwayTimeSeries: React.FC = () => {
             <div className="p-5 flex flex-col h-full">
               <div className="mb-4">
                 <h2 className="text-lg font-semibold text-bluespruce mb-2">
-                  <span className="">
-                    Multi line chart
-                  </span>
+                  <span className="">Multi line chart</span>
                 </h2>
               </div>
               <div className="mb-3">
@@ -235,9 +221,7 @@ const PathwayTimeSeries: React.FC = () => {
             <div className="p-5 flex flex-col h-full">
               <div className="mb-4">
                 <h2 className="text-lg font-semibold text-bluespruce mb-2">
-                  <span className="">
-                    Vertical bar chart
-                  </span>
+                  <span className="">Vertical bar chart</span>
                 </h2>
               </div>
               <div className="mb-3">
@@ -255,9 +239,7 @@ const PathwayTimeSeries: React.FC = () => {
             <div className="p-5 flex flex-col h-full">
               <div className="mb-4">
                 <h2 className="text-lg font-semibold text-bluespruce mb-2">
-                  <span className="">
-                    Radar chart
-                  </span>
+                  <span className="">Radar chart</span>
                 </h2>
               </div>
               <div className="mb-3">
@@ -275,9 +257,7 @@ const PathwayTimeSeries: React.FC = () => {
             <div className="p-5 flex flex-col h-full">
               <div className="mb-4">
                 <h2 className="text-xl font-semibold text-bluespruce mb-2">
-                  <span className="">
-                    Metadata
-                  </span>
+                  <span className="">Metadata</span>
                 </h2>
               </div>
               <div className="mb-3">
@@ -303,7 +283,6 @@ const PathwayTimeSeries: React.FC = () => {
             </div>
           </div>
         ) : null}
-
       </div>
     </div>
   );

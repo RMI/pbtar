@@ -13,7 +13,7 @@ export default function NormalizedStackedAreaChart({
   metric = "capacity",
 }) {
   const [d3data, setD3data] = useState(
-    data.data.filter(d => (d.sector == sector) & (d.metric == metric))
+    data.data.filter((d) => (d.sector == sector) & (d.metric == metric)),
   );
   const ref = useRef();
   const gx = useRef();
@@ -25,28 +25,36 @@ export default function NormalizedStackedAreaChart({
     const areasGroup = d3.select(areas.current);
 
     const utc = d3.utcParse("%Y");
-    const years = d3.extent(d3data, d => utc(d.year));
-    const values = d3.extent(d3data, d => d.value);
-    const xticks = [...new Set(d3data.map(d => d.year))].map(utc);
+    const years = d3.extent(d3data, (d) => utc(d.year));
+    const values = d3.extent(d3data, (d) => d.value);
+    const xticks = [...new Set(d3data.map((d) => d.year))].map(utc);
 
     const x = d3.scaleUtc(years, [marginLeft, width - marginRight]);
 
     const y = d3.scaleLinear().rangeRound([height - marginBottom, marginTop]);
 
-    const series = d3.stack()
+    const series = d3
+      .stack()
       .offset(d3.stackOffsetExpand)
-      .keys(d3.union(d3data.map(d => d.technology)))
-      .value(([, D], key) => D.get(key).value)
-    (d3.index(d3data, d => d.year, d => d.technology));
+      .keys(d3.union(d3data.map((d) => d.technology)))
+      .value(([, D], key) => D.get(key).value)(
+      d3.index(
+        d3data,
+        (d) => d.year,
+        (d) => d.technology,
+      ),
+    );
 
-    const color = d3.scaleOrdinal()
-      .domain(series.map(d => d.technology))
+    const color = d3
+      .scaleOrdinal()
+      .domain(series.map((d) => d.technology))
       .range(d3.schemeTableau10);
 
-    const area = d3.area()
-      .x(d => x(utc(d.data[0])))
-      .y0(d => y(d[0]))
-      .y1(d => y(d[1]));
+    const area = d3
+      .area()
+      .x((d) => x(utc(d.data[0])))
+      .y0((d) => y(d[0]))
+      .y1((d) => y(d[1]));
 
     d3.select(gx.current)
       .transition()
@@ -65,8 +73,8 @@ export default function NormalizedStackedAreaChart({
       .selectAll()
       .data(series)
       .join("path")
-        .attr("fill", (d, i) => color(i))
-        .attr("d", d => area(d));
+      .attr("fill", (d, i) => color(i))
+      .attr("d", (d) => area(d));
   }, [d3data]);
 
   return (

@@ -195,21 +195,30 @@ const PathwayDetailPage: React.FC = () => {
                 </div>
               </section>
 
-              {timeseriesdata &&
+              {timeseriesdata && (
                 <>
                   <section className="mb-8">
                     <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
                       Composition
                     </h2>
-                    <div className="row" style={{display: 'flex'}}>
-                      <div className="column" style={{flex: '60%', padding: '30px'}}>
+                    <div
+                      className="row"
+                      style={{ display: "flex" }}
+                    >
+                      <div
+                        className="column"
+                        style={{ flex: "60%", padding: "30px" }}
+                      >
                         <NormalizedStackedAreaChart
                           key={datasets[0].datasetId}
                           data={timeseriesdata}
                           width={500}
                         />
                       </div>
-                      <div className="column" style={{flex: '40%', padding: '30px'}}>
+                      <div
+                        className="column"
+                        style={{ flex: "40%", padding: "30px" }}
+                      >
                         <DonutChart
                           key={datasets[0].datasetId}
                           data={timeseriesdata}
@@ -223,8 +232,14 @@ const PathwayDetailPage: React.FC = () => {
                     <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
                       Emissions
                     </h2>
-                    <div className="row" style={{display: 'flex'}}>
-                      <div className="column" style={{flex: '60%', padding: '30px'}}>
+                    <div
+                      className="row"
+                      style={{ display: "flex" }}
+                    >
+                      <div
+                        className="column"
+                        style={{ flex: "60%", padding: "30px" }}
+                      >
                         <VerticalBarChart
                           key={datasets[0].datasetId}
                           data={timeseriesdata}
@@ -232,7 +247,10 @@ const PathwayDetailPage: React.FC = () => {
                           metric={"absoluteEmissions"}
                         />
                       </div>
-                      <div className="column" style={{flex: '40%', padding: '30px'}}>
+                      <div
+                        className="column"
+                        style={{ flex: "40%", padding: "30px" }}
+                      >
                         <VerticalBarChart
                           key={datasets[0].datasetId}
                           data={timeseriesdata}
@@ -247,15 +265,24 @@ const PathwayDetailPage: React.FC = () => {
                     <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
                       Supply
                     </h2>
-                    <div className="row" style={{display: 'flex'}}>
-                      <div className="column" style={{flex: '60%', padding: '30px'}}>
+                    <div
+                      className="row"
+                      style={{ display: "flex" }}
+                    >
+                      <div
+                        className="column"
+                        style={{ flex: "60%", padding: "30px" }}
+                      >
                         <MultiLineChart
                           key={datasets[0].datasetId}
                           data={timeseriesdata}
                           width={500}
                         />
                       </div>
-                      <div className="column" style={{flex: '40%', padding: '30px'}}>
+                      <div
+                        className="column"
+                        style={{ flex: "40%", padding: "30px" }}
+                      >
                         <RadarChart
                           key={datasets[0].datasetId}
                           data={timeseriesdata}
@@ -265,7 +292,7 @@ const PathwayDetailPage: React.FC = () => {
                     </div>
                   </section>
                 </>
-              }
+              )}
 
               <section>
                 <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
