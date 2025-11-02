@@ -4,9 +4,11 @@ import { useRef, useEffect, useState } from "react";
 export default function DonutChart({
   data,
   width = 400,
+  sector = "power",
+  metric = "capacity",
 }) {
   const [d3data, setD3data] = useState(
-    data.data.filter(d => (d.sector == "power") & (d.metric == "capacity") & (d.year == 2022)),
+    data.data.filter(d => (d.sector == sector) & (d.metric == metric) & (d.year == 2022)),
   );
   const ref = useRef();
 
@@ -103,8 +105,8 @@ export default function DonutChart({
     setD3data(
       data.data.filter(
         d =>
-          d.sector == "power" &
-          d.metric == "capacity" &
+          d.sector == sector &
+          d.metric == metric &
           d.year == selectedYear
       )
     );

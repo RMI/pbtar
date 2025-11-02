@@ -9,9 +9,11 @@ export default function NormalizedStackedAreaChart({
   marginRight = 20,
   marginBottom = 30,
   marginLeft = 40,
+  sector = "power",
+  metric = "capacity",
 }) {
   const [d3data, setD3data] = useState(
-    data.data.filter(d => (d.sector == "power") & (d.metric == "capacity"))
+    data.data.filter(d => (d.sector == sector) & (d.metric == metric))
   );
   const ref = useRef();
   const gx = useRef();
