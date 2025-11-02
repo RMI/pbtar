@@ -264,7 +264,7 @@ const PathwayDetailPage: React.FC = () => {
                       </div>
                     </div>
                   </section>
-                < />
+                </>
               }
 
               <section>
