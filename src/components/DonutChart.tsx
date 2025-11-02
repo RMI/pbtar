@@ -45,7 +45,7 @@ export default function DonutChart({
 
   function isDark(color) {
     //http://www.w3.org/TR/AERT#color-contrast
-    var rgb = d3.rgb(color);
+    const rgb = d3.rgb(color);
     return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000 < 128;
   }
 

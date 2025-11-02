@@ -61,7 +61,7 @@ export default function RadarChart({
           ")",
       );
 
-    var axisGrid = container.append("g").attr("class", "axisWrapper");
+    const axisGrid = container.append("g").attr("class", "axisWrapper");
 
     axisGrid
       .selectAll(".levels")
