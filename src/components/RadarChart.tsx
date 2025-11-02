@@ -5,10 +5,12 @@ export default function RadarChart({
   data,
   width = 400,
   marginVertical = 0,
-  marginHorizontal = 30
+  marginHorizontal = 30,
+  sector = "power",
+  metric = "capacity",
 }) {
   const [d3data, setD3data] = useState(
-    data.data.filter(d => (d.sector == "power") & (d.metric == "capacity") & (d.year == 2022)),
+    data.data.filter(d => (d.sector == sector) & (d.metric == metric) & (d.year == 2022)),
   );
   const ref = useRef();
 
@@ -46,8 +48,14 @@ export default function RadarChart({
       .attr("height", containerHeight)
       .attr('transform', 'translate(' + ((width / 2) + marginHorizontal) + ',' + ((height / 2) + marginVertical) + ')');
 
+<<<<<<< HEAD
   	var axisGrid = container.append("g")
       .attr("class", "axisWrapper");
+||||||| parent of 9d54b17 (lint fix)
+    var axisGrid = container.append("g").attr("class", "axisWrapper");
+=======
+    const axisGrid = container.append("g").attr("class", "axisWrapper");
+>>>>>>> 9d54b17 (lint fix)
 
   	axisGrid.selectAll(".levels")
   	   .data(d3.range(1, axisCircles + 1).reverse())
@@ -111,8 +119,8 @@ export default function RadarChart({
     setD3data(
       data.data.filter(
         d =>
-          d.sector == "power" &
-          d.metric == "capacity" &
+          d.sector == sector &
+          d.metric == metric &
           d.year == selectedYear
       )
     );

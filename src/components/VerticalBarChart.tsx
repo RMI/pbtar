@@ -9,11 +9,12 @@ export default function VerticalBarChart({
   marginRight = 20,
   marginBottom = 30,
   marginLeft = 40,
+  sector = "power",
   metric = "emissionsIntensity",
-  barColor = "midnightblue"
+  barColor = "midnightblue",
 }) {
   const [d3data, setD3data] = useState(
-    data.data.filter((d) => (d.sector == "power") & (d.metric == metric)),
+    data.data.filter((d) => (d.sector == sector) & (d.metric == metric)),
   );
   const svgRef = useRef();
 
