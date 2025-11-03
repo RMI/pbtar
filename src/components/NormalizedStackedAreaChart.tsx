@@ -92,14 +92,18 @@ export default function NormalizedStackedAreaChart({
     );
 
     // Group data by year
-    const groupedData = Array.from(group(d3data, d => d.year), ([year, values]) => {
-      const yearData: Record<string, number> = { year };
-      technologies.forEach(tech => {
-        const techValue = values.find(v => v.technology === tech)?.value ?? 0;
-        yearData[tech] = techValue;
-      });
-      return yearData;
-    });
+    const groupedData = Array.from(
+      group(d3data, (d) => d.year),
+      ([year, values]) => {
+        const yearData: Record<string, number> = { year };
+        technologies.forEach((tech) => {
+          const techValue =
+            values.find((v) => v.technology === tech)?.value ?? 0;
+          yearData[tech] = techValue;
+        });
+        return yearData;
+      },
+    );
 
     const stackGenerator = stack<Record<string, number | string>>()
       .offset(stackOffsetExpand)
@@ -107,7 +111,9 @@ export default function NormalizedStackedAreaChart({
 
     const series = stackGenerator(groupedData);
 
-    const areaGenerator = area<SeriesPoint<Series<Record<string, number | string>, string>>>()
+    const areaGenerator = area<
+      SeriesPoint<Series<Record<string, number | string>, string>>
+    >()
       .x((d) => x(parse(d.data.year as string) ?? new Date()))
       .y0((d) => y(d[0]))
       .y1((d) => y(d[1]));
@@ -116,7 +122,14 @@ export default function NormalizedStackedAreaChart({
   }, [d3data, width, height, marginLeft, marginRight, marginTop, marginBottom]);
 
   useEffect(() => {
-    if (!ref.current || !gx.current || !gy.current || !areas.current || !chartSetup) return;
+    if (
+      !ref.current ||
+      !gx.current ||
+      !gy.current ||
+      !areas.current ||
+      !chartSetup
+    )
+      return;
 
     const { x, y, series, area: areaGenerator, xticks } = chartSetup;
 
@@ -143,11 +156,19 @@ export default function NormalizedStackedAreaChart({
       .style("font-size", "12px");
 
     // Update areas
-    (select(areas.current)
-      .selectAll<SVGPathElement, Series<Record<string, number | string>, string>>("path")
-      .data(series)
-      .join("path") as UpdateSelection)
-      .attr("fill", (d) => technologyColors[d.key as keyof typeof technologyColors])
+    (
+      select(areas.current)
+        .selectAll<
+          SVGPathElement,
+          Series<Record<string, number | string>, string>
+        >("path")
+        .data(series)
+        .join("path") as UpdateSelection
+    )
+      .attr(
+        "fill",
+        (d) => technologyColors[d.key as keyof typeof technologyColors],
+      )
       .attr("d", areaGenerator);
   }, [d3data, chartSetup]);
 
