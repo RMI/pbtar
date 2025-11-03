@@ -18,8 +18,6 @@ export default function DonutChart({
   const outerRadius = height / 2 - 10;
   const innerRadius = outerRadius * 0.5;
 
-  const color = d3.scaleOrdinal(d3.schemeObservable10);
-
   const arc = d3
     .arc()
     .innerRadius(innerRadius)
@@ -54,12 +52,25 @@ export default function DonutChart({
 
     svgElement.attr("viewBox", [-width / 2, -height / 2, width, height]);
 
+    const technologyColors = {
+      coal: "#DF4E39",
+      oil: "#AB3C2C",
+      gas: "#F7988B",
+      other: "#B3BCC5",
+      biomass: "#91CBF2",
+      hydro: "#2888C9",
+      wind: "#005A96",
+      solar: "#003B63",
+    };
+
+    const d3dataSorted = d3data.sort((a, b) => Object.keys(technologyColors).indexOf(a.technology) > Object.keys(technologyColors).indexOf(b.technology));
+
     const path = svgElement
-      .datum(d3data)
+      .datum(d3dataSorted)
       .selectAll("path")
       .data(pie)
       .join("path")
-      .attr("fill", (d, i) => color(i))
+      .attr("fill", (d) => technologyColors[d.data.technology])
       .attr("data-year", (d) => d.data.year)
       .attr("data-value", (d) => d.data.value)
       .attr("data-technology", (d) => d.data.technology)
@@ -68,7 +79,7 @@ export default function DonutChart({
       .attrTween("d", arcTween);
 
     svgElement
-      .datum(d3data)
+      .datum(d3dataSorted)
       .selectAll(".label")
       .data(pie)
       .join("text")
@@ -78,7 +89,7 @@ export default function DonutChart({
       .attr("dy", -9)
       .attr("alignment-baseline", "middle")
       .attr("font-weight", "bold")
-      .attr("fill", (d, i) => (isDark(color(i)) ? "white" : "black"))
+      .attr("fill", (d, i) => (isDark(technologyColors[d.data.technology]) ? "white" : "black"))
       .attr("visibility", (d) => show(d))
       .transition()
       .attr("x", (d) => arc.centroid(d)[0])
@@ -86,7 +97,7 @@ export default function DonutChart({
       .duration(750);
 
     svgElement
-      .datum(d3data)
+      .datum(d3dataSorted)
       .selectAll(".label_value")
       .data(pie)
       .join("text")
@@ -95,7 +106,7 @@ export default function DonutChart({
       .attr("text-anchor", "middle")
       .attr("dy", 9)
       .attr("alignment-baseline", "middle")
-      .attr("fill", (d, i) => (isDark(color(i)) ? "white" : "black"))
+      .attr("fill", (d, i) => (isDark(technologyColors[d.data.technology]) ? "white" : "black"))
       .attr("visibility", (d) => show(d))
       .transition()
       .attr("x", (d) => arc.centroid(d)[0])
