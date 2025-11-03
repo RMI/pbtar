@@ -1,7 +1,22 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "IEA-APS-2024",
-  "publisher": "IEA",
+  "publication": {
+    "title": { "fullName": "World Energy Outlook 2024", "shortName": "WEO" },
+    "publisher": { "fullName": "International Energy Agency", "shortName": "IEA" },
+    "year": 2024,
+    "city": "Paris",
+    "links": [
+      {
+        "description": "Report",
+        "url": "https://www.iea.org/reports/world-energy-outlook-2024"
+      },
+      {
+        "description": "Dataset",
+        "url": "https://www.iea.org/data-and-statistics/data-product/world-energy-outlook-2024-free-dataset"
+      }
+    ]
+  },
   "name": "Announced Pledges Scenario (APS)",
   "description": "Pathway where all countries fully meet their aspirational targets (incl. NDCs and net zero pledges).",
   "geography": [
@@ -20,7 +35,6 @@
     "IN",
     "JP"
   ],
-  "publicationYear": 2024,
   "pathwayType": "Exploratory",
   "carbonBudget": 692,
   "modelTempIncrease": 1.7,
