@@ -1,8 +1,9 @@
-import { select, Selection } from "d3-selection";
+import { select } from "d3-selection";
 import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from "d3-scale";
 import { max } from "d3-array";
-import * as d3 from "d3";
-import { useRef, useEffect, useState, useMemo } from "react";
+import { axisBottom, axisLeft } from "d3-axis";
+import "d3-transition";
+import { useRef, useEffect, useMemo } from "react";
 
 interface DataPoint {
   sector: string;
@@ -35,8 +36,6 @@ interface ChartScales {
   unit: string;
 }
 
-type UpdateSelection = Selection<SVGGElement, unknown, null, undefined>;
-
 export default function VerticalBarChart({
   data,
   width = 640,
@@ -49,15 +48,17 @@ export default function VerticalBarChart({
   metric = "emissionsIntensity",
   barColor = "midnightblue",
 }: VerticalBarChartProps) {
-  // Since we're not using setD3data, we can just use useMemo instead of useState
   const d3data = useMemo(
     () => data.data.filter((d) => d.sector === sector && d.metric === metric),
     [data.data, sector, metric],
   );
 
-  const svgRef = useRef<SVGSVGElement>(null);
+  const ref = useRef<SVGSVGElement>(null);
+  const gx = useRef<SVGGElement>(null);
+  const gy = useRef<SVGGElement>(null);
+  const bars = useRef<SVGGElement>(null);
+  const title = useRef<SVGGElement>(null);
 
-  // Memoize scales and data transformations
   const chartSetup = useMemo<ChartScales>(() => {
     const unit = d3data[0]?.unit ?? "";
 
@@ -74,61 +75,53 @@ export default function VerticalBarChart({
   }, [d3data, width, height, marginLeft, marginRight, marginTop, marginBottom]);
 
   useEffect(() => {
-    if (!svgRef.current || !chartSetup) return;
+    if (
+      !ref.current ||
+      !gx.current ||
+      !gy.current ||
+      !bars.current ||
+      !title.current ||
+      !chartSetup
+    )
+      return;
 
     const { x, y, unit } = chartSetup;
-    const svg = select<SVGSVGElement, unknown>(svgRef.current);
 
-    // Clear previous content
-    svg.selectAll("*").remove();
+    // Update title
+    select(title.current)
+      .selectAll("text")
+      .data([metric, unit])
+      .join("text")
+      .text((d) => d)
+      .attr("dy", (_, i) => (i === 0 ? "15" : "30"))
+      .attr("font-weight", (_, i) => (i === 0 ? "bold" : "normal"))
+      .attr("font-variant", (_, i) => (i === 0 ? "small-caps" : "normal"));
 
-    // Set up SVG
-    svg
-      .attr("width", width)
-      .attr("height", height)
-      .attr("viewBox", [0, 0, width, height]);
-
-    // Add title
-    const title = svg.append<SVGGElement>("g").attr("class", "title");
-
-    title
-      .append("text")
-      .text(metric)
-      .attr("dy", "15")
-      .attr("font-weight", "bold")
-      .attr("font-variant", "small-caps");
-
-    title.append("text").text(unit).attr("dy", "30");
-
-    // Add X axis
-    svg
-      .append<SVGGElement>("g")
-      .attr("class", "xaxis")
-      .attr("transform", `translate(0,${height - marginBottom})`)
-      .call(d3.axisBottom(x).tickSize(0))
+    // Update X axis
+    select(gx.current)
+      .transition()
+      .duration(750)
+      .call(axisBottom(x).tickSize(0))
       .style("font-size", "14px")
       .style("font-weight", "bold");
 
-    // Add Y axis
-    const yAxis = svg
-      .append<SVGGElement>("g")
-      .attr("class", "yaxis")
-      .attr("transform", `translate(${marginLeft},0)`)
-      .call(d3.axisLeft(y).tickSize(0))
+    // Update Y axis
+    select(gy.current)
+      .transition()
+      .duration(750)
+      .call(axisLeft(y).tickSize(0))
       .style("font-size", "12px");
 
-    yAxis.select(".domain").remove();
+    select(gy.current).select(".domain").remove();
 
-    yAxis
+    select(gy.current)
       .selectAll(".tick line")
       .clone()
       .attr("x2", width)
       .attr("stroke-opacity", "0.1");
 
-    // Add bars
-    svg
-      .append("g")
-      .attr("class", "bars")
+    // Update bars
+    select(bars.current)
       .attr("fill", barColor)
       .selectAll<SVGRectElement, DataPoint>("rect")
       .data(d3data)
@@ -150,5 +143,31 @@ export default function VerticalBarChart({
     chartSetup,
   ]);
 
-  return <svg ref={svgRef} />;
+  return (
+    <svg
+      ref={ref}
+      width={width}
+      height={height}
+      viewBox={[0, 0, width, height]}
+    >
+      <g
+        ref={title}
+        className="title"
+      />
+      <g
+        ref={gx}
+        className="xaxis"
+        transform={`translate(0, ${height - marginBottom})`}
+      />
+      <g
+        ref={gy}
+        className="yaxis"
+        transform={`translate(${marginLeft}, 0)`}
+      />
+      <g
+        ref={bars}
+        className="bars"
+      />
+    </svg>
+  );
 }
