@@ -1,7 +1,7 @@
-import * as d3 from "d3";
-import { scaleBand, scaleLinear } from "d3-scale";
+import { select, Selection } from "d3-selection";
+import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from "d3-scale";
 import { max } from "d3-array";
-import { select } from "d3-selection";
+import * as d3 from "d3";
 import { useRef, useEffect, useState, useMemo } from "react";
 
 interface DataPoint {
@@ -29,6 +29,14 @@ interface VerticalBarChartProps {
   barColor?: string;
 }
 
+interface ChartScales {
+  x: ScaleBand<string>;
+  y: ScaleLinear<number, number>;
+  unit: string;
+}
+
+type UpdateSelection = Selection<SVGGElement, unknown, null, undefined>;
+
 export default function VerticalBarChart({
   data,
   width = 640,
@@ -41,14 +49,16 @@ export default function VerticalBarChart({
   metric = "emissionsIntensity",
   barColor = "midnightblue",
 }: VerticalBarChartProps) {
-  const [d3data, setD3data] = useState<DataPoint[]>(() =>
-    data.data.filter((d) => d.sector === sector && d.metric === metric),
+  // Since we're not using setD3data, we can just use useMemo instead of useState
+  const d3data = useMemo(
+    () => data.data.filter((d) => d.sector === sector && d.metric === metric),
+    [data.data, sector, metric],
   );
 
   const svgRef = useRef<SVGSVGElement>(null);
 
   // Memoize scales and data transformations
-  const chartSetup = useMemo(() => {
+  const chartSetup = useMemo<ChartScales>(() => {
     const unit = d3data[0]?.unit ?? "";
 
     const x = scaleBand()
@@ -67,7 +77,7 @@ export default function VerticalBarChart({
     if (!svgRef.current || !chartSetup) return;
 
     const { x, y, unit } = chartSetup;
-    const svg = select(svgRef.current);
+    const svg = select<SVGSVGElement, unknown>(svgRef.current);
 
     // Clear previous content
     svg.selectAll("*").remove();
@@ -79,7 +89,7 @@ export default function VerticalBarChart({
       .attr("viewBox", [0, 0, width, height]);
 
     // Add title
-    const title = svg.append("g").attr("class", "title");
+    const title = svg.append<SVGGElement>("g").attr("class", "title");
 
     title
       .append("text")
@@ -92,19 +102,19 @@ export default function VerticalBarChart({
 
     // Add X axis
     svg
-      .append("g")
+      .append<SVGGElement>("g")
       .attr("class", "xaxis")
       .attr("transform", `translate(0,${height - marginBottom})`)
-      .call(d3.axisBottom(x).tickSize(0) as any)
+      .call(d3.axisBottom(x).tickSize(0))
       .style("font-size", "14px")
       .style("font-weight", "bold");
 
     // Add Y axis
     const yAxis = svg
-      .append("g")
+      .append<SVGGElement>("g")
       .attr("class", "yaxis")
       .attr("transform", `translate(${marginLeft},0)`)
-      .call(d3.axisLeft(y).tickSize(0) as any)
+      .call(d3.axisLeft(y).tickSize(0))
       .style("font-size", "12px");
 
     yAxis.select(".domain").remove();
