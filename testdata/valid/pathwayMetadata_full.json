@@ -2,6 +2,25 @@
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "pathway-simple-full",
   "name": "Full Enums Pathway",
+  "publication": {
+    "title": { "fullName": "Example Title", "shortName": "Example" },
+    "subtitle": "An Example Subtitle",
+    "author": ["Foo bar", "Baz qux"],
+    "publisher": { "fullName": "Example Publisher", "shortName": "ExPub" },
+    "year": 2024,
+    "month": 6,
+    "day": 15,
+    "city": "Example City",
+    "doi": "10.1234/example.doi",
+    "isbn": "978-3-16-148410-0",
+    "issn": "1234-5678",
+    "links": [
+      {
+        "url": "https://example.com/publication",
+        "description": "Link to the publication."
+      }
+    ]
+  },
   "description": "Pathway with all enum values populated where possible.",
   "pathwayType": "Normative",
   "modelYearNetzero": 2050,
@@ -71,8 +90,6 @@
     { "name": "Shipping", "technologies": ["Maritime Efficiency"] },
     { "name": "Other", "technologies": ["Other"] }
   ],
-  "publisher": "Example Publisher",
-  "publicationYear": 2025,
   "pathwayOverview": "Example Overview.",
   "expertOverview": "Example Expert Recommendation.",
   "metric": [

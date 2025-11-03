@@ -2,6 +2,11 @@
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "sample-02",
   "name": "Sample Pathway 02",
+  "publication": {
+    "title": { "fullName": "Example Title" },
+    "publisher": { "fullName": "Example Publisher" },
+    "year": 2024
+  },
   "description": "Second Sample Pathway. uiop description.",
   "pathwayType": "Exploratory",
   "carbonBudget": 200,
@@ -11,8 +16,6 @@
   "ssp": "SSP2",
   "geography": ["EU"],
   "sectors": [{ "name": "Agriculture", "technologies": ["Agroforestry"] }],
-  "publisher": "Example Publisher",
-  "publicationYear": 2025,
   "pathwayOverview": "UIOP Overview.",
   "expertOverview": "Example Expert Recommendation.",
   "keyFeatures": {
