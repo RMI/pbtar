@@ -1,4 +1,7 @@
 import * as d3 from "d3";
+import { scaleBand, scaleLinear } from "d3-scale";
+import { max } from "d3-array";
+import { select } from "d3-selection";
 import { useRef, useEffect, useState, useMemo } from "react";
 
 interface DataPoint {
@@ -48,15 +51,13 @@ export default function VerticalBarChart({
   const chartSetup = useMemo(() => {
     const unit = d3data[0]?.unit ?? "";
 
-    const x = d3
-      .scaleBand()
+    const x = scaleBand()
       .domain(d3data.map((d) => d.year).sort())
       .range([marginLeft, width - marginRight])
       .padding(0.6);
 
-    const y = d3
-      .scaleLinear()
-      .domain([0, d3.max(d3data, (d) => d.value) ?? 0])
+    const y = scaleLinear()
+      .domain([0, max(d3data, (d) => d.value) ?? 0])
       .range([height - marginBottom, marginTop]);
 
     return { x, y, unit };
@@ -66,7 +67,7 @@ export default function VerticalBarChart({
     if (!svgRef.current || !chartSetup) return;
 
     const { x, y, unit } = chartSetup;
-    const svg = d3.select(svgRef.current);
+    const svg = select(svgRef.current);
 
     // Clear previous content
     svg.selectAll("*").remove();
