@@ -1,5 +1,39 @@
-import * as d3 from "d3";
-import { useRef, useEffect, useState } from "react";
+import { select, Selection } from "d3-selection";
+import { scaleUtc, scaleLinear } from "d3-scale";
+import { line } from "d3-shape";
+import { utcParse } from "d3-time-format";
+import { groups } from "d3-array";
+import { extent } from "d3-array";
+import { axisBottom, axisLeft } from "d3-axis";
+import { useRef, useEffect, useMemo } from "react";
+
+interface DataPoint {
+  sector: string;
+  metric: string;
+  year: string;
+  technology: string;
+  value: number;
+  geography: string;
+  unit: string;
+}
+
+interface ChartData {
+  data: DataPoint[];
+}
+
+interface MultiLineChartProps {
+  data: ChartData;
+  width?: number;
+  height?: number;
+  marginTop?: number;
+  marginRight?: number;
+  marginBottom?: number;
+  marginLeft?: number;
+  sector?: string;
+  metric?: string;
+}
+
+type GroupedData = [string, DataPoint[]];
 
 export default function MultiLineChart({
   data,
@@ -11,95 +45,139 @@ export default function MultiLineChart({
   marginLeft = 40,
   sector = "power",
   metric = "capacity",
-}) {
-  const [d3data, setD3data] = useState(
-    data.data.filter((d) => (d.sector == sector) & (d.metric == metric)),
+}: MultiLineChartProps) {
+  const d3data = useMemo(
+    () => data.data.filter((d) => d.sector === sector && d.metric === metric),
+    [data.data, sector, metric],
   );
-  const ref = useRef();
-  const gx = useRef();
-  const gy = useRef();
-  const lines = useRef();
-  const dots = useRef();
-  const selectRef = useRef();
 
-  useEffect(() => {
-    const svgElement = d3.select(ref.current);
-    const linesGroup = d3.select(lines.current);
-    const dotsGroup = d3.select(dots.current);
+  const ref = useRef<SVGSVGElement>(null);
+  const gx = useRef<SVGGElement>(null);
+  const gy = useRef<SVGGElement>(null);
+  const lines = useRef<SVGGElement>(null);
+  const dots = useRef<SVGGElement>(null);
+  const selectRef = useRef<HTMLSelectElement>(null);
 
-    const utc = d3.utcParse("%Y");
-    const years = d3.extent(d3data, (d) => utc(d.year));
-    const values = d3.extent(d3data, (d) => d.value);
-    const xticks = [...new Set(d3data.map((d) => d.year))].map(utc);
+  // Memoize scales and data transformations
+  const chartSetup = useMemo(() => {
+    const parse = utcParse("%Y");
+    const years = extent(d3data, (d) => parse(d.year));
+    const values = extent(d3data, (d) => d.value);
+    const xticks = Array.from(new Set(d3data.map((d) => d.year))).map(parse);
 
-    const x = d3.scaleUtc(years, [marginLeft, width - marginRight]);
-    const y = d3.scaleLinear(values, [height - marginBottom, marginTop]);
+    if (!years[0] || !years[1] || !values[0] || !values[1]) {
+      return null;
+    }
 
-    const line = d3
-      .line()
-      .x((d) => x(utc(d.year)))
+    const x = scaleUtc()
+      .domain(years)
+      .range([marginLeft, width - marginRight]);
+
+    const y = scaleLinear()
+      .domain(values)
+      .range([height - marginBottom, marginTop]);
+
+    const lineGenerator = line<DataPoint>()
+      .x((d) => x(parse(d.year) as Date))
       .y((d) => y(d.value));
 
-    d3.select(gx.current)
+    return { x, y, line: lineGenerator, xticks, parse };
+  }, [d3data, width, height, marginLeft, marginRight, marginTop, marginBottom]);
+
+  useEffect(() => {
+    if (
+      !ref.current ||
+      !gx.current ||
+      !gy.current ||
+      !lines.current ||
+      !chartSetup
+    )
+      return;
+
+    const { x, y, line: lineGenerator, xticks } = chartSetup;
+
+    type UpdateSelection = Selection<
+      SVGPathElement | SVGTextElement,
+      GroupedData,
+      SVGGElement,
+      unknown
+    >;
+
+    // Update X axis
+    select(gx.current)
       .transition()
       .duration(750)
-      .call(d3.axisBottom(x).tickValues(xticks))
+      .call(axisBottom(x).tickValues(xticks))
       .style("font-size", "14px")
       .style("font-weight", "bold");
 
-    d3.select(gy.current)
+    // Update Y axis
+    select(gy.current)
       .transition()
       .duration(750)
-      .call(d3.axisLeft(y))
+      .call(axisLeft(y))
       .style("font-size", "12px");
 
-    const groupedData = d3.groups(d3data, (d) => d.technology);
+    const groupedData = groups(d3data, (d) => d.technology);
+    const selectedTech = selectRef.current?.value;
 
-    const selectedTech = selectRef.current.value;
-
-    linesGroup
-      .selectAll(".line")
-      .data(groupedData)
-      .join("path")
+    // Update lines
+    (
+      select(lines.current)
+        .selectAll<SVGPathElement, GroupedData>(".line")
+        .data(groupedData)
+        .join("path") as UpdateSelection
+    )
       .attr("class", "line")
       .attr("fill", "none")
       .attr("stroke", (d) =>
-        d[0] == selectedTech ? "var(--color-donate)" : "var(--color-coal)",
+        d[0] === selectedTech ? "var(--color-donate)" : "var(--color-coal)",
       )
-      .attr("stroke-width", (d) => (d[0] == selectedTech ? 3 : 1))
-      .attr("d", (d) => line(d[1]))
-      .attr("data-year", (d) => d[1].year)
-      .attr("data-value", (d) => d[1].value)
-      .attr("data-geography", (d) => d[1].geography)
-      .attr("data-metric", (d) => d[1].metric)
-      .attr("data-sector", (d) => d[1].sector)
-      .attr("data-technology", (d) => d[1].technology)
-      .attr("data-unit", (d) => d[1].unit);
+      .attr("stroke-width", (d) => (d[0] === selectedTech ? 3 : 1))
+      .attr("d", (d) => lineGenerator(d[1]) || "")
+      .attr("data-year", (d) => d[1][0].year)
+      .attr("data-value", (d) => d[1][0].value)
+      .attr("data-geography", (d) => d[1][0].geography)
+      .attr("data-metric", (d) => d[1][0].metric)
+      .attr("data-sector", (d) => d[1][0].sector)
+      .attr("data-technology", (d) => d[1][0].technology)
+      .attr("data-unit", (d) => d[1][0].unit);
 
-    linesGroup
-      .selectAll(".label")
-      .data(groupedData)
-      .join("text")
+    // Update labels
+    (
+      select(lines.current)
+        .selectAll<SVGTextElement, GroupedData>(".label")
+        .data(groupedData)
+        .join("text") as UpdateSelection
+    )
       .text((d) => d[0])
       .attr("class", "label")
-      .attr("x", (d) => x(new Date(d[1].slice(-1)[0].year, 0, 1, 0, 0)))
-      .attr("y", (d) => y(d[1].slice(-1)[0].value))
-      .attr("dx", 12)
-      .attr("dy", 5);
-  }, [d3data]);
+      .attr("x", (d) => x(chartSetup.parse(d[1][d[1].length - 1].year) as Date))
+      .attr("y", (d) => y(d[1][d[1].length - 1].value))
+      .attr("dx", "12")
+      .attr("dy", "5");
+  }, [d3data, chartSetup]);
 
-  const highlightSelectedTech = (selectedTech) => {
-    d3.select(lines.current)
-      .selectAll(".line")
+  const highlightSelectedTech = (selectedTech: string): void => {
+    if (!lines.current) return;
+
+    select(lines.current)
+      .selectAll<SVGPathElement, GroupedData>(".line")
       .attr("stroke", (d) =>
-        d[0] == selectedTech ? "var(--color-donate)" : "var(--color-coal)",
+        d[0] === selectedTech ? "var(--color-donate)" : "var(--color-coal)",
       )
-      .attr("stroke-width", (d) => (d[0] == selectedTech ? 3 : 1));
+      .attr("stroke-width", (d) => (d[0] === selectedTech ? 3 : 1));
   };
 
-  function uniqueTechs(data) {
-    return [...d3.union(data.data.map((a) => a.technology).filter((n) => n))];
-  }
+  const uniqueTechs = (data: ChartData): string[] => {
+    return Array.from(
+      new Set(
+        data.data
+          .map((a) => a.technology)
+          .filter((n): n is string => n !== null && n !== undefined),
+      ),
+    );
+  };
 
   return (
     <>
@@ -109,7 +187,15 @@ export default function MultiLineChart({
           ref={selectRef}
           onChange={(e) => highlightSelectedTech(e.target.value)}
         >
-          {data && uniqueTechs(data).map((e) => <option value={e}>{e}</option>)}
+          {data &&
+            uniqueTechs(data).map((tech) => (
+              <option
+                key={tech}
+                value={tech}
+              >
+                {tech}
+              </option>
+            ))}
         </select>
       </label>
       <svg

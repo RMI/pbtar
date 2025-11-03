@@ -1,79 +1,124 @@
-import * as d3 from "d3";
-import { useRef, useEffect, useState } from "react";
+import { select, Selection } from "d3-selection";
+import { arc, pie, PieArcDatum, DefaultArcObject } from "d3-shape";
+import { interpolate } from "d3-interpolate";
+import { rgb } from "d3-color";
+import { useRef, useEffect, useState, useMemo } from "react";
+
+interface DataPoint {
+  sector: string;
+  metric: string;
+  year: number;
+  technology: keyof typeof technologyColors;
+  value: number;
+}
+
+interface ChartData {
+  data: DataPoint[];
+}
+
+interface DonutChartProps {
+  data: ChartData;
+  width?: number;
+  sector?: string;
+  metric?: string;
+}
+
+const technologyColors = {
+  coal: "#DF4E39",
+  oil: "#AB3C2C",
+  gas: "#F7988B",
+  other: "#B3BCC5",
+  biomass: "#91CBF2",
+  hydro: "#2888C9",
+  wind: "#005A96",
+  solar: "#003B63",
+} as const;
 
 export default function DonutChart({
   data,
   width = 400,
   sector = "power",
   metric = "capacity",
-}) {
-  const [d3data, setD3data] = useState(
+}: DonutChartProps) {
+  const [d3data, setD3data] = useState<DataPoint[]>(() =>
     data.data.filter(
-      (d) => (d.sector == sector) & (d.metric == metric) & (d.year == 2022),
+      (d) => d.sector === sector && d.metric === metric && d.year === 2022,
     ),
   );
-  const ref = useRef();
+
+  const ref = useRef<SVGSVGElement>(null);
 
   const height = Math.min(500, width);
   const outerRadius = height / 2 - 10;
   const innerRadius = outerRadius * 0.5;
 
-  const arc = d3
-    .arc()
-    .innerRadius(innerRadius)
-    .outerRadius(outerRadius)
-    .padAngle(0.005);
+  // Create arc generator with explicit typing
+  const createArc = useMemo(() => {
+    const arcGenerator = arc<PieArcDatum<DataPoint>, DefaultArcObject>()
+      .innerRadius(innerRadius)
+      .outerRadius(outerRadius)
+      .padAngle(0.005);
+    return arcGenerator;
+  }, [innerRadius, outerRadius]);
 
-  function show(d) {
-    const big_percent = 0.15;
-    const threshold = Math.PI * 2 * big_percent;
-    return d.endAngle - d.startAngle > threshold ? "visible" : "hidden";
-  }
-
-  function percent(d) {
-    return (
-      Math.round(((d.endAngle - d.startAngle) / (Math.PI * 2)) * 100) + "%"
-    );
-  }
-
-  const pie = d3
-    .pie()
-    .sort(null)
-    .value((d) => d.value);
-
-  function isDark(color) {
-    //http://www.w3.org/TR/AERT#color-contrast
-    const rgb = d3.rgb(color);
-    return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000 < 128;
-  }
+  // Create pie generator with explicit typing
+  const createPie = useMemo(() => {
+    const pieGenerator = pie<DataPoint>()
+      .sort(null)
+      .value((d) => d.value);
+    return pieGenerator;
+  }, []);
 
   useEffect(() => {
-    const svgElement = d3.select(ref.current);
+    if (!ref.current) return;
 
-    svgElement.attr("viewBox", [-width / 2, -height / 2, width, height]);
-
-    const technologyColors = {
-      coal: "#DF4E39",
-      oil: "#AB3C2C",
-      gas: "#F7988B",
-      other: "#B3BCC5",
-      biomass: "#91CBF2",
-      hydro: "#2888C9",
-      wind: "#005A96",
-      solar: "#003B63",
+    const show = (d: PieArcDatum<DataPoint>): "visible" | "hidden" => {
+      const big_percent = 0.15;
+      const threshold = Math.PI * 2 * big_percent;
+      return d.endAngle - d.startAngle > threshold ? "visible" : "hidden";
     };
 
-    const d3dataSorted = d3data.sort(
+    const percent = (d: PieArcDatum<DataPoint>): string => {
+      return `${Math.round(((d.endAngle - d.startAngle) / (Math.PI * 2)) * 100)}%`;
+    };
+
+    const isDark = (color: string): boolean => {
+      const rgbColor = rgb(color);
+      return (
+        (rgbColor.r * 299 + rgbColor.g * 587 + rgbColor.b * 114) / 1000 < 128
+      );
+    };
+
+    const arcTween = (d: PieArcDatum<DataPoint>) => {
+      const interpolator = interpolate({ startAngle: 0, endAngle: 0 }, d);
+      return (t: number) => createArc(interpolator(t)) || "";
+    };
+
+    type UpdateSelection = Selection<
+      SVGPathElement | SVGTextElement,
+      PieArcDatum<DataPoint>,
+      SVGSVGElement,
+      unknown
+    >;
+
+    const svgElement = select<SVGSVGElement, unknown>(ref.current);
+    svgElement.attr("viewBox", [-width / 2, -height / 2, width, height]);
+
+    const d3dataSorted = [...d3data].sort(
       (a, b) =>
-        Object.keys(technologyColors).indexOf(a.technology) >
+        Object.keys(technologyColors).indexOf(a.technology) -
         Object.keys(technologyColors).indexOf(b.technology),
     );
 
-    const path = svgElement
-      .datum(d3dataSorted)
-      .selectAll("path")
-      .data(pie)
-      .join("path")
+    const pieData = createPie(d3dataSorted);
+
+    // Create and update paths
+    (
+      svgElement
+        .selectAll<SVGPathElement, PieArcDatum<DataPoint>>("path")
+        .data(pieData)
+        .join("path") as UpdateSelection
+    )
       .attr("fill", (d) => technologyColors[d.data.technology])
       .attr("data-year", (d) => d.data.year)
       .attr("data-value", (d) => d.data.value)
@@ -82,81 +127,98 @@ export default function DonutChart({
       .duration(750)
       .attrTween("d", arcTween);
 
-    svgElement
-      .datum(d3dataSorted)
-      .selectAll(".label")
-      .data(pie)
-      .join("text")
+    // Create and update labels
+    (
+      svgElement
+        .selectAll<SVGTextElement, PieArcDatum<DataPoint>>(".label")
+        .data(pieData)
+        .join("text") as UpdateSelection
+    )
       .text((d) => d.data.technology)
       .attr("class", "label")
       .attr("text-anchor", "middle")
-      .attr("dy", -9)
+      .attr("dy", "-9")
       .attr("alignment-baseline", "middle")
       .attr("font-weight", "bold")
-      .attr("fill", (d, i) =>
+      .attr("fill", (d) =>
         isDark(technologyColors[d.data.technology]) ? "white" : "black",
       )
-      .attr("visibility", (d) => show(d))
+      .attr("visibility", show)
       .transition()
-      .attr("x", (d) => arc.centroid(d)[0])
-      .attr("y", (d) => arc.centroid(d)[1])
-      .duration(750);
+      .duration(750)
+      .attr("x", (d) => {
+        const centroid = createArc.centroid(d);
+        return centroid[0];
+      })
+      .attr("y", (d) => {
+        const centroid = createArc.centroid(d);
+        return centroid[1];
+      });
 
-    svgElement
-      .datum(d3dataSorted)
-      .selectAll(".label_value")
-      .data(pie)
-      .join("text")
-      .text((d) => percent(d))
+    // Create and update value labels
+    (
+      svgElement
+        .selectAll<SVGTextElement, PieArcDatum<DataPoint>>(".label_value")
+        .data(pieData)
+        .join("text") as UpdateSelection
+    )
+      .text(percent)
       .attr("class", "label_value")
       .attr("text-anchor", "middle")
-      .attr("dy", 9)
+      .attr("dy", "9")
       .attr("alignment-baseline", "middle")
-      .attr("fill", (d, i) =>
+      .attr("fill", (d) =>
         isDark(technologyColors[d.data.technology]) ? "white" : "black",
       )
-      .attr("visibility", (d) => show(d))
+      .attr("visibility", show)
       .transition()
-      .attr("x", (d) => arc.centroid(d)[0])
-      .attr("y", (d) => arc.centroid(d)[1])
-      .duration(750);
-  }, [d3data]);
+      .duration(750)
+      .attr("x", (d) => {
+        const centroid = createArc.centroid(d);
+        return centroid[0];
+      })
+      .attr("y", (d) => {
+        const centroid = createArc.centroid(d);
+        return centroid[1];
+      });
+  }, [d3data, width, height, createArc, createPie]);
 
-  function arcTween(a) {
-    const i = d3.interpolate(this._current, a);
-    this._current = i(0);
-    return (t) => arc(i(t));
-  }
+  const uniqueYears = (data: ChartData): number[] => {
+    return Array.from(new Set(data.data.map((d) => d.year))).sort();
+  };
 
-  function uniqueYears(data) {
-    return data.data
-      .reduce((a, b) => (a.indexOf(b.year) < 0 ? a.concat([b.year]) : a), [])
-      .sort();
-  }
-
-  const filterData = (selectedYear) =>
+  const filterData = (selectedYear: string): void => {
     setD3data(
       data.data.filter(
         (d) =>
-          (d.sector == sector) &
-          (d.metric == metric) &
-          (d.year == selectedYear),
+          d.sector === sector &&
+          d.metric === metric &&
+          d.year === Number(selectedYear),
       ),
     );
+  };
 
   return (
     <>
       <label>
         Year:
         <select onChange={(e) => filterData(e.target.value)}>
-          {data && uniqueYears(data).map((e) => <option value={e}>{e}</option>)}
+          {data &&
+            uniqueYears(data).map((e) => (
+              <option
+                key={e}
+                value={e}
+              >
+                {e}
+              </option>
+            ))}
         </select>
       </label>
       <svg
         ref={ref}
         width={width}
         height={height}
-      ></svg>
+      />
     </>
   );
 }

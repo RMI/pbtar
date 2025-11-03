@@ -1,5 +1,40 @@
-import * as d3 from "d3";
-import { useRef, useEffect, useState } from "react";
+import { select } from "d3-selection";
+import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from "d3-scale";
+import { max } from "d3-array";
+import { axisBottom, axisLeft } from "d3-axis";
+import "d3-transition";
+import { useRef, useEffect, useMemo } from "react";
+
+interface DataPoint {
+  sector: string;
+  metric: string;
+  year: string;
+  value: number;
+  unit: string;
+}
+
+interface ChartData {
+  data: DataPoint[];
+}
+
+interface VerticalBarChartProps {
+  data: ChartData;
+  width?: number;
+  height?: number;
+  marginTop?: number;
+  marginRight?: number;
+  marginBottom?: number;
+  marginLeft?: number;
+  sector?: string;
+  metric?: string;
+  barColor?: string;
+}
+
+interface ChartScales {
+  x: ScaleBand<string>;
+  y: ScaleLinear<number, number>;
+  unit: string;
+}
 
 export default function VerticalBarChart({
   data,
@@ -12,83 +47,127 @@ export default function VerticalBarChart({
   sector = "power",
   metric = "emissionsIntensity",
   barColor = "midnightblue",
-}) {
-  const [d3data, setD3data] = useState(
-    data.data.filter((d) => (d.sector == sector) & (d.metric == metric)),
+}: VerticalBarChartProps) {
+  const d3data = useMemo(
+    () => data.data.filter((d) => d.sector === sector && d.metric === metric),
+    [data.data, sector, metric],
   );
-  const svgRef = useRef();
 
-  useEffect(() => {
-    const svg = d3.select(svgRef.current);
+  const ref = useRef<SVGSVGElement>(null);
+  const gx = useRef<SVGGElement>(null);
+  const gy = useRef<SVGGElement>(null);
+  const bars = useRef<SVGGElement>(null);
+  const title = useRef<SVGGElement>(null);
 
-    const unit = d3data.map((d) => d.unit)[0];
+  const chartSetup = useMemo<ChartScales>(() => {
+    const unit = d3data[0]?.unit ?? "";
 
-    const x = d3
-      .scaleBand()
+    const x = scaleBand()
       .domain(d3data.map((d) => d.year).sort())
       .range([marginLeft, width - marginRight])
       .padding(0.6);
 
-    const y = d3
-      .scaleLinear()
-      .domain([0, d3.max(d3data, (d) => d.value)])
+    const y = scaleLinear()
+      .domain([0, max(d3data, (d) => d.value) ?? 0])
       .range([height - marginBottom, marginTop]);
 
-    svg
-      .attr("width", width)
-      .attr("height", height)
-      .attr("viewBox", [0, 0, width, height]);
+    return { x, y, unit };
+  }, [d3data, width, height, marginLeft, marginRight, marginTop, marginBottom]);
 
-    const title = svg.append("g").attr("class", "title");
+  useEffect(() => {
+    if (
+      !ref.current ||
+      !gx.current ||
+      !gy.current ||
+      !bars.current ||
+      !title.current ||
+      !chartSetup
+    )
+      return;
 
-    title
-      .append("text")
-      .text(metric)
-      .attr("dy", 15)
-      .attr("font-weight", "bold")
-      .attr("font-variant", "small-caps");
+    const { x, y, unit } = chartSetup;
 
-    title.append("text").text(unit).attr("dy", 30);
+    // Update title
+    select(title.current)
+      .selectAll("text")
+      .data([metric, unit])
+      .join("text")
+      .text((d) => d)
+      .attr("dy", (_, i) => (i === 0 ? "15" : "30"))
+      .attr("font-weight", (_, i) => (i === 0 ? "bold" : "normal"))
+      .attr("font-variant", (_, i) => (i === 0 ? "small-caps" : "normal"));
 
-    svg
-      .append("g")
-      .attr("class", "xaxis")
-      .attr("transform", `translate(0,${height - marginBottom})`)
-      .call(d3.axisBottom(x).tickSize(0))
+    // Update X axis
+    select(gx.current)
+      .transition()
+      .duration(750)
+      .call(axisBottom(x).tickSize(0))
       .style("font-size", "14px")
       .style("font-weight", "bold");
 
-    svg
-      .append("g")
-      .attr("class", "yaxis")
-      .attr("transform", `translate(${marginLeft},0)`)
-      .call(d3.axisLeft(y).tickSize(0))
-      .style("font-size", "12px")
-      .call((g) => g.select(".domain").remove())
-      .call((g) =>
-        g
-          .selectAll(".tick line")
-          .clone()
-          .attr("x2", width)
-          .attr("stroke-opacity", 0.1),
-      );
+    // Update Y axis
+    select(gy.current)
+      .transition()
+      .duration(750)
+      .call(axisLeft(y).tickSize(0))
+      .style("font-size", "12px");
 
-    svg
-      .append("g")
-      .attr("class", "bars")
+    select(gy.current).select(".domain").remove();
+
+    select(gy.current)
+      .selectAll(".tick line")
+      .clone()
+      .attr("x2", width)
+      .attr("stroke-opacity", "0.1");
+
+    // Update bars
+    select(bars.current)
       .attr("fill", barColor)
-      .selectAll()
+      .selectAll<SVGRectElement, DataPoint>("rect")
       .data(d3data)
       .join("rect")
-      .attr("x", (d) => x(d.year))
+      .attr("x", (d) => x(d.year) ?? 0)
       .attr("y", (d) => y(d.value))
       .attr("height", (d) => y(0) - y(d.value))
       .attr("width", x.bandwidth());
-  }, [d3data]);
+  }, [
+    d3data,
+    width,
+    height,
+    marginTop,
+    marginBottom,
+    marginLeft,
+    marginRight,
+    metric,
+    barColor,
+    chartSetup,
+  ]);
 
   return (
-    <>
-      <svg ref={svgRef} />
-    </>
+    <svg
+      ref={ref}
+      width={width}
+      height={height}
+      viewBox={[0, 0, width, height]}
+    >
+      <g
+        ref={title}
+        className="title"
+      />
+      <g
+        ref={gx}
+        className="xaxis"
+        transform={`translate(0, ${height - marginBottom})`}
+      />
+      <g
+        ref={gy}
+        className="yaxis"
+        transform={`translate(${marginLeft}, 0)`}
+      />
+      <g
+        ref={bars}
+        className="bars"
+      />
+    </svg>
   );
 }

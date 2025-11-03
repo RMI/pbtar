@@ -1,5 +1,47 @@
-import * as d3 from "d3";
-import { useRef, useEffect, useState } from "react";
+import { select, Selection } from "d3-selection";
+import { scaleUtc, scaleLinear } from "d3-scale";
+import { area, stack, Series, SeriesPoint } from "d3-shape";
+import { utcParse } from "d3-time-format";
+import { group } from "d3-array";
+import { extent } from "d3-array";
+import { axisBottom, axisLeft } from "d3-axis";
+import { stackOffsetExpand } from "d3-shape";
+import { useRef, useEffect, useState, useMemo } from "react";
+
+interface DataPoint {
+  sector: string;
+  metric: string;
+  year: string;
+  technology: keyof typeof technologyColors;
+  value: number;
+}
+
+interface ChartData {
+  data: DataPoint[];
+}
+
+interface NormalizedStackedAreaChartProps {
+  data: ChartData;
+  width?: number;
+  height?: number;
+  marginTop?: number;
+  marginRight?: number;
+  marginBottom?: number;
+  marginLeft?: number;
+  sector?: string;
+  metric?: string;
+}
+
+const technologyColors = {
+  coal: "#DF4E39",
+  oil: "#AB3C2C",
+  gas: "#F7988B",
+  other: "#B3BCC5",
+  biomass: "#91CBF2",
+  hydro: "#2888C9",
+  wind: "#005A96",
+  solar: "#003B63",
+} as const;
 
 export default function NormalizedStackedAreaChart({
   data,
@@ -11,103 +53,140 @@ export default function NormalizedStackedAreaChart({
   marginLeft = 40,
   sector = "power",
   metric = "capacity",
-}) {
-  const [d3data, setD3data] = useState(
-    data.data.filter((d) => (d.sector == sector) & (d.metric == metric)),
+}: NormalizedStackedAreaChartProps) {
+  const [d3data] = useState<DataPoint[]>(() =>
+    data.data.filter((d) => d.sector === sector && d.metric === metric),
   );
-  const ref = useRef();
-  const gx = useRef();
-  const gy = useRef();
-  const areas = useRef();
 
-  useEffect(() => {
-    const svgElement = d3.select(ref.current);
-    const areasGroup = d3.select(areas.current);
+  const ref = useRef<SVGSVGElement>(null);
+  const gx = useRef<SVGGElement>(null);
+  const gy = useRef<SVGGElement>(null);
+  const areas = useRef<SVGGElement>(null);
 
-    const utc = d3.utcParse("%Y");
-    const years = d3.extent(d3data, (d) => utc(d.year));
-    const values = d3.extent(d3data, (d) => d.value);
-    const xticks = [...new Set(d3data.map((d) => d.year))].map(utc);
+  // Memoize scales and data transformations
+  const chartSetup = useMemo(() => {
+    const parse = utcParse("%Y");
+    const years = extent(d3data, (d) => parse(d.year) ?? new Date());
+    const xticks = Array.from(new Set(d3data.map((d) => d.year)))
+      .map(parse)
+      .filter((d): d is Date => d !== null);
 
-    const x = d3.scaleUtc(years, [marginLeft, width - marginRight]);
+    if (!years[0] || !years[1]) {
+      return null;
+    }
 
-    const y = d3.scaleLinear().rangeRound([height - marginBottom, marginTop]);
+    const x = scaleUtc()
+      .domain(years)
+      .range([marginLeft, width - marginRight]);
 
-    const technologyColors = {
-      coal: "#DF4E39",
-      oil: "#AB3C2C",
-      gas: "#F7988B",
-      other: "#B3BCC5",
-      biomass: "#91CBF2",
-      hydro: "#2888C9",
-      wind: "#005A96",
-      solar: "#003B63",
-    };
+    const y = scaleLinear()
+      .domain([0, 1])
+      .range([height - marginBottom, marginTop]);
 
-    const sortedKeys = Array.from(
-      d3.union(d3data.map((d) => d.technology)),
+    const technologies = Array.from(
+      new Set(d3data.map((d) => d.technology)),
     ).sort(
       (a, b) =>
-        Object.keys(technologyColors).indexOf(a) >
+        Object.keys(technologyColors).indexOf(a) -
         Object.keys(technologyColors).indexOf(b),
     );
 
-    const series = d3
-      .stack()
-      .offset(d3.stackOffsetExpand)
-      .keys(sortedKeys)
-      .value(([, D], key) => D.get(key).value)(
-      d3.index(
-        d3data,
-        (d) => d.year,
-        (d) => d.technology,
-      ),
+    // Group data by year
+    const groupedData = Array.from(
+      group(d3data, (d) => d.year),
+      ([year, values]) => {
+        const yearData: Record<string, number> = { year };
+        technologies.forEach((tech) => {
+          const techValue =
+            values.find((v) => v.technology === tech)?.value ?? 0;
+          yearData[tech] = techValue;
+        });
+        return yearData;
+      },
     );
 
-    const area = d3
-      .area()
-      .x((d) => x(utc(d.data[0])))
+    const stackGenerator = stack<Record<string, number | string>>()
+      .offset(stackOffsetExpand)
+      .keys(technologies);
+
+    const series = stackGenerator(groupedData);
+
+    const areaGenerator = area<
+      SeriesPoint<Series<Record<string, number | string>, string>>
+    >()
+      .x((d) => x(parse(d.data.year as string) ?? new Date()))
       .y0((d) => y(d[0]))
       .y1((d) => y(d[1]));
 
-    d3.select(gx.current)
+    return { x, y, series, area: areaGenerator, xticks, parse };
+  }, [d3data, width, height, marginLeft, marginRight, marginTop, marginBottom]);
+
+  useEffect(() => {
+    if (
+      !ref.current ||
+      !gx.current ||
+      !gy.current ||
+      !areas.current ||
+      !chartSetup
+    )
+      return;
+
+    const { x, y, series, area: areaGenerator, xticks } = chartSetup;
+
+    type UpdateSelection = Selection<
+      SVGPathElement,
+      Series<Record<string, number | string>, string>,
+      SVGGElement,
+      unknown
+    >;
+
+    // Update X axis
+    select(gx.current)
       .transition()
       .duration(750)
-      .call(d3.axisBottom(x).tickValues(xticks))
+      .call(axisBottom(x).tickValues(xticks))
       .style("font-size", "14px")
       .style("font-weight", "bold");
 
-    d3.select(gy.current)
+    // Update Y axis
+    select(gy.current)
       .transition()
       .duration(750)
-      .call(d3.axisLeft(y).ticks(5, "%"))
+      .call(axisLeft(y).ticks(5, "%"))
       .style("font-size", "12px");
 
-    areasGroup
-      .selectAll()
-      .data(series)
-      .join("path")
-      .attr("fill", (d) => technologyColors[d.key])
-      .attr("d", (d) => area(d));
-  }, [d3data]);
+    // Update areas
+    (
+      select(areas.current)
+        .selectAll<
+          SVGPathElement,
+          Series<Record<string, number | string>, string>
+        >("path")
+        .data(series)
+        .join("path") as UpdateSelection
+    )
+      .attr(
+        "fill",
+        (d) => technologyColors[d.key as keyof typeof technologyColors],
+      )
+      .attr("d", areaGenerator);
+  }, [d3data, chartSetup]);
 
   return (
-    <>
-      <svg
-        ref={ref}
-        width={width}
-        height={height}
-      >
-        <g
-          ref={gx}
-          transform={`translate(0, ${height - marginBottom})`}
-        />
-        <g
-          ref={gy}
-          transform={`translate(${marginLeft}, 0)`}
-        />
-        <g ref={areas} />
-      </svg>
-    </>
+    <svg
+      ref={ref}
+      width={width}
+      height={height}
+    >
+      <g
+        ref={gx}
+        transform={`translate(0, ${height - marginBottom})`}
+      />
+      <g
+        ref={gy}
+        transform={`translate(${marginLeft}, 0)`}
+      />
+      <g ref={areas} />
+    </svg>
   );
 }
