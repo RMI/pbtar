@@ -1,4 +1,7 @@
-import * as d3 from "d3";
+import { select, Selection } from "d3-selection";
+import { scaleLinear, ScaleLinear } from "d3-scale";
+import { lineRadial, curveLinearClosed } from "d3-shape";
+import { range, max } from "d3-array";
 import { useRef, useEffect, useState, useMemo } from "react";
 
 interface DataPoint {
@@ -49,9 +52,13 @@ export default function RadarChart({
     const dotRadius = 3;
     const radius = width / 2 - 2 * marginHorizontal;
     const axesDomain = Array.from(new Set(d3data.map((d) => d.technology)));
-    const maxValue = d3.max(d3data, (d) => d.value) ?? 0;
+    const maxValue = max(d3data, (d) => d.value) ?? 0;
     const angleSlice = (Math.PI * 2) / axesDomain.length;
     const axisColor = "#CDCDCD";
+
+    const rScale: ScaleLinear<number, number> = scaleLinear()
+      .domain([0, maxValue])
+      .range([0, radius]);
 
     return {
       axisLabelFactor,
@@ -62,6 +69,7 @@ export default function RadarChart({
       maxValue,
       angleSlice,
       axisColor,
+      rScale,
     };
   }, [d3data, width, marginHorizontal]);
 
@@ -77,18 +85,29 @@ export default function RadarChart({
       maxValue,
       angleSlice,
       axisColor,
+      rScale,
     } = chartConfig;
 
-    const svg = d3
-      .select(ref.current)
+    type CircleSelection = Selection<
+      SVGCircleElement,
+      number,
+      SVGGElement,
+      unknown
+    >;
+    type AxisSelection = Selection<SVGGElement, string, SVGGElement, unknown>;
+    type DotSelection = Selection<
+      SVGCircleElement,
+      DataPoint,
+      SVGGElement,
+      unknown
+    >;
+
+    const svg = select<SVGSVGElement, unknown>(ref.current)
       .attr("width", width)
       .attr("height", height);
 
-    const rScale = d3.scaleLinear().domain([0, maxValue]).range([0, radius]);
-
-    const radarLine = d3
-      .lineRadial<number>()
-      .curve(d3.curveLinearClosed)
+    const radarLine = lineRadial<number>()
+      .curve(curveLinearClosed)
       .radius((d) => rScale(d))
       .angle((_, i) => i * angleSlice);
 
@@ -108,23 +127,26 @@ export default function RadarChart({
     const axisGrid = container.append("g").attr("class", "axisWrapper");
 
     // Draw the concentric circles
-    axisGrid
-      .selectAll(".levels")
-      .data(d3.range(1, axisCircles + 1).reverse())
-      .enter()
-      .append("circle")
+    (
+      axisGrid
+        .selectAll<SVGCircleElement, number>(".levels")
+        .data(range(1, axisCircles + 1).reverse())
+        .enter()
+        .append("circle") as CircleSelection
+    )
       .attr("class", "gridCircle")
       .attr("r", (d) => (radius / axisCircles) * d)
       .style("fill", "none")
       .style("stroke", axisColor);
 
     // Draw the axes
-    const axis = axisGrid
-      .selectAll(".axis")
-      .data(axesDomain)
-      .enter()
-      .append("g")
-      .attr("class", "axis");
+    const axis = (
+      axisGrid
+        .selectAll<SVGGElement, string>(".axis")
+        .data(axesDomain)
+        .enter()
+        .append("g") as AxisSelection
+    ).attr("class", "axis");
 
     // Draw the lines
     axis
@@ -171,17 +193,19 @@ export default function RadarChart({
     // Draw the radar path
     plots
       .append("path")
-      .attr("d", radarLine(d3data.map((d) => d.value)))
+      .attr("d", radarLine(d3data.map((d) => d.value)) ?? "")
       .attr("fill", "steelblue")
       .attr("fill-opacity", "0.5")
       .attr("stroke", "steelblue")
       .attr("stroke-width", "2");
 
     // Add the dots
-    plots
-      .selectAll("circle")
-      .data(d3data)
-      .join("circle")
+    (
+      plots
+        .selectAll<SVGCircleElement, DataPoint>("circle")
+        .data(d3data)
+        .join("circle") as DotSelection
+    )
       .attr("r", dotRadius)
       .attr(
         "cx",
