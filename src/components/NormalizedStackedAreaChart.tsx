@@ -2,7 +2,7 @@ import { select, Selection } from "d3-selection";
 import { scaleUtc, scaleLinear } from "d3-scale";
 import { area, stack, Series, SeriesPoint } from "d3-shape";
 import { utcParse } from "d3-time-format";
-import { index } from "d3-array";
+import { group } from "d3-array";
 import { extent } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { stackOffsetExpand } from "d3-shape";
@@ -83,7 +83,7 @@ export default function NormalizedStackedAreaChart({
       .domain([0, 1])
       .range([height - marginBottom, marginTop]);
 
-    const sortedKeys = Array.from(
+    const technologies = Array.from(
       new Set(d3data.map((d) => d.technology)),
     ).sort(
       (a, b) =>
@@ -91,23 +91,24 @@ export default function NormalizedStackedAreaChart({
         Object.keys(technologyColors).indexOf(b),
     );
 
-    const stackGenerator = stack<Map<string, DataPoint>, string>()
+    // Group data by year
+    const groupedData = Array.from(group(d3data, d => d.year), ([year, values]) => {
+      const yearData: Record<string, number> = { year };
+      technologies.forEach(tech => {
+        const techValue = values.find(v => v.technology === tech)?.value ?? 0;
+        yearData[tech] = techValue;
+      });
+      return yearData;
+    });
+
+    const stackGenerator = stack<Record<string, number | string>>()
       .offset(stackOffsetExpand)
-      .keys(sortedKeys)
-      .value((d, key) => d.get(key)?.value ?? 0);
+      .keys(technologies);
 
-    const series = stackGenerator(
-      index(
-        d3data,
-        (d) => d.year,
-        (d) => d.technology,
-      ),
-    );
+    const series = stackGenerator(groupedData);
 
-    const areaGenerator = area<
-      SeriesPoint<Series<Map<string, DataPoint>, string>>
-    >()
-      .x((d) => x(parse(d.data[0]) ?? new Date()))
+    const areaGenerator = area<SeriesPoint<Series<Record<string, number | string>, string>>>()
+      .x((d) => x(parse(d.data.year as string) ?? new Date()))
       .y0((d) => y(d[0]))
       .y1((d) => y(d[1]));
 
@@ -115,20 +116,13 @@ export default function NormalizedStackedAreaChart({
   }, [d3data, width, height, marginLeft, marginRight, marginTop, marginBottom]);
 
   useEffect(() => {
-    if (
-      !ref.current ||
-      !gx.current ||
-      !gy.current ||
-      !areas.current ||
-      !chartSetup
-    )
-      return;
+    if (!ref.current || !gx.current || !gy.current || !areas.current || !chartSetup) return;
 
     const { x, y, series, area: areaGenerator, xticks } = chartSetup;
 
     type UpdateSelection = Selection<
       SVGPathElement,
-      Series<Map<string, DataPoint>, string>,
+      Series<Record<string, number | string>, string>,
       SVGGElement,
       unknown
     >;
@@ -149,19 +143,11 @@ export default function NormalizedStackedAreaChart({
       .style("font-size", "12px");
 
     // Update areas
-    (
-      select(areas.current)
-        .selectAll<
-          SVGPathElement,
-          Series<Map<string, DataPoint>, string>
-        >("path")
-        .data(series)
-        .join("path") as UpdateSelection
-    )
-      .attr(
-        "fill",
-        (d) => technologyColors[d.key as keyof typeof technologyColors],
-      )
+    (select(areas.current)
+      .selectAll<SVGPathElement, Series<Record<string, number | string>, string>>("path")
+      .data(series)
+      .join("path") as UpdateSelection)
+      .attr("fill", (d) => technologyColors[d.key as keyof typeof technologyColors])
       .attr("d", areaGenerator);
   }, [d3data, chartSetup]);
 
