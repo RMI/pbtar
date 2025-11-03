@@ -1,4 +1,11 @@
-import * as d3 from "d3";
+import { select, Selection } from "d3-selection";
+import { scaleUtc, scaleLinear } from "d3-scale";
+import { area, stack, Series, SeriesPoint } from "d3-shape";
+import { utcParse } from "d3-time-format";
+import { index } from "d3-array";
+import { extent } from "d3-array";
+import { axisBottom, axisLeft } from "d3-axis";
+import { stackOffsetExpand } from "d3-shape";
 import { useRef, useEffect, useState, useMemo } from "react";
 
 interface DataPoint {
@@ -47,7 +54,7 @@ export default function NormalizedStackedAreaChart({
   sector = "power",
   metric = "capacity",
 }: NormalizedStackedAreaChartProps) {
-  const [d3data, setD3data] = useState<DataPoint[]>(() =>
+  const [d3data] = useState<DataPoint[]>(() =>
     data.data.filter((d) => d.sector === sector && d.metric === metric),
   );
 
@@ -58,18 +65,23 @@ export default function NormalizedStackedAreaChart({
 
   // Memoize scales and data transformations
   const chartSetup = useMemo(() => {
-    const utc = d3.utcParse("%Y");
-    const years = d3.extent(d3data, (d) => utc(d.year));
-    const xticks = Array.from(new Set(d3data.map((d) => d.year))).map(utc);
+    const parse = utcParse("%Y");
+    const years = extent(d3data, (d) => parse(d.year) ?? new Date());
+    const xticks = Array.from(new Set(d3data.map((d) => d.year)))
+      .map(parse)
+      .filter((d): d is Date => d !== null);
 
-    if (!years[0] || !years[1]) return null;
+    if (!years[0] || !years[1]) {
+      return null;
+    }
 
-    const x = d3
-      .scaleUtc()
+    const x = scaleUtc()
       .domain(years)
       .range([marginLeft, width - marginRight]);
 
-    const y = d3.scaleLinear().rangeRound([height - marginBottom, marginTop]);
+    const y = scaleLinear()
+      .domain([0, 1])
+      .range([height - marginBottom, marginTop]);
 
     const sortedKeys = Array.from(
       new Set(d3data.map((d) => d.technology)),
@@ -79,25 +91,27 @@ export default function NormalizedStackedAreaChart({
         Object.keys(technologyColors).indexOf(b),
     );
 
-    const series = d3
-      .stack<Map<string, DataPoint>, string>()
-      .offset(d3.stackOffsetExpand)
+    const stackGenerator = stack<Map<string, DataPoint>, string>()
+      .offset(stackOffsetExpand)
       .keys(sortedKeys)
-      .value(([, D], key) => D.get(key)?.value ?? 0)(
-      d3.index(
+      .value((d, key) => d.get(key)?.value ?? 0);
+
+    const series = stackGenerator(
+      index(
         d3data,
         (d) => d.year,
         (d) => d.technology,
       ),
     );
 
-    const area = d3
-      .area<d3.SeriesPoint<d3.Series<Map<string, DataPoint>, string>>>()
-      .x((d) => x(utc(d.data[0]) as Date))
+    const areaGenerator = area<
+      SeriesPoint<Series<Map<string, DataPoint>, string>>
+    >()
+      .x((d) => x(parse(d.data[0]) ?? new Date()))
       .y0((d) => y(d[0]))
       .y1((d) => y(d[1]));
 
-    return { x, y, series, area, xticks, utc };
+    return { x, y, series, area: areaGenerator, xticks, parse };
   }, [d3data, width, height, marginLeft, marginRight, marginTop, marginBottom]);
 
   useEffect(() => {
@@ -110,36 +124,45 @@ export default function NormalizedStackedAreaChart({
     )
       return;
 
-    const { x, y, series, area, xticks } = chartSetup;
-    const areasGroup = d3.select(areas.current);
+    const { x, y, series, area: areaGenerator, xticks } = chartSetup;
+
+    type UpdateSelection = Selection<
+      SVGPathElement,
+      Series<Map<string, DataPoint>, string>,
+      SVGGElement,
+      unknown
+    >;
 
     // Update X axis
-    d3.select(gx.current)
+    select(gx.current)
       .transition()
       .duration(750)
-      .call(d3.axisBottom(x).tickValues(xticks) as any)
+      .call(axisBottom(x).tickValues(xticks))
       .style("font-size", "14px")
       .style("font-weight", "bold");
 
     // Update Y axis
-    d3.select(gy.current)
+    select(gy.current)
       .transition()
       .duration(750)
-      .call(d3.axisLeft(y).ticks(5, "%") as any)
+      .call(axisLeft(y).ticks(5, "%"))
       .style("font-size", "12px");
 
     // Update areas
-    areasGroup
-      .selectAll<SVGPathElement, d3.Series<Map<string, DataPoint>, string>>(
-        "path",
-      )
-      .data(series)
-      .join("path")
+    (
+      select(areas.current)
+        .selectAll<
+          SVGPathElement,
+          Series<Map<string, DataPoint>, string>
+        >("path")
+        .data(series)
+        .join("path") as UpdateSelection
+    )
       .attr(
         "fill",
         (d) => technologyColors[d.key as keyof typeof technologyColors],
       )
-      .attr("d", area);
+      .attr("d", areaGenerator);
   }, [d3data, chartSetup]);
 
   return (
