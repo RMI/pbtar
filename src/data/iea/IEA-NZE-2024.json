@@ -3,7 +3,10 @@
   "id": "IEA-NZE-2024",
   "publication": {
     "title": { "fullName": "World Energy Outlook 2024", "shortName": "WEO" },
-    "publisher": { "fullName": "International Energy Agency", "shortName": "IEA" },
+    "publisher": {
+      "fullName": "International Energy Agency",
+      "shortName": "IEA"
+    },
     "year": 2024,
     "city": "Paris",
     "links": [
