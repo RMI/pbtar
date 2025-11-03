@@ -13,12 +13,12 @@ const WavePattern: React.FC = () => {
         >
           <animate
             attributeName="d"
-            dur="15s"
+            dur="100s"
             repeatCount="indefinite"
             values="
-              M0 50 Q 25 20, 50 50 T 100 50 V100 H0;
-              M0 50 Q 25 80, 50 50 T 100 50 V100 H0;
-              M0 50 Q 25 20, 50 50 T 100 50 V100 H0"
+              M0 50 Q 25 5, 50 50 T 100 50 V100 H0;
+              M0 50 Q 20 100, 50 50 T 100 50 V100 H0;
+              M0 50 Q 10 30, 50 50 T 100 50 V100 H0"
           />
         </path>
         <path
@@ -34,6 +34,21 @@ const WavePattern: React.FC = () => {
               M0 50 Q 25 30, 50 50 T 100 50 V100 H0;
               M0 50 Q 25 70, 50 50 T 100 50 V100 H0;
               M0 50 Q 25 30, 50 50 T 100 50 V100 H0"
+          />
+        </path>
+        <path
+          className="animate-wave-medium opacity-8"
+          d="M0 50 Q 25 40, 50 50 T 100 50 V100 H0"
+          fill="white"
+        >
+          <animate
+            attributeName="d"
+            dur="12s"
+            repeatCount="indefinite"
+            values="
+              M0 50 Q 25 25, 50 50 T 100 50 V100 H0;
+              M0 50 Q 25 75, 50 50 T 100 50 V100 H0;
+              M0 50 Q 25 25, 50 50 T 100 50 V100 H0"
           />
         </path>
       </svg>
