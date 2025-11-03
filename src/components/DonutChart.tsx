@@ -20,8 +20,6 @@ interface DonutChartProps {
   metric?: string;
 }
 
-type ArcDatum = d3.PieArcDatum<DataPoint>;
-
 const technologyColors = {
   coal: "#DF4E39",
   oil: "#AB3C2C",
@@ -51,50 +49,55 @@ export default function DonutChart({
   const outerRadius = height / 2 - 10;
   const innerRadius = outerRadius * 0.5;
 
-  const arc = useMemo(() => {
-    return d3.arc<ArcDatum>()
-      .innerRadius(innerRadius)
-      .outerRadius(outerRadius)
-      .padAngle(0.005);
-  }, [innerRadius, outerRadius]);
+  const arc = useMemo(
+    () =>
+      d3
+        .arc<d3.PieArcDatum<DataPoint>>()
+        .innerRadius(innerRadius)
+        .outerRadius(outerRadius)
+        .padAngle(0.005),
+    [innerRadius, outerRadius],
+  );
 
-  const pie = useMemo(() => {
-    return d3.pie<DataPoint>()
-      .sort(null)
-      .value((d) => d.value);
-  }, []);
+  const pie = useMemo(
+    () =>
+      d3
+        .pie<DataPoint>()
+        .sort(null)
+        .value((d) => d.value),
+    [],
+  );
 
-  const show = (d: ArcDatum): "visible" | "hidden" => {
+  const show = (d: d3.PieArcDatum<DataPoint>) => {
     const big_percent = 0.15;
     const threshold = Math.PI * 2 * big_percent;
     return d.endAngle - d.startAngle > threshold ? "visible" : "hidden";
   };
 
-  const percent = (d: ArcDatum): string => {
-    return `${Math.round(((d.endAngle - d.startAngle) / (Math.PI * 2)) * 100)}%`;
+  const percent = (d: d3.PieArcDatum<DataPoint>) => {
+    return (
+      Math.round(((d.endAngle - d.startAngle) / (Math.PI * 2)) * 100) + "%"
+    );
   };
 
-  const isDark = (color: string): boolean => {
+  const isDark = (color: string) => {
     const rgb = d3.rgb(color);
     return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000 < 128;
   };
 
-  function arcTween(this: d3.BaseType, a: ArcDatum) {
+  function arcTween(this: d3.BaseType, a: d3.PieArcDatum<DataPoint>) {
     const i = d3.interpolate(
       (this as any)._current || { startAngle: 0, endAngle: 0 },
       a,
     );
     (this as any)._current = i(0);
-    return (t: number) => {
-      const value = i(t);
-      return arc(value) || "";
-    };
+    return (t: number) => arc(i(t)) || "";
   }
 
   useEffect(() => {
     if (!ref.current) return;
 
-    const svgElement = d3.select<SVGSVGElement, DataPoint[]>(ref.current);
+    const svgElement = d3.select(ref.current);
 
     svgElement.attr("viewBox", [-width / 2, -height / 2, width, height]);
 
@@ -106,7 +109,7 @@ export default function DonutChart({
 
     const path = svgElement
       .datum(d3dataSorted)
-      .selectAll<SVGPathElement, ArcDatum>("path")
+      .selectAll("path")
       .data(pie)
       .join("path")
       .attr("fill", (d) => technologyColors[d.data.technology])
@@ -115,11 +118,11 @@ export default function DonutChart({
       .attr("data-technology", (d) => d.data.technology)
       .transition()
       .duration(750)
-      .attrTween("d", arcTween);
+      .attrTween("d", arcTween as any);
 
     svgElement
       .datum(d3dataSorted)
-      .selectAll<SVGTextElement, ArcDatum>(".label")
+      .selectAll(".label")
       .data(pie)
       .join("text")
       .text((d) => d.data.technology)
@@ -139,7 +142,7 @@ export default function DonutChart({
 
     svgElement
       .datum(d3dataSorted)
-      .selectAll<SVGTextElement, ArcDatum>(".label_value")
+      .selectAll(".label_value")
       .data(pie)
       .join("text")
       .text(percent)
@@ -157,11 +160,11 @@ export default function DonutChart({
       .duration(750);
   }, [d3data, width, height, arc, pie]);
 
-  const uniqueYears = (data: ChartData): number[] => {
+  const uniqueYears = (data: ChartData) => {
     return Array.from(new Set(data.data.map((d) => d.year))).sort();
   };
 
-  const filterData = (selectedYear: string): void => {
+  const filterData = (selectedYear: string) => {
     setD3data(
       data.data.filter(
         (d) =>
@@ -179,13 +182,20 @@ export default function DonutChart({
         <select onChange={(e) => filterData(e.target.value)}>
           {data &&
             uniqueYears(data).map((e) => (
-              <option key={e} value={e}>
+              <option
+                key={e}
+                value={e}
+              >
                 {e}
               </option>
             ))}
         </select>
       </label>
-      <svg ref={ref} width={width} height={height} />
+      <svg
+        ref={ref}
+        width={width}
+        height={height}
+      ></svg>
     </>
   );
 }
