@@ -2,19 +2,40 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { TrendingUp, Lightbulb } from "lucide-react";
 
-const TopographicPattern: React.FC = () => {
+const WavePattern: React.FC = () => {
   return (
     <div className="absolute inset-0">
-      <svg className="w-full h-full opacity-10" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <pattern id="topo" width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="
-            M 0 20 C 5 18, 10 15, 20 20
-            M 0 15 C 5 13, 10 10, 20 15
-            M 0 10 C 5 8, 10 5, 20 10
-            M 0 5 C 5 3, 10 0, 20 5
-          " stroke="white" fill="none" strokeWidth="0.5" />
-        </pattern>
-        <rect width="100" height="100" fill="url(#topo)" />
+      <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path
+          className="animate-wave-slow opacity-10"
+          d="M0 50 Q 25 20, 50 50 T 100 50 V100 H0"
+          fill="white"
+        >
+          <animate
+            attributeName="d"
+            dur="15s"
+            repeatCount="indefinite"
+            values="
+              M0 50 Q 25 20, 50 50 T 100 50 V100 H0;
+              M0 50 Q 25 80, 50 50 T 100 50 V100 H0;
+              M0 50 Q 25 20, 50 50 T 100 50 V100 H0"
+          />
+        </path>
+        <path
+          className="animate-wave-fast opacity-5"
+          d="M0 50 Q 25 30, 50 50 T 100 50 V100 H0"
+          fill="white"
+        >
+          <animate
+            attributeName="d"
+            dur="10s"
+            repeatCount="indefinite"
+            values="
+              M0 50 Q 25 30, 50 50 T 100 50 V100 H0;
+              M0 50 Q 25 70, 50 50 T 100 50 V100 H0;
+              M0 50 Q 25 30, 50 50 T 100 50 V100 H0"
+          />
+        </path>
       </svg>
     </div>
   );
@@ -27,7 +48,7 @@ const Card: React.FC<{
   linkText: string;
   linkHref: string;
 }> = ({ title, icon, children, linkText, linkHref }) => (
-  <div className="bg-white/70 backdrop-blur-sm rounded-lg shadow-md p-6 mb-6 flex flex-col h-full">
+  <div className="bg-white/30 backdrop-blur-sm rounded-lg shadow-md p-6 mb-6 flex flex-col h-full">
     <div className="flex items-center mb-4">
       <span className="text-2xl mr-3">{icon}</span>
       <h2 className="text-xl font-semibold text-rmigray-800">{title}</h2>
@@ -48,14 +69,13 @@ const LandingPage: React.FC = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Base gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-bluespruce to-rmiblue-800"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-bluespruce via-rmiblue-800 to-bluespruce"></div>
 
-      {/* Topographic pattern */}
-      <TopographicPattern />
+      {/* Animated waves */}
+      <WavePattern />
 
-      {/* Subtle color overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-transparent via-energy/5 to-transparent"></div>
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-rmipurple-400/10 to-transparent"></div>
+      {/* Additional gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-energy/5 to-transparent"></div>
 
       {/* Content */}
       <div className="relative">
@@ -63,7 +83,7 @@ const LandingPage: React.FC = () => {
           <div className="flex flex-col md:flex-row gap-10 items-stretch">
             {/* Left Column */}
             <div className="md:w-1/2 flex flex-col justify-center">
-              <div className="bg-white/70 backdrop-blur-sm rounded-lg p-8 shadow-md">
+              <div className="bg-white/30 backdrop-blur-sm rounded-lg p-8 shadow-md">
                 <h1 className="text-5xl font-bold text-rmigray-800 mb-6">
                   Navigating the Energy Transition
                 </h1>
