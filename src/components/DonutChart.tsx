@@ -1,4 +1,7 @@
-import * as d3 from "d3";
+import { select } from "d3-selection";
+import { arc, pie } from "d3-shape";
+import { interpolate } from "d3-interpolate";
+import { rgb } from "d3-color";
 import { useRef, useEffect, useState, useMemo } from "react";
 
 interface DataPoint {
@@ -51,8 +54,7 @@ export default function DonutChart({
 
   // Create arc generator with explicit typing
   const createArc = useMemo(() => {
-    const arcGenerator: d3.Arc<any, d3.DefaultArcObject> = d3
-      .arc()
+    const arcGenerator = arc<any, any>()
       .innerRadius(innerRadius)
       .outerRadius(outerRadius)
       .padAngle(0.005);
@@ -61,37 +63,40 @@ export default function DonutChart({
 
   // Create pie generator with explicit typing
   const createPie = useMemo(() => {
-    const pieGenerator: d3.Pie<any, DataPoint> = d3
-      .pie<DataPoint>()
+    const pieGenerator = pie<DataPoint>()
       .sort(null)
       .value((d) => d.value);
     return pieGenerator;
   }, []);
 
-  const show = (d: d3.PieArcDatum<DataPoint>): "visible" | "hidden" => {
+  const show = (
+    d: ReturnType<typeof createPie>[number],
+  ): "visible" | "hidden" => {
     const big_percent = 0.15;
     const threshold = Math.PI * 2 * big_percent;
     return d.endAngle - d.startAngle > threshold ? "visible" : "hidden";
   };
 
-  const percent = (d: d3.PieArcDatum<DataPoint>): string => {
+  const percent = (d: ReturnType<typeof createPie>[number]): string => {
     return `${Math.round(((d.endAngle - d.startAngle) / (Math.PI * 2)) * 100)}%`;
   };
 
   const isDark = (color: string): boolean => {
-    const rgb = d3.rgb(color);
-    return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000 < 128;
+    const rgbColor = rgb(color);
+    return (
+      (rgbColor.r * 299 + rgbColor.g * 587 + rgbColor.b * 114) / 1000 < 128
+    );
   };
 
-  const arcTween = (d: d3.PieArcDatum<DataPoint>) => {
-    const interpolate = d3.interpolate({ startAngle: 0, endAngle: 0 }, d);
-    return (t: number) => createArc(interpolate(t)) || "";
+  const arcTween = (d: ReturnType<typeof createPie>[number]) => {
+    const interpolator = interpolate({ startAngle: 0, endAngle: 0 }, d);
+    return (t: number) => createArc(interpolator(t)) || "";
   };
 
   useEffect(() => {
     if (!ref.current) return;
 
-    const svgElement = d3.select<SVGSVGElement, DataPoint[]>(ref.current);
+    const svgElement = select<SVGSVGElement, DataPoint[]>(ref.current);
     svgElement.attr("viewBox", [-width / 2, -height / 2, width, height]);
 
     const d3dataSorted = [...d3data].sort(
@@ -105,7 +110,7 @@ export default function DonutChart({
 
     // Create and update paths
     svgElement
-      .selectAll<SVGPathElement, d3.PieArcDatum<DataPoint>>("path")
+      .selectAll<SVGPathElement, ReturnType<typeof createPie>[number]>("path")
       .data(pieData)
       .join("path")
       .attr("fill", (d) => technologyColors[d.data.technology])
@@ -118,7 +123,7 @@ export default function DonutChart({
 
     // Create and update labels
     svgElement
-      .selectAll<SVGTextElement, d3.PieArcDatum<DataPoint>>(".label")
+      .selectAll<SVGTextElement, ReturnType<typeof createPie>[number]>(".label")
       .data(pieData)
       .join("text")
       .text((d) => d.data.technology)
@@ -144,7 +149,9 @@ export default function DonutChart({
 
     // Create and update value labels
     svgElement
-      .selectAll<SVGTextElement, d3.PieArcDatum<DataPoint>>(".label_value")
+      .selectAll<SVGTextElement, ReturnType<typeof createPie>[number]>(
+        ".label_value",
+      )
       .data(pieData)
       .join("text")
       .text(percent)
