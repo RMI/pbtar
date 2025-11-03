@@ -1,11 +1,22 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "ACE-CNS-2024",
-  "publisher": "ASEAN Centre for Energy (ACE)",
+  "publication": {
+    "title": { "fullName": "8th ASEAN Energy Outlook", "shortName": "AEO8" },
+    "publisher": { "fullName": "ASEAN Centre for Energy", "shortName": "ACE" },
+    "year": 2024,
+    "city": "Jakarta",
+    "issn": "2963-539X",
+    "links": [
+      {
+        "description": "Report",
+        "url": "https://aseanenergy.org/publications/the-8th-asean-energy-outlook/"
+      }
+    ]
+  },
   "name": "Carbon Neutrality Scenario (CNS)",
   "description": "Pathway for ASEAN to achieve net-zero CO2 emissions by 2050. Includes rollout of CCUS technologies.",
   "geography": ["South East Asia"],
-  "publicationYear": 2024,
   "pathwayType": "Normative",
   "modelYearStart": 2023,
   "modelYearEnd": 2050,

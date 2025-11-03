@@ -1,11 +1,22 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "ACE-RAS-2024",
-  "publisher": "ASEAN Centre for Energy (ACE)",
+  "publication": {
+    "title": { "fullName": "8th ASEAN Energy Outlook", "shortName": "AEO8" },
+    "publisher": { "fullName": "ASEAN Centre for Energy", "shortName": "ACE" },
+    "year": 2024,
+    "city": "Jakarta",
+    "issn": "2963-539X",
+    "links": [
+      {
+        "description": "Report",
+        "url": "https://aseanenergy.org/publications/the-8th-asean-energy-outlook/"
+      }
+    ]
+  },
   "name": "Regional Aspiration Scenario (RAS)",
   "description": "Accelerated EE, RE, and EI targets. Reaches near-term APAEC targets and conditional NDC targets.",
   "geography": ["South East Asia"],
-  "publicationYear": 2024,
   "pathwayType": "Exploratory",
   "modelYearStart": 2023,
   "modelYearEnd": 2050,
