@@ -51,7 +51,8 @@ export default function DonutChart({
 
   // Create arc generator with explicit typing
   const createArc = useMemo(() => {
-    const arcGenerator: d3.Arc<any, d3.DefaultArcObject> = d3.arc()
+    const arcGenerator: d3.Arc<any, d3.DefaultArcObject> = d3
+      .arc()
       .innerRadius(innerRadius)
       .outerRadius(outerRadius)
       .padAngle(0.005);
@@ -60,7 +61,8 @@ export default function DonutChart({
 
   // Create pie generator with explicit typing
   const createPie = useMemo(() => {
-    const pieGenerator: d3.Pie<any, DataPoint> = d3.pie<DataPoint>()
+    const pieGenerator: d3.Pie<any, DataPoint> = d3
+      .pie<DataPoint>()
       .sort(null)
       .value((d) => d.value);
     return pieGenerator;
@@ -82,10 +84,7 @@ export default function DonutChart({
   };
 
   const arcTween = (d: d3.PieArcDatum<DataPoint>) => {
-    const interpolate = d3.interpolate(
-      { startAngle: 0, endAngle: 0 },
-      d
-    );
+    const interpolate = d3.interpolate({ startAngle: 0, endAngle: 0 }, d);
     return (t: number) => createArc(interpolate(t)) || "";
   };
 
@@ -129,7 +128,7 @@ export default function DonutChart({
       .attr("alignment-baseline", "middle")
       .attr("font-weight", "bold")
       .attr("fill", (d) =>
-        isDark(technologyColors[d.data.technology]) ? "white" : "black"
+        isDark(technologyColors[d.data.technology]) ? "white" : "black",
       )
       .attr("visibility", show)
       .transition()
@@ -154,7 +153,7 @@ export default function DonutChart({
       .attr("dy", "9")
       .attr("alignment-baseline", "middle")
       .attr("fill", (d) =>
-        isDark(technologyColors[d.data.technology]) ? "white" : "black"
+        isDark(technologyColors[d.data.technology]) ? "white" : "black",
       )
       .attr("visibility", show)
       .transition()
@@ -179,8 +178,8 @@ export default function DonutChart({
         (d) =>
           d.sector === sector &&
           d.metric === metric &&
-          d.year === Number(selectedYear)
-      )
+          d.year === Number(selectedYear),
+      ),
     );
   };
 
@@ -191,13 +190,20 @@ export default function DonutChart({
         <select onChange={(e) => filterData(e.target.value)}>
           {data &&
             uniqueYears(data).map((e) => (
-              <option key={e} value={e}>
+              <option
+                key={e}
+                value={e}
+              >
                 {e}
               </option>
             ))}
         </select>
       </label>
-      <svg ref={ref} width={width} height={height} />
+      <svg
+        ref={ref}
+        width={width}
+        height={height}
+      />
     </>
   );
 }
