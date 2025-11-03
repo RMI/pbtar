@@ -13,7 +13,7 @@ export default function NormalizedStackedAreaChart({
   metric = "capacity",
 }) {
   const [d3data, setD3data] = useState(
-    data.data.filter(d => (d.sector == sector) & (d.metric == metric))
+    data.data.filter((d) => (d.sector == sector) & (d.metric == metric)),
   );
   const ref = useRef();
   const gx = useRef();
@@ -25,20 +25,14 @@ export default function NormalizedStackedAreaChart({
     const areasGroup = d3.select(areas.current);
 
     const utc = d3.utcParse("%Y");
-    const years = d3.extent(d3data, d => utc(d.year));
-    const values = d3.extent(d3data, d => d.value);
-    const xticks = [...new Set(d3data.map(d => d.year))].map(utc);
+    const years = d3.extent(d3data, (d) => utc(d.year));
+    const values = d3.extent(d3data, (d) => d.value);
+    const xticks = [...new Set(d3data.map((d) => d.year))].map(utc);
 
     const x = d3.scaleUtc(years, [marginLeft, width - marginRight]);
 
     const y = d3.scaleLinear().rangeRound([height - marginBottom, marginTop]);
 
-<<<<<<< HEAD
-    const series = d3.stack()
-||||||| parent of d9fb862 (stacked & donut: sort techs and use RMI colors)
-    const series = d3
-      .stack()
-=======
     const technologyColors = {
       coal: "#DF4E39",
       oil: "#AB3C2C",
@@ -50,63 +44,31 @@ export default function NormalizedStackedAreaChart({
       solar: "#003B63",
     };
 
-    const sortedKeys = Array.from(d3.union(d3data.map((d) => d.technology))).sort((a, b) => Object.keys(technologyColors).indexOf(a) > Object.keys(technologyColors).indexOf(b));
+    const sortedKeys = Array.from(
+      d3.union(d3data.map((d) => d.technology)),
+    ).sort(
+      (a, b) =>
+        Object.keys(technologyColors).indexOf(a) >
+        Object.keys(technologyColors).indexOf(b),
+    );
 
     const series = d3
       .stack()
->>>>>>> d9fb862 (stacked & donut: sort techs and use RMI colors)
       .offset(d3.stackOffsetExpand)
-<<<<<<< HEAD
-      .keys(d3.union(d3data.map(d => d.technology)))
-      .value(([, D], key) => D.get(key).value)
-    (d3.index(d3data, d => d.year, d => d.technology));
-||||||| parent of d9fb862 (stacked & donut: sort techs and use RMI colors)
-      .keys(d3.union(d3data.map((d) => d.technology)))
-      .value(([, D], key) => D.get(key).value)(
-      d3.index(
-        d3data,
-        (d) => d.year,
-        (d) => d.technology,
-      ),
-    );
-=======
       .keys(sortedKeys)
       .value(([, D], key) => D.get(key).value)(
-      d3.index(
-        d3data,
-        (d) => d.year,
-        (d) => d.technology,
-      ),
-    );
->>>>>>> d9fb862 (stacked & donut: sort techs and use RMI colors)
-
-<<<<<<< HEAD
-    const color = d3.scaleOrdinal()
-      .domain(series.map(d => d.technology))
-      .range(d3.schemeTableau10);
-
-    const area = d3.area()
-      .x(d => x(utc(d.data[0])))
-      .y0(d => y(d[0]))
-      .y1(d => y(d[1]));
-||||||| parent of d9fb862 (stacked & donut: sort techs and use RMI colors)
-    const color = d3
-      .scaleOrdinal()
-      .domain(series.map((d) => d.technology))
-      .range(d3.schemeTableau10);
+        d3.index(
+          d3data,
+          (d) => d.year,
+          (d) => d.technology,
+        ),
+      );
 
     const area = d3
       .area()
       .x((d) => x(utc(d.data[0])))
       .y0((d) => y(d[0]))
       .y1((d) => y(d[1]));
-=======
-    const area = d3
-      .area()
-      .x((d) => x(utc(d.data[0])))
-      .y0((d) => y(d[0]))
-      .y1((d) => y(d[1]));
->>>>>>> d9fb862 (stacked & donut: sort techs and use RMI colors)
 
     d3.select(gx.current)
       .transition()
@@ -125,16 +87,8 @@ export default function NormalizedStackedAreaChart({
       .selectAll()
       .data(series)
       .join("path")
-<<<<<<< HEAD
-        .attr("fill", (d, i) => color(i))
-        .attr("d", d => area(d));
-||||||| parent of d9fb862 (stacked & donut: sort techs and use RMI colors)
-      .attr("fill", (d, i) => color(i))
-      .attr("d", (d) => area(d));
-=======
       .attr("fill", (d) => technologyColors[d.key])
       .attr("d", (d) => area(d));
->>>>>>> d9fb862 (stacked & donut: sort techs and use RMI colors)
   }, [d3data]);
 
   return (

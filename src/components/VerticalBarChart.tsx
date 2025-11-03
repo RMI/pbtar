@@ -21,16 +21,18 @@ export default function VerticalBarChart({
   useEffect(() => {
     const svg = d3.select(svgRef.current);
 
-    const unit = d3data.map(d => d.unit)[0];
+    const unit = d3data.map((d) => d.unit)[0];
 
-    const x = d3.scaleBand()
-        .domain(d3data.map(d => d.year).sort())
-        .range([marginLeft, width - marginRight])
-        .padding(0.6);
+    const x = d3
+      .scaleBand()
+      .domain(d3data.map((d) => d.year).sort())
+      .range([marginLeft, width - marginRight])
+      .padding(0.6);
 
-    const y = d3.scaleLinear()
-        .domain([0, d3.max(d3data, d => d.value)])
-        .range([height - marginBottom, marginTop]);
+    const y = d3
+      .scaleLinear()
+      .domain([0, d3.max(d3data, (d) => d.value)])
+      .range([height - marginBottom, marginTop]);
 
     svg
       .attr("width", width)
@@ -40,44 +42,48 @@ export default function VerticalBarChart({
     const title = svg.append("g").attr("class", "title");
 
     title
-      .append('text')
+      .append("text")
       .text(metric)
-        .attr('dy', 15)
-        .attr('font-weight', 'bold')
-        .attr('font-variant', 'small-caps');
+      .attr("dy", 15)
+      .attr("font-weight", "bold")
+      .attr("font-variant", "small-caps");
 
-    title
-      .append('text')
-        .text(unit)
-        .attr('dy', 30);
+    title.append("text").text(unit).attr("dy", 30);
 
-    svg.append("g")
+    svg
+      .append("g")
       .attr("class", "xaxis")
       .attr("transform", `translate(0,${height - marginBottom})`)
       .call(d3.axisBottom(x).tickSize(0))
       .style("font-size", "14px")
       .style("font-weight", "bold");
 
-    svg.append("g")
+    svg
+      .append("g")
       .attr("class", "yaxis")
       .attr("transform", `translate(${marginLeft},0)`)
       .call(d3.axisLeft(y).tickSize(0))
       .style("font-size", "12px")
-      .call(g => g.select(".domain").remove())
-      .call(g => g.selectAll(".tick line").clone()
-        .attr("x2", width)
-        .attr("stroke-opacity", 0.1));
+      .call((g) => g.select(".domain").remove())
+      .call((g) =>
+        g
+          .selectAll(".tick line")
+          .clone()
+          .attr("x2", width)
+          .attr("stroke-opacity", 0.1),
+      );
 
-    svg.append("g")
+    svg
+      .append("g")
       .attr("class", "bars")
       .attr("fill", barColor)
       .selectAll()
       .data(d3data)
       .join("rect")
-        .attr("x", (d) => x(d.year))
-        .attr("y", (d) => y(d.value))
-        .attr("height", (d) => y(0) - y(d.value))
-        .attr("width", x.bandwidth());
+      .attr("x", (d) => x(d.year))
+      .attr("y", (d) => y(d.value))
+      .attr("height", (d) => y(0) - y(d.value))
+      .attr("width", x.bandwidth());
   }, [d3data]);
 
   return (
