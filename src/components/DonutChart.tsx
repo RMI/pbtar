@@ -63,7 +63,11 @@ export default function DonutChart({
       solar: "#003B63",
     };
 
-    const d3dataSorted = d3data.sort((a, b) => Object.keys(technologyColors).indexOf(a.technology) > Object.keys(technologyColors).indexOf(b.technology));
+    const d3dataSorted = d3data.sort(
+      (a, b) =>
+        Object.keys(technologyColors).indexOf(a.technology) >
+        Object.keys(technologyColors).indexOf(b.technology),
+    );
 
     const path = svgElement
       .datum(d3dataSorted)
@@ -89,7 +93,9 @@ export default function DonutChart({
       .attr("dy", -9)
       .attr("alignment-baseline", "middle")
       .attr("font-weight", "bold")
-      .attr("fill", (d, i) => (isDark(technologyColors[d.data.technology]) ? "white" : "black"))
+      .attr("fill", (d, i) =>
+        isDark(technologyColors[d.data.technology]) ? "white" : "black",
+      )
       .attr("visibility", (d) => show(d))
       .transition()
       .attr("x", (d) => arc.centroid(d)[0])
@@ -106,7 +112,9 @@ export default function DonutChart({
       .attr("text-anchor", "middle")
       .attr("dy", 9)
       .attr("alignment-baseline", "middle")
-      .attr("fill", (d, i) => (isDark(technologyColors[d.data.technology]) ? "white" : "black"))
+      .attr("fill", (d, i) =>
+        isDark(technologyColors[d.data.technology]) ? "white" : "black",
+      )
       .attr("visibility", (d) => show(d))
       .transition()
       .attr("x", (d) => arc.centroid(d)[0])

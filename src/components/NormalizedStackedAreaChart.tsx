@@ -44,7 +44,13 @@ export default function NormalizedStackedAreaChart({
       solar: "#003B63",
     };
 
-    const sortedKeys = Array.from(d3.union(d3data.map((d) => d.technology))).sort((a, b) => Object.keys(technologyColors).indexOf(a) > Object.keys(technologyColors).indexOf(b));
+    const sortedKeys = Array.from(
+      d3.union(d3data.map((d) => d.technology)),
+    ).sort(
+      (a, b) =>
+        Object.keys(technologyColors).indexOf(a) >
+        Object.keys(technologyColors).indexOf(b),
+    );
 
     const series = d3
       .stack()
