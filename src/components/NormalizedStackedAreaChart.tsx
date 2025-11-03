@@ -57,12 +57,12 @@ export default function NormalizedStackedAreaChart({
       .offset(d3.stackOffsetExpand)
       .keys(sortedKeys)
       .value(([, D], key) => D.get(key).value)(
-        d3.index(
-          d3data,
-          (d) => d.year,
-          (d) => d.technology,
-        ),
-      );
+      d3.index(
+        d3data,
+        (d) => d.year,
+        (d) => d.technology,
+      ),
+    );
 
     const area = d3
       .area()
