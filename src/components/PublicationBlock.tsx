@@ -19,6 +19,7 @@ export interface Publication {
   city?: string;
   doi?: string;
   isbn?: string;
+  issn?: string;
   links?: Array<{
     description?: string;
     url: string; // required per item
@@ -98,7 +99,10 @@ export default function PublicationBlock({
         <div className="text-rmigray-700 mb-3 leading-relaxed">
           <p>{formatCitation(publication)}</p>
 
-          {(publication.doi || publication.isbn || authors) && (
+          {(publication.doi ||
+            publication.isbn ||
+            publication.issn ||
+            authors) && (
             <div className="mt-2 flex flex-wrap gap-2 text-sm text-rmigray-700">
               {authors && (
                 <span className="inline-block rounded bg-neutral-100 px-2 py-1 border border-neutral-200">
@@ -113,6 +117,11 @@ export default function PublicationBlock({
               {publication.isbn && (
                 <span className="inline-block rounded bg-neutral-100 px-2 py-1 border border-neutral-200">
                   ISBN: {publication.isbn}
+                </span>
+              )}
+              {publication.issn && (
+                <span className="inline-block rounded bg-neutral-100 px-2 py-1 border border-neutral-200">
+                  ISSN: {publication.issn}
                 </span>
               )}
             </div>

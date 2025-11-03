@@ -482,6 +482,11 @@
           "type": "string",
           "maxLength": 32
         },
+        "issn": {
+          "description": "International Standard Serial Number, if applicable.",
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{3}[0-9X]$"
+        },
         "links": {
           "description": "Links to related materials such as data, supplementary files, or the full report.",
           "type": "array",
