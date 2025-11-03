@@ -55,10 +55,10 @@ export default function RadarChart({
       .attr(
         "transform",
         "translate(" +
-        (width / 2 + marginHorizontal) +
-        "," +
-        (height / 2 + marginVertical) +
-        ")",
+          (width / 2 + marginHorizontal) +
+          "," +
+          (height / 2 + marginVertical) +
+          ")",
       );
 
     const axisGrid = container.append("g").attr("class", "axisWrapper");
