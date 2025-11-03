@@ -1,14 +1,6 @@
 import * as d3 from "d3";
 import { useRef, useEffect, useState, useMemo } from "react";
 
-type PieArcDatum = d3.PieArcDatum<DataPoint>;
-
-interface ArcType extends d3.Arc<any, PieArcDatum> {
-  innerRadius: (radius: number) => ArcType;
-  outerRadius: (radius: number) => ArcType;
-  padAngle: (angle: number) => ArcType;
-}
-
 interface DataPoint {
   sector: string;
   metric: string;
@@ -57,12 +49,14 @@ export default function DonutChart({
   const outerRadius = height / 2 - 10;
   const innerRadius = outerRadius * 0.5;
 
+  // Create arc generator with explicit typing
   const createArc = useMemo(() => {
-    const arc = d3.arc<PieArcDatum>() as ArcType;
-    return arc
+    const arcGenerator: d3.Arc<any, d3.DefaultArcObject> = d3
+      .arc()
       .innerRadius(innerRadius)
       .outerRadius(outerRadius)
       .padAngle(0.005);
+    return arcGenerator;
   }, [innerRadius, outerRadius]);
 
   // Create pie generator with explicit typing
