@@ -152,12 +152,11 @@ const LandingPage: React.FC = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Base gradient */}
-      <div className="absolute inset-0 bg-rmiblue-800/100"></div>      {/* Animated waves */}
+      <div className="absolute inset-0 bg-rmiblue-800/100"></div>{" "}
+      {/* Animated waves */}
       <WavePattern />
-
       {/* Additional gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-energy/5 to-transparent"></div>
-
       {/* Content */}
       <div className="relative">
         <div className="container mx-auto px-4 py-12 min-h-screen flex items-center">
