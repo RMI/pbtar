@@ -5,50 +5,74 @@ import { TrendingUp, Lightbulb } from "lucide-react";
 const WavePattern: React.FC = () => {
   return (
     <div className="absolute inset-0">
-      <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <svg
+        className="w-full h-full"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+      >
+        <defs>
+          <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.04)" />
+            <stop offset="50%" stopColor="rgba(255,255,255,0.06)" />
+            <stop offset="100%" stopColor="rgba(255,255,255,0.04)" />
+          </linearGradient>
+          <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.05)" />
+            <stop offset="50%" stopColor="rgba(255,255,255,0.1)" />
+            <stop offset="100%" stopColor="rgba(255,255,255,0.05)" />
+          </linearGradient>
+          <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.03)" />
+            <stop offset="50%" stopColor="rgba(255,255,255,0.07)" />
+            <stop offset="100%" stopColor="rgba(255,255,255,0.03)" />
+          </linearGradient>
+        </defs>
         <path
-          className="animate-wave-slow opacity-10"
-          d="M0 50 Q 25 20, 50 50 T 100 50 V100 H0"
-          fill="white"
+          className="animate-wave-slow"
+          d="M-10 50 Q 25 20, 50 50 T 110 50 V100 H-10"
+          fill="url(#gradient1)"
         >
           <animate
             attributeName="d"
-            dur="100s"
+            dur="45s"
             repeatCount="indefinite"
             values="
-              M0 50 Q 25 5, 50 50 T 100 50 V100 H0;
-              M0 50 Q 20 100, 50 50 T 100 50 V100 H0;
-              M0 50 Q 10 30, 50 50 T 100 50 V100 H0"
+      M-10 45 Q 25 35, 50 55 T 110 45 V100 H-10;
+      M-10 55 Q 20 45, 50 35 T 110 55 V100 H-10;
+      M-10 45 Q 30 55, 50 45 T 110 45 V100 H-10;
+      M-10 45 Q 25 35, 50 55 T 110 45 V100 H-10"
           />
         </path>
         <path
-          className="animate-wave-fast opacity-5"
-          d="M0 50 Q 25 30, 50 50 T 100 50 V100 H0"
-          fill="white"
+          className="animate-wave-fast"
+          d="M-10 50 Q 25 30, 50 50 T 110 50 V100 H-10"
+          fill="url(#gradient2)"
         >
           <animate
             attributeName="d"
-            dur="10s"
+            dur="30s"
             repeatCount="indefinite"
             values="
-              M0 50 Q 25 30, 50 50 T 100 50 V100 H0;
-              M0 50 Q 25 70, 50 50 T 100 50 V100 H0;
-              M0 50 Q 25 30, 50 50 T 100 50 V100 H0"
+      M-10 45 Q 35 40, 50 55 T 110 45 V100 H-10;
+      M-10 55 Q 15 50, 50 45 T 110 55 V100 H-10;
+      M-10 45 Q 25 40, 50 55 T 110 45 V100 H-10;
+      M-10 45 Q 35 40, 50 55 T 110 45 V100 H-10"
           />
         </path>
         <path
-          className="animate-wave-medium opacity-8"
-          d="M0 50 Q 25 40, 50 50 T 100 50 V100 H0"
-          fill="white"
+          className="animate-wave-medium"
+          d="M-10 50 Q 25 40, 50 50 T 110 50 V100 H-10"
+          fill="url(#gradient3)"
         >
           <animate
             attributeName="d"
-            dur="12s"
+            dur="60s"
             repeatCount="indefinite"
             values="
-              M0 50 Q 25 25, 50 50 T 100 50 V100 H0;
-              M0 50 Q 25 75, 50 50 T 100 50 V100 H0;
-              M0 50 Q 25 25, 50 50 T 100 50 V100 H0"
+      M-10 52 Q 20 45, 50 48 T 110 52 V100 H-10;
+      M-10 48 Q 30 55, 50 52 T 110 48 V100 H-10;
+      M-10 52 Q 20 45, 50 48 T 110 52 V100 H-10;
+      M-10 52 Q 20 45, 50 48 T 110 52 V100 H-10"
           />
         </path>
       </svg>
@@ -84,12 +108,12 @@ const LandingPage: React.FC = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Base gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-bluespruce via-rmiblue-800 to-bluespruce"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-bluespruce via-rmiblue-900 to-bluespruce"></div>
 
       {/* Animated waves */}
       <WavePattern />
 
-      {/* Additional gradient overlay for depth */}
+      Additional gradient overlay for depth
       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-energy/5 to-transparent"></div>
 
       {/* Content */}
@@ -111,7 +135,7 @@ const LandingPage: React.FC = () => {
                 </p>
                 <Link
                   to="/pathway"
-                  className="inline-block px-8 py-4 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200 text-lg font-semibold"
+                  className="inline-block px-8 py-4 bg-energy-700 text-white rounded-md hover:bg-energy-800 transition-colors duration-200 text-lg font-semibold"
                 >
                   Explore Pathways
                 </Link>
@@ -121,7 +145,7 @@ const LandingPage: React.FC = () => {
             <div className="md:w-1/2 flex flex-col justify-center">
               <Card
                 title="Creating Transition Intelligence"
-                icon={<TrendingUp className="h-7 w-7 text-energy" />}
+                icon={<TrendingUp className="h-7 w-7 text-energy-700" />}
                 linkText="Learn more →"
                 linkHref="https://rmi.org/insight/creating-transition-intelligence-enhancing-corporate-transition-assessments-for-financial-decision-making"
               >
@@ -131,7 +155,7 @@ const LandingPage: React.FC = () => {
               </Card>
               <Card
                 title="RMI's Approach"
-                icon={<Lightbulb className="h-7 w-7 text-energy" />}
+                icon={<Lightbulb className="h-7 w-7 text-energy-700" />}
                 linkText="Learn more →"
                 linkHref="https://rmi.org/insight/leveraging-transition-pathways/"
               >
