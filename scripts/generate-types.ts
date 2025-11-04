@@ -14,7 +14,7 @@ const SCHEMA_DIR = "src/schema";
 const OUT_DIR = "src/types";
 
 async function generateAll() {
-  const files = await fs.readdir(SCHEMA_DIR);
+  const files = await fs.readdir(SCHEMA_DIR, { recursive: true });
   const schemaFiles = files.filter((f) => f.endsWith(".json"));
 
   await fs.mkdir(OUT_DIR, { recursive: true });
@@ -52,6 +52,8 @@ async function generateAll() {
       // (schema, keyFromDefinitionOrRef) => desiredName | undefined
     });
 
+    // Ensure nested folders (e.g., OUT_DIR/common) exist before writing
+    await fs.mkdir(path.dirname(outputPath), { recursive: true });
     await fs.writeFile(outputPath, ts);
   }
 
