@@ -132,7 +132,7 @@ const Card: React.FC<{
   linkText: string;
   linkHref: string;
 }> = ({ title, icon, children, linkText, linkHref }) => (
-  <div className="bg-white/30 backdrop-blur-sm rounded-lg shadow-md p-6 flex flex-col">
+  <div className="bg-white/50 backdrop-blur-sm rounded-lg shadow-md p-6 flex flex-col">
     {" "}
     {/* Removed mb-6 and h-full */}
     <div className="flex items-center mb-4">
@@ -144,7 +144,7 @@ const Card: React.FC<{
       href={linkHref}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-energy-700 font-semibold hover:underline mt-auto"
+      className="text-energy-800 font-semibold hover:underline mt-auto"
     >
       {linkText}
     </a>
@@ -155,7 +155,7 @@ const LandingPage: React.FC = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Base gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-bluespruce via-rmiblue-900 to-bluespruce"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-bluespruce via-rmiblue-800 to-bluespruce"></div>
 
       {/* Animated waves */}
       <WavePattern />
@@ -169,7 +169,7 @@ const LandingPage: React.FC = () => {
           <div className="flex flex-col md:flex-row gap-10 items-stretch w-full">
             {/* Left Column */}
             <div className="md:w-1/2">
-              <div className="bg-white/30 backdrop-blur-sm rounded-lg p-8 shadow-md flex flex-col h-full">
+              <div className="bg-white/50 backdrop-blur-sm rounded-lg p-8 shadow-md flex flex-col h-full">
                 <div className="flex-1">
                   <h1 className="text-5xl font-bold text-rmigray-800 mb-6">
                     Navigating the Energy Transition
@@ -185,7 +185,7 @@ const LandingPage: React.FC = () => {
                 <div className="mt-auto pt-8">
                   <Link
                     to="/pathway"
-                    className="inline-block px-8 py-4 bg-energy-700 text-neutral-300 rounded-md hover:bg-energy-800 transition-colors duration-200 text-lg font-semibold"
+                    className="inline-block px-8 py-4 bg-energy-800 text-neutral-300 rounded-md hover:bg-energy-700 transition-colors duration-200 text-lg font-semibold"
                   >
                     Explore Pathways
                   </Link>
@@ -196,7 +196,7 @@ const LandingPage: React.FC = () => {
             <div className="md:w-1/2 flex flex-col gap-6">
               <Card
                 title="Creating Transition Intelligence"
-                icon={<TrendingUp className="h-7 w-7 text-energy-700" />}
+                icon={<TrendingUp className="h-7 w-7 text-energy-800" />}
                 linkText="Learn more →"
                 linkHref="https://rmi.org/insight/creating-transition-intelligence-enhancing-corporate-transition-assessments-for-financial-decision-making"
               >
@@ -206,7 +206,7 @@ const LandingPage: React.FC = () => {
               </Card>
               <Card
                 title="RMI's Approach"
-                icon={<Lightbulb className="h-7 w-7 text-energy-700" />}
+                icon={<Lightbulb className="h-7 w-7 text-energy-800" />}
                 linkText="Learn more →"
                 linkHref="https://rmi.org/insight/leveraging-transition-pathways/"
               >
