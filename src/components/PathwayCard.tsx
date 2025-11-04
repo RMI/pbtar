@@ -180,8 +180,8 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
               <p className="text-sm font-medium text-rmigray-800">
                 <HighlightedText
                   text={
-                    pathway.publication.publisher.shortName ||
-                    pathway.publication.publisher.fullName
+                    pathway.publication.publisher.short ||
+                    pathway.publication.publisher.full
                   }
                   searchTerm={searchTerm}
                 />
