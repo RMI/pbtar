@@ -2,10 +2,10 @@
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "IEA-NZE-2024",
   "publication": {
-    "title": { "fullName": "World Energy Outlook 2024", "shortName": "WEO" },
+    "title": { "full": "World Energy Outlook 2024", "short": "WEO" },
     "publisher": {
-      "fullName": "International Energy Agency",
-      "shortName": "IEA"
+      "full": "International Energy Agency",
+      "short": "IEA"
     },
     "year": 2024,
     "city": "Paris",

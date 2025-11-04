@@ -3,8 +3,8 @@
   "id": "pathway-minimal",
   "name": "Minimal Pathway",
   "publication": {
-    "title": { "fullName": "Example Title" },
-    "publisher": { "fullName": "Example Publisher" },
+    "title": { "full": "Example Title" },
+    "publisher": { "full": "Example Publisher" },
     "year": 2024
   },
   "description": "A minimal pathway file that passes schema validation.",

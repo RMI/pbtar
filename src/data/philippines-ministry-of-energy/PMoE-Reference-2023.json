@@ -2,8 +2,8 @@
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "PMoE-Reference-2023",
   "publication": {
-    "title": { "fullName": "Power Development Plan 2023-2050" },
-    "publisher": { "fullName": "Philippines Department of Energy" },
+    "title": { "full": "Power Development Plan 2023-2050" },
+    "publisher": { "full": "Philippines Department of Energy" },
     "year": 2023,
     "links": [
       {

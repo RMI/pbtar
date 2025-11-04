@@ -3,8 +3,8 @@
   "id": "sample-03",
   "name": "Sample Pathway 03",
   "publication": {
-    "title": { "fullName": "Example Title" },
-    "publisher": { "fullName": "Example Publisher" },
+    "title": { "full": "Example Title" },
+    "publisher": { "full": "Example Publisher" },
     "year": 2024
   },
   "description": "Third Sample Pathway. asdf description.",

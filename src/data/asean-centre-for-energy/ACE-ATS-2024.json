@@ -2,8 +2,8 @@
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "ACE-ATS-2024",
   "publication": {
-    "title": { "fullName": "8th ASEAN Energy Outlook", "shortName": "AEO8" },
-    "publisher": { "fullName": "ASEAN Centre for Energy", "shortName": "ACE" },
+    "title": { "full": "8th ASEAN Energy Outlook", "short": "AEO8" },
+    "publisher": { "full": "ASEAN Centre for Energy", "short": "ACE" },
     "year": 2024,
     "city": "Jakarta",
     "issn": "2963-539X",

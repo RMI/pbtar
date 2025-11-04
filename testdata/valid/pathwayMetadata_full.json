@@ -3,10 +3,10 @@
   "id": "pathway-simple-full",
   "name": "Full Enums Pathway",
   "publication": {
-    "title": { "fullName": "Example Title", "shortName": "Example" },
+    "title": { "full": "Example Title", "short": "Example" },
     "subtitle": "An Example Subtitle",
     "author": ["Foo bar", "Baz qux"],
-    "publisher": { "fullName": "Example Publisher", "shortName": "ExPub" },
+    "publisher": { "full": "Example Publisher", "short": "ExPub" },
     "year": 2024,
     "month": 6,
     "day": 15,
