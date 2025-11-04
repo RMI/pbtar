@@ -73,7 +73,6 @@ const WavePattern: React.FC = () => {
           </linearGradient>
         </defs>
         <path
-          className="animate-wave-slow"
           d="M-10 50 Q 25 20, 50 50 T 110 50 V100 H-10"
           fill="url(#gradient1)"
         >
@@ -89,7 +88,6 @@ const WavePattern: React.FC = () => {
           />
         </path>
         <path
-          className="animate-wave-fast"
           d="M-10 50 Q 25 30, 50 50 T 110 50 V100 H-10"
           fill="url(#gradient2)"
         >
@@ -105,7 +103,6 @@ const WavePattern: React.FC = () => {
           />
         </path>
         <path
-          className="animate-wave-medium"
           d="M-10 50 Q 25 40, 50 50 T 110 50 V100 H-10"
           fill="url(#gradient3)"
         >
