@@ -24,7 +24,7 @@ async function generateAll() {
     const outputPath = path.join(OUT_DIR, file.replace(".json", ".d.ts"));
 
     // Extract "pathwayMetadata.v1" → "PathwayMetadataV1"
-    const base = file.replace(".json", "");
+    const base = path.basename(file, ".json");
     const typeName = base
       .split(".")
       .map((seg) => seg.charAt(0).toUpperCase() + seg.slice(1))

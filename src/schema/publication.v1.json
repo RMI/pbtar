@@ -8,7 +8,7 @@
     "title": {
       "description": "Title of the report or publication.",
       "$ref": "./common/label.v1.json",
-      "tsType": "import('./common/label.v1').Label"
+      "tsType": "import('./common/label.v1').LabelV1"
     },
     "subtitle": {
       "description": "Optional subtitle of the publication.",
@@ -24,7 +24,7 @@
     "publisher": {
       "description": "Publisher or organization responsible for the publication.",
       "$ref": "./common/label.v1.json",
-      "tsType": "import('./common/label.v1').Label"
+      "tsType": "import('./common/label.v1').LabelV1"
     },
     "year": {
       "description": "Year of publication.",

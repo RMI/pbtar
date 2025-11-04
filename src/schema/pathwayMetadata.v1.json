@@ -29,7 +29,7 @@
     "publication": {
       "description": "Bibliographic information about the report or dataset.",
       "$ref": "./publication.v1.json",
-      "tsType": "import('./publication.v1').Publication"
+      "tsType": "import('./publication.v1').PublicationV1"
     },
     "pathwayType": {
       "description": "Type of the pathway pathway.",
