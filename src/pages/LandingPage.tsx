@@ -87,7 +87,7 @@ const Card: React.FC<{
   linkText: string;
   linkHref: string;
 }> = ({ title, icon, children, linkText, linkHref }) => (
-  <div className="bg-white/30 backdrop-blur-sm rounded-lg shadow-md p-6 mb-6 flex flex-col h-full">
+  <div className="bg-white/30 backdrop-blur-sm rounded-lg shadow-md p-6 flex flex-col"> {/* Removed mb-6 and h-full */}
     <div className="flex items-center mb-4">
       <span className="text-2xl mr-3">{icon}</span>
       <h2 className="text-xl font-semibold text-rmigray-800">{title}</h2>
@@ -97,7 +97,7 @@ const Card: React.FC<{
       href={linkHref}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-energy font-semibold hover:underline mt-auto"
+      className="text-energy-700 font-semibold hover:underline mt-auto"
     >
       {linkText}
     </a>
@@ -113,36 +113,40 @@ const LandingPage: React.FC = () => {
       {/* Animated waves */}
       <WavePattern />
 
-      Additional gradient overlay for depth
+      {/* Additional gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-energy/5 to-transparent"></div>
 
       {/* Content */}
       <div className="relative">
         <div className="container mx-auto px-4 py-12 min-h-screen flex items-center">
-          <div className="flex flex-col md:flex-row gap-10 items-stretch">
+          <div className="flex flex-col md:flex-row gap-10 items-stretch w-full">
             {/* Left Column */}
-            <div className="md:w-1/2 flex flex-col justify-center">
-              <div className="bg-white/30 backdrop-blur-sm rounded-lg p-8 shadow-md">
-                <h1 className="text-5xl font-bold text-rmigray-800 mb-6">
-                  Navigating the Energy Transition
-                </h1>
-                <p className="text-lg text-rmigray-600 mb-8">
-                  Transition pathways illustrate how the energy transition will
-                  reshape sectors and systems, giving financial institutions,
-                  corporates, and other organizations greater confidence in
-                  developing, assessing, and implementing plans in a changing energy
-                  landscape.
-                </p>
-                <Link
-                  to="/pathway"
-                  className="inline-block px-8 py-4 bg-energy-700 text-white rounded-md hover:bg-energy-800 transition-colors duration-200 text-lg font-semibold"
-                >
-                  Explore Pathways
-                </Link>
+            <div className="md:w-1/2">
+              <div className="bg-white/30 backdrop-blur-sm rounded-lg p-8 shadow-md flex flex-col h-full">
+                <div className="flex-1">
+                  <h1 className="text-5xl font-bold text-rmigray-800 mb-6">
+                    Navigating the Energy Transition
+                  </h1>
+                  <p className="text-lg text-rmigray-600">
+                    Transition pathways illustrate how the energy transition will
+                    reshape sectors and systems, giving financial institutions,
+                    corporates, and other organizations greater confidence in
+                    developing, assessing, and implementing plans in a changing energy
+                    landscape.
+                  </p>
+                </div>
+                <div className="mt-auto pt-8">
+                  <Link
+                    to="/pathway"
+                    className="inline-block px-8 py-4 bg-energy-700 text-neutral-300 rounded-md hover:bg-energy-800 transition-colors duration-200 text-lg font-semibold"
+                  >
+                    Explore Pathways
+                  </Link>
+                </div>
               </div>
             </div>
             {/* Right Column */}
-            <div className="md:w-1/2 flex flex-col justify-center">
+            <div className="md:w-1/2 flex flex-col gap-6">
               <Card
                 title="Creating Transition Intelligence"
                 icon={<TrendingUp className="h-7 w-7 text-energy-700" />}
