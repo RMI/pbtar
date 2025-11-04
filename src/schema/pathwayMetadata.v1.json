@@ -28,7 +28,8 @@
     },
     "publication": {
       "description": "Bibliographic information about the report or dataset.",
-      "$ref": "http://pathways-library.rmi.org/schema/publication.v1.json"
+      "$ref": "./publication.v1.json",
+      "tsType": "import('./publication.v1').Publication"
     },
     "pathwayType": {
       "description": "Type of the pathway pathway.",

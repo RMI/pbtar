@@ -7,7 +7,8 @@
   "properties": {
     "title": {
       "description": "Title of the report or publication.",
-      "$ref": "http://pathways-library.rmi.org/schema/common/label.v1.json"
+      "$ref": "./common/label.v1.json",
+      "tsType": "import('./common/label.v1').Label"
     },
     "subtitle": {
       "description": "Optional subtitle of the publication.",
@@ -22,7 +23,8 @@
     },
     "publisher": {
       "description": "Publisher or organization responsible for the publication.",
-      "$ref": "http://pathways-library.rmi.org/schema/common/label.v1.json"
+      "$ref": "./common/label.v1.json",
+      "tsType": "import('./common/label.v1').Label"
     },
     "year": {
       "description": "Year of publication.",
