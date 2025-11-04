@@ -191,19 +191,21 @@ const PathwayDetailPage: React.FC = () => {
         <div className="border-b border-neutral-200">
           <nav className="flex -mb-px">
             <button
-              className={`px-6 py-3 border-b-2 font-medium text-sm ${activeTab === "details"
-                ? "border-energy text-energy"
-                : "border-transparent text-rmigray-500 hover:text-rmigray-700 hover:border-rmigray-300"
-                }`}
+              className={`px-6 py-3 border-b-2 font-medium text-sm ${
+                activeTab === "details"
+                  ? "border-energy text-energy"
+                  : "border-transparent text-rmigray-500 hover:text-rmigray-700 hover:border-rmigray-300"
+              }`}
               onClick={() => setActiveTab("details")}
             >
               Details
             </button>
             <button
-              className={`px-6 py-3 border-b-2 font-medium text-sm ${activeTab === "plots"
-                ? "border-energy text-energy"
-                : "border-transparent text-rmigray-500 hover:text-rmigray-700 hover:border-rmigray-300"
-                }`}
+              className={`px-6 py-3 border-b-2 font-medium text-sm ${
+                activeTab === "plots"
+                  ? "border-energy text-energy"
+                  : "border-transparent text-rmigray-500 hover:text-rmigray-700 hover:border-rmigray-300"
+              }`}
               onClick={() => setActiveTab("plots")}
             >
               Plots
