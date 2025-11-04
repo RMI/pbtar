@@ -92,10 +92,11 @@ export function validateFilesBySchema(
 export function validateDataCollect(
   entries: FileEntry[],
   schema: object | SchemaObject,
+  referencedSchemas: Array<object | SchemaObject> = [],
 ): ValidationOutcome {
   const META_ID = String((schema as SchemaObject).$id);
   const metaEntries = entries.filter(
     (e) => hasSchemaString(e.data) && e.data.$schema === META_ID,
   );
-  return validateFilesBySchema(metaEntries, [schema]);
+  return validateFilesBySchema(metaEntries, [schema, ...referencedSchemas]);
 }

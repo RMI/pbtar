@@ -115,7 +115,7 @@ describe("PathwayCard component", () => {
 
     expect(screen.getByText("Publisher:")).toBeInTheDocument();
     expect(
-      screen.getByText(mockPathway.publication.publisher.fullName),
+      screen.getByText(mockPathway.publication.publisher.full),
     ).toBeInTheDocument();
   });
 
