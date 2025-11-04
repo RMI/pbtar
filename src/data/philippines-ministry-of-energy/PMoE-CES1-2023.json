@@ -1,11 +1,24 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "PMoE-CES1-2023",
-  "publisher": "Philippines - Ministry of Energy",
+  "publication": {
+    "title": { "full": "Power Development Plan 2023-2050" },
+    "publisher": { "full": "Philippines Department of Energy" },
+    "year": 2023,
+    "links": [
+      {
+        "description": "Power Development Plan Report",
+        "url": "https://legacy.doe.gov.ph/energy-information-resources?q=power-development-plan"
+      },
+      {
+        "description": "Philippine Energy Plan",
+        "url": "https://legacy.doe.gov.ph/pep/philippine-energy-plan-2023-2050-0"
+      }
+    ]
+  },
   "name": "Clean Energy Scenario 1 (CES 1)",
   "description": "Philippines Power Development Plan following NREP with low offshore wind development.",
   "geography": ["PH"],
-  "publicationYear": 2023,
   "pathwayType": "Direct Policy",
   "modelYearStart": 2023,
   "modelYearEnd": 2050,

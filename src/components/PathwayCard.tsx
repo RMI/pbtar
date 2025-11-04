@@ -179,7 +179,10 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
               <p className="text-xs text-rmigray-500">Publisher:</p>
               <p className="text-sm font-medium text-rmigray-800">
                 <HighlightedText
-                  text={pathway.publisher}
+                  text={
+                    pathway.publication.publisher.short ||
+                    pathway.publication.publisher.full
+                  }
                   searchTerm={searchTerm}
                 />
               </p>
@@ -188,7 +191,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
               <p className="text-xs text-rmigray-500">Published:</p>
               <p className="text-sm font-medium text-rmigray-800">
                 <HighlightedText
-                  text={pathway.publicationYear}
+                  text={pathway.publication.year}
                   searchTerm={searchTerm}
                 />
               </p>

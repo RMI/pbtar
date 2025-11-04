@@ -26,6 +26,11 @@
       "pattern": "\\.$",
       "maxLength": 100
     },
+    "publication": {
+      "description": "Bibliographic information about the report or dataset.",
+      "$ref": "./publication.v1.json",
+      "tsType": "import('./publication.v1').PublicationV1"
+    },
     "pathwayType": {
       "description": "Type of the pathway pathway.",
       "type": "string",
@@ -152,17 +157,6 @@
         "required": ["name", "technologies"],
         "additionalProperties": false
       }
-    },
-    "publisher": {
-      "description": "Publisher of the pathway.",
-      "type": "string",
-      "maxLength": 100
-    },
-    "publicationYear": {
-      "description": "Year that the pathway was published.",
-      "type": "integer",
-      "minimum": 1900,
-      "maximum": 2030
     },
     "pathwayOverview": {
       "description": "Overview of the pathway.",
@@ -405,11 +399,10 @@
     "id",
     "name",
     "description",
+    "publication",
     "pathwayType",
     "geography",
     "sectors",
-    "publisher",
-    "publicationYear",
     "expertOverview",
     "dataSource",
     "metric",

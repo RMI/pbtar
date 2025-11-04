@@ -2,6 +2,11 @@
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "pathway-minimal",
   "name": "Minimal Pathway",
+  "publication": {
+    "title": { "full": "Example Title" },
+    "publisher": { "full": "Example Publisher" },
+    "year": 2024
+  },
   "description": "A minimal pathway file that passes schema validation.",
   "pathwayType": "Exploratory",
   "geography": ["Country-Specific"],
@@ -11,8 +16,6 @@
       "technologies": ["Other"]
     }
   ],
-  "publisher": "Test Publisher",
-  "publicationYear": 1900,
   "pathwayOverview": "This is a minimal pathway for testing purposes.",
   "expertOverview": "Test recommendation.",
   "metric": ["Capacity"],

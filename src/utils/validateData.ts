@@ -25,6 +25,14 @@ function makeAjv(schemas: readonly (object | SchemaObject)[]) {
     multipleOfPrecision: 12,
   });
   addFormats(ajv);
+  // Accept json-schema-to-typescript’s hint keyword without affecting validation
+
+  ajv.addKeyword({
+    keyword: "tsType",
+    schemaType: "string",
+    errors: false,
+  });
+
   for (const s of schemas) ajv.addSchema(s as SchemaObject);
   return ajv;
 }
@@ -92,10 +100,11 @@ export function validateFilesBySchema(
 export function validateDataCollect(
   entries: FileEntry[],
   schema: object | SchemaObject,
+  referencedSchemas: Array<object | SchemaObject> = [],
 ): ValidationOutcome {
   const META_ID = String((schema as SchemaObject).$id);
   const metaEntries = entries.filter(
     (e) => hasSchemaString(e.data) && e.data.$schema === META_ID,
   );
-  return validateFilesBySchema(metaEntries, [schema]);
+  return validateFilesBySchema(metaEntries, [schema, ...referencedSchemas]);
 }

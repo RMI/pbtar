@@ -5,6 +5,11 @@
  */
 
 /**
+ * Bibliographic information about the report or dataset.
+ */
+export type Publication = import("./publication.v1").PublicationV1;
+
+/**
  * A schema for the pathway metadata dataset in PBTAR.
  */
 export interface PathwayMetadataV1 {
@@ -24,6 +29,7 @@ export interface PathwayMetadataV1 {
    * Brief description of the pathway.
    */
   description: string;
+  publication: Publication;
   /**
    * Type of the pathway pathway.
    */
@@ -118,14 +124,6 @@ export interface PathwayMetadataV1 {
       | "Other"
     )[];
   }[];
-  /**
-   * Publisher of the pathway.
-   */
-  publisher: string;
-  /**
-   * Year that the pathway was published.
-   */
-  publicationYear: number;
   /**
    * Overview of the pathway.
    */
