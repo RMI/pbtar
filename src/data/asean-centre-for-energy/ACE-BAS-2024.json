@@ -1,11 +1,22 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "ACE-BAS-2024",
-  "publisher": "ASEAN Centre for Energy (ACE)",
+  "publication": {
+    "title": { "full": "8th ASEAN Energy Outlook", "short": "AEO8" },
+    "publisher": { "full": "ASEAN Centre for Energy", "short": "ACE" },
+    "year": 2024,
+    "city": "Jakarta",
+    "issn": "2963-539X",
+    "links": [
+      {
+        "description": "Report",
+        "url": "https://aseanenergy.org/publications/the-8th-asean-energy-outlook/"
+      }
+    ]
+  },
   "name": "Baseline Scenario (BAS)",
   "description": "Continuation of historical trends of ASEAN energy systems w/o modelling of existing policy targets.",
   "geography": ["South East Asia"],
-  "publicationYear": 2024,
   "pathwayType": "Predictive",
   "modelYearStart": 2023,
   "modelYearEnd": 2050,

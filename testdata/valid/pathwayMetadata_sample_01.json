@@ -2,6 +2,11 @@
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "sample-01",
   "name": "Sample Pathway 01",
+  "publication": {
+    "title": { "full": "Example Title" },
+    "publisher": { "full": "Example Publisher" },
+    "year": 2024
+  },
   "description": "First Sample Pathway. qwerty description.",
   "pathwayType": "Normative",
   "modelYearNetzero": 2050,
@@ -14,8 +19,6 @@
   "sectors": [
     { "name": "Land Use", "technologies": ["Precision Agriculture"] }
   ],
-  "publisher": "Example Publisher",
-  "publicationYear": 2025,
   "pathwayOverview": "QWERTY Overview.",
   "expertOverview": "Example Expert Recommendation.",
   "keyFeatures": {

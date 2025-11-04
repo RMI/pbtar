@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://pathways-library.rmi.org/schema/common/label.v1.json",
+  "title": "Label",
+  "description": "Label object with optional abbreviation.",
+  "type": "object",
+  "properties": {
+    "full": {
+      "description": "Full name or label",
+      "type": "string",
+      "maxLength": 200
+    },
+    "short": {
+      "description": "Short name, acronym, or abbreviation",
+      "type": "string",
+      "maxLength": 20
+    }
+  },
+  "required": ["full"],
+  "additionalProperties": false
+}

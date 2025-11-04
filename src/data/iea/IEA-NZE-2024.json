@@ -1,11 +1,28 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "IEA-NZE-2024",
-  "publisher": "IEA",
+  "publication": {
+    "title": { "full": "World Energy Outlook 2024", "short": "WEO" },
+    "publisher": {
+      "full": "International Energy Agency",
+      "short": "IEA"
+    },
+    "year": 2024,
+    "city": "Paris",
+    "links": [
+      {
+        "description": "Report",
+        "url": "https://www.iea.org/reports/world-energy-outlook-2024"
+      },
+      {
+        "description": "Dataset",
+        "url": "https://www.iea.org/data-and-statistics/data-product/world-energy-outlook-2024-free-dataset"
+      }
+    ]
+  },
   "name": "Net Zero Emissions by 2050 Scenario (NZE)",
   "description": "The IEA NZE is a normative global 1.5°C aligned pathway. It assumes net zero emissions by 2050.",
   "geography": ["Global"],
-  "publicationYear": 2024,
   "pathwayType": "Normative",
   "carbonBudget": 433,
   "modelTempIncrease": 1.5,

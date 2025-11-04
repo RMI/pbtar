@@ -12,7 +12,7 @@ import {
   normalizeGeography,
   sortGeographiesForDetails,
 } from "../utils/geographyUtils";
-import { ExternalLink, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import {
   getPathwayTypeTooltip,
   getSectorTooltip,
@@ -24,6 +24,7 @@ import {
   datasetsForPathway,
   summarizeSummary,
 } from "../utils/timeseriesIndex";
+import PublicationBlock from "../components/PublicationBlock";
 
 const PathwayDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -180,30 +181,7 @@ const PathwayDetailPage: React.FC = () => {
                 </div>
               </section>
 
-              <section>
-                <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
-                  Data Source
-                </h2>
-                <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-                  <div className="text-rmigray-700 mb-4 [&_a]:text-energy [&_a]:hover:text-energy-700">
-                    <Markdown>{pathway.dataSource.description}</Markdown>
-                  </div>
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <a
-                      href={pathway.dataSource.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center px-4 py-2 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200"
-                    >
-                      <ExternalLink
-                        size={16}
-                        className="mr-2"
-                      />
-                      Visit Source
-                    </a>
-                  </div>
-                </div>
-              </section>
+              <PublicationBlock publication={pathway.publication} />
 
               {tsIndexLoaded && datasets.length > 0 ? (
                 <section className="mt-8">

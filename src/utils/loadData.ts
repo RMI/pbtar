@@ -58,6 +58,7 @@ export function decideIncludeInvalid(): boolean {
 export function assembleData<T>(
   entries: FileEntry[],
   schema: object | SchemaObject,
+  referencedSchemas: Array<object | SchemaObject> = [],
   opts?: {
     includeInvalid?: boolean;
     warn?: (msg: string) => void;
@@ -71,7 +72,7 @@ export function assembleData<T>(
   const onInvalid = opts?.onInvalid;
 
   const { valid: valid, invalid: invalid }: ValidationOutcome =
-    validateDataCollect(entries, schema);
+    validateDataCollect(entries, schema, referencedSchemas);
 
   if (invalid.length && opts?.warn) {
     const totalInvalid = invalid.length;
