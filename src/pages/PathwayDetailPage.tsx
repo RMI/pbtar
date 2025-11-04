@@ -12,7 +12,7 @@ import {
   normalizeGeography,
   sortGeographiesForDetails,
 } from "../utils/geographyUtils";
-import { ExternalLink, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import {
   getPathwayTypeTooltip,
   getSectorTooltip,
