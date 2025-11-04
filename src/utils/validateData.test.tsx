@@ -48,7 +48,6 @@ describe("pathway schema enforces expected limits", () => {
         ...basePathway,
         modelYearStart: 1900,
         modelYearEnd: 2100,
-        publicationYear: 2030,
         modelYearNetzero: 2030,
         carbonBudget: 0,
         modelTempIncrease: 0.5, // min
@@ -83,8 +82,6 @@ describe("pathway schema enforces expected limits", () => {
     "pathwayType",
     "geography",
     "sectors",
-    "publisher",
-    "publicationYear",
     "expertOverview",
     "dataSource",
   ];
