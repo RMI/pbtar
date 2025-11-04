@@ -6,7 +6,6 @@ import Footer from "./components/Footer";
 import AboutPage from "./pages/AboutPage";
 import PathwaySearch from "./pages/PathwaySearch";
 import PathwayDetailPage from "./pages/PathwayDetailPage";
-import PathwayPlotsPage from "./pages/PathwayPlotsPage";
 import LandingPage from "./pages/LandingPage";
 import EnvironmentBanner from "./components/EnvironmentBanner";
 
@@ -32,10 +31,6 @@ export const AppContent = () => {
           <Route
             path="/pathway/:id"
             element={<PathwayDetailPage />}
-          />
-          <Route
-            path="/pathway/timeseries/:id"
-            element={<PathwayPlotsPage />}
           />
           <Route
             path="/about"
