@@ -24,6 +24,7 @@ export interface PathwayMetadataV1 {
    * Brief description of the pathway.
    */
   description: string;
+  publication: Publication;
   /**
    * Type of the pathway pathway.
    */
@@ -118,14 +119,6 @@ export interface PathwayMetadataV1 {
       | "Other"
     )[];
   }[];
-  /**
-   * Publisher of the pathway.
-   */
-  publisher: string;
-  /**
-   * Year that the pathway was published.
-   */
-  publicationYear: number;
   /**
    * Overview of the pathway.
    */
@@ -314,4 +307,86 @@ export interface PathwayMetadataV1 {
       | "By part of supply chain"
       | "By part of supply chain and maintenance/buildout";
   };
+}
+/**
+ * Bibliographic information about the report or dataset.
+ */
+export interface Publication {
+  title: Name;
+  /**
+   * Optional subtitle of the publication.
+   */
+  subtitle?: string;
+  /**
+   * List of authors or contributors.
+   */
+  author?: string[];
+  publisher: Name1;
+  /**
+   * Year of publication.
+   */
+  year: number;
+  /**
+   * Month of publication (1–12).
+   */
+  month?: number;
+  /**
+   * Day of publication (1–31).
+   */
+  day?: number;
+  /**
+   * City where the publication was published.
+   */
+  city?: string;
+  /**
+   * Digital Object Identifier for the publication.
+   */
+  doi?: string;
+  /**
+   * International Standard Book Number, if applicable.
+   */
+  isbn?: string;
+  /**
+   * International Standard Serial Number, if applicable.
+   */
+  issn?: string;
+  /**
+   * Links to related materials such as data, supplementary files, or the full report.
+   */
+  links?: {
+    /**
+     * Short label for the linked resource.
+     */
+    description?: string;
+    /**
+     * URL to the linked resource.
+     */
+    url: string;
+  }[];
+}
+/**
+ * Title of the report or publication.
+ */
+export interface Name {
+  /**
+   * Full Name
+   */
+  fullName: string;
+  /**
+   * Short Name or abbreviation
+   */
+  shortName?: string;
+}
+/**
+ * Publisher or organization responsible for the publication.
+ */
+export interface Name1 {
+  /**
+   * Full Name
+   */
+  fullName: string;
+  /**
+   * Short Name or abbreviation
+   */
+  shortName?: string;
 }
