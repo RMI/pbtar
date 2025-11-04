@@ -2,6 +2,11 @@
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "pathway-simple-standard",
   "name": "Simple Standard Pathway",
+  "publication": {
+    "title": { "full": "Example Title" },
+    "publisher": { "full": "Example Publisher" },
+    "year": 2025
+  },
   "description": "This is a simple standard pathway for demonstration purposes, with all fields filled out.",
   "pathwayType": "Normative",
   "modelYearNetzero": 2050,
@@ -14,8 +19,6 @@
   "sectors": [
     { "name": "Land Use", "technologies": ["Precision Agriculture"] }
   ],
-  "publisher": "Example Publisher",
-  "publicationYear": 2025,
   "pathwayOverview": "Example Overview.",
   "expertOverview": "Example Expert Recommendation.",
   "dataSource": {

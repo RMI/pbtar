@@ -2,6 +2,11 @@
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "sample-04",
   "name": "Sample Pathway 04",
+  "publication": {
+    "title": { "full": "Example Title" },
+    "publisher": { "full": "Example Publisher" },
+    "year": 2024
+  },
   "description": "Fourth Sample Pathway. ghjkl description.",
   "pathwayType": "Predictive",
   "modelYearNetzero": 2050,
@@ -13,8 +18,6 @@
     { "name": "Land Use", "technologies": ["Precision Agriculture"] },
     { "name": "Buildings", "technologies": ["Other"] }
   ],
-  "publisher": "Example Publisher",
-  "publicationYear": 2025,
   "pathwayOverview": "GHJKL Overview.",
   "expertOverview": "Example Expert Recommendation.",
   "metric": ["Emissions Intensity", "Technology Mix"],

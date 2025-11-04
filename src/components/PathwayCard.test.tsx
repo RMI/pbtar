@@ -114,14 +114,16 @@ describe("PathwayCard component", () => {
     renderPathwayCard();
 
     expect(screen.getByText("Publisher:")).toBeInTheDocument();
-    expect(screen.getByText(mockPathway.publisher)).toBeInTheDocument();
+    expect(
+      screen.getByText(mockPathway.publication.publisher.full),
+    ).toBeInTheDocument();
   });
 
   it("shows published date information", () => {
     renderPathwayCard();
 
     expect(screen.getByText("Published:")).toBeInTheDocument();
-    expect(screen.getByText(mockPathway.publicationYear)).toBeInTheDocument();
+    expect(screen.getByText(mockPathway.publication.year)).toBeInTheDocument();
   });
 
   it("displays the 'View details' text with icon", () => {
