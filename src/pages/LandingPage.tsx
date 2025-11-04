@@ -11,20 +11,65 @@ const WavePattern: React.FC = () => {
         preserveAspectRatio="none"
       >
         <defs>
-          <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(255,255,255,0.04)" />
-            <stop offset="50%" stopColor="rgba(255,255,255,0.06)" />
-            <stop offset="100%" stopColor="rgba(255,255,255,0.04)" />
+          <linearGradient
+            id="gradient1"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="0%"
+          >
+            <stop
+              offset="0%"
+              stopColor="rgba(255,255,255,0.04)"
+            />
+            <stop
+              offset="50%"
+              stopColor="rgba(255,255,255,0.06)"
+            />
+            <stop
+              offset="100%"
+              stopColor="rgba(255,255,255,0.04)"
+            />
           </linearGradient>
-          <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(255,255,255,0.05)" />
-            <stop offset="50%" stopColor="rgba(255,255,255,0.1)" />
-            <stop offset="100%" stopColor="rgba(255,255,255,0.05)" />
+          <linearGradient
+            id="gradient2"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="0%"
+          >
+            <stop
+              offset="0%"
+              stopColor="rgba(255,255,255,0.05)"
+            />
+            <stop
+              offset="50%"
+              stopColor="rgba(255,255,255,0.1)"
+            />
+            <stop
+              offset="100%"
+              stopColor="rgba(255,255,255,0.05)"
+            />
           </linearGradient>
-          <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(255,255,255,0.03)" />
-            <stop offset="50%" stopColor="rgba(255,255,255,0.07)" />
-            <stop offset="100%" stopColor="rgba(255,255,255,0.03)" />
+          <linearGradient
+            id="gradient3"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="0%"
+          >
+            <stop
+              offset="0%"
+              stopColor="rgba(255,255,255,0.03)"
+            />
+            <stop
+              offset="50%"
+              stopColor="rgba(255,255,255,0.07)"
+            />
+            <stop
+              offset="100%"
+              stopColor="rgba(255,255,255,0.03)"
+            />
           </linearGradient>
         </defs>
         <path
@@ -87,7 +132,9 @@ const Card: React.FC<{
   linkText: string;
   linkHref: string;
 }> = ({ title, icon, children, linkText, linkHref }) => (
-  <div className="bg-white/30 backdrop-blur-sm rounded-lg shadow-md p-6 flex flex-col"> {/* Removed mb-6 and h-full */}
+  <div className="bg-white/30 backdrop-blur-sm rounded-lg shadow-md p-6 flex flex-col">
+    {" "}
+    {/* Removed mb-6 and h-full */}
     <div className="flex items-center mb-4">
       <span className="text-2xl mr-3">{icon}</span>
       <h2 className="text-xl font-semibold text-rmigray-800">{title}</h2>
@@ -128,11 +175,11 @@ const LandingPage: React.FC = () => {
                     Navigating the Energy Transition
                   </h1>
                   <p className="text-lg text-rmigray-600">
-                    Transition pathways illustrate how the energy transition will
-                    reshape sectors and systems, giving financial institutions,
-                    corporates, and other organizations greater confidence in
-                    developing, assessing, and implementing plans in a changing energy
-                    landscape.
+                    Transition pathways illustrate how the energy transition
+                    will reshape sectors and systems, giving financial
+                    institutions, corporates, and other organizations greater
+                    confidence in developing, assessing, and implementing plans
+                    in a changing energy landscape.
                   </p>
                 </div>
                 <div className="mt-auto pt-8">
@@ -153,9 +200,9 @@ const LandingPage: React.FC = () => {
                 linkText="Learn more →"
                 linkHref="https://rmi.org/insight/creating-transition-intelligence-enhancing-corporate-transition-assessments-for-financial-decision-making"
               >
-                Drawing on a range of transition pathways turns corporate data into
-                actionable intelligence, helping organizations test strategies,
-                manage risks, and engage stakeholders.
+                Drawing on a range of transition pathways turns corporate data
+                into actionable intelligence, helping organizations test
+                strategies, manage risks, and engage stakeholders.
               </Card>
               <Card
                 title="RMI's Approach"
@@ -163,9 +210,10 @@ const LandingPage: React.FC = () => {
                 linkText="Learn more →"
                 linkHref="https://rmi.org/insight/leveraging-transition-pathways/"
               >
-                This repository connects users with the right transition pathways
-                for their needs, with structured guidance for navigating diverse
-                pathway types, geographies, developers, and methodologies.
+                This repository connects users with the right transition
+                pathways for their needs, with structured guidance for
+                navigating diverse pathway types, geographies, developers, and
+                methodologies.
               </Card>
             </div>
           </div>
