@@ -2,17 +2,19 @@ import { describe, it, expect } from "vitest";
 import { validateDataCollect, FileEntry } from "./validateData";
 import { PathwayMetadataType } from "../types";
 import pathwayMetadata from "../schema/pathwayMetadata.v1.json" with { type: "json" };
+import publicationSchema from "../schema/publication.v1.json" with { type: "json" };
+import labelSchema from "../schema/common/label.v1.json" with { type: "json" };
 
 function ok(entry: FileEntry | FileEntry[]) {
   const arr = Array.isArray(entry) ? entry : [entry];
-  const { valid, invalid } = validateDataCollect(arr, pathwayMetadata);
+  const { valid, invalid } = validateDataCollect(arr, pathwayMetadata, [publicationSchema, labelSchema] as object[]);
   expect(valid.length).toBeGreaterThan(0);
   expect(invalid.length).toBe(0);
 }
 
 function fail(entry: FileEntry | FileEntry[], rx?: RegExp | string) {
   const arr = Array.isArray(entry) ? entry : [entry];
-  const rawValidation = validateDataCollect(arr, pathwayMetadata);
+  const rawValidation = validateDataCollect(arr, pathwayMetadata, [publicationSchema, labelSchema] as object[]);
   const invalid = rawValidation.invalid;
   expect(invalid.length).toBeGreaterThan(0);
   if (rx) {

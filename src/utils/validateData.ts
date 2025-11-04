@@ -25,6 +25,14 @@ function makeAjv(schemas: readonly (object | SchemaObject)[]) {
     multipleOfPrecision: 12,
   });
   addFormats(ajv);
+  // Accept json-schema-to-typescript’s hint keyword without affecting validation
+
+  ajv.addKeyword({
+    keyword: "tsType",
+    schemaType: "string",
+    errors: false,
+  });
+
   for (const s of schemas) ajv.addSchema(s as SchemaObject);
   return ajv;
 }
