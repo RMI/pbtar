@@ -1,40 +1,18 @@
 import React from "react";
 import { ExternalLink } from "lucide-react";
+import { PublicationType } from "../types";
 
-/** Matches $defs.name in the schema */
-export interface NameObj {
-  fullName: string;
-  shortName?: string;
-}
-
-/** Matches $defs.publication in the schema */
-export interface Publication {
-  title: NameObj; // required
-  subtitle?: string;
-  author?: string[];
-  publisher: NameObj; // required
-  year: number; // required
-  month?: number;
-  day?: number;
-  city?: string;
-  doi?: string;
-  isbn?: string;
-  issn?: string;
-  links?: Array<{
-    description?: string;
-    url: string; // required per item
-  }>;
-}
+type labelObj = PublicationType["publisher"];
 
 /** Prefer short when present, otherwise full name */
-function preferShortName(n: NameObj): string {
-  return n.shortName?.trim() || n.fullName;
+function preferShortName(n: labelObj): string {
+  return n.short?.trim() || n.full;
 }
 
 /** Title with optional short in parentheses: "Long Title (SHORT)" */
-function formatTitleWithShort(title: NameObj, subtitle?: string): string {
-  const base = subtitle ? `${title.fullName} (${subtitle})` : title.fullName;
-  return title.shortName ? `${base} (${title.shortName})` : base;
+function formatTitleWithShort(title: labelObj, subtitle?: string): string {
+  const base = subtitle ? `${title.full} (${subtitle})` : title.full;
+  return title.short ? `${base} (${title.short})` : base;
 }
 
 function formatAuthors(authors?: string[]): string | undefined {
@@ -66,13 +44,13 @@ function linkLabel(url: string, description?: string): string {
   }
 }
 
-export function formatCitation(pub: Publication): string {
+export function formatCitation(pub: PublicationType): string {
   const lead = preferShortName(pub.publisher); // ACE
   const date = formatDate(pub.year, pub.month, pub.day); // "2024" or "2024-10"
   const title = formatTitleWithShort(pub.title, pub.subtitle); // "8th ASEAN Energy Outlook (AEO8)"
-  const pubTail = pub.publisher.shortName
-    ? `${pub.publisher.fullName} (${pub.publisher.shortName})`
-    : pub.publisher.fullName;
+  const pubTail = pub.publisher.short
+    ? `${pub.publisher.full} (${pub.publisher.short})`
+    : pub.publisher.full;
   const city = pub.city ? `, ${pub.city}` : "";
   // Optional authors before title if you ever want them:
   // const authors = formatAuthors(pub.author);
@@ -84,7 +62,7 @@ export function formatCitation(pub: Publication): string {
 export default function PublicationBlock({
   publication,
 }: {
-  publication: Publication;
+  publication: PublicationType;
 }) {
   const links = publication.links ?? [];
   const authors = formatAuthors(publication.author);

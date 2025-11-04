@@ -1,8 +1,10 @@
 import type { FacetMode } from "../utils/searchUtils";
 import type { PathwayMetadataV1 } from "./pathwayMetadata.v1";
+import type { PublicationV1 } from "./publication.v1";
 
 // Re-export the (current) versioned pathway metadata type as generic
 export type PathwayMetadataType = PathwayMetadataV1;
+export type PublicationType = PublicationV1;
 
 // Enum-like types derived from the schema
 export type PathwayType = PathwayMetadataType["pathwayType"];
