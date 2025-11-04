@@ -25,11 +25,20 @@ import {
   summarizeSummary,
 } from "../utils/timeseriesIndex";
 import PublicationBlock from "../components/PublicationBlock";
+import NormalizedStackedAreaChart from "../components/NormalizedStackedAreaChart";
+import DonutChart from "../components/DonutChart";
+import MultiLineChart from "../components/MultiLineChart";
+import RadarChart from "../components/RadarChart";
+import VerticalBarChart from "../components/VerticalBarChart";
+
+type TabType = "details" | "plots";
 
 const PathwayDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [pathway, setPathway] = useState<PathwayMetadataType | null>(null);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<TabType>("details");
+  const [timeseriesdata, setTimeseriesdata] = useState();
 
   useEffect(() => {
     setLoading(true);
@@ -80,6 +89,15 @@ const PathwayDetailPage: React.FC = () => {
       isMounted = false;
     };
   }, [pathway]); // depend on the full object to avoid eslint warning
+
+  useEffect(() => {
+    if (datasets.length > 0) {
+      fetch(datasets[0].path.replace(/\.csv$/, ".json"))
+        .then((response) => response.json())
+        .then((data) => setTimeseriesdata(data))
+        .catch((error) => console.error("Error fetching JSON:", error));
+    }
+  }, [datasets]);
 
   if (loading) {
     return (
@@ -169,153 +187,280 @@ const PathwayDetailPage: React.FC = () => {
           </div>
         </div>
 
+        {/* Tabs */}
+        <div className="border-b border-neutral-200">
+          <nav className="flex -mb-px">
+            <button
+              className={`px-6 py-3 border-b-2 font-medium text-sm ${activeTab === "details"
+                ? "border-energy text-energy"
+                : "border-transparent text-rmigray-500 hover:text-rmigray-700 hover:border-rmigray-300"
+                }`}
+              onClick={() => setActiveTab("details")}
+            >
+              Details
+            </button>
+            <button
+              className={`px-6 py-3 border-b-2 font-medium text-sm ${activeTab === "plots"
+                ? "border-energy text-energy"
+                : "border-transparent text-rmigray-500 hover:text-rmigray-700 hover:border-rmigray-300"
+                }`}
+              onClick={() => setActiveTab("plots")}
+            >
+              Plots
+            </button>
+          </nav>
+        </div>
+
         <div className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div className="md:col-span-8">
-              <section className="mb-8">
-                <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
-                  Expert Overview
-                </h2>
-                <div className="prose text-rmigray-700">
-                  <Markdown>{pathway.expertOverview}</Markdown>
-                </div>
-              </section>
-
-              <PublicationBlock publication={pathway.publication} />
-
-              {tsIndexLoaded && datasets.length > 0 ? (
-                <section className="mt-8">
-                  <h3 className="text-sm font-semibold text-neutral-600 mb-3">
-                    Related datasets
-                  </h3>
-                  <div className="grid gap-3">
-                    {datasets.map((d) => {
-                      const label = d.label ?? d.datasetId;
-                      const summary = summarizeSummary(d.summary);
-                      return (
-                        <DownloadDataset
-                          key={d.datasetId}
-                          label={label}
-                          href={d.path}
-                          summary={summary}
-                        />
-                      );
-                    })}
+          {activeTab === "details" ? (
+            // Details Tab Content
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+              <div className="md:col-span-8">
+                <section className="mb-8">
+                  <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
+                    Expert Overview
+                  </h2>
+                  <div className="prose text-rmigray-700">
+                    <Markdown>{pathway.expertOverview}</Markdown>
                   </div>
                 </section>
-              ) : null}
-            </div>
 
-            <div className="md:col-span-4">
-              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
-                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
-                  Key Features
-                </h3>
-                {(() => {
-                  // Pretty labels for keys from schema (kept small & explicit to avoid surprises)
-                  const LABELS: Record<
-                    keyof PathwayMetadataType["keyFeatures"],
-                    string
-                  > = {
-                    emissionsPathway: "Emissions pathway",
-                    energyEfficiency: "Energy efficiency",
-                    energyDemand: "Energy demand",
-                    electrification: "Electrification",
-                    policyTypes: "Policy types",
-                    technologyCostTrend: "Technology cost trend",
-                    technologyDeploymentTrend: "Technology deployment trend",
-                    emissionsScope: "Emissions scope",
-                    policyAmbition: "Policy ambition",
-                    technologyCostsDetail: "Technology costs detail",
-                    newTechnologiesIncluded: "New technologies included",
-                    supplyChain: "Supply chain",
-                    investmentNeeds: "Investment needs",
-                    infrastructureRequirements: "Infrastructure requirements",
-                  };
+                <PublicationBlock publication={pathway.publication} />
 
-                  return Object.entries(
-                    pathway.keyFeatures as string | string[],
-                  ).map(([rawKey, rawVal]) => {
-                    const key =
-                      rawKey as keyof PathwayMetadataType["keyFeatures"];
-                    // Normalize to an array of strings for BadgeArray
-                    const values = Array.isArray(rawVal) ? rawVal : [rawVal];
-                    // Defensive guard for any accidental empties
-                    const clean = values.filter((v): v is string =>
-                      Boolean(v && String(v).trim()),
-                    );
-                    if (clean.length === 0) return null;
+                {tsIndexLoaded && datasets.length > 0 ? (
+                  <section className="mt-8">
+                    <h3 className="text-sm font-semibold text-neutral-600 mb-3">
+                      Related datasets
+                    </h3>
+                    <div className="grid gap-3">
+                      {datasets.map((d) => {
+                        const label = d.label ?? d.datasetId;
+                        const summary = summarizeSummary(d.summary);
+                        return (
+                          <DownloadDataset
+                            key={d.datasetId}
+                            label={label}
+                            href={d.path}
+                            summary={summary}
+                          />
+                        );
+                      })}
+                    </div>
+                  </section>
+                ) : null}
+              </div>
 
-                    return (
-                      <div
-                        key={rawKey}
-                        className="mb-3"
-                      >
-                        <p className="text-xs font-medium text-rmigray-500 mb-1">
-                          {LABELS[key] ?? rawKey}
-                        </p>
-                        <BadgeArray
-                          variant="keyFeature"
-                          visibleCount={Infinity}
+              <div className="md:col-span-4">
+                <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                  <h3 className="text-lg font-medium text-rmigray-800 mb-3">
+                    Key Features
+                  </h3>
+                  {(() => {
+                    const LABELS: Record<
+                      keyof PathwayMetadataType["keyFeatures"],
+                      string
+                    > = {
+                      emissionsPathway: "Emissions pathway",
+                      energyEfficiency: "Energy efficiency",
+                      energyDemand: "Energy demand",
+                      electrification: "Electrification",
+                      policyTypes: "Policy types",
+                      technologyCostTrend: "Technology cost trend",
+                      technologyDeploymentTrend: "Technology deployment trend",
+                      emissionsScope: "Emissions scope",
+                      policyAmbition: "Policy ambition",
+                      technologyCostsDetail: "Technology costs detail",
+                      newTechnologiesIncluded: "New technologies included",
+                      supplyChain: "Supply chain",
+                      investmentNeeds: "Investment needs",
+                      infrastructureRequirements: "Infrastructure requirements",
+                    };
+
+                    return Object.entries(
+                      pathway.keyFeatures as string | string[],
+                    ).map(([rawKey, rawVal]) => {
+                      const key =
+                        rawKey as keyof PathwayMetadataType["keyFeatures"];
+                      const values = Array.isArray(rawVal) ? rawVal : [rawVal];
+                      const clean = values.filter((v): v is string =>
+                        Boolean(v && String(v).trim()),
+                      );
+                      if (clean.length === 0) return null;
+
+                      return (
+                        <div
+                          key={rawKey}
+                          className="mb-3"
                         >
-                          {clean}
-                        </BadgeArray>
-                      </div>
-                    );
-                  });
-                })()}
-              </div>
+                          <p className="text-xs font-medium text-rmigray-500 mb-1">
+                            {LABELS[key] ?? rawKey}
+                          </p>
+                          <BadgeArray
+                            variant="keyFeature"
+                            visibleCount={Infinity}
+                          >
+                            {clean}
+                          </BadgeArray>
+                        </div>
+                      );
+                    });
+                  })()}
+                </div>
 
-              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
-                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
-                  Geographies
-                </h3>
-                <BadgeArray
-                  variant={sortGeographiesForDetails(
-                    pathway.geography ?? [],
-                  ).map(
-                    (geo) => geographyVariant(geographyKind(geo)) as string,
-                  )}
-                  toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
-                  visibleCount={Infinity}
-                >
-                  {sortGeographiesForDetails(pathway.geography ?? [])}
-                </BadgeArray>
-              </div>
-
-              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
-                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
-                  Sectors
-                </h3>
-                {/* Sectors section with dynamic badge count */}
-                <div className="mb-3">
-                  <p className="text-xs font-medium text-rmigray-500 mb-1">
-                    Sectors:
-                  </p>
+                <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                  <h3 className="text-lg font-medium text-rmigray-800 mb-3">
+                    Geographies
+                  </h3>
                   <BadgeArray
-                    variant="sector"
-                    tooltipGetter={getSectorTooltip}
+                    variant={sortGeographiesForDetails(
+                      pathway.geography ?? [],
+                    ).map(
+                      (geo) => geographyVariant(geographyKind(geo)) as string,
+                    )}
+                    toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
                     visibleCount={Infinity}
                   >
-                    {pathway.sectors.map((sector) => sector.name)}
+                    {sortGeographiesForDetails(pathway.geography ?? [])}
+                  </BadgeArray>
+                </div>
+
+                <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                  <h3 className="text-lg font-medium text-rmigray-800 mb-3">
+                    Sectors
+                  </h3>
+                  <div className="mb-3">
+                    <p className="text-xs font-medium text-rmigray-500 mb-1">
+                      Sectors:
+                    </p>
+                    <BadgeArray
+                      variant="sector"
+                      tooltipGetter={getSectorTooltip}
+                      visibleCount={Infinity}
+                    >
+                      {pathway.sectors.map((sector) => sector.name)}
+                    </BadgeArray>
+                  </div>
+                </div>
+
+                <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                  <h3 className="text-lg font-medium text-rmigray-800 mb-3">
+                    Benchmark Metrics
+                  </h3>
+                  <BadgeArray
+                    variant="metric"
+                    tooltipGetter={getMetricTooltip}
+                    visibleCount={Infinity}
+                  >
+                    {pathway.metric}
                   </BadgeArray>
                 </div>
               </div>
+            </div>
+          ) : (
+            // Plots Tab Content
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+              <div className="md:col-span-12">
+                {timeseriesdata && (
+                  <>
+                    <section className="mb-8">
+                      <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
+                        Composition
+                      </h2>
+                      <div
+                        className="row"
+                        style={{ display: "flex" }}
+                      >
+                        <div
+                          className="column"
+                          style={{ flex: "60%", padding: "30px" }}
+                        >
+                          <NormalizedStackedAreaChart
+                            key={datasets[0].datasetId}
+                            data={timeseriesdata}
+                            width={500}
+                          />
+                        </div>
+                        <div
+                          className="column"
+                          style={{ flex: "40%", padding: "30px" }}
+                        >
+                          <DonutChart
+                            key={datasets[0].datasetId}
+                            data={timeseriesdata}
+                            width={350}
+                          />
+                        </div>
+                      </div>
+                    </section>
 
-              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
-                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
-                  Benchmark Metrics
-                </h3>
-                <BadgeArray
-                  variant="metric"
-                  tooltipGetter={getMetricTooltip}
-                  visibleCount={Infinity}
-                >
-                  {pathway.metric}
-                </BadgeArray>
+                    <section className="mb-8">
+                      <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
+                        Emissions
+                      </h2>
+                      <div
+                        className="row"
+                        style={{ display: "flex" }}
+                      >
+                        <div
+                          className="column"
+                          style={{ flex: "60%", padding: "30px" }}
+                        >
+                          <VerticalBarChart
+                            key={datasets[0].datasetId}
+                            data={timeseriesdata}
+                            width={500}
+                            metric={"absoluteEmissions"}
+                          />
+                        </div>
+                        <div
+                          className="column"
+                          style={{ flex: "40%", padding: "30px" }}
+                        >
+                          <VerticalBarChart
+                            key={datasets[0].datasetId}
+                            data={timeseriesdata}
+                            width={500}
+                            metric={"emissionsIntensity"}
+                          />
+                        </div>
+                      </div>
+                    </section>
+
+                    <section className="mb-8">
+                      <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
+                        Supply
+                      </h2>
+                      <div
+                        className="row"
+                        style={{ display: "flex" }}
+                      >
+                        <div
+                          className="column"
+                          style={{ flex: "60%", padding: "30px" }}
+                        >
+                          <MultiLineChart
+                            key={datasets[0].datasetId}
+                            data={timeseriesdata}
+                            width={500}
+                          />
+                        </div>
+                        <div
+                          className="column"
+                          style={{ flex: "40%", padding: "30px" }}
+                        >
+                          <RadarChart
+                            key={datasets[0].datasetId}
+                            data={timeseriesdata}
+                            width={400}
+                          />
+                        </div>
+                      </div>
+                    </section>
+                  </>
+                )}
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
