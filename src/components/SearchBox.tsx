@@ -24,11 +24,10 @@ const SearchBox: React.FC<SearchBoxProps> = ({
 
   return (
     <div
-      className={`flex items-center w-full max-w-169 rounded-md border transition-all duration-200 bg-white ${
-        isFocused
+      className={`flex items-center w-full max-w-169 rounded-md border transition-all duration-200 bg-white ${isFocused
           ? "border-energy-400 ring-2 ring-energy-100"
           : "border-neutral-300"
-      }`}
+        }`}
     >
       <div className="pl-3 text-gray-400">
         <Search size={20} />
