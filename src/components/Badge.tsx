@@ -6,16 +6,16 @@ interface BadgeProps {
   children: string | number;
   tooltip?: string;
   variant?:
-  | "default"
-  | "pathwayType"
-  | "temperature"
-  | "year"
-  | "geographyGlobal"
-  | "geographyRegion"
-  | "geographyCountry"
-  | "sector"
-  | "metric"
-  | "keyFeature";
+    | "default"
+    | "pathwayType"
+    | "temperature"
+    | "year"
+    | "geographyGlobal"
+    | "geographyRegion"
+    | "geographyCountry"
+    | "sector"
+    | "metric"
+    | "keyFeature";
   className?: string;
 }
 
@@ -110,8 +110,9 @@ export function BadgeMaybeAbsent<T extends string | number>({
   }
 
   // Convert ReactNode to string
-  const content = renderLabel && typeof base === "string"
-    ? String(renderLabel(base, absent))
-    : base;
+  const content =
+    renderLabel && typeof base === "string"
+      ? String(renderLabel(base, absent))
+      : base;
   return <Badge {...rest}>{content}</Badge>;
 }

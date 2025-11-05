@@ -25,12 +25,16 @@ describe("Badge component", () => {
 
   it("disallows ReactNode children for Badge at compile-time", () => {
     // @ts-expect-error - Badge children must be string | number
-    render(<Badge><div>Not allowed</div></Badge>);
+    render(
+      <Badge>
+        <div>Not allowed</div>
+      </Badge>,
+    );
   });
 
   it("applies pathwayType styling when variant is 'pathwayType'", () => {
     const { container } = render(
-      <Badge variant="pathwayType">Pathway Type</Badge>
+      <Badge variant="pathwayType">Pathway Type</Badge>,
     );
     const badge = container.firstChild as HTMLElement;
 
@@ -40,9 +44,7 @@ describe("Badge component", () => {
   });
 
   it("applies temperature styling when variant is 'temperature'", () => {
-    const { container } = render(
-      <Badge variant="temperature">1.5°C</Badge>
-    );
+    const { container } = render(<Badge variant="temperature">1.5°C</Badge>);
     const badge = container.firstChild as HTMLElement;
 
     expect(badge).toHaveClass("bg-rmired-100");
@@ -51,9 +53,7 @@ describe("Badge component", () => {
   });
 
   it("applies year styling when variant is 'year'", () => {
-    const { container } = render(
-      <Badge variant="year">2050</Badge>
-    );
+    const { container } = render(<Badge variant="year">2050</Badge>);
     const badge = container.firstChild as HTMLElement;
 
     expect(badge).toHaveClass("bg-rmiblue-100");
@@ -63,7 +63,7 @@ describe("Badge component", () => {
 
   it("applies geography styling when variant is 'geographyGlobal'", () => {
     const { container } = render(
-      <Badge variant="geographyGlobal">Global</Badge>
+      <Badge variant="geographyGlobal">Global</Badge>,
     );
     const badge = container.firstChild as HTMLElement;
 
@@ -74,7 +74,7 @@ describe("Badge component", () => {
 
   it("applies geography styling when variant is 'geographyRegion'", () => {
     const { container } = render(
-      <Badge variant="geographyRegion">RegionName</Badge>
+      <Badge variant="geographyRegion">RegionName</Badge>,
     );
     const badge = container.firstChild as HTMLElement;
 
@@ -85,7 +85,7 @@ describe("Badge component", () => {
 
   it("applies geography styling when variant is 'geographyCountry'", () => {
     const { container } = render(
-      <Badge variant="geographyCountry">CountryName</Badge>
+      <Badge variant="geographyCountry">CountryName</Badge>,
     );
     const badge = container.firstChild as HTMLElement;
 
@@ -95,9 +95,7 @@ describe("Badge component", () => {
   });
 
   it("applies sector styling when variant is 'sector'", () => {
-    const { container } = render(
-      <Badge variant="sector">Energy</Badge>
-    );
+    const { container } = render(<Badge variant="sector">Energy</Badge>);
     const badge = container.firstChild as HTMLElement;
 
     expect(badge).toHaveClass("bg-solar-100");
@@ -114,9 +112,7 @@ describe("Badge component", () => {
   });
 
   it("always includes base badge styling", () => {
-    const { container } = render(
-      <Badge variant="pathwayType">Test</Badge>
-    );
+    const { container } = render(<Badge variant="pathwayType">Test</Badge>);
     const badge = container.firstChild as HTMLElement;
 
     expect(badge).toHaveClass("inline-flex");
@@ -166,14 +162,14 @@ describe("Badge component", () => {
           variant="pathwayType"
         >
           Normative
-        </Badge>
+        </Badge>,
       );
 
       const badge = screen.getByText("Normative");
       expect(badge).toBeInTheDocument();
       expect(badge.closest("span")?.parentElement).toHaveAttribute(
         "tabindex",
-        "0"
+        "0",
       );
     });
 
@@ -184,14 +180,14 @@ describe("Badge component", () => {
           variant="pathwayType"
         >
           Direct Policy
-        </Badge>
+        </Badge>,
       );
 
       const badge = screen.getByText("Direct Policy");
       expect(badge).toBeInTheDocument();
       expect(badge.closest("span")?.parentElement).toHaveAttribute(
         "tabindex",
-        "0"
+        "0",
       );
     });
 
@@ -202,14 +198,14 @@ describe("Badge component", () => {
           variant="sector"
         >
           Power
-        </Badge>
+        </Badge>,
       );
 
       const badge = screen.getByText("Power");
       expect(badge).toBeInTheDocument();
       expect(badge.closest("span")?.parentElement).toHaveAttribute(
         "tabindex",
-        "0"
+        "0",
       );
     });
 
@@ -220,14 +216,14 @@ describe("Badge component", () => {
           variant="sector"
         >
           Transport
-        </Badge>
+        </Badge>,
       );
 
       const badge = screen.getByText("Transport");
       expect(badge).toBeInTheDocument();
       expect(badge.closest("span")?.parentElement).toHaveAttribute(
         "tabindex",
-        "0"
+        "0",
       );
     });
   });
@@ -235,7 +231,9 @@ describe("Badge component", () => {
 
 describe("BadgeMaybeAbsent", () => {
   it("renders 'None' for undefined/null", () => {
-    const { rerender } = render(<BadgeMaybeAbsent>{undefined}</BadgeMaybeAbsent>);
+    const { rerender } = render(
+      <BadgeMaybeAbsent>{undefined}</BadgeMaybeAbsent>,
+    );
     expect(screen.getByText("None")).toBeInTheDocument();
     rerender(<BadgeMaybeAbsent>{null}</BadgeMaybeAbsent>);
     expect(screen.getByText("None")).toBeInTheDocument();
@@ -256,23 +254,29 @@ describe("BadgeMaybeAbsent", () => {
   it("uses toLabel only for present values", () => {
     const toLabel = (v: number) => `Y${v}`;
     const { rerender } = render(
-      <BadgeMaybeAbsent<number> toLabel={toLabel}>{2030}</BadgeMaybeAbsent>
+      <BadgeMaybeAbsent<number> toLabel={toLabel}>{2030}</BadgeMaybeAbsent>,
     );
     expect(screen.getByText("Y2030")).toBeInTheDocument();
     rerender(
-      <BadgeMaybeAbsent<number> toLabel={toLabel}>{undefined}</BadgeMaybeAbsent>
+      <BadgeMaybeAbsent<number> toLabel={toLabel}>
+        {undefined}
+      </BadgeMaybeAbsent>,
     );
     expect(screen.getByText("None")).toBeInTheDocument();
   });
 
   it("disallows ReactNode children for BadgeMaybeAbsent at compile-time", () => {
     // @ts-expect-error - BadgeMaybeAbsent children must be string | number | null | undefined
-    render(<BadgeMaybeAbsent><div>Not allowed</div></BadgeMaybeAbsent>);
+    render(
+      <BadgeMaybeAbsent>
+        <div>Not allowed</div>
+      </BadgeMaybeAbsent>,
+    );
   });
 
   it("supports noneLabel override", () => {
     render(
-      <BadgeMaybeAbsent noneLabel="No Value">{undefined}</BadgeMaybeAbsent>
+      <BadgeMaybeAbsent noneLabel="No Value">{undefined}</BadgeMaybeAbsent>,
     );
     expect(screen.getByText("No Value")).toBeInTheDocument();
   });
@@ -280,7 +284,7 @@ describe("BadgeMaybeAbsent", () => {
   it("renderLabel decorates only string labels", () => {
     const renderLabel = (label: string) => `**${label}**`;
     render(
-      <BadgeMaybeAbsent renderLabel={renderLabel}>EUROPE</BadgeMaybeAbsent>
+      <BadgeMaybeAbsent renderLabel={renderLabel}>EUROPE</BadgeMaybeAbsent>,
     );
     expect(screen.getByText("**EUROPE**")).toBeInTheDocument();
   });
