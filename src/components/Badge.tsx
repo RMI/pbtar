@@ -55,13 +55,10 @@ const Badge: React.FC<BadgeProps> = ({
     ? `${badgeStylesBase} ${className}`
     : badgeStylesBase;
 
-  // If no tooltip, just return the basic badge
-  // If no tooltip, just return the basic badge
   if (!tooltip) {
     return <span className={badgeStyles}>{children}</span>;
   }
 
-  // With tooltip, use the TextWithTooltip component
   return (
     <TextWithTooltip
       text={<span className={badgeStyles}>{children}</span>}
@@ -72,7 +69,6 @@ const Badge: React.FC<BadgeProps> = ({
 };
 
 export default Badge;
-// --- value-aware helpers (schema-agnostic) --------------------
 
 export type BadgeMaybeAbsentProps<T extends string | number> = Omit<
   React.ComponentProps<typeof Badge>,
@@ -85,7 +81,7 @@ export type BadgeMaybeAbsentProps<T extends string | number> = Omit<
   /** Visible text for the "None" case (default "None"). */
   noneLabel?: string;
   /** Optional decorator for the final label (e.g., highlight search matches). */
-  renderLabel?: (label: string, isAbsent: boolean) => React.ReactNode;
+  renderLabel?: (label: string, isAbsent: boolean) => string | number;
 };
 
 export function BadgeMaybeAbsent<T extends string | number>({
@@ -109,10 +105,8 @@ export function BadgeMaybeAbsent<T extends string | number>({
     base = String(children as unknown as string | number);
   }
 
-  // Convert ReactNode to string
   const content =
-    renderLabel && typeof base === "string"
-      ? String(renderLabel(base, absent))
-      : base;
-  return <Badge {...rest}>{content}</Badge>;
+    renderLabel && typeof base === "string" ? renderLabel(base, absent) : base;
+
+  return <Badge {...rest}>{String(content)}</Badge>;
 }
