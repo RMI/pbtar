@@ -50,5 +50,9 @@ export const index: TimeseriesIndex = {
       path: "/data/asean-centre-for-energy/BAS-2024_timeseries.csv",
     },
   },
+  schema: {
+    version: 1,
+    generatedAt: "2025-11-05T14:23:08.770Z",
+  },
 } as const;
 export default index;
