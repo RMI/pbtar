@@ -217,11 +217,13 @@
           "type": "string",
           "enum": [
             "No information",
-            "Continued growth",
-            "Plateau",
-            "Growth then decline",
-            "Moderate decline",
-            "Fast decline"
+            "Significant increase",
+            "Moderate increase",
+            "Minor increase",
+            "Low or no change",
+            "Minor decrease",
+            "Moderate decrease",
+            "Significant decrease"
           ]
         },
         "energyEfficiency": {
@@ -229,10 +231,13 @@
           "type": "string",
           "enum": [
             "No information",
-            "Declining",
-            "Static energy efficiency",
-            "Moderate improvements",
-            "Significant improvements"
+            "Significant deterioration",
+            "Moderate deterioration",
+            "Minor deterioration",
+            "Low or no change",
+            "Minor improvement",
+            "Moderate improvement",
+            "Significant improvement"
           ]
         },
         "energyDemand": {
@@ -240,10 +245,13 @@
           "type": "string",
           "enum": [
             "No information",
-            "Decrease",
-            "Static energy demand",
-            "Moderate growth",
-            "Significant growth"
+            "Significant decrease",
+            "Moderate decrease",
+            "Minor decrease",
+            "Low or no change",
+            "Minor increase",
+            "Moderate increase",
+            "Significant increase"
           ]
         },
         "electrification": {
@@ -251,8 +259,11 @@
           "type": "string",
           "enum": [
             "No information",
-            "Decrease",
-            "Stable electrification",
+            "Significant decrease",
+            "Moderate decrease",
+            "Minor decrease",
+            "Low or no change",
+            "Minor increase",
             "Moderate increase",
             "Significant increase"
           ]
@@ -269,29 +280,25 @@
               "Phaseout dates",
               "Subsidies",
               "Target technology shares",
-              "Other"
+              "Other",
+              "None"
             ]
           }
         },
         "technologyCostTrend": {
           "description": "Describes how technology costs evolve over time, from static cost assumptions to rapidly declining costs (e.g., via learning curves).",
           "type": "string",
-          "enum": [
-            "No information",
-            "Static",
-            "Linear trend",
-            "S-curves",
-            "Other"
-          ]
+          "enum": ["No information", "Increase", "Low or no change", "Decrease"]
         },
         "technologyDeploymentTrend": {
           "description": "Indicates the scale and pace of new technology adoption within the pathway, where significant deployment means that several new technologies are adopted rapidly",
           "type": "string",
           "enum": [
             "No information",
-            "No deployment of new technologies",
-            "Moderate deployment of new technologies",
-            "Significant deployment of new technologies"
+            "No new technologies deployed",
+            "Minor technology deployment",
+            "Moderate technology deployment",
+            "Signif. technology deployment"
           ]
         },
         "emissionsScope": {
@@ -302,7 +309,8 @@
             "CO2",
             "CO2e (Kyoto)",
             "CO2e (CO2, Methane)",
-            "Other"
+            "CO2e (unspecified GHGs)",
+            "Other emissions scope"
           ]
         },
         "policyAmbition": {
@@ -310,11 +318,13 @@
           "type": "string",
           "enum": [
             "No information",
+            "No policies included",
             "Current/legislated policies",
-            "NDCs",
-            "NDCs and long term commitments",
+            "Current and drafted policies",
+            "NDCs, unconditional only",
+            "NDCs incl. conditional targets",
             "Normative/Optimization-based",
-            "Other"
+            "Other policy ambition"
           ]
         },
         "technologyCostsDetail": {
@@ -323,8 +333,8 @@
           "enum": [
             "No information",
             "Total costs",
-            "Capital costs/O&M/etc.",
-            "Other"
+            "Capital costs, O&M, etc.",
+            "Other cost breakdown"
           ]
         },
         "newTechnologiesIncluded": {
@@ -336,13 +346,14 @@
             "type": "string",
             "enum": [
               "No information",
+              "No new technologies",
               "CCUS",
               "DAC",
               "Green H2/ammonia",
               "SAF",
               "Battery storage",
               "EGS/AGS",
-              "Other"
+              "Other new technologies"
             ]
           }
         },
@@ -351,8 +362,9 @@
           "type": "string",
           "enum": [
             "No information",
-            "Static upstream fuel/material prices",
-            "Dynamic upstream fuel/material prices"
+            "Static input or fuel price",
+            "Exogenous input or fuel price",
+            "Endogenous input or fuel price"
           ]
         },
         "investmentNeeds": {
@@ -361,8 +373,10 @@
           "enum": [
             "No information",
             "Total investment",
-            "Sector-level",
-            "Sector-level by upstream/in-stream/downstream"
+            "By sector",
+            "By sector, part of value chain",
+            "By technology",
+            "By tech, part of value chain"
           ]
         },
         "infrastructureRequirements": {
@@ -371,7 +385,7 @@
           "enum": [
             "No information",
             "By part of supply chain",
-            "By part of supply chain and maintenance/buildout"
+            "By supply chain, add/replace"
           ]
         }
       },
