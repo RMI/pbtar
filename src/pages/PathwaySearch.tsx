@@ -43,7 +43,7 @@ const PathwaySearch: React.FC = () => {
         filters.pathwayType !== prevFiltersRef.current.pathwayType ||
         filters.modelYearNetzero !== prevFiltersRef.current.modelYearNetzero ||
         filters.modelTempIncrease !==
-        prevFiltersRef.current.modelTempIncrease ||
+          prevFiltersRef.current.modelTempIncrease ||
         filters.geography !== prevFiltersRef.current.geography ||
         filters.sector !== prevFiltersRef.current.sector ||
         filters.metric !== prevFiltersRef.current.metric;
