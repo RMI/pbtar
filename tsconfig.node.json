@@ -8,7 +8,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "strict": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "composite": true,
+    "tsBuildInfoFile": ".tsbuildcache/node.tsbuildinfo"
   },
   "include": [
     "vite.config.ts",
