@@ -1,6 +1,6 @@
 import { defineConfig, Plugin, version as viteVersion } from "vite";
 import type { ViteDevServer } from "vite";
-import type { PluginContext } from 'rollup';
+import type { PluginContext } from "rollup";
 import react from "@vitejs/plugin-react";
 import { simpleGit } from "simple-git";
 import os from "os";
@@ -188,7 +188,7 @@ function dataValidationPlugin(dir: string = "src/data") {
 // Create a new plugin for serving schema files
 function schemaServePlugin(): Plugin {
   return {
-    name: 'schema-serve',
+    name: "schema-serve",
     configureServer(server: ViteDevServer) {
       server.middlewares.use(
         "/schema",
