@@ -1,5 +1,5 @@
-import { select, Selection } from "d3-selection";
-import { arc, pie, PieArcDatum, DefaultArcObject } from "d3-shape";
+import { select } from "d3-selection";
+import { arc, pie, PieArcDatum } from "d3-shape";
 import { interpolate } from "d3-interpolate";
 import { rgb } from "d3-color";
 import { useRef, useEffect, useState, useMemo } from "react";
