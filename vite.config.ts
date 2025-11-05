@@ -186,6 +186,7 @@ function dataValidationPlugin(dir: string = "src/data") {
 }
 
 // Create a new plugin for serving schema files
+// Used to access the schema files with the dev server
 function schemaServePlugin(): Plugin {
   return {
     name: "schema-serve",
