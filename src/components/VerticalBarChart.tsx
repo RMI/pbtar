@@ -75,7 +75,13 @@ export default function VerticalBarChart({
   }, [d3data, width, height, marginLeft, marginRight, marginTop, marginBottom]);
 
   useEffect(() => {
-    if (!ref.current || !gx.current || !gy.current || !bars.current || !title.current)
+    if (
+      !ref.current ||
+      !gx.current ||
+      !gy.current ||
+      !bars.current ||
+      !title.current
+    )
       return;
 
     const { x, y, unit } = chartSetup;
