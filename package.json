@@ -21,7 +21,7 @@
     "json:check:testdata": "npx ts-node --esm scripts/schema-check-files.ts testdata/valid",
     "json:generate:types": "npx ts-node --esm scripts/generate-types.ts && prettier --write \"src/types/*.d.ts\"",
     "docs:jsonSchema": "scripts/generate-schema-docs.sh",
-    "prepare:tarball": "npm ci && npm run build && tar -czf dist.tgz -C dist .",
+    "prepare:tarball": "npm ci && npm run build && cp staticwebapp.config.json dist && tar -czf dist.tgz -C dist .",
     "build:timeseries": "npx ts-node --esm scripts/build-timeseries-files.ts && prettier --write \"src/data/index.gen.ts\"",
     "prebuild": "npm run build:timeseries",
     "predev": "npm run build:timeseries"
