@@ -75,21 +75,14 @@ export default function VerticalBarChart({
   }, [d3data, width, height, marginLeft, marginRight, marginTop, marginBottom]);
 
   useEffect(() => {
-    if (
-      !ref.current ||
-      !gx.current ||
-      !gy.current ||
-      !bars.current ||
-      !title.current ||
-      !chartSetup
-    )
+    if (!ref.current || !gx.current || !gy.current || !bars.current || !title.current)
       return;
 
     const { x, y, unit } = chartSetup;
 
     // Update title
     select(title.current)
-      .selectAll("text")
+      .selectAll<SVGTextElement, string>("text")
       .data([metric, unit])
       .join("text")
       .text((d) => d)
@@ -117,7 +110,7 @@ export default function VerticalBarChart({
     select(gy.current)
       .selectAll(".tick line")
       .clone()
-      .attr("x2", width)
+      .attr("x2", width - marginLeft - marginRight)
       .attr("stroke-opacity", "0.1");
 
     // Update bars
@@ -148,7 +141,7 @@ export default function VerticalBarChart({
       ref={ref}
       width={width}
       height={height}
-      viewBox={[0, 0, width, height]}
+      viewBox={`0 0 ${width} ${height}`}
     >
       <g
         ref={title}
