@@ -81,7 +81,9 @@ export default function DonutChart({
     const isDark = (color: string): boolean => {
       const rgbColor = rgb(color);
       if (!rgbColor) return false;
-      return (rgbColor.r * 299 + rgbColor.g * 587 + rgbColor.b * 114) / 1000 < 128;
+      return (
+        (rgbColor.r * 299 + rgbColor.g * 587 + rgbColor.b * 114) / 1000 < 128
+      );
     };
 
     const arcTween = (d: PieArcDatum<DataPoint>) => {
@@ -90,7 +92,10 @@ export default function DonutChart({
     };
 
     const svgElement = select<SVGSVGElement, unknown>(ref.current);
-    svgElement.attr("viewBox", [-width / 2, -height / 2, width, height].join(","));
+    svgElement.attr(
+      "viewBox",
+      [-width / 2, -height / 2, width, height].join(","),
+    );
 
     const d3dataSorted = [...d3data].sort(
       (a, b) =>
