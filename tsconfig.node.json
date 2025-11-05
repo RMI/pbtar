@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2022"],
+    "lib": [
+      "ES2022"
+    ],
     "module": "ESNext",
     "skipLibCheck": true,
     "moduleResolution": "bundler",
@@ -16,6 +18,7 @@
     "vitest.config.ts",
     "postcss.config.ts",
     "tailwind.config.ts",
-    "src/utils/*.ts"
+    "src/utils/*.ts",
+    "src/data/index.gen.ts"
   ]
 }
