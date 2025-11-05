@@ -21,11 +21,6 @@
   ],
   "pathwayOverview": "Example Overview.",
   "expertOverview": "Example Expert Recommendation.",
-  "dataSource": {
-    "description": "Mock Data Source.",
-    "url": "https://example.com/data-source",
-    "downloadAvailable": true
-  },
   "metric": ["Emissions Intensity"],
   "keyFeatures": {
     "emissionsPathway": "Moderate decline",

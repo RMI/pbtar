@@ -170,29 +170,6 @@
       "pattern": "\\.$",
       "maxLength": 10000
     },
-    "dataSource": {
-      "description": "Data source for the pathway.",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "Description of the data source.",
-          "type": "string",
-          "pattern": "\\.$",
-          "maxLength": 1000
-        },
-        "url": {
-          "description": "URL at which the data source can be accessed.",
-          "type": "string",
-          "pattern": "^(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*$"
-        },
-        "downloadAvailable": {
-          "description": "Flag indicating if the data source can be downloaded.",
-          "type": "boolean"
-        }
-      },
-      "additionalProperties": false,
-      "required": ["description", "url", "downloadAvailable"]
-    },
     "metric": {
       "type": "array",
       "uniqueItems": true,
@@ -418,7 +395,6 @@
     "geography",
     "sectors",
     "expertOverview",
-    "dataSource",
     "metric",
     "keyFeatures"
   ]
