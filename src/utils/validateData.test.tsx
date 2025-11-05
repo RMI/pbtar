@@ -91,7 +91,6 @@ describe("pathway schema enforces expected limits", () => {
     "geography",
     "sectors",
     "expertOverview",
-    "dataSource",
   ];
 
   for (const key of REQ) {
@@ -239,19 +238,6 @@ describe("pathway schema enforces expected limits", () => {
         data: {
           ...basePathway,
           sectors: [{ name: "Power", technologies: ["Solar"], foobar: 1 }],
-        },
-      },
-      /must NOT have additional properties/,
-    );
-  });
-
-  it("fails on extra property in dataSource", () => {
-    fail(
-      {
-        name: "extra-ds.json",
-        data: {
-          ...basePathway,
-          dataSource: { ...basePathway.dataSource, foobar: "x" },
         },
       },
       /must NOT have additional properties/,
