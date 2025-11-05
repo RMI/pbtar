@@ -49,10 +49,5 @@
     "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
     "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
   },
-  "metric": ["Emissions Intensity", "Capacity"],
-  "dataSource": {
-    "description": "Mock Data Source.",
-    "url": "https://example.com/data-source",
-    "downloadAvailable": true
-  }
+  "metric": ["Emissions Intensity", "Capacity"]
 }

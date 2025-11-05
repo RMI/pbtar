@@ -132,23 +132,6 @@ export interface PathwayMetadataV1 {
    * Expert recommendation for the pathway.
    */
   expertOverview: string;
-  /**
-   * Data source for the pathway.
-   */
-  dataSource: {
-    /**
-     * Description of the data source.
-     */
-    description: string;
-    /**
-     * URL at which the data source can be accessed.
-     */
-    url: string;
-    /**
-     * Flag indicating if the data source can be downloaded.
-     */
-    downloadAvailable: boolean;
-  };
   metric: (
     | "Emissions Intensity"
     | "Capacity"
