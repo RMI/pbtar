@@ -31,18 +31,23 @@ import MultiLineChart from "../components/MultiLineChart";
 import RadarChart from "../components/RadarChart";
 import VerticalBarChart from "../components/VerticalBarChart";
 
-type TabType = "details" | "plots";
+type PlotType = "composition" | "emissions" | "supply";
+
+const PLOT_OPTIONS = [
+  { value: "composition", label: "Energy Composition" },
+  { value: "emissions", label: "Emissions" },
+  { value: "supply", label: "Supply" },
+] as const;
 
 const PathwayDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [pathway, setPathway] = useState<PathwayMetadataType | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<TabType>("details");
+  const [selectedPlot, setSelectedPlot] = useState<PlotType>("composition");
   const [timeseriesdata, setTimeseriesdata] = useState();
 
   useEffect(() => {
     setLoading(true);
-    // Simulate API call with timeout
     const timer = setTimeout(() => {
       const foundPathway = pathwayMetadata.find((s) => s.id === id) || null;
       setPathway(foundPathway);
@@ -52,7 +57,6 @@ const PathwayDetailPage: React.FC = () => {
     return () => clearTimeout(timer);
   }, [id]);
 
-  // Timeseries index state
   const [tsIndexLoaded, setTsIndexLoaded] = useState(false);
   const [datasets, setDatasets] = useState<
     Array<{
@@ -84,11 +88,11 @@ const PathwayDetailPage: React.FC = () => {
       }
     };
 
-    void loadDatasets(); // explicitly mark ignored promise to satisfy no-floating-promises
+    void loadDatasets();
     return () => {
       isMounted = false;
     };
-  }, [pathway]); // depend on the full object to avoid eslint warning
+  }, [pathway]);
 
   useEffect(() => {
     if (datasets.length > 0) {
@@ -98,6 +102,49 @@ const PathwayDetailPage: React.FC = () => {
         .catch((error) => console.error("Error fetching JSON:", error));
     }
   }, [datasets]);
+
+  const renderPlot = () => {
+    if (!timeseriesdata || !datasets[0]) return null;
+
+    switch (selectedPlot) {
+      case "composition":
+        return (
+          <div className="flex flex-col items-center">
+            <NormalizedStackedAreaChart
+              key={`${datasets[0].datasetId}-composition`}
+              data={timeseriesdata}
+              width={350}
+              height={300}
+            />
+          </div>
+        );
+      case "emissions":
+        return (
+          <div className="flex flex-col items-center">
+            <VerticalBarChart
+              key={`${datasets[0].datasetId}-emissions`}
+              data={timeseriesdata}
+              width={350}
+              height={300}
+              metric="absoluteEmissions"
+            />
+          </div>
+        );
+      case "supply":
+        return (
+          <div className="flex flex-col items-center">
+            <MultiLineChart
+              key={`${datasets[0].datasetId}-supply`}
+              data={timeseriesdata}
+              width={350}
+              height={300}
+            />
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
 
   if (loading) {
     return (
@@ -125,10 +172,7 @@ const PathwayDetailPage: React.FC = () => {
           to="/pathway"
           className="inline-flex items-center px-4 py-2 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200"
         >
-          <ArrowLeft
-            size={16}
-            className="mr-2"
-          />
+          <ArrowLeft size={16} className="mr-2" />
           Back to Pathways
         </Link>
       </div>
@@ -141,18 +185,13 @@ const PathwayDetailPage: React.FC = () => {
         to="/pathway"
         className="inline-flex items-center text-rmigray-600 hover:text-energy-700 mb-6 transition-colors duration-200"
       >
-        <ArrowLeft
-          size={16}
-          className="mr-1"
-        />
+        <ArrowLeft size={16} className="mr-1" />
         Back to pathways
       </Link>
 
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="bg-bluespruce p-6 text-white">
-          <h1 className="text-2xl md:text-3xl font-bold mb-2">
-            {pathway.name}
-          </h1>
+          <h1 className="text-2xl md:text-3xl font-bold mb-2">{pathway.name}</h1>
           <p className="text-white mb-4">{pathway.description}</p>
 
           <div className="flex flex-wrap gap-2 mb-4">
@@ -178,291 +217,173 @@ const PathwayDetailPage: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
             <p className="mb-1 sm:mb-0">
-              <span className="text-white">Publisher:</span> {pathway.publisher}
+              <span className="text-white">Publisher:</span>{" "}
+              {pathway.publication.publisher.full}
             </p>
             <p>
               <span className="text-white">Published:</span>{" "}
-              {pathway.publicationYear}
+              {pathway.publication.year}
             </p>
           </div>
         </div>
 
-        {/* Tabs */}
-        <div className="border-b border-neutral-200">
-          <nav className="flex -mb-px">
-            <button
-              className={`px-6 py-3 border-b-2 font-medium text-sm ${
-                activeTab === "details"
-                  ? "border-energy text-energy"
-                  : "border-transparent text-rmigray-500 hover:text-rmigray-700 hover:border-rmigray-300"
-              }`}
-              onClick={() => setActiveTab("details")}
-            >
-              Details
-            </button>
-            <button
-              className={`px-6 py-3 border-b-2 font-medium text-sm ${
-                activeTab === "plots"
-                  ? "border-energy text-energy"
-                  : "border-transparent text-rmigray-500 hover:text-rmigray-700 hover:border-rmigray-300"
-              }`}
-              onClick={() => setActiveTab("plots")}
-            >
-              Plots
-            </button>
-          </nav>
-        </div>
-
         <div className="p-6">
-          {activeTab === "details" ? (
-            // Details Tab Content
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-              <div className="md:col-span-8">
-                <section className="mb-8">
-                  <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
-                    Expert Overview
-                  </h2>
-                  <div className="prose text-rmigray-700">
-                    <Markdown>{pathway.expertOverview}</Markdown>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <div className="md:col-span-7">
+              <section className="mb-8">
+                <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
+                  Expert Overview
+                </h2>
+                <div className="prose text-rmigray-700">
+                  <Markdown>{pathway.expertOverview}</Markdown>
+                </div>
+              </section>
+
+              <PublicationBlock publication={pathway.publication} />
+
+              {tsIndexLoaded && datasets.length > 0 ? (
+                <section className="mt-8">
+                  <h3 className="text-sm font-semibold text-neutral-600 mb-3">
+                    Related datasets
+                  </h3>
+                  <div className="grid gap-3">
+                    {datasets.map((d) => {
+                      const label = d.label ?? d.datasetId;
+                      const summary = summarizeSummary(d.summary);
+                      return (
+                        <DownloadDataset
+                          key={d.datasetId}
+                          label={label}
+                          href={d.path}
+                          summary={summary}
+                        />
+                      );
+                    })}
                   </div>
                 </section>
-
-                <PublicationBlock publication={pathway.publication} />
-
-                {tsIndexLoaded && datasets.length > 0 ? (
-                  <section className="mt-8">
-                    <h3 className="text-sm font-semibold text-neutral-600 mb-3">
-                      Related datasets
-                    </h3>
-                    <div className="grid gap-3">
-                      {datasets.map((d) => {
-                        const label = d.label ?? d.datasetId;
-                        const summary = summarizeSummary(d.summary);
-                        return (
-                          <DownloadDataset
-                            key={d.datasetId}
-                            label={label}
-                            href={d.path}
-                            summary={summary}
-                          />
-                        );
-                      })}
-                    </div>
-                  </section>
-                ) : null}
-              </div>
-
-              <div className="md:col-span-4">
-                <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
-                  <h3 className="text-lg font-medium text-rmigray-800 mb-3">
-                    Key Features
-                  </h3>
-                  {(() => {
-                    const LABELS: Record<
-                      keyof PathwayMetadataType["keyFeatures"],
-                      string
-                    > = {
-                      emissionsPathway: "Emissions pathway",
-                      energyEfficiency: "Energy efficiency",
-                      energyDemand: "Energy demand",
-                      electrification: "Electrification",
-                      policyTypes: "Policy types",
-                      technologyCostTrend: "Technology cost trend",
-                      technologyDeploymentTrend: "Technology deployment trend",
-                      emissionsScope: "Emissions scope",
-                      policyAmbition: "Policy ambition",
-                      technologyCostsDetail: "Technology costs detail",
-                      newTechnologiesIncluded: "New technologies included",
-                      supplyChain: "Supply chain",
-                      investmentNeeds: "Investment needs",
-                      infrastructureRequirements: "Infrastructure requirements",
-                    };
-
-                    return Object.entries(
-                      pathway.keyFeatures as string | string[],
-                    ).map(([rawKey, rawVal]) => {
-                      const key =
-                        rawKey as keyof PathwayMetadataType["keyFeatures"];
-                      const values = Array.isArray(rawVal) ? rawVal : [rawVal];
-                      const clean = values.filter((v): v is string =>
-                        Boolean(v && String(v).trim()),
-                      );
-                      if (clean.length === 0) return null;
-
-                      return (
-                        <div
-                          key={rawKey}
-                          className="mb-3"
-                        >
-                          <p className="text-xs font-medium text-rmigray-500 mb-1">
-                            {LABELS[key] ?? rawKey}
-                          </p>
-                          <BadgeArray
-                            variant="keyFeature"
-                            visibleCount={Infinity}
-                          >
-                            {clean}
-                          </BadgeArray>
-                        </div>
-                      );
-                    });
-                  })()}
-                </div>
-
-                <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
-                  <h3 className="text-lg font-medium text-rmigray-800 mb-3">
-                    Geographies
-                  </h3>
-                  <BadgeArray
-                    variant={sortGeographiesForDetails(
-                      pathway.geography ?? [],
-                    ).map(
-                      (geo) => geographyVariant(geographyKind(geo)) as string,
-                    )}
-                    toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
-                    visibleCount={Infinity}
-                  >
-                    {sortGeographiesForDetails(pathway.geography ?? [])}
-                  </BadgeArray>
-                </div>
-
-                <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
-                  <h3 className="text-lg font-medium text-rmigray-800 mb-3">
-                    Sectors
-                  </h3>
-                  <div className="mb-3">
-                    <p className="text-xs font-medium text-rmigray-500 mb-1">
-                      Sectors:
-                    </p>
-                    <BadgeArray
-                      variant="sector"
-                      tooltipGetter={getSectorTooltip}
-                      visibleCount={Infinity}
-                    >
-                      {pathway.sectors.map((sector) => sector.name)}
-                    </BadgeArray>
-                  </div>
-                </div>
-
-                <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
-                  <h3 className="text-lg font-medium text-rmigray-800 mb-3">
-                    Benchmark Metrics
-                  </h3>
-                  <BadgeArray
-                    variant="metric"
-                    tooltipGetter={getMetricTooltip}
-                    visibleCount={Infinity}
-                  >
-                    {pathway.metric}
-                  </BadgeArray>
-                </div>
-              </div>
+              ) : null}
             </div>
-          ) : (
-            // Plots Tab Content
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-              <div className="md:col-span-12">
+
+            <div className="md:col-span-5">
+              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                <div className="flex flex-col mb-4">
+                  <label htmlFor="plot-select" className="text-sm font-medium text-rmigray-700 mb-2">
+                    Select Plot
+                  </label>
+                  <select
+                    id="plot-select"
+                    value={selectedPlot}
+                    onChange={(e) => setSelectedPlot(e.target.value as PlotType)}
+                    className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
+                  >
+                    {PLOT_OPTIONS.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 {timeseriesdata && (
-                  <>
-                    <section className="mb-8">
-                      <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
-                        Composition
-                      </h2>
-                      <div
-                        className="row"
-                        style={{ display: "flex" }}
-                      >
-                        <div
-                          className="column"
-                          style={{ flex: "60%", padding: "30px" }}
-                        >
-                          <NormalizedStackedAreaChart
-                            key={datasets[0].datasetId}
-                            data={timeseriesdata}
-                            width={500}
-                          />
-                        </div>
-                        <div
-                          className="column"
-                          style={{ flex: "40%", padding: "30px" }}
-                        >
-                          <DonutChart
-                            key={datasets[0].datasetId}
-                            data={timeseriesdata}
-                            width={350}
-                          />
-                        </div>
-                      </div>
-                    </section>
-
-                    <section className="mb-8">
-                      <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
-                        Emissions
-                      </h2>
-                      <div
-                        className="row"
-                        style={{ display: "flex" }}
-                      >
-                        <div
-                          className="column"
-                          style={{ flex: "60%", padding: "30px" }}
-                        >
-                          <VerticalBarChart
-                            key={datasets[0].datasetId}
-                            data={timeseriesdata}
-                            width={500}
-                            metric={"absoluteEmissions"}
-                          />
-                        </div>
-                        <div
-                          className="column"
-                          style={{ flex: "40%", padding: "30px" }}
-                        >
-                          <VerticalBarChart
-                            key={datasets[0].datasetId}
-                            data={timeseriesdata}
-                            width={500}
-                            metric={"emissionsIntensity"}
-                          />
-                        </div>
-                      </div>
-                    </section>
-
-                    <section className="mb-8">
-                      <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
-                        Supply
-                      </h2>
-                      <div
-                        className="row"
-                        style={{ display: "flex" }}
-                      >
-                        <div
-                          className="column"
-                          style={{ flex: "60%", padding: "30px" }}
-                        >
-                          <MultiLineChart
-                            key={datasets[0].datasetId}
-                            data={timeseriesdata}
-                            width={500}
-                          />
-                        </div>
-                        <div
-                          className="column"
-                          style={{ flex: "40%", padding: "30px" }}
-                        >
-                          <RadarChart
-                            key={datasets[0].datasetId}
-                            data={timeseriesdata}
-                            width={400}
-                          />
-                        </div>
-                      </div>
-                    </section>
-                  </>
+                  <div className="mb-4">
+                    {renderPlot()}
+                  </div>
                 )}
               </div>
+
+              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
+                  Key Features
+                </h3>
+                {(() => {
+                  const LABELS: Record<
+                    keyof PathwayMetadataType["keyFeatures"],
+                    string
+                  > = {
+                    emissionsPathway: "Emissions pathway",
+                    energyEfficiency: "Energy efficiency",
+                    energyDemand: "Energy demand",
+                    electrification: "Electrification",
+                    policyTypes: "Policy types",
+                    technologyCostTrend: "Technology cost trend",
+                    technologyDeploymentTrend: "Technology deployment trend",
+                    emissionsScope: "Emissions scope",
+                    policyAmbition: "Policy ambition",
+                    technologyCostsDetail: "Technology costs detail",
+                    newTechnologiesIncluded: "New technologies included",
+                    supplyChain: "Supply chain",
+                    investmentNeeds: "Investment needs",
+                    infrastructureRequirements: "Infrastructure requirements",
+                  };
+
+                  return Object.entries(pathway.keyFeatures).map(([rawKey, rawVal]) => {
+                    const key = rawKey as keyof PathwayMetadataType["keyFeatures"];
+                    const values = Array.isArray(rawVal) ? rawVal : [rawVal];
+                    const clean = values.filter((v): v is string =>
+                      Boolean(v && String(v).trim())
+                    );
+                    if (clean.length === 0) return null;
+
+                    return (
+                      <div key={rawKey} className="mb-3">
+                        <p className="text-xs font-medium text-rmigray-500 mb-1">
+                          {LABELS[key] ?? rawKey}
+                        </p>
+                        <BadgeArray variant="keyFeature" visibleCount={Infinity}>
+                          {clean}
+                        </BadgeArray>
+                      </div>
+                    );
+                  });
+                })()}
+              </div>
+
+              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
+                  Geographies
+                </h3>
+                <BadgeArray
+                  variant={sortGeographiesForDetails(pathway.geography ?? []).map(
+                    (geo) => geographyVariant(geographyKind(geo)) as string
+                  )}
+                  toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
+                  visibleCount={Infinity}
+                >
+                  {sortGeographiesForDetails(pathway.geography ?? [])}
+                </BadgeArray>
+              </div>
+
+              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
+                  Sectors
+                </h3>
+                <div className="mb-3">
+                  <p className="text-xs font-medium text-rmigray-500 mb-1">
+                    Sectors:
+                  </p>
+                  <BadgeArray
+                    variant="sector"
+                    tooltipGetter={getSectorTooltip}
+                    visibleCount={Infinity}
+                  >
+                    {pathway.sectors.map((sector) => sector.name)}
+                  </BadgeArray>
+                </div>
+              </div>
+
+              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
+                  Benchmark Metrics
+                </h3>
+                <BadgeArray
+                  variant="metric"
+                  tooltipGetter={getMetricTooltip}
+                  visibleCount={Infinity}
+                >
+                  {pathway.metric}
+                </BadgeArray>
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>
