@@ -185,7 +185,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
               <div className="flex justify-between items-center">
                 <div>
                   <p className="text-xs text-rmigray-500">Publisher:</p>
-                  <p className="text-sm text-rmigray-500">
+                  <p className="text-sm font-medium text-rmigray-800">
                     <HighlightedText
                       text={
                         pathway.publication.publisher.short ||
@@ -197,7 +197,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
                 </div>
                 <div className="text-right">
                   <p className="text-xs text-rmigray-500">Published:</p>
-                  <p className="text-sm text-rmigray-500">
+                  <p className="text-sm font-medium text-rmigray-800">
                     <HighlightedText
                       text={pathway.publication.year}
                       searchTerm={searchTerm}
