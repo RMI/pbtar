@@ -116,7 +116,7 @@ export default function VerticalBarChart({
     select(gy.current)
       .selectAll(".tick line")
       .clone()
-      .attr("x2", width - marginLeft - marginRight)
+      .attr("x2", width)
       .attr("stroke-opacity", "0.1");
 
     // Update bars
