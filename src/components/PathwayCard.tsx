@@ -221,7 +221,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
