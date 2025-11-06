@@ -49,25 +49,24 @@
     "Absolute Emissions"
   ],
   "keyFeatures": {
-    "emissionsPathway": "Continued growth",
-    "energyEfficiency": "Significant improvements",
-    "energyDemand": "Significant growth",
-    "electrification": "Moderate increase",
+    "emissionsPathway": "Moderate increase",
+    "energyEfficiency": "Moderate improvement",
+    "energyDemand": "Significant increase",
+    "electrification": "Low or no change",
     "policyTypes": [
-      "Carbon price",
       "Phaseout dates",
       "Subsidies",
       "Target technology shares",
       "Other"
     ],
-    "technologyCostTrend": "Static",
-    "technologyDeploymentTrend": "Moderate deployment of new technologies",
-    "emissionsScope": "No information",
-    "policyAmbition": "NDCs",
-    "technologyCostsDetail": "Capital costs/O&M/etc.",
+    "technologyCostTrend": "Low or no change",
+    "technologyDeploymentTrend": "Minor technology deployment",
+    "emissionsScope": "CO2e (unspecified GHGs)",
+    "policyAmbition": "NDCs, unconditional only",
+    "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": ["Green H2/ammonia", "SAF"],
     "supplyChain": "No information",
-    "investmentNeeds": "Sector-level",
+    "investmentNeeds": "By sector",
     "infrastructureRequirements": "No information"
   }
 }
