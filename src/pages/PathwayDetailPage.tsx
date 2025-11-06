@@ -160,11 +160,12 @@ const PathwayDetailPage: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
             <p className="mb-1 sm:mb-0">
-              <span className="text-white">Publisher:</span> {pathway.publisher}
+              <span className="text-white">Publisher:</span>{" "}
+              {pathway.publication.publisher.full}
             </p>
             <p>
               <span className="text-white">Published:</span>{" "}
-              {pathway.publicationYear}
+              {pathway.publication.year}
             </p>
           </div>
         </div>
