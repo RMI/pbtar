@@ -48,21 +48,20 @@
     "Technology Mix",
     "Absolute Emissions"
   ],
-
   "keyFeatures": {
-    "emissionsPathway": "Continued growth",
-    "energyEfficiency": "Moderate improvements",
-    "energyDemand": "Significant growth",
-    "electrification": "Significant increase",
+    "emissionsPathway": "Significant increase",
+    "energyEfficiency": "Significant improvement",
+    "energyDemand": "Significant increase",
+    "electrification": "Moderate increase",
     "policyTypes": ["Subsidies", "Target technology shares", "Other"],
-    "technologyCostTrend": "Other",
-    "technologyDeploymentTrend": "Moderate deployment of new technologies",
-    "emissionsScope": "Other",
+    "technologyCostTrend": "Decrease",
+    "technologyDeploymentTrend": "Minor technology deployment",
+    "emissionsScope": "CO2e (unspecified GHGs)",
     "policyAmbition": "Current/legislated policies",
-    "technologyCostsDetail": "Capital costs/O&M/etc.",
+    "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": ["Battery storage"],
     "supplyChain": "No information",
-    "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
+    "investmentNeeds": "By sector, part of value chain",
     "infrastructureRequirements": "No information"
   }
 }

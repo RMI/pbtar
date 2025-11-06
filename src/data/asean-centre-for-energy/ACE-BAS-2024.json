@@ -49,19 +49,19 @@
     "Absolute Emissions"
   ],
   "keyFeatures": {
-    "emissionsPathway": "Continued growth",
-    "energyEfficiency": "Moderate improvements",
-    "energyDemand": "Significant growth",
-    "electrification": "Stable electrification",
-    "policyTypes": ["Other"],
-    "technologyCostTrend": "Static",
-    "technologyDeploymentTrend": "No deployment of new technologies",
-    "emissionsScope": "No information",
-    "policyAmbition": "Current/legislated policies",
-    "technologyCostsDetail": "Capital costs/O&M/etc.",
-    "newTechnologiesIncluded": ["No information"],
+    "emissionsPathway": "Significant increase",
+    "energyEfficiency": "Minor improvement",
+    "energyDemand": "Significant increase",
+    "electrification": "Low or no change",
+    "policyTypes": ["None"],
+    "technologyCostTrend": "Low or no change",
+    "technologyDeploymentTrend": "No new technologies deployed",
+    "emissionsScope": "CO2e (unspecified GHGs)",
+    "policyAmbition": "No policies included",
+    "technologyCostsDetail": "Capital costs, O&M, etc.",
+    "newTechnologiesIncluded": ["No new technologies"],
     "supplyChain": "No information",
-    "investmentNeeds": "Sector-level",
+    "investmentNeeds": "By sector",
     "infrastructureRequirements": "No information"
   }
 }
