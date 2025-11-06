@@ -25,7 +25,6 @@ describe("timeseriesIndex helpers", () => {
           path: "/data/BAS-2024_timeseries.json",
         },
       },
-      schema: { version: 1, generatedAt: new Date().toISOString() },
     };
 
     expect(datasetsForPathway(idx, "ACE-BAS-2024")).toEqual([
