@@ -203,15 +203,15 @@ export const filterPathways = (
       const ok =
         mode === "ALL"
           ? matchesOptionalFacetAll(
-              normalizedSelected,
-              pathway.geography ?? [],
-              (g) => norm(g),
-            )
+            normalizedSelected,
+            pathway.geography ?? [],
+            (g) => norm(g),
+          )
           : matchesOptionalFacetAny(
-              normalizedSelected,
-              pathway.geography ?? [],
-              (g) => norm(g),
-            );
+            normalizedSelected,
+            pathway.geography ?? [],
+            (g) => norm(g),
+          );
       if (!ok) return false;
     }
 
@@ -255,6 +255,7 @@ export const filterPathways = (
         ...pathway.sectors.map((s) => s.name),
         ...pathway.metric,
         pathway.publication.publisher.full,
+        pathway.publication.publisher.short,
         pathway.publication.year,
       ];
 
