@@ -59,6 +59,16 @@ export default function VerticalBarChart({
   const bars = useRef<SVGGElement>(null);
   const title = useRef<SVGGElement>(null);
 
+  const capitalizeWords = (str: string): string => {
+    const withSpaces = str.replace(/([A-Z])/g, ' $1');
+
+    return withSpaces
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ')
+      .trim();
+  };
+
   const chartSetup = useMemo<ChartScales>(() => {
     const unit = d3data[0]?.unit ?? "";
 
@@ -90,20 +100,21 @@ export default function VerticalBarChart({
     // Update title
     select(title.current)
       .selectAll("text")
-      .data([metric, unit])
+      .data([`${capitalizeWords(sector)} ${capitalizeWords(metric)} [${unit}]`])
       .join("text")
-      .text((d) => d)
-      .attr("dy", (_, i) => (i === 0 ? "15" : "30"))
-      .attr("font-weight", (_, i) => (i === 0 ? "bold" : "normal"))
-      .attr("font-variant", (_, i) => (i === 0 ? "small-caps" : "normal"));
+      .attr("x", width / 2)
+      .attr("y", marginTop - 30)
+      .attr("text-anchor", "middle")
+      .attr("font-size", "16px")
+      .attr("font-weight", "bold")
+      .text(d => d);
 
     // Update X axis
     select(gx.current)
       .transition()
       .duration(750)
       .call(axisBottom(x).tickSize(0))
-      .style("font-size", "14px")
-      .style("font-weight", "bold");
+      .style("font-size", "14px");
 
     // Update Y axis
     select(gy.current)
@@ -141,6 +152,7 @@ export default function VerticalBarChart({
     metric,
     barColor,
     chartSetup,
+    sector,
   ]);
 
   return (
@@ -150,10 +162,7 @@ export default function VerticalBarChart({
       height={height}
       viewBox={[0, 0, width, height]}
     >
-      <g
-        ref={title}
-        className="title"
-      />
+      <g ref={title} />
       <g
         ref={gx}
         className="xaxis"
