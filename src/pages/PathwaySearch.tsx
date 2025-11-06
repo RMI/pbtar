@@ -125,7 +125,7 @@ const PathwaySearch: React.FC = () => {
       </section>
       <div
         ref={searchSectionRef}
-        className={`sticky rounded-lg top-0 z-10 bg-white inset-x-0 transition-shadow duration-200 ${isSticky ? "shadow-md" : ""}`}
+        className={`sticky rounded-lg top-0 z-10 bg-gray-50 inset-x-0 transition-shadow duration-200 ${isSticky ? "shadow-md" : ""}`}
         style={{ margin: "0 calc(-50vw + 50%)" }}
       >
         <div className="container mx-auto px-4 py-2">
