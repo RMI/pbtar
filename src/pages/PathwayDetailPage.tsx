@@ -26,9 +26,7 @@ import {
 } from "../utils/timeseriesIndex";
 import PublicationBlock from "../components/PublicationBlock";
 import NormalizedStackedAreaChart from "../components/NormalizedStackedAreaChart";
-import DonutChart from "../components/DonutChart";
 import MultiLineChart from "../components/MultiLineChart";
-import RadarChart from "../components/RadarChart";
 import VerticalBarChart from "../components/VerticalBarChart";
 
 type PlotType = "composition" | "emissionsVolume" | "emissionsEfficiency" | "supply";
@@ -46,6 +44,42 @@ const PathwayDetailPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [selectedPlot, setSelectedPlot] = useState<PlotType>("composition");
   const [timeseriesdata, setTimeseriesdata] = useState();
+
+  // Helper function to check if data exists for a specific metric
+  const hasDataForMetric = (data: any, metric: string): boolean => {
+    if (!data?.data) return false;
+    return data.data.some((d: DataPoint) => d.metric === metric);
+  };
+
+  // Helper function to get available plot options based on data
+  const getAvailablePlotOptions = (data: any): typeof PLOT_OPTIONS => {
+    if (!data) return [];
+
+    return PLOT_OPTIONS.filter(option => {
+      switch (option.value) {
+        case 'composition':
+          return hasDataForMetric(data, 'capacity');
+        case 'emissionsVolume':
+          return hasDataForMetric(data, 'absoluteEmissions');
+        case 'emissionsEfficiency':
+          return hasDataForMetric(data, 'emissionsIntensity');
+        case 'supply':
+          return hasDataForMetric(data, 'capacity');
+        default:
+          return false;
+      }
+    });
+  };
+
+  // Add effect to update selected plot if current selection becomes invalid
+  useEffect(() => {
+    if (timeseriesdata) {
+      const availableOptions = getAvailablePlotOptions(timeseriesdata);
+      if (!availableOptions.find(opt => opt.value === selectedPlot) && availableOptions.length > 0) {
+        setSelectedPlot(availableOptions[0].value);
+      }
+    }
+  }, [timeseriesdata, selectedPlot]);
 
   useEffect(() => {
     setLoading(true);
@@ -278,30 +312,30 @@ const PathwayDetailPage: React.FC = () => {
             </div>
 
             <div className="md:col-span-5">
-              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
-                <div className="flex flex-col mb-4">
-                  <label htmlFor="plot-select" className="text-sm font-medium text-rmigray-700 mb-2">
-                    Select Plot
-                  </label>
-                  <select
-                    id="plot-select"
-                    value={selectedPlot}
-                    onChange={(e) => setSelectedPlot(e.target.value as PlotType)}
-                    className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
-                  >
-                    {PLOT_OPTIONS.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                {timeseriesdata && (
+              {timeseriesdata && getAvailablePlotOptions(timeseriesdata).length > 0 ? (
+                <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                  <div className="flex flex-col mb-4">
+                    <label htmlFor="plot-select" className="text-sm font-medium text-rmigray-700 mb-2">
+                      Select Plot
+                    </label>
+                    <select
+                      id="plot-select"
+                      value={selectedPlot}
+                      onChange={(e) => setSelectedPlot(e.target.value as PlotType)}
+                      className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
+                    >
+                      {getAvailablePlotOptions(timeseriesdata).map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                   <div className="mb-4">
                     {renderPlot()}
                   </div>
-                )}
-              </div>
+                </div>
+              ) : null}
 
               <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
                 <h3 className="text-lg font-medium text-rmigray-800 mb-3">
