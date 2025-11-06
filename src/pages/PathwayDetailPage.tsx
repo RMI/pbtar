@@ -113,7 +113,7 @@ const PathwayDetailPage: React.FC = () => {
             <NormalizedStackedAreaChart
               key={`${datasets[0].datasetId}-composition`}
               data={timeseriesdata}
-              width={400}
+              width={450}
               height={300}
             />
           </div>
@@ -124,7 +124,7 @@ const PathwayDetailPage: React.FC = () => {
             <VerticalBarChart
               key={`${datasets[0].datasetId}-emissions`}
               data={timeseriesdata}
-              width={350}
+              width={450}
               height={300}
               metric="absoluteEmissions"
             />
@@ -136,7 +136,7 @@ const PathwayDetailPage: React.FC = () => {
             <MultiLineChart
               key={`${datasets[0].datasetId}-supply`}
               data={timeseriesdata}
-              width={350}
+              width={450}
               height={300}
             />
           </div>
