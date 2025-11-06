@@ -164,18 +164,22 @@ const Colophon: React.FC<ColophonProps> = ({ className = "" }) => {
         <div className="mb-3">
           <h4 className="font-medium mb-1">Build Info</h4>
           <ul className="list-none text-s">
-            <li>App Version: {import.meta.env.VITE_APP_VERSION ?? "N/A"}</li>
-            <li>Git SHA: {import.meta.env.VITE_GIT_SHA ?? "N/A"}</li>
-            <li>Branch: {import.meta.env.VITE_GIT_BRANCH ?? "N/A"}</li>
+            <li>App Version: {import.meta.env["VITE_APP_VERSION"] ?? "N/A"}</li>
+            <li>Git SHA: {import.meta.env["VITE_GIT_SHA"] ?? "N/A"}</li>
+            <li>Branch: {import.meta.env["VITE_GIT_BRANCH"] ?? "N/A"}</li>
             <li>
-              Working Directory Clean: {String(import.meta.env.VITE_GIT_CLEAN)}
+              Working Directory Clean:{" "}
+              {String(import.meta.env["VITE_GIT_CLEAN"])}
             </li>
             <li>
-              Environment: {import.meta.env.VITE_ENVIRONMENT ?? "development"}
+              Environment:{" "}
+              {import.meta.env["VITE_ENVIRONMENT"] ?? "development"}
             </li>
-            <li>Build Time: {import.meta.env.VITE_BUILD_TIME ?? "N/A"}</li>
-            <li>Node Version: {import.meta.env.VITE_NODE_VERSION ?? "N/A"}</li>
-            <li>Vite Version: {import.meta.env.VITE_VERSION ?? "N/A"}</li>
+            <li>Build Time: {import.meta.env["VITE_BUILD_TIME"] ?? "N/A"}</li>
+            <li>
+              Node Version: {import.meta.env["VITE_NODE_VERSION"] ?? "N/A"}
+            </li>
+            <li>Vite Version: {import.meta.env["VITE_VERSION"] ?? "N/A"}</li>
           </ul>
         </div>
 
@@ -193,27 +197,33 @@ const Colophon: React.FC<ColophonProps> = ({ className = "" }) => {
         <div className="mb-3">
           <h4 className="font-medium mb-1">GitHub Build Info</h4>
           <ul className="list-none text-s">
-            <li>Actor: {import.meta.env.VITE_GITHUB_ACTOR ?? "N/A"}</li>
-            <li>Event: {import.meta.env.VITE_GITHUB_EVENT_NAME ?? "N/A"}</li>
+            <li>Actor: {import.meta.env["VITE_GITHUB_ACTOR"] ?? "N/A"}</li>
+            <li>Event: {import.meta.env["VITE_GITHUB_EVENT_NAME"] ?? "N/A"}</li>
             <li>
-              Repository: {import.meta.env.VITE_GITHUB_REPOSITORY ?? "N/A"}
+              Repository: {import.meta.env["VITE_GITHUB_REPOSITORY"] ?? "N/A"}
             </li>
-            <li>Ref: {import.meta.env.VITE_GITHUB_REF ?? "N/A"}</li>
-            <li>Merge SHA: {import.meta.env.VITE_GITHUB_SHA ?? "N/A"}</li>
-            <li>Head SHA: {import.meta.env.VITE_GITHUB_HEAD_SHA ?? "N/A"}</li>
-            <li>Workflow: {import.meta.env.VITE_GITHUB_WORKFLOW ?? "N/A"}</li>
+            <li>Ref: {import.meta.env["VITE_GITHUB_REF"] ?? "N/A"}</li>
+            <li>Merge SHA: {import.meta.env["VITE_GITHUB_SHA"] ?? "N/A"}</li>
             <li>
-              Workflow Ref: {import.meta.env.VITE_GITHUB_WORKFLOW_REF ?? "N/A"}
+              Head SHA: {import.meta.env["VITE_GITHUB_HEAD_SHA"] ?? "N/A"}
             </li>
             <li>
-              Workflow SHA: {import.meta.env.VITE_GITHUB_WORKFLOW_SHA ?? "N/A"}
-            </li>
-            <li>Run ID: {import.meta.env.VITE_GITHUB_RUN_ID ?? "N/A"}</li>
-            <li>
-              Run Number: {import.meta.env.VITE_GITHUB_RUN_NUMBER ?? "N/A"}
+              Workflow: {import.meta.env["VITE_GITHUB_WORKFLOW"] ?? "N/A"}
             </li>
             <li>
-              Run Attempt: {import.meta.env.VITE_GITHUB_RUN_ATTEMPT ?? "N/A"}
+              Workflow Ref:{" "}
+              {import.meta.env["VITE_GITHUB_WORKFLOW_REF"] ?? "N/A"}
+            </li>
+            <li>
+              Workflow SHA:{" "}
+              {import.meta.env["VITE_GITHUB_WORKFLOW_SHA"] ?? "N/A"}
+            </li>
+            <li>Run ID: {import.meta.env["VITE_GITHUB_RUN_ID"] ?? "N/A"}</li>
+            <li>
+              Run Number: {import.meta.env["VITE_GITHUB_RUN_NUMBER"] ?? "N/A"}
+            </li>
+            <li>
+              Run Attempt: {import.meta.env["VITE_GITHUB_RUN_ATTEMPT"] ?? "N/A"}
             </li>
           </ul>
         </div>
@@ -222,13 +232,14 @@ const Colophon: React.FC<ColophonProps> = ({ className = "" }) => {
           <h4 className="font-medium mb-1">Build Machine Info</h4>
           <ul className="list-none text-s">
             <li>
-              Machine Name: {import.meta.env.VITE_BUILD_MACHINE_NAME ?? "N/A"}
+              Machine Name:{" "}
+              {import.meta.env["VITE_BUILD_MACHINE_NAME"] ?? "N/A"}
             </li>
-            <li>OS: {import.meta.env.VITE_BUILD_OS ?? "N/A"}</li>
+            <li>OS: {import.meta.env["VITE_BUILD_OS"] ?? "N/A"}</li>
             <li>
-              OS Version: {import.meta.env.VITE_BUILD_OS_VERSION ?? "N/A"}
+              OS Version: {import.meta.env["VITE_BUILD_OS_VERSION"] ?? "N/A"}
             </li>
-            <li>Architecture: {import.meta.env.VITE_BUILD_ARCH ?? "N/A"}</li>
+            <li>Architecture: {import.meta.env["VITE_BUILD_ARCH"] ?? "N/A"}</li>
           </ul>
         </div>
       </div>

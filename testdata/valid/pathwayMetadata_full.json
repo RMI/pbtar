@@ -111,7 +111,7 @@
       "Target technology shares",
       "Other"
     ],
-    "technologyCostTrend": "Other",
+    "technologyCostTrend": "No information",
     "technologyDeploymentTrend": "No information",
     "emissionsScope": "No information",
     "policyAmbition": "No information",
@@ -123,8 +123,7 @@
       "Green H2/ammonia",
       "SAF",
       "Battery storage",
-      "EGS/AGS",
-      "Other"
+      "EGS/AGS"
     ],
     "supplyChain": "No information",
     "investmentNeeds": "No information",
