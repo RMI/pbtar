@@ -106,7 +106,7 @@ export default function MultiLineChart({
     >;
 
     // Update title
-    const unit = d3data[0]?.unit || '';
+    const unit = d3data[0]?.unit || "";
     select(title.current)
       .selectAll("text")
       .data([`${capitalizeWords(sector)} ${capitalizeWords(metric)} [${unit}]`])
@@ -116,7 +116,7 @@ export default function MultiLineChart({
       .attr("text-anchor", "middle")
       .attr("font-size", "16px")
       .attr("font-weight", "bold")
-      .text(d => d);
+      .text((d) => d);
 
     // Update X axis
     select(gx.current)
@@ -175,9 +175,9 @@ export default function MultiLineChart({
 
   const capitalizeWords = (str: string): string => {
     return str
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
   };
 
   const highlightSelectedTech = (selectedTech: string): void => {

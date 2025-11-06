@@ -60,12 +60,12 @@ export default function VerticalBarChart({
   const title = useRef<SVGGElement>(null);
 
   const capitalizeWords = (str: string): string => {
-    const withSpaces = str.replace(/([A-Z])/g, ' $1');
+    const withSpaces = str.replace(/([A-Z])/g, " $1");
 
     return withSpaces
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(' ')
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ")
       .trim();
   };
 
@@ -107,7 +107,7 @@ export default function VerticalBarChart({
       .attr("text-anchor", "middle")
       .attr("font-size", "16px")
       .attr("font-weight", "bold")
-      .text(d => d);
+      .text((d) => d);
 
     // Update X axis
     select(gx.current)

@@ -68,9 +68,9 @@ export default function NormalizedStackedAreaChart({
 
   const capitalizeWords = (str: string): string => {
     return str
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
   };
 
   // Memoize scales and data transformations
@@ -143,10 +143,17 @@ export default function NormalizedStackedAreaChart({
     )
       return;
 
-    const { x, y, series, area: areaGenerator, xticks, technologies } = chartSetup;
+    const {
+      x,
+      y,
+      series,
+      area: areaGenerator,
+      xticks,
+      technologies,
+    } = chartSetup;
 
     // Update title
-    const unit = d3data[0]?.unit || '';
+    const unit = d3data[0]?.unit || "";
     select(title.current)
       .selectAll("text")
       .data([`${capitalizeWords(sector)} ${capitalizeWords(metric)} [${unit}]`])
@@ -156,14 +163,18 @@ export default function NormalizedStackedAreaChart({
       .attr("text-anchor", "middle")
       .attr("font-size", "16px")
       .attr("font-weight", "bold")
-      .text(d => d);
+      .text((d) => d);
 
     // Add legend
     const legendItems = select(legend.current)
       .selectAll("g")
       .data(technologies)
       .join("g")
-      .attr("transform", (d, i) => `translate(${width - marginRight + 10}, ${marginTop + i * 20})`);
+      .attr(
+        "transform",
+        (d, i) =>
+          `translate(${width - marginRight + 10}, ${marginTop + i * 20})`,
+      );
 
     legendItems
       .selectAll("rect")
@@ -173,7 +184,10 @@ export default function NormalizedStackedAreaChart({
       .attr("y", 0)
       .attr("width", 12)
       .attr("height", 12)
-      .attr("fill", (d) => technologyColors[d as keyof typeof technologyColors]);
+      .attr(
+        "fill",
+        (d) => technologyColors[d as keyof typeof technologyColors],
+      );
 
     legendItems
       .selectAll("text")
@@ -199,15 +213,13 @@ export default function NormalizedStackedAreaChart({
       .style("font-size", "12px");
 
     // Update areas
-    (
-      select(areas.current)
-        .selectAll<
-          SVGPathElement,
-          Series<Record<string, number | string>, string>
-        >("path")
-        .data(series)
-        .join("path")
-    )
+    select(areas.current)
+      .selectAll<
+        SVGPathElement,
+        Series<Record<string, number | string>, string>
+      >("path")
+      .data(series)
+      .join("path")
       .attr(
         "fill",
         (d) => technologyColors[d.key as keyof typeof technologyColors],

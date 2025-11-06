@@ -29,7 +29,11 @@ import NormalizedStackedAreaChart from "../components/NormalizedStackedAreaChart
 import MultiLineChart from "../components/MultiLineChart";
 import VerticalBarChart from "../components/VerticalBarChart";
 
-type PlotType = "composition" | "emissionsVolume" | "emissionsEfficiency" | "supply";
+type PlotType =
+  | "composition"
+  | "emissionsVolume"
+  | "emissionsEfficiency"
+  | "supply";
 
 const PLOT_OPTIONS = [
   { value: "composition", label: "Energy Composition" },
@@ -55,16 +59,16 @@ const PathwayDetailPage: React.FC = () => {
   const getAvailablePlotOptions = (data: any): typeof PLOT_OPTIONS => {
     if (!data) return [];
 
-    return PLOT_OPTIONS.filter(option => {
+    return PLOT_OPTIONS.filter((option) => {
       switch (option.value) {
-        case 'composition':
-          return hasDataForMetric(data, 'capacity');
-        case 'emissionsVolume':
-          return hasDataForMetric(data, 'absoluteEmissions');
-        case 'emissionsEfficiency':
-          return hasDataForMetric(data, 'emissionsIntensity');
-        case 'supply':
-          return hasDataForMetric(data, 'capacity');
+        case "composition":
+          return hasDataForMetric(data, "capacity");
+        case "emissionsVolume":
+          return hasDataForMetric(data, "absoluteEmissions");
+        case "emissionsEfficiency":
+          return hasDataForMetric(data, "emissionsIntensity");
+        case "supply":
+          return hasDataForMetric(data, "capacity");
         default:
           return false;
       }
@@ -75,7 +79,10 @@ const PathwayDetailPage: React.FC = () => {
   useEffect(() => {
     if (timeseriesdata) {
       const availableOptions = getAvailablePlotOptions(timeseriesdata);
-      if (!availableOptions.find(opt => opt.value === selectedPlot) && availableOptions.length > 0) {
+      if (
+        !availableOptions.find((opt) => opt.value === selectedPlot) &&
+        availableOptions.length > 0
+      ) {
         setSelectedPlot(availableOptions[0].value);
       }
     }
@@ -219,7 +226,10 @@ const PathwayDetailPage: React.FC = () => {
           to="/pathway"
           className="inline-flex items-center px-4 py-2 bg-energy text-white rounded-md hover:bg-energy-700 transition-colors duration-200"
         >
-          <ArrowLeft size={16} className="mr-2" />
+          <ArrowLeft
+            size={16}
+            className="mr-2"
+          />
           Back to Pathways
         </Link>
       </div>
@@ -232,13 +242,18 @@ const PathwayDetailPage: React.FC = () => {
         to="/pathway"
         className="inline-flex items-center text-rmigray-600 hover:text-energy-700 mb-6 transition-colors duration-200"
       >
-        <ArrowLeft size={16} className="mr-1" />
+        <ArrowLeft
+          size={16}
+          className="mr-1"
+        />
         Back to pathways
       </Link>
 
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="bg-bluespruce p-6 text-white">
-          <h1 className="text-2xl md:text-3xl font-bold mb-2">{pathway.name}</h1>
+          <h1 className="text-2xl md:text-3xl font-bold mb-2">
+            {pathway.name}
+          </h1>
           <p className="text-white mb-4">{pathway.description}</p>
 
           <div className="flex flex-wrap gap-2 mb-4">
@@ -312,28 +327,35 @@ const PathwayDetailPage: React.FC = () => {
             </div>
 
             <div className="md:col-span-5">
-              {timeseriesdata && getAvailablePlotOptions(timeseriesdata).length > 0 ? (
+              {timeseriesdata &&
+              getAvailablePlotOptions(timeseriesdata).length > 0 ? (
                 <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
                   <div className="flex flex-col mb-4">
-                    <label htmlFor="plot-select" className="text-sm font-medium text-rmigray-700 mb-2">
+                    <label
+                      htmlFor="plot-select"
+                      className="text-sm font-medium text-rmigray-700 mb-2"
+                    >
                       Select Plot
                     </label>
                     <select
                       id="plot-select"
                       value={selectedPlot}
-                      onChange={(e) => setSelectedPlot(e.target.value as PlotType)}
+                      onChange={(e) =>
+                        setSelectedPlot(e.target.value as PlotType)
+                      }
                       className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
                     >
                       {getAvailablePlotOptions(timeseriesdata).map((option) => (
-                        <option key={option.value} value={option.value}>
+                        <option
+                          key={option.value}
+                          value={option.value}
+                        >
                           {option.label}
                         </option>
                       ))}
                     </select>
                   </div>
-                  <div className="mb-4">
-                    {renderPlot()}
-                  </div>
+                  <div className="mb-4">{renderPlot()}</div>
                 </div>
               ) : null}
 
@@ -362,25 +384,34 @@ const PathwayDetailPage: React.FC = () => {
                     infrastructureRequirements: "Infrastructure requirements",
                   };
 
-                  return Object.entries(pathway.keyFeatures).map(([rawKey, rawVal]) => {
-                    const key = rawKey as keyof PathwayMetadataType["keyFeatures"];
-                    const values = Array.isArray(rawVal) ? rawVal : [rawVal];
-                    const clean = values.filter((v): v is string =>
-                      Boolean(v && String(v).trim())
-                    );
-                    if (clean.length === 0) return null;
+                  return Object.entries(pathway.keyFeatures).map(
+                    ([rawKey, rawVal]) => {
+                      const key =
+                        rawKey as keyof PathwayMetadataType["keyFeatures"];
+                      const values = Array.isArray(rawVal) ? rawVal : [rawVal];
+                      const clean = values.filter((v): v is string =>
+                        Boolean(v && String(v).trim()),
+                      );
+                      if (clean.length === 0) return null;
 
-                    return (
-                      <div key={rawKey} className="mb-3">
-                        <p className="text-xs font-medium text-rmigray-500 mb-1">
-                          {LABELS[key] ?? rawKey}
-                        </p>
-                        <BadgeArray variant="keyFeature" visibleCount={Infinity}>
-                          {clean}
-                        </BadgeArray>
-                      </div>
-                    );
-                  });
+                      return (
+                        <div
+                          key={rawKey}
+                          className="mb-3"
+                        >
+                          <p className="text-xs font-medium text-rmigray-500 mb-1">
+                            {LABELS[key] ?? rawKey}
+                          </p>
+                          <BadgeArray
+                            variant="keyFeature"
+                            visibleCount={Infinity}
+                          >
+                            {clean}
+                          </BadgeArray>
+                        </div>
+                      );
+                    },
+                  );
                 })()}
               </div>
 
@@ -389,8 +420,10 @@ const PathwayDetailPage: React.FC = () => {
                   Geographies
                 </h3>
                 <BadgeArray
-                  variant={sortGeographiesForDetails(pathway.geography ?? []).map(
-                    (geo) => geographyVariant(geographyKind(geo)) as string
+                  variant={sortGeographiesForDetails(
+                    pathway.geography ?? [],
+                  ).map(
+                    (geo) => geographyVariant(geographyKind(geo)) as string,
                   )}
                   toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
                   visibleCount={Infinity}
