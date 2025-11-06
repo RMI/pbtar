@@ -99,10 +99,10 @@
     "technologyCostsDetail": "No information",
     "newTechnologiesIncluded": [
       "CCUS",
-"DAC",
-"Green H2/ammonia",
-"SAF",
-"Battery storage"
+      "DAC",
+      "Green H2/ammonia",
+      "SAF",
+      "Battery storage"
     ],
     "supplyChain": "Endogenous input or fuel price",
     "investmentNeeds": "By technology",
