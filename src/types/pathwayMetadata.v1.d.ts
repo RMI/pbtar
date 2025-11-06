@@ -148,36 +148,47 @@ export interface PathwayMetadataV1 {
      */
     emissionsPathway:
       | "No information"
-      | "Continued growth"
-      | "Plateau"
-      | "Growth then decline"
-      | "Moderate decline"
-      | "Fast decline";
+      | "Significant increase"
+      | "Moderate increase"
+      | "Minor increase"
+      | "Low or no change"
+      | "Minor decrease"
+      | "Moderate decrease"
+      | "Significant decrease";
     /**
      * Indicates how efficiently energy is used to produce economic output across the sectors covered in the pathway.
      */
     energyEfficiency:
       | "No information"
-      | "Declining"
-      | "Static energy efficiency"
-      | "Moderate improvements"
-      | "Significant improvements";
+      | "Significant deterioration"
+      | "Moderate deterioration"
+      | "Minor deterioration"
+      | "Low or no change"
+      | "Minor improvement"
+      | "Moderate improvement"
+      | "Significant improvement";
     /**
      * Captures the change in total energy consumption, driven by factors such as socio-economic development, technology shifts and consumer behavior.
      */
     energyDemand:
       | "No information"
-      | "Decrease"
-      | "Static energy demand"
-      | "Moderate growth"
-      | "Significant growth";
+      | "Significant decrease"
+      | "Moderate decrease"
+      | "Minor decrease"
+      | "Low or no change"
+      | "Minor increase"
+      | "Moderate increase"
+      | "Significant increase";
     /**
      * Represents the extent to which energy end-uses transition from fossil fuels to electricity.
      */
     electrification:
       | "No information"
-      | "Decrease"
-      | "Stable electrification"
+      | "Significant decrease"
+      | "Moderate decrease"
+      | "Minor decrease"
+      | "Low or no change"
+      | "Minor increase"
       | "Moderate increase"
       | "Significant increase";
     /**
@@ -192,6 +203,7 @@ export interface PathwayMetadataV1 {
         | "Subsidies"
         | "Target technology shares"
         | "Other"
+        | "None"
       ),
       ...(
         | "Carbon price"
@@ -199,6 +211,7 @@ export interface PathwayMetadataV1 {
         | "Subsidies"
         | "Target technology shares"
         | "Other"
+        | "None"
       )[],
     ];
     /**
@@ -206,18 +219,18 @@ export interface PathwayMetadataV1 {
      */
     technologyCostTrend:
       | "No information"
-      | "Static"
-      | "Linear trend"
-      | "S-curves"
-      | "Other";
+      | "Increase"
+      | "Low or no change"
+      | "Decrease";
     /**
      * Indicates the scale and pace of new technology adoption within the pathway, where significant deployment means that several new technologies are adopted rapidly
      */
     technologyDeploymentTrend:
       | "No information"
-      | "No deployment of new technologies"
-      | "Moderate deployment of new technologies"
-      | "Significant deployment of new technologies";
+      | "No new technologies deployed"
+      | "Minor technology deployment"
+      | "Moderate technology deployment"
+      | "Signif. technology deployment";
     /**
      * Defines which greenhouse gases are covered in the pathway’s emissions accounting.
      */
@@ -226,25 +239,28 @@ export interface PathwayMetadataV1 {
       | "CO2"
       | "CO2e (Kyoto)"
       | "CO2e (CO2, Methane)"
-      | "Other";
+      | "CO2e (unspecified GHGs)"
+      | "Other emissions scope";
     /**
      * Represents the overall stringency and intent of modeled policies relative to climate targets, often reflecting if and how far the included policies go beyond currently legislated ones
      */
     policyAmbition:
       | "No information"
+      | "No policies included"
       | "Current/legislated policies"
-      | "NDCs"
-      | "NDCs and long term commitments"
+      | "Current and drafted policies"
+      | "NDCs, unconditional only"
+      | "NDCs incl. conditional targets"
       | "Normative/Optimization-based"
-      | "Other";
+      | "Other policy ambition";
     /**
      * Specifies the level of granularity in cost data, such as total system costs or detailed CAPEX/OPEX breakdowns.
      */
     technologyCostsDetail:
       | "No information"
       | "Total costs"
-      | "Capital costs/O&M/etc."
-      | "Other";
+      | "Capital costs, O&M, etc."
+      | "Other cost breakdown";
     /**
      * Lists emerging or breakthrough technologies that are explicitly modeled within the pathway. These are considered in technology deployment too.
      *
@@ -253,23 +269,25 @@ export interface PathwayMetadataV1 {
     newTechnologiesIncluded: [
       (
         | "No information"
+        | "No new technologies"
         | "CCUS"
         | "DAC"
         | "Green H2/ammonia"
         | "SAF"
         | "Battery storage"
         | "EGS/AGS"
-        | "Other"
+        | "Other new technologies"
       ),
       ...(
         | "No information"
+        | "No new technologies"
         | "CCUS"
         | "DAC"
         | "Green H2/ammonia"
         | "SAF"
         | "Battery storage"
         | "EGS/AGS"
-        | "Other"
+        | "Other new technologies"
       )[],
     ];
     /**
@@ -277,22 +295,25 @@ export interface PathwayMetadataV1 {
      */
     supplyChain:
       | "No information"
-      | "Static upstream fuel/material prices"
-      | "Dynamic upstream fuel/material prices";
+      | "Static input or fuel price"
+      | "Exogenous input or fuel price"
+      | "Endogenous input or fuel price";
     /**
      * Summarizes how investment requirements are quantified, from total system to sector-level or supply-chain detail.
      */
     investmentNeeds:
       | "No information"
       | "Total investment"
-      | "Sector-level"
-      | "Sector-level by upstream/in-stream/downstream";
+      | "By sector"
+      | "By sector, part of value chain"
+      | "By technology"
+      | "By tech, part of value chain";
     /**
      * Describes how infrastructure buildout and maintenance needs are represented across the supply chain.
      */
     infrastructureRequirements:
       | "No information"
       | "By part of supply chain"
-      | "By part of supply chain and maintenance/buildout";
+      | "By supply chain, add/replace";
   };
 }
