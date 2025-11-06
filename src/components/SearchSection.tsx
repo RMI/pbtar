@@ -104,7 +104,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       : filters.modelTempIncrease != null);
 
   return (
-    <div className="bg-white">
+    <div className="bg-gray-50">
       <div className="mb-4 pt-8">
         <SearchBox
           value={filters.searchTerm}
