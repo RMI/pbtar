@@ -203,15 +203,15 @@ export const filterPathways = (
       const ok =
         mode === "ALL"
           ? matchesOptionalFacetAll(
-            normalizedSelected,
-            pathway.geography ?? [],
-            (g) => norm(g),
-          )
+              normalizedSelected,
+              pathway.geography ?? [],
+              (g) => norm(g),
+            )
           : matchesOptionalFacetAny(
-            normalizedSelected,
-            pathway.geography ?? [],
-            (g) => norm(g),
-          );
+              normalizedSelected,
+              pathway.geography ?? [],
+              (g) => norm(g),
+            );
       if (!ok) return false;
     }
 
