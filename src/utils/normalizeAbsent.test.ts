@@ -4,13 +4,13 @@ import { normalizeOptionalFields, normalizeList } from "./normalizeAbsent";
 
 type MockObject = {
   name: string;
-  temperature?: string | null;
-  targetYear?: number | null;
-  targetType?: "absolute" | "intensity" | null;
-  abool?: boolean | null;
-  zero?: number | null;
-  empty?: string | null;
-  missing?: string;
+  temperature?: string | null | undefined;
+  targetYear?: number | null | undefined;
+  targetType?: "absolute" | "intensity" | null | undefined;
+  abool?: boolean | null | undefined;
+  zero?: number | null | undefined;
+  empty?: string | null | undefined;
+  missing?: string | undefined;
 };
 
 describe("normalizeOptionalFields", () => {
@@ -49,7 +49,6 @@ describe("normalizeOptionalFields", () => {
     const n = normalizeOptionalFields(base, ["temperature"] as const);
     expect(isAbsent(n.temperature)).toBe(true);
     // not selected -> remains null
-    // @ts-expect-error - targetYear is still possibly null/undefined
     expect(n.targetYear).toBeNull();
   });
 });
@@ -62,6 +61,8 @@ describe("normalizeList", () => {
       { name: "C" }, // missing
     ];
     const out = normalizeList(list, ["temperature"] as const);
+    if (!out[0] || !out[1] || !out[2])
+      throw new Error("Expected array to have 3 items");
     expect(isAbsent(out[0].temperature)).toBe(true);
     expect(out[1].temperature).toBe("2°C");
     expect(isAbsent(out[2].temperature)).toBe(true);
