@@ -43,12 +43,17 @@ const technologyColors = {
   solar: "#003B63",
 } as const;
 
+// Add a function to format the technology labels
+const formatTechnologyLabel = (tech: string): string => {
+  return tech.charAt(0).toUpperCase() + tech.slice(1);
+};
+
 export default function NormalizedStackedAreaChart({
   data,
   width = 600,
   height = 400,
   marginTop = 20,
-  marginRight = 20,
+  marginRight = 80,
   marginBottom = 30,
   marginLeft = 40,
   sector = "power",
@@ -62,6 +67,8 @@ export default function NormalizedStackedAreaChart({
   const gx = useRef<SVGGElement>(null);
   const gy = useRef<SVGGElement>(null);
   const areas = useRef<SVGGElement>(null);
+  const title = useRef<SVGGElement>(null);
+  const legend = useRef<SVGGElement>(null);
 
   // Memoize scales and data transformations
   const chartSetup = useMemo(() => {
@@ -118,7 +125,7 @@ export default function NormalizedStackedAreaChart({
       .y0((d) => y(d[0]))
       .y1((d) => y(d[1]));
 
-    return { x, y, series, area: areaGenerator, xticks, parse };
+    return { x, y, series, area: areaGenerator, xticks, parse, technologies };
   }, [d3data, width, height, marginLeft, marginRight, marginTop, marginBottom]);
 
   useEffect(() => {
@@ -127,11 +134,51 @@ export default function NormalizedStackedAreaChart({
       !gx.current ||
       !gy.current ||
       !areas.current ||
+      !title.current ||
+      !legend.current ||
       !chartSetup
     )
       return;
 
-    const { x, y, series, area: areaGenerator, xticks } = chartSetup;
+    const { x, y, series, area: areaGenerator, xticks, technologies } = chartSetup;
+
+    // Add title
+    select(title.current)
+      .selectAll("text")
+      .data([sector])
+      .join("text")
+      .attr("x", width / 2)
+      .attr("y", marginTop - 5)
+      .attr("text-anchor", "middle")
+      .attr("font-size", "16px")
+      .attr("font-weight", "bold")
+      .text((d) => d.charAt(0).toUpperCase() + d.slice(1));
+
+    // Add legend
+    const legendItems = select(legend.current)
+      .selectAll("g")
+      .data(technologies)
+      .join("g")
+      .attr("transform", (d, i) => `translate(${width - marginRight + 10}, ${marginTop + i * 20})`);
+
+    legendItems
+      .selectAll("rect")
+      .data((d) => [d])
+      .join("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", 12)
+      .attr("height", 12)
+      .attr("fill", (d) => technologyColors[d as keyof typeof technologyColors]);
+
+    legendItems
+      .selectAll("text")
+      .data((d) => [d])
+      .join("text")
+      .attr("x", 16)
+      .attr("y", 10)
+      .attr("font-size", "12px")
+      .text((d) => formatTechnologyLabel(d));
 
     type UpdateSelection = Selection<
       SVGPathElement,
@@ -170,7 +217,7 @@ export default function NormalizedStackedAreaChart({
         (d) => technologyColors[d.key as keyof typeof technologyColors],
       )
       .attr("d", areaGenerator);
-  }, [d3data, chartSetup]);
+  }, [d3data, chartSetup, sector]);
 
   return (
     <svg
@@ -178,6 +225,8 @@ export default function NormalizedStackedAreaChart({
       width={width}
       height={height}
     >
+      <g ref={title} />
+      <g ref={legend} />
       <g
         ref={gx}
         transform={`translate(0, ${height - marginBottom})`}
