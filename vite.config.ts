@@ -1,5 +1,6 @@
 import { defineConfig, Plugin, version as viteVersion } from "vite";
-import type { PluginContext, ViteDevServer } from "vite";
+import type { ViteDevServer } from "vite";
+import type { PluginContext } from "rollup";
 import react from "@vitejs/plugin-react";
 import { simpleGit } from "simple-git";
 import os from "os";
@@ -77,7 +78,7 @@ const getGitInfo = async (): Promise<{
     // Fallback to environment variables or defaults
     return {
       sha: getEnv("VITE_GIT_SHA", "unknown"),
-      isClean: getEnv("VITE_GIT_CLEAN", "unknown"),
+      isClean: getEnv("VITE_GIT_CLEAN", "false") === "true",
       branch: getEnv("VITE_GIT_BRANCH", "unknown"),
     };
   }
@@ -128,8 +129,8 @@ function buildInfoPlugin(): Plugin {
 function dataValidationPlugin(dir: string = "src/data") {
   return {
     name: "data-validation",
-    apply: "build",
-    enforce: "pre",
+    apply: "build" as const,
+    enforce: "pre" as const,
     async buildStart(this: PluginContext) {
       const names = (await fs.readdir(dir)).filter((f) => f.endsWith(".json"));
       const entries: FileEntry[] = [];
@@ -184,12 +185,52 @@ function dataValidationPlugin(dir: string = "src/data") {
   };
 }
 
+// Create a new plugin for serving schema files
+// Used to access the schema files with the dev server
+function schemaServePlugin(): Plugin {
+  return {
+    name: "schema-serve",
+    configureServer(server: ViteDevServer) {
+      server.middlewares.use(
+        "/schema",
+        (
+          req: IncomingMessage,
+          res: ServerResponse,
+          next: (err?: unknown) => void,
+        ): void => {
+          try {
+            const baseDir = resolve("src/schema");
+            const relPath = decodeURIComponent(
+              (req.url || "").replace(/^\/schema\/?/, ""),
+            );
+            if (!relPath) return next(); // no file requested, let Vite handle
+            const absPath = resolve(baseDir, relPath);
+            // prevent path traversal
+            if (!absPath.startsWith(baseDir)) return next();
+            // only serve JSON files
+            if (!absPath.endsWith(".json")) return next();
+            readFile(absPath, "utf8")
+              .then((json) => {
+                res.setHeader("Content-Type", "application/json");
+                res.end(json);
+              })
+              .catch(next);
+          } catch (err) {
+            next(err);
+          }
+        },
+      );
+    },
+  };
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     buildInfoPlugin(),
     dataValidationPlugin("src/data"),
+    schemaServePlugin(),
     viteStaticCopy({
       // Copy the entire schema dir to /schema in the built output
       targets: [{ src: "src/schema/**/*", dest: "schema" }],
@@ -198,37 +239,5 @@ export default defineConfig({
   server: {
     open: true,
     port: 3000,
-  },
-  configureServer(server: ViteDevServer) {
-    // Serve any file under src/schema at /schema/* during dev
-    server.middlewares.use(
-      "/schema",
-      (
-        req: IncomingMessage,
-        res: ServerResponse,
-        next: (err?: unknown) => void,
-      ): void => {
-        try {
-          const baseDir = resolve("src/schema");
-          const relPath = decodeURIComponent(
-            (req.url || "").replace(/^\/schema\/?/, ""),
-          );
-          if (!relPath) return next(); // no file requested, let Vite handle
-          const absPath = resolve(baseDir, relPath);
-          // prevent path traversal
-          if (!absPath.startsWith(baseDir)) return next();
-          // only serve JSON files
-          if (!absPath.endsWith(".json")) return next();
-          readFile(absPath, "utf8")
-            .then((json) => {
-              res.setHeader("Content-Type", "application/json");
-              res.end(json);
-            })
-            .catch(next);
-        } catch (err) {
-          next(err);
-        }
-      },
-    );
   },
 });
