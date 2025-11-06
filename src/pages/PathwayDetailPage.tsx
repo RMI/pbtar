@@ -31,11 +31,12 @@ import MultiLineChart from "../components/MultiLineChart";
 import RadarChart from "../components/RadarChart";
 import VerticalBarChart from "../components/VerticalBarChart";
 
-type PlotType = "composition" | "emissions" | "supply";
+type PlotType = "composition" | "emissionsVolume" | "emissionsEfficiency" | "supply";
 
 const PLOT_OPTIONS = [
   { value: "composition", label: "Energy Composition" },
-  { value: "emissions", label: "Emissions" },
+  { value: "emissionsVolume", label: "Emissions Volume" },
+  { value: "emissionsEfficiency", label: "Emissions Efficiency" },
   { value: "supply", label: "Supply" },
 ] as const;
 
@@ -118,15 +119,27 @@ const PathwayDetailPage: React.FC = () => {
             />
           </div>
         );
-      case "emissions":
+      case "emissionsVolume":
         return (
           <div className="flex flex-col items-center">
             <VerticalBarChart
-              key={`${datasets[0].datasetId}-emissions`}
+              key={`${datasets[0].datasetId}-emissions-volume`}
               data={timeseriesdata}
               width={450}
               height={300}
               metric="absoluteEmissions"
+            />
+          </div>
+        );
+      case "emissionsEfficiency":
+        return (
+          <div className="flex flex-col items-center">
+            <VerticalBarChart
+              key={`${datasets[0].datasetId}-emissions-efficiency`}
+              data={timeseriesdata}
+              width={450}
+              height={300}
+              metric="emissionsIntensity"
             />
           </div>
         );
