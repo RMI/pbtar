@@ -2,8 +2,8 @@ on:
   workflow_call:
 
 jobs:
-  lint:
-    name: "Run ajv JSON validator"
+  check:
+    name: "Run JSON validator"
     runs-on: ubuntu-latest
 
     steps:
@@ -40,7 +40,7 @@ jobs:
       - name: Run ajv JSON validator
         env:
           VITE_INCLUDE_INVALID: ${{ steps.set-include.outputs.vite-include-invalid }}
-        run: npm run json:check
+        run: npm run schema:check
 
   schema-docs:
     name: "Check Schema Docs"
@@ -61,7 +61,7 @@ jobs:
         run: npm ci
 
       - name: Run JSON schema render
-        run: npm run docs:jsonSchema
+        run: npm run schema:generate:docs
 
       - name: Compare Results
         run: |
@@ -97,7 +97,7 @@ jobs:
         run: npm ci
 
       - name: Run JSON Types render
-        run: npm run json:generate:types
+        run: npm run schema:generate:types
 
       - name: Compare Results
         run: |
