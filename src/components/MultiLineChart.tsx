@@ -169,7 +169,8 @@ export default function MultiLineChart({
       .attr("x", (d) => x(chartSetup.parse(d[1][d[1].length - 1].year) as Date))
       .attr("y", (d) => y(d[1][d[1].length - 1].value))
       .attr("dx", "12")
-      .attr("dy", "5");
+      .attr("dy", "5")
+      .attr("font-size", "12px");
   }, [d3data, chartSetup, sector, metric]);
 
   const capitalizeWords = (str: string): string => {
