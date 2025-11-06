@@ -113,7 +113,7 @@ const PathwayDetailPage: React.FC = () => {
             <NormalizedStackedAreaChart
               key={`${datasets[0].datasetId}-composition`}
               data={timeseriesdata}
-              width={350}
+              width={400}
               height={300}
             />
           </div>
