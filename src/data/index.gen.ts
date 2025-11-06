@@ -18,7 +18,6 @@ export type TimeseriesIndex = {
       summary?: unknown;
     }
   >;
-  schema: { version: number; generatedAt: string };
 };
 export const index: TimeseriesIndex = {
   byPathway: {

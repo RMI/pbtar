@@ -20,9 +20,9 @@
   "expertOverview": "Example Expert Recommendation.",
   "metric": ["Generation", "Technology Mix"],
   "keyFeatures": {
-    "emissionsPathway": "Moderate decline",
-    "energyEfficiency": "Moderate improvements",
-    "energyDemand": "Moderate growth",
+    "emissionsPathway": "Minor decrease",
+    "energyEfficiency": "Moderate improvement",
+    "energyDemand": "Minor increase",
     "electrification": "Moderate increase",
     "policyTypes": [
       "Carbon price",
@@ -31,11 +31,11 @@
       "Target technology shares",
       "Other"
     ],
-    "technologyCostTrend": "Other",
-    "technologyDeploymentTrend": "Moderate deployment of new technologies",
+    "technologyCostTrend": "No information",
+    "technologyDeploymentTrend": "Moderate technology deployment",
     "emissionsScope": "CO2",
     "policyAmbition": "Current/legislated policies",
-    "technologyCostsDetail": "Capital costs/O&M/etc.",
+    "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": [
       "CCUS",
       "DAC",
@@ -43,8 +43,8 @@
       "SAF",
       "Battery storage"
     ],
-    "supplyChain": "Dynamic upstream fuel/material prices",
-    "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
-    "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
+    "supplyChain": "No information",
+    "investmentNeeds": "By sector, part of value chain",
+    "infrastructureRequirements": "By supply chain, add/replace"
   }
 }

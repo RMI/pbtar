@@ -27,24 +27,24 @@ describe("Markdown external link behavior", () => {
     render(<Markdown>[jump](#section)</Markdown>);
     const a = screen.getByRole("link", { name: "jump" });
     // unchanged target/rel
-    expect(a.target).toBe("");
-    expect(a.rel).toBe("");
-    expect(a.getAttribute("href")).toBe("#section");
+    expect(a.getAttribute("target") ?? "").toBe("");
+    expect(a.getAttribute("rel") ?? "").toBe("");
+    expect(a.getAttribute("href")).toMatch(/#section$/);
   });
 
   it("does not force target on relative paths", () => {
     render(<Markdown>[Home](/)</Markdown>);
     const a = screen.getByRole("link", { name: "Home" });
-    expect(a.target).toBe("");
-    expect(a.rel).toBe("");
+    expect(a.getAttribute("target") ?? "").toBe("");
+    expect(a.getAttribute("rel") ?? "").toBe("");
   });
 
   it("does not modify non-http schemes like mailto:", () => {
     render(<Markdown>[Email](mailto:test@example.org)</Markdown>);
     const a = screen.getByRole("link", { name: "Email" });
-    expect(a.target).toBe("");
-    expect(a.rel).toBe("");
-    expect(a.href).toBe("mailto:test@example.org");
+    expect(a.getAttribute("target") ?? "").toBe("");
+    expect(a.getAttribute("rel") ?? "").toBe("");
+    expect(a.getAttribute("href")).toBe("mailto:test@example.org");
   });
 
   it("handles multiple links and only modifies the externals", () => {
@@ -55,29 +55,28 @@ describe("Markdown external link behavior", () => {
     );
     const links = screen.getAllByRole("link");
     const [ext, int, hash, ext2] = links;
-    expect(ext.target).toBe("_blank");
-    expect(ext2.target).toBe("_blank");
-    expect(int.target).toBe("");
-    expect(hash.target).toBe("");
+    expect(ext?.getAttribute("target")).toBe("_blank");
+    expect(ext2?.getAttribute("target")).toBe("_blank");
+    expect(int?.getAttribute("target") ?? "").toBe("");
+    expect(hash?.getAttribute("target") ?? "").toBe("");
   });
 
   it("preserves link titles and still adds target/rel", () => {
     render(<Markdown>[titled](https://example.com "Example Title")</Markdown>);
     const a = screen.getByRole("link", { name: "titled" });
-    expect(a.title).toBe("Example Title");
-    expect(a.target).toBe("_blank");
-    expect(a.rel).toContain("noopener");
-    expect(a.rel).toContain("noreferrer");
+    expect(a.getAttribute("title")).toBe("Example Title");
+    expect(a.getAttribute("target")).toBe("_blank");
+    const rel = a.getAttribute("rel") ?? "";
+    expect(rel).toContain("noopener");
+    expect(rel).toContain("noreferrer");
   });
 });
 
 describe("Markdown safety/other elements", () => {
   it("does not alter images; only anchors receive target/rel", () => {
     render(<Markdown>![alt text](/img/logo.png)</Markdown>);
-    const img = screen.getByRole("img", {
-      name: "alt text",
-    });
-    expect(img.src).toMatch(/\/img\/logo\.png$/);
+    const img = screen.getByRole("img", { name: "alt text" });
+    expect(img.getAttribute("src")).toMatch(/\/img\/logo\.png$/);
   });
 
   it("works when a link wraps an image; the anchor should get target/rel", () => {
@@ -85,9 +84,10 @@ describe("Markdown safety/other elements", () => {
       <Markdown>{`[![alt](/img/logo.png)](https://example.com)`}</Markdown>,
     );
     const link = screen.getByRole("link");
-    expect(link.target).toBe("_blank");
-    expect(link.rel).toContain("noopener");
-    expect(link.rel).toContain("noreferrer");
+    expect(link.getAttribute("target")).toBe("_blank");
+    const rel = link.getAttribute("rel") ?? "";
+    expect(rel).toContain("noopener");
+    expect(rel).toContain("noreferrer");
     const img = within(link).getByRole("img", { name: "alt" });
     expect(img).toBeInTheDocument();
   });
