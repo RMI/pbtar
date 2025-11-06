@@ -41,11 +41,6 @@
     { "name": "Transport", "technologies": [] }
   ],
   "expertOverview": "#### Pathway Description\n\nThe ASEAN Centre for Energy (ACE) acts as the ASEAN energy data center and knowledge hub to provide a knowledge repository for the ASEAN Member States (AMS). The ACE ASEAN Energy Outlook is a publication of several scenarios which highlight some potential energy pathways at ASEAN level.\n\nThe ACE ASEAN Member States Targets Scenario (ATS) is an exploratory pathway which assumes that every ASEAN member state fully achieves its unconditional transition targets on time. This pathway models the impact of the existing national policies (NDCs) and measures (Power Development Plans). The ATS models more ambitious energy efficiency targets, as well as a faster deployment of low-carbon energy technologies, especially from renewable energy. Technologies are expected to see some efficiency improvements and power capacity is expected to grow in line with PDPs until the final year specified in each national PDP.\n\nThe geographic scope of the ATS pathway and the underlying AEO is limited to ASEAN countries. Since this implies the model does not produce any global estimates, the ATS pathway is not connected with any implied global temperature rise.\n\nThe assumptions of this pathway may be considered a comparatively likely outcome, as they are based on unconditional policy targets that are already in place. As such, this pathway can be used as a benchmark for a rather probable development of the energy sector. \n\n**Core drivers:**  \n\n*Policies:* The implementation of unconditional national policies are the primary driver of transition outcomes in the ATS pathway. Specifically, energy efficiency targets and renewable energy targets (share and capacity deployment) are expected to be met, including detailed plans from national power development plans.\n\n*Technology costs:* The ATS does not assume build out of new technologies necessarily follows a least cost approach. It assumes that power capacity deployment follows the plans detailed in NDCs and PDPs until the final year laid out in these policies and simulates further additions based on the technology mix at the end year of the policy plans.\n\n*Demand shifts, investment needs, and technology deployment:* These factors are described in detail in the ATS but are primarily or entirely driven by changes in national policies.\n\n*Emissions:* The ATS still corresponds to an average annual emissions growth of 0.8% across the energy sector, although there the unconditional policies lead to an average annual decrease in emissions from power generation of -2.4%, which translates to a decrease of around 74% of emissions in the power sector relative to the Baseline Scenario. However, the unconditional policies modelled by the ATS are not sufficient to lower absolute energy sector emissions below current levels.\n\n#### Application to transition assessment\n\nThe AMS Target Scenario (ATS) is an explorative scenario developed to reflect the stated energy and climate commitments of ASEAN member states. It is designed to capture the ambition of unconditional targets embedded in national policies and pledges, offering a forward-looking view of the region’s energy transition trajectory.\n\nThe ATS provides a regional ASEAN pathway, which limits its applicability for assessing companies with operations concentrated in specific countries. It enables comparisons to the regional average. For analyses that focus on companies with operations in one country only, this may not always be an appropriate reference point, as it may obscure country-specific dynamics, regulatory environments, and market conditions. For regionally operating companies, it can be more appropriate. Where no country specific alternative is available, this regional pathway may still be more appropriate than global ones, although such regional mismatches should always be clarified in any analysis.\n\nFurthermore, the ATS cannot be directly linked to an Implied Temperature Rise (ITR) metric, as it does not model the global energy system and cannot make a statement about how global emissions will evolve.\n\nThe ATS is particularly well-suited for evaluating the alignment of corporate targets, strategies, and investment pipelines with the stated ambitions of the jurisdictions in which they operate. Its strong policy orientation allows for a meaningful comparison between corporate actions and national development priorities. A misalignment with the ATS may signal potential exposure to future regulatory risks, such as non-compliance with evolving energy policies or reduced competitiveness in markets where low-carbon technologies are being prioritized. Alignment, in the other hand, may indicate that a company is strategically positioned to benefit from market shifts. However, it is important to note that the ATS includes aspirational targets and unimplemented policies. Therefore, misalignment does not necessarily imply exposure to current regulatory risk, but rather a potential gap in future readiness. A market comparison may be beneficial in that case.\n\nATS provides national targets. These targets are presented with fine granularity, enabling detailed national policy alignment assessments. The pathway also includes regional-level projections for generation and capacity on 5-year intervals and using a moderately detailed breakdown of by energy sources (such as coal, wind, solar, biomass, and geothermal). These are relevant and useful for analyzing specific decarbonization levers and project investment pipelines within company plans. While the regional granularity is still not optimal for analyzing companies that operate mainly in a single jurisdiction, they are still an improvement over global pathways for this kind of analysis.",
-  "dataSource": {
-    "description": "ACE (2024). 8th ASEAN Energy Outlook (AEO8). ASEAN Centre for Energy (ACE), Jakarta.",
-    "url": "https://aseanenergy.org/",
-    "downloadAvailable": true
-  },
   "metric": [
     "Emissions Intensity",
     "Capacity",
@@ -54,25 +49,24 @@
     "Absolute Emissions"
   ],
   "keyFeatures": {
-    "emissionsPathway": "Continued growth",
-    "energyEfficiency": "Significant improvements",
-    "energyDemand": "Significant growth",
-    "electrification": "Moderate increase",
+    "emissionsPathway": "Moderate increase",
+    "energyEfficiency": "Moderate improvement",
+    "energyDemand": "Significant increase",
+    "electrification": "Low or no change",
     "policyTypes": [
-      "Carbon price",
       "Phaseout dates",
       "Subsidies",
       "Target technology shares",
       "Other"
     ],
-    "technologyCostTrend": "Static",
-    "technologyDeploymentTrend": "Moderate deployment of new technologies",
-    "emissionsScope": "No information",
-    "policyAmbition": "NDCs",
-    "technologyCostsDetail": "Capital costs/O&M/etc.",
+    "technologyCostTrend": "Low or no change",
+    "technologyDeploymentTrend": "Minor technology deployment",
+    "emissionsScope": "CO2e (unspecified GHGs)",
+    "policyAmbition": "NDCs, unconditional only",
+    "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": ["Green H2/ammonia", "SAF"],
     "supplyChain": "No information",
-    "investmentNeeds": "Sector-level",
+    "investmentNeeds": "By sector",
     "infrastructureRequirements": "No information"
   }
 }

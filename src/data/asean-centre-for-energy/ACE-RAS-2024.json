@@ -41,11 +41,6 @@
     { "name": "Transport", "technologies": [] }
   ],
   "expertOverview": "#### Pathway Description\n\nThe ASEAN Centre for Energy (ACE) acts as the ASEAN energy data center and knowledge hub to provide a knowledge repository for the ASEAN Member States (AMS). The ACE ASEAN Energy Outlook is a publication of several scenarios which highlight some potential energy pathways at ASEAN level.\n\nThe ACE Regional Aspiration Scenario (RAS) is an exploratory pathway which assumes that every ASEAN member state fully achieves both its unconditional and conditional transition targets on time. This pathway models the impact of the existing national policies (NDCs) and measures (Power Development Plans), assuming all aspirational targets are achieved, which means that it includes all key assumptions of the ACE ATS pathway and additionally covers conditional NDC targets, short-term regional targets of the APAEC Phase II, and national targets from the enhanced scenario of the AMS energy roadmap. The RAS also differs from the ACE BAS and ACE ATS pathways in that it uses a least-cost optimization approach, which allows for another composition of the energy supply mix. This shows both in faster build-out of renewables capacities and in lower utilisation rates to fossil fuel based power plants.\n\nThe geographic scope of the RAS pathway and the underlying AEO is limited to ASEAN countries. Since this implies the model does not produce any global estimates, the RAS pathway is not connected with any implied global temperature rise.\n\nThe assumptions of this pathway may be considered an optimistic outlook on ASEAN countries’ policy plans and capacities to fully implement them. As such, this pathway can be used as a benchmark for an optimistic – but not unrealistic – development of the energy sector. \n\n**Core Drivers:**\n\n*Policies:* The RAS pathway adds conditional NDC targets, national targets from the enhanced scenario of the AMS energy roadmap, and APAEC 2025 regional targets on top of the assumptions from the ACE ATS, which primarily increases the target share of renewable energy in TPES and power capacity, and requires a steeper reduction of energy intensity in transport and industry. These additional policies are the main driver of transition in the RAS.\n\n*Technology Costs and Technology Deployment:* A secondary driver of transition outcomes in the RAS is the least-cost approach to power capacity additions and generation. While this does not affect the underlying technology costs per unit output, it allows for a cost-driven approach to scaling up renewable energy. This impacts the technology mix in the power sector and also shows in lower utilization rates of fossil fuel fired power plants.\n\n*Demand shifts, investment needs, and infrastructure requirements:* These factors are described in detail in the RAS but are primarily or entirely driven by changes in national policies. One important difference that results from integration of the AIMS II targets is increased regional interconnection of power grids and enhancing multilateral electricity trading.\n\n*Emissions:* Emissions remain stable in the RAS until 2030, after which they start to decrease very slightly at a rate of approximately 0.1% per year across the energy sector.\nEmissions from power generation decrease much more rapidly to approximately a third of 2022 emissions by 2050. Emissions in the industry and residential sectors also drop significantly compared to the ATS.\n\n#### Application to transition assessment\n\nThe Regional Ambition Scenario (RAS) is an explorative pathway modeling the impact of national transition policies – including unconditional and conditional goals of Nationally Determined Contributions (NDCs), national Power Development Plans (PDPs) – on climate targets. In addition to these national-level commitments, the RAS integrates a second layer of regional ambition by incorporating the 2025 ASEAN Plan of Action for Energy Cooperation (APAEC) targets, specifically in the areas of renewable energy generation and energy efficiency.\n\nThe RAS is a regional ASEAN pathway, which limits its applicability for assessing companies with operations concentrated in specific countries. It enables comparisons to the regional average. For analyses that focus on companies with operations in one country only, this may not always be an appropriate reference point, as it may obscure country-specific dynamics, regulatory environments, and market conditions. For regionally operating companies, it can be more appropriate. Where no country specific alternative is available, this regional pathway may still be more appropriate than global ones, although such regional mismatches should always be clarified in any analysis.\n\nFurthermore, the RAS cannot be directly linked to an Implied Temperature Rise (ITR) metric, as it does not model the global energy system and cannot make a statement about how global emissions will evolve.\n\nThe RAS is designed to support alignment assessments with potential future policies, making it a valuable tool for evaluating corporate strategies and investment pipelines against both national and regional ambitions. For companies that aim to align their strategies with national policy targets, the RAS is a candidate for mildly ambitious target setting. It is important to note that – as the RAS includes aspirational targets and yet-to-be-implemented policies – misalignment does not necessarily imply exposure to current regulatory risk, but rather a potential gap in future readiness.\n\nHowever, the scenario provides power sector projections only at the regional level, which limits its suitability for assessing companies with operations concentrated in a single country, where national policy dynamics may differ significantly from the regional average. This is particularly relevant, when comparisons are to be made against model projections rather than policy targets.\n\nAnother key difference between RAS and ATS is that the RAS applies a least-cost optimization framework for its projections, which leads to significantly different outcomes of capacity buildouts and the generation technology mix. This modeling approach prioritizes cost-efficiency in technology deployment and system expansion, resulting in higher investment needs in the RAS. Changes of such scale highlight the pathway’s relevance for market feasibility assessments, particularly within the Company Transition Assessment framework, where cost-effectiveness and investment scalability are key considerations.",
-  "dataSource": {
-    "description": "ACE (2024). 8th ASEAN Energy Outlook (AEO8). ASEAN Centre for Energy (ACE), Jakarta.",
-    "url": "https://aseanenergy.org/",
-    "downloadAvailable": true
-  },
   "metric": [
     "Emissions Intensity",
     "Capacity",
@@ -54,25 +49,24 @@
     "Absolute Emissions"
   ],
   "keyFeatures": {
-    "emissionsPathway": "Plateau",
-    "energyEfficiency": "Significant improvements",
-    "energyDemand": "Moderate growth",
-    "electrification": "Moderate increase",
+    "emissionsPathway": "Low or no change",
+    "energyEfficiency": "Significant improvement",
+    "energyDemand": "Moderate increase",
+    "electrification": "Low or no change",
     "policyTypes": [
-      "Carbon price",
       "Phaseout dates",
       "Subsidies",
       "Target technology shares",
       "Other"
     ],
-    "technologyCostTrend": "Static",
-    "technologyDeploymentTrend": "Moderate deployment of new technologies",
-    "emissionsScope": "No information",
-    "policyAmbition": "NDCs and long term commitments",
-    "technologyCostsDetail": "Capital costs/O&M/etc.",
+    "technologyCostTrend": "Low or no change",
+    "technologyDeploymentTrend": "Minor technology deployment",
+    "emissionsScope": "CO2e (unspecified GHGs)",
+    "policyAmbition": "NDCs incl. conditional targets",
+    "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": ["Battery storage", "Green H2/ammonia", "SAF"],
     "supplyChain": "No information",
-    "investmentNeeds": "Sector-level",
+    "investmentNeeds": "By sector",
     "infrastructureRequirements": "No information"
   }
 }

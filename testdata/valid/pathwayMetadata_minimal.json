@@ -19,18 +19,13 @@
   "pathwayOverview": "This is a minimal pathway for testing purposes.",
   "expertOverview": "Test recommendation.",
   "metric": ["Capacity"],
-  "dataSource": {
-    "description": "Test Data Source.",
-    "url": "http://example.com/",
-    "downloadAvailable": false
-  },
   "keyFeatures": {
     "emissionsPathway": "No information",
     "energyEfficiency": "No information",
     "energyDemand": "No information",
     "electrification": "No information",
     "policyTypes": ["Other"],
-    "technologyCostTrend": "Other",
+    "technologyCostTrend": "No information",
     "technologyDeploymentTrend": "No information",
     "emissionsScope": "No information",
     "policyAmbition": "No information",
