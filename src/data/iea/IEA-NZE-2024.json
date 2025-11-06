@@ -69,9 +69,9 @@
     "Absolute Emissions"
   ],
   "keyFeatures": {
-    "emissionsPathway": "Fast decline",
-    "energyEfficiency": "Significant improvements",
-    "energyDemand": "Decrease",
+    "emissionsPathway": "Significant decrease",
+    "energyEfficiency": "Significant improvement",
+    "energyDemand": "Significant decrease",
     "electrification": "Significant increase",
     "policyTypes": [
       "Carbon price",
@@ -80,11 +80,11 @@
       "Target technology shares",
       "Other"
     ],
-    "technologyCostTrend": "S-curves",
-    "technologyDeploymentTrend": "Significant deployment of new technologies",
+    "technologyCostTrend": "Decrease",
+    "technologyDeploymentTrend": "Signif. technology deployment",
     "emissionsScope": "CO2",
     "policyAmbition": "Normative/Optimization-based",
-    "technologyCostsDetail": "Capital costs/O&M/etc.",
+    "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": [
       "CCUS",
       "DAC",
@@ -92,8 +92,8 @@
       "SAF",
       "Battery storage"
     ],
-    "supplyChain": "Dynamic upstream fuel/material prices",
-    "investmentNeeds": "Sector-level by upstream/in-stream/downstream",
-    "infrastructureRequirements": "By part of supply chain and maintenance/buildout"
+    "supplyChain": "Exogenous input or fuel price",
+    "investmentNeeds": "By tech, part of value chain",
+    "infrastructureRequirements": "By supply chain, add/replace"
   }
 }
