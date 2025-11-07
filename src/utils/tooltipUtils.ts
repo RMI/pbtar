@@ -1,4 +1,10 @@
-import { PathwayType, Sector, Metric } from "../types";
+import type {
+  Metric,
+  PathwayType,
+  Sector,
+} from "../types";
+
+export const unknownTooltip = "No tooltip available.";
 
 export const pathwayTypeTooltips: Record<PathwayType, string> = {
   "Direct Policy":
@@ -7,6 +13,10 @@ export const pathwayTypeTooltips: Record<PathwayType, string> = {
   "Normative": "Starts from a desired end state and works backward to actions.",
   "Predictive":
     "Projects likely futures based on current trends and assumptions.",
+};
+
+export const getPathwayTypeTooltip = (type: PathwayType): string => {
+  return pathwayTypeTooltips[type] || unknownTooltip;
 };
 
 export const sectorTooltips: Record<Sector, string> = {
@@ -36,6 +46,10 @@ export const sectorTooltips: Record<Sector, string> = {
   "Transport": "Logistics of passengers and cargo.",
 };
 
+export const getSectorTooltip = (sector: Sector): string => {
+  return sectorTooltips[sector] || unknownTooltip;
+};
+
 export const metricTooltips: Record<string, string> = {
   "Emissions Intensity":
     "Amount of greenhouse gases emitted per unit of physical output. Indicates how low-carbon the output production is",
@@ -47,16 +61,6 @@ export const metricTooltips: Record<string, string> = {
     "The breakdown of energy sources used for electricity generation (e.g., coal, solar, wind, nuclear). Reflects the diversity and sustainability of the energy portfolio",
   "Absolute Emissions":
     "Total greenhouse gas emissions produced, regardless of output. Measured in metric tons of CO₂ equivalent",
-};
-
-export const unknownTooltip = "No tooltip available.";
-
-export const getPathwayTypeTooltip = (type: PathwayType): string => {
-  return pathwayTypeTooltips[type] || unknownTooltip;
-};
-
-export const getSectorTooltip = (sector: Sector): string => {
-  return sectorTooltips[sector] || unknownTooltip;
 };
 
 export const getMetricTooltip = (metric: Metric): string => {
