@@ -56,7 +56,8 @@ export interface PathwayTimeseriesV1 {
     | "CO2"
     | "CO2e (Kyoto)"
     | "CO2e (CO2, Methane)"
-    | "Other";
+    | "CO2e (unspecified GHGs)"
+    | "Other emissions scope";
   /**
    * Sectors that the timeseries data covers.
    */
