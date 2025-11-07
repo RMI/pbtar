@@ -1,5 +1,6 @@
 import type {
   Metric,
+  PathwayMetadataType,
   PathwayType,
   Sector,
 } from "../types";
@@ -66,3 +67,68 @@ export const metricTooltips: Record<string, string> = {
 export const getMetricTooltip = (metric: Metric): string => {
   return metricTooltips[metric] || unknownTooltip;
 };
+
+export type KeyFeatureSection = keyof PathwayMetadataType["keyFeatures"];
+
+/**
+ * Subsection-aware tooltip resolver for Key Features.
+ * Collisions are resolved by looking up [sectionKey][value].
+ */
+export function getKeyFeatureTooltip(
+  sectionKey: KeyFeatureSection,
+  value: string,
+): string {
+  // NOTE: Fill in real copy later — these are just placeholders.
+  // Use the exact enum strings from your schema/data as the nested keys.
+  const MAP: Partial<Record<KeyFeatureSection, Record<string, string>>> = {
+    emissionsPathway: {
+      // e.g. "Significant decrease": "Real copy about what this means in emissions pathways."
+    },
+    energyEfficiency: {
+      // e.g. "High": "Real copy describing high efficiency assumptions."
+    },
+    energyDemand: {
+      // e.g. "Increasing": "Real copy describing demand trajectory and drivers."
+    },
+    electrification: {
+      // e.g. "Aggressive": "Real copy about electrification pace/scope."
+    },
+    policyTypes: {
+      // e.g. "Carbon pricing": "Real copy about the policy instrument."
+    },
+    technologyCostTrend: {
+      // e.g. "Rapid decline": "Real copy about cost learning rates / drivers."
+    },
+    technologyDeploymentTrend: {
+      // e.g. "Accelerating": "Real copy about S-curve adoption dynamics."
+    },
+    emissionsScope: {
+      // e.g. "All GHGs": "Real copy about scope coverage and exclusions."
+    },
+    policyAmbition: {
+      // e.g. "High": "Real copy about ambition level / coverage."
+    },
+    technologyCostsDetail: {
+      // e.g. "Capex only": "Real copy clarifying cost boundary."
+    },
+    newTechnologiesIncluded: {
+      // e.g. "DAC": "Real copy about inclusion assumptions and constraints."
+    },
+    supplyChain: {
+      // e.g. "Constrained": "Real copy about supply chain risks/assumptions."
+    },
+    investmentNeeds: {
+      // e.g. "Very high": "Real copy about scale, timing, beneficiaries."
+    },
+    infrastructureRequirements: {
+      // e.g. "Grid expansion": "Real copy about infra dependencies."
+    },
+  };
+
+  const v = String(value).trim();
+  const section = MAP[sectionKey];
+  if (section?.[v]) return section[v];
+
+  // Fallback: safe generic placeholder with the raw value.
+  return `${v} Tooltip TKTK`;
+}
