@@ -87,14 +87,15 @@
       "maxLength": 500
     },
     "emissionsScope": {
-      "description": "Defines which greenhouse gases are covered in the pathway's modeled emissions.",
+      "description": "Defines which greenhouse gases are covered in the pathway’s emissions accounting.",
       "type": "string",
       "enum": [
         "No information",
         "CO2",
         "CO2e (Kyoto)",
         "CO2e (CO2, Methane)",
-        "Other"
+        "CO2e (unspecified GHGs)",
+        "Other emissions scope"
       ]
     },
     "sector": {
