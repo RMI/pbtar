@@ -17,6 +17,7 @@ import {
   getPathwayTypeTooltip,
   getSectorTooltip,
   getMetricTooltip,
+  getKeyFeatureTooltip,
 } from "../utils/tooltipUtils";
 import DownloadDataset from "../components/DownloadDataset";
 import {
@@ -280,6 +281,9 @@ const PathwayDetailPage: React.FC = () => {
                         <BadgeArray
                           variant="keyFeature"
                           visibleCount={Infinity}
+                          tooltipGetter={(v: string) =>
+                            getKeyFeatureTooltip(key, v)
+                          }
                         >
                           {clean}
                         </BadgeArray>
