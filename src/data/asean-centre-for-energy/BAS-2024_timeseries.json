@@ -54,7 +54,7 @@
       "metric": {
         "absoluteEmissions": {
           "displayName": "Absolute Emissions",
-          "definition": "Total greenhouse gas emissions produced, regardless of output. Measured in metric tons of CO₂ equivalent",
+          "definition": "Total greenhouse gas emissions produced, regardless of output. Measured in metric tons of CO2 equivalent",
           "sectorScope": "Power generation"
         },
         "capacity": {
