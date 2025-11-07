@@ -7,6 +7,7 @@ import { extent } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { stackOffsetExpand } from "d3-shape";
 import { useRef, useEffect, useState, useMemo } from "react";
+import { capitalizeWords } from '../utils/capitalizeWords';
 
 interface DataPoint {
   sector: string;
@@ -65,13 +66,6 @@ export default function NormalizedStackedAreaChart({
   const areas = useRef<SVGGElement>(null);
   const title = useRef<SVGGElement>(null);
   const legend = useRef<SVGGElement>(null);
-
-  const capitalizeWords = (str: string): string => {
-    return str
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  };
 
   // Memoize scales and data transformations
   const chartSetup = useMemo(() => {

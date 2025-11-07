@@ -6,6 +6,7 @@ import { groups } from "d3-array";
 import { extent } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { useRef, useEffect, useMemo } from "react";
+import { capitalizeWords } from '../utils/capitalizeWords';
 
 interface DataPoint {
   sector: string;
@@ -172,13 +173,6 @@ export default function MultiLineChart({
       .attr("dy", "5")
       .attr("font-size", "12px");
   }, [d3data, chartSetup, sector, metric, marginTop, width]);
-
-  const capitalizeWords = (str: string): string => {
-    return str
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  };
 
   const highlightSelectedTech = (selectedTech: string): void => {
     if (!lines.current) return;
