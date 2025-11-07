@@ -6,7 +6,7 @@ import { groups } from "d3-array";
 import { extent } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { useRef, useEffect, useMemo } from "react";
-import { capitalizeWords } from '../utils/capitalizeWords';
+import { capitalizeWords } from "../utils/capitalizeWords";
 
 interface DataPoint {
   sector: string;

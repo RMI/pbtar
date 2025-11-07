@@ -7,7 +7,7 @@ import { extent } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { stackOffsetExpand } from "d3-shape";
 import { useRef, useEffect, useState, useMemo } from "react";
-import { capitalizeWords } from '../utils/capitalizeWords';
+import { capitalizeWords } from "../utils/capitalizeWords";
 
 interface DataPoint {
   sector: string;

@@ -4,7 +4,7 @@ import { max } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import "d3-transition";
 import { useRef, useEffect, useMemo } from "react";
-import { capitalizeWords } from '../utils/capiutalizeWords';
+import { capitalizeWords } from "../utils/capiutalizeWords";
 
 interface DataPoint {
   sector: string;

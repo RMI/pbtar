@@ -77,7 +77,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
   // Memoize the available options
   const availablePlotOptions = useMemo(
     () => getAvailablePlotOptions(timeseriesdata),
-    [timeseriesdata, getAvailablePlotOptions]
+    [timeseriesdata, getAvailablePlotOptions],
   );
 
   // Update selected plot if current selection becomes invalid
