@@ -4,7 +4,7 @@ import { max } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import "d3-transition";
 import { useRef, useEffect, useMemo } from "react";
-import { capitalizeWords } from "../utils/capiutalizeWords";
+import { capitalizeWords } from "../utils/capitalizeWords";
 
 interface DataPoint {
   sector: string;
@@ -59,16 +59,6 @@ export default function VerticalBarChart({
   const gy = useRef<SVGGElement>(null);
   const bars = useRef<SVGGElement>(null);
   const title = useRef<SVGGElement>(null);
-
-  const capitalizeWords = (str: string): string => {
-    const withSpaces = str.replace(/([A-Z])/g, " $1");
-
-    return withSpaces
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(" ")
-      .trim();
-  };
 
   const chartSetup = useMemo<ChartScales>(() => {
     const unit = d3data[0]?.unit ?? "";
