@@ -2,13 +2,13 @@
   "$schema": "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
   "pathwayId": ["JRC-GECO-1.5C-2025"],
   "id": "JRC-GECO-1.5C-2025_TS",
-  "name": "1.5°C scenario (1.5°C) Timeseries Data",
-  "description": "Global normative pathway limiting warming to 1.5°C, with net zero achieved in 2060.",
+  "name": "1.5C scenario (1.5C) Timeseries Data",
+  "description": "Global normative pathway limiting warming to 1.5C, with net zero achieved in 2060.",
   "publisher": "JRC",
   "publicationName": "Global Energy and Climate Outlook (GECO)",
   "publicationYear": 2024,
-  "pathwayName": "1.5°C Scenario (1.5°C)",
-  "source": "European Commission, Joint Research Centre (JRC), 2025, Global energy and climate outlook 2024 – Updating NDCs and closing the ambition gap – Indicators for 1.5°C alignment\n\nReport URL: https://data.europa.eu/doi/10.2760/9028706\n\nDataset URL: http://data.europa.eu/89h/b3be46d2-568b-40e0-a426-a25b136bc336",
+  "pathwayName": "1.5C Scenario (1.5C)",
+  "source": "European Commission, Joint Research Centre (JRC), 2025, Global energy and climate outlook 2024 – Updating NDCs and closing the ambition gap – Indicators for 1.5C alignment\n\nReport URL: https://data.europa.eu/doi/10.2760/9028706\n\nDataset URL: http://data.europa.eu/89h/b3be46d2-568b-40e0-a426-a25b136bc336",
   "emissionsScope": "CO2e (Kyoto)",
   "sector": {
     "power": {
@@ -54,7 +54,7 @@
       "metric": {
         "absoluteEmissions": {
           "displayName": "Absolute Emissions",
-          "definition": "Total greenhouse gas emissions produced, regardless of output. Measured in metric tons of CO₂ equivalent",
+          "definition": "Total greenhouse gas emissions produced, regardless of output. Measured in metric tons of CO2 equivalent",
           "sectorScope": "Power generation"
         },
         "capacity": {

@@ -8,7 +8,7 @@
   "publicationName": "Global Energy and Climate Outlook (GECO)",
   "publicationYear": 2024,
   "pathwayName": "Reference Scenario (Reference)",
-  "source": "European Commission, Joint Research Centre (JRC), 2025, Global energy and climate outlook 2024 – Updating NDCs and closing the ambition gap – Indicators for 1.5°C alignment\n\nReport URL: https://data.europa.eu/doi/10.2760/9028706\n\nDataset URL: http://data.europa.eu/89h/b3be46d2-568b-40e0-a426-a25b136bc336",
+  "source": "European Commission, Joint Research Centre (JRC), 2025, Global energy and climate outlook 2024 – Updating NDCs and closing the ambition gap – Indicators for 1.5C alignment\n\nReport URL: https://data.europa.eu/doi/10.2760/9028706\n\nDataset URL: http://data.europa.eu/89h/b3be46d2-568b-40e0-a426-a25b136bc336",
   "emissionsScope": "CO2e (Kyoto)",
   "sector": {
     "power": {
@@ -54,7 +54,7 @@
       "metric": {
         "absoluteEmissions": {
           "displayName": "Absolute Emissions",
-          "definition": "Total greenhouse gas emissions produced, regardless of output. Measured in metric tons of CO₂ equivalent",
+          "definition": "Total greenhouse gas emissions produced, regardless of output. Measured in metric tons of CO2 equivalent",
           "sectorScope": "Power generation"
         },
         "capacity": {
