@@ -74,9 +74,6 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
     ? `${pathway.modelTempIncrease}°C`
     : null;
 
-  // Show targets section only if either exists
-  const showTargets = pathway.modelTempIncrease || pathway.modelYearNetzero;
-
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
       <div className="flex items-stretch">
@@ -85,26 +82,31 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
             {highlightTextIfSearchMatch(pathway.pathwayType)} Pathway
           </span>
         </div>
-        {showTargets && (
-          <div className="flex items-stretch">
-            {formattedTemp && (
-              <div
-                className={`px-5 py-3 flex items-center ${getTemperatureColor(pathway.modelTempIncrease)}`}
-              >
-                <span className="text-sm font-medium text-rmigray-700">
-                  {highlightTextIfSearchMatch(formattedTemp)}
+        <div className="flex items-stretch h-[52px]">
+          {" "}
+          {/* Fixed height container */}
+          {formattedTemp ? (
+            <div
+              className={`px-5 py-3 flex items-center justify-center ${getTemperatureColor(pathway.modelTempIncrease)}`}
+            >
+              <span className="text-sm font-medium text-rmigray-700">
+                {highlightTextIfSearchMatch(formattedTemp)}
+              </span>
+            </div>
+          ) : null}
+          {pathway.modelYearNetzero ? (
+            <div className="px-5 py-3 flex items-center bg-rmiblue-100">
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] text-rmigray-600 leading-tight h-[14px]">
+                  Net Zero By
                 </span>
-              </div>
-            )}
-            {pathway.modelYearNetzero && (
-              <div className="px-5 py-3 flex items-center bg-rmiblue-100">
                 <span className="text-sm font-medium text-rmigray-700">
                   {highlightTextIfSearchMatch(pathway.modelYearNetzero)}
                 </span>
               </div>
-            )}
-          </div>
-        )}
+            </div>
+          ) : null}
+        </div>
       </div>
 
       <div className="p-5 flex flex-col h-full">
