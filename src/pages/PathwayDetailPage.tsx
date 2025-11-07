@@ -35,6 +35,7 @@ const PathwayDetailPage: React.FC = () => {
 
   useEffect(() => {
     setLoading(true);
+    // Simulate API call with timeout
     const timer = setTimeout(() => {
       const foundPathway = pathwayMetadata.find((s) => s.id === id) || null;
       setPathway(foundPathway);
@@ -44,6 +45,7 @@ const PathwayDetailPage: React.FC = () => {
     return () => clearTimeout(timer);
   }, [id]);
 
+  // Timeseries index state
   const [tsIndexLoaded, setTsIndexLoaded] = useState(false);
   const [datasets, setDatasets] = useState<
     Array<{
@@ -75,7 +77,7 @@ const PathwayDetailPage: React.FC = () => {
       }
     };
 
-    void loadDatasets();
+    void loadDatasets(); // explicitly mark ignored promise to satisfy no-floating-promises
     return () => {
       isMounted = false;
     };
@@ -228,6 +230,7 @@ const PathwayDetailPage: React.FC = () => {
                   Key Features
                 </h3>
                 {(() => {
+                  // Pretty labels for keys from schema (kept small & explicit to avoid surprises)
                   const LABELS: Record<
                     keyof PathwayMetadataType["keyFeatures"],
                     string
@@ -248,34 +251,36 @@ const PathwayDetailPage: React.FC = () => {
                     infrastructureRequirements: "Infrastructure requirements",
                   };
 
-                  return Object.entries(pathway.keyFeatures).map(
-                    ([rawKey, rawVal]) => {
-                      const key =
-                        rawKey as keyof PathwayMetadataType["keyFeatures"];
-                      const values = Array.isArray(rawVal) ? rawVal : [rawVal];
-                      const clean = values.filter((v): v is string =>
-                        Boolean(v && String(v).trim()),
-                      );
-                      if (clean.length === 0) return null;
+                  return Object.entries(
+                    pathway.keyFeatures as string | string[],
+                  ).map(([rawKey, rawVal]) => {
+                    const key =
+                      rawKey as keyof PathwayMetadataType["keyFeatures"];
+                    // Normalize to an array of strings for BadgeArray
+                    const values = Array.isArray(rawVal) ? rawVal : [rawVal];
+                    // Defensive guard for any accidental empties
+                    const clean = values.filter((v): v is string =>
+                      Boolean(v && String(v).trim()),
+                    );
+                    if (clean.length === 0) return null;
 
-                      return (
-                        <div
-                          key={rawKey}
-                          className="mb-3"
+                    return (
+                      <div
+                        key={rawKey}
+                        className="mb-3"
+                      >
+                        <p className="text-xs font-medium text-rmigray-500 mb-1">
+                          {LABELS[key] ?? rawKey}
+                        </p>
+                        <BadgeArray
+                          variant="keyFeature"
+                          visibleCount={Infinity}
                         >
-                          <p className="text-xs font-medium text-rmigray-500 mb-1">
-                            {LABELS[key] ?? rawKey}
-                          </p>
-                          <BadgeArray
-                            variant="keyFeature"
-                            visibleCount={Infinity}
-                          >
-                            {clean}
-                          </BadgeArray>
-                        </div>
-                      );
-                    },
-                  );
+                          {clean}
+                        </BadgeArray>
+                      </div>
+                    );
+                  });
                 })()}
               </div>
 
