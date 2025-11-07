@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useMemo } from "react";
 import NormalizedStackedAreaChart from "./NormalizedStackedAreaChart";
 import MultiLineChart from "./MultiLineChart";
 import VerticalBarChart from "./VerticalBarChart";
@@ -74,18 +74,24 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
     [hasDataForMetric],
   );
 
+  // Memoize the available options
+  const availablePlotOptions = useMemo(
+    () => getAvailablePlotOptions(timeseriesdata),
+    [timeseriesdata, getAvailablePlotOptions]
+  );
+
   // Update selected plot if current selection becomes invalid
   useEffect(() => {
-    if (timeseriesdata) {
-      const availableOptions = getAvailablePlotOptions(timeseriesdata);
-      if (
-        !availableOptions.find((opt) => opt.value === selectedPlot) &&
-        availableOptions.length > 0
-      ) {
-        setSelectedPlot(availableOptions[0].value);
+    if (timeseriesdata && availablePlotOptions.length > 0) {
+      if (!availablePlotOptions.find((opt) => opt.value === selectedPlot)) {
+        setSelectedPlot(availablePlotOptions[0].value);
       }
     }
-  }, [timeseriesdata, selectedPlot, getAvailablePlotOptions]);
+  }, [timeseriesdata, selectedPlot, availablePlotOptions]);
+
+  if (!timeseriesdata || availablePlotOptions.length === 0) {
+    return null;
+  }
 
   const renderPlot = () => {
     if (!timeseriesdata) return null;
