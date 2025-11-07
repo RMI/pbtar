@@ -86,7 +86,12 @@ const PathwayDetailPage: React.FC = () => {
   useEffect(() => {
     if (datasets.length > 0) {
       fetch(datasets[0].path.replace(/\.csv$/, ".json"))
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
         .then((data: TimeSeries) => setTimeseriesdata(data))
         .catch((error) => console.error("Error fetching JSON:", error));
     }
