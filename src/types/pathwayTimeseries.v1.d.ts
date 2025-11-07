@@ -49,14 +49,15 @@ export interface PathwayTimeseriesV1 {
    */
   source: string;
   /**
-   * Defines which greenhouse gases are covered in the pathway's modeled emissions.
+   * Defines which greenhouse gases are covered in the pathway’s emissions accounting.
    */
   emissionsScope:
     | "No information"
     | "CO2"
     | "CO2e (Kyoto)"
     | "CO2e (CO2, Methane)"
-    | "Other";
+    | "CO2e (unspecified GHGs)"
+    | "Other emissions scope";
   /**
    * Sectors that the timeseries data covers.
    */
