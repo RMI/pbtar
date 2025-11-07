@@ -171,7 +171,7 @@ export default function MultiLineChart({
       .attr("dx", "12")
       .attr("dy", "5")
       .attr("font-size", "12px");
-  }, [d3data, chartSetup, sector, metric]);
+  }, [d3data, chartSetup, sector, metric, marginTop, width]);
 
   const capitalizeWords = (str: string): string => {
     return str

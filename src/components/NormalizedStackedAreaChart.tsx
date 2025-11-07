@@ -1,4 +1,4 @@
-import { select, Selection } from "d3-selection";
+import { select } from "d3-selection";
 import { scaleUtc, scaleLinear } from "d3-scale";
 import { area, stack, Series, SeriesPoint } from "d3-shape";
 import { utcParse } from "d3-time-format";
@@ -184,10 +184,7 @@ export default function NormalizedStackedAreaChart({
       .attr("y", 0)
       .attr("width", 12)
       .attr("height", 12)
-      .attr(
-        "fill",
-        (d) => technologyColors[d as keyof typeof technologyColors],
-      );
+      .attr("fill", (d) => technologyColors[d]);
 
     legendItems
       .selectAll("text")
@@ -225,7 +222,7 @@ export default function NormalizedStackedAreaChart({
         (d) => technologyColors[d.key as keyof typeof technologyColors],
       )
       .attr("d", areaGenerator);
-  }, [d3data, chartSetup, sector, metric]);
+  }, [d3data, chartSetup, sector, metric, marginRight, marginTop, width]);
 
   return (
     <svg

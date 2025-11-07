@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
 import Markdown from "../components/Markdown";
 import { pathwayMetadata } from "../data/pathwayMetadata";
@@ -29,6 +29,19 @@ import NormalizedStackedAreaChart from "../components/NormalizedStackedAreaChart
 import MultiLineChart from "../components/MultiLineChart";
 import VerticalBarChart from "../components/VerticalBarChart";
 
+interface DataPoint {
+  sector: string;
+  metric: string;
+  year: string;
+  technology: string;
+  value: number;
+  unit: string;
+}
+
+interface TimeSeries {
+  data: DataPoint[];
+}
+
 type PlotType =
   | "composition"
   | "emissionsVolume"
@@ -47,33 +60,39 @@ const PathwayDetailPage: React.FC = () => {
   const [pathway, setPathway] = useState<PathwayMetadataType | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedPlot, setSelectedPlot] = useState<PlotType>("composition");
-  const [timeseriesdata, setTimeseriesdata] = useState();
+  const [timeseriesdata, setTimeseriesdata] = useState<TimeSeries | null>(null);
 
   // Helper function to check if data exists for a specific metric
-  const hasDataForMetric = (data: any, metric: string): boolean => {
-    if (!data?.data) return false;
-    return data.data.some((d: DataPoint) => d.metric === metric);
-  };
+  const hasDataForMetric = useCallback(
+    (data: TimeSeries | null, metric: string): boolean => {
+      if (!data?.data) return false;
+      return data.data.some((d) => d.metric === metric);
+    },
+    [],
+  );
 
   // Helper function to get available plot options based on data
-  const getAvailablePlotOptions = (data: any): typeof PLOT_OPTIONS => {
-    if (!data) return [];
+  const getAvailablePlotOptions = useCallback(
+    (data: TimeSeries | null): (typeof PLOT_OPTIONS)[number][] => {
+      if (!data) return [];
 
-    return PLOT_OPTIONS.filter((option) => {
-      switch (option.value) {
-        case "composition":
-          return hasDataForMetric(data, "capacity");
-        case "emissionsVolume":
-          return hasDataForMetric(data, "absoluteEmissions");
-        case "emissionsEfficiency":
-          return hasDataForMetric(data, "emissionsIntensity");
-        case "supply":
-          return hasDataForMetric(data, "capacity");
-        default:
-          return false;
-      }
-    });
-  };
+      return PLOT_OPTIONS.filter((option) => {
+        switch (option.value) {
+          case "composition":
+            return hasDataForMetric(data, "capacity");
+          case "emissionsVolume":
+            return hasDataForMetric(data, "absoluteEmissions");
+          case "emissionsEfficiency":
+            return hasDataForMetric(data, "emissionsIntensity");
+          case "supply":
+            return hasDataForMetric(data, "capacity");
+          default:
+            return false;
+        }
+      });
+    },
+    [hasDataForMetric],
+  );
 
   // Add effect to update selected plot if current selection becomes invalid
   useEffect(() => {
@@ -86,7 +105,7 @@ const PathwayDetailPage: React.FC = () => {
         setSelectedPlot(availableOptions[0].value);
       }
     }
-  }, [timeseriesdata, selectedPlot]);
+  }, [timeseriesdata, selectedPlot, getAvailablePlotOptions]);
 
   useEffect(() => {
     setLoading(true);
@@ -140,7 +159,7 @@ const PathwayDetailPage: React.FC = () => {
     if (datasets.length > 0) {
       fetch(datasets[0].path.replace(/\.csv$/, ".json"))
         .then((response) => response.json())
-        .then((data) => setTimeseriesdata(data))
+        .then((data: TimeSeries) => setTimeseriesdata(data))
         .catch((error) => console.error("Error fetching JSON:", error));
     }
   }, [datasets]);
