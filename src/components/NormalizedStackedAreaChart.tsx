@@ -14,6 +14,7 @@ interface DataPoint {
   year: string;
   technology: keyof typeof technologyColors;
   value: number;
+  unit: string;
 }
 
 interface ChartData {
@@ -47,8 +48,8 @@ export default function NormalizedStackedAreaChart({
   data,
   width = 600,
   height = 400,
-  marginTop = 20,
-  marginRight = 20,
+  marginTop = 40,
+  marginRight = 80,
   marginBottom = 30,
   marginLeft = 40,
   sector = "power",
@@ -62,6 +63,15 @@ export default function NormalizedStackedAreaChart({
   const gx = useRef<SVGGElement>(null);
   const gy = useRef<SVGGElement>(null);
   const areas = useRef<SVGGElement>(null);
+  const title = useRef<SVGGElement>(null);
+  const legend = useRef<SVGGElement>(null);
+
+  const capitalizeWords = (str: string): string => {
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
 
   // Memoize scales and data transformations
   const chartSetup = useMemo(() => {
@@ -118,7 +128,7 @@ export default function NormalizedStackedAreaChart({
       .y0((d) => y(d[0]))
       .y1((d) => y(d[1]));
 
-    return { x, y, series, area: areaGenerator, xticks, parse };
+    return { x, y, series, area: areaGenerator, xticks, parse, technologies };
   }, [d3data, width, height, marginLeft, marginRight, marginTop, marginBottom]);
 
   useEffect(() => {
@@ -127,26 +137,73 @@ export default function NormalizedStackedAreaChart({
       !gx.current ||
       !gy.current ||
       !areas.current ||
+      !title.current ||
+      !legend.current ||
       !chartSetup
     )
       return;
 
-    const { x, y, series, area: areaGenerator, xticks } = chartSetup;
+    const {
+      x,
+      y,
+      series,
+      area: areaGenerator,
+      xticks,
+      technologies,
+    } = chartSetup;
 
-    type UpdateSelection = Selection<
-      SVGPathElement,
-      Series<Record<string, number | string>, string>,
-      SVGGElement,
-      unknown
-    >;
+    // Update title
+    const unit = d3data[0]?.unit || "";
+    select(title.current)
+      .selectAll("text")
+      .data([`${capitalizeWords(sector)} ${capitalizeWords(metric)} [${unit}]`])
+      .join("text")
+      .attr("x", width / 2)
+      .attr("y", marginTop - 10)
+      .attr("text-anchor", "middle")
+      .attr("font-size", "16px")
+      .attr("font-weight", "bold")
+      .text((d) => d);
+
+    // Add legend
+    const legendItems = select(legend.current)
+      .selectAll("g")
+      .data(technologies)
+      .join("g")
+      .attr(
+        "transform",
+        (d, i) =>
+          `translate(${width - marginRight + 10}, ${marginTop + i * 20})`,
+      );
+
+    legendItems
+      .selectAll("rect")
+      .data((d) => [d])
+      .join("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", 12)
+      .attr("height", 12)
+      .attr(
+        "fill",
+        (d) => technologyColors[d as keyof typeof technologyColors],
+      );
+
+    legendItems
+      .selectAll("text")
+      .data((d) => [d])
+      .join("text")
+      .attr("x", 16)
+      .attr("y", 10)
+      .attr("font-size", "12px")
+      .text((d) => capitalizeWords(d));
 
     // Update X axis
     select(gx.current)
       .transition()
       .duration(750)
       .call(axisBottom(x).tickValues(xticks))
-      .style("font-size", "14px")
-      .style("font-weight", "bold");
+      .style("font-size", "14px");
 
     // Update Y axis
     select(gy.current)
@@ -156,21 +213,19 @@ export default function NormalizedStackedAreaChart({
       .style("font-size", "12px");
 
     // Update areas
-    (
-      select(areas.current)
-        .selectAll<
-          SVGPathElement,
-          Series<Record<string, number | string>, string>
-        >("path")
-        .data(series)
-        .join("path") as UpdateSelection
-    )
+    select(areas.current)
+      .selectAll<
+        SVGPathElement,
+        Series<Record<string, number | string>, string>
+      >("path")
+      .data(series)
+      .join("path")
       .attr(
         "fill",
         (d) => technologyColors[d.key as keyof typeof technologyColors],
       )
       .attr("d", areaGenerator);
-  }, [d3data, chartSetup]);
+  }, [d3data, chartSetup, sector, metric]);
 
   return (
     <svg
@@ -178,6 +233,8 @@ export default function NormalizedStackedAreaChart({
       width={width}
       height={height}
     >
+      <g ref={title} />
+      <g ref={legend} />
       <g
         ref={gx}
         transform={`translate(0, ${height - marginBottom})`}
