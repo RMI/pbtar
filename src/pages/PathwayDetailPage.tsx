@@ -17,6 +17,7 @@ import {
   getPathwayTypeTooltip,
   getSectorTooltip,
   getMetricTooltip,
+  getKeyFeatureTooltip,
 } from "../utils/tooltipUtils";
 import DownloadDataset from "../components/DownloadDataset";
 import {
@@ -160,11 +161,12 @@ const PathwayDetailPage: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
             <p className="mb-1 sm:mb-0">
-              <span className="text-white">Publisher:</span> {pathway.publisher}
+              <span className="text-white">Publisher:</span>{" "}
+              {pathway.publication.publisher.full}
             </p>
             <p>
               <span className="text-white">Published:</span>{" "}
-              {pathway.publicationYear}
+              {pathway.publication.year}
             </p>
           </div>
         </div>
@@ -257,6 +259,9 @@ const PathwayDetailPage: React.FC = () => {
                         <BadgeArray
                           variant="keyFeature"
                           visibleCount={Infinity}
+                          tooltipGetter={(v: string) =>
+                            getKeyFeatureTooltip(key, v)
+                          }
                         >
                           {clean}
                         </BadgeArray>
