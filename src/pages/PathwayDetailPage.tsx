@@ -81,7 +81,7 @@ const PathwayDetailPage: React.FC = () => {
     return () => {
       isMounted = false;
     };
-  }, [pathway]);
+  }, [pathway]); // depend on the full object to avoid eslint warning
 
   useEffect(() => {
     if (datasets.length > 0) {
@@ -305,6 +305,7 @@ const PathwayDetailPage: React.FC = () => {
                 <h3 className="text-lg font-medium text-rmigray-800 mb-3">
                   Sectors
                 </h3>
+                {/* Sectors section with dynamic badge count */}
                 <div className="mb-3">
                   <p className="text-xs font-medium text-rmigray-500 mb-1">
                     Sectors:
