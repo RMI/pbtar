@@ -25,15 +25,71 @@ import {
   summarizeSummary,
 } from "../utils/timeseriesIndex";
 import PublicationBlock from "../components/PublicationBlock";
+import NormalizedStackedAreaChart from "../components/NormalizedStackedAreaChart";
+import MultiLineChart from "../components/MultiLineChart";
+import VerticalBarChart from "../components/VerticalBarChart";
+
+type PlotType =
+  | "composition"
+  | "emissionsVolume"
+  | "emissionsEfficiency"
+  | "supply";
+
+const PLOT_OPTIONS = [
+  { value: "composition", label: "Energy Composition" },
+  { value: "emissionsVolume", label: "Emissions Volume" },
+  { value: "emissionsEfficiency", label: "Emissions Efficiency" },
+  { value: "supply", label: "Supply" },
+] as const;
 
 const PathwayDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [pathway, setPathway] = useState<PathwayMetadataType | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedPlot, setSelectedPlot] = useState<PlotType>("composition");
+  const [timeseriesdata, setTimeseriesdata] = useState();
+
+  // Helper function to check if data exists for a specific metric
+  const hasDataForMetric = (data: any, metric: string): boolean => {
+    if (!data?.data) return false;
+    return data.data.some((d: DataPoint) => d.metric === metric);
+  };
+
+  // Helper function to get available plot options based on data
+  const getAvailablePlotOptions = (data: any): typeof PLOT_OPTIONS => {
+    if (!data) return [];
+
+    return PLOT_OPTIONS.filter((option) => {
+      switch (option.value) {
+        case "composition":
+          return hasDataForMetric(data, "capacity");
+        case "emissionsVolume":
+          return hasDataForMetric(data, "absoluteEmissions");
+        case "emissionsEfficiency":
+          return hasDataForMetric(data, "emissionsIntensity");
+        case "supply":
+          return hasDataForMetric(data, "capacity");
+        default:
+          return false;
+      }
+    });
+  };
+
+  // Add effect to update selected plot if current selection becomes invalid
+  useEffect(() => {
+    if (timeseriesdata) {
+      const availableOptions = getAvailablePlotOptions(timeseriesdata);
+      if (
+        !availableOptions.find((opt) => opt.value === selectedPlot) &&
+        availableOptions.length > 0
+      ) {
+        setSelectedPlot(availableOptions[0].value);
+      }
+    }
+  }, [timeseriesdata, selectedPlot]);
 
   useEffect(() => {
     setLoading(true);
-    // Simulate API call with timeout
     const timer = setTimeout(() => {
       const foundPathway = pathwayMetadata.find((s) => s.id === id) || null;
       setPathway(foundPathway);
@@ -43,7 +99,6 @@ const PathwayDetailPage: React.FC = () => {
     return () => clearTimeout(timer);
   }, [id]);
 
-  // Timeseries index state
   const [tsIndexLoaded, setTsIndexLoaded] = useState(false);
   const [datasets, setDatasets] = useState<
     Array<{
@@ -75,11 +130,75 @@ const PathwayDetailPage: React.FC = () => {
       }
     };
 
-    void loadDatasets(); // explicitly mark ignored promise to satisfy no-floating-promises
+    void loadDatasets();
     return () => {
       isMounted = false;
     };
-  }, [pathway]); // depend on the full object to avoid eslint warning
+  }, [pathway]);
+
+  useEffect(() => {
+    if (datasets.length > 0) {
+      fetch(datasets[0].path.replace(/\.csv$/, ".json"))
+        .then((response) => response.json())
+        .then((data) => setTimeseriesdata(data))
+        .catch((error) => console.error("Error fetching JSON:", error));
+    }
+  }, [datasets]);
+
+  const renderPlot = () => {
+    if (!timeseriesdata || !datasets[0]) return null;
+
+    switch (selectedPlot) {
+      case "composition":
+        return (
+          <div className="flex flex-col items-center">
+            <NormalizedStackedAreaChart
+              key={`${datasets[0].datasetId}-composition`}
+              data={timeseriesdata}
+              width={450}
+              height={300}
+            />
+          </div>
+        );
+      case "emissionsVolume":
+        return (
+          <div className="flex flex-col items-center">
+            <VerticalBarChart
+              key={`${datasets[0].datasetId}-emissions-volume`}
+              data={timeseriesdata}
+              width={450}
+              height={300}
+              metric="absoluteEmissions"
+            />
+          </div>
+        );
+      case "emissionsEfficiency":
+        return (
+          <div className="flex flex-col items-center">
+            <VerticalBarChart
+              key={`${datasets[0].datasetId}-emissions-efficiency`}
+              data={timeseriesdata}
+              width={450}
+              height={300}
+              metric="emissionsIntensity"
+            />
+          </div>
+        );
+      case "supply":
+        return (
+          <div className="flex flex-col items-center">
+            <MultiLineChart
+              key={`${datasets[0].datasetId}-supply`}
+              data={timeseriesdata}
+              width={450}
+              height={300}
+            />
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
 
   if (loading) {
     return (
@@ -172,7 +291,7 @@ const PathwayDetailPage: React.FC = () => {
 
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div className="md:col-span-8">
+            <div className="md:col-span-7">
               <section className="mb-8">
                 <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
                   Expert Overview
@@ -207,13 +326,44 @@ const PathwayDetailPage: React.FC = () => {
               ) : null}
             </div>
 
-            <div className="md:col-span-4">
+            <div className="md:col-span-5">
+              {timeseriesdata &&
+              getAvailablePlotOptions(timeseriesdata).length > 0 ? (
+                <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                  <div className="flex flex-col mb-4">
+                    <label
+                      htmlFor="plot-select"
+                      className="text-sm font-medium text-rmigray-700 mb-2"
+                    >
+                      Select Plot
+                    </label>
+                    <select
+                      id="plot-select"
+                      value={selectedPlot}
+                      onChange={(e) =>
+                        setSelectedPlot(e.target.value as PlotType)
+                      }
+                      className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
+                    >
+                      {getAvailablePlotOptions(timeseriesdata).map((option) => (
+                        <option
+                          key={option.value}
+                          value={option.value}
+                        >
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="mb-4">{renderPlot()}</div>
+                </div>
+              ) : null}
+
               <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
                 <h3 className="text-lg font-medium text-rmigray-800 mb-3">
                   Key Features
                 </h3>
                 {(() => {
-                  // Pretty labels for keys from schema (kept small & explicit to avoid surprises)
                   const LABELS: Record<
                     keyof PathwayMetadataType["keyFeatures"],
                     string
@@ -234,36 +384,34 @@ const PathwayDetailPage: React.FC = () => {
                     infrastructureRequirements: "Infrastructure requirements",
                   };
 
-                  return Object.entries(
-                    pathway.keyFeatures as string | string[],
-                  ).map(([rawKey, rawVal]) => {
-                    const key =
-                      rawKey as keyof PathwayMetadataType["keyFeatures"];
-                    // Normalize to an array of strings for BadgeArray
-                    const values = Array.isArray(rawVal) ? rawVal : [rawVal];
-                    // Defensive guard for any accidental empties
-                    const clean = values.filter((v): v is string =>
-                      Boolean(v && String(v).trim()),
-                    );
-                    if (clean.length === 0) return null;
+                  return Object.entries(pathway.keyFeatures).map(
+                    ([rawKey, rawVal]) => {
+                      const key =
+                        rawKey as keyof PathwayMetadataType["keyFeatures"];
+                      const values = Array.isArray(rawVal) ? rawVal : [rawVal];
+                      const clean = values.filter((v): v is string =>
+                        Boolean(v && String(v).trim()),
+                      );
+                      if (clean.length === 0) return null;
 
-                    return (
-                      <div
-                        key={rawKey}
-                        className="mb-3"
-                      >
-                        <p className="text-xs font-medium text-rmigray-500 mb-1">
-                          {LABELS[key] ?? rawKey}
-                        </p>
-                        <BadgeArray
-                          variant="keyFeature"
-                          visibleCount={Infinity}
+                      return (
+                        <div
+                          key={rawKey}
+                          className="mb-3"
                         >
-                          {clean}
-                        </BadgeArray>
-                      </div>
-                    );
-                  });
+                          <p className="text-xs font-medium text-rmigray-500 mb-1">
+                            {LABELS[key] ?? rawKey}
+                          </p>
+                          <BadgeArray
+                            variant="keyFeature"
+                            visibleCount={Infinity}
+                          >
+                            {clean}
+                          </BadgeArray>
+                        </div>
+                      );
+                    },
+                  );
                 })()}
               </div>
 
@@ -288,7 +436,6 @@ const PathwayDetailPage: React.FC = () => {
                 <h3 className="text-lg font-medium text-rmigray-800 mb-3">
                   Sectors
                 </h3>
-                {/* Sectors section with dynamic badge count */}
                 <div className="mb-3">
                   <p className="text-xs font-medium text-rmigray-500 mb-1">
                     Sectors:
