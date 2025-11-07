@@ -65,7 +65,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
           case "emissionsEfficiency":
             return hasDataForMetric(data, "emissionsIntensity");
           case "supply":
-            return hasDataForMetric(data, "capacity");
+            return hasDataForMetric(data, "generation");
           default:
             return false;
         }
@@ -140,6 +140,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
               data={timeseriesdata}
               width={450}
               height={300}
+              metric="generation"
             />
           </div>
         );
