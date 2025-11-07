@@ -20,7 +20,7 @@
   "pathwayType": "Normative",
   "modelYearStart": 2023,
   "modelYearEnd": 2050,
-  "modelYearNetzero": 2065,
+  "modelYearNetzero": 2050,
   "sectors": [
     { "name": "Land Use", "technologies": [] },
     { "name": "Buildings", "technologies": [] },
