@@ -87,7 +87,7 @@
       "maxLength": 500
     },
     "emissionsScope": {
-      "description": "Defines which greenhouse gases are covered in the pathway’s emissions accounting.",
+      "description": "Defines which greenhouse gases are covered in the pathway's modeled emissions.",
       "type": "string",
       "enum": [
         "No information",

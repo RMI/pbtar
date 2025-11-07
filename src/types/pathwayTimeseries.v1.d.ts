@@ -49,7 +49,7 @@ export interface PathwayTimeseriesV1 {
    */
   source: string;
   /**
-   * Defines which greenhouse gases are covered in the pathway’s emissions accounting.
+   * Defines which greenhouse gases are covered in the pathway's modeled emissions.
    */
   emissionsScope:
     | "No information"
