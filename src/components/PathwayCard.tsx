@@ -82,7 +82,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
             {highlightTextIfSearchMatch(pathway.pathwayType)} Pathway
           </span>
         </div>
-        <div className="flex items-stretch h-[52px]">
+        <div className="flex items-stretch h-[44px]">
           {" "}
           {/* Fixed height container */}
           {formattedTemp ? (
