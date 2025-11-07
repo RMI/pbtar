@@ -1,7 +1,7 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
   "id": "ACE-ATS-2024_TS",
-  "pathwayId":[ "ACE-ATS-2024"],
+  "pathwayId": ["ACE-ATS-2024"],
   "name": "ASEAN Member State Targets Scenario (ATS) Timeseries Data",
   "description": "ASEAN-specific pathway exploring impact of unconditional NDCs and existing policies.",
   "publisher": "ASEAN Centre for Energy (ACE)",

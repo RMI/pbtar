@@ -1,7 +1,7 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
   "id": "ACE-CNS-2024_TS",
-  "pathwayId":[ "ACE-CNS-2024"],
+  "pathwayId": ["ACE-CNS-2024"],
   "name": "Carbon Neutrality Scenario (CNS) Timeseries Data",
   "description": "Pathway for ASEAN to achieve significant CO2 emissions reductions by 2050.",
   "publisher": "ASEAN Centre for Energy (ACE)",
