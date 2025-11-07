@@ -77,7 +77,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
       <div className="flex items-stretch">
-        <div className="px-5 py-3 bg-neutral-200 flex-grow flex items-center">
+        <div className="px-5 py-3 bg-neutral-100 flex-grow flex items-center">
           <span className="text-sm font-medium text-rmigray-700 uppercase">
             {highlightTextIfSearchMatch(pathway.pathwayType)} Pathway
           </span>
