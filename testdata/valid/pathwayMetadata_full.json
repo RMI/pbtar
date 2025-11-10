@@ -1,7 +1,7 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "pathway-simple-full",
-  "name": "Full Enums Pathway",
+  "name": { "full": "Full Enums Pathway", "short": "FEP" },
   "publication": {
     "title": { "full": "Example Title", "short": "Example" },
     "subtitle": "An Example Subtitle",

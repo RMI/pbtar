@@ -1,7 +1,7 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "sample-01",
-  "name": "Sample Pathway 01",
+  "name": { "full": "Sample Pathway 01" },
   "publication": {
     "title": { "full": "Example Title" },
     "publisher": { "full": "Example Publisher" },
