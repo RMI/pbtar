@@ -1,7 +1,7 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "pathway-simple-standard",
-  "name": "Simple Standard Pathway",
+  "name": { "full": "Simple Standard Pathway", "short": "SimpStanPath" },
   "publication": {
     "title": { "full": "Example Title" },
     "publisher": { "full": "Example Publisher" },

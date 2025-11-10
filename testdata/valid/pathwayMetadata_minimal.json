@@ -1,7 +1,7 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "pathway-minimal",
-  "name": "Minimal Pathway",
+  "name": { "full": "Minimal Pathway" },
   "publication": {
     "title": { "full": "Example Title" },
     "publisher": { "full": "Example Publisher" },

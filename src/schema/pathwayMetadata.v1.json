@@ -17,8 +17,8 @@
     },
     "name": {
       "description": "Name of the pathway.",
-      "type": "string",
-      "maxLength": 100
+      "$ref": "./common/label.v1.json",
+      "tsType": "import('./common/label.v1').LabelV1"
     },
     "description": {
       "description": "Brief description of the pathway.",

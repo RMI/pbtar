@@ -245,7 +245,8 @@ export const filterPathways = (
     if (filters.searchTerm && filters.searchTerm.trim() !== "") {
       const searchTerm = filters.searchTerm.toLowerCase();
       const searchFields = [
-        pathway.name,
+        pathway.name.full,
+        pathway.name.short,
         pathway.description,
         pathway.pathwayType,
         pathway.modelYearNetzero,
@@ -254,8 +255,9 @@ export const filterPathways = (
         ...pathway.geography.map((s) => geographyLabel(s)),
         ...pathway.sectors.map((s) => s.name),
         ...pathway.metric,
-        pathway.publisher,
-        pathway.publicationYear,
+        pathway.publication.publisher.full,
+        pathway.publication.publisher.short,
+        pathway.publication.year,
       ];
 
       return searchFields.some((field) =>
