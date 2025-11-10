@@ -44,7 +44,7 @@ const technologyColors = {
   hydro: "#2888C9",       // blue
   nuclear: "#6B3FA0",     // deep purple (distinct, cool, and neutral)
   wind: "#005A96",        // dark blue
-  solar: "#003B63"       // navy blue
+  solar: "#003B63",       // navy blue
 } as const;
 
 export default function NormalizedStackedAreaChart({
