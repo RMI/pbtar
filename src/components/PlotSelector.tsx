@@ -48,7 +48,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
   const availableGeographies = useMemo(() => {
     if (!timeseriesdata?.data) return [];
     return Array.from(
-      new Set(timeseriesdata.data.map((d) => d.geography).filter(Boolean))
+      new Set(timeseriesdata.data.map((d) => d.geography).filter(Boolean)),
     );
   }, [timeseriesdata]);
 
@@ -111,10 +111,20 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
     if (!timeseriesdata?.data || !selectedGeography) return { data: [] };
     return {
       data: timeseriesdata.data.filter(
-        (d) => d.geography === selectedGeography
+        (d) => d.geography === selectedGeography,
       ),
     };
   }, [timeseriesdata, selectedGeography]);
+
+  // Only render when all required state is ready
+  if (
+    !timeseriesdata ||
+    getAvailablePlotOptions(timeseriesdata).length === 0 ||
+    availableGeographies.length === 0 ||
+    !selectedGeography
+  ) {
+    return null;
+  }
 
   const renderPlot = () => {
     if (!filteredData) return null;
@@ -211,7 +221,10 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
           className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
         >
           {availableGeographies.map((geo) => (
-            <option key={geo} value={geo}>
+            <option
+              key={geo}
+              value={geo}
+            >
               {geo}
             </option>
           ))}
