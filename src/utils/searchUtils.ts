@@ -245,7 +245,8 @@ export const filterPathways = (
     if (filters.searchTerm && filters.searchTerm.trim() !== "") {
       const searchTerm = filters.searchTerm.toLowerCase();
       const searchFields = [
-        pathway.name,
+        pathway.name.full,
+        pathway.name.short,
         pathway.description,
         pathway.pathwayType,
         pathway.modelYearNetzero,
