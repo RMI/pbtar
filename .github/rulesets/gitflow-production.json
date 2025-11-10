@@ -53,11 +53,15 @@
             "integration_id": 15368
           },
           {
-            "context": "JSON Schema Validation / Check Schema Docs",
+            "context": "JSON Schema / Check Schema Docs",
             "integration_id": 15368
           },
           {
-            "context": "JSON Schema Validation / Run ajv JSON validator",
+            "context": "JSON Schema / Run JSON validator",
+            "integration_id": 15368
+          },
+          {
+            "context": "JSON Schema / Check generated types",
             "integration_id": 15368
           },
           {

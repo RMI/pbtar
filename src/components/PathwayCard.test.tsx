@@ -65,7 +65,11 @@ describe("PathwayCard component", () => {
   it("renders the pathway name and description", () => {
     renderPathwayCard();
 
-    expect(screen.getByText(mockPathway.name)).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        mockPathway.name.full + " (" + mockPathway.name.short + ")",
+      ),
+    ).toBeInTheDocument();
     expect(screen.getByText(mockPathway.description)).toBeInTheDocument();
   });
 
@@ -74,13 +78,6 @@ describe("PathwayCard component", () => {
 
     const link = container.querySelector("a");
     expect(link).toHaveAttribute("href", `/pathway/${mockPathway.id}`);
-  });
-
-  it("displays the pathwayType badge", () => {
-    renderPathwayCard();
-
-    const pathwayTypeBadge = screen.getByText(mockPathway.pathwayType);
-    expect(pathwayTypeBadge).toBeInTheDocument();
   });
 
   it("shows target year and temperature badges", () => {
@@ -129,11 +126,13 @@ describe("PathwayCard component", () => {
   it("displays the 'View details' text with icon", () => {
     renderPathwayCard();
 
-    expect(screen.getByText("View details")).toBeInTheDocument();
+    // Find the link containing the text
+    const link = screen.getByRole("link", { name: /View Details/i });
+    expect(link).toBeInTheDocument();
 
-    // Check if the ChevronRight icon is rendered
-    const viewDetailsElement = screen.getByText("View details").closest("span");
-    expect(viewDetailsElement?.querySelector("svg")).toBeInTheDocument();
+    // Check that the link contains both the text and the icon
+    const icon = link.querySelector("svg");
+    expect(icon).toBeInTheDocument();
   });
 
   // Testing responsive layout classes
@@ -382,12 +381,12 @@ describe("tooltip functionality", () => {
   it("uses correct tooltip for Policy pathway type", () => {
     const pathwayWithPolicy: PathwayMetadataType = {
       ...mockPathway,
-      pathwayType: "Direct Policy",
+      sectors: [{ name: "Power" }],
     };
 
     renderPathwayCard(pathwayWithPolicy);
 
-    const badge = screen.getByText("Direct Policy");
+    const badge = screen.getByText("Power");
     expect(badge).toBeInTheDocument();
     const tooltipTrigger = badge.closest("span")?.parentElement;
     expect(tooltipTrigger).toHaveAttribute("tabindex", "0");
@@ -454,7 +453,6 @@ describe("tooltip functionality", () => {
 
       expect(() => renderWithRouter(s, "rmi")).not.toThrow();
       // Card chrome still there
-      expect(screen.getByText("Pathway type:")).toBeInTheDocument();
       expect(screen.getByText("Publisher:")).toBeInTheDocument();
       // No “[object Object]” leaks
       expect(document.body.textContent).not.toContain("[object Object]");
