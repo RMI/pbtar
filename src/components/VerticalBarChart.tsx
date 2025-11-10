@@ -91,7 +91,6 @@ export default function VerticalBarChart({
     select(title.current)
       .selectAll<SVGTextElement, string>("text")
       .data([`${capitalizeWords(sector)} ${capitalizeWords(metric)} [${unit}]`])
-      .data([metric, unit])
       .join("text")
       .attr("x", width / 2)
       .attr("y", marginTop - 30)
