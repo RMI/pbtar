@@ -126,7 +126,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         />
 
         <MultiSelectDropdown<number>
-          label="Target Year"
+          label="Net Zero By"
           options={modelYearNetzeroOptions}
           value={filters.modelYearNetzero}
           onChange={(arr) => onFilterChange("modelYearNetzero", arr)}

@@ -62,7 +62,7 @@ describe("SearchSection", () => {
       screen.getByRole("button", { name: /^Pathway Type\b/i }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: /^Target Year\b/i }),
+      screen.getByRole("button", { name: /^Net Zero By\b/i }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /^Temperature\b/i }),
@@ -171,7 +171,7 @@ describe("SearchSection", () => {
   describe("does NOT render ANY/ALL toggle for scalar facets", () => {
     for (const facet of [
       "Pathway Type",
-      "Target Year",
+      "Net Zero By",
       "Temperature",
     ] as const) {
       it(`facet: ${facet}`, () => {
