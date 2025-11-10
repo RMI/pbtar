@@ -43,7 +43,7 @@ export default function MultiLineChart({
   marginTop = 40,
   marginRight = 80,
   marginBottom = 30,
-  marginLeft = 40,
+  marginLeft = 50,
   sector = "power",
   metric = "capacity",
 }: MultiLineChartProps) {
