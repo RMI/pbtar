@@ -14,7 +14,7 @@
       }
     ]
   },
-  "name": "Carbon Neutrality Scenario (CNS)",
+  "name": { "full": "Carbon Neutrality Scenario", "short": "CNS" },
   "description": "Pathway for ASEAN to achieve significant CO2 emissions reductions by 2050.",
   "geography": ["South East Asia"],
   "pathwayType": "Normative",

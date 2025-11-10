@@ -17,7 +17,7 @@
       }
     ]
   },
-  "name": "Green Growth Scenario (GG)",
+  "name": { "full": "Green Growth Scenario", "short": "GG" },
   "description": "Net-zero pathway with economic shifts toward low-emissions-intensity sectors.",
   "geography": ["VN"],
   "pathwayType": "Normative",

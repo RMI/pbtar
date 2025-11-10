@@ -22,7 +22,7 @@
       }
     ]
   },
-  "name": "Reference Scenario (Reference)",
+  "name": { "full": "Reference Scenario", "short": "Reference" },
   "description": "Global model extrapolating trends under currently legislated policies.",
   "geography": [
     "Global",

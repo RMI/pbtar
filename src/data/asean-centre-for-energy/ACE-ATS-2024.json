@@ -14,7 +14,7 @@
       }
     ]
   },
-  "name": "ASEAN Member State Targets Scenario (ATS)",
+  "name": { "full": "ASEAN Member State Targets Scenario", "short": "ATS" },
   "description": "ASEAN-specific pathway exploring impact of unconditional NDCs and existing policies.",
   "geography": ["South East Asia"],
   "pathwayType": "Exploratory",
