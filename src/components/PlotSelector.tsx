@@ -183,53 +183,47 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
   };
 
   return (
-    <div
-      className={`bg-neutral-50 border border-neutral-200 rounded-lg p-4 ${className}`}
-    >
-      <div className="flex flex-col mb-4">
-        <label
-          htmlFor="plot-select"
-          className="text-sm font-medium text-rmigray-700 mb-2"
-        >
-          Select Plot
-        </label>
-        <select
-          id="plot-select"
-          value={selectedPlot}
-          onChange={(e) => setSelectedPlot(e.target.value as PlotType)}
-          className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm mb-2"
-        >
-          {availablePlotOptions.map((option) => (
-            <option
-              key={option.value}
-              value={option.value}
+    <div className={`bg-neutral-50 border border-neutral-200 rounded-lg p-4 ${className}`}>
+      <div className="mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:gap-4">
+          <div className="flex-1">
+            <label htmlFor="plot-select" className="text-sm font-medium text-rmigray-700 mb-2 block">
+              Select Plot
+            </label>
+            <select
+              id="plot-select"
+              value={selectedPlot}
+              onChange={(e) => setSelectedPlot(e.target.value as PlotType)}
+              className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
             >
-              {option.label}
-            </option>
-          ))}
-        </select>
-        <label
-          htmlFor="geography-select"
-          className="text-sm font-medium text-rmigray-700 mb-2"
-        >
-          Select Geography
-        </label>
-        <select
-          id="geography-select"
-          value={selectedGeography}
-          onChange={(e) => setSelectedGeography(e.target.value)}
-          className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
-        >
-          {availableGeographies.map((geo) => (
-            <option
-              key={geo}
-              value={geo}
+              {availablePlotOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex-1 mt-3 sm:mt-0">
+            <label htmlFor="geography-select" className="text-sm font-medium text-rmigray-700 mb-2 block">
+              Select Geography
+            </label>
+            <select
+              id="geography-select"
+              value={selectedGeography}
+              onChange={(e) => setSelectedGeography(e.target.value)}
+              className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
             >
-              {geo}
-            </option>
-          ))}
-        </select>
+              {availableGeographies.map((geo) => (
+                <option key={geo} value={geo}>
+                  {geo}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
+
       <div className="mb-4">{renderPlot()}</div>
     </div>
   );
