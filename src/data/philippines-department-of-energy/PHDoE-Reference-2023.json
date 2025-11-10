@@ -16,7 +16,7 @@
       }
     ]
   },
-  "name": "Reference Scenario (Reference)",
+  "name": { "full": "Reference Scenario", "short": "Reference" },
   "description": "Continuation of historical trends in the energy system in the Philippines.",
   "geography": ["PH"],
   "pathwayType": "Direct Policy",

@@ -22,7 +22,10 @@
       }
     ]
   },
-  "name": "Nationally Determined Contributions and Long-Term Strategies (NDC-LTS)",
+  "name": {
+    "full": "Nationally Determined Contributions and Long-Term Strategies",
+    "short": "NDC-LTS"
+  },
   "description": "Exploratory global pathway. All countries achieve NDCs and long-term carbon neutrality pledges.",
   "geography": [
     "Global",

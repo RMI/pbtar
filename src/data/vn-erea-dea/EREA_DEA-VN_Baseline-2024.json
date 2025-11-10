@@ -17,7 +17,7 @@
       }
     ]
   },
-  "name": "Baseline Scenario (Baseline)",
+  "name": { "full": "Baseline Scenario", "short": "Baseline" },
   "description": "Business-as-usual baseline pathway for Vietnam's energy sector.",
   "geography": ["VN"],
   "pathwayType": "Predictive",

@@ -65,7 +65,11 @@ describe("PathwayCard component", () => {
   it("renders the pathway name and description", () => {
     renderPathwayCard();
 
-    expect(screen.getByText(mockPathway.name)).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        mockPathway.name.full + " (" + mockPathway.name.short + ")",
+      ),
+    ).toBeInTheDocument();
     expect(screen.getByText(mockPathway.description)).toBeInTheDocument();
   });
 
