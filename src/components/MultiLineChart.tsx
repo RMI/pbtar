@@ -67,7 +67,12 @@ export default function MultiLineChart({
     const values = extent(d3data, (d) => d.value);
     const xticks = Array.from(new Set(d3data.map((d) => d.year))).map(parse);
 
-    if (!years[0] || !years[1] || (!values[0] && values[0] !== 0) || (!values[1] && values[1] !== 0)) {
+    if (
+      !years[0] ||
+      !years[1] ||
+      (!values[0] && values[0] !== 0) ||
+      (!values[1] && values[1] !== 0)
+    ) {
       return null;
     }
 
