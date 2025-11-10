@@ -80,8 +80,7 @@ export default function VerticalBarChart({
       !gx.current ||
       !gy.current ||
       !bars.current ||
-      !title.current ||
-      !chartSetup
+      !title.current
     )
       return;
 
@@ -89,7 +88,7 @@ export default function VerticalBarChart({
 
     // Update title
     select(title.current)
-      .selectAll("text")
+      .selectAll<SVGTextElement, string>("text")
       .data([metric, unit])
       .join("text")
       .text((d) => d)
@@ -148,7 +147,7 @@ export default function VerticalBarChart({
       ref={ref}
       width={width}
       height={height}
-      viewBox={[0, 0, width, height]}
+      viewBox={`0 0 ${width} ${height}`}
     >
       <g
         ref={title}
