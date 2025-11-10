@@ -35,16 +35,17 @@ interface NormalizedStackedAreaChartProps {
 }
 
 const technologyColors = {
-  coal: "#DF4E39", // deep red (hot)
-  oil: "#AB3C2C", // red-brown
+  coal: "#AB3C2C", // red-brown
+  oil: "#DF4E39", // deep red (hot)
   gas: "#F7988B", // orange-pink
   other: "#B3BCC5", // gray
   biomass: "#91CBF2", // light blue
-  biofuels: "#3CB371", // medium green (evocative of plant-based fuels)
+  biofuels: "#77B8E4", // argentinian blue
   hydro: "#2888C9", // blue
-  nuclear: "#6B3FA0", // deep purple (distinct, cool, and neutral)
+  nuclear: "#2274AA", // ucla blue
   wind: "#005A96", // dark blue
   solar: "#003B63", // navy blue
+  renewables: "#003152", // prussian blue
 } as const;
 
 export default function NormalizedStackedAreaChart({
