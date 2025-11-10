@@ -8,6 +8,13 @@
  * Bibliographic information about the report or dataset.
  */
 export type Publication = import("./publication.v1").PublicationV1;
+/**
+ * Expert recommendation for the pathway.
+ *
+ * @minItems 1
+ * @maxItems 1000
+ */
+export type MarkdownObject = import("./common/markdown.v1").MarkdownV1;
 
 /**
  * A schema for the pathway metadata dataset in PBTAR.
@@ -128,10 +135,7 @@ export interface PathwayMetadataV1 {
    * Overview of the pathway.
    */
   pathwayOverview?: string;
-  /**
-   * Expert recommendation for the pathway.
-   */
-  expertOverview: string;
+  expertOverview: MarkdownObject;
   metric: (
     | "Emissions Intensity"
     | "Capacity"
