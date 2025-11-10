@@ -166,9 +166,8 @@
     },
     "expertOverview": {
       "description": "Expert recommendation for the pathway.",
-      "type": "string",
-      "pattern": "\\.$",
-      "maxLength": 10000
+      "$ref": "./common/markdown.v1.json",
+      "tsType": "import('./common/markdown.v1').MarkdownV1"
     },
     "metric": {
       "type": "array",
