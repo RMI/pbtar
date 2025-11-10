@@ -254,8 +254,9 @@ export const filterPathways = (
         ...pathway.geography.map((s) => geographyLabel(s)),
         ...pathway.sectors.map((s) => s.name),
         ...pathway.metric,
-        pathway.publisher,
-        pathway.publicationYear,
+        pathway.publication.publisher.full,
+        pathway.publication.publisher.short,
+        pathway.publication.year,
       ];
 
       return searchFields.some((field) =>
