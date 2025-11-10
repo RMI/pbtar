@@ -14,7 +14,7 @@
       }
     ]
   },
-  "name": "Regional Aspiration Scenario (RAS)",
+  "name": { "full": "Regional Aspiration Scenario", "short": "RAS" },
   "description": "ASEAN-specific pathway exploring impact of unconditional NDCs and long-term pledges.",
   "geography": ["South East Asia"],
   "pathwayType": "Exploratory",

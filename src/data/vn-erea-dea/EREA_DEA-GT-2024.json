@@ -17,7 +17,7 @@
       }
     ]
   },
-  "name": "Green Transport Scenario (GT)",
+  "name": { "full": "Green Transport Scenario", "short": "GT" },
   "description": "Net-zero pathway with full implementation of Vietnam's Green Transport Strategy.",
   "geography": ["VN"],
   "pathwayType": "Normative",

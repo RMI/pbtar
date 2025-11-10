@@ -20,7 +20,7 @@
       }
     ]
   },
-  "name": "Announced Pledges Scenario (APS)",
+  "name": { "full": "Announced Pledges Scenario", "short": "APS" },
   "description": "Countries meet aspirational targets including NDCs and net zero pledges.",
   "geography": [
     "Global",

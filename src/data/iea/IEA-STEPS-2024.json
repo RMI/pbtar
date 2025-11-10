@@ -20,7 +20,7 @@
       }
     ]
   },
-  "name": "Stated Policies Scenario (STEPS)",
+  "name": { "full": "Stated Policies Scenario", "short": "STEPS" },
   "description": "Global projection of current energy system trends and the impact of stated policies.",
   "geography": [
     "Global",
