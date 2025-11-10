@@ -183,11 +183,16 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
   };
 
   return (
-    <div className={`bg-neutral-50 border border-neutral-200 rounded-lg p-4 ${className}`}>
+    <div
+      className={`bg-neutral-50 border border-neutral-200 rounded-lg p-4 ${className}`}
+    >
       <div className="mb-4">
         <div className="flex flex-col sm:flex-row sm:items-end sm:gap-4">
           <div className="flex-1">
-            <label htmlFor="plot-select" className="text-sm font-medium text-rmigray-700 mb-2 block">
+            <label
+              htmlFor="plot-select"
+              className="text-sm font-medium text-rmigray-700 mb-2 block"
+            >
               Select Plot
             </label>
             <select
@@ -197,7 +202,10 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
               className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
             >
               {availablePlotOptions.map((option) => (
-                <option key={option.value} value={option.value}>
+                <option
+                  key={option.value}
+                  value={option.value}
+                >
                   {option.label}
                 </option>
               ))}
@@ -205,7 +213,10 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
           </div>
 
           <div className="flex-1 mt-3 sm:mt-0">
-            <label htmlFor="geography-select" className="text-sm font-medium text-rmigray-700 mb-2 block">
+            <label
+              htmlFor="geography-select"
+              className="text-sm font-medium text-rmigray-700 mb-2 block"
+            >
               Select Geography
             </label>
             <select
@@ -215,7 +226,10 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
               className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
             >
               {availableGeographies.map((geo) => (
-                <option key={geo} value={geo}>
+                <option
+                  key={geo}
+                  value={geo}
+                >
                   {geo}
                 </option>
               ))}
