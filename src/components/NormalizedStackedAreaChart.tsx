@@ -75,8 +75,7 @@ export default function NormalizedStackedAreaChart({
     const years = extent(d3data, (d) => parse(d.year) ?? new Date());
     const xticks = Array.from(new Set(d3data.map((d) => d.year)))
       .map(parse)
-      .filter((d): d is Date => d !== null);
-
+      .filter((d, i, arr): d is Date => d !== null && (i === 0 || d.getUTCFullYear() % 10 === 0));
     if (!years[0] || !years[1]) {
       return null;
     }
