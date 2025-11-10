@@ -1,5 +1,5 @@
 {
-  "$schema": "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
+  "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
   "pathwayId": ["IEA-NZE-2024"],
   "id": "IEA-NZE-2024_TS",
   "name": "Net Zero Emissions by 2050 Scenario (NZE) Timeseries Data",

@@ -1,5 +1,5 @@
 {
-  "$schema": "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
+  "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
   "id": "ACE-RAS-2024_TS",
   "pathwayId": ["ACE-RAS-2024"],
   "name": "Regional Aspiration Scenario (RAS) Timeseries Data",

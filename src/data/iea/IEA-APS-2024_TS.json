@@ -1,5 +1,5 @@
 {
-  "$schema": "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
+  "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
   "pathwayId": ["IEA-APS-2024"],
   "id": "IEA-APS-2024_TS",
   "name": "Announced Pledges Scenario (APS) Timeseries Data",
