@@ -76,7 +76,7 @@ describe("pathway schema enforces expected limits", () => {
         data: {
           ...basePathway,
           id: "scn-2",
-          name: "Other",
+          name: { full: "Other" },
           geography: ["Global", "EU"],
         },
       },
@@ -122,13 +122,24 @@ describe("pathway schema enforces expected limits", () => {
   });
 
   it("enforces maxLength for short strings", () => {
-    const long = "x".repeat(101);
+    const long = "x".repeat(201);
     fail(
       {
         name: "maxlength.json",
-        data: { ...basePathway, name: long },
+        data: { ...basePathway, name: { full: long } },
       },
-      /name must NOT have more than 100 characters/,
+      /name\/full must NOT have more than 200 characters/,
+    );
+  });
+
+  it("enforces maxLength for short strings", () => {
+    const long = "x".repeat(201);
+    fail(
+      {
+        name: "maxlength.json",
+        data: { ...basePathway, name: { short: long } },
+      },
+      /name\/short must NOT have more than 20 characters/,
     );
   });
 

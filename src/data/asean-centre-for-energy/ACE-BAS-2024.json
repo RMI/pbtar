@@ -14,7 +14,7 @@
       }
     ]
   },
-  "name": "Baseline Scenario (BAS)",
+  "name": { "full": "Baseline Scenario", "short": "BAS" },
   "description": "Baseline prediction of historical trends in ASEAN energy systems without policy impacts.",
   "geography": ["South East Asia"],
   "pathwayType": "Predictive",

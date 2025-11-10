@@ -134,7 +134,8 @@ const PathwayDetailPage: React.FC = () => {
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="bg-bluespruce p-6 text-white">
           <h1 className="text-2xl md:text-3xl font-bold mb-2">
-            {pathway.name}
+            {pathway.name.full +
+              (pathway.name.short ? ` (${pathway.name.short})` : "")}
           </h1>
           <p className="text-white mb-4">{pathway.description}</p>
 

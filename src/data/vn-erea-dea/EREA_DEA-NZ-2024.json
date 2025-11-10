@@ -17,7 +17,7 @@
       }
     ]
   },
-  "name": "Net-Zero Scenario (NZ)",
+  "name": { "full": "Net-Zero Scenario", "short": "NZ" },
   "description": "Cost-optimized pathway to achieve net-zero emissions in 2050 with rapid renewables growth.",
   "geography": ["VN"],
   "pathwayType": "Normative",

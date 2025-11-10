@@ -22,7 +22,7 @@
       }
     ]
   },
-  "name": "1.5°C scenario (1.5°C)",
+  "name": { "full": "1.5°C scenario", "short": "1.5°C" },
   "description": "Global normative pathway limiting warming to 1.5°C, with net zero achieved in 2060.",
   "geography": [
     "Global",

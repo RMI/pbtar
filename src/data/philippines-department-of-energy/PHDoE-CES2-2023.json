@@ -16,7 +16,7 @@
       }
     ]
   },
-  "name": "Clean Energy Scenario 2 (CES 2)",
+  "name": { "full": "Clean Energy Scenario 2", "short": "CES 2" },
   "description": "Philippines pathway following National Renewable Energy Plan. Significant offshore wind development.",
   "geography": ["PH"],
   "pathwayType": "Direct Policy",
