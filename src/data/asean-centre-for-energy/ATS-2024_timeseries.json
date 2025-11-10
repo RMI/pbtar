@@ -1,5 +1,5 @@
 {
-  "$schema": "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
+  "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
   "id": "ACE-ATS-2024_TS",
   "pathwayId": ["ACE-ATS-2024"],
   "name": "ASEAN Member State Targets Scenario (ATS) Timeseries Data",
