@@ -17,7 +17,7 @@
       }
     ]
   },
-  "name": {"full": "More Ambitious Policy 1 scenario MY", "short": "MAP1 MY"},
+  "name": { "full": "More Ambitious Policy 1 scenario MY", "short": "MAP1 MY" },
   "description": "Ambitious net-zero pathway with electricity decarbonization by the early 2040s.",
   "geography": ["MY"],
   "pathwayType": "Exploratory",
@@ -28,7 +28,13 @@
     {
       "name": "Power",
       "technologies": [
-        "Coal", "Gas", "Hydro", "Solar", "Wind", "Biomass", "Other"
+        "Coal",
+        "Gas",
+        "Hydro",
+        "Solar",
+        "Wind",
+        "Biomass",
+        "Other"
       ]
     }
   ],
@@ -46,7 +52,10 @@
     "energyDemand": "No information",
     "electrification": "Significant increase",
     "policyTypes": [
-      "Phaseout dates", "Target technology shares", "Subsidies", "Other"
+      "Phaseout dates",
+      "Target technology shares",
+      "Subsidies",
+      "Other"
     ],
     "technologyCostTrend": "Low or no change",
     "technologyDeploymentTrend": "Signif. technology deployment",
@@ -55,9 +64,9 @@
     "technologyCostsDetail": "Total costs",
     "newTechnologiesIncluded": [
       "Battery storage",
-"CCUS",
-"Green H2/ammonia",
-"Other new technologies"
+      "CCUS",
+      "Green H2/ammonia",
+      "Other new technologies"
     ],
     "supplyChain": "No information",
     "investmentNeeds": "No information",

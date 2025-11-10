@@ -17,7 +17,7 @@
       }
     ]
   },
-  "name": {"full": "More Ambitious Policy Scenario MY", "short": "MAP MY"},
+  "name": { "full": "More Ambitious Policy Scenario MY", "short": "MAP MY" },
   "description": "Near-zero pathway with significant policy-supported renewables expansions.",
   "geography": ["MY"],
   "pathwayType": "Exploratory",
@@ -28,7 +28,13 @@
     {
       "name": "Power",
       "technologies": [
-        "Coal", "Gas", "Hydro", "Solar", "Wind", "Biomass", "Other"
+        "Coal",
+        "Gas",
+        "Hydro",
+        "Solar",
+        "Wind",
+        "Biomass",
+        "Other"
       ]
     }
   ],
@@ -53,9 +59,9 @@
     "technologyCostsDetail": "Total costs",
     "newTechnologiesIncluded": [
       "Battery storage",
-"CCUS",
-"Green H2/ammonia",
-"Other new technologies"
+      "CCUS",
+      "Green H2/ammonia",
+      "Other new technologies"
     ],
     "supplyChain": "No information",
     "investmentNeeds": "No information",

@@ -17,7 +17,7 @@
       }
     ]
   },
-  "name": {"full": "Existing Policy Scenario MY", "short": "EP MY"},
+  "name": { "full": "Existing Policy Scenario MY", "short": "EP MY" },
   "description": "Extrapolation of current policy and market conditions for Malaysia’s energy system.",
   "geography": ["MY"],
   "pathwayType": "Predictive",
@@ -28,7 +28,13 @@
     {
       "name": "Power",
       "technologies": [
-        "Coal", "Gas", "Hydro", "Solar", "Wind", "Biomass", "Other"
+        "Coal",
+        "Gas",
+        "Hydro",
+        "Solar",
+        "Wind",
+        "Biomass",
+        "Other"
       ]
     }
   ],
@@ -51,8 +57,7 @@
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "Current/legislated policies",
     "technologyCostsDetail": "Total costs",
-    "newTechnologiesIncluded": ["Battery storage",
-"Other new technologies"],
+    "newTechnologiesIncluded": ["Battery storage", "Other new technologies"],
     "supplyChain": "No information",
     "investmentNeeds": "No information",
     "infrastructureRequirements": "No information"
