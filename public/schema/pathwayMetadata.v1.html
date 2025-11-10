@@ -31,7 +31,7 @@
     <script src="schema_doc.min.js"></script>
     <meta charset="utf-8" />
 
-    <title>PBTAR Scenarios metadata Schema</title>
+    <title>Pathway Metadata</title>
   </head>
   <body
     onload="anchorOnLoad();"
@@ -59,10 +59,10 @@
     </div>
 
     <div class="breadcrumbs"></div>
-    <h1>PBTAR Scenarios metadata Schema</h1>
+    <h1>Pathway Metadata</h1>
     <span class="badge badge-dark value-type">Type: object</span><br />
     <span class="description"
-      ><p>A schema for the scenarios metadata dataset in PBTAR.</p>
+      ><p>A schema for the pathway metadata dataset in PBTAR.</p>
     </span>
     <span class="badge badge-info no-additional">No Additional Properties</span>
 
@@ -194,7 +194,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
             <span class="description"
-              ><p>The unique identifier for a scenario.</p>
+              ><p>The unique identifier for a pathway.</p>
             </span>
 
             <p>
@@ -264,7 +264,7 @@
               >
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
-            <span class="description"><p>Name of the scenario.</p> </span>
+            <span class="description"><p>Name of the pathway.</p> </span>
 
             <p>
               <span
@@ -334,7 +334,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
             <span class="description"
-              ><p>Brief description of the scenario.</p> </span
+              ><p>Brief description of the pathway.</p> </span
             ><span
               class="pattern-value"
               id="description_pattern"
@@ -348,6 +348,1972 @@
                 >Must be at most <code>100</code> characters long</span
               >
             </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion"
+      id="accordionpublication"
+    >
+      <div class="card">
+        <div
+          class="card-header"
+          id="headingpublication"
+        >
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link property-name-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#publication"
+              aria-expanded=""
+              aria-controls="publication"
+              onclick="setAnchor('#publication')"
+            >
+              <span class="property-name">publication</span>
+              <span class="badge badge-warning required-property"
+                >Required</span
+              >
+            </button>
+          </h2>
+        </div>
+
+        <div
+          id="publication"
+          class="collapse property-definition-div"
+          aria-labelledby="headingpublication"
+          data-parent="#accordionpublication"
+        >
+          <div class="card-body pl-5">
+            <div class="breadcrumbs">
+              root
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right-short"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <a
+                href="#publication"
+                onclick="anchorLink('publication')"
+                >publication</a
+              >
+            </div>
+            <h4>Publication</h4>
+            <span class="badge badge-dark value-type">Type: object</span><br />
+            <span class="description"
+              ><p>Bibliographic information about the report or dataset.</p>
+            </span>
+
+            <span class="badge badge-info no-additional"
+              >No Additional Properties</span
+            >
+
+            <div
+              class="accordion"
+              id="accordionpublication_title"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingpublication_title"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#publication_title"
+                      aria-expanded=""
+                      aria-controls="publication_title"
+                      onclick="setAnchor('#publication_title')"
+                    >
+                      <span class="property-name">title</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="publication_title"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingpublication_title"
+                  data-parent="#accordionpublication_title"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication"
+                        onclick="anchorLink('publication')"
+                        >publication</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication_title"
+                        onclick="anchorLink('publication_title')"
+                        >title</a
+                      >
+                    </div>
+                    <h4>Label</h4>
+                    <span class="badge badge-dark value-type">Type: object</span
+                    ><br />
+                    <span class="description"
+                      ><p>Title of the report or publication.</p>
+                    </span>
+
+                    <span class="badge badge-info no-additional"
+                      >No Additional Properties</span
+                    >
+
+                    <div
+                      class="accordion"
+                      id="accordionpublication_title_full"
+                    >
+                      <div class="card">
+                        <div
+                          class="card-header"
+                          id="headingpublication_title_full"
+                        >
+                          <h2 class="mb-0">
+                            <button
+                              class="btn btn-link property-name-button"
+                              type="button"
+                              data-toggle="collapse"
+                              data-target="#publication_title_full"
+                              aria-expanded=""
+                              aria-controls="publication_title_full"
+                              onclick="setAnchor('#publication_title_full')"
+                            >
+                              <span class="property-name">full</span>
+                              <span
+                                class="badge badge-warning required-property"
+                                >Required</span
+                              >
+                            </button>
+                          </h2>
+                        </div>
+
+                        <div
+                          id="publication_title_full"
+                          class="collapse property-definition-div"
+                          aria-labelledby="headingpublication_title_full"
+                          data-parent="#accordionpublication_title_full"
+                        >
+                          <div class="card-body pl-5">
+                            <div class="breadcrumbs">
+                              root
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#publication"
+                                onclick="anchorLink('publication')"
+                                >publication</a
+                              >
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#publication_title"
+                                onclick="anchorLink('publication_title')"
+                                >title</a
+                              >
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#publication_title_full"
+                                onclick="anchorLink('publication_title_full')"
+                                >full</a
+                              >
+                            </div>
+                            <span class="badge badge-dark value-type"
+                              >Type: string</span
+                            ><br />
+                            <span class="description"
+                              ><p>Full name or label</p>
+                            </span>
+
+                            <p>
+                              <span
+                                class="badge badge-light restriction max-length-restriction"
+                                id="publication_title_full_maxLength"
+                                >Must be at most <code>200</code> characters
+                                long</span
+                              >
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="accordion"
+                      id="accordionpublication_title_short"
+                    >
+                      <div class="card">
+                        <div
+                          class="card-header"
+                          id="headingpublication_title_short"
+                        >
+                          <h2 class="mb-0">
+                            <button
+                              class="btn btn-link property-name-button"
+                              type="button"
+                              data-toggle="collapse"
+                              data-target="#publication_title_short"
+                              aria-expanded=""
+                              aria-controls="publication_title_short"
+                              onclick="setAnchor('#publication_title_short')"
+                            >
+                              <span class="property-name">short</span>
+                            </button>
+                          </h2>
+                        </div>
+
+                        <div
+                          id="publication_title_short"
+                          class="collapse property-definition-div"
+                          aria-labelledby="headingpublication_title_short"
+                          data-parent="#accordionpublication_title_short"
+                        >
+                          <div class="card-body pl-5">
+                            <div class="breadcrumbs">
+                              root
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#publication"
+                                onclick="anchorLink('publication')"
+                                >publication</a
+                              >
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#publication_title"
+                                onclick="anchorLink('publication_title')"
+                                >title</a
+                              >
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#publication_title_short"
+                                onclick="anchorLink('publication_title_short')"
+                                >short</a
+                              >
+                            </div>
+                            <span class="badge badge-dark value-type"
+                              >Type: string</span
+                            ><br />
+                            <span class="description"
+                              ><p>Short name, acronym, or abbreviation</p>
+                            </span>
+
+                            <p>
+                              <span
+                                class="badge badge-light restriction max-length-restriction"
+                                id="publication_title_short_maxLength"
+                                >Must be at most <code>20</code> characters
+                                long</span
+                              >
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionpublication_subtitle"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingpublication_subtitle"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#publication_subtitle"
+                      aria-expanded=""
+                      aria-controls="publication_subtitle"
+                      onclick="setAnchor('#publication_subtitle')"
+                    >
+                      <span class="property-name">subtitle</span>
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="publication_subtitle"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingpublication_subtitle"
+                  data-parent="#accordionpublication_subtitle"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication"
+                        onclick="anchorLink('publication')"
+                        >publication</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication_subtitle"
+                        onclick="anchorLink('publication_subtitle')"
+                        >subtitle</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type">Type: string</span
+                    ><br />
+                    <span class="description"
+                      ><p>Optional subtitle of the publication.</p>
+                    </span>
+
+                    <p>
+                      <span
+                        class="badge badge-light restriction max-length-restriction"
+                        id="publication_subtitle_maxLength"
+                        >Must be at most <code>300</code> characters long</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionpublication_author"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingpublication_author"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#publication_author"
+                      aria-expanded=""
+                      aria-controls="publication_author"
+                      onclick="setAnchor('#publication_author')"
+                    >
+                      <span class="property-name">author</span>
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="publication_author"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingpublication_author"
+                  data-parent="#accordionpublication_author"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication"
+                        onclick="anchorLink('publication')"
+                        >publication</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication_author"
+                        onclick="anchorLink('publication_author')"
+                        >author</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: array of string</span
+                    ><br />
+                    <span class="description"
+                      ><p>List of authors or contributors.</p>
+                    </span>
+
+                    <p>
+                      <span
+                        class="badge badge-light restriction unique-items-restriction"
+                        id="publication_author_uniqueItems"
+                        >All items must be unique</span
+                      >
+                    </p>
+                    <span class="badge badge-info no-additional"
+                      >No Additional Items</span
+                    >
+                    <h4>Each item of this array must be:</h4>
+                    <div class="card">
+                      <div
+                        class="card-body items-definition"
+                        id="publication_author_items"
+                      >
+                        <div class="breadcrumbs">
+                          root
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#publication"
+                            onclick="anchorLink('publication')"
+                            >publication</a
+                          >
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#publication_author"
+                            onclick="anchorLink('publication_author')"
+                            >author</a
+                          >
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#publication_author_items"
+                            onclick="anchorLink('publication_author_items')"
+                            >author items</a
+                          >
+                        </div>
+                        <span class="badge badge-dark value-type"
+                          >Type: string</span
+                        ><br />
+
+                        <p>
+                          <span
+                            class="badge badge-light restriction max-length-restriction"
+                            id="publication_author_items_maxLength"
+                            >Must be at most <code>100</code> characters
+                            long</span
+                          >
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionpublication_publisher"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingpublication_publisher"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#publication_publisher"
+                      aria-expanded=""
+                      aria-controls="publication_publisher"
+                      onclick="setAnchor('#publication_publisher')"
+                    >
+                      <span class="property-name">publisher</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="publication_publisher"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingpublication_publisher"
+                  data-parent="#accordionpublication_publisher"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication"
+                        onclick="anchorLink('publication')"
+                        >publication</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication_publisher"
+                        onclick="anchorLink('publication_publisher')"
+                        >publisher</a
+                      >
+                    </div>
+                    <h4>Label</h4>
+                    <span class="badge badge-dark value-type">Type: object</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Publisher or organization responsible for the
+                        publication.
+                      </p>
+                    </span>
+
+                    <span class="badge badge-info no-additional"
+                      >No Additional Properties</span
+                    >
+
+                    <div
+                      class="accordion"
+                      id="accordionpublication_title_full"
+                    >
+                      <div class="card">
+                        <div
+                          class="card-header"
+                          id="headingpublication_title_full"
+                        >
+                          <h2 class="mb-0">
+                            <button
+                              class="btn btn-link property-name-button"
+                              type="button"
+                              data-toggle="collapse"
+                              data-target="#publication_title_full"
+                              aria-expanded=""
+                              aria-controls="publication_title_full"
+                              onclick="setAnchor('#publication_title_full')"
+                            >
+                              <span class="property-name">full</span>
+                              <span
+                                class="badge badge-warning required-property"
+                                >Required</span
+                              >
+                            </button>
+                          </h2>
+                        </div>
+
+                        <div
+                          id="publication_title_full"
+                          class="collapse property-definition-div"
+                          aria-labelledby="headingpublication_title_full"
+                          data-parent="#accordionpublication_title_full"
+                        >
+                          <div class="card-body pl-5">
+                            <div class="breadcrumbs">
+                              root
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#publication"
+                                onclick="anchorLink('publication')"
+                                >publication</a
+                              >
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#publication_title"
+                                onclick="anchorLink('publication_title')"
+                                >title</a
+                              >
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#publication_title_full"
+                                onclick="anchorLink('publication_title_full')"
+                                >full</a
+                              >
+                            </div>
+                            <span class="badge badge-dark value-type"
+                              >Type: string</span
+                            ><br />
+                            <span class="description"
+                              ><p>Full name or label</p>
+                            </span>
+
+                            <p>
+                              <span
+                                class="badge badge-light restriction max-length-restriction"
+                                id="publication_title_full_maxLength"
+                                >Must be at most <code>200</code> characters
+                                long</span
+                              >
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="accordion"
+                      id="accordionpublication_title_short"
+                    >
+                      <div class="card">
+                        <div
+                          class="card-header"
+                          id="headingpublication_title_short"
+                        >
+                          <h2 class="mb-0">
+                            <button
+                              class="btn btn-link property-name-button"
+                              type="button"
+                              data-toggle="collapse"
+                              data-target="#publication_title_short"
+                              aria-expanded=""
+                              aria-controls="publication_title_short"
+                              onclick="setAnchor('#publication_title_short')"
+                            >
+                              <span class="property-name">short</span>
+                            </button>
+                          </h2>
+                        </div>
+
+                        <div
+                          id="publication_title_short"
+                          class="collapse property-definition-div"
+                          aria-labelledby="headingpublication_title_short"
+                          data-parent="#accordionpublication_title_short"
+                        >
+                          <div class="card-body pl-5">
+                            <div class="breadcrumbs">
+                              root
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#publication"
+                                onclick="anchorLink('publication')"
+                                >publication</a
+                              >
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#publication_title"
+                                onclick="anchorLink('publication_title')"
+                                >title</a
+                              >
+                              <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                class="bi bi-arrow-right-short"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                />
+                              </svg>
+                              <a
+                                href="#publication_title_short"
+                                onclick="anchorLink('publication_title_short')"
+                                >short</a
+                              >
+                            </div>
+                            <span class="badge badge-dark value-type"
+                              >Type: string</span
+                            ><br />
+                            <span class="description"
+                              ><p>Short name, acronym, or abbreviation</p>
+                            </span>
+
+                            <p>
+                              <span
+                                class="badge badge-light restriction max-length-restriction"
+                                id="publication_title_short_maxLength"
+                                >Must be at most <code>20</code> characters
+                                long</span
+                              >
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionpublication_year"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingpublication_year"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#publication_year"
+                      aria-expanded=""
+                      aria-controls="publication_year"
+                      onclick="setAnchor('#publication_year')"
+                    >
+                      <span class="property-name">year</span>
+                      <span class="badge badge-warning required-property"
+                        >Required</span
+                      >
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="publication_year"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingpublication_year"
+                  data-parent="#accordionpublication_year"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication"
+                        onclick="anchorLink('publication')"
+                        >publication</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication_year"
+                        onclick="anchorLink('publication_year')"
+                        >year</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: integer</span
+                    ><br />
+                    <span class="description"
+                      ><p>Year of publication.</p>
+                    </span>
+
+                    <p>
+                      <span
+                        class="badge badge-light restriction numeric-restriction"
+                        id="publication_year_number"
+                        >Value must be greater or equal to <code>1900</code> and
+                        lesser or equal to <code>2100</code></span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionpublication_month"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingpublication_month"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#publication_month"
+                      aria-expanded=""
+                      aria-controls="publication_month"
+                      onclick="setAnchor('#publication_month')"
+                    >
+                      <span class="property-name">month</span>
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="publication_month"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingpublication_month"
+                  data-parent="#accordionpublication_month"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication"
+                        onclick="anchorLink('publication')"
+                        >publication</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication_month"
+                        onclick="anchorLink('publication_month')"
+                        >month</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: integer</span
+                    ><br />
+                    <span class="description"
+                      ><p>Month of publication (1–12).</p>
+                    </span>
+
+                    <p>
+                      <span
+                        class="badge badge-light restriction numeric-restriction"
+                        id="publication_month_number"
+                        >Value must be greater or equal to <code>1</code> and
+                        lesser or equal to <code>12</code></span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionpublication_day"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingpublication_day"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#publication_day"
+                      aria-expanded=""
+                      aria-controls="publication_day"
+                      onclick="setAnchor('#publication_day')"
+                    >
+                      <span class="property-name">day</span>
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="publication_day"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingpublication_day"
+                  data-parent="#accordionpublication_day"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication"
+                        onclick="anchorLink('publication')"
+                        >publication</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication_day"
+                        onclick="anchorLink('publication_day')"
+                        >day</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: integer</span
+                    ><br />
+                    <span class="description"
+                      ><p>Day of publication (1–31).</p>
+                    </span>
+
+                    <p>
+                      <span
+                        class="badge badge-light restriction numeric-restriction"
+                        id="publication_day_number"
+                        >Value must be greater or equal to <code>1</code> and
+                        lesser or equal to <code>31</code></span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionpublication_city"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingpublication_city"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#publication_city"
+                      aria-expanded=""
+                      aria-controls="publication_city"
+                      onclick="setAnchor('#publication_city')"
+                    >
+                      <span class="property-name">city</span>
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="publication_city"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingpublication_city"
+                  data-parent="#accordionpublication_city"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication"
+                        onclick="anchorLink('publication')"
+                        >publication</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication_city"
+                        onclick="anchorLink('publication_city')"
+                        >city</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type">Type: string</span
+                    ><br />
+                    <span class="description"
+                      ><p>City where the publication was published.</p>
+                    </span>
+
+                    <p>
+                      <span
+                        class="badge badge-light restriction max-length-restriction"
+                        id="publication_city_maxLength"
+                        >Must be at most <code>100</code> characters long</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionpublication_doi"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingpublication_doi"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#publication_doi"
+                      aria-expanded=""
+                      aria-controls="publication_doi"
+                      onclick="setAnchor('#publication_doi')"
+                    >
+                      <span class="property-name">doi</span>
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="publication_doi"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingpublication_doi"
+                  data-parent="#accordionpublication_doi"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication"
+                        onclick="anchorLink('publication')"
+                        >publication</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication_doi"
+                        onclick="anchorLink('publication_doi')"
+                        >doi</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type">Type: string</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Digital Object Identifier for the publication.
+                      </p> </span
+                    ><span
+                      class="pattern-value"
+                      id="publication_doi_pattern"
+                      >Must match regular expression:
+                      <code>^10\.[^\s/]+/.+$</code></span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionpublication_isbn"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingpublication_isbn"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#publication_isbn"
+                      aria-expanded=""
+                      aria-controls="publication_isbn"
+                      onclick="setAnchor('#publication_isbn')"
+                    >
+                      <span class="property-name">isbn</span>
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="publication_isbn"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingpublication_isbn"
+                  data-parent="#accordionpublication_isbn"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication"
+                        onclick="anchorLink('publication')"
+                        >publication</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication_isbn"
+                        onclick="anchorLink('publication_isbn')"
+                        >isbn</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type">Type: string</span
+                    ><br />
+                    <span class="description"
+                      ><p>International Standard Book Number, if applicable.</p>
+                    </span>
+
+                    <p>
+                      <span
+                        class="badge badge-light restriction max-length-restriction"
+                        id="publication_isbn_maxLength"
+                        >Must be at most <code>32</code> characters long</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionpublication_issn"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingpublication_issn"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#publication_issn"
+                      aria-expanded=""
+                      aria-controls="publication_issn"
+                      onclick="setAnchor('#publication_issn')"
+                    >
+                      <span class="property-name">issn</span>
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="publication_issn"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingpublication_issn"
+                  data-parent="#accordionpublication_issn"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication"
+                        onclick="anchorLink('publication')"
+                        >publication</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication_issn"
+                        onclick="anchorLink('publication_issn')"
+                        >issn</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type">Type: string</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        International Standard Serial Number, if applicable.
+                      </p> </span
+                    ><span
+                      class="pattern-value"
+                      id="publication_issn_pattern"
+                      >Must match regular expression:
+                      <code>^[0-9]{4}-[0-9]{3}[0-9X]$</code></span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="accordion"
+              id="accordionpublication_links"
+            >
+              <div class="card">
+                <div
+                  class="card-header"
+                  id="headingpublication_links"
+                >
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-link property-name-button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#publication_links"
+                      aria-expanded=""
+                      aria-controls="publication_links"
+                      onclick="setAnchor('#publication_links')"
+                    >
+                      <span class="property-name">links</span>
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="publication_links"
+                  class="collapse property-definition-div"
+                  aria-labelledby="headingpublication_links"
+                  data-parent="#accordionpublication_links"
+                >
+                  <div class="card-body pl-5">
+                    <div class="breadcrumbs">
+                      root
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication"
+                        onclick="anchorLink('publication')"
+                        >publication</a
+                      >
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-arrow-right-short"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                        />
+                      </svg>
+                      <a
+                        href="#publication_links"
+                        onclick="anchorLink('publication_links')"
+                        >links</a
+                      >
+                    </div>
+                    <span class="badge badge-dark value-type"
+                      >Type: array of object</span
+                    ><br />
+                    <span class="description"
+                      ><p>
+                        Links to related materials such as data, supplementary
+                        files, or the full report.
+                      </p>
+                    </span>
+
+                    <span class="badge badge-info no-additional"
+                      >No Additional Items</span
+                    >
+                    <h4>Each item of this array must be:</h4>
+                    <div class="card">
+                      <div
+                        class="card-body items-definition"
+                        id="publication_links_items"
+                      >
+                        <div class="breadcrumbs">
+                          root
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#publication"
+                            onclick="anchorLink('publication')"
+                            >publication</a
+                          >
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#publication_links"
+                            onclick="anchorLink('publication_links')"
+                            >links</a
+                          >
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-arrow-right-short"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                            />
+                          </svg>
+                          <a
+                            href="#publication_links_items"
+                            onclick="anchorLink('publication_links_items')"
+                            >links items</a
+                          >
+                        </div>
+                        <span class="badge badge-dark value-type"
+                          >Type: object</span
+                        ><br />
+                        <span class="badge badge-info no-additional"
+                          >No Additional Properties</span
+                        >
+
+                        <div
+                          class="accordion"
+                          id="accordionpublication_links_items_description"
+                        >
+                          <div class="card">
+                            <div
+                              class="card-header"
+                              id="headingpublication_links_items_description"
+                            >
+                              <h2 class="mb-0">
+                                <button
+                                  class="btn btn-link property-name-button"
+                                  type="button"
+                                  data-toggle="collapse"
+                                  data-target="#publication_links_items_description"
+                                  aria-expanded=""
+                                  aria-controls="publication_links_items_description"
+                                  onclick="setAnchor('#publication_links_items_description')"
+                                >
+                                  <span class="property-name">description</span>
+                                </button>
+                              </h2>
+                            </div>
+
+                            <div
+                              id="publication_links_items_description"
+                              class="collapse property-definition-div"
+                              aria-labelledby="headingpublication_links_items_description"
+                              data-parent="#accordionpublication_links_items_description"
+                            >
+                              <div class="card-body pl-5">
+                                <div class="breadcrumbs">
+                                  root
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 16 16"
+                                    class="bi bi-arrow-right-short"
+                                    fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                    />
+                                  </svg>
+                                  <a
+                                    href="#publication"
+                                    onclick="anchorLink('publication')"
+                                    >publication</a
+                                  >
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 16 16"
+                                    class="bi bi-arrow-right-short"
+                                    fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                    />
+                                  </svg>
+                                  <a
+                                    href="#publication_links"
+                                    onclick="anchorLink('publication_links')"
+                                    >links</a
+                                  >
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 16 16"
+                                    class="bi bi-arrow-right-short"
+                                    fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                    />
+                                  </svg>
+                                  <a
+                                    href="#publication_links_items"
+                                    onclick="anchorLink('publication_links_items')"
+                                    >links items</a
+                                  >
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 16 16"
+                                    class="bi bi-arrow-right-short"
+                                    fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                    />
+                                  </svg>
+                                  <a
+                                    href="#publication_links_items_description"
+                                    onclick="anchorLink('publication_links_items_description')"
+                                    >description</a
+                                  >
+                                </div>
+                                <span class="badge badge-dark value-type"
+                                  >Type: string</span
+                                ><br />
+                                <span class="description"
+                                  ><p>Short label for the linked resource.</p>
+                                </span>
+
+                                <p>
+                                  <span
+                                    class="badge badge-light restriction max-length-restriction"
+                                    id="publication_links_items_description_maxLength"
+                                    >Must be at most <code>100</code> characters
+                                    long</span
+                                  >
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="accordion"
+                          id="accordionpublication_links_items_url"
+                        >
+                          <div class="card">
+                            <div
+                              class="card-header"
+                              id="headingpublication_links_items_url"
+                            >
+                              <h2 class="mb-0">
+                                <button
+                                  class="btn btn-link property-name-button"
+                                  type="button"
+                                  data-toggle="collapse"
+                                  data-target="#publication_links_items_url"
+                                  aria-expanded=""
+                                  aria-controls="publication_links_items_url"
+                                  onclick="setAnchor('#publication_links_items_url')"
+                                >
+                                  <span class="property-name">url</span>
+                                  <span
+                                    class="badge badge-warning required-property"
+                                    >Required</span
+                                  >
+                                </button>
+                              </h2>
+                            </div>
+
+                            <div
+                              id="publication_links_items_url"
+                              class="collapse property-definition-div"
+                              aria-labelledby="headingpublication_links_items_url"
+                              data-parent="#accordionpublication_links_items_url"
+                            >
+                              <div class="card-body pl-5">
+                                <div class="breadcrumbs">
+                                  root
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 16 16"
+                                    class="bi bi-arrow-right-short"
+                                    fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                    />
+                                  </svg>
+                                  <a
+                                    href="#publication"
+                                    onclick="anchorLink('publication')"
+                                    >publication</a
+                                  >
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 16 16"
+                                    class="bi bi-arrow-right-short"
+                                    fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                    />
+                                  </svg>
+                                  <a
+                                    href="#publication_links"
+                                    onclick="anchorLink('publication_links')"
+                                    >links</a
+                                  >
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 16 16"
+                                    class="bi bi-arrow-right-short"
+                                    fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                    />
+                                  </svg>
+                                  <a
+                                    href="#publication_links_items"
+                                    onclick="anchorLink('publication_links_items')"
+                                    >links items</a
+                                  >
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 16 16"
+                                    class="bi bi-arrow-right-short"
+                                    fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                    />
+                                  </svg>
+                                  <a
+                                    href="#publication_links_items_url"
+                                    onclick="anchorLink('publication_links_items_url')"
+                                    >url</a
+                                  >
+                                </div>
+                                <span class="badge badge-dark value-type"
+                                  >Type: string</span
+                                ><br />
+                                <span class="description"
+                                  ><p>URL to the linked resource.</p> </span
+                                ><span
+                                  class="pattern-value"
+                                  id="publication_links_items_url_pattern"
+                                  >Must match regular expression:
+                                  <code
+                                    >^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$</code
+                                  ></span
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -411,7 +2377,7 @@
               >Type: enum (of string)</span
             ><br />
             <span class="description"
-              ><p>Type of the scenario pathway.</p>
+              ><p>Type of the pathway pathway.</p>
             </span>
             <div
               class="enum-value"
@@ -484,7 +2450,7 @@
             <span class="badge badge-dark value-type">Type: integer</span><br />
             <span class="description"
               ><p>
-                Year by which net zero is reached in the scenario. If Scenario
+                Year by which net zero is reached in the pathway. If Pathway
                 does not reach net zero, this field should be omitted.
               </p>
             </span>
@@ -556,7 +2522,7 @@
             <span class="badge badge-dark value-type">Type: number</span><br />
             <span class="description"
               ><p>
-                Carbon budget of the scenario in gigatons of CO2 equivalent
+                Carbon budget of the pathway in gigatons of CO2 equivalent
                 (GtCO2eq). If no carbon budget is defined, this field should be
                 omitted. If the carbon budget is not applicable, it should be
                 set to 0.
@@ -767,8 +2733,8 @@
             <span class="badge badge-dark value-type">Type: number</span><br />
             <span class="description"
               ><p>
-                Modeled temperature increase expected by the scenario (in
-                degrees Celsius).
+                Modeled temperature increase expected by the pathway (in degrees
+                Celsius).
               </p>
             </span>
 
@@ -842,8 +2808,7 @@
             ><br />
             <span class="description"
               ><p>
-                Shared Socioeconomic Pathways (SSP) associated with the
-                scenario.
+                Shared Socioeconomic Pathways (SSP) associated with the pathway.
               </p>
             </span>
             <div
@@ -923,7 +2888,7 @@
             ><br />
             <span class="description"
               ><p>
-                Geographical areas that the scenario covers. Can include
+                Geographical areas that the pathway covers. Can include
                 'Global', country ISO-3166-1 alpha-2 codes (US, DE), or
                 free-text region names (e.g., 'Europe', 'OECD'). Any 2-letter
                 items in the array will be treated as an ISO code. Any 2-letter
@@ -1385,7 +3350,7 @@
               >Type: array of object</span
             ><br />
             <span class="description"
-              ><p>Sectors that the scenario covers.</p>
+              ><p>Sectors that the pathway covers.</p>
             </span>
 
             <span class="badge badge-info no-additional"
@@ -1888,36 +3853,33 @@
     </div>
     <div
       class="accordion"
-      id="accordionpublisher"
+      id="accordionpathwayOverview"
     >
       <div class="card">
         <div
           class="card-header"
-          id="headingpublisher"
+          id="headingpathwayOverview"
         >
           <h2 class="mb-0">
             <button
               class="btn btn-link property-name-button"
               type="button"
               data-toggle="collapse"
-              data-target="#publisher"
+              data-target="#pathwayOverview"
               aria-expanded=""
-              aria-controls="publisher"
-              onclick="setAnchor('#publisher')"
+              aria-controls="pathwayOverview"
+              onclick="setAnchor('#pathwayOverview')"
             >
-              <span class="property-name">publisher</span>
-              <span class="badge badge-warning required-property"
-                >Required</span
-              >
+              <span class="property-name">pathwayOverview</span>
             </button>
           </h2>
         </div>
 
         <div
-          id="publisher"
+          id="pathwayOverview"
           class="collapse property-definition-div"
-          aria-labelledby="headingpublisher"
-          data-parent="#accordionpublisher"
+          aria-labelledby="headingpathwayOverview"
+          data-parent="#accordionpathwayOverview"
         >
           <div class="card-body pl-5">
             <div class="breadcrumbs">
@@ -1936,161 +3898,23 @@
                 />
               </svg>
               <a
-                href="#publisher"
-                onclick="anchorLink('publisher')"
-                >publisher</a
+                href="#pathwayOverview"
+                onclick="anchorLink('pathwayOverview')"
+                >pathwayOverview</a
               >
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
-            <span class="description"><p>Publisher of the scenario.</p> </span>
-
-            <p>
-              <span
-                class="badge badge-light restriction max-length-restriction"
-                id="publisher_maxLength"
-                >Must be at most <code>100</code> characters long</span
-              >
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="accordion"
-      id="accordionpublicationYear"
-    >
-      <div class="card">
-        <div
-          class="card-header"
-          id="headingpublicationYear"
-        >
-          <h2 class="mb-0">
-            <button
-              class="btn btn-link property-name-button"
-              type="button"
-              data-toggle="collapse"
-              data-target="#publicationYear"
-              aria-expanded=""
-              aria-controls="publicationYear"
-              onclick="setAnchor('#publicationYear')"
-            >
-              <span class="property-name">publicationYear</span>
-              <span class="badge badge-warning required-property"
-                >Required</span
-              >
-            </button>
-          </h2>
-        </div>
-
-        <div
-          id="publicationYear"
-          class="collapse property-definition-div"
-          aria-labelledby="headingpublicationYear"
-          data-parent="#accordionpublicationYear"
-        >
-          <div class="card-body pl-5">
-            <div class="breadcrumbs">
-              root
-              <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-arrow-right-short"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-                />
-              </svg>
-              <a
-                href="#publicationYear"
-                onclick="anchorLink('publicationYear')"
-                >publicationYear</a
-              >
-            </div>
-            <span class="badge badge-dark value-type">Type: integer</span><br />
-            <span class="description"
-              ><p>Year that the scenario was published.</p>
-            </span>
-
-            <p>
-              <span
-                class="badge badge-light restriction numeric-restriction"
-                id="publicationYear_number"
-                >Value must be greater or equal to <code>1900</code> and lesser
-                or equal to <code>2030</code></span
-              >
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="accordion"
-      id="accordionscenarioOverview"
-    >
-      <div class="card">
-        <div
-          class="card-header"
-          id="headingscenarioOverview"
-        >
-          <h2 class="mb-0">
-            <button
-              class="btn btn-link property-name-button"
-              type="button"
-              data-toggle="collapse"
-              data-target="#scenarioOverview"
-              aria-expanded=""
-              aria-controls="scenarioOverview"
-              onclick="setAnchor('#scenarioOverview')"
-            >
-              <span class="property-name">scenarioOverview</span>
-            </button>
-          </h2>
-        </div>
-
-        <div
-          id="scenarioOverview"
-          class="collapse property-definition-div"
-          aria-labelledby="headingscenarioOverview"
-          data-parent="#accordionscenarioOverview"
-        >
-          <div class="card-body pl-5">
-            <div class="breadcrumbs">
-              root
-              <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-arrow-right-short"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-                />
-              </svg>
-              <a
-                href="#scenarioOverview"
-                onclick="anchorLink('scenarioOverview')"
-                >scenarioOverview</a
-              >
-            </div>
-            <span class="badge badge-dark value-type">Type: string</span><br />
-            <span class="description"><p>Overview of the scenario.</p> </span
+            <span class="description"><p>Overview of the pathway.</p> </span
             ><span
               class="pattern-value"
-              id="scenarioOverview_pattern"
+              id="pathwayOverview_pattern"
               >Must match regular expression: <code>\.$</code></span
             >
 
             <p>
               <span
                 class="badge badge-light restriction max-length-restriction"
-                id="scenarioOverview_maxLength"
+                id="pathwayOverview_maxLength"
                 >Must be at most <code>1000</code> characters long</span
               >
             </p>
@@ -2155,7 +3979,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
             <span class="description"
-              ><p>Expert recommendation for the scenario.</p> </span
+              ><p>Expert recommendation for the pathway.</p> </span
             ><span
               class="pattern-value"
               id="expertOverview_pattern"
@@ -2169,341 +3993,6 @@
                 >Must be at most <code>10000</code> characters long</span
               >
             </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="accordion"
-      id="accordiondataSource"
-    >
-      <div class="card">
-        <div
-          class="card-header"
-          id="headingdataSource"
-        >
-          <h2 class="mb-0">
-            <button
-              class="btn btn-link property-name-button"
-              type="button"
-              data-toggle="collapse"
-              data-target="#dataSource"
-              aria-expanded=""
-              aria-controls="dataSource"
-              onclick="setAnchor('#dataSource')"
-            >
-              <span class="property-name">dataSource</span>
-              <span class="badge badge-warning required-property"
-                >Required</span
-              >
-            </button>
-          </h2>
-        </div>
-
-        <div
-          id="dataSource"
-          class="collapse property-definition-div"
-          aria-labelledby="headingdataSource"
-          data-parent="#accordiondataSource"
-        >
-          <div class="card-body pl-5">
-            <div class="breadcrumbs">
-              root
-              <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-arrow-right-short"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-                />
-              </svg>
-              <a
-                href="#dataSource"
-                onclick="anchorLink('dataSource')"
-                >dataSource</a
-              >
-            </div>
-            <span class="badge badge-dark value-type">Type: object</span><br />
-            <span class="description"
-              ><p>Data source for the scenario.</p>
-            </span>
-            <span class="badge badge-info no-additional"
-              >No Additional Properties</span
-            >
-
-            <div
-              class="accordion"
-              id="accordiondataSource_description"
-            >
-              <div class="card">
-                <div
-                  class="card-header"
-                  id="headingdataSource_description"
-                >
-                  <h2 class="mb-0">
-                    <button
-                      class="btn btn-link property-name-button"
-                      type="button"
-                      data-toggle="collapse"
-                      data-target="#dataSource_description"
-                      aria-expanded=""
-                      aria-controls="dataSource_description"
-                      onclick="setAnchor('#dataSource_description')"
-                    >
-                      <span class="property-name">description</span>
-                      <span class="badge badge-warning required-property"
-                        >Required</span
-                      >
-                    </button>
-                  </h2>
-                </div>
-
-                <div
-                  id="dataSource_description"
-                  class="collapse property-definition-div"
-                  aria-labelledby="headingdataSource_description"
-                  data-parent="#accordiondataSource_description"
-                >
-                  <div class="card-body pl-5">
-                    <div class="breadcrumbs">
-                      root
-                      <svg
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-arrow-right-short"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-                        />
-                      </svg>
-                      <a
-                        href="#dataSource"
-                        onclick="anchorLink('dataSource')"
-                        >dataSource</a
-                      >
-                      <svg
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-arrow-right-short"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-                        />
-                      </svg>
-                      <a
-                        href="#dataSource_description"
-                        onclick="anchorLink('dataSource_description')"
-                        >description</a
-                      >
-                    </div>
-                    <span class="badge badge-dark value-type">Type: string</span
-                    ><br />
-                    <span class="description"
-                      ><p>Description of the data source.</p> </span
-                    ><span
-                      class="pattern-value"
-                      id="dataSource_description_pattern"
-                      >Must match regular expression: <code>\.$</code></span
-                    >
-
-                    <p>
-                      <span
-                        class="badge badge-light restriction max-length-restriction"
-                        id="dataSource_description_maxLength"
-                        >Must be at most <code>1000</code> characters long</span
-                      >
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="accordion"
-              id="accordiondataSource_url"
-            >
-              <div class="card">
-                <div
-                  class="card-header"
-                  id="headingdataSource_url"
-                >
-                  <h2 class="mb-0">
-                    <button
-                      class="btn btn-link property-name-button"
-                      type="button"
-                      data-toggle="collapse"
-                      data-target="#dataSource_url"
-                      aria-expanded=""
-                      aria-controls="dataSource_url"
-                      onclick="setAnchor('#dataSource_url')"
-                    >
-                      <span class="property-name">url</span>
-                      <span class="badge badge-warning required-property"
-                        >Required</span
-                      >
-                    </button>
-                  </h2>
-                </div>
-
-                <div
-                  id="dataSource_url"
-                  class="collapse property-definition-div"
-                  aria-labelledby="headingdataSource_url"
-                  data-parent="#accordiondataSource_url"
-                >
-                  <div class="card-body pl-5">
-                    <div class="breadcrumbs">
-                      root
-                      <svg
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-arrow-right-short"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-                        />
-                      </svg>
-                      <a
-                        href="#dataSource"
-                        onclick="anchorLink('dataSource')"
-                        >dataSource</a
-                      >
-                      <svg
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-arrow-right-short"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-                        />
-                      </svg>
-                      <a
-                        href="#dataSource_url"
-                        onclick="anchorLink('dataSource_url')"
-                        >url</a
-                      >
-                    </div>
-                    <span class="badge badge-dark value-type">Type: string</span
-                    ><br />
-                    <span class="description"
-                      ><p>
-                        URL at which the data source can be accessed.
-                      </p> </span
-                    ><span
-                      class="pattern-value"
-                      id="dataSource_url_pattern"
-                      >Must match regular expression:
-                      <code>^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$</code></span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="accordion"
-              id="accordiondataSource_downloadAvailable"
-            >
-              <div class="card">
-                <div
-                  class="card-header"
-                  id="headingdataSource_downloadAvailable"
-                >
-                  <h2 class="mb-0">
-                    <button
-                      class="btn btn-link property-name-button"
-                      type="button"
-                      data-toggle="collapse"
-                      data-target="#dataSource_downloadAvailable"
-                      aria-expanded=""
-                      aria-controls="dataSource_downloadAvailable"
-                      onclick="setAnchor('#dataSource_downloadAvailable')"
-                    >
-                      <span class="property-name">downloadAvailable</span>
-                      <span class="badge badge-warning required-property"
-                        >Required</span
-                      >
-                    </button>
-                  </h2>
-                </div>
-
-                <div
-                  id="dataSource_downloadAvailable"
-                  class="collapse property-definition-div"
-                  aria-labelledby="headingdataSource_downloadAvailable"
-                  data-parent="#accordiondataSource_downloadAvailable"
-                >
-                  <div class="card-body pl-5">
-                    <div class="breadcrumbs">
-                      root
-                      <svg
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-arrow-right-short"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-                        />
-                      </svg>
-                      <a
-                        href="#dataSource"
-                        onclick="anchorLink('dataSource')"
-                        >dataSource</a
-                      >
-                      <svg
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-arrow-right-short"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-                        />
-                      </svg>
-                      <a
-                        href="#dataSource_downloadAvailable"
-                        onclick="anchorLink('dataSource_downloadAvailable')"
-                        >downloadAvailable</a
-                      >
-                    </div>
-                    <span class="badge badge-dark value-type"
-                      >Type: boolean</span
-                    ><br />
-                    <span class="description"
-                      ><p>
-                        Flag indicating if the data source can be downloaded.
-                      </p>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -2708,7 +4197,7 @@
             </div>
             <span class="badge badge-dark value-type">Type: object</span><br />
             <span class="description"
-              ><p>Key features of the scenario.</p>
+              ><p>Key features of the pathway.</p>
             </span>
             <span class="badge badge-info no-additional"
               >No Additional Properties</span
@@ -2806,17 +4295,25 @@
                           "No information"
                         </li>
                         <li class="list-group-item enum-item">
-                          "Continued growth"
-                        </li>
-                        <li class="list-group-item enum-item">"Plateau"</li>
-                        <li class="list-group-item enum-item">
-                          "Growth then decline"
+                          "Significant increase"
                         </li>
                         <li class="list-group-item enum-item">
-                          "Moderate decline"
+                          "Moderate increase"
                         </li>
                         <li class="list-group-item enum-item">
-                          "Fast decline"
+                          "Minor increase"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Low or no change"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Minor decrease"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Moderate decrease"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Significant decrease"
                         </li>
                       </ul>
                     </div>
@@ -2916,15 +4413,26 @@
                         <li class="list-group-item enum-item">
                           "No information"
                         </li>
-                        <li class="list-group-item enum-item">"Declining"</li>
                         <li class="list-group-item enum-item">
-                          "Static energy efficiency"
+                          "Significant deterioration"
                         </li>
                         <li class="list-group-item enum-item">
-                          "Moderate improvements"
+                          "Moderate deterioration"
                         </li>
                         <li class="list-group-item enum-item">
-                          "Significant improvements"
+                          "Minor deterioration"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Low or no change"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Minor improvement"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Moderate improvement"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Significant improvement"
                         </li>
                       </ul>
                     </div>
@@ -3024,15 +4532,26 @@
                         <li class="list-group-item enum-item">
                           "No information"
                         </li>
-                        <li class="list-group-item enum-item">"Decrease"</li>
                         <li class="list-group-item enum-item">
-                          "Static energy demand"
+                          "Significant decrease"
                         </li>
                         <li class="list-group-item enum-item">
-                          "Moderate growth"
+                          "Moderate decrease"
                         </li>
                         <li class="list-group-item enum-item">
-                          "Significant growth"
+                          "Minor decrease"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Low or no change"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Minor increase"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Moderate increase"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Significant increase"
                         </li>
                       </ul>
                     </div>
@@ -3131,9 +4650,20 @@
                         <li class="list-group-item enum-item">
                           "No information"
                         </li>
-                        <li class="list-group-item enum-item">"Decrease"</li>
                         <li class="list-group-item enum-item">
-                          "Stable electrification"
+                          "Significant decrease"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Moderate decrease"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Minor decrease"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Low or no change"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Minor increase"
                         </li>
                         <li class="list-group-item enum-item">
                           "Moderate increase"
@@ -3226,7 +4756,7 @@
                     <span class="description"
                       ><p>
                         Identifies the types of policies modeled as drivers of
-                        the scenario, such as carbon pricing, subsidies, or
+                        the pathway, such as carbon pricing, subsidies, or
                         mandated phaseouts of specific technologies.
                       </p>
                     </span>
@@ -3333,6 +4863,7 @@
                               "Target technology shares"
                             </li>
                             <li class="list-group-item enum-item">"Other"</li>
+                            <li class="list-group-item enum-item">"None"</li>
                           </ul>
                         </div>
                       </div>
@@ -3433,12 +4964,11 @@
                         <li class="list-group-item enum-item">
                           "No information"
                         </li>
-                        <li class="list-group-item enum-item">"Static"</li>
+                        <li class="list-group-item enum-item">"Increase"</li>
                         <li class="list-group-item enum-item">
-                          "Linear trend"
+                          "Low or no change"
                         </li>
-                        <li class="list-group-item enum-item">"S-curves"</li>
-                        <li class="list-group-item enum-item">"Other"</li>
+                        <li class="list-group-item enum-item">"Decrease"</li>
                       </ul>
                     </div>
                   </div>
@@ -3526,7 +5056,7 @@
                     <span class="description"
                       ><p>
                         Indicates the scale and pace of new technology adoption
-                        within the scenario, where significant deployment means
+                        within the pathway, where significant deployment means
                         that several new technologies are adopted rapidly
                       </p>
                     </span>
@@ -3540,13 +5070,16 @@
                           "No information"
                         </li>
                         <li class="list-group-item enum-item">
-                          "No deployment of new technologies"
+                          "No new technologies deployed"
                         </li>
                         <li class="list-group-item enum-item">
-                          "Moderate deployment of new technologies"
+                          "Minor technology deployment"
                         </li>
                         <li class="list-group-item enum-item">
-                          "Significant deployment of new technologies"
+                          "Moderate technology deployment"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Signif. technology deployment"
                         </li>
                       </ul>
                     </div>
@@ -3633,7 +5166,7 @@
                     <span class="description"
                       ><p>
                         Defines which greenhouse gases are covered in the
-                        scenario’s emissions accounting.
+                        pathway’s emissions accounting.
                       </p>
                     </span>
                     <div
@@ -3652,7 +5185,12 @@
                         <li class="list-group-item enum-item">
                           "CO2e (CO2, Methane)"
                         </li>
-                        <li class="list-group-item enum-item">"Other"</li>
+                        <li class="list-group-item enum-item">
+                          "CO2e (unspecified GHGs)"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Other emissions scope"
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -3753,16 +5291,26 @@
                           "No information"
                         </li>
                         <li class="list-group-item enum-item">
+                          "No policies included"
+                        </li>
+                        <li class="list-group-item enum-item">
                           "Current/legislated policies"
                         </li>
-                        <li class="list-group-item enum-item">"NDCs"</li>
                         <li class="list-group-item enum-item">
-                          "NDCs and long term commitments"
+                          "Current and drafted policies"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "NDCs, unconditional only"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "NDCs incl. conditional targets"
                         </li>
                         <li class="list-group-item enum-item">
                           "Normative/Optimization-based"
                         </li>
-                        <li class="list-group-item enum-item">"Other"</li>
+                        <li class="list-group-item enum-item">
+                          "Other policy ambition"
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -3862,9 +5410,11 @@
                         </li>
                         <li class="list-group-item enum-item">"Total costs"</li>
                         <li class="list-group-item enum-item">
-                          "Capital costs/O&M/etc."
+                          "Capital costs, O&M, etc."
                         </li>
-                        <li class="list-group-item enum-item">"Other"</li>
+                        <li class="list-group-item enum-item">
+                          "Other cost breakdown"
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -4047,6 +5597,9 @@
                             <li class="list-group-item enum-item">
                               "No information"
                             </li>
+                            <li class="list-group-item enum-item">
+                              "No new technologies"
+                            </li>
                             <li class="list-group-item enum-item">"CCUS"</li>
                             <li class="list-group-item enum-item">"DAC"</li>
                             <li class="list-group-item enum-item">
@@ -4057,7 +5610,9 @@
                               "Battery storage"
                             </li>
                             <li class="list-group-item enum-item">"EGS/AGS"</li>
-                            <li class="list-group-item enum-item">"Other"</li>
+                            <li class="list-group-item enum-item">
+                              "Other new technologies"
+                            </li>
                           </ul>
                         </div>
                       </div>
@@ -4145,7 +5700,7 @@
                     <span class="description"
                       ><p>
                         Describes how upstream fuel or material price dynamics
-                        are represented in the scenario.
+                        are represented in the pathway.
                       </p>
                     </span>
                     <div
@@ -4158,10 +5713,13 @@
                           "No information"
                         </li>
                         <li class="list-group-item enum-item">
-                          "Static upstream fuel/material prices"
+                          "Static input or fuel price"
                         </li>
                         <li class="list-group-item enum-item">
-                          "Dynamic upstream fuel/material prices"
+                          "Exogenous input or fuel price"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "Endogenous input or fuel price"
                         </li>
                       </ul>
                     </div>
@@ -4264,11 +5822,15 @@
                         <li class="list-group-item enum-item">
                           "Total investment"
                         </li>
+                        <li class="list-group-item enum-item">"By sector"</li>
                         <li class="list-group-item enum-item">
-                          "Sector-level"
+                          "By sector, part of value chain"
                         </li>
                         <li class="list-group-item enum-item">
-                          "Sector-level by upstream/in-stream/downstream"
+                          "By technology"
+                        </li>
+                        <li class="list-group-item enum-item">
+                          "By tech, part of value chain"
                         </li>
                       </ul>
                     </div>
@@ -4373,7 +5935,7 @@
                           "By part of supply chain"
                         </li>
                         <li class="list-group-item enum-item">
-                          "By part of supply chain and maintenance/buildout"
+                          "By supply chain, add/replace"
                         </li>
                       </ul>
                     </div>

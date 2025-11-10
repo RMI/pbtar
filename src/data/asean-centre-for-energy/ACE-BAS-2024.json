@@ -1,11 +1,22 @@
 {
   "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "ACE-BAS-2024",
-  "publisher": "ASEAN Centre for Energy (ACE)",
+  "publication": {
+    "title": { "full": "8th ASEAN Energy Outlook", "short": "AEO8" },
+    "publisher": { "full": "ASEAN Centre for Energy", "short": "ACE" },
+    "year": 2024,
+    "city": "Jakarta",
+    "issn": "2963-539X",
+    "links": [
+      {
+        "description": "Report",
+        "url": "https://aseanenergy.org/publications/the-8th-asean-energy-outlook/"
+      }
+    ]
+  },
   "name": "Baseline Scenario (BAS)",
-  "description": "Continuation of historical trends of ASEAN energy systems w/o modelling of existing policy targets.",
+  "description": "Baseline prediction of historical trends in ASEAN energy systems without policy impacts.",
   "geography": ["South East Asia"],
-  "publicationYear": 2024,
   "pathwayType": "Predictive",
   "modelYearStart": 2023,
   "modelYearEnd": 2050,
@@ -29,12 +40,7 @@
     },
     { "name": "Transport", "technologies": [] }
   ],
-  "expertOverview": "#### Pathway Description\n\nThe ASEAN Centre for Energy (ACE) acts as the ASEAN energy data center and knowledge hub to provide a knowledge repository for the ASEAN Member States (AMS). The ACE ASEAN Energy Outlook is a publication of several scenarios which highlight some potential energy pathways at ASEAN level.\n\nThe ACE Baseline scenario (BAS) is an exploratory pathway that extrapolates observed historic trends of the ASEAN Member States (AMS) energy systems into the future. It assumes a business-as-usual level of effort and specifically disregards modelling any policy interventions, even existing ones to meet national energy efficiency (EE) and renewable energy (RE) targets. Hence, it also excludes firm plant capacity additions based on power development plans (PDP). The BAS provides a detailed description of a possible future of the ASEAN energy sector, but it does not quantify the probability of this outcome relative to others. The extrapolation of past trends also implies that technology costs remain static and new technologies do not benefit from learning rates.\n\nThe geographic scope of the BAS scenario and the underlying AEO is limited to ASEAN countries. Since this implies the model does not produce any global estimates, the Baseline scenario is not connected with any implied global temperature rise.\n\nWhile the assumptions of this scenario may be considered very conservative, the pathway provides a good benchmark for comparing metrics with other pathways and to understand how much faster the low carbon transition needs to happen.\n\n**Core drivers:**\n\n*Socio-economic trends:* Energy demand is mainly driven by population growth and economic growth, reflecting the reliance on past trends in the energy sector rather than any new interventions.\n\n*Policies:* Policies are not a driver in this pathway, as even legislated targets are not explicitly modelled.\n\n*Energy Efficiency, Electrification, Technology Costs:* Energy efficiency is assumed to remain constant. This is the case across sectors, where efficiency measures across sectors are held fixed at the latest level of input data. Changes at the unit level are also not expected for electrification and technology costs.\n\n*Energy demand growth:* Moderate energy demand growth is fully driven by GDP growth.\n\n*Emissions:* In sum, this leads to more than a doubling of annual emissions in the energy sector in ASEAN until 2050, if no further actions are taken.\n\n#### Application to transition assessment\n\nThe Baseline Scenario developed by the ASEAN Centre for Energy (ACE) serves as an explorative reference, projecting future energy trends based on the continuation of historical patterns. While useful for contextual analysis, this scenario presents several limitations when applied to policy evaluation and corporate risk assessment.\n\nThe Baseline scenario can be used as a conservative case pathway that could be useful for risk analysis under the assumption that existing policies are not properly enforced and the energy sector simply follows past trends. This corresponds to slower change in the market and as such it could be a useful scenario to consider in analysing transition risk.\n\nHowever, the scenario’s conservative nature makes it unsuitable for target setting. It does not reflect the scale of transformation required to meet ASEAN’s climate goals or global net-zero pathways. Therefore, it should not be used as a benchmark for strategic planning or investment decisions aimed at long-term decarbonization.\n\nThe Baseline Scenario provides a regional ASEAN pathway, which limits its applicability for assessing companies with operations concentrated in specific countries. It enables comparisons to the regional average. For analyses that focus on companies with operations in one country only, this may not always be an appropriate reference point, as it may obscure country-specific dynamics, regulatory environments, and market conditions. For regionally operating companies, it can be more appropriate. Where no country specific alternative is available, this regional pathway may still be more appropriate than global ones, although such regional mismatches should always be clarified in any analysis.\n\nFurthermore, the BAS cannot be directly linked to an Implied Temperature Rise (ITR) metric, as it does not model the global energy system and cannot make a statement about how global emissions will evolve.\n\nThe BAS provides benchmark data on 5-year intervals and using a moderately detailed breakdown of specific generation technologies, such as coal, wind, solar, biomass, and geothermal. This level of detail makes it well-suited to assessing specific decarbonization levers and project pipelines within company plans, where a comparison to the regional trend is of interest.",
-  "dataSource": {
-    "description": "ACE (2024). 8th ASEAN Energy Outlook (AEO8). ASEAN Centre for Energy (ACE), Jakarta.",
-    "url": "https://aseanenergy.org/",
-    "downloadAvailable": true
-  },
+  "expertOverview": "#### Pathway Description\n\nThe ASEAN Centre for Energy (ACE) acts as the ASEAN energy data center and knowledge hub and produces the ACE ASEAN Energy Outlook providing energy pathways for Southeast Asia. The ACE Baseline scenario (BAS) is a predictive pathway that extrapolates observed historic trends of the ASEAN Member States (AMS) energy systems into the future. It assumes a business-as-usual level of effort and specifically disregards modelling any policy interventions, even existing ones to meet national energy efficiency (EE) and renewable energy (RE) targets. Hence, it also excludes firm plant capacity additions based on power development plans (PDP). The extrapolation of past trends also implies that technology costs remain static and new technologies do not benefit from learning rates.\n\nAs a conservative baseline pathway, ACE BAS forecasts emissions at the ASEAN level to more than double by 2050.\n\n**Core drivers:** The BAS pathway is driven by historical trends in energy consumption growth.\n\n*Economic growth:* Rising energy consumption in the BAS pathway is a function of region-wide population growth and rapid economic development. The total population in ASEAN is forecast to grow from 680 million in 2022 to 790 million in 2050. GDP growth across the region is projected to be 3.9% CAGR between that same period, along with further increases in electrification rate and clean cooking access.\n\nPolicy impacts are explicitly excluded from this model in order to provide a baseline case for modeling policy impacts, which are included in other ACE pathways such as the Regional Aspiration Scenario (RAS). Energy efficiency and technology costs are assumed to be static, leaving limited avenues for potential emissions reductions in this baseline pathway.\n\n#### Applications to Transition Assessment\n\nThe ACE BAS pathway is intended to provide a base case for the ASEAN region, explicitly excluding policy impacts, technology cost declines, or efficiency improvements as avenues for emissions reductions. As a result, it provides a highly conversative reference, which may be used to place a floor on potential future rates of transition in the energy sector. As a single-region model, the BAS pathway is not associated with a global implied temperature rise, and should not be used as a quantitative benchmark for the ambition of climate targets.\n\nMisalignment to the baseline scenario can highlight companies or plans which do not keep pace with purely historical trends, without accounting for planned policy interventions. However, the scenario’s conservative limit its applications in assessing the ambition of corporate targets.\n\nFor transition assessment applications focused on assessing the commercial or technological feasibility of company plans, BAS’s assumptions of static technology costs and energy efficiency may be overly conservative compared to alternative business-as-usual pathways. Due to its deliberate exclusion of policy impacts, including existing policies, the BAS pathway should not be used for assessing the alignment of company strategies with existing or potential policies, and ACE provides alternate pathways for these applications.\n\nThe BAS provides benchmark data on 5-year intervals and uses a moderately detailed breakdown of specific generation technologies such as coal, wind, solar, biomass, and geothermal. This level of detail makes it well-suited to assessing specific decarbonization levers and project pipelines within company plans. BAS provides data at the regional ASEAN level, which enables region-specific benchmarking but limits its applicability for assessing country-specific strategies.",
   "metric": [
     "Emissions Intensity",
     "Capacity",
@@ -43,19 +49,19 @@
     "Absolute Emissions"
   ],
   "keyFeatures": {
-    "emissionsPathway": "Continued growth",
-    "energyEfficiency": "Moderate improvements",
-    "energyDemand": "Significant growth",
-    "electrification": "Stable electrification",
-    "policyTypes": ["Other"],
-    "technologyCostTrend": "Static",
-    "technologyDeploymentTrend": "No deployment of new technologies",
-    "emissionsScope": "No information",
-    "policyAmbition": "Current/legislated policies",
-    "technologyCostsDetail": "Capital costs/O&M/etc.",
-    "newTechnologiesIncluded": ["No information"],
+    "emissionsPathway": "Significant increase",
+    "energyEfficiency": "Minor improvement",
+    "energyDemand": "Significant increase",
+    "electrification": "Low or no change",
+    "policyTypes": ["None"],
+    "technologyCostTrend": "Low or no change",
+    "technologyDeploymentTrend": "No new technologies deployed",
+    "emissionsScope": "CO2e (unspecified GHGs)",
+    "policyAmbition": "No policies included",
+    "technologyCostsDetail": "Capital costs, O&M, etc.",
+    "newTechnologiesIncluded": ["No new technologies"],
     "supplyChain": "No information",
-    "investmentNeeds": "Sector-level",
+    "investmentNeeds": "By sector",
     "infrastructureRequirements": "No information"
   }
 }

@@ -142,7 +142,7 @@ jobs:
         # Reuse the artifact for downstream deploy
       - name: Upload dist.tgz as workflow artifact
         if: ${{ steps.check_artifact.outputs.has_artifact == 'true' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: dist-tgz
           path: dist.tgz

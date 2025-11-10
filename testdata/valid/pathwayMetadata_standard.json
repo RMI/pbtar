@@ -1,0 +1,41 @@
+{
+  "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
+  "id": "pathway-simple-standard",
+  "name": "Simple Standard Pathway",
+  "publication": {
+    "title": { "full": "Example Title" },
+    "publisher": { "full": "Example Publisher" },
+    "year": 2025
+  },
+  "description": "This is a simple standard pathway for demonstration purposes, with all fields filled out.",
+  "pathwayType": "Normative",
+  "modelYearNetzero": 2050,
+  "carbonBudget": 500,
+  "modelYearStart": 2020,
+  "modelYearEnd": 2050,
+  "modelTempIncrease": 1.5,
+  "ssp": "SSP1",
+  "geography": ["Global"],
+  "sectors": [
+    { "name": "Land Use", "technologies": ["Precision Agriculture"] }
+  ],
+  "pathwayOverview": "Example Overview.",
+  "expertOverview": "Example Expert Recommendation.",
+  "metric": ["Emissions Intensity"],
+  "keyFeatures": {
+    "emissionsPathway": "Minor decrease",
+    "energyEfficiency": "Moderate improvement",
+    "energyDemand": "Minor increase",
+    "electrification": "Moderate increase",
+    "policyTypes": ["Carbon price", "Phaseout dates"],
+    "technologyCostTrend": "No information",
+    "technologyDeploymentTrend": "Moderate technology deployment",
+    "emissionsScope": "CO2",
+    "policyAmbition": "Current/legislated policies",
+    "technologyCostsDetail": "Capital costs, O&M, etc.",
+    "newTechnologiesIncluded": ["DAC", "Green H2/ammonia"],
+    "supplyChain": "No information",
+    "investmentNeeds": "By sector, part of value chain",
+    "infrastructureRequirements": "By supply chain, add/replace"
+  }
+}

@@ -36,5 +36,6 @@ jobs:
           exclude: |
             .github/**/*
             package-lock.json
+            scripts/build-timeseries-files.ts
+            scripts/generate-types.ts
             scripts/schema-check-files.ts
-            scripts/build-timeseries-index.ts
