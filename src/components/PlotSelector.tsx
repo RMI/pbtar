@@ -24,10 +24,10 @@ type PlotType =
   | "supply";
 
 const PLOT_OPTIONS = [
-  { value: "composition", label: "Energy Composition" },
+  { value: "composition", label: "Capacity" },
   { value: "emissionsVolume", label: "Emissions Volume" },
   { value: "emissionsEfficiency", label: "Emissions Efficiency" },
-  { value: "supply", label: "Supply" },
+  { value: "supply", label: "Generation" },
 ] as const;
 
 interface PlotSelectorProps {
