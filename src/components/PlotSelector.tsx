@@ -10,6 +10,7 @@ interface DataPoint {
   technology: string;
   value: number;
   unit: string;
+  geography: string;
 }
 
 interface TimeSeries {
@@ -41,6 +42,22 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
   className = "",
 }) => {
   const [selectedPlot, setSelectedPlot] = useState<PlotType>("composition");
+  const [selectedGeography, setSelectedGeography] = useState<string>("");
+
+  // Get unique geographies from the dataset
+  const availableGeographies = useMemo(() => {
+    if (!timeseriesdata?.data) return [];
+    return Array.from(
+      new Set(timeseriesdata.data.map((d) => d.geography).filter(Boolean))
+    );
+  }, [timeseriesdata, selectedPlot]);
+
+  // Set default geography on load
+  useEffect(() => {
+    if (availableGeographies.length > 0) {
+      setSelectedGeography(availableGeographies[0]);
+    }
+  }, [availableGeographies, selectedPlot]);
 
   // Helper function to check if data exists for a specific metric
   const hasDataForMetric = useCallback(
@@ -93,8 +110,18 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
     return null;
   }
 
+  // Filter data by selected geography before passing to chart components
+  const filteredData = useMemo(() => {
+    if (!timeseriesdata?.data || !selectedGeography) return { data: [] };
+    return {
+      data: timeseriesdata.data.filter(
+        (d) => d.geography === selectedGeography
+      ),
+    };
+  }, [timeseriesdata, selectedGeography]);
+
   const renderPlot = () => {
-    if (!timeseriesdata) return null;
+    if (!filteredData) return null;
 
     switch (selectedPlot) {
       case "composition":
@@ -102,7 +129,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
           <div className="flex flex-col items-center">
             <NormalizedStackedAreaChart
               key={`${datasetId}-composition`}
-              data={timeseriesdata}
+              data={filteredData}
               width={450}
               height={300}
             />
@@ -113,7 +140,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
           <div className="flex flex-col items-center">
             <VerticalBarChart
               key={`${datasetId}-emissions-volume`}
-              data={timeseriesdata}
+              data={filteredData}
               width={450}
               height={300}
               metric="absoluteEmissions"
@@ -125,7 +152,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
           <div className="flex flex-col items-center">
             <VerticalBarChart
               key={`${datasetId}-emissions-efficiency`}
-              data={timeseriesdata}
+              data={filteredData}
               width={450}
               height={300}
               metric="emissionsIntensity"
@@ -137,7 +164,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
           <div className="flex flex-col items-center">
             <MultiLineChart
               key={`${datasetId}-supply`}
-              data={timeseriesdata}
+              data={filteredData}
               width={450}
               height={300}
               metric="generation"
@@ -148,10 +175,6 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
         return null;
     }
   };
-
-  if (!timeseriesdata || getAvailablePlotOptions(timeseriesdata).length === 0) {
-    return null;
-  }
 
   return (
     <div
@@ -168,14 +191,32 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
           id="plot-select"
           value={selectedPlot}
           onChange={(e) => setSelectedPlot(e.target.value as PlotType)}
-          className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
+          className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm mb-2"
         >
-          {getAvailablePlotOptions(timeseriesdata).map((option) => (
+          {availablePlotOptions.map((option) => (
             <option
               key={option.value}
               value={option.value}
             >
               {option.label}
+            </option>
+          ))}
+        </select>
+        <label
+          htmlFor="geography-select"
+          className="text-sm font-medium text-rmigray-700 mb-2"
+        >
+          Select Geography
+        </label>
+        <select
+          id="geography-select"
+          value={selectedGeography}
+          onChange={(e) => setSelectedGeography(e.target.value)}
+          className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
+        >
+          {availableGeographies.map((geo) => (
+            <option key={geo} value={geo}>
+              {geo}
             </option>
           ))}
         </select>
