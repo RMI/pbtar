@@ -50,14 +50,14 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
     return Array.from(
       new Set(timeseriesdata.data.map((d) => d.geography).filter(Boolean))
     );
-  }, [timeseriesdata, selectedPlot]);
+  }, [timeseriesdata]);
 
   // Set default geography on load
   useEffect(() => {
     if (availableGeographies.length > 0) {
       setSelectedGeography(availableGeographies[0]);
     }
-  }, [availableGeographies]);
+  }, [availableGeographies, selectedPlot]);
 
   // Helper function to check if data exists for a specific metric
   const hasDataForMetric = useCallback(
@@ -115,10 +115,6 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
       ),
     };
   }, [timeseriesdata, selectedGeography]);
-
-  if (!timeseriesdata || availablePlotOptions.length === 0) {
-    return null;
-  }
 
   const renderPlot = () => {
     if (!filteredData) return null;
