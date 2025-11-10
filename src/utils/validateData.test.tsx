@@ -4,6 +4,7 @@ import { PathwayMetadataType } from "../types";
 import pathwayMetadata from "../schema/pathwayMetadata.v1.json" with { type: "json" };
 import publicationSchema from "../schema/publication.v1.json" with { type: "json" };
 import labelSchema from "../schema/common/label.v1.json" with { type: "json" };
+import markdownSchema from "../schema/common/markdown.v1.json" with { type: "json" };
 
 function ok(entry: FileEntry | FileEntry[]) {
   const arr = Array.isArray(entry) ? entry : [entry];
@@ -20,6 +21,7 @@ function fail(entry: FileEntry | FileEntry[], rx?: RegExp | string) {
   const rawValidation = validateDataCollect(arr, pathwayMetadata, [
     publicationSchema,
     labelSchema,
+    markdownSchema,
   ] as object[]);
   const invalid = rawValidation.invalid;
   expect(invalid.length).toBeGreaterThan(0);
