@@ -114,7 +114,10 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
           <Link to={`/pathway/${pathway.id}`}>
             <h2 className="text-xl font-semibold text-bluespruce mb-2">
               <HighlightedText
-                text={pathway.name.short || pathway.name.full}
+                text={
+                  pathway.name.full +
+                  (pathway.name.short ? ` (${pathway.name.short})` : "")
+                }
                 searchTerm={searchTerm}
               />
             </h2>
