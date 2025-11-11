@@ -57,7 +57,7 @@ export default function NormalizedStackedAreaChart({
   marginBottom = 30,
   marginLeft = 40,
   sector = "power",
-  metric = "capacity",
+  metric = "technologyMix",
 }: NormalizedStackedAreaChartProps) {
   const [d3data] = useState<DataPoint[]>(() =>
     data.data.filter((d) => d.sector === sector && d.metric === metric),
