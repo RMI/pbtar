@@ -44,84 +44,90 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     {
       id: "pathwayType",
       title: "Pathway Type",
-      description: "Different pathway types tell different stories about the future.",
+      description:
+        "Different pathway types tell different stories about the future.",
       icon: <GitFork className="h-8 w-8" />,
-      options: filterValues.pathwayTypes.map(type => ({
+      options: filterValues.pathwayTypes.map((type) => ({
         id: type,
         title: type,
-        value: type
-      }))
+        value: type,
+      })),
     },
     {
       id: "modelYearNetzero",
       title: "Target Year",
       description: "Choose pathways based on their target net-zero year.",
       icon: <Timer className="h-8 w-8" />,
-      options: filterValues.targetYears.map(year => ({
+      options: filterValues.targetYears.map((year) => ({
         id: year.toString(),
         title: year.toString(),
-        value: year
-      }))
+        value: year,
+      })),
     },
     {
       id: "modelTempIncrease",
       title: "Temperature Outcome",
-      description: "Choose pathways aligned with different temperature outcomes.",
+      description:
+        "Choose pathways aligned with different temperature outcomes.",
       icon: <Thermometer className="h-8 w-8" />,
-      options: filterValues.temperatures.map(temp => ({
+      options: filterValues.temperatures.map((temp) => ({
         id: temp.toString(),
         title: `${temp}°C`,
-        value: temp
-      }))
+        value: temp,
+      })),
     },
     {
       id: "geography",
       title: "Geography",
       description: "Select pathways for specific geographical areas.",
       icon: <Earth className="h-8 w-8" />,
-      options: filterValues.geographies.map(geo => ({
+      options: filterValues.geographies.map((geo) => ({
         id: geo,
         title: geo,
-        value: geo
-      }))
+        value: geo,
+      })),
     },
     {
       id: "sector",
       title: "Sector",
       description: "Focus on pathways covering specific economic sectors.",
       icon: <Factory className="h-8 w-8" />,
-      options: filterValues.sectors.map(sector => ({
+      options: filterValues.sectors.map((sector) => ({
         id: sector,
         title: sector,
-        value: sector
-      }))
+        value: sector,
+      })),
     },
     {
       id: "metric",
       title: "Benchmark Metric",
       description: "Choose pathways with specific benchmark indicators.",
       icon: <Ruler className="h-8 w-8" />,
-      options: filterValues.metrics.map(metric => ({
+      options: filterValues.metrics.map((metric) => ({
         id: metric,
         title: metric,
-        value: metric
-      }))
-    }
+        value: metric,
+      })),
+    },
   ];
 
-  const handleOptionSelect = (stepId: keyof SearchFilters, optionValue: string | number) => {
+  const handleOptionSelect = (
+    stepId: keyof SearchFilters,
+    optionValue: string | number,
+  ) => {
     const newFilters = { ...filters };
 
     // Convert string values to numbers for numeric fields
-    const value = stepId === "modelYearNetzero" || stepId === "modelTempIncrease"
-      ? Number(optionValue)
-      : optionValue;
+    const value =
+      stepId === "modelYearNetzero" || stepId === "modelTempIncrease"
+        ? Number(optionValue)
+        : optionValue;
 
     if (Array.isArray(filters[stepId])) {
       // Handle array values
       const currentValues = (filters[stepId] as (string | number)[]) || [];
       if (currentValues.includes(value)) {
-        newFilters[stepId] = currentValues.filter(v => v !== value);
+        newFilters[stepId] = currentValues.filter((v) => v !== value);
       } else {
         newFilters[stepId] = [...currentValues, value];
       }
@@ -133,7 +139,10 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     onFilterChange(newFilters);
   };
 
-  const isOptionSelected = (stepId: keyof SearchFilters, value: string | number) => {
+  const isOptionSelected = (
+    stepId: keyof SearchFilters,
+    value: string | number,
+  ) => {
     const currentValue = filters[stepId];
     if (Array.isArray(currentValue)) {
       return currentValue.includes(value);
@@ -210,7 +219,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
             {steps[currentView as number].options.map((option) => {
               const isSelected = isOptionSelected(
                 steps[currentView as number].id,
-                option.value
+                option.value,
               );
               return (
                 <button
@@ -218,13 +227,14 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                   onClick={() =>
                     handleOptionSelect(
                       steps[currentView as number].id,
-                      option.value
+                      option.value,
                     )
                   }
-                  className={`p-4 border rounded-lg transition-colors bg-gray-50 ${isSelected
-                    ? "border-energy bg-energy-50"
-                    : "hover:border-energy hover:bg-energy-50"
-                    }`}
+                  className={`p-4 border rounded-lg transition-colors bg-gray-50 ${
+                    isSelected
+                      ? "border-energy bg-energy-50"
+                      : "hover:border-energy hover:bg-energy-50"
+                  }`}
                 >
                   {option.title}
                 </button>
@@ -238,8 +248,9 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                 <button
                   key={index}
                   onClick={() => setCurrentView(index)}
-                  className={`w-2 h-2 rounded-full ${currentView === index ? "bg-energy" : "bg-gray-300"
-                    }`}
+                  className={`w-2 h-2 rounded-full ${
+                    currentView === index ? "bg-energy" : "bg-gray-300"
+                  }`}
                 />
               ))}
             </div>
@@ -263,7 +274,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
               <button
                 onClick={() =>
                   setCurrentView(
-                    Math.min(steps.length - 1, (currentView as number) + 1)
+                    Math.min(steps.length - 1, (currentView as number) + 1),
                   )
                 }
                 disabled={currentView === steps.length - 1}

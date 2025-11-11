@@ -37,7 +37,8 @@ const PathwaySearch: React.FC = () => {
         filters.searchTerm !== prevFiltersRef.current.searchTerm ||
         filters.pathwayType !== prevFiltersRef.current.pathwayType ||
         filters.modelYearNetzero !== prevFiltersRef.current.modelYearNetzero ||
-        filters.modelTempIncrease !== prevFiltersRef.current.modelTempIncrease ||
+        filters.modelTempIncrease !==
+          prevFiltersRef.current.modelTempIncrease ||
         filters.geography !== prevFiltersRef.current.geography ||
         filters.sector !== prevFiltersRef.current.sector ||
         filters.metric !== prevFiltersRef.current.metric;
@@ -96,7 +97,10 @@ const PathwaySearch: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 bg-white">
-      <section ref={topSectionRef} className="mb-8">
+      <section
+        ref={topSectionRef}
+        className="mb-8"
+      >
         <h1 className="text-2xl font-bold text-rmigray-800 mb-2">
           Find Climate Transition Pathways
         </h1>
@@ -106,7 +110,10 @@ const PathwaySearch: React.FC = () => {
         </p>
       </section>
 
-      <StepByStepGuide filters={filters} onFilterChange={handleFilterChange} />
+      <StepByStepGuide
+        filters={filters}
+        onFilterChange={handleFilterChange}
+      />
 
       <div
         ref={searchSectionRef}
@@ -125,8 +132,9 @@ const PathwaySearch: React.FC = () => {
       </div>
 
       <div
-        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300 bg-white ${isFiltering ? "opacity-50" : "opacity-100"
-          }`}
+        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300 bg-white ${
+          isFiltering ? "opacity-50" : "opacity-100"
+        }`}
       >
         {filteredPathways.map((pathway) => (
           <PathwayCard
