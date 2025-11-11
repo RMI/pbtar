@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -213,17 +213,17 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         <div className="space-y-6">
           <div className="space-y-2">
             <h3 className="text-xl font-semibold text-rmigray-800">
-              {steps[currentView as number].title}
+              {steps[currentView].title}
             </h3>
             <p className="text-rmigray-600">
-              {steps[currentView as number].description}
+              {steps[currentView].description}
             </p>
           </div>
 
           <div className="grid grid-cols-4 gap-4">
-            {steps[currentView as number].options.map((option) => {
+            {steps[currentView].options.map((option) => {
               const isSelected = isOptionSelected(
-                steps[currentView as number].id,
+                steps[currentView].id,
                 option.value,
               );
               return (
@@ -231,15 +231,14 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                   key={option.id}
                   onClick={() =>
                     handleOptionSelect(
-                      steps[currentView as number].id,
+                      steps[currentView].id,
                       option.value,
                     )
                   }
-                  className={`p-4 border rounded-lg transition-colors bg-gray-50 ${
-                    isSelected
-                      ? "border-energy bg-energy-50"
-                      : "hover:border-energy hover:bg-energy-50"
-                  }`}
+                  className={`p-4 border rounded-lg transition-colors bg-gray-50 ${isSelected
+                    ? "border-energy bg-energy-50"
+                    : "hover:border-energy hover:bg-energy-50"
+                    }`}
                 >
                   {option.title}
                 </button>
@@ -253,9 +252,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                 <button
                   key={index}
                   onClick={() => setCurrentView(index)}
-                  className={`w-2 h-2 rounded-full ${
-                    currentView === index ? "bg-energy" : "bg-gray-300"
-                  }`}
+                  className={`w-2 h-2 rounded-full ${currentView === index ? "bg-energy" : "bg-gray-300"
+                    }`}
                 />
               ))}
             </div>
@@ -269,7 +267,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
               </button>
               <button
                 onClick={() =>
-                  setCurrentView(Math.max(0, (currentView as number) - 1))
+                  setCurrentView(Math.max(0, (currentView) - 1))
                 }
                 disabled={currentView === 0}
                 className="p-2 hover:text-energy disabled:opacity-50"
@@ -279,7 +277,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
               <button
                 onClick={() =>
                   setCurrentView(
-                    Math.min(steps.length - 1, (currentView as number) + 1),
+                    Math.min(steps.length - 1, (currentView) + 1),
                   )
                 }
                 disabled={currentView === steps.length - 1}
