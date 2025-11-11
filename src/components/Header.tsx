@@ -23,7 +23,6 @@ const Header: React.FC = () => {
             <p className="text-xs md:text-sm text-white">by RMI</p>
           </div>
         </Link>
-
       </div>
     </header>
   );
