@@ -152,20 +152,25 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
 
   if (isCollapsed) {
     return (
-      <div className="bg-white shadow-md p-4">
-        <button
-          onClick={() => setIsCollapsed(false)}
-          className="flex items-center text-energy hover:text-energy-700"
-        >
-          <ChevronDown className="h-5 w-5 mr-2" />
-          Show guide
-        </button>
+      <div className="bg-gray-50 p-4">
+        <div className="flex justify-between items-center mb-4">
+          <div className="w-12" />
+          <div className="w-12 flex justify-end">
+            <button
+              onClick={() => setIsCollapsed(false)}
+              className="flex items-center text-energy hover:text-energy-700"
+            >
+              <ChevronDown className="h-5 w-5 mr-2" />
+              Show guide
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white shadow-md p-6">
+    <div className="bg-gray-50 p-6">
       <div className="flex justify-between items-center mb-4">
         <div className="w-12" />
         <h2 className="text-2xl font-bold text-bluespruce text-center mx-auto">
