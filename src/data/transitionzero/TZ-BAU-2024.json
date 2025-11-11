@@ -1,0 +1,77 @@
+{
+  "$schema": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
+  "id": "TZ-BAU-2024",
+  "publication": {
+    "title": {
+      "full": "From Vision to Voltage"
+    },
+    "subtitle": "Open Access Modelling of the ASEAN Power Grid with TZ-APG",
+    "author": [
+      "Vu, T.",
+      "Shivakumar, A.",
+      "Suarez, I.",
+      "Puspitarini, H. D.",
+      "Majid, A."
+    ],
+    "publisher": {
+      "full": "TransitionZero"
+    },
+    "year": 2024,
+    "month": 12,
+    "day": 2,
+    "links": [
+      {
+        "url": "https://blog.transitionzero.org/hubfs/Analysis/TZ-APG/TZ-APG%20-%20From%20Vision%20to%20Voltage%20-%20Report.pdf",
+        "description": "Report"
+      }
+    ]
+  },
+  "name": { "full": "Business as Usual", "short": "BAU" },
+  "description": "Business-as-usual continuation of existing ASEAN power and transmission systems.",
+  "geography": [
+    "South East Asia",
+    "BN",
+    "KH",
+    "ID",
+    "LA",
+    "MY",
+    "MN",
+    "PH",
+    "SG",
+    "TH",
+    "VN"
+  ],
+  "pathwayType": "Predictive",
+  "modelYearStart": 2024,
+  "modelYearEnd": 2035,
+  "sectors": [
+    {
+      "name": "Power",
+      "technologies": []
+    }
+  ],
+  "expertOverview": "#### Pathway Description\n\nThe Business-as-Usual (BAU) scenario in TransitionZero’s TZ-APG v1 model depicts the ASEAN region’s power system as it operates under prevailing infrastructure and national policy conditions through 2035. Built on the PyPSA modeling framework, this scenario assumes all existing domestic and cross-border transmission lines remain in place with their present capacities, and no new interconnectors are added. The pathway thus mirrors the current structural reality of the ASEAN Power Grid.\n\nUnder the static grid environment in BAU, each country continues to meet rising demand primarily through national generation expansion rather than regional power exchange. Power flows remain unidirectional and modest, constrained by limited physical connectivity and the lack of integrated market frameworks. The scenario also maintains a conservative technology palette (coal, gas, hydropower, solar, and wind) consistent with current ASEAN deployment trends. \n\nA distinctive feature of TZ-APG v1 is that capacity and generation outcomes by 2035 vary only marginally across all four grid pathways. This underscores that the central focus of this study is not on changing generation composition but on understanding how different grid architectures affect system operation, investment distribution, and interregional dynamics. In BAU, this manifests as limited regional trade potential and continued reliance on domestic fossil resources.\n\n**Core drivers:**\n\nThe BAU pathway is driven by existing policy environments, continued demand growth, and limited grid investments.\n\n*Policy:* The BAU scenario reflects each country’s existing policy and capacity commitments as of 2023, incorporating renewable energy and emissions targets only insofar as they are already legislated. No new regional initiatives are included.\n\n*Technology:* The generation mix is dominated by coal, gas, and hydropower, with incremental renewable growth. The technology palette mirrors regional norms, meaning no carbon capture, nuclear, or ammonia co-firing developments are considered.\n\n*Demand shifts, infrastructure build-out, investment, and technology deployment:* Electricity demand follows policy-based compound annual growth rates, averaging 3–8% across countries, reflecting historical and planned growth trajectories. Transmission investment is minimal, focused on maintenance of existing assets. System expansion relies heavily on gas and coal additions within national boundaries.\n\n#### Application to Transition Assessment\n\nThe BAU scenario serves as the reference baseline for assessing ASEAN’s power system under static grid conditions. It represents the “current trajectory” case against which all other grid-expansion scenarios are compared. It is most suitable for comparing transition impacts of grid expansion and for understanding fossil fuel persistence in a non-interconnected region.\n\nBecause system-wide generation and capacity are consistent across all four TZ-APG scenarios, BAU primarily illustrates a regional energy system with no additional transmission flexibility. However, BAU has limited relevance for assessing target ambition or alignment with long-term transition goals. Since the model assumes minimal transformation of system structure, it does not represent a decarbonization trajectory but rather a structural baseline. It serves best as a contextual reference to measure the incremental value of grid cooperation and to interpret future system cost reductions or emissions savings achieved under more connected scenarios.\n\nThe BAU pathway provides capacity and generation data with limited time availability, providing only baseline 2023 and 2035 projections. It uses a moderately detailed breakdown by generation source, such as coal, solar, and wind. BAU provides both regional and country-specific results, allowing granular comparisons for companies operating across multiple countries. TransitionZero offers open access to its underlying TZ-APG model, providing significantly greater detail and customizability for users who are interested in more complex applications.",
+  "metric": [
+    "Emissions Intensity",
+    "Absolute Emissions",
+    "Capacity",
+    "Generation",
+    "Technology Mix"
+  ],
+  "keyFeatures": {
+    "emissionsPathway": "No information",
+    "energyEfficiency": "No information",
+    "energyDemand": "No information",
+    "electrification": "No information",
+    "policyTypes": ["Target technology shares"],
+    "technologyCostTrend": "Low or no change",
+    "technologyDeploymentTrend": "No new technologies deployed",
+    "emissionsScope": "CO2e (unspecified GHGs)",
+    "policyAmbition": "Current/legislated policies",
+    "technologyCostsDetail": "Capital costs, O&M, etc.",
+    "newTechnologiesIncluded": ["Battery storage"],
+    "supplyChain": "Static input or fuel price",
+    "investmentNeeds": "No information",
+    "infrastructureRequirements": "No information"
+  }
+}
