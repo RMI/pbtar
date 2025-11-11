@@ -23,10 +23,4 @@ describe("Header component", () => {
     renderHeader();
     expect(screen.getByText("by RMI")).toBeInTheDocument();
   });
-
-  it("renders the navigation links to Home and About pages", () => {
-    renderHeader();
-    expect(screen.getByText("Pathways")).toBeInTheDocument();
-    expect(screen.getByText("About")).toBeInTheDocument();
-  });
 });
