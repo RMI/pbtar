@@ -23,5 +23,4 @@ describe("Header component", () => {
     renderHeader();
     expect(screen.getByText("by RMI")).toBeInTheDocument();
   });
-
 });

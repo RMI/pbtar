@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { BarChart3 } from "lucide-react";
 
 const Header: React.FC = () => {
-
   return (
     <header className="bg-bluespruce text-white shadow-md">
       <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
