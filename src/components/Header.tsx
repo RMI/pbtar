@@ -1,9 +1,8 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { BarChart3 } from "lucide-react";
 
 const Header: React.FC = () => {
-  const location = useLocation();
 
   return (
     <header className="bg-bluespruce text-white shadow-md">
