@@ -1,29 +1,34 @@
 import { describe, it, expect } from "vitest";
-import { filterScenarios } from "./searchUtils";
+import { filterPathways } from "./searchUtils";
 import type { FiltersWithArrays } from "./searchUtils";
 import { ABSENT_FILTER_TOKEN } from "./absent";
-import { Scenario, SearchFilters } from "../types";
+import { PathwayMetadataType, SearchFilters } from "../types";
 
-import sample01 from "../../testdata/valid/scenarios_metadata_sample_01.json" assert { type: "json" };
-import sample02 from "../../testdata/valid/scenarios_metadata_sample_02.json" assert { type: "json" };
-import sample03 from "../../testdata/valid/scenarios_metadata_sample_03.json" assert { type: "json" };
-import sample04 from "../../testdata/valid/scenarios_metadata_sample_04.json" assert { type: "json" };
-const mockScenarios: Scenario[] = [sample01, sample02, sample03, sample04];
+import sample01 from "../../testdata/valid/pathwayMetadata_sample_01.json" assert { type: "json" };
+import sample02 from "../../testdata/valid/pathwayMetadata_sample_02.json" assert { type: "json" };
+import sample03 from "../../testdata/valid/pathwayMetadata_sample_03.json" assert { type: "json" };
+import sample04 from "../../testdata/valid/pathwayMetadata_sample_04.json" assert { type: "json" };
+const mockPathways: PathwayMetadataType[] = [
+  sample01,
+  sample02,
+  sample03,
+  sample04,
+];
 
 describe("searchUtils", () => {
-  // Mock scenario data
+  // Mock pathway data
 
-  describe("filterScenarios", () => {
-    it("returns all scenarios when no filters are applied", () => {
+  describe("filterPathways", () => {
+    it("returns all pathways when no filters are applied", () => {
       const emptyFilters: SearchFilters = {};
-      const result = filterScenarios(mockScenarios, emptyFilters);
+      const result = filterPathways(mockPathways, emptyFilters);
 
-      expect(result).toEqual(mockScenarios);
+      expect(result).toEqual(mockPathways);
     });
 
     it("filters by pathway type", () => {
       const filters: SearchFilters = { pathwayType: "Exploratory" };
-      const result = filterScenarios(mockScenarios, filters);
+      const result = filterPathways(mockPathways, filters);
 
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("sample-02");
@@ -31,7 +36,7 @@ describe("searchUtils", () => {
 
     it("filters by target year", () => {
       const filters: SearchFilters = { modelYearNetzero: 2050 };
-      const result = filterScenarios(mockScenarios, filters);
+      const result = filterPathways(mockPathways, filters);
 
       expect(result.length).toBe(2);
       expect(result.map((x) => x.id)).toEqual(["sample-01", "sample-04"]);
@@ -39,7 +44,7 @@ describe("searchUtils", () => {
 
     it("filters by modeled temperature increase", () => {
       const filters: SearchFilters = { modelTempIncrease: 1 };
-      const result = filterScenarios(mockScenarios, filters);
+      const result = filterPathways(mockPathways, filters);
 
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("sample-01");
@@ -47,7 +52,7 @@ describe("searchUtils", () => {
 
     it("filters by geography", () => {
       const filters: SearchFilters = { geography: "Global" };
-      const result = filterScenarios(mockScenarios, filters);
+      const result = filterPathways(mockPathways, filters);
 
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("sample-01");
@@ -55,7 +60,7 @@ describe("searchUtils", () => {
 
     it("filters by sector", () => {
       const filters: SearchFilters = { sector: "Agriculture" };
-      const result = filterScenarios(mockScenarios, filters);
+      const result = filterPathways(mockPathways, filters);
 
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("sample-02");
@@ -63,15 +68,15 @@ describe("searchUtils", () => {
 
     it("filters by metric", () => {
       const filters: SearchFilters = { metric: "Capacity" };
-      const result = filterScenarios(mockScenarios, filters);
+      const result = filterPathways(mockPathways, filters);
 
       expect(result.length).toBe(2);
       expect(result.map((x) => x.id)).toEqual(["sample-01", "sample-02"]);
     });
 
     it("filters by search term in name", () => {
-      const filters: SearchFilters = { searchTerm: "Scenario 01" };
-      const result = filterScenarios(mockScenarios, filters);
+      const filters: SearchFilters = { searchTerm: "Pathway 01" };
+      const result = filterPathways(mockPathways, filters);
 
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("sample-01");
@@ -79,7 +84,7 @@ describe("searchUtils", () => {
 
     it("filters by search term in description", () => {
       const filters: SearchFilters = { searchTerm: "qwerty description" };
-      const result = filterScenarios(mockScenarios, filters);
+      const result = filterPathways(mockPathways, filters);
 
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("sample-01");
@@ -90,18 +95,18 @@ describe("searchUtils", () => {
         pathwayType: "Normative",
         geography: "Global",
       };
-      const result = filterScenarios(mockScenarios, filters);
+      const result = filterPathways(mockPathways, filters);
 
       expect(result.length).toBe(1);
       expect(result[0].id).toBe("sample-01");
     });
 
-    it("returns empty array when no scenarios match filters", () => {
+    it("returns empty array when no pathways match filters", () => {
       const filters: SearchFilters = {
         pathwayType: "Policy",
         modelYearNetzero: "2030",
       };
-      const result = filterScenarios(mockScenarios, filters);
+      const result = filterPathways(mockPathways, filters);
 
       expect(result.length).toBe(0);
       expect(result).toEqual([]);
@@ -109,51 +114,51 @@ describe("searchUtils", () => {
 
     it("handles empty search term", () => {
       const filters: SearchFilters = { searchTerm: "" };
-      const result = filterScenarios(mockScenarios, filters);
+      const result = filterPathways(mockPathways, filters);
 
-      expect(result.length).toBe(mockScenarios.length);
-      expect(result).toEqual(mockScenarios);
+      expect(result.length).toBe(mockPathways.length);
+      expect(result).toEqual(mockPathways);
     });
 
     it("handles whitespace-only search term", () => {
       const filters: SearchFilters = { searchTerm: "   " };
-      const result = filterScenarios(mockScenarios, filters);
+      const result = filterPathways(mockPathways, filters);
 
-      expect(result.length).toBe(mockScenarios.length);
-      expect(result).toEqual(mockScenarios);
+      expect(result.length).toBe(mockPathways.length);
+      expect(result).toEqual(mockPathways);
     });
   });
 
-  describe("Schema compliance scenarios", () => {
+  describe("Schema compliance pathways", () => {
     it("returns matches on extant fields", () => {
       const filters: SearchFilters = {
         publisher: "Example Publisher",
       };
 
-      const result = filterScenarios(mockScenarios, filters);
-      expect(result.length).toBe(mockScenarios.length);
-      expect(result).toEqual(mockScenarios);
+      const result = filterPathways(mockPathways, filters);
+      expect(result.length).toBe(mockPathways.length);
+      expect(result).toEqual(mockPathways);
     });
 
     it("safely omits results for non-existing fields", () => {
-      //scenario 3 in the mock data has no modelYearNetzero
+      //pathway 3 in the mock data has no modelYearNetzero
       const filters: SearchFilters = {
         modelYearNetzero: 2050,
       };
 
-      const result = filterScenarios(mockScenarios, filters);
+      const result = filterPathways(mockPathways, filters);
       expect(result.length).toBe(2);
       expect(result.map((x) => x.id)).toEqual(["sample-01", "sample-04"]);
     });
   });
 });
 
-import rawFullScenario from "../../testdata/valid/scenarios_metadata_full.json" assert { type: "json" };
-const mockFullScenarios: Scenario[] = [rawFullScenario];
+import rawFullPathway from "../../testdata/valid/pathwayMetadata_full.json" assert { type: "json" };
+const mockFullPathways: PathwayMetadataType[] = [rawFullPathway];
 
 describe("searchUtils - array results", () => {
   //
-  // Mock scenario data
+  // Mock pathway data
   const geography: string[] = [
     "Global",
     "EU",
@@ -186,31 +191,31 @@ describe("searchUtils - array results", () => {
   //These tests are to ensure that search works for all array values, even when
   //they would not be surface directly in the UI (e.g. "Power, Transport, + 15
   //more")
-  describe("filterScenarios for many array values", () => {
+  describe("filterPathways for many array values", () => {
     geography.forEach((geography) => {
       it(`options for geography - ${geography}`, () => {
         const filters: SearchFilters = { geography: geography };
-        const result = filterScenarios(mockFullScenarios, filters);
+        const result = filterPathways(mockFullPathways, filters);
 
         expect(result.length).toBe(1);
-        expect(result[0].id).toBe("scenario-simple-full");
+        expect(result[0].id).toBe("pathway-simple-full");
       });
     });
 
     sectors.forEach((sector) => {
       it(`filters by sector - ${sector}`, () => {
         const filters: SearchFilters = { sector: sector };
-        const result = filterScenarios(mockFullScenarios, filters);
+        const result = filterPathways(mockFullPathways, filters);
 
         expect(result.length).toBe(1);
-        expect(result[0].id).toBe("scenario-simple-full");
+        expect(result[0].id).toBe("pathway-simple-full");
       });
     });
   });
 });
 
-describe("filterScenarios (array-backed facets)", () => {
-  const scenarios: Scenario[] = [
+describe("filterPathways (array-backed facets)", () => {
+  const pathways: PathwayMetadataType[] = [
     {
       id: "A",
       name: "A",
@@ -250,70 +255,70 @@ describe("filterScenarios (array-backed facets)", () => {
   ];
 
   it("pathwayType: OR over multiple selections; empty array = no filter", () => {
-    let out = filterScenarios(scenarios, {
+    let out = filterPathways(pathways, {
       pathwayType: ["Direct Policy", "Exploratory"],
     } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual(["B", "C"]);
 
-    out = filterScenarios(scenarios, { pathwayType: [] } as FiltersWithArrays);
+    out = filterPathways(pathways, { pathwayType: [] } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual(["A", "B", "C"]);
   });
 
   it("pathwayType: ABSENT token matches missing value only", () => {
-    const out = filterScenarios(scenarios, {
+    const out = filterPathways(pathways, {
       pathwayType: [ABSENT_FILTER_TOKEN],
     } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual(["A"]);
   });
 
   it("numeric (modelYearNetzero): OR over numbers, with ABSENT", () => {
-    let out = filterScenarios(scenarios, {
+    let out = filterPathways(pathways, {
       modelYearNetzero: [2040, 2030],
     } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual(["B", "C"]);
-    out = filterScenarios(scenarios, {
+    out = filterPathways(pathways, {
       modelYearNetzero: [2040, ABSENT_FILTER_TOKEN],
     } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual(["A", "B"]);
-    out = filterScenarios(scenarios, {
+    out = filterPathways(pathways, {
       modelYearNetzero: [ABSENT_FILTER_TOKEN],
     } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual(["A"]);
-    out = filterScenarios(scenarios, {
+    out = filterPathways(pathways, {
       modelYearNetzero: [9999],
     } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual([]);
   });
 
   it("numeric (temperature): OR over numbers, with ABSENT", () => {
-    let out = filterScenarios(scenarios, {
+    let out = filterPathways(pathways, {
       modelTempIncrease: [1.5, 2.0],
     } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual(["B", "C"]);
-    out = filterScenarios(scenarios, {
+    out = filterPathways(pathways, {
       modelTempIncrease: [ABSENT_FILTER_TOKEN],
     } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual(["A"]);
   });
 
   it("geography: ALL mode requires all tokens; ANY is default", () => {
-    // Add a scenario with two geos
-    const many: Scenario[] = [
-      ...scenarios,
+    // Add a pathway with two geos
+    const many: PathwayMetadataType[] = [
+      ...pathways,
       {
-        ...scenarios[1],
+        ...pathways[1],
         id: "B2",
         name: "B2",
         geography: ["Europe", "Asia"],
       },
     ];
     // ANY (default): Europe OR Asia → B, C, B2
-    let out = filterScenarios(many, {
+    let out = filterPathways(many, {
       geography: ["Europe", "Asia"],
     } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual(["B", "C", "B2"]);
     // ALL: must have both → only B2
-    out = filterScenarios(many, {
+    out = filterPathways(many, {
       geography: ["Europe", "Asia"],
       modes: { geography: "ALL" },
     } as FiltersWithArrays);
@@ -321,7 +326,7 @@ describe("filterScenarios (array-backed facets)", () => {
   });
 
   it("pathwayType: ALL with two tokens yields no results (single-valued facet)", () => {
-    const out = filterScenarios(
+    const out = filterPathways(
       [
         {
           id: "A",
@@ -347,14 +352,14 @@ describe("filterScenarios (array-backed facets)", () => {
           publicationYear: 2020,
           description: "",
         },
-      ] as Scenario[],
+      ] as PathwayMetadataType[],
       { pathwayType: ["Net Zero", "BAU"], modes: { pathwayType: "ALL" } },
     );
     expect(out).toHaveLength(0);
   });
 
   it("modelYearNetzero: ALL with [2030,2050] yields no results (single-valued facet)", () => {
-    const out = filterScenarios(
+    const out = filterPathways(
       [
         {
           id: "A",
@@ -380,14 +385,14 @@ describe("filterScenarios (array-backed facets)", () => {
           publicationYear: 2020,
           description: "",
         },
-      ] as Scenario[],
+      ] as PathwayMetadataType[],
       { modelYearNetzero: [2030, 2050], modes: { modelYearNetzero: "ALL" } },
     );
     expect(out).toHaveLength(0);
   });
 
   it("modelTempIncrease: ALL with [1.5,2.0] yields no results (single-valued facet)", () => {
-    const out = filterScenarios(
+    const out = filterPathways(
       [
         {
           id: "A",
@@ -413,14 +418,14 @@ describe("filterScenarios (array-backed facets)", () => {
           publicationYear: 2020,
           description: "",
         },
-      ] as Scenario[],
+      ] as PathwayMetadataType[],
       { modelTempIncrease: [1.5, 2.0], modes: { modelTempIncrease: "ALL" } },
     );
     expect(out).toHaveLength(0);
   });
 
   it("single-valued facets: ALL with one token behaves like equality; ABSENT-only matches null", () => {
-    const out1 = filterScenarios(
+    const out1 = filterPathways(
       [
         {
           id: "A",
@@ -434,12 +439,12 @@ describe("filterScenarios (array-backed facets)", () => {
           publicationYear: 2020,
           description: "",
         },
-      ] as Scenario[],
+      ] as PathwayMetadataType[],
       { pathwayType: [ABSENT_FILTER_TOKEN], modes: { pathwayType: "ALL" } },
     );
     expect(out1.map((s) => s.id)).toEqual(["A"]);
 
-    const out2 = filterScenarios(
+    const out2 = filterPathways(
       [
         {
           id: "B",
@@ -453,7 +458,7 @@ describe("filterScenarios (array-backed facets)", () => {
           publicationYear: 2020,
           description: "",
         },
-      ] as Scenario[],
+      ] as PathwayMetadataType[],
       { modelTempIncrease: [2.0], modes: { modelTempIncrease: "ALL" } },
     );
     expect(out2.map((s) => s.id)).toEqual(["B"]);

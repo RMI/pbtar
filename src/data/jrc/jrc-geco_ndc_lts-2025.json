@@ -1,0 +1,113 @@
+{
+  "$schema": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
+  "id": "JRC-GECO-NDC-LTS-2025",
+  "publication": {
+    "title": {
+      "full": "Global energy and climate outlook 2024 – Updating NDCs and closing the ambition gap – Indicators for 1.5°C alignment",
+      "short": "GECO"
+    },
+    "publisher": {
+      "full": "European Commission, Joint Research Centre",
+      "short": "JRC"
+    },
+    "year": 2025,
+    "links": [
+      {
+        "url": "https://data.europa.eu/doi/10.2760/9028706",
+        "description": "Report"
+      },
+      {
+        "url": "http://data.europa.eu/89h/b3be46d2-568b-40e0-a426-a25b136bc336",
+        "description": "Dataset"
+      }
+    ]
+  },
+  "name": {
+    "full": "Nationally Determined Contributions and Long-Term Strategies",
+    "short": "NDC-LTS"
+  },
+  "description": "Exploratory global pathway. All countries achieve NDCs and long-term carbon neutrality pledges.",
+  "geography": [
+    "Global",
+    "GB",
+    "RU",
+    "UA",
+    "AR",
+    "BR",
+    "CA",
+    "CN",
+    "CH",
+    "MX",
+    "US",
+    "EG",
+    "ZA",
+    "IR",
+    "SA",
+    "TR",
+    "IN",
+    "ID",
+    "MY",
+    "TH",
+    "VN",
+    "AU",
+    "KR",
+    "NZ"
+  ],
+  "pathwayType": "Exploratory",
+  "modelTempIncrease": 1.8,
+  "modelYearStart": 2022,
+  "modelYearEnd": 2100,
+  "ssp": "SSP2",
+  "sectors": [
+    {
+      "name": "Power",
+      "technologies": [
+        "Coal",
+        "Oil",
+        "Gas",
+        "Nuclear",
+        "Hydro",
+        "Wind",
+        "Solar",
+        "Biomass",
+        "Other"
+      ]
+    }
+  ],
+  "expertOverview": "#### Pathway Description\n\nThe European Commission’s Global Energy and Climate Outlook 2024 (GECO) provides an ensemble of energy transition scenarios, developed by the Joint Research Centre. Its Nationally Determined Contribution – Long Term Strategies (NDC-LTS) pathway provides a detailed exploratory scenario in which all countries fully implement their existing conditional and unconditional NDCs, as well as introducing additional policies necessary to achieve stated long-term carbon neutrality objectives. These policies reduce emissions significantly from GECO’s reference pathway, producing a projected temperature rise of 1.8°C by 2100.\n\n**Core Drivers:** NDC-LTS is driven by a combination of policy interventions, large-scale deployment of low-carbon technology supported by declining cost, and substantial increases in electrification and energy efficiency. \n\n*Policy:* The core driver of the NDC-LTS pathway is the implementation of existing and announced policies, including all conditional and unconditional NDCs, as well as additional policy measures necessary to achieve long-term carbon neutrality goals where those targets do not already have clear implementation. These policies include country-specific carbon pricing. \n\n*Demand shifts and electrification:* The NDC-LTS pathway includes significant shifts in demand patterns, including behavioral shifts in transportation, diet selection, and personal energy consumption. Electrification increases rapidly. Significant improvements in energy efficiency combine with behavioral shifts to avoid energy demand growth, with total energy consumption plateauing in the 2030s. \n\n*Technology costs, deployment, and investment:* Continued learning and cost reductions in mature low-carbon technologies (solar, wind, batteries) and newer technologies (hydrogen, carbon capture and storage) support large-scale deployment. Fossil fuels remain competitive in some regions but rapidly decline as a share of total global energy supply.\n\n#### Applications to transition assessment\n\nNDC-LTS is a detailed, policy-focused, exploratory pathway. As a global integrated assessment model, NDC-LTS provides a direct connection between the described pathway and a global temperature outcome. This makes it suitable for assessing the ambition of stated targets or plans against a 1.8°C outcome.\n\nDue to its strong policy focus, NDC-LTS is well-suited to assessing the alignment of corporate targets, plans, and investment pipelines with the stated ambitions of the jurisdictions they operate in. Misalignment to the NDC-LTS pathway can indicate potential risk that a company will fall out of line with future regulatory or development policy or face declining market share as other segments of the energy sector are encouraged to grow. Conversely, alignment to NDC-LTS may indicate that a company is well-positioned to take advantage of future policy and market dynamics. However, because NDC-LTS includes aspirational pledges and policies which have not yet been implemented, misalignment to NDC-LTS does not necessarily imply a company is exposed to current regulatory risk.\n\nThe inclusion of detailed technology cost and deployment projection makes the NDC-LTS pathway a strong candidate for contextualizing the commercial and technical feasibility of transition strategies in the presence of plausible policy developments.\n\nThe NDC-LTS pathway provides capacity and generation technology on 5-year increments, using a moderately detailed breakdown of technologies including coal, wind, solar, and battery storage. The pathway provides benchmarks at a range of geographic granularity, including global results, EU-specific results, country-specific results for 24 non-EU countries, and 13 residual regions. These granular benchmarks provide valuable information for assessing specific decarbonization levers and project pipelines within company plans, and can allow temperature alignment assessments within granular geographic scope. Users may wish to supplement country-specific GECO 1.5°C pathway data with bottom-up, country-specific models where available, such as those published by the Philippines Department of Energy.",
+  "metric": [
+    "Emissions Intensity",
+    "Capacity",
+    "Generation",
+    "Technology Mix",
+    "Absolute Emissions"
+  ],
+  "keyFeatures": {
+    "emissionsPathway": "Moderate decrease",
+    "energyEfficiency": "Significant improvement",
+    "energyDemand": "Low or no change",
+    "electrification": "Significant increase",
+    "policyTypes": [
+      "Carbon price",
+      "Phaseout dates",
+      "Subsidies",
+      "Target technology shares",
+      "Other"
+    ],
+    "technologyCostTrend": "Decrease",
+    "technologyDeploymentTrend": "Moderate technology deployment",
+    "emissionsScope": "CO2e (Kyoto)",
+    "policyAmbition": "NDCs incl. conditional targets",
+    "technologyCostsDetail": "No information",
+    "newTechnologiesIncluded": [
+      "CCUS",
+      "DAC",
+      "Green H2/ammonia",
+      "SAF",
+      "Battery storage"
+    ],
+    "supplyChain": "Endogenous input or fuel price",
+    "investmentNeeds": "No information",
+    "infrastructureRequirements": "No information"
+  }
+}

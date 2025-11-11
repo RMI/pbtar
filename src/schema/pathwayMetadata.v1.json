@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
-  "title": "PBTAR Scenarios metadata Schema",
-  "description": "A schema for the scenarios metadata dataset in PBTAR.",
+  "$id": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
+  "title": "Pathway Metadata",
+  "description": "A schema for the pathway metadata dataset in PBTAR.",
   "type": "object",
   "properties": {
     "$schema": {
@@ -11,34 +11,39 @@
       "maxLength": 1000
     },
     "id": {
-      "description": "The unique identifier for a scenario.",
+      "description": "The unique identifier for a pathway.",
       "type": "string",
       "maxLength": 100
     },
     "name": {
-      "description": "Name of the scenario.",
-      "type": "string",
-      "maxLength": 100
+      "description": "Name of the pathway.",
+      "$ref": "./common/label.v1.json",
+      "tsType": "import('./common/label.v1').LabelV1"
     },
     "description": {
-      "description": "Brief description of the scenario.",
+      "description": "Brief description of the pathway.",
       "type": "string",
       "pattern": "\\.$",
       "maxLength": 100
     },
+    "publication": {
+      "description": "Bibliographic information about the report or dataset.",
+      "$ref": "./publication.v1.json",
+      "tsType": "import('./publication.v1').PublicationV1"
+    },
     "pathwayType": {
-      "description": "Type of the scenario pathway.",
+      "description": "Type of the pathway pathway.",
       "type": "string",
       "enum": ["Normative", "Exploratory", "Direct Policy", "Predictive"]
     },
     "modelYearNetzero": {
-      "description": "Year by which net zero is reached in the scenario. If Scenario does not reach net zero, this field should be omitted.",
+      "description": "Year by which net zero is reached in the pathway. If Pathway does not reach net zero, this field should be omitted.",
       "type": "integer",
       "minimum": 2030,
       "maximum": 2100
     },
     "carbonBudget": {
-      "description": "Carbon budget of the scenario in gigatons of CO2 equivalent (GtCO2eq). If no carbon budget is defined, this field should be omitted. If the carbon budget is not applicable, it should be set to 0.",
+      "description": "Carbon budget of the pathway in gigatons of CO2 equivalent (GtCO2eq). If no carbon budget is defined, this field should be omitted. If the carbon budget is not applicable, it should be set to 0.",
       "type": "number",
       "minimum": 0
     },
@@ -55,19 +60,19 @@
       "maximum": 2100
     },
     "modelTempIncrease": {
-      "description": "Modeled temperature increase expected by the scenario (in degrees Celsius).",
+      "description": "Modeled temperature increase expected by the pathway (in degrees Celsius).",
       "type": "number",
       "multipleOf": 0.1,
       "minimum": 0.5,
       "maximum": 3
     },
     "ssp": {
-      "description": "Shared Socioeconomic Pathways (SSP) associated with the scenario.",
+      "description": "Shared Socioeconomic Pathways (SSP) associated with the pathway.",
       "type": "string",
       "enum": ["SSP1", "SSP2", "SSP3", "SSP4", "SSP5"]
     },
     "geography": {
-      "description": "Geographical areas that the scenario covers. Can include 'Global', country ISO-3166-1 alpha-2 codes (US, DE), or free-text region names (e.g., 'Europe', 'OECD'). Any 2-letter items in the array will be treated as an ISO code. Any 2-letter entries that do not map to a country will throw errors (EU). Do not use full country names, only ISO alpha-2 codes. To avoid typographical errors, items in this array may not be 3 letters long (USA)",
+      "description": "Geographical areas that the pathway covers. Can include 'Global', country ISO-3166-1 alpha-2 codes (US, DE), or free-text region names (e.g., 'Europe', 'OECD'). Any 2-letter items in the array will be treated as an ISO code. Any 2-letter entries that do not map to a country will throw errors (EU). Do not use full country names, only ISO alpha-2 codes. To avoid typographical errors, items in this array may not be 3 letters long (USA)",
       "type": "array",
       "uniqueItems": true,
       "items": {
@@ -80,7 +85,7 @@
       }
     },
     "sectors": {
-      "description": "Sectors that the scenario covers.",
+      "description": "Sectors that the pathway covers.",
       "type": "array",
       "items": {
         "type": "object",
@@ -153,51 +158,17 @@
         "additionalProperties": false
       }
     },
-    "publisher": {
-      "description": "Publisher of the scenario.",
-      "type": "string",
-      "maxLength": 100
-    },
-    "publicationYear": {
-      "description": "Year that the scenario was published.",
-      "type": "integer",
-      "minimum": 1900,
-      "maximum": 2030
-    },
-    "scenarioOverview": {
-      "description": "Overview of the scenario.",
+    "pathwayOverview": {
+      "description": "Overview of the pathway.",
       "type": "string",
       "pattern": "\\.$",
       "maxLength": 1000
     },
     "expertOverview": {
-      "description": "Expert recommendation for the scenario.",
+      "description": "Expert recommendation for the pathway.",
       "type": "string",
       "pattern": "\\.$",
       "maxLength": 10000
-    },
-    "dataSource": {
-      "description": "Data source for the scenario.",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "Description of the data source.",
-          "type": "string",
-          "pattern": "\\.$",
-          "maxLength": 1000
-        },
-        "url": {
-          "description": "URL at which the data source can be accessed.",
-          "type": "string",
-          "pattern": "^(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*$"
-        },
-        "downloadAvailable": {
-          "description": "Flag indicating if the data source can be downloaded.",
-          "type": "boolean"
-        }
-      },
-      "additionalProperties": false,
-      "required": ["description", "url", "downloadAvailable"]
     },
     "metric": {
       "type": "array",
@@ -215,7 +186,7 @@
       }
     },
     "keyFeatures": {
-      "description": "Key features of the scenario.",
+      "description": "Key features of the pathway.",
       "type": "object",
       "properties": {
         "emissionsPathway": {
@@ -223,11 +194,13 @@
           "type": "string",
           "enum": [
             "No information",
-            "Continued growth",
-            "Plateau",
-            "Growth then decline",
-            "Moderate decline",
-            "Fast decline"
+            "Significant increase",
+            "Moderate increase",
+            "Minor increase",
+            "Low or no change",
+            "Minor decrease",
+            "Moderate decrease",
+            "Significant decrease"
           ]
         },
         "energyEfficiency": {
@@ -235,10 +208,13 @@
           "type": "string",
           "enum": [
             "No information",
-            "Declining",
-            "Static energy efficiency",
-            "Moderate improvements",
-            "Significant improvements"
+            "Significant deterioration",
+            "Moderate deterioration",
+            "Minor deterioration",
+            "Low or no change",
+            "Minor improvement",
+            "Moderate improvement",
+            "Significant improvement"
           ]
         },
         "energyDemand": {
@@ -246,10 +222,13 @@
           "type": "string",
           "enum": [
             "No information",
-            "Decrease",
-            "Static energy demand",
-            "Moderate growth",
-            "Significant growth"
+            "Significant decrease",
+            "Moderate decrease",
+            "Minor decrease",
+            "Low or no change",
+            "Minor increase",
+            "Moderate increase",
+            "Significant increase"
           ]
         },
         "electrification": {
@@ -257,14 +236,17 @@
           "type": "string",
           "enum": [
             "No information",
-            "Decrease",
-            "Stable electrification",
+            "Significant decrease",
+            "Moderate decrease",
+            "Minor decrease",
+            "Low or no change",
+            "Minor increase",
             "Moderate increase",
             "Significant increase"
           ]
         },
         "policyTypes": {
-          "description": "Identifies the types of policies modeled as drivers of the scenario, such as carbon pricing, subsidies, or mandated phaseouts of specific technologies.",
+          "description": "Identifies the types of policies modeled as drivers of the pathway, such as carbon pricing, subsidies, or mandated phaseouts of specific technologies.",
           "type": "array",
           "uniqueItems": true,
           "minItems": 1,
@@ -275,40 +257,37 @@
               "Phaseout dates",
               "Subsidies",
               "Target technology shares",
-              "Other"
+              "Other",
+              "None"
             ]
           }
         },
         "technologyCostTrend": {
           "description": "Describes how technology costs evolve over time, from static cost assumptions to rapidly declining costs (e.g., via learning curves).",
           "type": "string",
-          "enum": [
-            "No information",
-            "Static",
-            "Linear trend",
-            "S-curves",
-            "Other"
-          ]
+          "enum": ["No information", "Increase", "Low or no change", "Decrease"]
         },
         "technologyDeploymentTrend": {
-          "description": "Indicates the scale and pace of new technology adoption within the scenario, where significant deployment means that several new technologies are adopted rapidly",
+          "description": "Indicates the scale and pace of new technology adoption within the pathway, where significant deployment means that several new technologies are adopted rapidly",
           "type": "string",
           "enum": [
             "No information",
-            "No deployment of new technologies",
-            "Moderate deployment of new technologies",
-            "Significant deployment of new technologies"
+            "No new technologies deployed",
+            "Minor technology deployment",
+            "Moderate technology deployment",
+            "Signif. technology deployment"
           ]
         },
         "emissionsScope": {
-          "description": "Defines which greenhouse gases are covered in the scenario’s emissions accounting.",
+          "description": "Defines which greenhouse gases are covered in the pathway’s emissions accounting.",
           "type": "string",
           "enum": [
             "No information",
             "CO2",
             "CO2e (Kyoto)",
             "CO2e (CO2, Methane)",
-            "Other"
+            "CO2e (unspecified GHGs)",
+            "Other emissions scope"
           ]
         },
         "policyAmbition": {
@@ -316,11 +295,13 @@
           "type": "string",
           "enum": [
             "No information",
+            "No policies included",
             "Current/legislated policies",
-            "NDCs",
-            "NDCs and long term commitments",
+            "Current and drafted policies",
+            "NDCs, unconditional only",
+            "NDCs incl. conditional targets",
             "Normative/Optimization-based",
-            "Other"
+            "Other policy ambition"
           ]
         },
         "technologyCostsDetail": {
@@ -329,8 +310,8 @@
           "enum": [
             "No information",
             "Total costs",
-            "Capital costs/O&M/etc.",
-            "Other"
+            "Capital costs, O&M, etc.",
+            "Other cost breakdown"
           ]
         },
         "newTechnologiesIncluded": {
@@ -342,23 +323,25 @@
             "type": "string",
             "enum": [
               "No information",
+              "No new technologies",
               "CCUS",
               "DAC",
               "Green H2/ammonia",
               "SAF",
               "Battery storage",
               "EGS/AGS",
-              "Other"
+              "Other new technologies"
             ]
           }
         },
         "supplyChain": {
-          "description": "Describes how upstream fuel or material price dynamics are represented in the scenario.",
+          "description": "Describes how upstream fuel or material price dynamics are represented in the pathway.",
           "type": "string",
           "enum": [
             "No information",
-            "Static upstream fuel/material prices",
-            "Dynamic upstream fuel/material prices"
+            "Static input or fuel price",
+            "Exogenous input or fuel price",
+            "Endogenous input or fuel price"
           ]
         },
         "investmentNeeds": {
@@ -367,8 +350,10 @@
           "enum": [
             "No information",
             "Total investment",
-            "Sector-level",
-            "Sector-level by upstream/in-stream/downstream"
+            "By sector",
+            "By sector, part of value chain",
+            "By technology",
+            "By tech, part of value chain"
           ]
         },
         "infrastructureRequirements": {
@@ -377,7 +362,7 @@
           "enum": [
             "No information",
             "By part of supply chain",
-            "By part of supply chain and maintenance/buildout"
+            "By supply chain, add/replace"
           ]
         }
       },
@@ -405,13 +390,11 @@
     "id",
     "name",
     "description",
+    "publication",
     "pathwayType",
     "geography",
     "sectors",
-    "publisher",
-    "publicationYear",
     "expertOverview",
-    "dataSource",
     "metric",
     "keyFeatures"
   ]

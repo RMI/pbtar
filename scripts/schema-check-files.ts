@@ -1,11 +1,13 @@
 // scripts/schema-check-files.ts
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
-import type { FileEntry } from "../src/utils/validateScenarios.ts";
-import { validateFilesBySchema } from "../src/utils/validateScenarios.ts";
-import { decideIncludeInvalid } from "../src/utils/loadScenarios.ts";
+import type { FileEntry } from "../src/utils/validateData.ts";
+import { validateFilesBySchema } from "../src/utils/validateData.ts";
+import { decideIncludeInvalid } from "../src/utils/loadData.ts";
 import pathwayMetadata from "../src/schema/pathwayMetadata.v1.json" with { type: "json" };
 import pathwayTimeseries from "../src/schema/pathwayTimeseries.v1.json" with { type: "json" };
+import publicationSchema from "../src/schema/publication.v1.json" with { type: "json" };
+import labelSchema from "../src/schema/common/label.v1.json" with { type: "json" };
 
 async function run(dir: string) {
   async function getJsonFilesRecursive(base: string): Promise<string[]> {
@@ -34,6 +36,8 @@ async function run(dir: string) {
   const { valid, invalid } = validateFilesBySchema(entries, [
     pathwayMetadata,
     pathwayTimeseries,
+    publicationSchema,
+    labelSchema,
   ]);
   return { dir, validCount: valid.length, invalid };
 }

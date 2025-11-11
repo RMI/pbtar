@@ -1,8 +1,10 @@
 ---
 on:
   pull_request:
-    paths:
-      - ".github/rulesets/**"
+    branches:
+      - main
+      - production
+      - next
   push:
     branches:
       - main

@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBox from "./SearchBox";
 import MultiSelectDropdown from "./MultiSelectDropdown";
-import { scenariosData } from "../data/scenariosData";
+import { pathwayMetadata } from "../data/pathwayMetadata";
 import { SearchFilters, Geography } from "../types";
 import { makeGeographyOptions } from "../utils/searchUtils";
 import type { FacetMode } from "../utils/searchUtils";
@@ -14,7 +14,7 @@ import { ABSENT_FILTER_TOKEN } from "../utils/absent";
 
 interface SearchSectionProps {
   filters: SearchFilters;
-  scenariosNumber: number;
+  pathwaysNumber: number;
   onFilterChange: <T extends string | number | (string | number)[] | null>(
     key: keyof SearchFilters,
     value: T | null,
@@ -25,7 +25,7 @@ interface SearchSectionProps {
 
 const SearchSection: React.FC<SearchSectionProps> = ({
   filters,
-  scenariosNumber,
+  pathwaysNumber,
   onFilterChange,
   onSearch,
   onClear,
@@ -47,32 +47,32 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   );
 
   const pathwayTypeOptions = buildOptionsFromValues(
-    scenariosData.map((d) => d.pathwayType),
+    pathwayMetadata.map((d) => d.pathwayType),
   );
 
   const modelYearNetzeroOptions = buildOptionsFromValues(
-    scenariosData.map((d) => d.modelYearNetzero),
+    pathwayMetadata.map((d) => d.modelYearNetzero),
   );
 
   const temperatureOptions = buildOptionsFromValues(
-    scenariosData.map((d) => d.modelTempIncrease),
+    pathwayMetadata.map((d) => d.modelTempIncrease),
   );
 
   const geographyOptionsRaw: Geography[] = React.useMemo(
-    () => makeGeographyOptions(scenariosData),
+    () => makeGeographyOptions(pathwayMetadata),
     [],
   ) as Geography[];
-  const sawAbsentGeography = hasAbsent(scenariosData.map((d) => d.geography));
+  const sawAbsentGeography = hasAbsent(pathwayMetadata.map((d) => d.geography));
   const geographyOptions = withAbsentOption(
     geographyOptionsRaw,
     sawAbsentGeography,
   );
 
-  const sectorNames = scenariosData.flatMap(
+  const sectorNames = pathwayMetadata.flatMap(
     (d) => d.sectors?.map((s) => s.name) ?? [],
   );
   const sectorOptionsBase = buildOptionsFromValues(sectorNames);
-  const sawAbsentSectors = scenariosData.some(
+  const sawAbsentSectors = pathwayMetadata.some(
     (d) => !d.sectors || d.sectors.length === 0,
   );
   const sectorOptions = sawAbsentSectors
@@ -80,7 +80,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     : sectorOptionsBase;
 
   const metricOptions = buildOptionsFromValues(
-    scenariosData.map((d) => d.metric).flat(),
+    pathwayMetadata.map((d) => d.metric).flat(),
   );
 
   const areFiltersApplied =
@@ -104,7 +104,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       : filters.modelTempIncrease != null);
 
   return (
-    <div className="bg-white">
+    <div className="bg-gray-50">
       <div className="mb-4 pt-8">
         <SearchBox
           value={filters.searchTerm}
@@ -126,7 +126,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         />
 
         <MultiSelectDropdown<number>
-          label="Target Year"
+          label="Net Zero By"
           options={modelYearNetzeroOptions}
           value={filters.modelYearNetzero}
           onChange={(arr) => onFilterChange("modelYearNetzero", arr)}
@@ -180,7 +180,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       </div>
       <div className="mt-4 ml-1 flex items-center justify-between gap-3">
         <p className="text-sm text-rmigray-500">
-          Found {scenariosNumber} scenarios
+          Found {pathwaysNumber} pathways
           {areFiltersApplied && " matching your criteria"}
           {areFiltersApplied && (
             <button

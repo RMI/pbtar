@@ -1,0 +1,132 @@
+{
+  "$schema": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
+  "id": "pathway-simple-full",
+  "name": { "full": "Full Enums Pathway", "short": "FullEnum" },
+  "publication": {
+    "title": { "full": "Example Title", "short": "Example" },
+    "subtitle": "An Example Subtitle",
+    "author": ["Foo bar", "Baz qux"],
+    "publisher": { "full": "Example Publisher", "short": "ExPub" },
+    "year": 2024,
+    "month": 6,
+    "day": 15,
+    "city": "Example City",
+    "doi": "10.1234/example.doi",
+    "isbn": "978-3-16-148410-0",
+    "issn": "1234-5678",
+    "links": [
+      {
+        "url": "https://example.com/publication",
+        "description": "Link to the publication."
+      }
+    ]
+  },
+  "description": "Pathway with all enum values populated where possible.",
+  "pathwayType": "Normative",
+  "modelYearNetzero": 2050,
+  "carbonBudget": 500,
+  "modelYearStart": 2020,
+  "modelYearEnd": 2050,
+  "modelTempIncrease": 1.5,
+  "ssp": "SSP1",
+  "geography": [
+    "Global",
+    "EU",
+    "Americas",
+    "Asia Pacific",
+    "US",
+    "Country-Specific"
+  ],
+  "sectors": [
+    {
+      "name": "Land Use",
+      "technologies": ["Agroforestry", "Bioenergy Crops"]
+    },
+    { "name": "Agriculture", "technologies": ["Precision Agriculture"] },
+    {
+      "name": "Buildings",
+      "technologies": [
+        "Energy Efficiency",
+        "Smart Grids",
+        "Renewable Heating",
+        "Heat Pumps",
+        "Building Automation",
+        "Smart Appliances",
+        "Insulation"
+      ]
+    },
+    {
+      "name": "Industry",
+      "technologies": ["Carbon Capture and Storage", "Electrification"]
+    },
+    { "name": "Steel", "technologies": ["Process Optimization"] },
+    { "name": "Cement", "technologies": ["Other"] },
+    { "name": "Chemicals", "technologies": ["Hydrogen Use", "Biofuels"] },
+    { "name": "Coal Mining", "technologies": ["Other"] },
+    { "name": "Oil (Upstream)", "technologies": ["Other"] },
+    { "name": "Gas (Upstream)", "technologies": ["Other"] },
+    {
+      "name": "Power",
+      "technologies": [
+        "Coal",
+        "Oil",
+        "Gas",
+        "Wind",
+        "Solar",
+        "Nuclear",
+        "Biomass"
+      ]
+    },
+    {
+      "name": "Transport",
+      "technologies": ["Public Transport", "Active Mobility"]
+    },
+    {
+      "name": "Road transport",
+      "technologies": ["Electric Vehicles", "Hydrogen Vehicles"]
+    },
+    { "name": "Aviation", "technologies": ["Aviation Efficiency"] },
+    { "name": "Rail", "technologies": ["Other"] },
+    { "name": "Shipping", "technologies": ["Maritime Efficiency"] },
+    { "name": "Other", "technologies": ["Other"] }
+  ],
+  "pathwayOverview": "Example Overview.",
+  "expertOverview": "Example Expert Recommendation.",
+  "metric": [
+    "Emissions Intensity",
+    "Capacity",
+    "Generation",
+    "Technology Mix",
+    "Absolute Emissions"
+  ],
+  "keyFeatures": {
+    "emissionsPathway": "No information",
+    "energyEfficiency": "No information",
+    "energyDemand": "No information",
+    "electrification": "No information",
+    "policyTypes": [
+      "Carbon price",
+      "Phaseout dates",
+      "Subsidies",
+      "Target technology shares",
+      "Other"
+    ],
+    "technologyCostTrend": "No information",
+    "technologyDeploymentTrend": "No information",
+    "emissionsScope": "No information",
+    "policyAmbition": "No information",
+    "technologyCostsDetail": "No information",
+    "newTechnologiesIncluded": [
+      "No information",
+      "CCUS",
+      "DAC",
+      "Green H2/ammonia",
+      "SAF",
+      "Battery storage",
+      "EGS/AGS"
+    ],
+    "supplyChain": "No information",
+    "investmentNeeds": "No information",
+    "infrastructureRequirements": "No information"
+  }
+}

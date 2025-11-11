@@ -12,7 +12,7 @@
 //   - label      := label | name
 //
 // Output:
-//   - Writes src/data/index.json with { byPathway, byDataset, schema }.
+//   - Writes src/data/index.json with { byPathway, byDataset }.
 
 import { promises as fs } from "node:fs";
 import * as path from "node:path";
@@ -60,7 +60,7 @@ const OUT_FILE = path.join(DATA_DIR, "index.json");
 
 const TS_SCHEMA_MATCHERS = [
   "pathwayTimeseries.v1.json",
-  "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
+  "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
 ];
 
 function logDebug(...args: any[]) {
@@ -414,7 +414,6 @@ async function main() {
 export type TimeseriesIndex = {
   byPathway: Record<string, TimeseriesIndexItem[]>;
   byDataset: Record<string, { datasetId: string; pathwayIds: string[]; label?: string; path: string; summary?: unknown }>;
-  schema: { version: number; generatedAt: string };
 };
 export const index: TimeseriesIndex = ${JSON.stringify(out, null, 2)} as const;
 export default index;

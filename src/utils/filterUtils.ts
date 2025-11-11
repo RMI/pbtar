@@ -1,4 +1,4 @@
-import { scenariosData } from "../data/scenariosData";
+import { pathwayMetadata } from "../data/pathwayMetadata";
 
 export const getUniqueFilterValues = () => {
     const pathwayTypes = new Set<string>();
@@ -8,13 +8,13 @@ export const getUniqueFilterValues = () => {
     const sectors = new Set<string>();
     const metrics = new Set<string>();
 
-    scenariosData.forEach((scenario) => {
-        if (scenario.pathwayType) pathwayTypes.add(scenario.pathwayType);
-        if (scenario.modelYearNetzero) targetYears.add(scenario.modelYearNetzero);
-        if (scenario.modelTempIncrease) temperatures.add(scenario.modelTempIncrease);
-        scenario.geography.forEach((geo) => geographies.add(geo));
-        scenario.sectors.forEach((sector) => sectors.add(sector.name));
-        scenario.metric.forEach((metric) => metrics.add(metric));
+    pathwayMetadata.forEach((pathway) => {
+        if (pathway.pathwayType) pathwayTypes.add(pathway.pathwayType);
+        if (pathway.modelYearNetzero) targetYears.add(pathway.modelYearNetzero);
+        if (pathway.modelTempIncrease) temperatures.add(pathway.modelTempIncrease);
+        pathway.geography.forEach((geo) => geographies.add(geo));
+        pathway.sectors.forEach((sector) => sectors.add(sector.name));
+        pathway.metric.forEach((metric) => metrics.add(metric));
     });
 
     return {

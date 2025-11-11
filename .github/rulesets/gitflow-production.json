@@ -26,6 +26,7 @@
       "parameters": {
         "required_approving_review_count": 2,
         "dismiss_stale_reviews_on_push": true,
+        "required_reviewers": [],
         "require_code_owner_review": true,
         "require_last_push_approval": true,
         "required_review_thread_resolution": true,
@@ -52,11 +53,15 @@
             "integration_id": 15368
           },
           {
-            "context": "JSON Schema Validation / Check Schema Docs",
+            "context": "JSON Schema / Check Schema Docs",
             "integration_id": 15368
           },
           {
-            "context": "JSON Schema Validation / Run ajv JSON validator",
+            "context": "JSON Schema / Run JSON validator",
+            "integration_id": 15368
+          },
+          {
+            "context": "JSON Schema / Check generated types",
             "integration_id": 15368
           },
           {

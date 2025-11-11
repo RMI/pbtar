@@ -2,39 +2,40 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import SearchSection from "./SearchSection";
 import { SearchFilters } from "../types";
+import { PathwayMetadataType } from "../types";
 
-// Mock the scenariosData import
-vi.mock("../data/scenariosData", async () => {
+// Mock the pathwayMetadata import
+vi.mock("../data/pathwayMetadata", async () => {
   const [s1, s2, s3, s4] = await Promise.all([
-    import("../../testdata/valid/scenarios_metadata_sample_01.json", {
+    import("../../testdata/valid/pathwayMetadata_sample_01.json", {
       assert: { type: "json" },
     }),
-    import("../../testdata/valid/scenarios_metadata_sample_02.json", {
+    import("../../testdata/valid/pathwayMetadata_sample_02.json", {
       assert: { type: "json" },
     }),
-    import("../../testdata/valid/scenarios_metadata_sample_03.json", {
+    import("../../testdata/valid/pathwayMetadata_sample_03.json", {
       assert: { type: "json" },
     }),
-    import("../../testdata/valid/scenarios_metadata_sample_04.json", {
+    import("../../testdata/valid/pathwayMetadata_sample_04.json", {
       assert: { type: "json" },
     }),
   ]);
 
-  const mockScenarios = [
+  const mockPathways = [
     s1.default,
     s2.default,
     s3.default,
     s4.default,
-  ] as import("../types").Scenario[];
+  ] as PathwayMetadataType[];
 
-  return { scenariosData: mockScenarios };
+  return { pathwayMetadata: mockPathways };
 });
 
 describe("SearchSection", () => {
   // Default props for the component
   const defaultProps = {
     filters: {} as SearchFilters,
-    scenariosNumber: 2,
+    pathwaysNumber: 2,
     onFilterChange: vi.fn(),
     onSearch: vi.fn(),
     onClear: vi.fn(),
@@ -61,7 +62,7 @@ describe("SearchSection", () => {
       screen.getByRole("button", { name: /^Pathway Type\b/i }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: /^Target Year\b/i }),
+      screen.getByRole("button", { name: /^Net Zero By\b/i }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /^Temperature\b/i }),
@@ -170,7 +171,7 @@ describe("SearchSection", () => {
   describe("does NOT render ANY/ALL toggle for scalar facets", () => {
     for (const facet of [
       "Pathway Type",
-      "Target Year",
+      "Net Zero By",
       "Temperature",
     ] as const) {
       it(`facet: ${facet}`, () => {
@@ -192,7 +193,7 @@ describe("SearchSection", () => {
       render(<SearchSection {...defaultProps} />);
       expect(screen.queryByTestId("clear-all-filters")).toBeNull();
       // Summary still renders
-      expect(screen.getByText(/Found 2 scenarios/i)).toBeInTheDocument();
+      expect(screen.getByText(/Found 2 pathways/i)).toBeInTheDocument();
     });
 
     it("renders the inline button when any filter is applied and calls onClear", () => {
@@ -203,7 +204,7 @@ describe("SearchSection", () => {
       render(<SearchSection {...props} />);
 
       // Button should be present and visually near the summary (inline within the same <p>)
-      const paragraph = screen.getByText(/Found \d+ scenarios/i).closest("p");
+      const paragraph = screen.getByText(/Found \d+ pathways/i).closest("p");
       expect(paragraph).toBeTruthy();
       const clearBtn = screen.getByTestId("clear-all-filters");
       expect(clearBtn).toBeInTheDocument();

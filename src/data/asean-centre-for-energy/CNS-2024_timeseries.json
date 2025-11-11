@@ -1,0 +1,1912 @@
+{
+  "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
+  "id": "ACE-CNS-2024_TS",
+  "pathwayId": ["ACE-CNS-2024"],
+  "name": "Carbon Neutrality Scenario (CNS) Timeseries Data",
+  "description": "Pathway for ASEAN to achieve significant CO2 emissions reductions by 2050.",
+  "publisher": "ASEAN Centre for Energy (ACE)",
+  "publicationName": "8th ASEAN Energy Outlook",
+  "publicationYear": 2024,
+  "pathwayName": "Carbon Neutrality Scenario (CNS)",
+  "source": "ACE, 2024, 8th ASEAN Energy Outlook (AEO8)\nReport URL:https://aseanenergy.org/publications/the-8th-asean-energy-outlook/",
+  "emissionsScope": "CO2e (unspecified GHGs)",
+  "sector": {
+    "power": {
+      "displayName": "Power",
+      "technology": {
+        "biomass": {
+          "displayName": "Biomass",
+          "definition": "Electricity generation using organic materials (biomass, biogas, or waste) as fuel for combustion or steam turbines."
+        },
+        "coal": {
+          "displayName": "Coal",
+          "definition": "Electricity generation using coal combustion to produce steam that drives turbines for power."
+        },
+        "gas": {
+          "displayName": "Gas",
+          "definition": "Electricity generation using natural gas combustion in turbines or combined-cycle plants."
+        },
+        "hydro": {
+          "displayName": "Hydro",
+          "definition": "Electricity generation using flowing or falling water from rivers or dams to drive turbines (includes large and small sites, excludes pumped storage)."
+        },
+        "nuclear": {
+          "displayName": "Nuclear",
+          "definition": "Electricity generation using heat from controlled nuclear fission reactors to produce steam."
+        },
+        "oil": {
+          "displayName": "Oil",
+          "definition": "Electricity generation using petroleum-based fuels (diesel, heavy oil) to drive engines or steam turbines."
+        },
+        "other": {
+          "displayName": "Other",
+          "definition": "Electricity generation using alternative or emerging sources such as geothermal, tidal, or hydrogen."
+        },
+        "solar": {
+          "displayName": "Solar",
+          "definition": "Electricity generation via photovoltaic cells that convert sunlight directly into electricity."
+        },
+        "wind": {
+          "displayName": "Wind",
+          "definition": "Electricity generation via wind turbines, both onshore and offshore."
+        }
+      },
+      "metric": {
+        "absoluteEmissions": {
+          "displayName": "Absolute Emissions",
+          "definition": "Total greenhouse gas emissions produced, regardless of output. Measured in metric tons of CO2 equivalent",
+          "sectorScope": "Power generation"
+        },
+        "capacity": {
+          "displayName": "Capacity",
+          "definition": "The maximum output a power plant or energy source can produce under ideal conditions, measured in GW",
+          "sectorScope": "Power generation"
+        },
+        "emissionsIntensity": {
+          "displayName": "Emissions Intensity",
+          "definition": "Amount of greenhouse gases emitted per unit of physical output. Indicates how low-carbon the output production is",
+          "sectorScope": "Power generation"
+        },
+        "generation": {
+          "displayName": "Generation",
+          "definition": "The actual amount of electricity produced over a specific period, typically measured in TWh",
+          "sectorScope": "Power generation"
+        },
+        "technologyMix": {
+          "displayName": "Technology Mix",
+          "definition": "The breakdown of energy sources used for electricity generation (e.g., coal, solar, wind, nuclear). Reflects the diversity and sustainability of the energy portfolio",
+          "sectorScope": "Power generation"
+        }
+      }
+    }
+  },
+  "data": [
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 770,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 659,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 589,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 442,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 350,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 215,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 129,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 8,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 12,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 15,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 24,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 39,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 59,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 104,
+      "unit": "GW"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 107,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 118,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 128,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 108,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 103,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 93,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 80,
+      "unit": "GW"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 90,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 104,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 149,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 176,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 214,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 272,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 335,
+      "unit": "GW"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 62,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 77,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 100,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 126,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 145,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 165,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 212,
+      "unit": "GW"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 3,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 6,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 8,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 10,
+      "unit": "GW"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 12,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 12,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 12,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 12,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 5,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 8,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 14,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 21,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 32,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 45,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 58,
+      "unit": "GW"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 24,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 52,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 98,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 165,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 237,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 331,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 466,
+      "unit": "GW"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 7,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 22,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 67,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 92,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 134,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 223,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 321,
+      "unit": "GW"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.606,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.466,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.354,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.226,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.148,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.074,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.037,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 43,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 44,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 53,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 75,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 92,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 103,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 94,
+      "unit": "TWh"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 532,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 441,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 408,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 292,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 244,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 159,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 116,
+      "unit": "TWh"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 342,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 399,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 338,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 312,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 268,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 225,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 184,
+      "unit": "TWh"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 248,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 319,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 391,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 544,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 646,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 756,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 873,
+      "unit": "TWh"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 8,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 28,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 20,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 23,
+      "unit": "TWh"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 24,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 2,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 29,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 55,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 88,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 132,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 217,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 297,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 342,
+      "unit": "TWh"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 39,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 87,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 163,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 288,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 420,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 590,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 833,
+      "unit": "TWh"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 13,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 66,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 223,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 302,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 444,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 771,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 1063,
+      "unit": "TWh"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 3.39,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 3.11,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 3.18,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 3.84,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 3.9,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 3.53,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 2.66,
+      "unit": "%"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 41.89,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 31.21,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 24.5,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 14.95,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 10.34,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 5.44,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 3.29,
+      "unit": "%"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 26.93,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 28.24,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 20.3,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 15.98,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 11.36,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 7.7,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 5.22,
+      "unit": "%"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 19.53,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 22.58,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 23.48,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 27.85,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 27.38,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 25.88,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 24.74,
+      "unit": "%"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0.41,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 1.19,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0.68,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0.65,
+      "unit": "%"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 1.89,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 0.14,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 0.06,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 2.28,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 3.89,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 5.29,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 6.76,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 9.2,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 10.17,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 9.69,
+      "unit": "%"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 3.07,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 6.16,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 9.79,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 14.75,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 17.8,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 20.2,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 23.61,
+      "unit": "%"
+    },
+    {
+      "year": 2022,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 1.02,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 4.67,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 13.39,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 15.46,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 18.82,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 26.4,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "South East Asia",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 30.13,
+      "unit": "%"
+    }
+  ]
+}
