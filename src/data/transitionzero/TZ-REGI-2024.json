@@ -26,7 +26,7 @@
       }
     ]
   },
-  "name": { "full": "Regional Integration", "short": "REGI" },
+  "name": {"full": "Regional Interconnection", "short": "REGI"},
   "description": "ASEAN power model with significant new regional transmission infrastructure.",
   "geography": [
     "South East Asia",
