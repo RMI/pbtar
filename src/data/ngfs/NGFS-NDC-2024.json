@@ -262,9 +262,7 @@
         "Wind",
         "Solar",
         "Biomass",
-        "Other",
-        "Total",
-        "Battery Storage"
+        "Other"
       ]
     }
   ],
