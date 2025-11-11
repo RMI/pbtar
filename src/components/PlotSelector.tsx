@@ -18,16 +18,18 @@ interface TimeSeries {
 }
 
 type PlotType =
-  | "composition"
-  | "emissionsVolume"
-  | "emissionsEfficiency"
-  | "supply";
+  | "technologyMix"
+  | "absoluteEmissions"
+  | "emissionsIntensity"
+  | "capacity"
+  | "generation";
 
 const PLOT_OPTIONS = [
-  { value: "composition", label: "Capacity" },
-  { value: "emissionsVolume", label: "Emissions Volume" },
-  { value: "emissionsEfficiency", label: "Emissions Efficiency" },
-  { value: "supply", label: "Generation" },
+  { value: "technologyMix", label: "Technology Mix" },
+  { value: "absoluteEmissions", label: "Absolute Emissions" },
+  { value: "emissionsIntensity", label: "Emissions Intensity" },
+  { value: "capacity", label: "Capacity" },
+  { value: "generation", label: "Generation" },
 ] as const;
 
 interface PlotSelectorProps {
@@ -41,7 +43,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
   datasetId,
   className = "",
 }) => {
-  const [selectedPlot, setSelectedPlot] = useState<PlotType>("composition");
+  const [selectedPlot, setSelectedPlot] = useState<PlotType>("technologyMix");
   const [selectedGeography, setSelectedGeography] = useState<string>("");
 
   // Get unique geographies from the dataset
@@ -75,13 +77,15 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
 
       return PLOT_OPTIONS.filter((option) => {
         switch (option.value) {
-          case "composition":
-            return hasDataForMetric(data, "capacity");
-          case "emissionsVolume":
+          case "technologyMix":
+            return hasDataForMetric(data, "technologyMix");
+          case "absoluteEmissions":
             return hasDataForMetric(data, "absoluteEmissions");
-          case "emissionsEfficiency":
+          case "emissionsIntensity":
             return hasDataForMetric(data, "emissionsIntensity");
-          case "supply":
+          case "capacity":
+            return hasDataForMetric(data, "capacity");
+          case "generation":
             return hasDataForMetric(data, "generation");
           default:
             return false;
@@ -130,22 +134,24 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
     if (!filteredData) return null;
 
     switch (selectedPlot) {
-      case "composition":
+      case "technologyMix":
         return (
           <div className="flex flex-col items-center">
             <NormalizedStackedAreaChart
-              key={`${datasetId}-composition`}
+              key={`${datasetId}-technology-mix`}
               data={filteredData}
               width={450}
               height={300}
+              sector="power"
+              metric="technologyMix"
             />
           </div>
         );
-      case "emissionsVolume":
+      case "absoluteEmissions":
         return (
           <div className="flex flex-col items-center">
             <VerticalBarChart
-              key={`${datasetId}-emissions-volume`}
+              key={`${datasetId}-absolute-emissions`}
               data={filteredData}
               width={450}
               height={300}
@@ -153,11 +159,11 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
             />
           </div>
         );
-      case "emissionsEfficiency":
+      case "emissionsIntensity":
         return (
           <div className="flex flex-col items-center">
             <VerticalBarChart
-              key={`${datasetId}-emissions-efficiency`}
+              key={`${datasetId}-emissions-intensity`}
               data={filteredData}
               width={450}
               height={300}
@@ -165,11 +171,23 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
             />
           </div>
         );
-      case "supply":
+      case "capacity":
         return (
           <div className="flex flex-col items-center">
             <MultiLineChart
-              key={`${datasetId}-supply`}
+              key={`${datasetId}-capacity`}
+              data={filteredData}
+              width={450}
+              height={300}
+              metric="capacity"
+            />
+          </div>
+        );
+      case "generation":
+        return (
+          <div className="flex flex-col items-center">
+            <MultiLineChart
+              key={`${datasetId}-generation`}
               data={filteredData}
               width={450}
               height={300}
