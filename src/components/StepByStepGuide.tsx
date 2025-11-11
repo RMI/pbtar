@@ -55,7 +55,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     {
       id: "modelYearNetzero",
       title: "Target Year",
-      description: "Choose scenarios based on their target net-zero year.",
+      description: "Choose pathways based on their target net-zero year.",
       icon: <Timer className="h-8 w-8" />,
       options: filterValues.targetYears.map(year => ({
         id: year.toString(),
@@ -66,7 +66,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     {
       id: "modelTempIncrease",
       title: "Temperature Outcome",
-      description: "Choose scenarios aligned with different temperature outcomes.",
+      description: "Choose pathways aligned with different temperature outcomes.",
       icon: <Thermometer className="h-8 w-8" />,
       options: filterValues.temperatures.map(temp => ({
         id: temp.toString(),
@@ -77,7 +77,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     {
       id: "geography",
       title: "Geography",
-      description: "Select scenarios for specific geographical areas.",
+      description: "Select pathways for specific geographical areas.",
       icon: <Earth className="h-8 w-8" />,
       options: filterValues.geographies.map(geo => ({
         id: geo,
@@ -88,7 +88,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     {
       id: "sector",
       title: "Sector",
-      description: "Focus on scenarios covering specific economic sectors.",
+      description: "Focus on pathways covering specific economic sectors.",
       icon: <Factory className="h-8 w-8" />,
       options: filterValues.sectors.map(sector => ({
         id: sector,
@@ -99,7 +99,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     {
       id: "metric",
       title: "Benchmark Metric",
-      description: "Choose scenarios with specific benchmark indicators.",
+      description: "Choose pathways with specific benchmark indicators.",
       icon: <Ruler className="h-8 w-8" />,
       options: filterValues.metrics.map(metric => ({
         id: metric,
@@ -160,7 +160,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       <div className="flex justify-between items-center mb-4">
         <div className="w-12" />
         <h2 className="text-2xl font-bold text-bluespruce text-center mx-auto">
-          Choose the right scenarios for your needs
+          Choose the right pathways for your needs
         </h2>
         <div className="w-12 flex justify-end">
           <button
@@ -175,9 +175,9 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       {currentView === "home" ? (
         <div className="space-y-6">
           <p className="text-rmigray-600">
-            Selecting the right scenarios is the most critical step for a
-            successful assessment. A scenario is a story for a possible future.
-            Use our filters to find the scenarios that best fit the story you
+            Selecting the right pathways is the most critical step for a
+            successful assessment. A pathway is a story for a possible future.
+            Use our filters to find the pathways that best fit the story you
             want to tell.
           </p>
           <div className="grid grid-cols-6 gap-10">
@@ -222,8 +222,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                     )
                   }
                   className={`p-4 border rounded-lg transition-colors bg-gray-50 ${isSelected
-                      ? "border-energy bg-energy-50"
-                      : "hover:border-energy hover:bg-energy-50"
+                    ? "border-energy bg-energy-50"
+                    : "hover:border-energy hover:bg-energy-50"
                     }`}
                 >
                   {option.title}
