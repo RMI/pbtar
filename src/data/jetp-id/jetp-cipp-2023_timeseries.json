@@ -1,6 +1,6 @@
 {
   "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
-  "pathwayId":[ "JETP-CIPP-2023"],
+  "pathwayId": ["JETP-CIPP-2023"],
   "id": "JETP-CIPP-2023_TS",
   "name": "Comprehensive Investment and Policy Plan (CIPP) Timeseries Data",
   "description": "Power transition strategy driven by managed coal phasedown and renewables scale-up.",
