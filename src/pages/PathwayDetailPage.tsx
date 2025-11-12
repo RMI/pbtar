@@ -26,11 +26,13 @@ import {
   summarizeSummary,
 } from "../utils/timeseriesIndex";
 import PublicationBlock from "../components/PublicationBlock";
+import { PlotSelector, TimeSeries } from "../components/PlotSelector";
 
 const PathwayDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [pathway, setPathway] = useState<PathwayMetadataType | null>(null);
   const [loading, setLoading] = useState(true);
+  const [timeseriesdata, setTimeseriesdata] = useState<TimeSeries | null>(null);
 
   useEffect(() => {
     setLoading(true);
@@ -81,6 +83,20 @@ const PathwayDetailPage: React.FC = () => {
       isMounted = false;
     };
   }, [pathway]); // depend on the full object to avoid eslint warning
+
+  useEffect(() => {
+    if (datasets.length > 0) {
+      fetch(datasets[0].path.replace(/\.csv$/, ".json"))
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data: TimeSeries) => setTimeseriesdata(data))
+        .catch((error) => console.error("Error fetching JSON:", error));
+    }
+  }, [datasets]);
 
   if (loading) {
     return (
@@ -174,7 +190,7 @@ const PathwayDetailPage: React.FC = () => {
 
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div className="md:col-span-8">
+            <div className="md:col-span-7">
               <section className="mb-8">
                 <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
                   Expert Overview
@@ -209,7 +225,13 @@ const PathwayDetailPage: React.FC = () => {
               ) : null}
             </div>
 
-            <div className="md:col-span-4">
+            <div className="md:col-span-5">
+              <PlotSelector
+                timeseriesdata={timeseriesdata}
+                datasetId={datasets[0]?.datasetId}
+                className="mb-6"
+              />
+
               <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
                 <h3 className="text-lg font-medium text-rmigray-800 mb-3">
                   Key Features
