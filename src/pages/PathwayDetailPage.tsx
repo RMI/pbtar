@@ -310,9 +310,6 @@ const PathwayDetailPage: React.FC = () => {
                 </h3>
                 {/* Sectors section with dynamic badge count */}
                 <div className="mb-3">
-                  <p className="text-xs font-medium text-rmigray-500 mb-1">
-                    Sectors:
-                  </p>
                   <BadgeArray
                     variant="sector"
                     tooltipGetter={getSectorTooltip}
