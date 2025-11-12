@@ -73,7 +73,7 @@ export default function PublicationBlock({
         Data Source
       </h2>
 
-      <div className="flex items-center justify-between gap-4 rounded-2xl border border-neutral-200 p-4 shadow-sm bg-white">
+      <div className="flex items-start justify-between gap-4 rounded-2xl border border-neutral-200 p-4 shadow-sm bg-white">
         <div className="text-rmigray-700 mb-3 leading-relaxed">
           <p>{formatCitation(publication)}</p>
 
