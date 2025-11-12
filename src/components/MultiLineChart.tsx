@@ -6,6 +6,7 @@ import { groups } from "d3-array";
 import { extent } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { useRef, useEffect, useMemo } from "react";
+import { capitalizeWords } from "../utils/capitalizeWords";
 
 interface DataPoint {
   sector: string;
@@ -39,10 +40,10 @@ export default function MultiLineChart({
   data,
   width = 600,
   height = 400,
-  marginTop = 20,
+  marginTop = 40,
   marginRight = 80,
   marginBottom = 30,
-  marginLeft = 40,
+  marginLeft = 50,
   sector = "power",
   metric = "capacity",
 }: MultiLineChartProps) {
@@ -56,6 +57,7 @@ export default function MultiLineChart({
   const gy = useRef<SVGGElement>(null);
   const lines = useRef<SVGGElement>(null);
   const dots = useRef<SVGGElement>(null);
+  const title = useRef<SVGGElement>(null);
   const selectRef = useRef<HTMLSelectElement>(null);
 
   // Memoize scales and data transformations
@@ -63,9 +65,19 @@ export default function MultiLineChart({
     const parse = utcParse("%Y");
     const years = extent(d3data, (d) => parse(d.year));
     const values = extent(d3data, (d) => d.value);
-    const xticks = Array.from(new Set(d3data.map((d) => d.year))).map(parse);
+    const xticks = Array.from(new Set(d3data.map((d) => d.year)))
+      .map(parse)
+      .filter(
+        (d, i): d is Date =>
+          d !== null && (i === 0 || d.getUTCFullYear() % 10 === 0),
+      );
 
-    if (!years[0] || !years[1] || !values[0] || !values[1]) {
+    if (
+      !years[0] ||
+      !years[1] ||
+      (!values[0] && values[0] !== 0) ||
+      (!values[1] && values[1] !== 0)
+    ) {
       return null;
     }
 
@@ -90,6 +102,7 @@ export default function MultiLineChart({
       !gx.current ||
       !gy.current ||
       !lines.current ||
+      !title.current ||
       !chartSetup
     )
       return;
@@ -103,13 +116,25 @@ export default function MultiLineChart({
       unknown
     >;
 
+    // Update title
+    const unit = d3data[0]?.unit || "";
+    select(title.current)
+      .selectAll("text")
+      .data([`${capitalizeWords(sector)} ${capitalizeWords(metric)} [${unit}]`])
+      .join("text")
+      .attr("x", width / 2)
+      .attr("y", marginTop - 5)
+      .attr("text-anchor", "middle")
+      .attr("font-size", "16px")
+      .attr("font-weight", "bold")
+      .text((d) => d);
+
     // Update X axis
     select(gx.current)
       .transition()
       .duration(750)
       .call(axisBottom(x).tickValues(xticks))
-      .style("font-size", "14px")
-      .style("font-weight", "bold");
+      .style("font-size", "14px");
 
     // Update Y axis
     select(gy.current)
@@ -143,20 +168,21 @@ export default function MultiLineChart({
       .attr("data-technology", (d) => d[1][0].technology)
       .attr("data-unit", (d) => d[1][0].unit);
 
-    // Update labels
+    // Update labels with capitalized technology names
     (
       select(lines.current)
         .selectAll<SVGTextElement, GroupedData>(".label")
         .data(groupedData)
         .join("text") as UpdateSelection
     )
-      .text((d) => d[0])
+      .text((d) => capitalizeWords(d[0]))
       .attr("class", "label")
       .attr("x", (d) => x(chartSetup.parse(d[1][d[1].length - 1].year) as Date))
       .attr("y", (d) => y(d[1][d[1].length - 1].value))
       .attr("dx", "12")
-      .attr("dy", "5");
-  }, [d3data, chartSetup]);
+      .attr("dy", "5")
+      .attr("font-size", "12px");
+  }, [d3data, chartSetup, sector, metric, marginTop, width]);
 
   const highlightSelectedTech = (selectedTech: string): void => {
     if (!lines.current) return;
@@ -180,29 +206,13 @@ export default function MultiLineChart({
   };
 
   return (
-    <>
-      <label>
-        Highlight:
-        <select
-          ref={selectRef}
-          onChange={(e) => highlightSelectedTech(e.target.value)}
-        >
-          {data &&
-            uniqueTechs(data).map((tech) => (
-              <option
-                key={tech}
-                value={tech}
-              >
-                {tech}
-              </option>
-            ))}
-        </select>
-      </label>
+    <div className="flex flex-col items-center">
       <svg
         ref={ref}
         width={width}
         height={height}
       >
+        <g ref={title} />
         <g
           ref={gx}
           transform={`translate(0, ${height - marginBottom})`}
@@ -214,6 +224,26 @@ export default function MultiLineChart({
         <g ref={lines} />
         <g ref={dots} />
       </svg>
-    </>
+      <div className="mt-4">
+        <label className="mr-2">
+          Highlight:
+          <select
+            ref={selectRef}
+            onChange={(e) => highlightSelectedTech(e.target.value)}
+            className="ml-2 p-1 border rounded"
+          >
+            {data &&
+              uniqueTechs(data).map((tech) => (
+                <option
+                  key={tech}
+                  value={tech}
+                >
+                  {capitalizeWords(tech)}
+                </option>
+              ))}
+          </select>
+        </label>
+      </div>
+    </div>
   );
 }
