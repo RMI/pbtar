@@ -2,7 +2,7 @@
   "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
   "pathwayId": ["TZ-ISG-2024"],
   "id": "TZ-ISG-2024_TS",
-  "name": "Indonesia Supergrid (ISG)",
+  "name": "Indonesia Supergrid (ISG) Timeseries Data",
   "description": "ASEAN power model with significant new regional and interisland transmission in Indonesia.",
   "publisher": "TransitionZero",
   "publicationName": "From Vision to Voltage\nOpen Access Modelling of the ASEAN Power Grid with TZ-APG",

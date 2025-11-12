@@ -2,7 +2,7 @@
   "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
   "pathwayId": ["TZ-REGI-2024"],
   "id": "TZ-REGI-2024_TS",
-  "name": "Regional Interconnection (REGI)",
+  "name": "Regional Interconnection (REGI) Timeseries Data",
   "description": "ASEAN power model with significant new regional transmission infrastructure.",
   "publisher": "TransitionZero",
   "publicationName": "From Vision to Voltage\nOpen Access Modelling of the ASEAN Power Grid with TZ-APG",
