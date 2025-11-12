@@ -5,13 +5,7 @@ const EnvironmentBanner: React.FC = () => {
 
   const isProd = mode === "production"; // boolean at build time
   if (isProd) {
-    return (
-      <div
-        className={`bg-yellow-500 text-white text-center py-1 text-sm font-medium sticky top-0 z-50`}
-      >
-        This site is under development
-      </div>
-    );
+    return null;
   }
 
   function getBgColor(mode: string): string {
