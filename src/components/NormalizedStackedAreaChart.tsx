@@ -73,7 +73,7 @@ export default function NormalizedStackedAreaChart({
     if (uniq_years_count === 1) {
       return { flag: true, year: [...years] };
     } else {
-      return { flag: false, year: 0 };
+      return { flag: false, year: [0] };
     }
   });
 
