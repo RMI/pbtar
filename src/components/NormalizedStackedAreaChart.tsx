@@ -102,7 +102,7 @@ export default function NormalizedStackedAreaChart({
   const chartSetup = useMemo(() => {
     const parse = utcParse("%Y");
     const years = extent(d3data, (d) => parse(d.year) ?? new Date());
-    
+
     let xticks = [];
     if (onlyOneYear.flag) {
       xticks = [parse(onlyOneYear.year)];
@@ -114,7 +114,7 @@ export default function NormalizedStackedAreaChart({
             d !== null && (i === 0 || d.getUTCFullYear() % 10 === 0),
         );
     }
-    
+
     if (!years[0] || !years[1]) {
       return null;
     }
