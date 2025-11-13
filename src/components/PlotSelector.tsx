@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState, useMemo } from "react";
 import NormalizedStackedAreaChart from "./NormalizedStackedAreaChart";
 import MultiLineChart from "./MultiLineChart";
 import VerticalBarChart from "./VerticalBarChart";
+import { geographyLabel } from "../utils/geographyUtils";
 
 interface DataPoint {
   sector: string;
@@ -248,7 +249,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
                   key={geo}
                   value={geo}
                 >
-                  {geo}
+                  {geographyLabel(geo)}
                 </option>
               ))}
             </select>
