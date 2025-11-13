@@ -24,7 +24,7 @@ interface ChartData {
 
 interface OnlyOneYearBoolean {
   flag: boolean;
-  year: number;
+  year: number[];
 }
 
 interface NormalizedStackedAreaChartProps {
