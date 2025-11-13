@@ -72,7 +72,7 @@ describe("PathwayCard component", () => {
     const titleText = titleEl.textContent ?? "";
     expect(titleText).toContain(
       mockPathway.publication.publisher.short ??
-        mockPathway.publication.publisher.full,
+      mockPathway.publication.publisher.full,
     );
     expect(titleText).toContain(mockPathway.name.full);
   });
@@ -120,9 +120,9 @@ describe("PathwayCard component", () => {
   it("shows publisher information", () => {
     renderPathwayCard();
 
-    expect(screen.getByText("Publisher:")).toBeInTheDocument();
+    expect(screen.getByText("Publication:")).toBeInTheDocument();
     expect(
-      screen.getByText(mockPathway.publication.publisher.full),
+      screen.getByText(mockPathway.publication.title.full),
     ).toBeInTheDocument();
   });
 
@@ -463,7 +463,7 @@ describe("tooltip functionality", () => {
 
       expect(() => renderWithRouter(s, "rmi")).not.toThrow();
       // Card chrome still there
-      expect(screen.getByText("Publisher:")).toBeInTheDocument();
+      expect(screen.getByText("Publication:")).toBeInTheDocument();
       // No “[object Object]” leaks
       expect(document.body.textContent).not.toContain("[object Object]");
     });
