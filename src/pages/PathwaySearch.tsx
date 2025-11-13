@@ -9,7 +9,10 @@ import { SearchFilters, PathwayMetadataType } from "../types";
 const PathwaySearch: React.FC = () => {
   // Ref for the top section to handle scrolling
   const topSectionRef = useRef<HTMLDivElement>(null);
+  // Ref for the search section to detect sticky state
   const searchSectionRef = useRef<HTMLDivElement>(null);
+
+  // State to track if search section is sticky
   const [isSticky, setIsSticky] = useState(false);
 
   const [filters, setFilters] = useState<SearchFilters>({
@@ -25,6 +28,8 @@ const PathwaySearch: React.FC = () => {
   const [filteredPathways, setFilteredPathways] =
     useState<PathwayMetadataType[]>(pathwayMetadata);
   const [isFiltering, setIsFiltering] = useState(false);
+
+  // Track previous filter state to detect changes
   const prevFiltersRef = useRef<SearchFilters>(filters);
 
   useEffect(() => {
@@ -33,6 +38,7 @@ const PathwaySearch: React.FC = () => {
       const result = filterPathways(pathwayMetadata, filters);
       setFilteredPathways(result);
 
+      // Check if filters have changed meaningfully
       const hasFilterChanged =
         filters.searchTerm !== prevFiltersRef.current.searchTerm ||
         filters.pathwayType !== prevFiltersRef.current.pathwayType ||
@@ -43,31 +49,37 @@ const PathwaySearch: React.FC = () => {
         filters.sector !== prevFiltersRef.current.sector ||
         filters.metric !== prevFiltersRef.current.metric;
 
+      // Scroll to top when filters change
       if (hasFilterChanged && topSectionRef.current) {
         window.scrollTo({
-          top: topSectionRef.current.offsetTop - 20,
+          top: topSectionRef.current.offsetTop - 20, // Slight offset for better UX
           behavior: "smooth",
         });
       }
 
+      // Update the previous filters reference
       prevFiltersRef.current = { ...filters };
+
       setTimeout(() => setIsFiltering(false), 300);
     };
 
     applyFilters();
   }, [filters]);
 
+  // Detect sticky state
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const threshold = topSectionRef.current?.offsetTop || 0;
 
+      // Only update if state actually changes (performance optimization)
       if (scrollPosition > threshold !== isSticky) {
         setIsSticky(scrollPosition > threshold);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
+    // Initialize on mount
     handleScroll();
 
     return () => {
