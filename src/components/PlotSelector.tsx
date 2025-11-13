@@ -138,7 +138,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
         return (
           <div className="flex flex-col items-center">
             <NormalizedStackedAreaChart
-              key={`${datasetId}-technology-mix`}
+              key={`${datasetId}-${selectedPlot}-${selectedGeography}`}
               data={filteredData}
               width={450}
               height={300}
@@ -151,7 +151,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
         return (
           <div className="flex flex-col items-center">
             <VerticalBarChart
-              key={`${datasetId}-absolute-emissions`}
+              key={`${datasetId}-${selectedPlot}-${selectedGeography}`}
               data={filteredData}
               width={450}
               height={300}
@@ -163,7 +163,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
         return (
           <div className="flex flex-col items-center">
             <VerticalBarChart
-              key={`${datasetId}-emissions-intensity`}
+              key={`${datasetId}-${selectedPlot}-${selectedGeography}`}
               data={filteredData}
               width={450}
               height={300}
@@ -175,7 +175,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
         return (
           <div className="flex flex-col items-center">
             <MultiLineChart
-              key={`${datasetId}-capacity`}
+              key={`${datasetId}-${selectedPlot}-${selectedGeography}`}
               data={filteredData}
               width={450}
               height={300}
@@ -187,7 +187,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
         return (
           <div className="flex flex-col items-center">
             <MultiLineChart
-              key={`${datasetId}-generation`}
+              key={`${datasetId}-${selectedPlot}-${selectedGeography}`}
               data={filteredData}
               width={450}
               height={300}
