@@ -118,7 +118,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
                   (pathway.publication.publisher.short
                     ? pathway.publication.publisher.short
                     : pathway.publication.publisher.full) +
-                  " - " +
+                  ": " +
                   pathway.name.full
                 }
                 searchTerm={searchTerm}
