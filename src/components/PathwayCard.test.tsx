@@ -62,14 +62,24 @@ describe("PathwayCard component", () => {
     );
   };
 
-  it("renders the pathway name and description", () => {
+  it("renders both publisher and pathway name in the title", () => {
     renderPathwayCard();
 
-    expect(
-      screen.getByText(
-        mockPathway.name.full + " (" + mockPathway.name.short + ")",
-      ),
-    ).toBeInTheDocument();
+    const titleEl = screen.getByRole("heading", { level: 2 });
+    expect(titleEl).toBeInTheDocument();
+
+    // assert that both strings appear somewhere in the same element
+    const titleText = titleEl.textContent ?? "";
+    expect(titleText).toContain(
+      mockPathway.publication.publisher.short ??
+        mockPathway.publication.publisher.full,
+    );
+    expect(titleText).toContain(mockPathway.name.full);
+  });
+
+  it("renders the pathway description", () => {
+    renderPathwayCard();
+
     expect(screen.getByText(mockPathway.description)).toBeInTheDocument();
   });
 
