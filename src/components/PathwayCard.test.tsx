@@ -72,7 +72,7 @@ describe("PathwayCard component", () => {
     const titleText = titleEl.textContent ?? "";
     expect(titleText).toContain(
       mockPathway.publication.publisher.short ??
-      mockPathway.publication.publisher.full,
+        mockPathway.publication.publisher.full,
     );
     expect(titleText).toContain(mockPathway.name.full);
   });
