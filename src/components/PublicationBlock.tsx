@@ -1,6 +1,7 @@
 import React from "react";
 import { ExternalLink } from "lucide-react";
 import { PublicationType } from "../types";
+import AdditionalInfoBox from "./AdditionalInfoBox";
 
 type labelObj = PublicationType["publisher"];
 
@@ -68,46 +69,11 @@ export default function PublicationBlock({
   const authors = formatAuthors(publication.author);
 
   return (
-    <section>
-      <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
-        Data Source
-      </h2>
-
-      <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-        <div className="text-rmigray-700 mb-3 leading-relaxed">
-          <p>{formatCitation(publication)}</p>
-
-          {(publication.doi ||
-            publication.isbn ||
-            publication.issn ||
-            authors) && (
-            <div className="mt-2 flex flex-wrap gap-2 text-sm text-rmigray-700">
-              {authors && (
-                <span className="inline-block rounded bg-neutral-100 px-2 py-1 border border-neutral-200">
-                  {authors}
-                </span>
-              )}
-              {publication.doi && (
-                <span className="inline-block rounded bg-neutral-100 px-2 py-1 border border-neutral-200">
-                  DOI: {publication.doi}
-                </span>
-              )}
-              {publication.isbn && (
-                <span className="inline-block rounded bg-neutral-100 px-2 py-1 border border-neutral-200">
-                  ISBN: {publication.isbn}
-                </span>
-              )}
-              {publication.issn && (
-                <span className="inline-block rounded bg-neutral-100 px-2 py-1 border border-neutral-200">
-                  ISSN: {publication.issn}
-                </span>
-              )}
-            </div>
-          )}
-        </div>
-
-        {links.length > 0 && (
-          <div className="flex flex-col sm:flex-row gap-3">
+    <AdditionalInfoBox
+      title="Data Source"
+      actions={
+        links.length > 0 ? (
+          <div className="flex flex-col gap-2">
             {links.map((l, i) => (
               <a
                 key={`${l.url}-${i}`}
@@ -124,8 +90,40 @@ export default function PublicationBlock({
               </a>
             ))}
           </div>
+        ) : undefined
+      }
+    >
+      <div className="text-rmigray-700 mb-3 leading-relaxed">
+        <p>{formatCitation(publication)}</p>
+
+        {(publication.doi ||
+          publication.isbn ||
+          publication.issn ||
+          authors) && (
+          <div className="mt-2 flex flex-wrap gap-2 text-sm text-rmigray-700">
+            {authors && (
+              <span className="inline-block rounded bg-neutral-100 px-2 py-1 border border-neutral-200">
+                {authors}
+              </span>
+            )}
+            {publication.doi && (
+              <span className="inline-block rounded bg-neutral-100 px-2 py-1 border border-neutral-200">
+                DOI: {publication.doi}
+              </span>
+            )}
+            {publication.isbn && (
+              <span className="inline-block rounded bg-neutral-100 px-2 py-1 border border-neutral-200">
+                ISBN: {publication.isbn}
+              </span>
+            )}
+            {publication.issn && (
+              <span className="inline-block rounded bg-neutral-100 px-2 py-1 border border-neutral-200">
+                ISSN: {publication.issn}
+              </span>
+            )}
+          </div>
         )}
       </div>
-    </section>
+    </AdditionalInfoBox>
   );
 }
