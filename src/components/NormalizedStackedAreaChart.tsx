@@ -22,6 +22,11 @@ interface ChartData {
   data: DataPoint[];
 }
 
+interface OnlyOneYearBoolean {
+  flag: boolean;
+  year: number;
+}
+
 interface NormalizedStackedAreaChartProps {
   data: ChartData;
   width?: number;
@@ -59,9 +64,32 @@ export default function NormalizedStackedAreaChart({
   sector = "power",
   metric = "technologyMix",
 }: NormalizedStackedAreaChartProps) {
-  const [d3data] = useState<DataPoint[]>(() =>
-    data.data.filter((d) => d.sector === sector && d.metric === metric),
-  );
+  const [onlyOneYear] = useState<OnlyOneYearBoolean[]>(() => {
+    const filteredData = data.data.filter(
+      (d) => d.sector === sector && d.metric === metric,
+    );
+    const years = new Set(filteredData.map((d) => d.year));
+    const uniq_years_count = years.size;
+    if (uniq_years_count === 1) {
+      return { flag: true, year: [...years] };
+    } else {
+      return { flag: false, year: 0 };
+    }
+  });
+
+  const [d3data] = useState<DataPoint[]>(() => {
+    const filteredData = data.data.filter(
+      (d) => d.sector === sector && d.metric === metric,
+    );
+    if (onlyOneYear.flag) {
+      const start = filteredData.map((d) => ({ ...d, year: d.year - 100 }));
+      const end = filteredData.map((d) => ({ ...d, year: d.year + 100 }));
+      const newdata = start.concat(filteredData).concat(end);
+      return newdata;
+    } else {
+      return filteredData;
+    }
+  });
 
   const ref = useRef<SVGSVGElement>(null);
   const gx = useRef<SVGGElement>(null);
@@ -74,12 +102,19 @@ export default function NormalizedStackedAreaChart({
   const chartSetup = useMemo(() => {
     const parse = utcParse("%Y");
     const years = extent(d3data, (d) => parse(d.year) ?? new Date());
-    const xticks = Array.from(new Set(d3data.map((d) => d.year)))
-      .map(parse)
-      .filter(
-        (d, i): d is Date =>
-          d !== null && (i === 0 || d.getUTCFullYear() % 10 === 0),
-      );
+    
+    let xticks = [];
+    if (onlyOneYear.flag) {
+      xticks = [parse(onlyOneYear.year)];
+    } else {
+      xticks = Array.from(new Set(d3data.map((d) => d.year)))
+        .map(parse)
+        .filter(
+          (d, i): d is Date =>
+            d !== null && (i === 0 || d.getUTCFullYear() % 10 === 0),
+        );
+    }
+    
     if (!years[0] || !years[1]) {
       return null;
     }
@@ -128,7 +163,16 @@ export default function NormalizedStackedAreaChart({
       .y1((d) => y(d[1]));
 
     return { x, y, series, area: areaGenerator, xticks, parse, technologies };
-  }, [d3data, width, height, marginLeft, marginRight, marginTop, marginBottom]);
+  }, [
+    d3data,
+    onlyOneYear,
+    width,
+    height,
+    marginLeft,
+    marginRight,
+    marginTop,
+    marginBottom,
+  ]);
 
   useEffect(() => {
     if (
