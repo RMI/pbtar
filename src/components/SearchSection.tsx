@@ -2,15 +2,9 @@ import React from "react";
 import SearchBox from "./SearchBox";
 import MultiSelectDropdown from "./MultiSelectDropdown";
 import { pathwayMetadata } from "../data/pathwayMetadata";
-import { SearchFilters, Geography } from "../types";
-import { makeGeographyOptions } from "../utils/searchUtils";
+import { SearchFilters } from "../types";
 import type { FacetMode } from "../utils/searchUtils";
-import {
-  buildOptionsFromValues,
-  hasAbsent,
-  withAbsentOption,
-} from "../utils/facets";
-import { ABSENT_FILTER_TOKEN } from "../utils/absent";
+import { getGlobalFacetOptions } from "../utils/searchUtils";
 
 interface SearchSectionProps {
   filters: SearchFilters;
@@ -46,42 +40,15 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     [filters.modes, onFilterChange],
   );
 
-  const pathwayTypeOptions = buildOptionsFromValues(
-    pathwayMetadata.map((d) => d.pathwayType),
-  );
-
-  const modelYearNetzeroOptions = buildOptionsFromValues(
-    pathwayMetadata.map((d) => d.modelYearNetzero),
-  );
-
-  const temperatureOptions = buildOptionsFromValues(
-    pathwayMetadata.map((d) => d.modelTempIncrease),
-  );
-
-  const geographyOptionsRaw: Geography[] = React.useMemo(
-    () => makeGeographyOptions(pathwayMetadata),
-    [],
-  ) as Geography[];
-  const sawAbsentGeography = hasAbsent(pathwayMetadata.map((d) => d.geography));
-  const geographyOptions = withAbsentOption(
-    geographyOptionsRaw,
-    sawAbsentGeography,
-  );
-
-  const sectorNames = pathwayMetadata.flatMap(
-    (d) => d.sectors?.map((s) => s.name) ?? [],
-  );
-  const sectorOptionsBase = buildOptionsFromValues(sectorNames);
-  const sawAbsentSectors = pathwayMetadata.some(
-    (d) => !d.sectors || d.sectors.length === 0,
-  );
-  const sectorOptions = sawAbsentSectors
-    ? [...sectorOptionsBase, { label: "None", value: ABSENT_FILTER_TOKEN }]
-    : sectorOptionsBase;
-
-  const metricOptions = buildOptionsFromValues(
-    pathwayMetadata.map((d) => d.metric).flat(),
-  );
+  // Single source of truth for option lists (global, data-driven)
+  const {
+    pathwayTypeOptions,
+    modelYearNetzeroOptions,
+    temperatureOptions,
+    geographyOptions,
+    sectorOptions,
+    metricOptions,
+  } = React.useMemo(() => getGlobalFacetOptions(pathwayMetadata), []);
 
   const areFiltersApplied =
     Boolean(filters.searchTerm) ||
