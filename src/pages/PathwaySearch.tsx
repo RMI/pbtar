@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import PathwayCard from "../components/PathwayCard";
 import SearchSection from "../components/SearchSection";
+import StepByStepGuide from "../components/StepByStepGuide";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 import { filterPathways } from "../utils/searchUtils";
 import { SearchFilters, PathwayMetadataType } from "../types";
@@ -86,11 +87,8 @@ const PathwaySearch: React.FC = () => {
     };
   }, [isSticky]);
 
-  const handleFilterChange = <T extends string | number>(
-    key: keyof SearchFilters,
-    value: T | null,
-  ) => {
-    setFilters((prev) => ({ ...prev, [key]: value }));
+  const handleFilterChange = (newFilters: SearchFilters) => {
+    setFilters(newFilters);
   };
 
   const handleSearch = () => {
@@ -110,7 +108,7 @@ const PathwaySearch: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 bg-gray-50">
       <section
         ref={topSectionRef}
         className="mb-8"
@@ -123,6 +121,12 @@ const PathwaySearch: React.FC = () => {
           relevant ones for your assessment needs.
         </p>
       </section>
+
+      <StepByStepGuide
+        filters={filters}
+        onFilterChange={handleFilterChange}
+      />
+
       <div
         ref={searchSectionRef}
         className={`sticky rounded-lg top-0 z-10 bg-gray-50 inset-x-0 transition-shadow duration-200 ${isSticky ? "shadow-md" : ""}`}
@@ -140,7 +144,9 @@ const PathwaySearch: React.FC = () => {
       </div>
 
       <div
-        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300 ${isFiltering ? "opacity-50" : "opacity-100"}`}
+        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300 bg-gray-50 ${
+          isFiltering ? "opacity-50" : "opacity-100"
+        }`}
       >
         {filteredPathways.map((pathway) => (
           <PathwayCard
