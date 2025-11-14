@@ -46,9 +46,7 @@ export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
   const sawAbsentSectors = pathways.some(
     (d) => !d.sectors || d.sectors.length === 0,
   );
-  const sectorOptions = sawAbsentSectors
-    ? [...sectorOptionsBase, { label: "None", value: ABSENT_FILTER_TOKEN }]
-    : sectorOptionsBase;
+  const sectorOptions = withAbsentOption(sectorOptionsBase, sawAbsentSectors);
 
   // Metric
   const metricOptions = buildOptionsFromValues(
