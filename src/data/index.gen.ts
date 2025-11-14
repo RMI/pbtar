@@ -152,6 +152,58 @@ export const index: TimeseriesIndex = {
         path: "/data/jrc/jrc-geco_reference-2025_timeseries.csv",
       },
     ],
+    "TZ-BAU-2024": [
+      {
+        datasetId: "TZ-BAU-2024_TS",
+        label: "Business as Usual (BAU)",
+        summary: {
+          rowCount: 418,
+          yearRange: [2023, 2035],
+          sectorCount: 1,
+          geographyCount: 11,
+        },
+        path: "/data/transitionzero/TZ-BAU-2024_timeseries.csv",
+      },
+    ],
+    "TZ-EBAU-2024": [
+      {
+        datasetId: "TZ-EBAU-2024_TS",
+        label: "Enhanced Business as Usual (EBAU)",
+        summary: {
+          rowCount: 418,
+          yearRange: [2023, 2035],
+          sectorCount: 1,
+          geographyCount: 11,
+        },
+        path: "/data/transitionzero/TZ-EBAU-2024_timeseries.csv",
+      },
+    ],
+    "TZ-ISG-2024": [
+      {
+        datasetId: "TZ-ISG-2024_TS",
+        label: "Indonesia Supergrid (ISG)",
+        summary: {
+          rowCount: 418,
+          yearRange: [2023, 2035],
+          sectorCount: 1,
+          geographyCount: 11,
+        },
+        path: "/data/transitionzero/TZ-ISG-2024_timeseries.csv",
+      },
+    ],
+    "TZ-REGI-2024": [
+      {
+        datasetId: "TZ-REGI-2024_TS",
+        label: "Regional Interconnection (REGI)",
+        summary: {
+          rowCount: 418,
+          yearRange: [2023, 2035],
+          sectorCount: 1,
+          geographyCount: 11,
+        },
+        path: "/data/transitionzero/TZ-REGI-2024_timeseries.csv",
+      },
+    ],
   },
   byDataset: {
     "ACE-ATS-2024_TS": {
@@ -274,6 +326,54 @@ export const index: TimeseriesIndex = {
         geographyCount: 6,
       },
       path: "/data/jrc/jrc-geco_reference-2025_timeseries.csv",
+    },
+    "TZ-BAU-2024_TS": {
+      datasetId: "TZ-BAU-2024_TS",
+      pathwayIds: ["TZ-BAU-2024"],
+      label: "Business as Usual (BAU)",
+      summary: {
+        rowCount: 418,
+        yearRange: [2023, 2035],
+        sectorCount: 1,
+        geographyCount: 11,
+      },
+      path: "/data/transitionzero/TZ-BAU-2024_timeseries.csv",
+    },
+    "TZ-EBAU-2024_TS": {
+      datasetId: "TZ-EBAU-2024_TS",
+      pathwayIds: ["TZ-EBAU-2024"],
+      label: "Enhanced Business as Usual (EBAU)",
+      summary: {
+        rowCount: 418,
+        yearRange: [2023, 2035],
+        sectorCount: 1,
+        geographyCount: 11,
+      },
+      path: "/data/transitionzero/TZ-EBAU-2024_timeseries.csv",
+    },
+    "TZ-ISG-2024_TS": {
+      datasetId: "TZ-ISG-2024_TS",
+      pathwayIds: ["TZ-ISG-2024"],
+      label: "Indonesia Supergrid (ISG)",
+      summary: {
+        rowCount: 418,
+        yearRange: [2023, 2035],
+        sectorCount: 1,
+        geographyCount: 11,
+      },
+      path: "/data/transitionzero/TZ-ISG-2024_timeseries.csv",
+    },
+    "TZ-REGI-2024_TS": {
+      datasetId: "TZ-REGI-2024_TS",
+      pathwayIds: ["TZ-REGI-2024"],
+      label: "Regional Interconnection (REGI)",
+      summary: {
+        rowCount: 418,
+        yearRange: [2023, 2035],
+        sectorCount: 1,
+        geographyCount: 11,
+      },
+      path: "/data/transitionzero/TZ-REGI-2024_timeseries.csv",
     },
   },
 } as const;
