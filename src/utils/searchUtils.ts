@@ -6,6 +6,87 @@ import {
 } from "./geographyUtils";
 import { matchesOptionalFacetAny, matchesOptionalFacetAll } from "./facets";
 import { ABSENT_FILTER_TOKEN } from "./absent";
+import { buildOptionsFromValues, hasAbsent, withAbsentOption } from "./facets";
+import type { LabeledOption } from "./facets";
+
+// ───────────────────────────────────────────────────────────────────────────────
+// Global facet option provider
+// Builds the dropdown option lists from pathway data in one place,
+// including consistent ABSENT/missing handling.
+// ───────────────────────────────────────────────────────────────────────────────
+export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
+  // Pathway Type
+  const pathwayTypeOptions = buildOptionsFromValues(
+    pathways.map((d) => d.pathwayType),
+  );
+
+  // Net Zero Year
+  const modelYearNetzeroOptions = buildOptionsFromValues(
+    pathways.map((d) => d.modelYearNetzero),
+  );
+
+  // Temperature
+  const temperatureOptions = buildOptionsFromValues(
+    pathways.map((d) => d.modelTempIncrease),
+  );
+
+  // Geography (structured options via makeGeographyOptions)
+  const geographyOptionsRaw = makeGeographyOptions(pathways) as Geography[];
+  const sawAbsentGeography = hasAbsent(pathways.map((d) => d.geography));
+  const geographyOptions = withAbsentOption(
+    geographyOptionsRaw as LabeledOption[],
+    sawAbsentGeography,
+  );
+
+  // Sector (flat names; include ABSENT when some pathways have no sectors)
+  const sectorNames = pathways.flatMap(
+    (d) => d.sectors?.map((s) => s.name) ?? [],
+  );
+  const sectorOptionsBase = buildOptionsFromValues(sectorNames);
+  const sawAbsentSectors = pathways.some(
+    (d) => !d.sectors || d.sectors.length === 0,
+  );
+  const sectorOptions = sawAbsentSectors
+    ? [...sectorOptionsBase, { label: "None", value: ABSENT_FILTER_TOKEN }]
+    : sectorOptionsBase;
+
+  // Metric
+  const metricOptions = buildOptionsFromValues(
+    pathways.map((d) => d.metric).flat(),
+  );
+
+  return {
+    pathwayTypeOptions,
+    modelYearNetzeroOptions,
+    temperatureOptions,
+    geographyOptions,
+    sectorOptions,
+    metricOptions,
+  };
+}
+
+// (Optional compatibility) If other code expects raw arrays, derive them here.
+export function getUniqueFilterValuesFromGlobalOptions(
+  pathways: PathwayMetadataType[],
+) {
+  const {
+    pathwayTypeOptions,
+    modelYearNetzeroOptions,
+    temperatureOptions,
+    geographyOptions,
+    sectorOptions,
+    metricOptions,
+  } = getGlobalFacetOptions(pathways);
+
+  return {
+    pathwayTypes: pathwayTypeOptions.map((o) => String(o.value)),
+    targetYears: modelYearNetzeroOptions.map((o) => Number(o.value)),
+    temperatures: temperatureOptions.map((o) => Number(o.value)),
+    geographies: geographyOptions.map((o: LabeledOption) => String(o.value)),
+    sectors: sectorOptions.map((o) => String(o.value)),
+    metrics: metricOptions.map((o) => String(o.value)),
+  };
+}
 
 export interface GeoOption {
   value: string; // raw (e.g., "CN", "Europe", "Global")
