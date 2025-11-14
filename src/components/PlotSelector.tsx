@@ -66,7 +66,11 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
   const hasDataForMetric = useCallback(
     (data: TimeSeries | null, metric: string): boolean => {
       if (!data?.data) return false;
-      return data.data.some((d) => d.metric === metric);
+      const filtered = data.data.filter((d) => d.metric === metric);
+      if (filtered.length === 0) return false;
+      // Only plot if there is more than one unique year
+      const uniqueYears = new Set(filtered.map((d) => d.year));
+      return uniqueYears.size > 1;
     },
     [],
   );

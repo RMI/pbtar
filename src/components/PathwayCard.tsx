@@ -30,6 +30,9 @@ const getTemperatureColor = (temp: number): string => {
   return "bg-rmired-400"; // Red for higher temperatures
 };
 
+const truncateText = (text: string, maxLength: number) =>
+  text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+
 const PathwayCard: React.FC<PathwayCardProps> = ({
   pathway,
   searchTerm = "",
@@ -183,34 +186,32 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
             </BadgeArray>
           </div>
         </div>
-
         <div className="mt-auto pt-3 border-t border-gray-100">
-          <div className="flex flex-col">
-            <div className="w-full mb-4">
-              <div className="flex justify-between items-center">
-                <div>
-                  <p className="text-xs text-rmigray-500">Publisher:</p>
-                  <p className="text-sm font-medium text-rmigray-800">
-                    <HighlightedText
-                      text={
-                        pathway.publication.publisher.short ||
-                        pathway.publication.publisher.full
-                      }
-                      searchTerm={searchTerm}
-                    />
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-xs text-rmigray-500">Published:</p>
-                  <p className="text-sm font-medium text-rmigray-800">
-                    <HighlightedText
-                      text={pathway.publication.year}
-                      searchTerm={searchTerm}
-                    />
-                  </p>
-                </div>
-              </div>
+          <div className="flex justify-between items-center mb-2">
+            <div>
+              <p className="text-xs text-rmigray-500">Publication:</p>
+              <p className="text-sm font-medium text-rmigray-800">
+                <HighlightedText
+                  text={truncateText(
+                    pathway.publication.title.short ||
+                      pathway.publication.title.full,
+                    40, // <-- set your desired max length here
+                  )}
+                  searchTerm={searchTerm}
+                />
+              </p>
             </div>
+            <div className="text-right">
+              <p className="text-xs text-rmigray-500">Published:</p>
+              <p className="text-sm font-medium text-rmigray-800">
+                <HighlightedText
+                  text={pathway.publication.year}
+                  searchTerm={searchTerm}
+                />
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col">
             <Link
               to={`/pathway/${pathway.id}`}
               className="bg-rmiblue-100 hover:bg-rmiblue-200 transition-colors duration-200 h-12 flex items-center justify-center w-full"
