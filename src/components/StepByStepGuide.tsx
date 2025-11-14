@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -13,17 +13,23 @@ import {
   Ruler,
 } from "lucide-react";
 import { SearchFilters } from "../types";
-import { getUniqueFilterValues } from "../utils/filterUtils";
+import { pathwayMetadata } from "../data/pathwayMetadata";
+import { getGlobalFacetOptions } from "../utils/searchUtils";
+import StepPageDefault, { StepOption } from "./StepPage";
 
-export interface FilterStep {
+export interface GuideStep {
   id: keyof SearchFilters;
   title: string;
   description: string;
   icon: React.ReactNode;
-  options: Array<{
-    id: string;
-    title: string;
-    value: string | number;
+  /** allow selecting multiple values on this page; default single */
+  multi?: boolean;
+  /** optional custom renderer; defaults to StepPage */
+  component?: React.FC<{
+    step: GuideStep;
+    options: StepOption[];
+    isSelected: (value: string | number) => boolean;
+    onSelect: (value: string | number) => void;
   }>;
 }
 
@@ -38,31 +44,57 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentView, setCurrentView] = useState<"home" | number>("home");
-  const filterValues = getUniqueFilterValues();
+  // Single source of truth for all facet options
+  const {
+    pathwayTypeOptions,
+    modelYearNetzeroOptions,
+    temperatureOptions,
+    geographyOptions,
+    sectorOptions,
+    metricOptions,
+  } = useMemo(() => getGlobalFacetOptions(pathwayMetadata), []);
 
-  const steps: FilterStep[] = [
+  // Normalize provider options -> tile-ready {id,title,value}
+  const normalize = (
+    arr: Array<{ value: string | number; label: string }>,
+  ): StepOption[] =>
+    arr.map((o) => ({ id: String(o.value), title: o.label, value: o.value }));
+  const optionsByFacet: Record<string, StepOption[]> = useMemo(
+    () => ({
+      pathwayType: normalize(pathwayTypeOptions),
+      modelYearNetzero: normalize(modelYearNetzeroOptions),
+      modelTempIncrease: normalize(temperatureOptions),
+      geography: normalize(geographyOptions),
+      sector: normalize(sectorOptions),
+      metric: normalize(metricOptions),
+    }),
+    [
+      pathwayTypeOptions,
+      modelYearNetzeroOptions,
+      temperatureOptions,
+      geographyOptions,
+      sectorOptions,
+      metricOptions,
+    ],
+  );
+
+  const steps: GuideStep[] = [
     {
       id: "pathwayType",
       title: "Pathway Type",
       description:
         "Different pathway types tell different stories about the future.",
       icon: <GitFork className="h-8 w-8" />,
-      options: filterValues.pathwayTypes.map((type) => ({
-        id: type,
-        title: type,
-        value: type,
-      })),
+      multi: false,
+      component: StepPageDefault,
     },
     {
       id: "modelYearNetzero",
       title: "Target Year",
       description: "Choose pathways based on their target net-zero year.",
       icon: <Timer className="h-8 w-8" />,
-      options: filterValues.targetYears.map((year) => ({
-        id: year.toString(),
-        title: year.toString(),
-        value: year,
-      })),
+      multi: false,
+      component: StepPageDefault,
     },
     {
       id: "modelTempIncrease",
@@ -70,44 +102,32 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       description:
         "Choose pathways aligned with different temperature outcomes.",
       icon: <Thermometer className="h-8 w-8" />,
-      options: filterValues.temperatures.map((temp) => ({
-        id: temp.toString(),
-        title: `${temp}°C`,
-        value: temp,
-      })),
+      multi: false,
+      component: StepPageDefault,
     },
     {
       id: "geography",
       title: "Geography",
       description: "Select pathways for specific geographical areas.",
       icon: <Earth className="h-8 w-8" />,
-      options: filterValues.geographies.map((geo) => ({
-        id: geo,
-        title: geo,
-        value: geo,
-      })),
+      multi: false,
+      component: StepPageDefault,
     },
     {
       id: "sector",
       title: "Sector",
       description: "Focus on pathways covering specific economic sectors.",
       icon: <Factory className="h-8 w-8" />,
-      options: filterValues.sectors.map((sector) => ({
-        id: sector,
-        title: sector,
-        value: sector,
-      })),
+      multi: false,
+      component: StepPageDefault,
     },
     {
       id: "metric",
       title: "Benchmark Metric",
       description: "Choose pathways with specific benchmark indicators.",
       icon: <Ruler className="h-8 w-8" />,
-      options: filterValues.metrics.map((metric) => ({
-        id: metric,
-        title: metric,
-        value: metric,
-      })),
+      multi: false,
+      component: StepPageDefault,
     },
   ];
 
@@ -123,16 +143,15 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         ? Number(optionValue)
         : optionValue;
 
-    if (Array.isArray(filters[stepId])) {
-      // Handle array values
-      const currentValues = (filters[stepId] as (string | number)[]) || [];
-      if (currentValues.includes(value)) {
-        newFilters[stepId] = currentValues.filter((v) => v !== value);
-      } else {
-        newFilters[stepId] = [...currentValues, value];
-      }
+    const multi = steps.find((s) => s.id === stepId)?.multi ?? false;
+    const curr = Array.isArray(filters[stepId])
+      ? ((filters[stepId] as (string | number)[]) ?? [])
+      : [];
+    if (multi) {
+      newFilters[stepId] = curr.includes(value)
+        ? curr.filter((v) => v !== value)
+        : [...curr, value];
     } else {
-      // Handle single values
       newFilters[stepId] = filters[stepId] === value ? null : value;
     }
 
@@ -211,40 +230,25 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         </div>
       ) : (
         <div className="space-y-6">
-          <div className="space-y-2">
-            <h3 className="text-xl font-semibold text-rmigray-800">
-              {steps[currentView].title}
-            </h3>
-            <p className="text-rmigray-600">
-              {steps[currentView].description}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-4 gap-4">
-            {steps[currentView].options.map((option) => {
-              const isSelected = isOptionSelected(
-                steps[currentView].id,
-                option.value,
-              );
-              return (
-                <button
-                  key={option.id}
-                  onClick={() =>
-                    handleOptionSelect(
-                      steps[currentView].id,
-                      option.value,
-                    )
-                  }
-                  className={`p-4 border rounded-lg transition-colors bg-gray-50 ${isSelected
-                    ? "border-energy bg-energy-50"
-                    : "hover:border-energy hover:bg-energy-50"
-                    }`}
-                >
-                  {option.title}
-                </button>
-              );
-            })}
-          </div>
+          {(() => {
+            const step = steps[currentView];
+            const Comp = step.component ?? StepPage;
+            const opts = optionsByFacet[step.id] ?? [];
+            const isSelected = (v: string | number) =>
+              Array.isArray(filters[step.id])
+                ? (filters[step.id] as (string | number)[]).includes(v)
+                : filters[step.id] === v;
+            return (
+              <Comp
+                step={step}
+                options={opts}
+                isSelected={isSelected}
+                onSelect={(v) => handleOptionSelect(step.id, v)}
+                title={step.title}
+                description={step.description}
+              />
+            );
+          })()}
 
           <div className="flex items-center justify-between mt-6">
             <div className="flex space-x-2">
@@ -252,8 +256,9 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                 <button
                   key={index}
                   onClick={() => setCurrentView(index)}
-                  className={`w-2 h-2 rounded-full ${currentView === index ? "bg-energy" : "bg-gray-300"
-                    }`}
+                  className={`w-2 h-2 rounded-full ${
+                    currentView === index ? "bg-energy" : "bg-gray-300"
+                  }`}
                 />
               ))}
             </div>
@@ -266,9 +271,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                 <Home className="h-5 w-5" />
               </button>
               <button
-                onClick={() =>
-                  setCurrentView(Math.max(0, (currentView) - 1))
-                }
+                onClick={() => setCurrentView(Math.max(0, currentView - 1))}
                 disabled={currentView === 0}
                 className="p-2 hover:text-energy disabled:opacity-50"
               >
@@ -276,9 +279,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
               </button>
               <button
                 onClick={() =>
-                  setCurrentView(
-                    Math.min(steps.length - 1, (currentView) + 1),
-                  )
+                  setCurrentView(Math.min(steps.length - 1, currentView + 1))
                 }
                 disabled={currentView === steps.length - 1}
                 className="p-2 hover:text-energy disabled:opacity-50"
