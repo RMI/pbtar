@@ -31,7 +31,7 @@ export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
   );
 
   // Geography (structured options via makeGeographyOptions)
-  const geographyOptionsRaw = makeGeographyOptions(pathways) as Geography[];
+  const geographyOptionsRaw: GeoOption[] = makeGeographyOptions(pathways);
   const sawAbsentGeography = hasAbsent(pathways.map((d) => d.geography));
   const geographyOptions = withAbsentOption(
     geographyOptionsRaw as LabeledOption[],
