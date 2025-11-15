@@ -96,7 +96,7 @@ export default function MultiLineChart({
       positions: number[],
       separation: number = 12,
       maxiter: number = 10,
-      maxerror: number = 1e-1
+      maxerror: number = 1e-1,
     ): number[] {
       positions = Array.from(positions);
       const n = positions.length;
