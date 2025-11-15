@@ -2,8 +2,7 @@ import { select, Selection } from "d3-selection";
 import { scaleUtc, scaleLinear } from "d3-scale";
 import { line } from "d3-shape";
 import { utcParse } from "d3-time-format";
-import { groups } from "d3-array";
-import { extent } from "d3-array";
+import { ascending, extent, groups, range } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { useRef, useEffect, useMemo } from "react";
 import { capitalizeWords } from "../utils/capitalizeWords";
@@ -93,7 +92,30 @@ export default function MultiLineChart({
       .x((d) => x(parse(d.year) as Date))
       .y((d) => y(d.value));
 
-    return { x, y, line: lineGenerator, xticks, parse };
+    function dodge(positions, separation = 12, maxiter = 10, maxerror = 1e-1) {
+      positions = Array.from(positions);
+      const n = positions.length;
+      if (!positions.every(isFinite)) throw new Error("invalid position");
+      if (!(n > 1)) return positions;
+      const index = range(positions.length);
+      for (let iter = 0; iter < maxiter; ++iter) {
+        index.sort((i, j) => ascending(positions[i], positions[j]));
+        let error = 0;
+        for (let i = 1; i < n; ++i) {
+          let delta = positions[index[i]] - positions[index[i - 1]];
+          if (delta < separation) {
+            delta = (separation - delta) / 2;
+            error = Math.max(error, delta);
+            positions[index[i - 1]] -= delta;
+            positions[index[i]] += delta;
+          }
+        }
+        if (error < maxerror) break;
+      }
+      return positions;
+    }
+
+    return { x, y, line: lineGenerator, xticks, parse, dodge };
   }, [d3data, width, height, marginLeft, marginRight, marginTop, marginBottom]);
 
   useEffect(() => {
@@ -107,7 +129,7 @@ export default function MultiLineChart({
     )
       return;
 
-    const { x, y, line: lineGenerator, xticks } = chartSetup;
+    const { x, y, line: lineGenerator, xticks, parse, dodge } = chartSetup;
 
     type UpdateSelection = Selection<
       SVGPathElement | SVGTextElement,
@@ -169,17 +191,27 @@ export default function MultiLineChart({
       .attr("data-unit", (d) => d[1][0].unit);
 
     // Update labels with capitalized technology names
+    const dodged = dodge(
+      groupedData.map((d) => y(d[1][d[1].length - 1].value)),
+    );
+
+    const labelData = groupedData.map((d, i) => ({
+      label: capitalizeWords(d[0]),
+      x: x(parse(d[1][d[1].length - 1].year) as Date),
+      y: dodged[i],
+    }));
+
     (
       select(lines.current)
         .selectAll<SVGTextElement, GroupedData>(".label")
-        .data(groupedData)
+        .data(labelData)
         .join("text") as UpdateSelection
     )
-      .text((d) => capitalizeWords(d[0]))
+      .text((d) => d.label)
       .attr("class", "label")
-      .attr("x", (d) => x(chartSetup.parse(d[1][d[1].length - 1].year) as Date))
-      .attr("y", (d) => y(d[1][d[1].length - 1].value))
-      .attr("dx", "12")
+      .attr("x", (d) => d.x)
+      .attr("y", (d) => d.y)
+      .attr("dx", "18")
       .attr("dy", "5")
       .attr("font-size", "12px");
   }, [d3data, chartSetup, sector, metric, marginTop, width]);
