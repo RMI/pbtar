@@ -92,7 +92,12 @@ export default function MultiLineChart({
       .x((d) => x(parse(d.year) as Date))
       .y((d) => y(d.value));
 
-    function dodge(positions, separation = 12, maxiter = 10, maxerror = 1e-1) {
+    function dodge(
+      positions: number[],
+      separation: number = 12,
+      maxiter: number = 10,
+      maxerror: number = 1e-1
+    ): number[] {
       positions = Array.from(positions);
       const n = positions.length;
       if (!positions.every(isFinite)) throw new Error("invalid position");
