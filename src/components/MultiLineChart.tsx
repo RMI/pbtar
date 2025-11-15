@@ -214,10 +214,10 @@ export default function MultiLineChart({
         .data(labelData)
         .join("text") as UpdateSelection
     )
-      .text((d) => d.label)
+      .text((d) => d.label as string)
       .attr("class", "label")
-      .attr("x", (d) => d.x)
-      .attr("y", (d) => d.y)
+      .attr("x", (d) => d.x as number)
+      .attr("y", (d) => d.y as number)
       .attr("dx", "18")
       .attr("dy", "5")
       .attr("font-size", "12px");
