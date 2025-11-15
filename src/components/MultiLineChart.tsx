@@ -35,6 +35,8 @@ interface MultiLineChartProps {
 
 type GroupedData = [string, DataPoint[]];
 
+type LabelData = { label: string; x: number; y: number };
+
 export default function MultiLineChart({
   data,
   width = 600,
@@ -208,7 +210,7 @@ export default function MultiLineChart({
 
     (
       select(lines.current)
-        .selectAll<SVGTextElement, GroupedData>(".label")
+        .selectAll<SVGTextElement, LabelData>(".label")
         .data(labelData)
         .join("text") as UpdateSelection
     )
