@@ -155,20 +155,9 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         : [...curr, normalized];
       onFilterChange(stepId, next);
     } else {
-      const next = filters[stepId] === normalized ? null : (normalized as any);
+      const next = filters[stepId] === normalized ? null : normalized;
       onFilterChange(stepId, next);
     }
-  };
-
-  const isOptionSelected = (
-    stepId: keyof SearchFilters,
-    value: string | number,
-  ) => {
-    const currentValue = filters[stepId];
-    if (Array.isArray(currentValue)) {
-      return currentValue.includes(value);
-    }
-    return currentValue === value;
   };
 
   if (isCollapsed) {
@@ -234,7 +223,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         <div className="space-y-6">
           {(() => {
             const step = steps[currentView];
-            const Comp = step.component ?? StepPage;
+            const Comp = step.component ?? StepPageDefault;
             const opts = optionsByFacet[step.id] ?? [];
             const isSelected = (v: string | number) =>
               Array.isArray(filters[step.id])
