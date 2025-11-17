@@ -13,7 +13,8 @@ import {
 import { SearchFilters } from "../types";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 import { getGlobalFacetOptions } from "../utils/searchUtils";
-import { StepPageDiscrete, StepOption } from "./StepPage";
+import { StepPageDiscrete, StepOption, StepRendererProps } from "./StepPage";
+import StepPageRemap, { RemapCategory } from "./StepPageRemap";
 
 export interface GuideStep {
   id: keyof SearchFilters;
@@ -22,13 +23,8 @@ export interface GuideStep {
   icon: React.ReactNode;
   /** allow selecting multiple values on this page; default single */
   multi?: boolean;
-  /** optional custom renderer; defaults to StepPage */
-  component?: React.FC<{
-    step: GuideStep;
-    options: StepOption[];
-    isSelected: (value: string | number) => boolean;
-    onSelect: (value: string | number) => void;
-  }>;
+  /** Optional custom renderer; defaults to StepPageDiscrete. */
+  component?: React.FC<StepRendererProps>;
 }
 
 interface StepByStepGuideProps {
@@ -95,7 +91,55 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       description: "Select pathways for specific geographical areas.",
       icon: <Earth className="h-8 w-8" />,
       multi: false,
-      component: StepPageDiscrete,
+      // Use the remap renderer via the component field:
+      component: (props) => {
+        // Define your categories here (labels -> raw values).
+        // Use the raw values present in props.options[].value.
+        const values = (needle: string) =>
+          props.options
+            .filter((o) =>
+              String(o.title).toLowerCase().includes(needle.toLowerCase()),
+            )
+            .map((o) => o.value);
+
+        const categories: RemapCategory[] = [
+          {
+            label: "World / Global",
+            values: values("world").concat(values("global")),
+          },
+          {
+            label: "Continents",
+            values: values("europe")
+              .concat(values("asia"))
+              .concat(values("africa"))
+              .concat(values("ameri"))
+              .concat(values("ocean")),
+          },
+          {
+            label: "OECD & Groups",
+            values: values("oecd")
+              .concat(values("eu"))
+              .concat(values("g7"))
+              .concat(values("g20")),
+          },
+          {
+            label: "Major Economies",
+            values: values("united states")
+              .concat(values("china"))
+              .concat(values("india"))
+              .concat(values("japan"))
+              .concat(values("germany")),
+          },
+        ];
+
+        return (
+          <StepPageRemap
+            {...props}
+            categories={categories}
+            clampToAvailable
+          />
+        );
+      },
     },
     {
       id: "modelTempIncrease",
@@ -213,18 +257,33 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
             const step = steps[currentView];
             const Comp = step.component ?? StepPageDiscrete;
             const opts = optionsByFacet[step.id] ?? [];
-            const isSelected = (v: string | number) =>
-              Array.isArray(filters[step.id])
-                ? (filters[step.id] as (string | number)[]).includes(v)
-                : filters[step.id] === v;
+            const currentArray = Array.isArray(filters[step.id])
+              ? ((filters[step.id] as (string | number)[]) ?? [])
+              : filters[step.id] != null
+                ? [filters[step.id] as string | number]
+                : [];
+
+            const selectionMode: "single" | "multi" =
+              (step.multi ?? false) ? "multi" : "single";
+
+            const onChange = (next: Array<string | number>) =>
+              onFilterChange(
+                step.id,
+                next.length === 0 && selectionMode === "single"
+                  ? null
+                  : selectionMode === "single"
+                    ? next[0]
+                    : next,
+              );
+
             return (
               <Comp
-                step={step}
-                options={opts}
-                isSelected={isSelected}
-                onSelect={(v) => handleOptionSelect(step.id, v)}
                 title={step.title}
                 description={step.description}
+                options={opts}
+                value={currentArray}
+                selectionMode={selectionMode}
+                onChange={onChange}
               />
             );
           })()}
