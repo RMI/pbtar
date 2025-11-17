@@ -111,7 +111,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     {
       id: "metric",
       title: "Benchmark Metric",
-      description: "athways differ in the metrics they make available. Users interested in benchmarking applications should select their comparison metric. Investment-related analyses often use physical output metrics, climate targets often use emissions-related metrics.",
+      description:
+        "Pathways differ in the metrics they make available. Users interested in benchmarking applications should select their comparison metric. Investment-related analyses often use physical output metrics, climate targets often use emissions-related metrics.",
       icon: <Ruler className="h-8 w-8" />,
       multi: false,
       component: StepPageDiscrete,
