@@ -239,11 +239,16 @@ export default function MultiLineChart({
 
     dot.append("circle").attr("r", 2.5);
 
-    dot
-      .append("text")
-      .attr("text-anchor", "middle")
-      .attr("y", -8)
-      .attr("font-size", "12px");
+    const tooltipBoxElem = dot
+      .selectAll("path")
+      .data([,])
+      .join("path")
+      .attr("fill", "white")
+      .attr("stroke", "black")
+      .attr("stroke-width", 1)
+      .attr("stroke-linejoin", "round");
+
+    const tooltipTextElem = dot.selectAll("text").data([,]).join("text");
 
     svg
       .on("pointerenter", pointerentered)
@@ -256,15 +261,33 @@ export default function MultiLineChart({
       const [xm, ym] = pointer(event);
       const i = leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
       const [x, y, k, year, value, unit] = points[i];
+
       path
         .attr("stroke", (d) => (d[0] === k ? "var(--color-donate)" : "#ddd"))
         .attr("stroke-width", (d) => (d[0] === k ? 3 : 1))
         .filter((d) => d[0] === k)
         .raise();
+
       dot.attr("transform", `translate(${x},${y})`);
-      const tooltipText =
-        capitalizeWords(k) + ": " + value + " " + unit + " (" + year + ")";
-      dot.select("text").text(tooltipText);
+
+      const tooltipText = [
+        capitalizeWords(k) + ": " + year,
+        value + " " + unit,
+      ];
+
+      tooltipTextElem.call((text) =>
+        text
+          .selectAll("tspan")
+          .data(tooltipText)
+          .join("tspan")
+          .attr("x", 0)
+          .attr("y", (_, i) => `${i * 1.1}em`)
+          .attr("font-size", "12px")
+          .attr("font-weight", (_, i) => (i ? null : "bold"))
+          .text((d) => d),
+      );
+
+      size(tooltipTextElem, tooltipBoxElem);
     }
 
     function pointerentered() {
@@ -288,6 +311,15 @@ export default function MultiLineChart({
       const i = leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
       const selectedTech = points[i][2];
       console.log("clicked on: ", selectedTech);
+    }
+
+    function size(text, path) {
+      const { x, y, width: w, height: h } = text.node().getBBox();
+      text.attr("transform", `translate(${-w / 2},${15 - y})`);
+      path.attr(
+        "d",
+        `M${-w / 2 - 10},5H-5l5,-5l5,5H${w / 2 + 10}v${h + 20}h-${w + 20}z`,
+      );
     }
   }, [d3data, chartSetup, sector, metric, marginTop, width]);
 
