@@ -90,7 +90,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       title: "Geography",
       description: "Select pathways for specific geographical areas.",
       icon: <Earth className="h-8 w-8" />,
-      multi: true,
+      multi: false,
       // Use the remap renderer via the component field:
       component: (props) => {
         // Define your categories here (labels -> raw values).
@@ -264,15 +264,21 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
             const selectionMode: "single" | "multi" =
               (step.multi ?? false) ? "multi" : "single";
 
-            const onChange = (next: Array<string | number>) =>
+            const onChange = (next: Array<string | number>) => {
+              // Geography is array-valued even in "single" category mode
+              if (step.id === "geography") {
+                onFilterChange(step.id, next);
+                return;
+              }
               onFilterChange(
                 step.id,
-                next.length === 0 && selectionMode === "single"
-                  ? null
-                  : selectionMode === "single"
-                    ? next[0]
-                    : next,
+                selectionMode === "single"
+                  ? next.length === 0
+                    ? null
+                    : (next[0] as any)
+                  : (next as any),
               );
+            };
 
             return (
               <Comp

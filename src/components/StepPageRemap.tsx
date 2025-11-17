@@ -20,6 +20,7 @@ const StepPageRemap: React.FC<StepPageRemapProps> = ({
   description,
   options,
   value,
+  selectionMode,
   onChange,
   categories,
   clampToAvailable = true,
@@ -91,6 +92,7 @@ const StepPageRemap: React.FC<StepPageRemapProps> = ({
       description={description}
       options={categoryOptions}
       value={value}
+      selectionMode={selectionMode}
       mapSelect={(label) => {
         const cat = categories.find((c) => c.label === String(label));
         return cat ? normalize(cat.values) : [];
