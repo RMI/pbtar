@@ -271,7 +271,7 @@ export default function MultiLineChart({
       dot.attr("transform", `translate(${x},${y})`);
 
       const tooltipText = [
-        capitalizeWords(k) + ": " + year,
+        capitalizeWords(k as string) + ": " + year,
         value + " " + unit,
       ];
 
