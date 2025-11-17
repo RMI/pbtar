@@ -1,8 +1,8 @@
-import { select, Selection } from "d3-selection";
+import { pointer, select, Selection } from "d3-selection";
 import { scaleUtc, scaleLinear } from "d3-scale";
 import { line } from "d3-shape";
 import { utcParse } from "d3-time-format";
-import { ascending, extent, groups, range } from "d3-array";
+import { ascending, extent, groups, leastIndex, range } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { useRef, useEffect, useMemo } from "react";
 import { capitalizeWords } from "../utils/capitalizeWords";
@@ -221,6 +221,73 @@ export default function MultiLineChart({
       .attr("dx", "18")
       .attr("dy", "5")
       .attr("font-size", "12px");
+
+    // Add an invisible layer for the interactive tip.
+    const svg = select(ref.current);
+    const path = select(lines.current).selectAll("path");
+
+    const points = d3data.map((d) => [
+      x(parse(d.year)),
+      y(d.value),
+      d.technology,
+      d.year,
+      d.value,
+      d.unit,
+    ]);
+
+    const dot = svg.append("g").attr("display", "none");
+
+    dot.append("circle").attr("r", 2.5);
+
+    dot
+      .append("text")
+      .attr("text-anchor", "middle")
+      .attr("y", -8)
+      .attr("font-size", "12px");
+
+    svg
+      .on("pointerenter", pointerentered)
+      .on("pointermove", pointermoved)
+      .on("pointerleave", pointerleft)
+      .on("touchstart", (event) => event.preventDefault())
+      .on("click", pointerclick);
+
+    function pointermoved(event) {
+      const [xm, ym] = pointer(event);
+      const i = leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
+      const [x, y, k, year, value, unit] = points[i];
+      path
+        .attr("stroke", (d) => (d[0] === k ? "var(--color-donate)" : "#ddd"))
+        .attr("stroke-width", (d) => (d[0] === k ? 3 : 1))
+        .filter((d) => d[0] === k)
+        .raise();
+      dot.attr("transform", `translate(${x},${y})`);
+      const tooltipText = capitalizeWords(k) + ": " + value + " " + unit;
+      dot.select("text").text(tooltipText);
+    }
+
+    function pointerentered() {
+      path.style("mix-blend-mode", null).attr("stroke", "#ddd");
+      dot.attr("display", null);
+    }
+
+    function pointerleft() {
+      const selectedTech = selectRef.current?.value;
+      path
+        .style("mix-blend-mode", "multiply")
+        .attr("stroke", (d) =>
+          d[0] === selectedTech ? "var(--color-donate)" : "var(--color-coal)",
+        )
+        .attr("stroke-width", (d) => (d[0] === selectedTech ? 3 : 1));
+      dot.attr("display", "none");
+    }
+
+    function pointerclick(event) {
+      const [xm, ym] = pointer(event);
+      const i = leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
+      const selectedTech = points[i][2];
+      console.log("clicked on: ", selectedTech);
+    }
   }, [d3data, chartSetup, sector, metric, marginTop, width]);
 
   const highlightSelectedTech = (selectedTech: string): void => {
