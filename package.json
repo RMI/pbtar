@@ -41,7 +41,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-markdown": "^10.1.0",
-    "react-router-dom": "^7.9.5",
+    "react-router-dom": "^7.9.6",
     "rehype-external-links": "^3.0.0",
     "vite-plugin-static-copy": "^3.1.4"
   },
@@ -62,11 +62,11 @@
     "@types/d3-shape": "^3.1.7",
     "@types/d3-time-format": "^4.0.3",
     "@types/d3-transition": "^3.0.9",
-    "@types/node": "^24.10.0",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
-    "@vitejs/plugin-react": "^5.1.0",
-    "autoprefixer": "^10.4.21",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "autoprefixer": "^10.4.22",
     "chokidar-cli": "^3.0.0",
     "conventional-changelog-conventionalcommits": "^9.1.0",
     "cross-env": "^10.1.0",
@@ -75,7 +75,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "globals": "^16.5.0",
     "jiti": "^2.6.1",
-    "jsdom": "^27.1.0",
+    "jsdom": "^27.2.0",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
     "semantic-release": "^25.0.2",
@@ -83,9 +83,9 @@
     "tailwindcss": "^4.1.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.3",
+    "typescript-eslint": "^8.46.4",
     "vite": "^7.2.2",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.9"
   },
   "engines": {
     "node": ">=20.0.0"
