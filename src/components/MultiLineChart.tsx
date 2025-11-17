@@ -252,7 +252,7 @@ export default function MultiLineChart({
       .on("touchstart", (event) => event.preventDefault())
       .on("click", pointerclick);
 
-    function pointermoved(event) {
+    function pointermoved(event: PointerEvent) {
       const [xm, ym] = pointer(event);
       const i = leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
       const [x, y, k, year, value, unit] = points[i];
@@ -283,7 +283,7 @@ export default function MultiLineChart({
       dot.attr("display", "none");
     }
 
-    function pointerclick(event) {
+    function pointerclick(event: PointerEvent) {
       const [xm, ym] = pointer(event);
       const i = leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
       const selectedTech = points[i][2];
