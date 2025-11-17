@@ -91,12 +91,11 @@ const StepPageRemap: React.FC<StepPageRemapProps> = ({
       description={description}
       options={categoryOptions}
       value={value}
-      selectionMode="multi"
       mapSelect={(label) => {
         const cat = categories.find((c) => c.label === String(label));
         return cat ? normalize(cat.values) : [];
       }}
-      getState={(label) => (isCategorySelected(String(label)) ? "on" : "off")}
+      /* Omit getState — StepPageDiscrete will compute partial/on/off using mapSelect */
       onChange={onChange}
     />
   );
