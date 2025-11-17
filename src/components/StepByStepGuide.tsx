@@ -86,25 +86,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       id: "pathwayType",
       title: "Pathway Type",
       description:
-        "Different pathway types tell different stories about the future.",
+        "Different pathway types are constructed with different objectives, making them suited for different analytical applications. Analyses of ambitious scenarios, such as strategic target setting, often use normative pathways. Risk analyses often use predictive or explorative pathways.",
       icon: <GitFork className="h-8 w-8" />,
-      multi: false,
-      component: StepPageDiscrete,
-    },
-    {
-      id: "modelYearNetzero",
-      title: "Target Year",
-      description: "Choose pathways based on their target net-zero year.",
-      icon: <Timer className="h-8 w-8" />,
-      multi: false,
-      component: StepPageDiscrete,
-    },
-    {
-      id: "modelTempIncrease",
-      title: "Temperature Outcome",
-      description:
-        "Choose pathways aligned with different temperature outcomes.",
-      icon: <Thermometer className="h-8 w-8" />,
       multi: false,
       component: StepPageDiscrete,
     },
@@ -117,17 +100,18 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       component: StepPageDiscrete,
     },
     {
-      id: "sector",
-      title: "Sector",
-      description: "Focus on pathways covering specific economic sectors.",
-      icon: <Factory className="h-8 w-8" />,
+      id: "modelTempIncrease",
+      title: "Temperature Rise",
+      description:
+        "Pathways project different total temperature change by 2100, describing different levels of climate ambition and system change. Many regional and country pathways do not model a temperature rise.",
+      icon: <Thermometer className="h-8 w-8" />,
       multi: false,
       component: StepPageDiscrete,
     },
     {
       id: "metric",
       title: "Benchmark Metric",
-      description: "Choose pathways with specific benchmark indicators.",
+      description: "athways differ in the metrics they make available. Users interested in benchmarking applications should select their comparison metric. Investment-related analyses often use physical output metrics, climate targets often use emissions-related metrics.",
       icon: <Ruler className="h-8 w-8" />,
       multi: false,
       component: StepPageDiscrete,
@@ -199,10 +183,15 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       {currentView === "home" ? (
         <div className="space-y-6">
           <p className="text-rmigray-600">
-            Selecting the right pathways is the most critical step for a
-            successful assessment. A pathway is a story for a possible future.
-            Use our filters to find the pathways that best fit the story you
-            want to tell.
+            Different pathways are suited to different applications. All users
+            should be mindful of the model types and geographic coverage of the
+            pathways they select. Users interested in assessing the ambition of
+            transition strategies may wish to select pathways with suitable
+            temperature rise or emissions changes, while those interested in
+            assessing potential policy exposure or technical feasibility may
+            prioritize models with the relevant policy assumption set. The
+            following steps guide users through key pathway features, while
+            filters below offer additional options.
           </p>
           <div className="grid grid-cols-6 gap-10">
             {steps.map((step, index) => (
