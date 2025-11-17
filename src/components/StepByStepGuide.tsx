@@ -35,7 +35,10 @@ export interface GuideStep {
 
 interface StepByStepGuideProps {
   filters: SearchFilters;
-  onFilterChange: (filters: SearchFilters) => void;
+  onFilterChange: <T extends string | number | (string | number)[] | null>(
+    key: keyof SearchFilters,
+    value: T | null,
+  ) => void;
 }
 
 const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
@@ -135,10 +138,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     stepId: keyof SearchFilters,
     optionValue: string | number,
   ) => {
-    const newFilters = { ...filters };
-
-    // Convert string values to numbers for numeric fields
-    const value =
+    // Cast numeric steps
+    const normalized =
       stepId === "modelYearNetzero" || stepId === "modelTempIncrease"
         ? Number(optionValue)
         : optionValue;
@@ -147,15 +148,16 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     const curr = Array.isArray(filters[stepId])
       ? ((filters[stepId] as (string | number)[]) ?? [])
       : [];
-    if (multi) {
-      newFilters[stepId] = curr.includes(value)
-        ? curr.filter((v) => v !== value)
-        : [...curr, value];
-    } else {
-      newFilters[stepId] = filters[stepId] === value ? null : value;
-    }
 
-    onFilterChange(newFilters);
+    if (multi) {
+      const next = curr.includes(normalized)
+        ? curr.filter((v) => v !== normalized)
+        : [...curr, normalized];
+      onFilterChange(stepId, next);
+    } else {
+      const next = filters[stepId] === normalized ? null : (normalized as any);
+      onFilterChange(stepId, next);
+    }
   };
 
   const isOptionSelected = (

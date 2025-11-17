@@ -87,8 +87,11 @@ const PathwaySearch: React.FC = () => {
     };
   }, [isSticky]);
 
-  const handleFilterChange = (newFilters: SearchFilters) => {
-    setFilters(newFilters);
+  const handleFilterChange = <T extends string | number>(
+    key: keyof SearchFilters,
+    value: T | null,
+  ) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleSearch = () => {
