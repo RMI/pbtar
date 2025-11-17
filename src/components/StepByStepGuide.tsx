@@ -6,10 +6,8 @@ import {
   GitFork,
   Thermometer,
   Earth,
-  Factory,
   ChevronUp,
   ChevronDown,
-  Timer,
   Ruler,
 } from "lucide-react";
 import { SearchFilters } from "../types";
