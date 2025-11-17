@@ -15,7 +15,7 @@ import {
 import { SearchFilters } from "../types";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 import { getGlobalFacetOptions } from "../utils/searchUtils";
-import StepPageDefault, { StepOption } from "./StepPage";
+import { StepPageDiscrete, StepOption } from "./StepPage";
 
 export interface GuideStep {
   id: keyof SearchFilters;
@@ -89,7 +89,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         "Different pathway types tell different stories about the future.",
       icon: <GitFork className="h-8 w-8" />,
       multi: false,
-      component: StepPageDefault,
+      component: StepPageDiscrete,
     },
     {
       id: "modelYearNetzero",
@@ -97,7 +97,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       description: "Choose pathways based on their target net-zero year.",
       icon: <Timer className="h-8 w-8" />,
       multi: false,
-      component: StepPageDefault,
+      component: StepPageDiscrete,
     },
     {
       id: "modelTempIncrease",
@@ -106,7 +106,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         "Choose pathways aligned with different temperature outcomes.",
       icon: <Thermometer className="h-8 w-8" />,
       multi: false,
-      component: StepPageDefault,
+      component: StepPageDiscrete,
     },
     {
       id: "geography",
@@ -114,7 +114,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       description: "Select pathways for specific geographical areas.",
       icon: <Earth className="h-8 w-8" />,
       multi: false,
-      component: StepPageDefault,
+      component: StepPageDiscrete,
     },
     {
       id: "sector",
@@ -122,7 +122,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       description: "Focus on pathways covering specific economic sectors.",
       icon: <Factory className="h-8 w-8" />,
       multi: false,
-      component: StepPageDefault,
+      component: StepPageDiscrete,
     },
     {
       id: "metric",
@@ -130,7 +130,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       description: "Choose pathways with specific benchmark indicators.",
       icon: <Ruler className="h-8 w-8" />,
       multi: false,
-      component: StepPageDefault,
+      component: StepPageDiscrete,
     },
   ];
 
@@ -223,7 +223,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         <div className="space-y-6">
           {(() => {
             const step = steps[currentView];
-            const Comp = step.component ?? StepPageDefault;
+            const Comp = step.component ?? StepPageDiscrete;
             const opts = optionsByFacet[step.id] ?? [];
             const isSelected = (v: string | number) =>
               Array.isArray(filters[step.id])

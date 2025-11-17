@@ -14,7 +14,7 @@ export interface StepPageProps {
   onSelect: (value: string | number) => void;
 }
 
-const StepPageDefault: React.FC<StepPageProps> = ({
+export const StepPageDiscrete: React.FC<StepPageProps> = ({
   title,
   description,
   options,
@@ -49,5 +49,3 @@ const StepPageDefault: React.FC<StepPageProps> = ({
     </>
   );
 };
-
-export default StepPageDefault;
