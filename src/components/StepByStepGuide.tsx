@@ -90,7 +90,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       title: "Geography",
       description: "Select pathways for specific geographical areas.",
       icon: <Earth className="h-8 w-8" />,
-      multi: false,
+      multi: true,
       // Use the remap renderer via the component field:
       component: (props) => {
         // Define your categories here (labels -> raw values).
@@ -105,30 +105,28 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         const categories: RemapCategory[] = [
           {
             label: "World / Global",
-            values: values("world").concat(values("global")),
+            values: ["Global"],
           },
           {
-            label: "Continents",
-            values: values("europe")
-              .concat(values("asia"))
-              .concat(values("africa"))
-              .concat(values("ameri"))
-              .concat(values("ocean")),
+            label: "South America",
+            values: [
+              "AR",
+              "BO",
+              "BR",
+              "CL",
+              "CO",
+              "EC",
+              "GY",
+              "PE",
+              "PY",
+              "SR",
+              "UY",
+              "VE",
+            ],
           },
           {
-            label: "OECD & Groups",
-            values: values("oecd")
-              .concat(values("eu"))
-              .concat(values("g7"))
-              .concat(values("g20")),
-          },
-          {
-            label: "Major Economies",
-            values: values("united states")
-              .concat(values("china"))
-              .concat(values("india"))
-              .concat(values("japan"))
-              .concat(values("germany")),
+            label: "Oceania",
+            values: ["AU", "NZ", "FJ", "PG", "East Asia and Pacific"],
           },
         ];
 
