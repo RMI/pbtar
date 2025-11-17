@@ -262,7 +262,8 @@ export default function MultiLineChart({
         .filter((d) => d[0] === k)
         .raise();
       dot.attr("transform", `translate(${x},${y})`);
-      const tooltipText = capitalizeWords(k) + ": " + value + " " + unit;
+      const tooltipText =
+        capitalizeWords(k) + ": " + value + " " + unit + " (" + year + ")";
       dot.select("text").text(tooltipText);
     }
 
