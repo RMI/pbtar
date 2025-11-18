@@ -154,6 +154,12 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
             values: byKind("country"),
             description: "Information only for global averages",
           },
+          {
+            // Use a null array to unset filter
+            label: "Any Granularity",
+            values: [null],
+            description: "Includes all pathways",
+          },
         ];
         console.log("Rendering geography remap with options:", props);
         return (
