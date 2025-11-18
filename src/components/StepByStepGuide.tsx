@@ -225,9 +225,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
   return (
     <div className="bg-gray-50 p-4 md:p-6">
       <div className="max-w-6xl mx-auto">
-        {/* faint panel grouping the guide */}
         <div className="rounded-lg bg-white border border-neutral-200/70 p-4 md:p-6 shadow-sm">
-          {/* Header (rendered once) */}
           <div className="flex justify-between items-center mb-4">
             <div className="w-12" />
 
@@ -240,7 +238,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                 <button
                   onClick={() => setIsCollapsed(false)}
                   className="flex items-center gap-2 text-energy hover:text-energy-700 whitespace-nowrap flex-shrink-0"
-                  aria-label="Show guide"
                 >
                   <ChevronDown className="h-5 w-5" />
                   <span>Show guide</span>
@@ -257,7 +254,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
             </div>
           </div>
 
-          {/* Body: show the full guide when not collapsed */}
           {!isCollapsed ? (
             <>
               {currentView === "home" ? (
