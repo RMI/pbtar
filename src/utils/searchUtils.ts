@@ -320,7 +320,10 @@ export const filterPathways = (
         const hasAbsent = selected.includes(ABSENT_FILTER_TOKEN);
         const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
         const v = pathway.keyFeatures?.emissionsTrajectory ?? null;
-        const mode = pickMode("emissionsTrajectory", filters.modes as FilterModes);
+        const mode = pickMode(
+          "emissionsTrajectory",
+          filters.modes as FilterModes,
+        );
         let ok = true;
 
         if (mode === "ANY") {

@@ -176,7 +176,6 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           onModeChange={(m) => setMode("policyAmbition", m)}
           menuWidthClassName="w-60"
         />
-
       </div>
       <div className="mt-4 ml-1 flex items-center justify-between gap-3">
         <p className="text-sm text-rmigray-500">
