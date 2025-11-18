@@ -86,7 +86,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       "Minor decrease": "Decrease 5%-15% by 2050",
       "Moderate decrease": "Decrease 15%-50% by 2050",
       "Significant decrease": "Decrease more than 50% by 2050",
-      "None": "Include any emissions trajectory",
+      "": "Include any emissions trajectory",
     },
     policyAmbition: {
       "No policies included": "Excludes policy impacts.",
@@ -95,7 +95,15 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       "NDCs, unconditional only": "Policies to reach unconditional targets",
       "NDCs incl. conditional targets": "Policies to reach all targets",
       "Normative/Optimization-based": "Policies to reach a climate outcome.",
-      "None": "Include any policy ambition",
+      "": "Include any policy ambition",
+    },
+    metric: {
+      "Capacity": "Generation capacity by technology/fuel",
+      "Generation": "Generation by technology/fuel",
+      "Emissions": "Total GHG emissions",
+      "Emissions Intensity": "GHG emissions per quantity of generation",
+      "Technology Mix": "Share of generation by technology/fuel",
+      "": "Include any benchmark metric",
     },
   };
 
@@ -198,7 +206,10 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       icon: <Ruler className="h-8 w-8" />,
       multi: false,
       component: StepPageDiscrete,
-      options: optionsByFacet["metric"],
+      options: optionsByFacet["metric"].map((o) => ({
+        ...o,
+        description: descriptions["metric"][o.title] || undefined,
+      })),
     },
   ];
 
