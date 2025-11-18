@@ -22,7 +22,7 @@
   "expertOverview": "Example Expert Recommendation.",
   "metric": ["Emissions Intensity", "Technology Mix"],
   "keyFeatures": {
-    "emissionsPathway": "Minor decrease",
+    "emissionsTrajectory": "Minor decrease",
     "energyEfficiency": "Moderate improvement",
     "energyDemand": "Minor increase",
     "electrification": "Moderate increase",
