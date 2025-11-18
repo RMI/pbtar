@@ -222,152 +222,175 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     },
   ];
 
-  if (isCollapsed) {
-    return (
-      <div className="bg-gray-50 p-4">
-        <div className="flex justify-between items-center mb-4">
-          <div className="w-12" />
-          <div className="w-12 flex justify-end">
-            <button
-              onClick={() => setIsCollapsed(false)}
-              className="flex items-center text-energy hover:text-energy-700"
-            >
-              <ChevronDown className="h-5 w-5 mr-2" />
-              Show guide
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="bg-gray-50 p-6">
-      <div className="flex justify-between items-center mb-4">
-        <div className="w-12" />
-        <h2 className="text-2xl font-bold text-bluespruce text-center mx-auto">
-          Choose the right pathways for your needs
-        </h2>
-        <div className="w-12 flex justify-end">
-          <button
-            onClick={() => setIsCollapsed(true)}
-            className="text-energy hover:text-energy-700"
-          >
-            <ChevronUp className="h-5 w-5" />
-          </button>
-        </div>
-      </div>
+    <div className="bg-gray-50 p-4 md:p-6">
+      <div className="max-w-6xl mx-auto">
+        {/* faint panel grouping the guide */}
+        <div className="rounded-lg bg-white border border-neutral-200/70 p-4 md:p-6 shadow-sm">
+          {/* Header (rendered once) */}
+          <div className="flex justify-between items-center mb-4">
+            <div className="w-12" />
 
-      {currentView === "home" ? (
-        <div className="space-y-6">
-          <p className="text-rmigray-600">
-            Different pathways are suited to different applications. All users
-            should be mindful of the model types and geographic coverage of the
-            pathways they select. Users interested in assessing the ambition of
-            transition strategies may wish to select pathways with suitable
-            temperature rise or emissions changes, while those interested in
-            assessing potential policy exposure or technical feasibility may
-            prioritize models with the relevant policy assumption set. The
-            following steps guide users through key pathway features, while
-            filters below offer additional options.
-          </p>
-          <div className="grid grid-cols-6 gap-10">
-            {steps.map((step, index) => (
-              <button
-                key={step.id}
-                onClick={() => setCurrentView(index)}
-                className="aspect-square p-6 border rounded-lg bg-gray-50 hover:border-energy hover:bg-energy-50 transition-colors flex flex-col items-center justify-center"
-              >
-                <div className="flex flex-col items-center text-center">
-                  {step.icon}
-                  <span className="mt-2 text-lg font-normal">{step.title}</span>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <div className="space-y-6">
-          {(() => {
-            const step = steps[currentView];
-            const Comp = step.component ?? StepPageDiscrete;
-            const currentArray = Array.isArray(filters[step.id])
-              ? ((filters[step.id] as (string | number)[]) ?? [])
-              : filters[step.id] != null
-                ? [filters[step.id] as string | number]
-                : [];
+            <h2 className="text-lg md:text-2xl font-semibold text-bluespruce text-center mx-auto max-w-prose">
+              Choose the right pathways for your needs
+            </h2>
 
-            const selectionMode: "single" | "multi" =
-              (step.multi ?? false) ? "multi" : "single";
-
-            const onChange = (next: Array<string | number>) => {
-              // Geography is array-valued even in "single" category mode
-              if (step.id === "geography") {
-                onFilterChange(step.id, next);
-                return;
-              }
-              onFilterChange(
-                step.id,
-                selectionMode === "single"
-                  ? next.length === 0
-                    ? null
-                    : next[0]
-                  : next,
-              );
-            };
-
-            return (
-              <Comp
-                title={step.title}
-                description={step.description}
-                options={step.options}
-                value={currentArray}
-                selectionMode={selectionMode}
-                onChange={onChange}
-              />
-            );
-          })()}
-
-          <div className="flex items-center justify-between mt-6">
-            <div className="flex space-x-2">
-              {steps.map((_, index) => (
+            <div className="w-12 flex justify-end">
+              {isCollapsed ? (
                 <button
-                  key={index}
-                  onClick={() => setCurrentView(index)}
-                  className={`w-2 h-2 rounded-full ${
-                    currentView === index ? "bg-energy" : "bg-gray-300"
-                  }`}
-                />
-              ))}
-            </div>
-
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={() => setCurrentView("home")}
-                className="p-2 hover:text-energy"
-              >
-                <Home className="h-5 w-5" />
-              </button>
-              <button
-                onClick={() => setCurrentView(Math.max(0, currentView - 1))}
-                disabled={currentView === 0}
-                className="p-2 hover:text-energy disabled:opacity-50"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-              <button
-                onClick={() =>
-                  setCurrentView(Math.min(steps.length - 1, currentView + 1))
-                }
-                disabled={currentView === steps.length - 1}
-                className="p-2 hover:text-energy disabled:opacity-50"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
+                  onClick={() => setIsCollapsed(false)}
+                  className="flex items-center gap-2 text-energy hover:text-energy-700 whitespace-nowrap flex-shrink-0"
+                  aria-label="Show guide"
+                >
+                  <ChevronDown className="h-5 w-5" />
+                  <span>Show guide</span>
+                </button>
+              ) : (
+                <button
+                  onClick={() => setIsCollapsed(true)}
+                  className="text-energy hover:text-energy-700"
+                  aria-label="Collapse guide"
+                >
+                  <ChevronUp className="h-5 w-5" />
+                </button>
+              )}
             </div>
           </div>
+
+          {/* Body: show the full guide when not collapsed */}
+          {!isCollapsed ? (
+            <>
+              {currentView === "home" ? (
+                <div className="space-y-6">
+                  <div className="max-w-5xl mx-auto">
+                    <p className="text-rmigray-500 leading-relaxed">
+                      Different pathways are suited to different applications. All
+                      users should be mindful of the model types and geographic
+                      coverage of the pathways they select. Users interested in
+                      assessing the ambition of transition strategies may wish to
+                      select pathways with suitable temperature rise or emissions
+                      changes, while those interested in assessing potential policy
+                      exposure or technical feasibility may prioritize models with
+                      the relevant policy assumption set. The following steps guide
+                      users through key pathway features, while filters below offer
+                      additional options.
+                    </p>
+                  </div>
+
+                  <div className="mt-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                      {steps.map((step, index) => {
+                        return (
+                          <button
+                            type="button"
+                            key={step.id}
+                            onClick={() => setCurrentView(index)}
+                            aria-label={step.title}
+                            title={step.title}
+                            className={`group cursor-pointer p-3 rounded-lg bg-white text-rmigray-800 shadow-sm hover:shadow-md transition transform duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-rmiblue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white flex flex-col items-center justify-center gap-2 min-h-[76px]`}
+                          >
+                            <div
+                              className="flex items-center justify-center h-9 w-9 rounded-full bg-rmiblue-50 text-rmiblue-700 border border-rmiblue-200 group-hover:bg-rmiblue-100 group-focus:bg-rmiblue-100 transition-colors"
+                              aria-hidden="true"
+                            >
+                              {React.isValidElement(step.icon)
+                                ? React.cloneElement(step.icon as any, {
+                                  className: "h-4 w-4 stroke-current",
+                                })
+                                : step.icon}
+                            </div>
+
+                            <div className="mt-1 text-sm font-medium leading-tight text-center">
+                              {step.title}
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  {(() => {
+                    const step = steps[currentView];
+                    const Comp = step.component ?? StepPageDiscrete;
+                    const currentArray = Array.isArray(filters[step.id])
+                      ? ((filters[step.id] as (string | number)[]) ?? [])
+                      : filters[step.id] != null
+                        ? [filters[step.id] as string | number]
+                        : [];
+
+                    const selectionMode: "single" | "multi" =
+                      (step.multi ?? false) ? "multi" : "single";
+
+                    const onChange = (next: Array<string | number>) => {
+                      // Geography is array-valued even in "single" category mode
+                      if (step.id === "geography") {
+                        onFilterChange(step.id, next);
+                        return;
+                      }
+                      onFilterChange(
+                        step.id,
+                        selectionMode === "single" ? (next.length === 0 ? null : next[0]) : next,
+                      );
+                    };
+
+                    return (
+                      <Comp
+                        title={step.title}
+                        description={step.description}
+                        options={step.options}
+                        value={currentArray}
+                        selectionMode={selectionMode}
+                        onChange={onChange}
+                      />
+                    );
+                  })()}
+
+                  <div className="flex items-center justify-between mt-6">
+                    <div className="flex space-x-2">
+                      {steps.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentView(index)}
+                          className={`w-2 h-2 rounded-full ${currentView === index ? "bg-energy" : "bg-gray-300"}`}
+                        />
+                      ))}
+                    </div>
+
+                    <div className="flex items-center space-x-4">
+                      <button
+                        onClick={() => setCurrentView("home")}
+                        className="p-2 hover:text-energy"
+                      >
+                        <Home className="h-5 w-5" />
+                      </button>
+                      <button
+                        onClick={() => setCurrentView(Math.max(0, currentView - 1))}
+                        disabled={currentView === 0}
+                        className="p-2 hover:text-energy disabled:opacity-50"
+                      >
+                        <ChevronLeft className="h-5 w-5" />
+                      </button>
+                      <button
+                        onClick={() =>
+                          setCurrentView(Math.min(steps.length - 1, currentView + 1))
+                        }
+                        disabled={currentView === steps.length - 1}
+                        className="p-2 hover:text-energy disabled:opacity-50"
+                      >
+                        <ChevronRight className="h-5 w-5" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </>
+          ) : null}
         </div>
-      )}
+
+        <div className="h-4" />
+      </div>
     </div>
   );
 };
