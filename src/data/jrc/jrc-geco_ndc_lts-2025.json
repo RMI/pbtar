@@ -83,7 +83,7 @@
     "Absolute Emissions"
   ],
   "keyFeatures": {
-    "emissionsPathway": "Moderate decrease",
+    "emissionsTrajectory": "Moderate decrease",
     "energyEfficiency": "Significant improvement",
     "energyDemand": "Low or no change",
     "electrification": "Significant increase",

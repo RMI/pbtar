@@ -189,7 +189,7 @@
       "description": "Key features of the pathway.",
       "type": "object",
       "properties": {
-        "emissionsPathway": {
+        "emissionsTrajectory": {
           "description": "Describes the overall trend of greenhouse gas emissions over time, from continued growth to rapid decline.",
           "type": "string",
           "enum": [
@@ -368,7 +368,7 @@
       },
       "additionalProperties": false,
       "required": [
-        "emissionsPathway",
+        "emissionsTrajectory",
         "energyEfficiency",
         "energyDemand",
         "electrification",

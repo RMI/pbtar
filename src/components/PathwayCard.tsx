@@ -80,8 +80,8 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-neutral-200">
       <div className="flex items-stretch">
-        <div className="px-5 py-3 bg-neutral-100 flex-grow flex items-center">
-          <span className="text-sm font-medium text-rmigray-700 uppercase">
+        <div className="px-5 py-3 bg-neutral-100 flex-grow flex items-center min-w-0">
+          <span className="text-sm font-medium text-rmigray-700 uppercase truncate overflow-hidden whitespace-nowrap w-full">
             {highlightTextIfSearchMatch(pathway.pathwayType)} Pathway
           </span>
         </div>
@@ -98,12 +98,12 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
             </div>
           ) : null}
           {pathway.modelYearNetzero ? (
-            <div className="px-5 py-3 flex items-center bg-rmiblue-100">
+            <div className="px-5 py-3 flex items-center bg-rmiblue-100 min-w-[80px]">
               <div className="flex flex-col items-center">
-                <span className="text-[10px] text-rmigray-600 leading-tight h-[14px]">
+                <span className="text-[10px] text-rmigray-600 leading-tight h-[14px] whitespace-nowrap">
                   Net Zero By
                 </span>
-                <span className="text-sm font-medium text-rmigray-700">
+                <span className="text-sm font-medium text-rmigray-700 truncate overflow-hidden whitespace-nowrap max-w-[60px]">
                   {highlightTextIfSearchMatch(pathway.modelYearNetzero)}
                 </span>
               </div>
