@@ -37,56 +37,15 @@ const StepPageRemap: React.FC<StepPageRemapProps> = ({
 
   // Build synthetic UI options: each category becomes a single tile option
   const categoryOptions: StepOption[] = useMemo(() => {
-    const sel = new Set(value);
     return categories.map((cat) => {
-      const catValues = normalize(cat.values);
-      const selectedCount = catValues.reduce(
-        (acc, v) => acc + (sel.has(v) ? 1 : 0),
-        0,
-      );
-      const total = catValues.length;
-
-      // Show counts in the label; keeps shared UI unchanged
-      const labelWithCounts =
-        total > 0 ? `${cat.label} (${selectedCount}/${total})` : cat.label;
-
       return {
         id: cat.label,
-        title: labelWithCounts,
+        title: cat.label,
         description: cat.description,
         value: cat.label, // we use label as the synthetic value/key
       };
     });
-  }, [categories, value, normalize]);
-
-  // A category is "selected" when *all* of its raw values are selected
-  const isCategorySelected = (label: string): boolean => {
-    const cat = categories.find((c) => c.label === label);
-    if (!cat) return false;
-    const catValues = normalize(cat.values);
-    if (catValues.length === 0) return false;
-    const sel = new Set(value);
-    return catValues.every((v) => sel.has(v));
-  };
-
-  // Toggle: add/remove all mapped values
-  const toggleCategory = (label: string) => {
-    const cat = categories.find((c) => c.label === label);
-    if (!cat) return;
-    const catValues = normalize(cat.values);
-
-    const next = new Set(value);
-    const allSelected =
-      catValues.length > 0 && catValues.every((v) => next.has(v));
-
-    if (allSelected) {
-      catValues.forEach((v) => next.delete(v));
-    } else {
-      catValues.forEach((v) => next.add(v));
-    }
-
-    onChange(Array.from(next));
-  };
+  }, [categories]);
 
   return (
     <StepPageDiscrete
