@@ -17,6 +17,7 @@ import { pathwayMetadata } from "../data/pathwayMetadata";
 import { getGlobalFacetOptions } from "../utils/searchUtils";
 import { StepPageDiscrete, StepOption, StepRendererProps } from "./StepPage";
 import StepPageRemap, { RemapCategory } from "./StepPageRemap";
+import { geographyKind } from "../utils/geographyUtils.ts";
 
 export interface GuideStep {
   id: keyof SearchFilters;
@@ -130,29 +131,31 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       // Use the remap renderer via the component field:
       options: optionsByFacet["geography"],
       component: (props) => {
+        // Build categories from the actual options by *kind*, using option.id for routing
+        // and option.value for the underlying filter values.
+        const byKind = (k: "global" | "region" | "country") =>
+          (optionsByFacet["geography"] ?? [])
+            .filter((o) => geographyKind(String(o.id)) === k)
+            .map((o) => o.value);
+
         const categories: RemapCategory[] = [
           {
             label: "World / Global",
-            values: ["Global"],
+            values: byKind("global"),
             description: "Information only for global averages",
           },
           {
             label: "Regional",
-            values: ["Global"], // TODO: implement
+            values: byKind("region"),
             description: "Information for specific regions",
           },
           {
             label: "Information for individual countries",
-            values: ["Global"], // TODO: implement
+            values: byKind("country"),
             description: "Information only for global averages",
           },
-          {
-            label: "Any granularity",
-            values: ["Global"], // TODO: implement
-            description: "Includes all pathways",
-          },
         ];
-
+        console.log("Rendering geography remap with options:", props);
         return (
           <StepPageRemap
             {...props}
