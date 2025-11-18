@@ -63,8 +63,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       modelTempIncrease: normalize(globalFacetOptions["temperatureOptions"]),
       geography: normalize(globalFacetOptions["geographyOptions"]),
       metric: normalize(globalFacetOptions["metricOptions"]),
-      emissionsPathway: normalize(
-        globalFacetOptions["emissionsPathwayOptions"],
+      emissionsTrajectory: normalize(
+        globalFacetOptions["emissionsTrajectoryOptions"],
       ),
       policyAmbition: normalize(globalFacetOptions["policyAmbitionOptions"]),
     }),
@@ -153,14 +153,14 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       options: optionsByFacet["modelTempIncrease"],
     },
     {
-      id: "emissionsPathway",
-      title: "Emissions Pathway",
+      id: "emissionsTrajectory",
+      title: "Emissions Trajectory",
       description:
         "Pathways project different emissions scenarios, including pathways without an explicit temperature alignment. Users should select the level of change they wish to compare against.",
       icon: <CircleArrowOutUpRight className="h-8 w-8" />,
       multi: false,
       component: StepPageDiscrete,
-      options: optionsByFacet["emissionsPathway"],
+      options: optionsByFacet["emissionsTrajectory"],
     },
     {
       id: "policyAmbition",

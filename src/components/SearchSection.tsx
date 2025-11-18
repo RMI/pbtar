@@ -30,7 +30,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         | "geography"
         | "sector"
         | "metric"
-        | "emissionsPathway"
+        | "emissionsTrajectory"
         | "policyAmbition"
         | "pathwayType"
         | "modelYearNetzero"
@@ -50,7 +50,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     geographyOptions,
     sectorOptions,
     metricOptions,
-    emissionsPathwayOptions,
+    emissionsTrajectoryOptions,
     policyAmbitionOptions,
   } = React.useMemo(() => getGlobalFacetOptions(pathwayMetadata), []);
 
@@ -73,9 +73,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     (Array.isArray(filters.modelTempIncrease)
       ? filters.modelTempIncrease.length > 0
       : filters.modelTempIncrease != null) ||
-    (Array.isArray(filters.emissionsPathway)
-      ? filters.emissionsPathway.length > 0
-      : filters.emissionsPathway != null) ||
+    (Array.isArray(filters.emissionsTrajectory)
+      ? filters.emissionsTrajectory.length > 0
+      : filters.emissionsTrajectory != null) ||
     (Array.isArray(filters.policyAmbition)
       ? filters.policyAmbition.length > 0
       : filters.policyAmbition != null);
@@ -156,13 +156,13 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         />
 
         <MultiSelectDropdown<string>
-          label="Emissions Pathway"
-          options={emissionsPathwayOptions}
-          value={filters.emissionsPathway}
-          onChange={(arr) => onFilterChange("emissionsPathway", arr)}
+          label="Emissions Trajectory"
+          options={emissionsTrajectoryOptions}
+          value={filters.emissionsTrajectory}
+          onChange={(arr) => onFilterChange("emissionsTrajectory", arr)}
           showModeToggle={false}
-          mode={filters.modes?.emissionsPathway ?? "ANY"}
-          onModeChange={(m) => setMode("emissionsPathway", m)}
+          mode={filters.modes?.emissionsTrajectory ?? "ANY"}
+          onModeChange={(m) => setMode("emissionsTrajectory", m)}
           menuWidthClassName="w-60"
         />
 

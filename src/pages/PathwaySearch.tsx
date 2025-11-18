@@ -22,7 +22,7 @@ const PathwaySearch: React.FC = () => {
     geography: null,
     sector: null,
     metric: null,
-    emissionsPathway: null,
+    emissionsTrajectory: null,
     policyAmbition: null,
     searchTerm: "",
   });
@@ -108,7 +108,7 @@ const PathwaySearch: React.FC = () => {
       geography: null,
       sector: null,
       metric: null,
-      emissionsPathway: null,
+      emissionsTrajectory: null,
       policyAmbition: null,
       searchTerm: "",
     });

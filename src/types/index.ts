@@ -29,7 +29,7 @@ export interface SearchFilters {
   geography?: string | string[] | null;
   sector?: string | string[] | null;
   metric?: string | string[] | null;
-  emissionsPathway?: string | string[] | null;
+  emissionsTrajectory?: string | string[] | null;
   policyAmbition?: string | string[] | null;
   searchTerm: string;
   // Optional per-facet mode (used later by a UI toggle)
@@ -40,7 +40,7 @@ export interface SearchFilters {
     geography?: FacetMode;
     sector?: FacetMode;
     metric?: FacetMode;
-    emissionsPathway?: FacetMode;
+    emissionsTrajectory?: FacetMode;
     policyAmbition?: FacetMode;
   } | null;
 }

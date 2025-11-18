@@ -53,9 +53,9 @@ export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
     pathways.map((d) => d.metric).flat(),
   );
 
-  // Emissions pathway
-  const emissionsPathwayOptions = buildOptionsFromValues(
-    pathways.map((d) => d.keyFeatures.emissionsPathway).flat(),
+  // emissionsTrajectory
+  const emissionsTrajectoryOptions = buildOptionsFromValues(
+    pathways.map((d) => d.keyFeatures.emissionsTrajectory).flat(),
   );
 
   // Policy ambition
@@ -70,7 +70,7 @@ export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
     geographyOptions,
     sectorOptions,
     metricOptions,
-    emissionsPathwayOptions,
+    emissionsTrajectoryOptions,
     policyAmbitionOptions,
   };
 }
@@ -89,7 +89,7 @@ export type FilterModes = Partial<{
   geography: FacetMode;
   sector: FacetMode;
   metric: FacetMode;
-  emissionsPathway: FacetMode;
+  emissionsTrajectory: FacetMode;
   policyAmbition: FacetMode;
 }>;
 
@@ -108,7 +108,7 @@ export type FiltersWithArrays = {
   geography?: Arrayable;
   sector?: Arrayable;
   metric?: Arrayable;
-  emissionsPathway?: Arrayable;
+  emissionsTrajectory?: Arrayable;
   policyAmbition?: Arrayable;
   pathwayType?: Arrayable;
   modelYearNetzero?: Arrayable;
@@ -313,14 +313,14 @@ export const filterPathways = (
       if (!ok) return false;
     }
 
-    // emissionsPathway filter
+    // emissionsTrajectory filter
     {
-      const selected = toArray(filters.emissionsPathway);
+      const selected = toArray(filters.emissionsTrajectory);
       if (selected.length) {
         const hasAbsent = selected.includes(ABSENT_FILTER_TOKEN);
         const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
-        const v = pathway.keyFeatures?.emissionsPathway ?? null;
-        const mode = pickMode("emissionsPathway", filters.modes as FilterModes);
+        const v = pathway.keyFeatures?.emissionsTrajectory ?? null;
+        const mode = pickMode("emissionsTrajectory", filters.modes as FilterModes);
         let ok = true;
 
         if (mode === "ANY") {
