@@ -46,7 +46,7 @@ const PathwaySearch: React.FC = () => {
         filters.pathwayType !== prevFiltersRef.current.pathwayType ||
         filters.modelYearNetzero !== prevFiltersRef.current.modelYearNetzero ||
         filters.modelTempIncrease !==
-          prevFiltersRef.current.modelTempIncrease ||
+        prevFiltersRef.current.modelTempIncrease ||
         filters.geography !== prevFiltersRef.current.geography ||
         filters.sector !== prevFiltersRef.current.sector ||
         filters.metric !== prevFiltersRef.current.metric;
@@ -120,7 +120,7 @@ const PathwaySearch: React.FC = () => {
         filters={filters}
         onFilterChange={handleFilterChange}
       />
-      <div class="mt-6 border-t border-slate-200"></div>
+      <div class="border-t border-slate-200"></div>
       <div
         ref={searchSectionRef}
         className={`sticky rounded-lg top-0 z-10 bg-gray-50 inset-x-0 transition-shadow duration-200 ${isSticky ? "shadow-md" : ""}`}
@@ -138,9 +138,8 @@ const PathwaySearch: React.FC = () => {
       </div>
 
       <div
-        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300 bg-gray-50 ${
-          isFiltering ? "opacity-50" : "opacity-100"
-        }`}
+        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300 bg-gray-50 ${isFiltering ? "opacity-50" : "opacity-100"
+          }`}
       >
         {filteredPathways.map((pathway) => (
           <PathwayCard
