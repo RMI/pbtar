@@ -30,6 +30,8 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         | "geography"
         | "sector"
         | "metric"
+        | "emissionsPathway"
+        | "policyAmbition"
         | "pathwayType"
         | "modelYearNetzero"
         | "modelTempIncrease",
@@ -48,6 +50,8 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     geographyOptions,
     sectorOptions,
     metricOptions,
+    emissionsPathwayOptions,
+    policyAmbitionOptions,
   } = React.useMemo(() => getGlobalFacetOptions(pathwayMetadata), []);
 
   const areFiltersApplied =
@@ -68,7 +72,13 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       : filters.modelYearNetzero != null) ||
     (Array.isArray(filters.modelTempIncrease)
       ? filters.modelTempIncrease.length > 0
-      : filters.modelTempIncrease != null);
+      : filters.modelTempIncrease != null) ||
+    (Array.isArray(filters.emissionsPathway)
+      ? filters.emissionsPathway.length > 0
+      : filters.emissionsPathway != null) ||
+    (Array.isArray(filters.policyAmbition)
+      ? filters.policyAmbition.length > 0
+      : filters.policyAmbition != null);
 
   return (
     <div className="bg-gray-50">
@@ -144,6 +154,29 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           onModeChange={(m) => setMode("metric", m)}
           menuWidthClassName="w-60"
         />
+
+        <MultiSelectDropdown<string>
+          label="Emissions Pathway"
+          options={emissionsPathwayOptions}
+          value={filters.emissionsPathway}
+          onChange={(arr) => onFilterChange("emissionsPathway", arr)}
+          showModeToggle={false}
+          mode={filters.modes?.emissionsPathway ?? "ANY"}
+          onModeChange={(m) => setMode("emissionsPathway", m)}
+          menuWidthClassName="w-60"
+        />
+
+        <MultiSelectDropdown<string>
+          label="Policy Ambition"
+          options={policyAmbitionOptions}
+          value={filters.policyAmbition}
+          onChange={(arr) => onFilterChange("policyAmbition", arr)}
+          showModeToggle={false}
+          mode={filters.modes?.policyAmbition ?? "ANY"}
+          onModeChange={(m) => setMode("policyAmbition", m)}
+          menuWidthClassName="w-60"
+        />
+
       </div>
       <div className="mt-4 ml-1 flex items-center justify-between gap-3">
         <p className="text-sm text-rmigray-500">

@@ -1,14 +1,16 @@
 import React, { useMemo, useState } from "react";
 import {
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
-  Home,
-  GitFork,
-  Thermometer,
-  Earth,
   ChevronUp,
-  ChevronDown,
+  CircleArrowOutUpRight,
+  Earth,
+  GitFork,
+  Home,
   Ruler,
+  ScrollText,
+  Thermometer,
 } from "lucide-react";
 import { SearchFilters } from "../types";
 import { pathwayMetadata } from "../data/pathwayMetadata";
@@ -57,16 +59,17 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
   // Options by facet for easy access
   const optionsByFacet: Record<string, StepOption[]> = useMemo(
     () => ({
-      pathwayType: normalize(globalFacetOptions[["pathwayTypeOptions"]]),
-      modelTempIncrease: normalize(globalFacetOptions[["temperatureOptions"]]),
-      geography: normalize(globalFacetOptions[["geographyOptions"]]),
-      metric: normalize(globalFacetOptions[["metricOptions"]]),
+      pathwayType: normalize(globalFacetOptions["pathwayTypeOptions"]),
+      modelTempIncrease: normalize(globalFacetOptions["temperatureOptions"]),
+      geography: normalize(globalFacetOptions["geographyOptions"]),
+      metric: normalize(globalFacetOptions["metricOptions"]),
+      emissionsPathway: normalize(
+        globalFacetOptions["emissionsPathwayOptions"],
+      ),
+      policyAmbition: normalize(globalFacetOptions["policyAmbitionOptions"]),
     }),
     [globalFacetOptions],
   );
-
-  console.log("optionsByFacet", optionsByFacet);
-  console.log("getGlobalFacetOptions", getGlobalFacetOptions(pathwayMetadata));
 
   const descriptions: Record<string, Record<string, string>> = {
     pathwayType: {
@@ -148,6 +151,26 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       multi: false,
       component: StepPageDiscrete,
       options: optionsByFacet["modelTempIncrease"],
+    },
+    {
+      id: "emissionsPathway",
+      title: "Emissions Pathway",
+      description:
+        "Pathways project different emissions scenarios, including pathways without an explicit temperature alignment. Users should select the level of change they wish to compare against.",
+      icon: <CircleArrowOutUpRight className="h-8 w-8" />,
+      multi: false,
+      component: StepPageDiscrete,
+      options: optionsByFacet["emissionsPathway"],
+    },
+    {
+      id: "policyAmbition",
+      title: "Policy Ambition",
+      description:
+        "Pathways differ in the types of policies included, providing benchmarks for different policy action scenarios. This is relevant both for setting appropriately ambitious targets and for policy alignment analysis.",
+      icon: <ScrollText className="h-8 w-8" />,
+      multi: false,
+      component: StepPageDiscrete,
+      options: optionsByFacet["policyAmbition"],
     },
     {
       id: "metric",
