@@ -53,6 +53,16 @@ export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
     pathways.map((d) => d.metric).flat(),
   );
 
+  // Emissions pathway
+  const emissionsPathwayOptions = buildOptionsFromValues(
+    pathways.map((d) => d.keyFeatures.emissionsPathway).flat(),
+  );
+
+  // Policy ambition
+  const policyAmbitionOptions = buildOptionsFromValues(
+    pathways.map((d) => d.keyFeatures.policyAmbition).flat(),
+  );
+
   return {
     pathwayTypeOptions,
     modelYearNetzeroOptions,
@@ -60,29 +70,8 @@ export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
     geographyOptions,
     sectorOptions,
     metricOptions,
-  };
-}
-
-// (Optional compatibility) If other code expects raw arrays, derive them here.
-export function getUniqueFilterValuesFromGlobalOptions(
-  pathways: PathwayMetadataType[],
-) {
-  const {
-    pathwayTypeOptions,
-    modelYearNetzeroOptions,
-    temperatureOptions,
-    geographyOptions,
-    sectorOptions,
-    metricOptions,
-  } = getGlobalFacetOptions(pathways);
-
-  return {
-    pathwayTypes: pathwayTypeOptions.map((o) => String(o.value)),
-    targetYears: modelYearNetzeroOptions.map((o) => Number(o.value)),
-    temperatures: temperatureOptions.map((o) => Number(o.value)),
-    geographies: geographyOptions.map((o: LabeledOption) => String(o.value)),
-    sectors: sectorOptions.map((o) => String(o.value)),
-    metrics: metricOptions.map((o) => String(o.value)),
+    emissionsPathwayOptions,
+    policyAmbitionOptions,
   };
 }
 
@@ -100,6 +89,8 @@ export type FilterModes = Partial<{
   geography: FacetMode;
   sector: FacetMode;
   metric: FacetMode;
+  emissionsPathway: FacetMode;
+  policyAmbition: FacetMode;
 }>;
 
 // Extend your existing Filters type minimally:
@@ -117,6 +108,8 @@ export type FiltersWithArrays = {
   geography?: Arrayable;
   sector?: Arrayable;
   metric?: Arrayable;
+  emissionsPathway?: Arrayable;
+  policyAmbition?: Arrayable;
   pathwayType?: Arrayable;
   modelYearNetzero?: Arrayable;
   modelTempIncrease?: Arrayable;
@@ -318,6 +311,70 @@ export const filterPathways = (
           ? matchesOptionalFacetAll(normalizedSelected, values, (s) => s)
           : matchesOptionalFacetAny(normalizedSelected, values, (s) => s);
       if (!ok) return false;
+    }
+
+    // emissionsPathway filter
+    {
+      const selected = toArray(filters.emissionsPathway);
+      if (selected.length) {
+        const hasAbsent = selected.includes(ABSENT_FILTER_TOKEN);
+        const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
+        const v = pathway.keyFeatures?.emissionsPathway ?? null;
+        const mode = pickMode("emissionsPathway", filters.modes as FilterModes);
+        let ok = true;
+
+        if (mode === "ANY") {
+          ok =
+            (v == null && hasAbsent) ||
+            (v != null && (concrete.length ? concrete.includes(v) : false));
+        } else {
+          // ALL: for single-valued fields, all selected tokens must hold.
+          // That is only possible when exactly one token is selected:
+          //  - [ABSENT]  -> v == null
+          //  - [X]       -> v == X
+          // Any combination (ABSENT + X, or X + Y) cannot be satisfied.
+          if (hasAbsent && concrete.length === 0) {
+            ok = v == null;
+          } else if (!hasAbsent && concrete.length === 1) {
+            ok = v != null && v === concrete[0];
+          } else {
+            ok = false;
+          }
+        }
+        if (!ok) return false;
+      }
+    }
+
+    // policyAmbition filter
+    {
+      const selected = toArray(filters.policyAmbition);
+      if (selected.length) {
+        const hasAbsent = selected.includes(ABSENT_FILTER_TOKEN);
+        const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
+        const v = pathway.keyFeatures?.policyAmbition ?? null;
+        const mode = pickMode("policyAmbition", filters.modes as FilterModes);
+        let ok = true;
+
+        if (mode === "ANY") {
+          ok =
+            (v == null && hasAbsent) ||
+            (v != null && (concrete.length ? concrete.includes(v) : false));
+        } else {
+          // ALL: for single-valued fields, all selected tokens must hold.
+          // That is only possible when exactly one token is selected:
+          //  - [ABSENT]  -> v == null
+          //  - [X]       -> v == X
+          // Any combination (ABSENT + X, or X + Y) cannot be satisfied.
+          if (hasAbsent && concrete.length === 0) {
+            ok = v == null;
+          } else if (!hasAbsent && concrete.length === 1) {
+            ok = v != null && v === concrete[0];
+          } else {
+            ok = false;
+          }
+        }
+        if (!ok) return false;
+      }
     }
 
     // Search term
