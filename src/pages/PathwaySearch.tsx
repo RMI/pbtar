@@ -116,19 +116,6 @@ const PathwaySearch: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 bg-gray-50">
-      <section
-        ref={topSectionRef}
-        className="mb-8"
-      >
-        <h1 className="text-2xl font-bold text-rmigray-800 mb-2">
-          Find Climate Transition Pathways
-        </h1>
-        <p className="text-rmigray-600">
-          Browse our repository of climate transition pathways to find the most
-          relevant ones for your assessment needs.
-        </p>
-      </section>
-
       <StepByStepGuide
         filters={filters}
         onFilterChange={handleFilterChange}
