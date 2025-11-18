@@ -161,7 +161,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
             description: "Includes all pathways",
           },
         ];
-        console.log("Rendering geography remap with options:", props);
         return (
           <StepPageRemap
             {...props}
