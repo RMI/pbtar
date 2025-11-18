@@ -306,7 +306,9 @@ export default function MultiLineChart({
         .attr("stroke", (d: GroupedData) =>
           d[0] === selectedTech ? "var(--color-donate)" : "var(--color-coal)",
         )
-        .attr("stroke-width", (d: GroupedData) => (d[0] === selectedTech ? 3 : 1));
+        .attr("stroke-width", (d: GroupedData) =>
+          d[0] === selectedTech ? 3 : 1,
+        );
       dot.attr("display", "none");
     }
 
@@ -317,12 +319,11 @@ export default function MultiLineChart({
       const i = leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
       if (i === undefined || i < 0) return;
       const selectedTech = points[i][2];
-      console.log("clicked on: ", selectedTech);
     }
 
     function size(
       text: Selection<SVGTextElement, unknown, null, undefined>,
-      path: Selection<SVGPathElement, unknown, null, undefined>
+      path: Selection<SVGPathElement, unknown, null, undefined>,
     ) {
       const bbox = text.node()?.getBBox();
       if (!bbox) return;
