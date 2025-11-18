@@ -80,7 +80,7 @@
     "Absolute Emissions"
   ],
   "keyFeatures": {
-    "emissionsPathway": "Minor decrease",
+    "emissionsTrajectory": "Minor decrease",
     "energyEfficiency": "Moderate improvement",
     "energyDemand": "Minor increase",
     "electrification": "Significant increase",

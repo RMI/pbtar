@@ -235,7 +235,7 @@ const PathwayDetailPage: React.FC = () => {
                     keyof PathwayMetadataType["keyFeatures"],
                     string
                   > = {
-                    emissionsPathway: "Emissions pathway",
+                    emissionsTrajectory: "Emissions trajectory",
                     energyEfficiency: "Energy efficiency",
                     energyDemand: "Energy demand",
                     electrification: "Electrification",

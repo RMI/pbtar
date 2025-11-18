@@ -275,7 +275,7 @@
     "Technology Mix"
   ],
   "keyFeatures": {
-    "emissionsPathway": "Moderate decrease",
+    "emissionsTrajectory": "Moderate decrease",
     "energyEfficiency": "Moderate improvement",
     "energyDemand": "Minor increase",
     "electrification": "Significant increase",
