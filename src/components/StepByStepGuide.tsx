@@ -76,7 +76,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     ],
   );
 
-  const descriptions = {
+  const descriptions: Record<string, Record<string, string>> = {
     pathwayType: {
       "Direct Policy": "Foo",
       "Exploratory": "Bar",
@@ -108,15 +108,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       // Use the remap renderer via the component field:
       options: optionsByFacet["geography"],
       component: (props) => {
-        // Define your categories here (labels -> raw values).
-        // Use the raw values present in props.options[].value.
-        const values = (needle: string) =>
-          props.options
-            .filter((o) =>
-              String(o.title).toLowerCase().includes(needle.toLowerCase()),
-            )
-            .map((o) => o.value);
-
         const categories: RemapCategory[] = [
           {
             label: "World / Global",
@@ -177,32 +168,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       options: optionsByFacet["metric"],
     },
   ];
-
-  const handleOptionSelect = (
-    stepId: keyof SearchFilters,
-    optionValue: string | number,
-  ) => {
-    // Cast numeric steps
-    const normalized =
-      stepId === "modelYearNetzero" || stepId === "modelTempIncrease"
-        ? Number(optionValue)
-        : optionValue;
-
-    const multi = steps.find((s) => s.id === stepId)?.multi ?? false;
-    const curr = Array.isArray(filters[stepId])
-      ? ((filters[stepId] as (string | number)[]) ?? [])
-      : [];
-
-    if (multi) {
-      const next = curr.includes(normalized)
-        ? curr.filter((v) => v !== normalized)
-        : [...curr, normalized];
-      onFilterChange(stepId, next);
-    } else {
-      const next = filters[stepId] === normalized ? null : normalized;
-      onFilterChange(stepId, next);
-    }
-  };
 
   if (isCollapsed) {
     return (
@@ -293,8 +258,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                 selectionMode === "single"
                   ? next.length === 0
                     ? null
-                    : (next[0] as any)
-                  : (next as any),
+                    : next[0]
+                  : next,
               );
             };
 
