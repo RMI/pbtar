@@ -1,8 +1,8 @@
-import { select, Selection } from "d3-selection";
+import { pointer, select, Selection } from "d3-selection";
 import { scaleUtc, scaleLinear } from "d3-scale";
 import { line } from "d3-shape";
 import { utcParse } from "d3-time-format";
-import { ascending, extent, groups, range } from "d3-array";
+import { ascending, extent, groups, leastIndex, range } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { useRef, useEffect, useMemo } from "react";
 import { capitalizeWords } from "../utils/capitalizeWords";
@@ -232,6 +232,110 @@ export default function MultiLineChart({
       .attr("dx", "18")
       .attr("dy", "5")
       .attr("font-size", "12px");
+
+    // Add an invisible layer for the interactive tip.
+    const svg = select(ref.current);
+    const path = select(lines.current).selectAll("path");
+
+    const points = d3data.map((d) => [
+      x(parse(d.year)),
+      y(d.value),
+      d.technology,
+      d.year,
+      d.value,
+      d.unit,
+    ]);
+
+    const dot = svg.append("g").attr("display", "none");
+
+    dot.append("circle").attr("r", 2.5);
+
+    const tooltipBoxElem = dot
+      .selectAll<SVGPathElement, unknown>("path")
+      .data([null])
+      .join("path")
+      .attr("fill", "white")
+      .attr("stroke", "black")
+      .attr("stroke-width", 1)
+      .attr("stroke-linejoin", "round");
+
+    const tooltipTextElem = dot
+      .selectAll<SVGTextElement, unknown>("text")
+      .data([null])
+      .join("text");
+
+    svg
+      .on("pointerenter", pointerentered)
+      .on("pointermove", pointermoved)
+      .on("pointerleave", pointerleft)
+      .on("touchstart", (event: TouchEvent) => event.preventDefault());
+    function pointermoved(event: PointerEvent) {
+      const [xm, ym] = pointer(event);
+      const i = leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
+      if (i === undefined || i < 0) return;
+      const [x, y, k, year, value, unit] = points[i];
+
+      path
+        .attr("stroke", (d) => (d[0] === k ? "var(--color-donate)" : "#ddd"))
+        .attr("stroke-width", (d) => (d[0] === k ? 3 : 1))
+        .filter((d) => d[0] === k)
+        .raise();
+
+      dot.attr("transform", `translate(${x},${y})`);
+
+      const tooltipText = [
+        capitalizeWords(k as string) + ": " + year,
+        value + " " + unit,
+      ];
+
+      tooltipTextElem.call((text) =>
+        text
+          .selectAll("tspan")
+          .data(tooltipText)
+          .join("tspan")
+          .attr("x", 0)
+          .attr("y", (_, i) => `${i * 1.1}em`)
+          .attr("font-size", "12px")
+          .attr("font-weight", (_, i) => (i ? null : "bold"))
+          .text((d) => d),
+      );
+
+      size(tooltipTextElem, tooltipBoxElem);
+    }
+
+    function pointerentered() {
+      path.style("mix-blend-mode", null).attr("stroke", "#ddd");
+      dot.attr("display", null);
+    }
+
+    function pointerleft() {
+      const selectedTech = selectRef.current?.value;
+      path
+        .style("mix-blend-mode", "multiply")
+        .attr("stroke", (d: GroupedData) =>
+          d[0] === selectedTech ? "var(--color-donate)" : "var(--color-coal)",
+        )
+        .attr("stroke-width", (d: GroupedData) =>
+          d[0] === selectedTech ? 3 : 1,
+        );
+      dot.attr("display", "none");
+    }
+
+    svg.on("touchstart", (event: TouchEvent) => event.preventDefault());
+
+    function size(
+      text: Selection<SVGTextElement, unknown, null, undefined>,
+      path: Selection<SVGPathElement, unknown, null, undefined>,
+    ) {
+      const bbox = text.node()?.getBBox();
+      if (!bbox) return;
+      const { y, width: w, height: h } = bbox;
+      text.attr("transform", `translate(${-w / 2},${15 - y})`);
+      path.attr(
+        "d",
+        `M${-w / 2 - 10},5H-5l5,-5l5,5H${w / 2 + 10}v${h + 20}h-${w + 20}z`,
+      );
+    }
   }, [d3data, chartSetup, sector, metric, marginTop, width]);
 
   const highlightSelectedTech = (selectedTech: string): void => {
