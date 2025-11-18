@@ -147,7 +147,7 @@ export interface PathwayMetadataV1 {
     /**
      * Describes the overall trend of greenhouse gas emissions over time, from continued growth to rapid decline.
      */
-    emissionsPathway:
+    emissionsTrajectory:
       | "No information"
       | "Significant increase"
       | "Moderate increase"
