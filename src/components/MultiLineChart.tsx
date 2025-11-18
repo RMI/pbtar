@@ -257,9 +257,7 @@ export default function MultiLineChart({
       .on("pointerenter", pointerentered)
       .on("pointermove", pointermoved)
       .on("pointerleave", pointerleft)
-      .on("touchstart", (event: TouchEvent) => event.preventDefault())
-      .on("click", pointerclick);
-
+      .on("touchstart", (event: TouchEvent) => event.preventDefault());
     function pointermoved(event: PointerEvent) {
       const [xm, ym] = pointer(event);
       const i = leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
@@ -313,13 +311,6 @@ export default function MultiLineChart({
     }
 
     svg.on("touchstart", (event: TouchEvent) => event.preventDefault());
-
-    function pointerclick(event: PointerEvent) {
-      const [xm, ym] = pointer(event);
-      const i = leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
-      if (i === undefined || i < 0) return;
-      const selectedTech = points[i][2];
-    }
 
     function size(
       text: Selection<SVGTextElement, unknown, null, undefined>,
