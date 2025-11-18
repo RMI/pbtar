@@ -25,6 +25,7 @@ export interface GuideStep {
   multi?: boolean;
   /** Optional custom renderer; defaults to StepPageDiscrete. */
   component?: React.FC<StepRendererProps>;
+  options?: StepOption[];
 }
 
 interface StepByStepGuideProps {
@@ -75,6 +76,15 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     ],
   );
 
+  const descriptions = {
+    pathwayType: {
+      "Direct Policy": "Foo",
+      "Exploratory": "Bar",
+      "Normative": "Baz",
+      "Predictive": "Qux",
+    },
+  };
+
   const steps: GuideStep[] = [
     {
       id: "pathwayType",
@@ -84,6 +94,10 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       icon: <GitFork className="h-8 w-8" />,
       multi: false,
       component: StepPageDiscrete,
+      options: optionsByFacet["pathwayType"].map((o) => ({
+        ...o,
+        description: descriptions["pathwayType"][o.title] || undefined,
+      })),
     },
     {
       id: "geography",
@@ -147,6 +161,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       icon: <Thermometer className="h-8 w-8" />,
       multi: false,
       component: StepPageDiscrete,
+      options: optionsByFacet["modelTempIncrease"],
     },
     {
       id: "metric",
@@ -156,6 +171,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       icon: <Ruler className="h-8 w-8" />,
       multi: false,
       component: StepPageDiscrete,
+      options: optionsByFacet["metric"],
     },
   ];
 
@@ -284,7 +300,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
               <Comp
                 title={step.title}
                 description={step.description}
-                options={opts}
+                options={step.options}
                 value={currentArray}
                 selectionMode={selectionMode}
                 onChange={onChange}

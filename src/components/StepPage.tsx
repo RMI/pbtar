@@ -4,6 +4,7 @@ export type StepOption = {
   id: string;
   title: string;
   value: string | number;
+  description?: string;
 };
 
 /** Unified renderer props for any step (discrete or remap). */
@@ -83,7 +84,14 @@ export const StepPageDiscrete: React.FC<StepRendererProps> = ({
                     : "hover:border-energy hover:bg-energy-50"
               }`}
             >
-              {option.title}
+              <div className="text-sm font-medium text-rmigray-800">
+                {option.title}
+              </div>
+              {option.description && (
+                <div className="text-xs text-rmigray-600 mt-1">
+                  {option.description}
+                </div>
+              )}
             </button>
           );
         })}
