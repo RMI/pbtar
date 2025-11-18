@@ -146,7 +146,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
               key={`${datasetId}-${selectedPlot}-${selectedGeography}`}
               data={filteredData}
               width={450}
-              height={300}
+              height={350}
               sector="power"
               metric="technologyMix"
             />
@@ -159,7 +159,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
               key={`${datasetId}-${selectedPlot}-${selectedGeography}`}
               data={filteredData}
               width={450}
-              height={300}
+              height={350}
               metric="absoluteEmissions"
             />
           </div>
@@ -171,7 +171,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
               key={`${datasetId}-${selectedPlot}-${selectedGeography}`}
               data={filteredData}
               width={450}
-              height={300}
+              height={350}
               metric="emissionsIntensity"
             />
           </div>
@@ -183,7 +183,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
               key={`${datasetId}-${selectedPlot}-${selectedGeography}`}
               data={filteredData}
               width={450}
-              height={300}
+              height={350}
               metric="capacity"
             />
           </div>
@@ -195,7 +195,7 @@ export const PlotSelector: React.FC<PlotSelectorProps> = ({
               key={`${datasetId}-${selectedPlot}-${selectedGeography}`}
               data={filteredData}
               width={450}
-              height={300}
+              height={350}
               metric="generation"
             />
           </div>

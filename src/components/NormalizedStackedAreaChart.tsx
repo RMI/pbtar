@@ -8,6 +8,7 @@ import { axisBottom, axisLeft } from "d3-axis";
 import { stackOffsetExpand } from "d3-shape";
 import { useRef, useEffect, useState, useMemo } from "react";
 import { capitalizeWords } from "../utils/capitalizeWords";
+import { getMetricTooltip } from "../utils/tooltipUtils";
 
 interface DataPoint {
   sector: string;
@@ -52,7 +53,7 @@ export default function NormalizedStackedAreaChart({
   data,
   width = 600,
   height = 400,
-  marginTop = 40,
+  marginTop = 95,
   marginRight = 80,
   marginBottom = 30,
   marginLeft = 40,
@@ -158,11 +159,21 @@ export default function NormalizedStackedAreaChart({
       .data([`${capitalizeWords(sector)} ${capitalizeWords(metric)} [${unit}]`])
       .join("text")
       .attr("x", width / 2)
-      .attr("y", marginTop - 10)
+      .attr("y", 20)
       .attr("text-anchor", "middle")
       .attr("font-size", "16px")
       .attr("font-weight", "bold")
       .text((d) => d);
+
+    // Update subtitle
+    const subtitle = getMetricTooltip(capitalizeWords(metric));
+    select(title.current)
+      .append("foreignObject")
+      .attr("x", 0)
+      .attr("y", 25)
+      .attr("width", width)
+      .attr("height", 55)
+      .html("<div style='font-size: 10pt'>" + subtitle + "</div>");
 
     // Add legend
     const legendItems = select(legend.current)

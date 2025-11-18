@@ -5,6 +5,7 @@ import { axisBottom, axisLeft } from "d3-axis";
 import "d3-transition";
 import { useRef, useEffect, useMemo } from "react";
 import { capitalizeWords } from "../utils/capitalizeWords";
+import { getMetricTooltip } from "../utils/tooltipUtils";
 
 interface DataPoint {
   sector: string;
@@ -41,7 +42,7 @@ export default function VerticalBarChart({
   data,
   width = 640,
   height = 400,
-  marginTop = 45,
+  marginTop = 80,
   marginRight = 20,
   marginBottom = 30,
   marginLeft = 40,
@@ -93,11 +94,21 @@ export default function VerticalBarChart({
       .data([`${capitalizeWords(sector)} ${capitalizeWords(metric)} [${unit}]`])
       .join("text")
       .attr("x", width / 2)
-      .attr("y", marginTop - 30)
+      .attr("y", 20)
       .attr("text-anchor", "middle")
       .attr("font-size", "16px")
       .attr("font-weight", "bold")
       .text((d) => d);
+
+    // Update subtitle
+    const subtitle = getMetricTooltip(capitalizeWords(metric));
+    select(title.current)
+      .append("foreignObject")
+      .attr("x", 0)
+      .attr("y", 25)
+      .attr("width", width)
+      .attr("height", 40)
+      .html("<div style='font-size: 10pt'>" + subtitle + "</div>");
 
     // Update X axis
     select(gx.current)
