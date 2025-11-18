@@ -43,38 +43,30 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentView, setCurrentView] = useState<"home" | number>("home");
   // Single source of truth for all facet options
-  const {
-    pathwayTypeOptions,
-    modelYearNetzeroOptions,
-    temperatureOptions,
-    geographyOptions,
-    sectorOptions,
-    metricOptions,
-  } = useMemo(() => getGlobalFacetOptions(pathwayMetadata), []);
+  const globalFacetOptions = useMemo(
+    () => getGlobalFacetOptions(pathwayMetadata),
+    [],
+  );
 
   // Normalize provider options -> tile-ready {id,title,value}
   const normalize = (
     arr: Array<{ value: string | number; label: string }>,
   ): StepOption[] =>
     arr.map((o) => ({ id: String(o.value), title: o.label, value: o.value }));
+
+  // Options by facet for easy access
   const optionsByFacet: Record<string, StepOption[]> = useMemo(
     () => ({
-      pathwayType: normalize(pathwayTypeOptions),
-      modelYearNetzero: normalize(modelYearNetzeroOptions),
-      modelTempIncrease: normalize(temperatureOptions),
-      geography: normalize(geographyOptions),
-      sector: normalize(sectorOptions),
-      metric: normalize(metricOptions),
+      pathwayType: normalize(globalFacetOptions[["pathwayTypeOptions"]]),
+      modelTempIncrease: normalize(globalFacetOptions[["temperatureOptions"]]),
+      geography: normalize(globalFacetOptions[["geographyOptions"]]),
+      metric: normalize(globalFacetOptions[["metricOptions"]]),
     }),
-    [
-      pathwayTypeOptions,
-      modelYearNetzeroOptions,
-      temperatureOptions,
-      geographyOptions,
-      sectorOptions,
-      metricOptions,
-    ],
+    [globalFacetOptions],
   );
+
+  console.log("optionsByFacet", optionsByFacet);
+  console.log("getGlobalFacetOptions", getGlobalFacetOptions(pathwayMetadata));
 
   const descriptions: Record<string, Record<string, string>> = {
     pathwayType: {
