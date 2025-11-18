@@ -240,26 +240,30 @@ export default function MultiLineChart({
     dot.append("circle").attr("r", 2.5);
 
     const tooltipBoxElem = dot
-      .selectAll("path")
-      .data([,])
+      .selectAll<SVGPathElement, unknown>("path")
+      .data([null])
       .join("path")
       .attr("fill", "white")
       .attr("stroke", "black")
       .attr("stroke-width", 1)
       .attr("stroke-linejoin", "round");
 
-    const tooltipTextElem = dot.selectAll("text").data([,]).join("text");
+    const tooltipTextElem = dot
+      .selectAll<SVGTextElement, unknown>("text")
+      .data([null])
+      .join("text");
 
     svg
       .on("pointerenter", pointerentered)
       .on("pointermove", pointermoved)
       .on("pointerleave", pointerleft)
-      .on("touchstart", (event) => event.preventDefault())
+      .on("touchstart", (event: TouchEvent) => event.preventDefault())
       .on("click", pointerclick);
 
     function pointermoved(event: PointerEvent) {
       const [xm, ym] = pointer(event);
       const i = leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
+      if (i === undefined || i < 0) return;
       const [x, y, k, year, value, unit] = points[i];
 
       path
@@ -299,22 +303,30 @@ export default function MultiLineChart({
       const selectedTech = selectRef.current?.value;
       path
         .style("mix-blend-mode", "multiply")
-        .attr("stroke", (d) =>
+        .attr("stroke", (d: GroupedData) =>
           d[0] === selectedTech ? "var(--color-donate)" : "var(--color-coal)",
         )
-        .attr("stroke-width", (d) => (d[0] === selectedTech ? 3 : 1));
+        .attr("stroke-width", (d: GroupedData) => (d[0] === selectedTech ? 3 : 1));
       dot.attr("display", "none");
     }
+
+    svg.on("touchstart", (event: TouchEvent) => event.preventDefault());
 
     function pointerclick(event: PointerEvent) {
       const [xm, ym] = pointer(event);
       const i = leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
+      if (i === undefined || i < 0) return;
       const selectedTech = points[i][2];
       console.log("clicked on: ", selectedTech);
     }
 
-    function size(text, path) {
-      const { x, y, width: w, height: h } = text.node().getBBox();
+    function size(
+      text: Selection<SVGTextElement, unknown, null, undefined>,
+      path: Selection<SVGPathElement, unknown, null, undefined>
+    ) {
+      const bbox = text.node()?.getBBox();
+      if (!bbox) return;
+      const { y, width: w, height: h } = bbox;
       text.attr("transform", `translate(${-w / 2},${15 - y})`);
       path.attr(
         "d",
