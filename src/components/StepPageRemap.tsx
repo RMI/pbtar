@@ -6,6 +6,7 @@ export interface RemapCategory {
   label: string;
   /** The underlying raw filter values this category represents */
   values: Array<string | number>;
+  description?: string;
 }
 
 export type StepPageRemapProps = StepRendererProps & {
@@ -52,6 +53,7 @@ const StepPageRemap: React.FC<StepPageRemapProps> = ({
       return {
         id: cat.label,
         title: labelWithCounts,
+        description: cat.description,
         value: cat.label, // we use label as the synthetic value/key
       };
     });

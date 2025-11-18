@@ -106,6 +106,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       icon: <Earth className="h-8 w-8" />,
       multi: false,
       // Use the remap renderer via the component field:
+      options: optionsByFacet["geography"],
       component: (props) => {
         // Define your categories here (labels -> raw values).
         // Use the raw values present in props.options[].value.
@@ -120,6 +121,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
           {
             label: "World / Global",
             values: ["Global"],
+            description: "The Whole World",
           },
           {
             label: "South America",
@@ -141,6 +143,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
           {
             label: "Oceania",
             values: ["AU", "NZ", "FJ", "PG", "East Asia and Pacific"],
+            description: "The Whale world",
           },
         ];
 
@@ -270,7 +273,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
           {(() => {
             const step = steps[currentView];
             const Comp = step.component ?? StepPageDiscrete;
-            const opts = optionsByFacet[step.id] ?? [];
             const currentArray = Array.isArray(filters[step.id])
               ? ((filters[step.id] as (string | number)[]) ?? [])
               : filters[step.id] != null
