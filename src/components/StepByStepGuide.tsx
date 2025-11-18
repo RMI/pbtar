@@ -73,10 +73,29 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
 
   const descriptions: Record<string, Record<string, string>> = {
     pathwayType: {
-      "Direct Policy": "Foo",
-      "Exploratory": "Bar",
-      "Normative": "Baz",
-      "Predictive": "Qux",
+      "Direct Policy": "Sourced directly from policy frameworks",
+      "Explorative": "Future states under explicit assumptions",
+      "Normative": "Pre-determined target outcome",
+      "Predictive": "Extrapolates from current trends.",
+    },
+    emissionsTrajectory: {
+      "Significant increase": "Grow more than 50% by 2050",
+      "Moderate increase": "Grow 15%-50% by 2050",
+      "Minor increase": "Grow 5% -15% by 2050",
+      "Low or no change": "Change less than 5% by 2050",
+      "Minor decrease": "Decrease 5%-15% by 2050",
+      "Moderate decrease": "Decrease 15%-50% by 2050",
+      "Significant decrease": "Decrease more than 50% by 2050",
+      "None": "Include any emissions trajectory",
+    },
+    policyAmbition: {
+      "No policies included": "Excludes policy impacts.",
+      "Current/legislated policies": "Only policies already in place.",
+      "Current and drafted policies": "Includes in-process policy drafts.",
+      "NDCs, unconditional only": "Policies to reach unconditional targets",
+      "NDCs incl. conditional targets": "Policies to reach all targets",
+      "Normative/Optimization-based": "Policies to reach a climate outcome.",
+      "None": "Include any policy ambition",
     },
   };
 
@@ -107,29 +126,22 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
           {
             label: "World / Global",
             values: ["Global"],
-            description: "The Whole World",
+            description: "Information only for global averages",
           },
           {
-            label: "South America",
-            values: [
-              "AR",
-              "BO",
-              "BR",
-              "CL",
-              "CO",
-              "EC",
-              "GY",
-              "PE",
-              "PY",
-              "SR",
-              "UY",
-              "VE",
-            ],
+            label: "Regional",
+            values: ["Global"], // TODO: implement
+            description: "Information for specific regions",
           },
           {
-            label: "Oceania",
-            values: ["AU", "NZ", "FJ", "PG", "East Asia and Pacific"],
-            description: "The Whale world",
+            label: "Information for individual countries",
+            values: ["Global"], // TODO: implement
+            description: "Information only for global averages",
+          },
+          {
+            label: "Any granularity",
+            values: ["Global"], // TODO: implement
+            description: "Includes all pathways",
           },
         ];
 
@@ -160,7 +172,10 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       icon: <CircleArrowOutUpRight className="h-8 w-8" />,
       multi: false,
       component: StepPageDiscrete,
-      options: optionsByFacet["emissionsTrajectory"],
+      options: optionsByFacet["emissionsTrajectory"].map((o) => ({
+        ...o,
+        description: descriptions["emissionsTrajectory"][o.title] || undefined,
+      })),
     },
     {
       id: "policyAmbition",
@@ -170,7 +185,10 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       icon: <ScrollText className="h-8 w-8" />,
       multi: false,
       component: StepPageDiscrete,
-      options: optionsByFacet["policyAmbition"],
+      options: optionsByFacet["policyAmbition"].map((o) => ({
+        ...o,
+        description: descriptions["policyAmbition"][o.title] || undefined,
+      })),
     },
     {
       id: "metric",
