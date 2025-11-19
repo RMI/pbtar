@@ -273,14 +273,33 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         "Pathways differ in the availability of their benchmark data for access, which may limit user applications. Some pathway data is freely available in standardized format, other data needs to be acquired from third parties.",
       icon: <FileDown className="h-8 w-8" />,
       multi: false,
-      component: StepPageDiscrete,
-      options: (() => {
-        return [...(optionsByFacet["dataAvailability"] ?? [])].concat({
-          id: "__dataAvailability_clear__",
-          title: "Benchmark data availability not relevant",
-          value: [], // empty array clears the filter
-        });
-      })(),
+      options: optionsByFacet["dataAvailability"],
+      component: (props) => {
+        const categories: RemapCategory[] = [
+          {
+            label: "Freely available",
+            values: ["Download"],
+            description: "from this repository",
+          },
+          {
+            label: "Available",
+            values: ["Download", "Link"],
+            description: "from this repository or elsewhere",
+          },
+          {
+            // Use a null array to unset filter
+            label: "Benchmark data availability not relevant",
+            values: [null],
+          },
+        ];
+        return (
+          <StepPageRemap
+            {...props}
+            categories={categories}
+            clampToAvailable
+          />
+        );
+      },
     },
   ];
 
@@ -384,7 +403,10 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
 
                     const onChange = (next: Array<string | number>) => {
                       // Geography is array-valued even in "single" category mode
-                      if (step.id === "geography") {
+                      if (
+                        step.id === "geography" ||
+                        step.id === "dataAvailability"
+                      ) {
                         onFilterChange(step.id, next);
                         return;
                       }
