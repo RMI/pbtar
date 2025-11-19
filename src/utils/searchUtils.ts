@@ -230,14 +230,27 @@ export const filterPathways = (
       }
     }
 
-    // Net Zero By — discrete array OR range
-    if (filters.modelYearNetzero != null) {
+    // Net Zero By — DISCRETE (array) or RANGE ({min,max,includeAbsent})
+    {
       const mode = filters.modes?.modelYearNetzero ?? "DISCRETE";
-      if (mode === "RANGE" && isRangeFilter(filters.modelYearNetzero)) {
-        const v = pathway?.modelYearNetzero as number | undefined;
-        if (!matchesNumericRange(v, filters.modelYearNetzero)) return false;
+      if (mode === "RANGE") {
+        const r = (
+          !Array.isArray(filters.modelYearNetzero)
+            ? (filters.modelYearNetzero as any)
+            : null
+        ) as { min?: number; max?: number; includeAbsent?: boolean } | null;
+
+        if (r) {
+          const v = pathway?.modelYearNetzero as number | undefined;
+          const hasValue = v != null;
+          const inRange =
+            hasValue &&
+            (r.min == null || v >= r.min) &&
+            (r.max == null || v <= r.max);
+          const pass = inRange || (!hasValue && !!r.includeAbsent);
+          if (!pass) return false;
+        }
       } else {
-        // Back-compat: discrete (arrayable)
         const arr = Array.isArray(filters.modelYearNetzero)
           ? filters.modelYearNetzero
           : [];
@@ -250,12 +263,26 @@ export const filterPathways = (
       }
     }
 
-    // Temperature — discrete array OR range
-    if (filters.modelTempIncrease != null) {
+    // Temperature — DISCRETE (array) or RANGE ({min,max,includeAbsent})
+    {
       const mode = filters.modes?.modelTempIncrease ?? "DISCRETE";
-      if (mode === "RANGE" && isRangeFilter(filters.modelTempIncrease)) {
-        const v = pathway?.modelTempIncrease as number | undefined;
-        if (!matchesNumericRange(v, filters.modelTempIncrease)) return false;
+      if (mode === "RANGE") {
+        const r = (
+          !Array.isArray(filters.modelTempIncrease)
+            ? (filters.modelTempIncrease as any)
+            : null
+        ) as { min?: number; max?: number; includeAbsent?: boolean } | null;
+
+        if (r) {
+          const v = pathway?.modelTempIncrease as number | undefined;
+          const hasValue = v != null;
+          const inRange =
+            hasValue &&
+            (r.min == null || v >= r.min) &&
+            (r.max == null || v <= r.max);
+          const pass = inRange || (!hasValue && !!r.includeAbsent);
+          if (!pass) return false;
+        }
       } else {
         const arr = Array.isArray(filters.modelTempIncrease)
           ? filters.modelTempIncrease
