@@ -4,12 +4,9 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronUp,
-  CircleArrowOutUpRight,
-  Earth,
   FileDown,
   GitFork,
   Home,
-  Ruler,
   ScrollText,
   Thermometer,
 } from "lucide-react";
@@ -18,7 +15,6 @@ import { pathwayMetadata } from "../data/pathwayMetadata";
 import { getGlobalFacetOptions } from "../utils/searchUtils";
 import { StepPageDiscrete, StepOption, StepRendererProps } from "./StepPage";
 import StepPageRemap, { RemapCategory } from "./StepPageRemap";
-import { geographyKind } from "../utils/geographyUtils.ts";
 
 export interface GuideStep {
   id: keyof SearchFilters;
@@ -125,54 +121,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       })),
     },
     {
-      id: "geography",
-      title: "Geography",
-      description: "Select pathways for specific geographical areas.",
-      icon: <Earth className="h-8 w-8" />,
-      multi: false,
-      // Use the remap renderer via the component field:
-      options: optionsByFacet["geography"],
-      component: (props) => {
-        // Build categories from the actual options by *kind*, using option.id for routing
-        // and option.value for the underlying filter values.
-        const byKind = (k: "global" | "region" | "country") =>
-          (optionsByFacet["geography"] ?? [])
-            .filter((o) => geographyKind(String(o.id)) === k)
-            .map((o) => o.value);
-
-        const categories: RemapCategory[] = [
-          {
-            label: "World / Global",
-            values: byKind("global"),
-            description: "Information only for global averages",
-          },
-          {
-            label: "Regional",
-            values: byKind("region"),
-            description: "Information for specific regions",
-          },
-          {
-            label: "Information for individual countries",
-            values: byKind("country"),
-            description: "Information only for global averages",
-          },
-          {
-            // Use a null array to unset filter
-            label: "Any Granularity",
-            values: [null],
-            description: "Includes all pathways",
-          },
-        ];
-        return (
-          <StepPageRemap
-            {...props}
-            categories={categories}
-            clampToAvailable
-          />
-        );
-      },
-    },
-    {
       id: "modelTempIncrease",
       title: "Temperature Rise",
       description:
@@ -181,48 +129,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       multi: false,
       component: StepPageDiscrete,
       options: optionsByFacet["modelTempIncrease"],
-    },
-    {
-      id: "emissionsTrajectory",
-      title: "Emissions Trajectory",
-      description:
-        "Pathways project different emissions scenarios, including pathways without an explicit temperature alignment. Users should select the level of change they wish to compare against.",
-      icon: <CircleArrowOutUpRight className="h-8 w-8" />,
-      multi: false,
-      component: StepPageDiscrete,
-      options: (() => {
-        const ORDER = [
-          "Significant decrease",
-          "Moderate decrease",
-          "Minor decrease",
-          "Low or no change",
-          "Minor increase",
-          "Moderate increase",
-          "Significant increase",
-        ];
-        const rank = new Map(ORDER.map((t, i) => [t, i]));
-        // copy → add descriptions → sort by ORDER (fallback: alpha)
-        return [...(optionsByFacet["emissionsTrajectory"] ?? [])]
-          .map((o) => ({
-            ...o,
-            description:
-              descriptions["emissionsTrajectory"][o.title] || undefined,
-          }))
-          .sort((a, b) => {
-            const ai = rank.get(a.title);
-            const bi = rank.get(b.title);
-            if (ai != null && bi != null) return ai - bi;
-            if (ai != null) return -1;
-            if (bi != null) return 1;
-            return String(a.title).localeCompare(String(b.title));
-          })
-          .filter((o) => o.title !== "No information")
-          .concat({
-            id: "__emissionsTrajectory_clear__",
-            title: "Include any emissions trajectory",
-            value: null, // null value clears the filter
-          });
-      })(),
     },
     {
       id: "policyAmbition",
@@ -241,27 +147,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
           .concat({
             id: "__policyAmbition_clear__",
             title: "Include any policy ambition",
-            value: null, // null value clears the filter
-          });
-      })(),
-    },
-    {
-      id: "metric",
-      title: "Benchmark Metric",
-      description:
-        "Pathways differ in the metrics they make available. Users interested in benchmarking applications should select their comparison metric. Investment-related analyses often use physical output metrics, climate targets often use emissions-related metrics.",
-      icon: <Ruler className="h-8 w-8" />,
-      multi: false,
-      component: StepPageDiscrete,
-      options: (() => {
-        return [...(optionsByFacet["metric"] ?? [])]
-          .map((o) => ({
-            ...o,
-            description: descriptions["metric"][o.title] || undefined,
-          }))
-          .concat({
-            id: "__metric_clear__",
-            title: "Include any benchmark metric",
             value: null, // null value clears the filter
           });
       })(),

@@ -29,12 +29,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       facet:
         | "geography"
         | "sector"
-        | "metric"
-        | "emissionsTrajectory"
         | "policyAmbition"
         | "dataAvailability"
         | "pathwayType"
-        | "modelYearNetzero"
         | "modelTempIncrease",
       m: FacetMode,
     ) => {
@@ -46,12 +43,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   // Single source of truth for option lists (global, data-driven)
   const {
     pathwayTypeOptions,
-    modelYearNetzeroOptions,
     temperatureOptions,
     geographyOptions,
     sectorOptions,
-    metricOptions,
-    emissionsTrajectoryOptions,
     policyAmbitionOptions,
     dataAvailabilityOptions,
   } = React.useMemo(() => getGlobalFacetOptions(pathwayMetadata), []);
@@ -66,18 +60,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     (Array.isArray(filters.sector)
       ? filters.sector.length > 0
       : filters.sector != null) ||
-    (Array.isArray(filters.metric)
-      ? filters.metric.length > 0
-      : filters.metric != null) ||
-    (Array.isArray(filters.modelYearNetzero)
-      ? filters.modelYearNetzero.length > 0
-      : filters.modelYearNetzero != null) ||
     (Array.isArray(filters.modelTempIncrease)
       ? filters.modelTempIncrease.length > 0
       : filters.modelTempIncrease != null) ||
-    (Array.isArray(filters.emissionsTrajectory)
-      ? filters.emissionsTrajectory.length > 0
-      : filters.emissionsTrajectory != null) ||
     (Array.isArray(filters.policyAmbition)
       ? filters.policyAmbition.length > 0
       : filters.policyAmbition != null) ||
@@ -98,6 +83,17 @@ const SearchSection: React.FC<SearchSectionProps> = ({
 
       <div className="flex flex-wrap gap-2">
         <MultiSelectDropdown<string>
+          label="Geography"
+          options={geographyOptions}
+          value={filters.geography}
+          onChange={(arr) => onFilterChange("geography", arr)}
+          showModeToggle
+          mode={filters.modes?.geography ?? "ANY"}
+          onModeChange={(m) => setMode("geography", m)}
+          menuWidthClassName="w-60"
+        />
+
+        <MultiSelectDropdown<string>
           label="Pathway Type"
           options={pathwayTypeOptions}
           value={filters.pathwayType}
@@ -105,16 +101,6 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           showModeToggle={false}
           mode={filters.modes?.pathwayType ?? "ANY"}
           onModeChange={(m) => setMode("pathwayType", m)}
-        />
-
-        <MultiSelectDropdown<number>
-          label="Net Zero By"
-          options={modelYearNetzeroOptions}
-          value={filters.modelYearNetzero}
-          onChange={(arr) => onFilterChange("modelYearNetzero", arr)}
-          showModeToggle={false}
-          mode={filters.modes?.modelYearNetzero ?? "ANY"}
-          onModeChange={(m) => setMode("modelYearNetzero", m)}
         />
 
         <MultiSelectDropdown<string | number>
@@ -128,13 +114,13 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         />
 
         <MultiSelectDropdown<string>
-          label="Geography"
-          options={geographyOptions}
-          value={filters.geography}
-          onChange={(arr) => onFilterChange("geography", arr)}
-          showModeToggle
-          mode={filters.modes?.geography ?? "ANY"}
-          onModeChange={(m) => setMode("geography", m)}
+          label="Policy Ambition"
+          options={policyAmbitionOptions}
+          value={filters.policyAmbition}
+          onChange={(arr) => onFilterChange("policyAmbition", arr)}
+          showModeToggle={false}
+          mode={filters.modes?.policyAmbition ?? "ANY"}
+          onModeChange={(m) => setMode("policyAmbition", m)}
           menuWidthClassName="w-60"
         />
 
@@ -146,39 +132,6 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           showModeToggle
           mode={filters.modes?.sector ?? "ANY"}
           onModeChange={(m) => setMode("sector", m)}
-          menuWidthClassName="w-60"
-        />
-
-        <MultiSelectDropdown<string>
-          label="Benchmark Metric"
-          options={metricOptions}
-          value={filters.metric}
-          onChange={(arr) => onFilterChange("metric", arr)}
-          showModeToggle
-          mode={filters.modes?.metric ?? "ANY"}
-          onModeChange={(m) => setMode("metric", m)}
-          menuWidthClassName="w-60"
-        />
-
-        <MultiSelectDropdown<string>
-          label="Emissions Trajectory"
-          options={emissionsTrajectoryOptions}
-          value={filters.emissionsTrajectory}
-          onChange={(arr) => onFilterChange("emissionsTrajectory", arr)}
-          showModeToggle={false}
-          mode={filters.modes?.emissionsTrajectory ?? "ANY"}
-          onModeChange={(m) => setMode("emissionsTrajectory", m)}
-          menuWidthClassName="w-60"
-        />
-
-        <MultiSelectDropdown<string>
-          label="Policy Ambition"
-          options={policyAmbitionOptions}
-          value={filters.policyAmbition}
-          onChange={(arr) => onFilterChange("policyAmbition", arr)}
-          showModeToggle={false}
-          mode={filters.modes?.policyAmbition ?? "ANY"}
-          onModeChange={(m) => setMode("policyAmbition", m)}
           menuWidthClassName="w-60"
         />
 
