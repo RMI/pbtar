@@ -96,6 +96,8 @@ export default function MultiSelectDropdown<
       onClear={clear}
       menuWidthClassName={menuWidthClassName}
       triggerMinWidthClassName={triggerMinWidthClassName}
+      // number of digits in options.length
+      reserveSpace={String(options.length).length}
       header={
         <>
           {/* Left: actions */}

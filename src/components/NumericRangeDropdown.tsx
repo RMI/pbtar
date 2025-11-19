@@ -49,6 +49,7 @@ export default function NumericRangeDropdown({
       active={active}
       summary={summary}
       onClear={() => onChange(null)}
+      reserveSpace={7}
       header={
         <>
           {/* Left: Clear button to mirror MultiSelect */}

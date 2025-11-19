@@ -93,7 +93,7 @@ export default function DropdownFacetShell({
               aria-hidden
               className="opacity-0 select-none whitespace-pre"
             >
-              {label}: "9".repeat(reserveSpace)
+              {label}: {"9".repeat(reserveSpace)}
             </span>
             <span className="absolute inset-0 whitespace-pre">
               {label}
