@@ -75,7 +75,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
   const descriptions: Record<string, Record<string, string>> = {
     pathwayType: {
       "Direct Policy": "Sourced directly from policy frameworks",
-      "Explorative": "Future states under explicit assumptions",
+      "Exploratory": "Future states under explicit assumptions",
       "Normative": "Pre-determined target outcome",
       "Predictive": "Extrapolates from current trends.",
     },
