@@ -32,6 +32,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         | "metric"
         | "emissionsTrajectory"
         | "policyAmbition"
+        | "dataAvailability"
         | "pathwayType"
         | "modelYearNetzero"
         | "modelTempIncrease",
@@ -52,6 +53,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     metricOptions,
     emissionsTrajectoryOptions,
     policyAmbitionOptions,
+    dataAvailabilityOptions,
   } = React.useMemo(() => getGlobalFacetOptions(pathwayMetadata), []);
 
   const areFiltersApplied =
@@ -78,7 +80,10 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       : filters.emissionsTrajectory != null) ||
     (Array.isArray(filters.policyAmbition)
       ? filters.policyAmbition.length > 0
-      : filters.policyAmbition != null);
+      : filters.policyAmbition != null) ||
+    (Array.isArray(filters.dataAvailability)
+      ? filters.dataAvailability.length > 0
+      : filters.dataAvailability != null);
 
   return (
     <div className="bg-gray-50">
@@ -174,6 +179,17 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           showModeToggle={false}
           mode={filters.modes?.policyAmbition ?? "ANY"}
           onModeChange={(m) => setMode("policyAmbition", m)}
+          menuWidthClassName="w-60"
+        />
+
+        <MultiSelectDropdown<string>
+          label="Data Availability"
+          options={dataAvailabilityOptions}
+          value={filters.dataAvailability}
+          onChange={(arr) => onFilterChange("dataAvailability", arr)}
+          showModeToggle={false}
+          mode={filters.modes?.dataAvailability ?? "ANY"}
+          onModeChange={(m) => setMode("dataAvailability", m)}
           menuWidthClassName="w-60"
         />
       </div>

@@ -31,6 +31,7 @@ export interface SearchFilters {
   metric?: string | string[] | null;
   emissionsTrajectory?: string | string[] | null;
   policyAmbition?: string | string[] | null;
+  dataAvailability?: string | string[] | null;
   searchTerm: string;
   // Optional per-facet mode (used later by a UI toggle)
   modes?: {
@@ -42,5 +43,6 @@ export interface SearchFilters {
     metric?: FacetMode;
     emissionsTrajectory?: FacetMode;
     policyAmbition?: FacetMode;
+    dataAvailability?: FacetMode;
   } | null;
 }

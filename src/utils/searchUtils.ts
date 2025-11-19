@@ -8,6 +8,7 @@ import { matchesOptionalFacetAny, matchesOptionalFacetAll } from "./facets";
 import { ABSENT_FILTER_TOKEN } from "./absent";
 import { buildOptionsFromValues, hasAbsent, withAbsentOption } from "./facets";
 import type { LabeledOption } from "./facets";
+import { index } from "../data/index.gen";
 
 // ───────────────────────────────────────────────────────────────────────────────
 // Global facet option provider
@@ -63,6 +64,10 @@ export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
     pathways.map((d) => d.keyFeatures.policyAmbition).flat(),
   );
 
+  const dataAvailabilityOptions = buildOptionsFromValues(
+    pathways.map((d) => availabilityFor(d)).flat(),
+  );
+
   return {
     pathwayTypeOptions,
     modelYearNetzeroOptions,
@@ -72,6 +77,7 @@ export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
     metricOptions,
     emissionsTrajectoryOptions,
     policyAmbitionOptions,
+    dataAvailabilityOptions,
   };
 }
 
@@ -110,6 +116,7 @@ export type FiltersWithArrays = {
   metric?: Arrayable;
   emissionsTrajectory?: Arrayable;
   policyAmbition?: Arrayable;
+  dataAvailability?: Arrayable;
   pathwayType?: Arrayable;
   modelYearNetzero?: Arrayable;
   modelTempIncrease?: Arrayable;
@@ -163,6 +170,26 @@ export function makeGeographyOptions(
 
   // ✅ value stays raw, label is full name (or passthrough for regions/Global)
   return sorted.map((v) => ({ value: v, label: geographyLabel(v) }));
+}
+
+// Determine data availability per pathway using the generated index
+// - "download": pathway id exists in index.byPathway
+// - "link": has link to data set
+// - "unavailable": otherwise
+export type DataAvailability = "Download" | "Foo" | "Unavailable";
+
+function availabilityFor(pathway: PathwayMetadataType): DataAvailability {
+  const hasDownload = Boolean(index?.byPathway?.[pathway.id]);
+  if (hasDownload) return "Download";
+  const hasLink =
+    Array.isArray(pathway.publication?.links) &&
+    pathway.publication.links.some(
+      (l) =>
+        typeof l?.description === "string" &&
+        ["dataset", "data"].includes(l.description.toLowerCase()),
+    );
+  if (hasLink) return "Link";
+  return "Unavailable";
 }
 
 export const filterPathways = (
@@ -356,6 +383,40 @@ export const filterPathways = (
         const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
         const v = pathway.keyFeatures?.policyAmbition ?? null;
         const mode = pickMode("policyAmbition", filters.modes as FilterModes);
+        let ok = true;
+
+        if (mode === "ANY") {
+          ok =
+            (v == null && hasAbsent) ||
+            (v != null && (concrete.length ? concrete.includes(v) : false));
+        } else {
+          // ALL: for single-valued fields, all selected tokens must hold.
+          // That is only possible when exactly one token is selected:
+          //  - [ABSENT]  -> v == null
+          //  - [X]       -> v == X
+          // Any combination (ABSENT + X, or X + Y) cannot be satisfied.
+          if (hasAbsent && concrete.length === 0) {
+            ok = v == null;
+          } else if (!hasAbsent && concrete.length === 1) {
+            ok = v != null && v === concrete[0];
+          } else {
+            ok = false;
+          }
+        }
+        if (!ok) return false;
+      }
+    }
+
+    // dataAvailability filter
+    // Expect `filters.dataAvailability` to be an array of DataAvailability values.
+    // Empty array or undefined => do not filter on availability.
+    {
+      const selected = toArray(filters.dataAvailability ?? []);
+      if (selected.length) {
+        const hasAbsent = selected.includes(ABSENT_FILTER_TOKEN);
+        const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
+        const v = availabilityFor(pathway) ?? null;
+        const mode = pickMode("dataAvailability", filters.modes as FilterModes);
         let ok = true;
 
         if (mode === "ANY") {

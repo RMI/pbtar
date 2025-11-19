@@ -24,6 +24,7 @@ const PathwaySearch: React.FC = () => {
     metric: null,
     emissionsTrajectory: null,
     policyAmbition: null,
+    dataAvailability: null,
     searchTerm: "",
   });
 
@@ -110,6 +111,7 @@ const PathwaySearch: React.FC = () => {
       metric: null,
       emissionsTrajectory: null,
       policyAmbition: null,
+      dataAvailability: null,
       searchTerm: "",
     });
   };

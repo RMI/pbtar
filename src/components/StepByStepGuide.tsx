@@ -6,6 +6,7 @@ import {
   ChevronUp,
   CircleArrowOutUpRight,
   Earth,
+  FileDown,
   GitFork,
   Home,
   Ruler,
@@ -68,6 +69,9 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         globalFacetOptions["emissionsTrajectoryOptions"],
       ),
       policyAmbition: normalize(globalFacetOptions["policyAmbitionOptions"]),
+      dataAvailability: normalize(
+        globalFacetOptions["dataAvailabilityOptions"],
+      ),
     }),
     [globalFacetOptions],
   );
@@ -260,6 +264,22 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
             title: "Include any benchmark metric",
             value: [], // empty array clears the filter
           });
+      })(),
+    },
+    {
+      id: "dataAvailability",
+      title: "Benchmark data accessibility",
+      description:
+        "Pathways differ in the availability of their benchmark data for access, which may limit user applications. Some pathway data is freely available in standardized format, other data needs to be acquired from third parties.",
+      icon: <FileDown className="h-8 w-8" />,
+      multi: false,
+      component: StepPageDiscrete,
+      options: (() => {
+        return [...(optionsByFacet["dataAvailability"] ?? [])].concat({
+          id: "__dataAvailability_clear__",
+          title: "Benchmark data availability not relevant",
+          value: [], // empty array clears the filter
+        });
       })(),
     },
   ];
