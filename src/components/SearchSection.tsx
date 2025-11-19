@@ -5,10 +5,9 @@ import { pathwayMetadata } from "../data/pathwayMetadata";
 import { SearchFilters } from "../types";
 import type { FacetMode } from "../utils/searchUtils";
 import { getGlobalFacetOptions } from "../utils/searchUtils";
-import NumericRange from "./NumericRange";
 import { getStep } from "./NumericRange";
 import clsx from "clsx";
-import FilterDropdown from "./FilterDropdown";
+import NumericRangeDropdown from "./NumericRangeDropdown";
 import { ChevronDown } from "lucide-react";
 
 interface SearchSectionProps {
@@ -115,39 +114,31 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           onModeChange={(m) => setMode("pathwayType", m)}
         />
 
-        <FilterDropdown label="Net Zero By">
-          <NumericRange
-            label="Net Zero By"
-            minBound={netZeroBounds.min}
-            maxBound={netZeroBounds.max}
-            step={getStep("netZeroBy")}
-            value={
-              !Array.isArray(filters.modelYearNetzero)
-                ? (filters.modelYearNetzero as any)
-                : null
-            }
-            onChange={(r) => onFilterChange("modelYearNetzero", r)}
-            onClear={() => onFilterChange("modelYearNetzero", null)}
-            dataTestId="range-netZeroBy"
-          />
-        </FilterDropdown>
+        <NumericRangeDropdown
+          label="Net Zero By"
+          minBound={netZeroBounds.min}
+          maxBound={netZeroBounds.max}
+          step={getStep("netZeroBy")}
+          value={
+            !Array.isArray(filters.modelYearNetzero)
+              ? (filters.modelYearNetzero as any)
+              : null
+          }
+          onChange={(r) => onFilterChange("modelYearNetzero", r)}
+        />
 
-        <FilterDropdown label="Temperature (°C)">
-          <NumericRange
-            label="Temperature (°C)"
-            minBound={tempBounds.min}
-            maxBound={tempBounds.max}
-            step={getStep("temp")}
-            value={
-              !Array.isArray(filters.modelTempIncrease)
-                ? (filters.modelTempIncrease as any)
-                : null
-            }
-            onChange={(r) => onFilterChange("modelTempIncrease", r)}
-            onClear={() => onFilterChange("modelTempIncrease", null)}
-            dataTestId="range-temp"
-          />
-        </FilterDropdown>
+        <NumericRangeDropdown
+          label="Temperature (°C)"
+          minBound={tempBounds.min}
+          maxBound={tempBounds.max}
+          step={getStep("temp")}
+          value={
+            !Array.isArray(filters.modelTempIncrease)
+              ? (filters.modelTempIncrease as any)
+              : null
+          }
+          onChange={(r) => onFilterChange("modelTempIncrease", r)}
+        />
 
         <MultiSelectDropdown<string>
           label="Geography"
