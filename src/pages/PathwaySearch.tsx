@@ -120,7 +120,7 @@ const PathwaySearch: React.FC = () => {
         filters={filters}
         onFilterChange={handleFilterChange}
       />
-      <div class="border-t border-slate-200"></div>
+      <div className="border-t border-slate-200"></div>
       <div
         ref={searchSectionRef}
         className={`sticky rounded-lg top-0 z-10 bg-gray-50 inset-x-0 transition-shadow duration-200 ${isSticky ? "shadow-md" : ""}`}
