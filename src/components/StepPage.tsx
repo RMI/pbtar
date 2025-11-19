@@ -38,7 +38,7 @@ export const StepPageDiscrete: React.FC<StepRendererProps> = ({
 
   const computeState = (opt: string | number): "on" | "partial" | "off" => {
     if (getState) return getState(opt, selectedSet);
-    const mapped = mapFn(opt);
+    const mapped = mapFn(opt).filter((v) => v != null); // ignore null/undefined
     const hits = mapped.filter((v) => selectedSet.has(v)).length;
     if (hits === 0) return "off";
     if (hits === mapped.length) return "on";
@@ -46,10 +46,15 @@ export const StepPageDiscrete: React.FC<StepRendererProps> = ({
   };
 
   const handleClick = (opt: string | number) => {
-    const mapped = mapFn(opt);
+    // Normalize mapped values; treat null/undefined as “no selection”
+    const mapped = mapFn(opt).filter((v) => v != null);
     if (selectionMode === "single") {
-      // Replace selection with the mapped values (for discrete, this is `[opt]`)
-      onChange(mapped);
+      // In single mode, clicking the already-selected option clears (toggle off).
+      const fullySelected =
+        mapped.length > 0 &&
+        mapped.every((v) => selectedSet.has(v)) &&
+        selectedSet.size === mapped.length;
+      onChange(fullySelected ? [] : mapped);
       return;
     }
     // Multi: toggle the whole mapped set

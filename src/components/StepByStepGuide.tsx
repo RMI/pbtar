@@ -220,7 +220,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
           .concat({
             id: "__emissionsTrajectory_clear__",
             title: "Include any emissions trajectory",
-            value: [], // empty array clears the filter
+            value: null, // null value clears the filter
           });
       })(),
     },
@@ -241,7 +241,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
           .concat({
             id: "__policyAmbition_clear__",
             title: "Include any policy ambition",
-            value: [], // empty array clears the filter
+            value: null, // null value clears the filter
           });
       })(),
     },
@@ -262,7 +262,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
           .concat({
             id: "__metric_clear__",
             title: "Include any benchmark metric",
-            value: [], // empty array clears the filter
+            value: null, // null value clears the filter
           });
       })(),
     },
@@ -401,24 +401,9 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                     const selectionMode: "single" | "multi" =
                       (step.multi ?? false) ? "multi" : "single";
 
-                    const onChange = (next: Array<string | number>) => {
-                      // Geography is array-valued even in "single" category mode
-                      if (
-                        step.id === "geography" ||
-                        step.id === "dataAvailability"
-                      ) {
-                        onFilterChange(step.id, next);
-                        return;
-                      }
-                      onFilterChange(
-                        step.id,
-                        selectionMode === "single"
-                          ? next.length === 0
-                            ? null
-                            : next[0]
-                          : next,
-                      );
-                    };
+                    // Unified array-based filters: always emit arrays
+                    const onChange = (next: Array<string | number>) =>
+                      onFilterChange(step.id, next);
 
                     return (
                       <Comp
