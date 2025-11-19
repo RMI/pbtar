@@ -87,7 +87,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       "Minor decrease": "Decrease 5%-15% by 2050",
       "Moderate decrease": "Decrease 15%-50% by 2050",
       "Significant decrease": "Decrease more than 50% by 2050",
-      "": "Include any emissions trajectory",
     },
     policyAmbition: {
       "No policies included": "Excludes policy impacts.",
@@ -188,10 +187,39 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       icon: <CircleArrowOutUpRight className="h-8 w-8" />,
       multi: false,
       component: StepPageDiscrete,
-      options: optionsByFacet["emissionsTrajectory"].map((o) => ({
-        ...o,
-        description: descriptions["emissionsTrajectory"][o.title] || undefined,
-      })),
+      options: (() => {
+        const ORDER = [
+          "Significant decrease",
+          "Moderate decrease",
+          "Minor decrease",
+          "Low or no change",
+          "Minor increase",
+          "Moderate increase",
+          "Significant increase",
+        ];
+        const rank = new Map(ORDER.map((t, i) => [t, i]));
+        // copy → add descriptions → sort by ORDER (fallback: alpha)
+        return [...(optionsByFacet["emissionsTrajectory"] ?? [])]
+          .map((o) => ({
+            ...o,
+            description:
+              descriptions["emissionsTrajectory"][o.title] || undefined,
+          }))
+          .sort((a, b) => {
+            const ai = rank.get(a.title);
+            const bi = rank.get(b.title);
+            if (ai != null && bi != null) return ai - bi;
+            if (ai != null) return -1;
+            if (bi != null) return 1;
+            return String(a.title).localeCompare(String(b.title));
+          })
+          .filter((o) => o.title !== "No information")
+          .concat({
+            id: "__emissionsTrajectory_clear__",
+            title: "Include any emissions trajectory",
+            value: [], // empty array clears the filter
+          });
+      })(),
     },
     {
       id: "policyAmbition",
