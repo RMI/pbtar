@@ -5,6 +5,9 @@ import { pathwayMetadata } from "../data/pathwayMetadata";
 import { SearchFilters } from "../types";
 import type { FacetMode } from "../utils/searchUtils";
 import { getGlobalFacetOptions } from "../utils/searchUtils";
+import NumericRange from "./NumericRange";
+import { getStep } from "./NumericRange";
+import clsx from "clsx";
 
 interface SearchSectionProps {
   filters: SearchFilters;
@@ -50,6 +53,24 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     metricOptions,
   } = React.useMemo(() => getGlobalFacetOptions(pathwayMetadata), []);
 
+  const { tempBounds, netZeroBounds } = React.useMemo(() => {
+    const tVals = (temperatureOptions ?? [])
+      .filter((o) => !o.disabled)
+      .map((o) => Number(o.value))
+      .filter((n) => Number.isFinite(n)) as number[];
+    const nzVals = (modelYearNetzeroOptions ?? [])
+      .filter((o) => !o.disabled)
+      .map((o) => Number(o.value))
+      .filter((n) => Number.isFinite(n)) as number[];
+    const tb = tVals.length
+      ? { min: Math.min(...tVals), max: Math.max(...tVals) }
+      : { min: 0, max: 0 };
+    const nzb = nzVals.length
+      ? { min: Math.min(...nzVals), max: Math.max(...nzVals) }
+      : { min: 0, max: 0 };
+    return { tempBounds: tb, netZeroBounds: nzb };
+  }, [temperatureOptions, modelYearNetzeroOptions]);
+
   const areFiltersApplied =
     Boolean(filters.searchTerm) ||
     Boolean(filters.pathwayType) ||
@@ -92,25 +113,148 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           onModeChange={(m) => setMode("pathwayType", m)}
         />
 
-        <MultiSelectDropdown<number>
-          label="Net Zero By"
-          options={modelYearNetzeroOptions}
-          value={filters.modelYearNetzero}
-          onChange={(arr) => onFilterChange("modelYearNetzero", arr)}
-          showModeToggle={false}
-          mode={filters.modes?.modelYearNetzero ?? "ANY"}
-          onModeChange={(m) => setMode("modelYearNetzero", m)}
-        />
+        {/* Net Zero By: toggle between Discrete and Range */}
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-medium text-gray-700">
+              Net Zero By
+            </span>
+            <div className="flex items-center gap-2 text-sm">
+              <button
+                type="button"
+                className={clsx(
+                  "px-2 py-1 rounded",
+                  (filters.modes?.modelYearNetzero ?? "DISCRETE") === "DISCRETE"
+                    ? "bg-gray-200"
+                    : "bg-transparent",
+                )}
+                onClick={() => setMode("modelYearNetzero", "DISCRETE")}
+              >
+                Discrete
+              </button>
+              <button
+                type="button"
+                className={clsx(
+                  "px-2 py-1 rounded",
+                  (filters.modes?.modelYearNetzero ?? "DISCRETE") === "RANGE"
+                    ? "bg-gray-200"
+                    : "bg-transparent",
+                )}
+                onClick={() => setMode("modelYearNetzero", "RANGE")}
+              >
+                Range
+              </button>
+            </div>
+          </div>
 
-        <MultiSelectDropdown<string | number>
-          label="Temperature (°C)"
-          options={temperatureOptions}
-          value={filters.modelTempIncrease}
-          onChange={(arr) => onFilterChange("modelTempIncrease", arr)}
-          showModeToggle={false}
-          mode={filters.modes?.modelTempIncrease ?? "ANY"}
-          onModeChange={(m) => setMode("modelTempIncrease", m)}
-        />
+          {(filters.modes?.modelYearNetzero ?? "DISCRETE") === "RANGE" ? (
+            <NumericRange
+              label=""
+              minBound={netZeroBounds.min}
+              maxBound={netZeroBounds.max}
+              step={getStep("netZeroBy")}
+              value={
+                (filters.modelYearNetzero as any)?.mode === "RANGE"
+                  ? (filters.modelYearNetzero as any)
+                  : null
+              }
+              onChange={(r) =>
+                onFilterChange(
+                  "modelYearNetzero",
+                  r ? { mode: "RANGE", ...r } : null,
+                )
+              }
+              onClear={() => onFilterChange("modelYearNetzero", null)}
+              dataTestId="range-netZeroBy"
+            />
+          ) : (
+            <MultiSelectDropdown<number>
+              label=""
+              options={modelYearNetzeroOptions}
+              value={
+                Array.isArray(filters.modelYearNetzero)
+                  ? filters.modelYearNetzero
+                  : []
+              }
+              onChange={(arr) => onFilterChange("modelYearNetzero", arr)}
+              showModeToggle={false}
+              mode="DISCRETE"
+              onModeChange={() => {}}
+            />
+          )}
+        </div>
+
+        {/* Temperature (°C): toggle between Discrete and Range */}
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-medium text-gray-700">
+              Temperature (°C)
+            </span>
+            <div className="flex items-center gap-2 text-sm">
+              <button
+                type="button"
+                className={clsx(
+                  "px-2 py-1 rounded",
+                  (filters.modes?.modelTempIncrease ?? "DISCRETE") ===
+                    "DISCRETE"
+                    ? "bg-gray-200"
+                    : "bg-transparent",
+                )}
+                onClick={() => setMode("modelTempIncrease", "DISCRETE")}
+              >
+                Discrete
+              </button>
+              <button
+                type="button"
+                className={clsx(
+                  "px-2 py-1 rounded",
+                  (filters.modes?.modelTempIncrease ?? "DISCRETE") === "RANGE"
+                    ? "bg-gray-200"
+                    : "bg-transparent",
+                )}
+                onClick={() => setMode("modelTempIncrease", "RANGE")}
+              >
+                Range
+              </button>
+            </div>
+          </div>
+
+          {(filters.modes?.modelTempIncrease ?? "DISCRETE") === "RANGE" ? (
+            <NumericRange
+              label=""
+              minBound={tempBounds.min}
+              maxBound={tempBounds.max}
+              step={getStep("temp")}
+              value={
+                (filters.modelTempIncrease as any)?.mode === "RANGE"
+                  ? (filters.modelTempIncrease as any)
+                  : null
+              }
+              onChange={(r) =>
+                onFilterChange(
+                  "modelTempIncrease",
+                  r ? { mode: "RANGE", ...r } : null,
+                )
+              }
+              onClear={() => onFilterChange("modelTempIncrease", null)}
+              dataTestId="range-temp"
+            />
+          ) : (
+            <MultiSelectDropdown<string | number>
+              label=""
+              options={temperatureOptions}
+              value={
+                Array.isArray(filters.modelTempIncrease)
+                  ? filters.modelTempIncrease
+                  : []
+              }
+              onChange={(arr) => onFilterChange("modelTempIncrease", arr)}
+              showModeToggle={false}
+              mode="DISCRETE"
+              onModeChange={() => {}}
+            />
+          )}
+        </div>
 
         <MultiSelectDropdown<string>
           label="Geography"

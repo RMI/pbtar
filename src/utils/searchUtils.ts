@@ -92,7 +92,14 @@ export interface GeoOption {
 }
 
 // New: allow AND/OR per facet. Defaults to "ANY" for backwards compatibility.
-export type FacetMode = "ANY" | "ALL";
+export type FacetMode = "ANY" | "ALL" | "DISCRETE" | "RANGE";
+
+export type NumericRange = {
+  mode: "RANGE";
+  min?: number; // open-ended lower bound ok
+  max?: number; // open-ended upper bound ok
+};
+
 export type FilterModes = Partial<{
   pathwayType: FacetMode;
   modelYearNetzero: FacetMode;
@@ -155,6 +162,20 @@ function pickMode(facet: keyof FilterModes, modes?: FilterModes): FacetMode {
   return modes?.[facet] ?? "ANY";
 }
 
+function matchesNumericRange(
+  value: number | undefined | null,
+  range: { min?: number; max?: number } | null | undefined,
+): boolean {
+  if (value == null) return false;
+  const gteMin = range?.min == null || value >= range!.min!;
+  const lteMax = range?.max == null || value <= range!.max!;
+  return gteMin && lteMax;
+}
+
+function isRangeFilter(f: unknown): f is NumericRange {
+  return !!f && typeof f === "object" && (f as any).mode === "RANGE";
+}
+
 export function makeGeographyOptions(
   pathways: PathwayMetadataType[],
 ): GeoOption[] {
@@ -209,64 +230,42 @@ export const filterPathways = (
       }
     }
 
-    // ---- Target year: OR over numbers; empty array => no filter; ABSENT-aware
-    {
-      const selected = toArrayMixed(filters.modelYearNetzero);
-      if (selected.length) {
-        const hasAbsent = hasAbsentToken(selected);
-        const numericChoices = toNumberSet(selected);
-        const v = pathway.modelYearNetzero; // number | null | undefined
-        const mode = pickMode("modelYearNetzero", filters.modes as FilterModes);
-        let ok = true;
-
-        if (mode === "ANY") {
-          ok =
-            (v == null && hasAbsent) ||
-            (v != null && numericChoices.has(Number(v)));
-        } else {
-          // ALL: only possible when exactly one condition is chosen:
-          //  - [ABSENT]        -> v == null
-          //  - [single number] -> v == number
-          // Any other combination (ABSENT + number, or two numbers) is impossible.
-          if (hasAbsent && numericChoices.size === 0) {
-            ok = v == null;
-          } else if (!hasAbsent && numericChoices.size === 1) {
-            ok = v != null && numericChoices.has(Number(v));
-          } else {
-            ok = false;
-          }
+    // Net Zero By — discrete array OR range
+    if (filters.modelYearNetzero != null) {
+      const mode = filters.modes?.modelYearNetzero ?? "DISCRETE";
+      if (mode === "RANGE" && isRangeFilter(filters.modelYearNetzero)) {
+        const v = pathway?.modelYearNetzero as number | undefined;
+        if (!matchesNumericRange(v, filters.modelYearNetzero)) return false;
+      } else {
+        // Back-compat: discrete (arrayable)
+        const arr = Array.isArray(filters.modelYearNetzero)
+          ? filters.modelYearNetzero
+          : [];
+        if (
+          arr.length > 0 &&
+          !arr.includes(pathway?.modelYearNetzero as number)
+        ) {
+          return false;
         }
-        if (!ok) return false;
       }
     }
 
-    // ---- Temperature: OR over numbers; empty array => no filter; ABSENT-aware
-    {
-      const selected = toArrayMixed(filters.modelTempIncrease);
-      if (selected.length) {
-        const hasAbsent = hasAbsentToken(selected);
-        const numericChoices = toNumberSet(selected);
-        const v = pathway.modelTempIncrease; // number | null | undefined
-        const mode = pickMode(
-          "modelTempIncrease",
-          filters.modes as FilterModes,
-        );
-        let ok = true;
-
-        if (mode === "ANY") {
-          ok =
-            (v == null && hasAbsent) ||
-            (v != null && numericChoices.has(Number(v)));
-        } else {
-          if (hasAbsent && numericChoices.size === 0) {
-            ok = v == null;
-          } else if (!hasAbsent && numericChoices.size === 1) {
-            ok = v != null && numericChoices.has(Number(v));
-          } else {
-            ok = false;
-          }
+    // Temperature — discrete array OR range
+    if (filters.modelTempIncrease != null) {
+      const mode = filters.modes?.modelTempIncrease ?? "DISCRETE";
+      if (mode === "RANGE" && isRangeFilter(filters.modelTempIncrease)) {
+        const v = pathway?.modelTempIncrease as number | undefined;
+        if (!matchesNumericRange(v, filters.modelTempIncrease)) return false;
+      } else {
+        const arr = Array.isArray(filters.modelTempIncrease)
+          ? filters.modelTempIncrease
+          : [];
+        if (
+          arr.length > 0 &&
+          !arr.includes(pathway?.modelTempIncrease as number)
+        ) {
+          return false;
         }
-        if (!ok) return false;
       }
     }
 
