@@ -100,10 +100,9 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     metric: {
       "Capacity": "Generation capacity by technology/fuel",
       "Generation": "Generation by technology/fuel",
-      "Emissions": "Total GHG emissions",
+      "Absolute Emissions": "Total GHG emissions",
       "Emissions Intensity": "GHG emissions per quantity of generation",
       "Technology Mix": "Share of generation by technology/fuel",
-      "": "Include any benchmark metric",
     },
   };
 
@@ -250,10 +249,18 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       icon: <Ruler className="h-8 w-8" />,
       multi: false,
       component: StepPageDiscrete,
-      options: optionsByFacet["metric"].map((o) => ({
-        ...o,
-        description: descriptions["metric"][o.title] || undefined,
-      })),
+      options: (() => {
+        return [...(optionsByFacet["metric"] ?? [])]
+          .map((o) => ({
+            ...o,
+            description: descriptions["metric"][o.title] || undefined,
+          }))
+          .concat({
+            id: "__metric_clear__",
+            title: "Include any benchmark metric",
+            value: [], // empty array clears the filter
+          });
+      })(),
     },
   ];
 
