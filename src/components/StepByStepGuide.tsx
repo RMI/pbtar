@@ -333,7 +333,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                               aria-hidden="true"
                             >
                               {React.isValidElement(step.icon)
-                                ? React.cloneElement(step.icon as any, {
+                                ? React.cloneElement(step.icon, {
                                     className: "h-4 w-4 stroke-current",
                                   })
                                 : step.icon}
