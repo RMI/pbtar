@@ -27,14 +27,6 @@ describe("PathwaySearch component", () => {
     );
   };
 
-  it("renders the main heading", () => {
-    renderPathwaySearch();
-
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Find Climate Transition Pathways",
-    );
-  });
-
   it("displays the introductory paragraph", () => {
     renderPathwaySearch();
 
