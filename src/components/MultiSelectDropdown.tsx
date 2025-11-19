@@ -35,7 +35,6 @@ export default function MultiSelectDropdown<
   value,
   onChange,
   placeholder = "Select",
-  className,
   triggerMinWidthClassName = "min-w-32",
   menuWidthClassName,
   mode = "ANY",

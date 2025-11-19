@@ -6,9 +6,7 @@ import { SearchFilters } from "../types";
 import type { FacetMode } from "../utils/searchUtils";
 import { getGlobalFacetOptions } from "../utils/searchUtils";
 import { getStep } from "./NumericRange";
-import clsx from "clsx";
 import NumericRangeDropdown from "./NumericRangeDropdown";
-import { ChevronDown } from "lucide-react";
 
 interface SearchSectionProps {
   filters: SearchFilters;

@@ -137,27 +137,6 @@ function toArray(v: Arrayable): string[] {
   return Array.isArray(v) ? v.filter(Boolean) : [String(v)];
 }
 
-function toArrayMixed(v: Arrayable): (string | number)[] {
-  if (v == null) return [];
-  return Array.isArray(v)
-    ? v.filter((x) => x !== null && x !== undefined)
-    : [v];
-}
-
-function hasAbsentToken(arr: (string | number)[]): boolean {
-  return arr.some((t) => String(t) === ABSENT_FILTER_TOKEN);
-}
-
-function toNumberSet(arr: (string | number)[]): Set<number> {
-  const out = new Set<number>();
-  for (const t of arr) {
-    if (String(t) === ABSENT_FILTER_TOKEN) continue;
-    const n = typeof t === "number" ? t : Number(t);
-    if (Number.isFinite(n)) out.add(n);
-  }
-  return out;
-}
-
 function pickMode(facet: keyof FilterModes, modes?: FilterModes): FacetMode {
   return modes?.[facet] ?? "ANY";
 }
@@ -170,10 +149,6 @@ function matchesNumericRange(
   const gteMin = range?.min == null || value >= range!.min!;
   const lteMax = range?.max == null || value <= range!.max!;
   return gteMin && lteMax;
-}
-
-function isRangeFilter(f: unknown): f is NumericRange {
-  return !!f && typeof f === "object" && (f as any).mode === "RANGE";
 }
 
 export function makeGeographyOptions(
