@@ -8,6 +8,8 @@ import { getGlobalFacetOptions } from "../utils/searchUtils";
 import NumericRange from "./NumericRange";
 import { getStep } from "./NumericRange";
 import clsx from "clsx";
+import FilterDropdown from "./FilterDropdown";
+import { ChevronDown } from "lucide-react";
 
 interface SearchSectionProps {
   filters: SearchFilters;
@@ -113,43 +115,71 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           onModeChange={(m) => setMode("pathwayType", m)}
         />
 
-        {/* Net Zero By: toggle between Discrete and Range */}
-        <div className="flex flex-col gap-2">
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-gray-700">
+        <FilterDropdown label="Net Zero By">
+          {/* Header row with mode toggle on the right */}
+          <div className="flex items-start justify-between pb-2">
+            <div className="text-sm font-medium text-gray-700 leading-tight">
               Net Zero By
-            </span>
-            <div className="flex items-center gap-2 text-sm">
-              <button
-                type="button"
-                className={clsx(
-                  "px-2 py-1 rounded",
-                  (filters.modes?.modelYearNetzero ?? "DISCRETE") === "DISCRETE"
-                    ? "bg-gray-200"
-                    : "bg-transparent",
-                )}
-                onClick={() => setMode("modelYearNetzero", "DISCRETE")}
-              >
-                Discrete
-              </button>
-              <button
-                type="button"
-                className={clsx(
-                  "px-2 py-1 rounded",
-                  (filters.modes?.modelYearNetzero ?? "DISCRETE") === "RANGE"
-                    ? "bg-gray-200"
-                    : "bg-transparent",
-                )}
-                onClick={() => setMode("modelYearNetzero", "RANGE")}
-              >
-                Range
-              </button>
+            </div>
+            <div
+              className="text-right text-rmigray-500 inline-block"
+              data-testid="nz-mode-toggle"
+            >
+              <div className="whitespace-nowrap text-xs">Filter mode</div>
+              <div className="mt-1 flex items-center justify-end gap-1">
+                <div
+                  className="border border-gray-200 rounded-md cursor-pointer select-none"
+                  role="button"
+                  aria-label={`Toggle filter mode (currently ${(filters.modes?.modelYearNetzero ?? "DISCRETE") === "RANGE" ? "Range" : "Discrete"})`}
+                  tabIndex={0}
+                  onClick={() =>
+                    setMode(
+                      "modelYearNetzero",
+                      (filters.modes?.modelYearNetzero ?? "DISCRETE") ===
+                        "RANGE"
+                        ? "DISCRETE"
+                        : "RANGE",
+                    )
+                  }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setMode(
+                        "modelYearNetzero",
+                        (filters.modes?.modelYearNetzero ?? "DISCRETE") ===
+                          "RANGE"
+                          ? "DISCRETE"
+                          : "RANGE",
+                      );
+                    }
+                  }}
+                >
+                  <span
+                    className={clsx(
+                      "px-[4px] py-[2px] rounded text-xs",
+                      (filters.modes?.modelYearNetzero ?? "DISCRETE") ===
+                        "DISCRETE" && "bg-energy-100 text-energy-800",
+                    )}
+                  >
+                    Discrete
+                  </span>
+                  <span
+                    className={clsx(
+                      "px-[4px] py-[2px] rounded text-xs",
+                      (filters.modes?.modelYearNetzero ?? "DISCRETE") ===
+                        "RANGE" && "bg-energy-100 text-energy-800",
+                    )}
+                  >
+                    Range
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
           {(filters.modes?.modelYearNetzero ?? "DISCRETE") === "RANGE" ? (
             <NumericRange
-              label=""
+              label="Net Zero By"
               minBound={netZeroBounds.min}
               maxBound={netZeroBounds.max}
               step={getStep("netZeroBy")}
@@ -180,48 +210,75 @@ const SearchSection: React.FC<SearchSectionProps> = ({
               showModeToggle={false}
               mode="DISCRETE"
               onModeChange={() => {}}
+              menuWidthClassName="w-60"
             />
           )}
-        </div>
+        </FilterDropdown>
 
-        {/* Temperature (°C): toggle between Discrete and Range */}
-        <div className="flex flex-col gap-2">
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-gray-700">
+        <FilterDropdown label="Temperature (°C)">
+          <div className="flex items-start justify-between pb-2">
+            <div className="text-sm font-medium text-gray-700 leading-tight">
               Temperature (°C)
-            </span>
-            <div className="flex items-center gap-2 text-sm">
-              <button
-                type="button"
-                className={clsx(
-                  "px-2 py-1 rounded",
-                  (filters.modes?.modelTempIncrease ?? "DISCRETE") ===
-                    "DISCRETE"
-                    ? "bg-gray-200"
-                    : "bg-transparent",
-                )}
-                onClick={() => setMode("modelTempIncrease", "DISCRETE")}
-              >
-                Discrete
-              </button>
-              <button
-                type="button"
-                className={clsx(
-                  "px-2 py-1 rounded",
-                  (filters.modes?.modelTempIncrease ?? "DISCRETE") === "RANGE"
-                    ? "bg-gray-200"
-                    : "bg-transparent",
-                )}
-                onClick={() => setMode("modelTempIncrease", "RANGE")}
-              >
-                Range
-              </button>
+            </div>
+            <div
+              className="text-right text-rmigray-500 inline-block"
+              data-testid="temp-mode-toggle"
+            >
+              <div className="whitespace-nowrap text-xs">Filter mode</div>
+              <div className="mt-1 flex items-center justify-end gap-1">
+                <div
+                  className="border border-gray-200 rounded-md cursor-pointer select-none"
+                  role="button"
+                  aria-label={`Toggle filter mode (currently ${(filters.modes?.modelTempIncrease ?? "DISCRETE") === "RANGE" ? "Range" : "Discrete"})`}
+                  tabIndex={0}
+                  onClick={() =>
+                    setMode(
+                      "modelTempIncrease",
+                      (filters.modes?.modelTempIncrease ?? "DISCRETE") ===
+                        "RANGE"
+                        ? "DISCRETE"
+                        : "RANGE",
+                    )
+                  }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setMode(
+                        "modelTempIncrease",
+                        (filters.modes?.modelTempIncrease ?? "DISCRETE") ===
+                          "RANGE"
+                          ? "DISCRETE"
+                          : "RANGE",
+                      );
+                    }
+                  }}
+                >
+                  <span
+                    className={clsx(
+                      "px-[4px] py-[2px] rounded text-xs",
+                      (filters.modes?.modelTempIncrease ?? "DISCRETE") ===
+                        "DISCRETE" && "bg-energy-100 text-energy-800",
+                    )}
+                  >
+                    Discrete
+                  </span>
+                  <span
+                    className={clsx(
+                      "px-[4px] py-[2px] rounded text-xs",
+                      (filters.modes?.modelTempIncrease ?? "DISCRETE") ===
+                        "RANGE" && "bg-energy-100 text-energy-800",
+                    )}
+                  >
+                    Range
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
           {(filters.modes?.modelTempIncrease ?? "DISCRETE") === "RANGE" ? (
             <NumericRange
-              label=""
+              label="Temperature (°C)"
               minBound={tempBounds.min}
               maxBound={tempBounds.max}
               step={getStep("temp")}
@@ -252,9 +309,10 @@ const SearchSection: React.FC<SearchSectionProps> = ({
               showModeToggle={false}
               mode="DISCRETE"
               onModeChange={() => {}}
+              menuWidthClassName="w-60"
             />
           )}
-        </div>
+        </FilterDropdown>
 
         <MultiSelectDropdown<string>
           label="Geography"
