@@ -116,202 +116,37 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         />
 
         <FilterDropdown label="Net Zero By">
-          {/* Header row with mode toggle on the right */}
-          <div className="flex items-start justify-between pb-2">
-            <div className="text-sm font-medium text-gray-700 leading-tight">
-              Net Zero By
-            </div>
-            <div
-              className="text-right text-rmigray-500 inline-block"
-              data-testid="nz-mode-toggle"
-            >
-              <div className="whitespace-nowrap text-xs">Filter mode</div>
-              <div className="mt-1 flex items-center justify-end gap-1">
-                <div
-                  className="border border-gray-200 rounded-md cursor-pointer select-none"
-                  role="button"
-                  aria-label={`Toggle filter mode (currently ${(filters.modes?.modelYearNetzero ?? "DISCRETE") === "RANGE" ? "Range" : "Discrete"})`}
-                  tabIndex={0}
-                  onClick={() =>
-                    setMode(
-                      "modelYearNetzero",
-                      (filters.modes?.modelYearNetzero ?? "DISCRETE") ===
-                        "RANGE"
-                        ? "DISCRETE"
-                        : "RANGE",
-                    )
-                  }
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setMode(
-                        "modelYearNetzero",
-                        (filters.modes?.modelYearNetzero ?? "DISCRETE") ===
-                          "RANGE"
-                          ? "DISCRETE"
-                          : "RANGE",
-                      );
-                    }
-                  }}
-                >
-                  <span
-                    className={clsx(
-                      "px-[4px] py-[2px] rounded text-xs",
-                      (filters.modes?.modelYearNetzero ?? "DISCRETE") ===
-                        "DISCRETE" && "bg-energy-100 text-energy-800",
-                    )}
-                  >
-                    Discrete
-                  </span>
-                  <span
-                    className={clsx(
-                      "px-[4px] py-[2px] rounded text-xs",
-                      (filters.modes?.modelYearNetzero ?? "DISCRETE") ===
-                        "RANGE" && "bg-energy-100 text-energy-800",
-                    )}
-                  >
-                    Range
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {(filters.modes?.modelYearNetzero ?? "DISCRETE") === "RANGE" ? (
-            <NumericRange
-              label="Net Zero By"
-              minBound={netZeroBounds.min}
-              maxBound={netZeroBounds.max}
-              step={getStep("netZeroBy")}
-              value={
-                (filters.modelYearNetzero as any)?.mode === "RANGE"
-                  ? (filters.modelYearNetzero as any)
-                  : null
-              }
-              onChange={(r) =>
-                onFilterChange(
-                  "modelYearNetzero",
-                  r ? { mode: "RANGE", ...r } : null,
-                )
-              }
-              onClear={() => onFilterChange("modelYearNetzero", null)}
-              dataTestId="range-netZeroBy"
-            />
-          ) : (
-            <MultiSelectDropdown<number>
-              label=""
-              options={modelYearNetzeroOptions}
-              value={
-                Array.isArray(filters.modelYearNetzero)
-                  ? filters.modelYearNetzero
-                  : []
-              }
-              onChange={(arr) => onFilterChange("modelYearNetzero", arr)}
-              showModeToggle={false}
-              mode="DISCRETE"
-              onModeChange={() => {}}
-              menuWidthClassName="w-60"
-            />
-          )}
+          <NumericRange
+            label="Net Zero By"
+            minBound={netZeroBounds.min}
+            maxBound={netZeroBounds.max}
+            step={getStep("netZeroBy")}
+            value={
+              !Array.isArray(filters.modelYearNetzero)
+                ? (filters.modelYearNetzero as any)
+                : null
+            }
+            onChange={(r) => onFilterChange("modelYearNetzero", r)}
+            onClear={() => onFilterChange("modelYearNetzero", null)}
+            dataTestId="range-netZeroBy"
+          />
         </FilterDropdown>
 
         <FilterDropdown label="Temperature (°C)">
-          <div className="flex items-start justify-between pb-2">
-            <div className="text-sm font-medium text-gray-700 leading-tight">
-              Temperature (°C)
-            </div>
-            <div
-              className="text-right text-rmigray-500 inline-block"
-              data-testid="temp-mode-toggle"
-            >
-              <div className="whitespace-nowrap text-xs">Filter mode</div>
-              <div className="mt-1 flex items-center justify-end gap-1">
-                <div
-                  className="border border-gray-200 rounded-md cursor-pointer select-none"
-                  role="button"
-                  aria-label={`Toggle filter mode (currently ${(filters.modes?.modelTempIncrease ?? "DISCRETE") === "RANGE" ? "Range" : "Discrete"})`}
-                  tabIndex={0}
-                  onClick={() =>
-                    setMode(
-                      "modelTempIncrease",
-                      (filters.modes?.modelTempIncrease ?? "DISCRETE") ===
-                        "RANGE"
-                        ? "DISCRETE"
-                        : "RANGE",
-                    )
-                  }
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setMode(
-                        "modelTempIncrease",
-                        (filters.modes?.modelTempIncrease ?? "DISCRETE") ===
-                          "RANGE"
-                          ? "DISCRETE"
-                          : "RANGE",
-                      );
-                    }
-                  }}
-                >
-                  <span
-                    className={clsx(
-                      "px-[4px] py-[2px] rounded text-xs",
-                      (filters.modes?.modelTempIncrease ?? "DISCRETE") ===
-                        "DISCRETE" && "bg-energy-100 text-energy-800",
-                    )}
-                  >
-                    Discrete
-                  </span>
-                  <span
-                    className={clsx(
-                      "px-[4px] py-[2px] rounded text-xs",
-                      (filters.modes?.modelTempIncrease ?? "DISCRETE") ===
-                        "RANGE" && "bg-energy-100 text-energy-800",
-                    )}
-                  >
-                    Range
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {(filters.modes?.modelTempIncrease ?? "DISCRETE") === "RANGE" ? (
-            <NumericRange
-              label="Temperature (°C)"
-              minBound={tempBounds.min}
-              maxBound={tempBounds.max}
-              step={getStep("temp")}
-              value={
-                (filters.modelTempIncrease as any)?.mode === "RANGE"
-                  ? (filters.modelTempIncrease as any)
-                  : null
-              }
-              onChange={(r) =>
-                onFilterChange(
-                  "modelTempIncrease",
-                  r ? { mode: "RANGE", ...r } : null,
-                )
-              }
-              onClear={() => onFilterChange("modelTempIncrease", null)}
-              dataTestId="range-temp"
-            />
-          ) : (
-            <MultiSelectDropdown<string | number>
-              label=""
-              options={temperatureOptions}
-              value={
-                Array.isArray(filters.modelTempIncrease)
-                  ? filters.modelTempIncrease
-                  : []
-              }
-              onChange={(arr) => onFilterChange("modelTempIncrease", arr)}
-              showModeToggle={false}
-              mode="DISCRETE"
-              onModeChange={() => {}}
-              menuWidthClassName="w-60"
-            />
-          )}
+          <NumericRange
+            label="Temperature (°C)"
+            minBound={tempBounds.min}
+            maxBound={tempBounds.max}
+            step={getStep("temp")}
+            value={
+              !Array.isArray(filters.modelTempIncrease)
+                ? (filters.modelTempIncrease as any)
+                : null
+            }
+            onChange={(r) => onFilterChange("modelTempIncrease", r)}
+            onClear={() => onFilterChange("modelTempIncrease", null)}
+            dataTestId="range-temp"
+          />
         </FilterDropdown>
 
         <MultiSelectDropdown<string>

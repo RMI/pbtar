@@ -92,7 +92,7 @@ export interface GeoOption {
 }
 
 // New: allow AND/OR per facet. Defaults to "ANY" for backwards compatibility.
-export type FacetMode = "ANY" | "ALL" | "DISCRETE" | "RANGE";
+export type FacetMode = "ANY" | "ALL" | "RANGE";
 
 export type NumericRange = {
   mode: "RANGE";
@@ -230,69 +230,39 @@ export const filterPathways = (
       }
     }
 
-    // Net Zero By — DISCRETE (array) or RANGE ({min,max,includeAbsent})
+    // --- Net Zero By: ALWAYS RANGE for this facet ---
     {
-      const mode = filters.modes?.modelYearNetzero ?? "DISCRETE";
-      if (mode === "RANGE") {
-        const r = (
-          !Array.isArray(filters.modelYearNetzero)
-            ? (filters.modelYearNetzero as any)
-            : null
-        ) as { min?: number; max?: number; includeAbsent?: boolean } | null;
+      const r = (
+        !Array.isArray(filters.modelYearNetzero)
+          ? (filters.modelYearNetzero as any)
+          : null
+      ) as { min?: number; max?: number; includeAbsent?: boolean } | null;
 
-        if (r) {
-          const v = pathway?.modelYearNetzero as number | undefined;
-          const hasValue = v != null;
-          const inRange =
-            hasValue &&
-            (r.min == null || v >= r.min) &&
-            (r.max == null || v <= r.max);
-          const pass = inRange || (!hasValue && !!r.includeAbsent);
-          if (!pass) return false;
-        }
-      } else {
-        const arr = Array.isArray(filters.modelYearNetzero)
-          ? filters.modelYearNetzero
-          : [];
-        if (
-          arr.length > 0 &&
-          !arr.includes(pathway?.modelYearNetzero as number)
-        ) {
-          return false;
-        }
+      if (r) {
+        const v = pathway?.modelYearNetzero as number | undefined;
+        const hasValue = v != null;
+        const pass =
+          (hasValue && matchesNumericRange(v, r)) ||
+          (!hasValue && !!r.includeAbsent);
+        if (!pass) return false;
       }
     }
 
-    // Temperature — DISCRETE (array) or RANGE ({min,max,includeAbsent})
+    // --- Temperature (°C): ALWAYS RANGE for this facet ---
     {
-      const mode = filters.modes?.modelTempIncrease ?? "DISCRETE";
-      if (mode === "RANGE") {
-        const r = (
-          !Array.isArray(filters.modelTempIncrease)
-            ? (filters.modelTempIncrease as any)
-            : null
-        ) as { min?: number; max?: number; includeAbsent?: boolean } | null;
+      const r = (
+        !Array.isArray(filters.modelTempIncrease)
+          ? (filters.modelTempIncrease as any)
+          : null
+      ) as { min?: number; max?: number; includeAbsent?: boolean } | null;
 
-        if (r) {
-          const v = pathway?.modelTempIncrease as number | undefined;
-          const hasValue = v != null;
-          const inRange =
-            hasValue &&
-            (r.min == null || v >= r.min) &&
-            (r.max == null || v <= r.max);
-          const pass = inRange || (!hasValue && !!r.includeAbsent);
-          if (!pass) return false;
-        }
-      } else {
-        const arr = Array.isArray(filters.modelTempIncrease)
-          ? filters.modelTempIncrease
-          : [];
-        if (
-          arr.length > 0 &&
-          !arr.includes(pathway?.modelTempIncrease as number)
-        ) {
-          return false;
-        }
+      if (r) {
+        const v = pathway?.modelTempIncrease as number | undefined;
+        const hasValue = v != null;
+        const pass =
+          (hasValue && matchesNumericRange(v, r)) ||
+          (!hasValue && !!r.includeAbsent);
+        if (!pass) return false;
       }
     }
 
