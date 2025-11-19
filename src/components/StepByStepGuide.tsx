@@ -302,16 +302,17 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                 <div className="space-y-6">
                   <div className="max-w-5xl mx-auto">
                     <p className="text-rmigray-500 leading-relaxed">
-                      Different pathways are suited to different applications. All
-                      users should be mindful of the model types and geographic
-                      coverage of the pathways they select. Users interested in
-                      assessing the ambition of transition strategies may wish to
-                      select pathways with suitable temperature rise or emissions
-                      changes, while those interested in assessing potential policy
-                      exposure or technical feasibility may prioritize models with
-                      the relevant policy assumption set. The following steps guide
-                      users through key pathway features, while filters below offer
-                      additional options.
+                      Different pathways are suited to different applications.
+                      All users should be mindful of the model types and
+                      geographic coverage of the pathways they select. Users
+                      interested in assessing the ambition of transition
+                      strategies may wish to select pathways with suitable
+                      temperature rise or emissions changes, while those
+                      interested in assessing potential policy exposure or
+                      technical feasibility may prioritize models with the
+                      relevant policy assumption set. The following steps guide
+                      users through key pathway features, while filters below
+                      offer additional options.
                     </p>
                   </div>
 
@@ -333,8 +334,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                             >
                               {React.isValidElement(step.icon)
                                 ? React.cloneElement(step.icon as any, {
-                                  className: "h-4 w-4 stroke-current",
-                                })
+                                    className: "h-4 w-4 stroke-current",
+                                  })
                                 : step.icon}
                             </div>
 
@@ -369,7 +370,11 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                       }
                       onFilterChange(
                         step.id,
-                        selectionMode === "single" ? (next.length === 0 ? null : next[0]) : next,
+                        selectionMode === "single"
+                          ? next.length === 0
+                            ? null
+                            : next[0]
+                          : next,
                       );
                     };
 
@@ -404,7 +409,9 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                         <Home className="h-5 w-5" />
                       </button>
                       <button
-                        onClick={() => setCurrentView(Math.max(0, currentView - 1))}
+                        onClick={() =>
+                          setCurrentView(Math.max(0, currentView - 1))
+                        }
                         disabled={currentView === 0}
                         className="p-2 hover:text-energy disabled:opacity-50"
                       >
@@ -412,7 +419,9 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                       </button>
                       <button
                         onClick={() =>
-                          setCurrentView(Math.min(steps.length - 1, currentView + 1))
+                          setCurrentView(
+                            Math.min(steps.length - 1, currentView + 1),
+                          )
                         }
                         disabled={currentView === steps.length - 1}
                         className="p-2 hover:text-energy disabled:opacity-50"
