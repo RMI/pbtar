@@ -27,20 +27,6 @@ type Props = {
   dataTestId?: string;
 };
 
-const clamp = (v: number, lo: number, hi: number) =>
-  Math.min(hi, Math.max(lo, v));
-const countDecimals = (n: number) => {
-  const s = String(n);
-  const i = s.indexOf(".");
-  return i === -1 ? 0 : s.length - i - 1;
-};
-const snapToStep = (v: number, step: number) => Math.round(v / step) * step;
-const normalize = (v: number, step: number) => {
-  const snapped = snapToStep(v, step);
-  const fixed = Number(snapped.toFixed(countDecimals(step)));
-  return fixed;
-};
-
 export default function NumericRange({
   label,
   minBound,
@@ -69,7 +55,8 @@ export default function NumericRange({
       update({ min: undefined, max });
       return;
     }
-    const v = normalize(clamp(Number(raw), minBound, maxBound), step);
+    const v = Number(raw);
+    if (!Number.isFinite(v)) return; // allow free typing; apply only when it's a number
     if (value?.max != null && v > value.max) {
       // swap to keep a valid interval
       update({ min: value.max, max: v });
@@ -84,7 +71,8 @@ export default function NumericRange({
       update({ min, max: undefined });
       return;
     }
-    const v = normalize(clamp(Number(raw), minBound, maxBound), step);
+    const v = Number(raw);
+    if (!Number.isFinite(v)) return; // allow free typing; apply only when it's a number
     if (value?.min != null && v < value.min) {
       // swap to keep a valid interval
       update({ min: v, max: value.min });
@@ -107,8 +95,6 @@ export default function NumericRange({
         <input
           type="number"
           step={step}
-          min={minBound}
-          max={maxBound}
           value={min ?? ""}
           onChange={handleMinInput}
           className="w-28 rounded border px-2 py-1"
@@ -119,8 +105,6 @@ export default function NumericRange({
         <input
           type="number"
           step={step}
-          min={minBound}
-          max={maxBound}
           value={max ?? ""}
           onChange={handleMaxInput}
           className="w-28 rounded border px-2 py-1"
