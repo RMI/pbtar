@@ -229,10 +229,18 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       icon: <ScrollText className="h-8 w-8" />,
       multi: false,
       component: StepPageDiscrete,
-      options: optionsByFacet["policyAmbition"].map((o) => ({
-        ...o,
-        description: descriptions["policyAmbition"][o.title] || undefined,
-      })),
+      options: (() => {
+        return [...(optionsByFacet["policyAmbition"] ?? [])]
+          .map((o) => ({
+            ...o,
+            description: descriptions["policyAmbition"][o.title] || undefined,
+          }))
+          .concat({
+            id: "__policyAmbition_clear__",
+            title: "Include any policy ambition",
+            value: [], // empty array clears the filter
+          });
+      })(),
     },
     {
       id: "metric",
