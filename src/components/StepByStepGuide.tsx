@@ -95,7 +95,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       "NDCs, unconditional only": "Policies to reach unconditional targets",
       "NDCs incl. conditional targets": "Policies to reach all targets",
       "Normative/Optimization-based": "Policies to reach a climate outcome.",
-      "": "Include any policy ambition",
+      "Other policy ambition": "See pathway details",
     },
     metric: {
       "Capacity": "Generation capacity by technology/fuel",
