@@ -40,12 +40,12 @@ const HANDLE_R = 8;
 function tempToHex(t: number) {
   // Use deeper theme tokens (CSS variables) for a richer gradient.
   // These variables are defined in src/index.css (see --color-...).
-  if (t <= 1.5) return "#2888C9";   // stronger blue
+  if (t <= 1.5) return "#2888C9"; // stronger blue
   if (t <= 1.75) return "#77B8E4"; // deeper green
-  if (t <= 2.0) return "#91CBF2";    // stronger yellow
-  if (t <= 3.0) return "#DF4E39";   // warm orange
-  if (t <= 3.5) return "#DF4E39";   // deep red
-  return "#AB3C2C";                 // red-brown
+  if (t <= 2.0) return "#91CBF2"; // stronger yellow
+  if (t <= 3.0) return "#DF4E39"; // warm orange
+  if (t <= 3.5) return "#DF4E39"; // deep red
+  return "#AB3C2C"; // red-brown
 }
 
 const NumericRangeSlider: React.FC<Props> = ({
@@ -67,7 +67,9 @@ const NumericRangeSlider: React.FC<Props> = ({
   });
 
   const [isDragging, setIsDragging] = React.useState(false);
-  const [draggingWhich, setDraggingWhich] = React.useState<"min" | "max" | null>(null);
+  const [draggingWhich, setDraggingWhich] = React.useState<
+    "min" | "max" | null
+  >(null);
 
   const fromUserRef = React.useRef(false);
 
@@ -155,26 +157,26 @@ const NumericRangeSlider: React.FC<Props> = ({
 
   const dragHandle =
     (which: "min" | "max"): React.MouseEventHandler<HTMLDivElement> =>
-      (e) => {
-        e.stopPropagation();
-        activeHandle.current = which;
-        setDraggingWhich(which);
-        setIsDragging(true);
-        const move = (ev: MouseEvent) => {
-          const nv = pxToValue(ev.clientX);
-          if (!isNum(nv)) return;
-          commit({ [which]: nv } as Partial<Internal>);
-        };
-        const up = () => {
-          activeHandle.current = null;
-          setIsDragging(false);
-          setDraggingWhich(null);
-          window.removeEventListener("mousemove", move);
-          window.removeEventListener("mouseup", up);
-        };
-        window.addEventListener("mousemove", move);
-        window.addEventListener("mouseup", up);
+    (e) => {
+      e.stopPropagation();
+      activeHandle.current = which;
+      setDraggingWhich(which);
+      setIsDragging(true);
+      const move = (ev: MouseEvent) => {
+        const nv = pxToValue(ev.clientX);
+        if (!isNum(nv)) return;
+        commit({ [which]: nv } as Partial<Internal>);
       };
+      const up = () => {
+        activeHandle.current = null;
+        setIsDragging(false);
+        setDraggingWhich(null);
+        window.removeEventListener("mousemove", move);
+        window.removeEventListener("mouseup", up);
+      };
+      window.addEventListener("mousemove", move);
+      window.addEventListener("mouseup", up);
+    };
 
   // visuals
   const effMin = isNum(min) ? min : minBound;
@@ -215,7 +217,11 @@ const NumericRangeSlider: React.FC<Props> = ({
   const maxTooltipValue = fmt(isNum(max) ? max : maxBound);
 
   return (
-    <fieldset data-testid={dataTestId} aria-label={label} className="space-y-3">
+    <fieldset
+      data-testid={dataTestId}
+      aria-label={label}
+      className="space-y-3"
+    >
       <div className="flex flex-col gap-4 md:p-5 md:gap-4 my-6">
         <div className="relative">
           {minBar > minBound && (
@@ -300,10 +306,11 @@ const NumericRangeSlider: React.FC<Props> = ({
                 aria-valuemax={maxBound}
                 aria-valuenow={min}
                 onMouseDown={dragHandle("min")}
-                className={`absolute -top-1 h-4 w-4 rounded-full border bg-white transition-shadow duration-150 ${isActive
-                  ? "border-rmiblue-800 shadow-md ring-2 ring-rmiblue-100"
-                  : "border-rmigray-400 shadow-sm"
-                  } z-50`}
+                className={`absolute -top-1 h-4 w-4 rounded-full border bg-white transition-shadow duration-150 ${
+                  isActive
+                    ? "border-rmiblue-800 shadow-md ring-2 ring-rmiblue-100"
+                    : "border-rmigray-400 shadow-sm"
+                } z-50`}
                 style={{ left: `calc(${minPctOnBar}% - ${HANDLE_R}px)` }}
               />
             )}
@@ -317,10 +324,11 @@ const NumericRangeSlider: React.FC<Props> = ({
                 aria-valuemax={maxBound}
                 aria-valuenow={max}
                 onMouseDown={dragHandle("max")}
-                className={`absolute -top-1 h-4 w-4 rounded-full border bg-white transition-shadow duration-150 ${isActive
-                  ? "border-rmiblue-800 shadow-md ring-2 ring-rmiblue-100"
-                  : "border-rmigray-400 shadow-sm"
-                  } z-50`}
+                className={`absolute -top-1 h-4 w-4 rounded-full border bg-white transition-shadow duration-150 ${
+                  isActive
+                    ? "border-rmiblue-800 shadow-md ring-2 ring-rmiblue-100"
+                    : "border-rmigray-400 shadow-sm"
+                } z-50`}
                 style={{ left: `calc(${maxPctOnBar}% - ${HANDLE_R}px)` }}
               />
             )}
