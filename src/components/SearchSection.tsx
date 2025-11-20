@@ -119,7 +119,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           step={getStep("netZeroBy")}
           value={
             !Array.isArray(filters.modelYearNetzero)
-              ? (filters.modelYearNetzero)
+              ? filters.modelYearNetzero
               : null
           }
           onChange={(r) => onFilterChange("modelYearNetzero", r)}
@@ -132,7 +132,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           step={getStep("temp")}
           value={
             !Array.isArray(filters.modelTempIncrease)
-              ? (filters.modelTempIncrease)
+              ? filters.modelTempIncrease
               : null
           }
           onChange={(r) => onFilterChange("modelTempIncrease", r)}

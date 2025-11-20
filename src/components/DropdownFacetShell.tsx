@@ -97,10 +97,7 @@ export default function DropdownFacetShell({
             </span>
             <span className="absolute inset-0 whitespace-pre">
               {label}
-            {
-              summary ? 
-              <strong>{": " + summary}</strong> : "..."
-            }
+              {summary ? <strong>{": " + summary}</strong> : "..."}
             </span>
           </span>
         </span>
@@ -118,13 +115,18 @@ export default function DropdownFacetShell({
               }}
               onMouseDown={(e) => e.preventDefault()}
             >
-              <X size={16} aria-hidden />
+              <X
+                size={16}
+                aria-hidden
+              />
             </span>
           ) : (
-            <ChevronDown size={16} aria-hidden />
+            <ChevronDown
+              size={16}
+              aria-hidden
+            />
           )}
         </span>
-
       </button>
 
       {open && (
@@ -155,9 +157,11 @@ export default function DropdownFacetShell({
             {/* Body */}
             <div className="p-2">
               {typeof children === "function"
-                ? (children as (api: { close: () => void }) => React.ReactNode)({
-                    close: () => setOpen(false),
-                  })
+                ? (children as (api: { close: () => void }) => React.ReactNode)(
+                    {
+                      close: () => setOpen(false),
+                    },
+                  )
                 : children}
             </div>
           </div>

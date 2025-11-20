@@ -140,10 +140,20 @@ export default function MultiSelectDropdown<
                     }
                   }}
                 >
-                  <span className={clsx("px-[2px] py-[2px] rounded", mode === "ANY" && "bg-energy-100 text-energy-800")}>
+                  <span
+                    className={clsx(
+                      "px-[2px] py-[2px] rounded",
+                      mode === "ANY" && "bg-energy-100 text-energy-800",
+                    )}
+                  >
                     Any
                   </span>
-                  <span className={clsx("px-[2px] py-[2px] rounded", mode === "ALL" && "bg-energy-100 text-energy-800")}>
+                  <span
+                    className={clsx(
+                      "px-[2px] py-[2px] rounded",
+                      mode === "ALL" && "bg-energy-100 text-energy-800",
+                    )}
+                  >
                     All
                   </span>
                 </div>
@@ -155,12 +165,18 @@ export default function MultiSelectDropdown<
       }
     >
       {(api: { close: () => void }) => (
-        <ul className="max-h-64 overflow-auto" role="listbox" aria-multiselectable="true">
+        <ul
+          className="max-h-64 overflow-auto"
+          role="listbox"
+          aria-multiselectable="true"
+        >
           {options.map((o) => {
             const checked = selectedSet.has(toKey(o.value));
             return (
               <li key={toKey(o.value)}>
-                <label className={`flex items-center gap-2 px-2 py-1 ${o.disabled ? "opacity-50" : "cursor-pointer"}`}>
+                <label
+                  className={`flex items-center gap-2 px-2 py-1 ${o.disabled ? "opacity-50" : "cursor-pointer"}`}
+                >
                   <input
                     type="checkbox"
                     checked={checked}

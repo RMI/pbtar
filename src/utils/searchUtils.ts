@@ -209,7 +209,7 @@ export const filterPathways = (
     {
       const r = (
         !Array.isArray(filters.modelYearNetzero)
-          ? (filters.modelYearNetzero)
+          ? filters.modelYearNetzero
           : null
       ) as { min?: number; max?: number; includeAbsent?: boolean } | null;
 
@@ -227,7 +227,7 @@ export const filterPathways = (
     {
       const r = (
         !Array.isArray(filters.modelTempIncrease)
-          ? (filters.modelTempIncrease)
+          ? filters.modelTempIncrease
           : null
       ) as { min?: number; max?: number; includeAbsent?: boolean } | null;
 
