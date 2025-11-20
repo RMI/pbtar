@@ -62,7 +62,9 @@ describe("<NumericRange>", () => {
     // No swap — last emission should reflect { min: 3, max: 1 }
     const lastPayload = onChange.mock.calls.at(-1)?.[0];
     expect(lastPayload).toMatchObject({ min: 3, max: 1 });
-   // And the UI shows the inline hint
-    expect(screen.getByRole("alert")).toHaveTextContent(/end value must be ≥ start value/i);
+    // And the UI shows the inline hint
+    expect(screen.getByRole("alert")).toHaveTextContent(
+      /end value must be ≥ start value/i,
+    );
   });
 });
