@@ -8,15 +8,11 @@ export type RangeValue = {
 
 type Props = {
   label: string;
-  /** Domain low/high (true bounds used for “default” and emitting null) */
   minBound: number;
   maxBound: number;
-  /** Visible window on the bar; can be narrower than bounds */
   minBar: number;
   maxBar: number;
-  /** Snap increment (e.g., getStep("temp") = 0.1) */
   step: number;
-  /** Parent-controlled value; null = no filter */
   value: RangeValue;
   onChange: (next: RangeValue) => void;
   dataTestId?: string;
@@ -37,6 +33,22 @@ function isNum(x: unknown): x is number {
 
 const HANDLE_R = 8;
 
+/**
+ * Temperature -> hex mapping (based on your existing tokens from index.css).
+ * We include a soft blue at the low end and then the pathway mapping / warm colors.
+ */
+function tempToHex(t: number) {
+  // Use deeper theme tokens (CSS variables) for a richer gradient.
+  // These variables are defined in src/index.css (see --color-...).
+  if (t <= 1.5) return "var(--color-pinishgreen-200)";   // stronger blue
+  if (t <= 1.75) return "var(--color-pinishgreen-400)"; // deeper green
+  if (t <= 2.0) return "var(--color-solar-400)";    // stronger yellow
+  if (t <= 2.5) return "var(--color-solar-800)";    // orange-ish
+  if (t <= 3.0) return "var(--color-rmired-200)";   // warm orange
+  if (t <= 3.5) return "var(--color-rmired-400)";   // deep red
+  return "var(--color-rmired-800)";                 // darkest red
+}
+
 const NumericRangeSlider: React.FC<Props> = ({
   label,
   minBound,
@@ -55,10 +67,11 @@ const NumericRangeSlider: React.FC<Props> = ({
     includeAbsent: Boolean(value?.includeAbsent),
   });
 
-  // Track whether a change originated from the user (vs prop sync)
+  const [isDragging, setIsDragging] = React.useState(false);
+  const [draggingWhich, setDraggingWhich] = React.useState<"min" | "max" | null>(null);
+
   const fromUserRef = React.useRef(false);
 
-  // Sync down from parent
   React.useEffect(() => {
     const v = value ?? null;
     const next: Internal = v
@@ -79,7 +92,6 @@ const NumericRangeSlider: React.FC<Props> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value?.min, value?.max, value?.includeAbsent, minBound, maxBound]);
 
-  // Notify parent when user commits changes
   React.useEffect(() => {
     if (!fromUserRef.current) return;
     const isDefault =
@@ -97,7 +109,6 @@ const NumericRangeSlider: React.FC<Props> = ({
 
   const { min, max, includeAbsent } = internal;
 
-  // --- slider interactions (confined to visible bar) ---
   const trackRef = React.useRef<HTMLDivElement | null>(null);
   const activeHandle = React.useRef<"min" | "max" | null>(null);
 
@@ -110,10 +121,6 @@ const NumericRangeSlider: React.FC<Props> = ({
     return clamp(snap(raw, step), minBound, maxBound);
   };
 
-  // Choose which handle to move:
-  // 1) If min is unset, set min first
-  // 2) Else if max is unset, set max
-  // 3) Else move the nearest of the two
   const chooseHandle = (v: number): "min" | "max" => {
     if (!isNum(min)) return "min";
     if (!isNum(max)) return "max";
@@ -125,16 +132,21 @@ const NumericRangeSlider: React.FC<Props> = ({
     if (!isNum(v)) return;
     const which = chooseHandle(v);
     activeHandle.current = which;
+    setDraggingWhich(which);
+    setIsDragging(true);
     commit({ [which]: v } as Partial<Internal>);
 
     const move = (ev: MouseEvent) => {
       const nv = pxToValue(ev.clientX);
       if (!isNum(nv)) return;
-      if (activeHandle.current)
+      if (activeHandle.current) {
         commit({ [activeHandle.current]: nv } as Partial<Internal>);
+      }
     };
     const up = () => {
       activeHandle.current = null;
+      setIsDragging(false);
+      setDraggingWhich(null);
       window.removeEventListener("mousemove", move);
       window.removeEventListener("mouseup", up);
     };
@@ -144,41 +156,28 @@ const NumericRangeSlider: React.FC<Props> = ({
 
   const dragHandle =
     (which: "min" | "max"): React.MouseEventHandler<HTMLDivElement> =>
-    (e) => {
-      e.stopPropagation();
-      activeHandle.current = which;
-      const move = (ev: MouseEvent) => {
-        const nv = pxToValue(ev.clientX);
-        if (!isNum(nv)) return;
-        commit({ [which]: nv } as Partial<Internal>);
+      (e) => {
+        e.stopPropagation();
+        activeHandle.current = which;
+        setDraggingWhich(which);
+        setIsDragging(true);
+        const move = (ev: MouseEvent) => {
+          const nv = pxToValue(ev.clientX);
+          if (!isNum(nv)) return;
+          commit({ [which]: nv } as Partial<Internal>);
+        };
+        const up = () => {
+          activeHandle.current = null;
+          setIsDragging(false);
+          setDraggingWhich(null);
+          window.removeEventListener("mousemove", move);
+          window.removeEventListener("mouseup", up);
+        };
+        window.addEventListener("mousemove", move);
+        window.addEventListener("mouseup", up);
       };
-      const up = () => {
-        activeHandle.current = null;
-        window.removeEventListener("mousemove", move);
-        window.removeEventListener("mouseup", up);
-      };
-      window.addEventListener("mousemove", move);
-      window.addEventListener("mouseup", up);
-    };
 
-  // --- inputs (identical semantics to NumericRange) ---
-  const onMinInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    const raw = e.target.value;
-    if (raw === "") return commit({ min: undefined });
-    const v = Number(raw);
-    if (!Number.isFinite(v)) return;
-    commit({ min: v });
-  };
-  const onMaxInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    const raw = e.target.value;
-    if (raw === "") return commit({ max: undefined });
-    const v = Number(raw);
-    if (!Number.isFinite(v)) return;
-    commit({ max: v });
-  };
-
-  // --- visuals ---
-  // For visuals, show handles at bounds when undefined; hide if off the visible window.
+  // visuals
   const effMin = isNum(min) ? min : minBound;
   const effMax = isNum(max) ? max : maxBound;
   const minPctOnBar = toPct(clamp(effMin, minBar, maxBar), minBar, maxBar);
@@ -190,48 +189,110 @@ const NumericRangeSlider: React.FC<Props> = ({
   const lo = Math.min(minPctOnBar, maxPctOnBar);
   const hi = Math.max(minPctOnBar, maxPctOnBar);
 
-  // Active if any non-default or includeAbsent
-  // Active if any non-default (min/max set) or includeAbsent checked
   const isActive = includeAbsent || isNum(min) || isNum(max);
 
-  // Simple tick labels at integer steps within the visible bar
+  // prepare gradient stops across the visible domain. We'll use a set of logical temperature marks.
+  const marks = [minBar, 1.5, 2.0, 2.5, 3.0, 3.5, maxBar]
+    .filter((m) => m >= minBar && m <= maxBar)
+    .sort((a, b) => a - b);
+
+  // Build gradient string with percentage stops relative to the visible bar
+  const gradientStops = marks
+    .map((m) => {
+      const pct = toPct(m, minBar, maxBar);
+      return `${tempToHex(m)} ${pct}%`;
+    })
+    .join(", ");
+
+  // Tick labels every 0.5 degrees
   const ticks: number[] = [];
-  for (let t = Math.ceil(minBar); t <= Math.floor(maxBar); t += 1)
-    ticks.push(t);
+  const startI = Math.ceil(minBar * 2);
+  const endI = Math.floor(maxBar * 2);
+  for (let ti = startI; ti <= endI; ti++) ticks.push(ti / 2);
+
+  // format tooltip value (1 decimal)
+  const fmt = (v: number) => v.toFixed(1);
+  const minTooltipValue = fmt(isNum(min) ? min : minBound);
+  const maxTooltipValue = fmt(isNum(max) ? max : maxBound);
 
   return (
-    <fieldset
-      data-testid={dataTestId}
-      aria-label={label}
-      className="space-y-3"
-    >
-      {/* Slider track */}
-      <div className="flex flex-col gap-4">
+    <fieldset data-testid={dataTestId} aria-label={label} className="space-y-3">
+      <div className="flex flex-col gap-4 md:p-5 md:gap-4 my-6">
         <div className="relative">
-          {/* left fade if bar > domain */}
           {minBar > minBound && (
-            <div className="pointer-events-none absolute left-0 top-0 h-2 w-6 bg-gradient-to-r from-gray-300 to-transparent rounded-l" />
+            <div className="pointer-events-none absolute left-0 top-0 h-2 w-6 bg-gradient-to-r from-rmigray-200 to-transparent rounded-l" />
           )}
-          {/* right fade if bar < domain */}
           {maxBar < maxBound && (
-            <div className="pointer-events-none absolute right-0 top-0 h-2 w-6 bg-gradient-to-l from-gray-300 to-transparent rounded-r" />
+            <div className="pointer-events-none absolute right-0 top-0 h-2 w-6 bg-gradient-to-l from-rmigray-200 to-transparent rounded-r" />
           )}
 
           <div
             ref={trackRef}
             onMouseDown={onTrackMouseDown}
-            className="relative h-2 w-full rounded bg-gray-200 cursor-pointer select-none"
+            className="relative h-2 w-full rounded bg-rmigray-200 cursor-pointer select-none"
             aria-label={`${label} slider`}
           >
-            {/* selected segment */}
+            {/* Full-track gradient (always present behind overlays) */}
             <div
-              className={`absolute top-0 h-2 rounded ${
-                isActive ? "bg-blue-600" : "bg-gray-400"
-              }`}
-              style={{ left: `${lo}%`, width: `${Math.max(0, hi - lo)}%` }}
+              className="absolute inset-0 h-2 rounded"
+              style={{
+                background: `linear-gradient(to right, ${gradientStops})`,
+                // keep it behind overlays but above base
+                zIndex: 10,
+              }}
             />
 
-            {/* min handle (hidden if outside visible window) */}
+            {/* overlays to hide gradient outside active range */}
+            {/* left cover */}
+            <div
+              className="absolute top-0 h-2 rounded-l"
+              style={{
+                left: 0,
+                width: `${lo}%`,
+                background: "rgb(230 236 239)", // rmigray-200 fallback (matches bg-rmigray-200)
+                zIndex: 20,
+                transition: "width 200ms ease",
+              }}
+            />
+            {/* right cover */}
+            <div
+              className="absolute top-0 h-2 rounded-r"
+              style={{
+                left: `${hi}%`,
+                width: `${Math.max(0, 100 - hi)}%`,
+                background: "rgb(230 236 239)",
+                zIndex: 20,
+                transition: "left 200ms ease, width 200ms ease",
+              }}
+            />
+
+            {/* when not active we want a neutral fill visible (so gradient is masked by overlays that cover whole track) */}
+            {!isActive && (
+              <div
+                className="absolute inset-0 h-2 rounded"
+                style={{ background: "rgb(209 216 221)", zIndex: 25 }}
+              />
+            )}
+
+            {/* floating tooltips above handles while dragging (1 decimal + °C) */}
+            {isDragging && draggingWhich === "min" && minVisible && (
+              <div
+                className="absolute -top-8 -translate-x-1/2 px-2 py-1 bg-white border border-rmigray-200 rounded text-xs shadow-sm z-40"
+                style={{ left: `calc(${minPctOnBar}% )` }}
+              >
+                {minTooltipValue}°C
+              </div>
+            )}
+            {isDragging && draggingWhich === "max" && maxVisible && (
+              <div
+                className="absolute -top-8 -translate-x-1/2 px-2 py-1 bg-white border border-rmigray-200 rounded text-xs shadow-sm z-40"
+                style={{ left: `calc(${maxPctOnBar}% )` }}
+              >
+                {maxTooltipValue}°C
+              </div>
+            )}
+
+            {/* min handle */}
             {minVisible && (
               <div
                 role="slider"
@@ -240,14 +301,15 @@ const NumericRangeSlider: React.FC<Props> = ({
                 aria-valuemax={maxBound}
                 aria-valuenow={min}
                 onMouseDown={dragHandle("min")}
-                className={`absolute -top-1 h-4 w-4 rounded-full border ${
-                  isActive ? "border-blue-700" : "border-gray-500"
-                } bg-white`}
+                className={`absolute -top-1 h-4 w-4 rounded-full border bg-white transition-shadow duration-150 ${isActive
+                  ? "border-rmiblue-800 shadow-md ring-2 ring-rmiblue-100"
+                  : "border-rmigray-400 shadow-sm"
+                  } z-50`}
                 style={{ left: `calc(${minPctOnBar}% - ${HANDLE_R}px)` }}
               />
             )}
 
-            {/* max handle (hidden if outside visible window) */}
+            {/* max handle */}
             {maxVisible && (
               <div
                 role="slider"
@@ -256,58 +318,39 @@ const NumericRangeSlider: React.FC<Props> = ({
                 aria-valuemax={maxBound}
                 aria-valuenow={max}
                 onMouseDown={dragHandle("max")}
-                className={`absolute -top-1 h-4 w-4 rounded-full border ${
-                  isActive ? "border-blue-700" : "border-gray-500"
-                } bg-white`}
+                className={`absolute -top-1 h-4 w-4 rounded-full border bg-white transition-shadow duration-150 ${isActive
+                  ? "border-rmiblue-800 shadow-md ring-2 ring-rmiblue-100"
+                  : "border-rmigray-400 shadow-sm"
+                  } z-50`}
                 style={{ left: `calc(${maxPctOnBar}% - ${HANDLE_R}px)` }}
               />
             )}
 
-            {/* tick labels */}
+            {/* tick labels every 0.5° with °C appended */}
             {ticks.map((t) => {
               const pct = toPct(t, minBar, maxBar);
               return (
                 <div
-                  key={t}
-                  className="absolute -bottom-5 -translate-x-1/2 text-[10px] text-gray-500"
+                  key={String(t)}
+                  className="absolute -bottom-5 -translate-x-1/2 text-[12px] text-rmigray-500 z-50"
                   style={{ left: `${pct}%` }}
                 >
-                  {t}
+                  {t.toFixed(1)}°C
                 </div>
               );
             })}
           </div>
         </div>
 
-        {/* Inputs + Include-absent (checkbox to the right) */}
-        <div className="flex items-center gap-3">
-          <input
-            type="number"
-            step={step}
-            value={min ?? ""}
-            onChange={onMinInput}
-            className="w-28 rounded border px-2 py-1"
-            placeholder={`${minBound}`}
-            aria-label={`${label} min`}
-          />
-          <span className="text-gray-500">to</span>
-          <input
-            type="number"
-            step={step}
-            value={max ?? ""}
-            onChange={onMaxInput}
-            className="w-28 rounded border px-2 py-1"
-            placeholder={`${maxBound}`}
-            aria-label={`${label} max`}
-          />
-          <label className="ml-auto flex items-center gap-2 text-sm">
+        <div className="flex items-center gap-3 mt-4">
+          <div className="ml-auto flex items-center gap-2 text-sm">
             <input
               type="checkbox"
               checked={internal.includeAbsent}
               onChange={(e) => commit({ includeAbsent: e.target.checked })}
             />
-            Include entries with no value
-          </label>
+            <span>Include entries with no value</span>
+          </div>
         </div>
       </div>
     </fieldset>
