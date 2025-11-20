@@ -34,7 +34,6 @@ export default function NumericRange({
   step,
   value,
   onChange,
-  onClear,
   dataTestId,
 }: Props) {
   const min = value?.min;
@@ -87,9 +86,6 @@ export default function NumericRange({
       aria-label={label}
       className="space-y-3"
     >
-      <legend className="block text-sm font-medium text-gray-700 mb-1">
-        {label}
-      </legend>
 
       <div className="flex items-center gap-2">
         <input
@@ -112,16 +108,6 @@ export default function NumericRange({
           aria-label={`${label} max`}
         />
 
-        <button
-          type="button"
-          onClick={() => {
-            onClear?.();
-            onChange(null);
-          }}
-          className="ml-2 text-sm text-indigo-600 hover:underline"
-        >
-          Clear
-        </button>
       </div>
 
       <label className="flex items-center gap-2 text-sm">
