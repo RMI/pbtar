@@ -92,7 +92,14 @@ export interface GeoOption {
 }
 
 // New: allow AND/OR per facet. Defaults to "ANY" for backwards compatibility.
-export type FacetMode = "ANY" | "ALL";
+export type FacetMode = "ANY" | "ALL" | "RANGE";
+
+export type NumericRange = {
+  mode: "RANGE";
+  min?: number; // open-ended lower bound ok
+  max?: number; // open-ended upper bound ok
+};
+
 export type FilterModes = Partial<{
   pathwayType: FacetMode;
   modelYearNetzero: FacetMode;
@@ -130,29 +137,18 @@ function toArray(v: Arrayable): string[] {
   return Array.isArray(v) ? v.filter(Boolean) : [String(v)];
 }
 
-function toArrayMixed(v: Arrayable): (string | number)[] {
-  if (v == null) return [];
-  return Array.isArray(v)
-    ? v.filter((x) => x !== null && x !== undefined)
-    : [v];
-}
-
-function hasAbsentToken(arr: (string | number)[]): boolean {
-  return arr.some((t) => String(t) === ABSENT_FILTER_TOKEN);
-}
-
-function toNumberSet(arr: (string | number)[]): Set<number> {
-  const out = new Set<number>();
-  for (const t of arr) {
-    if (String(t) === ABSENT_FILTER_TOKEN) continue;
-    const n = typeof t === "number" ? t : Number(t);
-    if (Number.isFinite(n)) out.add(n);
-  }
-  return out;
-}
-
 function pickMode(facet: keyof FilterModes, modes?: FilterModes): FacetMode {
   return modes?.[facet] ?? "ANY";
+}
+
+function matchesNumericRange(
+  value: number | undefined | null,
+  range: { min?: number; max?: number } | null | undefined,
+): boolean {
+  if (value == null) return false;
+  const gteMin = range?.min == null || value >= range.min;
+  const lteMax = range?.max == null || value <= range.max;
+  return gteMin && lteMax;
 }
 
 export function makeGeographyOptions(
@@ -177,6 +173,61 @@ export const filterPathways = (
   filters: FiltersWithArrays,
 ): PathwayMetadataType[] => {
   return pathways.filter((pathway) => {
+    // --- Helpers
+    const isNil = (v: unknown): v is null | undefined =>
+      v === null || v === undefined;
+    const modeOf = (facet: keyof NonNullable<(typeof filters)["modes"]>) =>
+      filters.modes?.[facet] === "ALL" ? "ALL" : "ANY";
+
+    // ----- A) Primitive (single-value) numeric facets behave as equality
+    if (typeof filters.modelTempIncrease === "number") {
+      const want = filters.modelTempIncrease;
+      if (
+        isNil(pathway.modelTempIncrease) ||
+        pathway.modelTempIncrease !== want
+      )
+        return false;
+    }
+    if (typeof filters.modelYearNetzero === "number") {
+      const want = filters.modelYearNetzero;
+      if (isNil(pathway.modelYearNetzero) || pathway.modelYearNetzero !== want)
+        return false;
+    }
+
+    // ----- B) Array-backed numerics (OR by default; respect ABSENT; ALL for single-valued facets)
+    const numericFacet = <K extends "modelTempIncrease" | "modelYearNetzero">(
+      key: K,
+    ) => {
+      const sel = filters[key] as unknown[];
+      if (!Array.isArray(sel) || sel.length === 0) return true; // no filter for this facet
+
+      const hasAbsent = sel.includes(ABSENT_FILTER_TOKEN);
+      const nums = sel.filter((v): v is number => typeof v === "number");
+      const val = pathway[key] as number | null | undefined;
+      const mode = modeOf(key); // "ANY" | "ALL"
+
+      // Single-valued facet: a pathway can have at most one numeric value
+      // ANY: matches if val equals any selected number (OR), or if ABSENT is selected and val is nil
+      // ALL: matches only if:
+      //   - nums.length === 1 and val equals that single number; AND
+      //   - if hasAbsent is also selected, that would require val to be both present and absent -> impossible,
+      //     so treat it as no match when nums.length >= 1.
+      const matchNumber =
+        !isNil(val) &&
+        (mode === "ALL"
+          ? nums.length === 1 && val === nums[0]
+          : nums.length > 0 && nums.includes(val));
+
+      const matchAbsent = hasAbsent && isNil(val);
+
+      // If user selected some numbers but not ABSENT, nil values must NOT pass.
+      // If user selected only ABSENT, only nil values pass.
+      return matchNumber || matchAbsent;
+    };
+
+    if (!numericFacet("modelTempIncrease")) return false;
+    if (!numericFacet("modelYearNetzero")) return false;
+
     // ---- Pathway type: ANY/ALL over selected tokens; empty array => no filter; ABSENT-aware
     {
       const selected = toArray(filters.pathwayType);
@@ -209,64 +260,39 @@ export const filterPathways = (
       }
     }
 
-    // ---- Target year: OR over numbers; empty array => no filter; ABSENT-aware
+    // --- Net Zero By: ALWAYS RANGE for this facet ---
     {
-      const selected = toArrayMixed(filters.modelYearNetzero);
-      if (selected.length) {
-        const hasAbsent = hasAbsentToken(selected);
-        const numericChoices = toNumberSet(selected);
-        const v = pathway.modelYearNetzero; // number | null | undefined
-        const mode = pickMode("modelYearNetzero", filters.modes as FilterModes);
-        let ok = true;
+      const r = (
+        !Array.isArray(filters.modelYearNetzero)
+          ? filters.modelYearNetzero
+          : null
+      ) as { min?: number; max?: number; includeAbsent?: boolean } | null;
 
-        if (mode === "ANY") {
-          ok =
-            (v == null && hasAbsent) ||
-            (v != null && numericChoices.has(Number(v)));
-        } else {
-          // ALL: only possible when exactly one condition is chosen:
-          //  - [ABSENT]        -> v == null
-          //  - [single number] -> v == number
-          // Any other combination (ABSENT + number, or two numbers) is impossible.
-          if (hasAbsent && numericChoices.size === 0) {
-            ok = v == null;
-          } else if (!hasAbsent && numericChoices.size === 1) {
-            ok = v != null && numericChoices.has(Number(v));
-          } else {
-            ok = false;
-          }
-        }
-        if (!ok) return false;
+      if (r) {
+        const v = pathway?.modelYearNetzero;
+        const hasValue = v != null;
+        const pass =
+          (hasValue && matchesNumericRange(v, r)) ||
+          (!hasValue && !!r.includeAbsent);
+        if (!pass) return false;
       }
     }
 
-    // ---- Temperature: OR over numbers; empty array => no filter; ABSENT-aware
+    // --- Temperature (°C): ALWAYS RANGE for this facet ---
     {
-      const selected = toArrayMixed(filters.modelTempIncrease);
-      if (selected.length) {
-        const hasAbsent = hasAbsentToken(selected);
-        const numericChoices = toNumberSet(selected);
-        const v = pathway.modelTempIncrease; // number | null | undefined
-        const mode = pickMode(
-          "modelTempIncrease",
-          filters.modes as FilterModes,
-        );
-        let ok = true;
+      const r = (
+        !Array.isArray(filters.modelTempIncrease)
+          ? filters.modelTempIncrease
+          : null
+      ) as { min?: number; max?: number; includeAbsent?: boolean } | null;
 
-        if (mode === "ANY") {
-          ok =
-            (v == null && hasAbsent) ||
-            (v != null && numericChoices.has(Number(v)));
-        } else {
-          if (hasAbsent && numericChoices.size === 0) {
-            ok = v == null;
-          } else if (!hasAbsent && numericChoices.size === 1) {
-            ok = v != null && numericChoices.has(Number(v));
-          } else {
-            ok = false;
-          }
-        }
-        if (!ok) return false;
+      if (r) {
+        const v = pathway?.modelTempIncrease;
+        const hasValue = v != null;
+        const pass =
+          (hasValue && matchesNumericRange(v, r)) ||
+          (!hasValue && !!r.includeAbsent);
+        if (!pass) return false;
       }
     }
 
