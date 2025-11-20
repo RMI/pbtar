@@ -1,5 +1,6 @@
 import React from "react";
-import NumericRange, { getStep } from "./NumericRange";
+import { getStep } from "./NumericRange";
+import NumericRangeSlider from "./NumericRangeSlider";
 
 export type RangeValue = {
   min?: number;
@@ -51,7 +52,7 @@ const StepPageNumericRange: React.FC<Props> = ({
       </div>
 
       <div className="mt-3">
-        <NumericRange
+        <NumericRangeSlider
           label={title}
           minBound={minBound}
           maxBound={maxBound}
