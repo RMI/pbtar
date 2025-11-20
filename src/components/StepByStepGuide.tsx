@@ -37,20 +37,6 @@ interface StepByStepGuideProps {
   ) => void;
 }
 
-// Small adapter that fixes the prop wiring for modelTempIncrease
-const StepPageNumericRangeModelTemp: React.FC<StepRendererProps> = (props) => (
-  <StepPageNumericRange
-    title={props.title}
-    description={props.description}
-    // The value/onChange are provided by the SBS renderer automatically
-    value={props.value}
-    onChange={props.onChange}
-    minBound={0}
-    maxBound={6}
-    stepKey="temp"
-  />
-);
-
 const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
   filters,
   onFilterChange,
@@ -85,6 +71,36 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       ),
     }),
     [globalFacetOptions],
+  );
+
+  // Small adapter that fixes the prop wiring for modelTempIncrease
+  const StepPageNumericRangeModelTemp: React.FC<StepRendererProps> = (
+    props,
+  ) => {
+    const values = optionsByFacet["modelTempIncrease"]
+      .map((o) => Number(o.value))
+      .filter((v) => !isNaN(v));
+
+    const minBound = Math.min(...values);
+    const maxBound = Math.max(...values);
+
+    return (
+      <StepPageNumericRange
+        title={props.title}
+        description={props.description}
+        value={props.value}
+        onChange={props.onChange}
+        minBound={minBound}
+        maxBound={maxBound}
+        stepKey="temp"
+      />
+    );
+  };
+
+  console.log(
+    optionsByFacet["modelTempIncrease"].reduce((max, current) => {
+      return current.value > max.value ? current : max;
+    }),
   );
 
   const descriptions: Record<string, Record<string, string>> = {
