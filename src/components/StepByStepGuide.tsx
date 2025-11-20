@@ -153,7 +153,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     },
     {
       id: "dataAvailability",
-      title: "Benchmark Data Accessibility",
+      title: "Benchmark Data Availability",
       description:
         "Pathways differ in the availability of their benchmark data for access, which may limit user applications. Some pathway data is freely available in standardized format, other data needs to be acquired from third parties.",
       icon: <FileDown className="h-8 w-8" />,
