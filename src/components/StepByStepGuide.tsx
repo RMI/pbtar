@@ -309,6 +309,13 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                         .filter((v: number) => Number.isFinite(v));
                       const minBound = nums.length ? Math.min(...nums) : 0;
                       const maxBound = nums.length ? Math.max(...nums) : 6;
+                      const minBar =
+                        (step.componentProps?.minBar as number | undefined) ??
+                        minBound;
+                      const maxBar =
+                        (step.componentProps?.maxBar as number | undefined) ??
+                        maxBound;
+
                       return (
                         <Comp
                           title={step.title}
@@ -318,6 +325,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                           onChange={(next) => onFilterChange(step.id, next)}
                           minBound={minBound}
                           maxBound={maxBound}
+                          minBar={minBar}
+                          maxBar={maxBar}
                           stepKey={step.componentProps?.stepKey ?? "temp"}
                         />
                       );

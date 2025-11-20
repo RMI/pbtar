@@ -31,6 +31,9 @@ type Props = {
   minBound?: number;
   maxBound?: number;
   stepKey?: "temp" | "netZeroBy";
+  /** Optional visible-window bounds for the slider; defaults to full domain */
+  minBar?: number;
+  maxBar?: number;
 };
 
 const StepPageNumericRange: React.FC<Props> = ({
@@ -38,9 +41,11 @@ const StepPageNumericRange: React.FC<Props> = ({
   description,
   value,
   onChange,
-  minBound = 0, // sensible defaults; adjust if you have tighter domain
+  minBound = 0,
   maxBound = 6,
-  stepKey = "temp", // uses NumericRange’s step table
+  stepKey = "temp",
+  minBar,
+  maxBar,
 }) => {
   const step = getStep(stepKey);
 
@@ -56,6 +61,8 @@ const StepPageNumericRange: React.FC<Props> = ({
           label={title}
           minBound={minBound}
           maxBound={maxBound}
+          minBar={minBar ?? minBound}
+          maxBar={maxBar ?? maxBound}
           step={step}
           value={value}
           onChange={onChange}
