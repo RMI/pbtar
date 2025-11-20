@@ -59,18 +59,10 @@ describe("<NumericRange>", () => {
     await u.type(minInput, "3");
     await u.type(maxInput, "1");
 
-    // Blur to trigger final normalization emit
-    await u.tab();
+    // No swap — last emission should reflect { min: 3, max: 1 }
     const lastPayload = onChange.mock.calls.at(-1)?.[0];
-    const minIsNum = typeof lastPayload?.min === "number";
-    const maxIsNum = typeof lastPayload?.max === "number";
-    // If both numeric are present, enforce min ≤ max. Otherwise just ensure at least one bound is numeric.
-    if (minIsNum && maxIsNum) {
-      const min = lastPayload.min as number;
-      const max = lastPayload.max as number;
-      expect(min).toBeLessThanOrEqual(max);
-    } else {
-      expect(minIsNum || maxIsNum).toBe(true);
-    }
+    expect(lastPayload).toMatchObject({ min: 3, max: 1 });
+   // And the UI shows the inline hint
+    expect(screen.getByRole("alert")).toHaveTextContent(/end value must be ≥ start value/i);
   });
 });
