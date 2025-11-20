@@ -86,7 +86,6 @@ export default function NumericRange({
       aria-label={label}
       className="space-y-3"
     >
-
       <div className="flex items-center gap-2">
         <input
           type="number"
@@ -107,7 +106,6 @@ export default function NumericRange({
           placeholder={`${maxBound}`}
           aria-label={`${label} max`}
         />
-
       </div>
 
       <label className="flex items-center gap-2 text-sm">
