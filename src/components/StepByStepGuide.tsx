@@ -241,7 +241,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                   </div>
 
                   <div className="mt-2">
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                       {steps.map((step, index) => {
                         return (
                           <button
@@ -250,7 +250,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                             onClick={() => setCurrentView(index)}
                             aria-label={step.title}
                             title={step.title}
-                            className={`group cursor-pointer p-3 rounded-lg bg-white text-rmigray-800 shadow-sm hover:shadow-md transition transform duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-rmiblue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white flex flex-col items-center justify-center gap-2 min-h-[76px]`}
+                            className={`group cursor-pointer w-full px-4 py-3 rounded-lg bg-white text-rmigray-800 shadow-sm hover:shadow-md transition transform duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-rmiblue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white flex flex-col items-center justify-center gap-2 min-h-[76px]`}
                           >
                             <div
                               className="flex items-center justify-center h-9 w-9 rounded-full bg-rmiblue-50 text-rmiblue-700 border border-rmiblue-200 group-hover:bg-rmiblue-100 group-focus:bg-rmiblue-100 transition-colors"
