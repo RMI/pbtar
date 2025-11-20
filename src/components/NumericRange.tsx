@@ -36,17 +36,40 @@ export default function NumericRange({
   onChange,
   dataTestId,
 }: Props) {
-  const min = value?.min;
-  const max = value?.max;
-  const includeAbsent = Boolean(value?.includeAbsent);
-
-  const update = (next: Partial<NonNullable<RangeValue>>) => {
-    const m = next.min ?? min;
-    const M = next.max ?? max;
-    const a = next.includeAbsent ?? includeAbsent;
-    if (m == null && M == null && !a) onChange(null);
-    else onChange({ min: m, max: M, includeAbsent: a });
+  type InternalState = {
+    min?: number;
+    max?: number;
+    includeAbsent: boolean;
   };
+  const [internal, setInternal] = React.useState<InternalState>({
+    min: value?.min,
+    max: value?.max,
+    includeAbsent: Boolean(value?.includeAbsent),
+  });
+
+  // Sync down when parent-controlled value changes
+  React.useEffect(() => {
+    setInternal({
+      min: value?.min,
+      max: value?.max,
+      includeAbsent: Boolean(value?.includeAbsent),
+    });
+  }, [value?.min, value?.max, value?.includeAbsent]);
+
+  const { min, max, includeAbsent } = internal;
+
+  const update = (patch: Partial<InternalState>) => {
+    // Update local mirror immediately; DO NOT call parent here
+    setInternal(
+      (prev: InternalState): InternalState => ({ ...prev, ...patch }),
+    );
+  };
+
+  // Notify parent AFTER render when internal changes
+  React.useEffect(() => {
+    onChange?.(internal);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [internal.min, internal.max, internal.includeAbsent]);
 
   const handleMinInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value;
