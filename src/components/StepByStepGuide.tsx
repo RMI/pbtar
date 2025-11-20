@@ -192,10 +192,10 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     <div className="bg-gray-50 p-4 md:p-6">
       <div className="max-w-6xl mx-auto">
         <div className="rounded-lg bg-white border border-neutral-200/70 p-4 md:p-6 shadow-sm">
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-center mb-6">
             <div className="w-12" />
 
-            <h2 className="text-lg md:text-2xl font-semibold text-bluespruce text-center mx-auto max-w-prose">
+            <h2 className="text-2xl md:text-3xl font-semibold text-bluespruce tracking-tight text-center mx-auto max-w-prose">
               Choose the right pathways for your needs
             </h2>
 
@@ -225,22 +225,26 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
               {currentView === "home" ? (
                 <div className="space-y-6">
                   <div className="max-w-5xl mx-auto">
-                    <p className="text-rmigray-500 leading-relaxed">
+                    <p className="text-base text-rmigray-600 leading-[1.6] tracking-normal mb-2">
                       Different pathways are suited to different applications.
                       All users should be mindful of the model types and
-                      geographic coverage of the pathways they select. Users
-                      interested in assessing the ambition of transition
+                      geographic coverage of the pathways they select.
+                    </p>
+                    <p className="text-base text-rmigray-600 leading-[1.6] tracking-normal mb-2">
+                      Users interested in assessing the ambition of transition
                       strategies may wish to select pathways with suitable
                       temperature rise or emissions changes, while those
                       interested in assessing potential policy exposure or
                       technical feasibility may prioritize models with the
-                      relevant policy assumption set. The following steps guide
-                      users through key pathway features, while filters below
-                      offer additional options.
+                      relevant policy assumption set.
+                    </p>
+                    <p className="text-base text-rmigray-600 leading-[1.6] tracking-normal mb-2">
+                      The following steps guide users through key pathway
+                      features, while filters below offer additional options.
                     </p>
                   </div>
 
-                  <div className="mt-2">
+                  <div className="mt-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                       {steps.map((step, index) => {
                         return (
@@ -250,10 +254,10 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                             onClick={() => setCurrentView(index)}
                             aria-label={step.title}
                             title={step.title}
-                            className="group relative cursor-pointer w-full pl-10 pr-4 py-3 rounded-lg bg-white text-rmigray-800 shadow-sm
+                            className="group relative cursor-pointer w-full pl-10 pr-4 py-3 rounded-lg bg-white text-rmigray-600 shadow-sm
                               focus:outline-none focus-visible:ring-2 focus-visible:ring-rmiblue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white
                               flex flex-col items-center justify-center gap-2 min-h-[76px]
-                              border-2  border-transparent hover:border-neutral-300
+                              border-2 border-transparent hover:border-neutral-300
                               transition-colors duration-150 ease-in-out hover:shadow-sm"
                           >
                             <div
@@ -263,12 +267,13 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                             >
                               {React.isValidElement(step.icon)
                                 ? React.cloneElement(step.icon, {
-                                  className: "h-4 w-4 stroke-current",
-                                })
+                                    className: "h-4 w-4 stroke-current",
+                                  })
                                 : step.icon}
                             </div>
 
-                            <div className="mt-1 text-sm font-medium leading-tight text-center">
+                            {/* Button label: match home view typography */}
+                            <div className="mt-1 text-base font-medium text-rmigray-800 text-center tracking-normal">
                               {step.title}
                             </div>
                           </button>

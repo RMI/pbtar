@@ -83,11 +83,12 @@ export const StepPageDiscrete: React.FC<StepRendererProps> = ({
               onClick={() => handleClick(option.value)}
               className={`group relative w-full text-left pl-10 pr-4 py-3 min-h-[76px] rounded-lg flex flex-col justify-center gap-2 transition-colors
                 focus:outline-none focus-visible:ring-2 focus-visible:ring-rmiblue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white
-                border-2 ${selected
-                  ? "border-rmiblue-800 bg-rmiblue-100"
-                  : partial
-                    ? "border-rmiblue-400 bg-rmiblue-100"
-                    : "border-transparent shadow-sm hover:border-neutral-300 hover:shadow-sm bg-white"
+                border-2 ${
+                  selected
+                    ? "border-rmiblue-800 bg-rmiblue-100"
+                    : partial
+                      ? "border-rmiblue-400 bg-rmiblue-100"
+                      : "border-transparent shadow-sm hover:border-neutral-300 hover:shadow-sm bg-white"
                 }`}
             >
               {selected && (
