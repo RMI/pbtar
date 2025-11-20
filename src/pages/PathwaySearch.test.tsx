@@ -196,14 +196,24 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
     expectHidden(["Power, Europe, 2°C", "Industry, Asia, no temp"]);
   });
 
-  it("Temperature: shows 'None' when any pathway omits temperature, selecting it filters correctly", async () => {
+  it("Temperature: shows 'Include entries with no value'; when checked with no bounds, present values remain visible", async () => {
     await openDropdown(/temperature|temp(?:erature)?/i);
-    expect(await screen.findByText("None")).toBeInTheDocument();
-    await selectOption("None");
+    // NumericRangeDropdown exposes ABSENT as a checkbox, not a discrete "None" item.
+    const absent = await screen.findByRole("checkbox", {
+      name: /include entries with no value/i,
+    });
+    expect(absent).toBeInTheDocument();
+    await u.click(absent);
 
-    // Pathways with no temperature: A and D
-    expectVisible(["no sectors, no geo, no temp", "Industry, Asia, no temp"]);
-    expectHidden(["Power, Europe, 2°C", "empty sectors[], empty geo[], 1.5°C"]);
+    // With no bounds set, checking the “include absent” box should not exclude present values.
+    // All pathways remain visible; absent ones are included as well.
+    expectVisible([
+      "no sectors, no geo, no temp",
+      "Industry, Asia, no temp",
+      "Power, Europe, 2°C",
+      "empty sectors[], empty geo[], 1.5°C",
+    ]);
+    // (No expectHidden assertions here: present values are still shown.)
   });
 
   // Concrete selection (requested): pick a real value and ensure only matching pathways remain
