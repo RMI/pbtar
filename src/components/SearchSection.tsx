@@ -56,11 +56,11 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     const tVals = (temperatureOptions ?? [])
       .filter((o) => !o.disabled)
       .map((o) => Number(o.value))
-      .filter((n) => Number.isFinite(n)) as number[];
+      .filter((n) => Number.isFinite(n));
     const nzVals = (modelYearNetzeroOptions ?? [])
       .filter((o) => !o.disabled)
       .map((o) => Number(o.value))
-      .filter((n) => Number.isFinite(n)) as number[];
+      .filter((n) => Number.isFinite(n));
     const tb = tVals.length
       ? { min: Math.min(...tVals), max: Math.max(...tVals) }
       : { min: 0, max: 0 };
@@ -119,7 +119,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           step={getStep("netZeroBy")}
           value={
             !Array.isArray(filters.modelYearNetzero)
-              ? (filters.modelYearNetzero as any)
+              ? (filters.modelYearNetzero)
               : null
           }
           onChange={(r) => onFilterChange("modelYearNetzero", r)}
@@ -132,7 +132,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           step={getStep("temp")}
           value={
             !Array.isArray(filters.modelTempIncrease)
-              ? (filters.modelTempIncrease as any)
+              ? (filters.modelTempIncrease)
               : null
           }
           onChange={(r) => onFilterChange("modelTempIncrease", r)}

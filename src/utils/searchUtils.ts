@@ -146,8 +146,8 @@ function matchesNumericRange(
   range: { min?: number; max?: number } | null | undefined,
 ): boolean {
   if (value == null) return false;
-  const gteMin = range?.min == null || value >= range!.min!;
-  const lteMax = range?.max == null || value <= range!.max!;
+  const gteMin = range?.min == null || value >= range.min;
+  const lteMax = range?.max == null || value <= range.max;
   return gteMin && lteMax;
 }
 
@@ -209,12 +209,12 @@ export const filterPathways = (
     {
       const r = (
         !Array.isArray(filters.modelYearNetzero)
-          ? (filters.modelYearNetzero as any)
+          ? (filters.modelYearNetzero)
           : null
       ) as { min?: number; max?: number; includeAbsent?: boolean } | null;
 
       if (r) {
-        const v = pathway?.modelYearNetzero as number | undefined;
+        const v = pathway?.modelYearNetzero;
         const hasValue = v != null;
         const pass =
           (hasValue && matchesNumericRange(v, r)) ||
@@ -227,12 +227,12 @@ export const filterPathways = (
     {
       const r = (
         !Array.isArray(filters.modelTempIncrease)
-          ? (filters.modelTempIncrease as any)
+          ? (filters.modelTempIncrease)
           : null
       ) as { min?: number; max?: number; includeAbsent?: boolean } | null;
 
       if (r) {
-        const v = pathway?.modelTempIncrease as number | undefined;
+        const v = pathway?.modelTempIncrease;
         const hasValue = v != null;
         const pass =
           (hasValue && matchesNumericRange(v, r)) ||
