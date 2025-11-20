@@ -264,4 +264,32 @@ describe("MultiSelectDropdown – menu header layout & interactions", () => {
     await user.keyboard("[Enter]");
     expect(onModeChange).toHaveBeenLastCalledWith("ALL");
   });
+
+it("closes panel when closeOnSelect is true", async () => {
+  const u = userEvent.setup();
+  render(
+    <MultiSelectDropdown
+      label="Sector"
+      options={[
+        { value: "p", label: "Power" },
+        { value: "t", label: "Transport" },
+      ]}
+      value={[]}
+      onChange={() => {}}
+      closeOnSelect
+    />,
+  );
+
+  // open
+  const trigger = screen.getByRole("button", { name: /^sector\b/i });
+  await u.click(trigger);
+  expect(screen.getByRole("listbox")).toBeInTheDocument();
+
+  // click an option checkbox
+  const checkbox = screen.getByRole("checkbox", { name: /power/i });
+  await u.click(checkbox);
+
+  // should close via api.close() wired in shell children
+  expect(screen.queryByRole("listbox")).toBeNull();
+});
 });
