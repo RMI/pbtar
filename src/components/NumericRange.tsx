@@ -47,29 +47,49 @@ export default function NumericRange({
     includeAbsent: Boolean(value?.includeAbsent),
   });
 
-  // Sync down when parent-controlled value changes
+  // Track source of the next notify: true = user edit, false = prop sync
+  const fromUserRef = React.useRef(false);
+
+  // Sync down when parent-controlled value changes (no-op if identical)
   React.useEffect(() => {
-    setInternal({
+    const next: InternalState = {
       min: value?.min,
       max: value?.max,
       includeAbsent: Boolean(value?.includeAbsent),
+    };
+    setInternal((prev) => {
+      if (
+        prev.min === next.min &&
+        prev.max === next.max &&
+        prev.includeAbsent === next.includeAbsent
+      ) {
+        return prev;
+      }
+      // mark as coming from props so we don't notify parent back
+      fromUserRef.current = false;
+      return next;
     });
   }, [value?.min, value?.max, value?.includeAbsent]);
 
   const { min, max, includeAbsent } = internal;
 
   const update = (patch: Partial<InternalState>) => {
-    // Update local mirror immediately; DO NOT call parent here
-    setInternal(
-      (prev: InternalState): InternalState => ({ ...prev, ...patch }),
-    );
+    // Update local mirror immediately and mark as user-initiated
+    setInternal((prev: InternalState): InternalState => {
+      const next = { ...prev, ...patch };
+      fromUserRef.current = true;
+      return next;
+    });
   };
 
-  // Notify parent AFTER render when internal changes
+  // Notify parent AFTER render when internal changes, but only for user edits
   React.useEffect(() => {
-    onChange?.(internal);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [internal.min, internal.max, internal.includeAbsent]);
+    if (fromUserRef.current) {
+      onChange?.(internal);
+      fromUserRef.current = false; // reset
+    }
+    // Include onChange so effect rebinds if handler identity changes
+  }, [internal, onChange]);
 
   const handleMinInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value;
