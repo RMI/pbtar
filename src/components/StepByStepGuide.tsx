@@ -153,7 +153,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     },
     {
       id: "dataAvailability",
-      title: "Benchmark data accessibility",
+      title: "Benchmark Data Accessibility",
       description:
         "Pathways differ in the availability of their benchmark data for access, which may limit user applications. Some pathway data is freely available in standardized format, other data needs to be acquired from third parties.",
       icon: <FileDown className="h-8 w-8" />,
@@ -258,8 +258,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                             >
                               {React.isValidElement(step.icon)
                                 ? React.cloneElement(step.icon, {
-                                    className: "h-4 w-4 stroke-current",
-                                  })
+                                  className: "h-4 w-4 stroke-current",
+                                })
                                 : step.icon}
                             </div>
 
