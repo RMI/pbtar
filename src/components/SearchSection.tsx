@@ -5,6 +5,8 @@ import { pathwayMetadata } from "../data/pathwayMetadata";
 import { SearchFilters } from "../types";
 import type { FacetMode } from "../utils/searchUtils";
 import { getGlobalFacetOptions } from "../utils/searchUtils";
+import { getStep } from "./NumericRange";
+import NumericRangeDropdown from "./NumericRangeDropdown";
 
 interface SearchSectionProps {
   filters: SearchFilters;
@@ -49,6 +51,24 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     policyAmbitionOptions,
     dataAvailabilityOptions,
   } = React.useMemo(() => getGlobalFacetOptions(pathwayMetadata), []);
+
+  const { tempBounds, netZeroBounds } = React.useMemo(() => {
+    const tVals = (temperatureOptions ?? [])
+      .filter((o) => !o.disabled)
+      .map((o) => Number(o.value))
+      .filter((n) => Number.isFinite(n));
+    const nzVals = (modelYearNetzeroOptions ?? [])
+      .filter((o) => !o.disabled)
+      .map((o) => Number(o.value))
+      .filter((n) => Number.isFinite(n));
+    const tb = tVals.length
+      ? { min: Math.min(...tVals), max: Math.max(...tVals) }
+      : { min: 0, max: 0 };
+    const nzb = nzVals.length
+      ? { min: Math.min(...nzVals), max: Math.max(...nzVals) }
+      : { min: 0, max: 0 };
+    return { tempBounds: tb, netZeroBounds: nzb };
+  }, [temperatureOptions, modelYearNetzeroOptions]);
 
   const areFiltersApplied =
     Boolean(filters.searchTerm) ||
@@ -103,14 +123,17 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           onModeChange={(m) => setMode("pathwayType", m)}
         />
 
-        <MultiSelectDropdown<string | number>
+        <NumericRangeDropdown
           label="Temperature (°C)"
-          options={temperatureOptions}
-          value={filters.modelTempIncrease}
-          onChange={(arr) => onFilterChange("modelTempIncrease", arr)}
-          showModeToggle={false}
-          mode={filters.modes?.modelTempIncrease ?? "ANY"}
-          onModeChange={(m) => setMode("modelTempIncrease", m)}
+          minBound={tempBounds.min}
+          maxBound={tempBounds.max}
+          step={getStep("temp")}
+          value={
+            !Array.isArray(filters.modelTempIncrease)
+              ? filters.modelTempIncrease
+              : null
+          }
+          onChange={(r) => onFilterChange("modelTempIncrease", r)}
         />
 
         <MultiSelectDropdown<string>
