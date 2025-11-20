@@ -15,6 +15,7 @@ import { pathwayMetadata } from "../data/pathwayMetadata";
 import { getGlobalFacetOptions } from "../utils/searchUtils";
 import { StepPageDiscrete, StepOption, StepRendererProps } from "./StepPage";
 import StepPageRemap, { RemapCategory } from "./StepPageRemap";
+import StepPageNumericRange from "./StepPageNumericRange";
 
 export interface GuideStep {
   id: keyof SearchFilters;
@@ -35,6 +36,20 @@ interface StepByStepGuideProps {
     value: T | null,
   ) => void;
 }
+
+// Small adapter that fixes the prop wiring for modelTempIncrease
+const StepPageNumericRangeModelTemp: React.FC<StepRendererProps> = (props) => (
+  <StepPageNumericRange
+    title={props.title}
+    description={props.description}
+    // The value/onChange are provided by the SBS renderer automatically
+    value={props.value}
+    onChange={props.onChange}
+    minBound={0}
+    maxBound={6}
+    stepKey="temp"
+  />
+);
 
 const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
   filters,
@@ -127,8 +142,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         "Pathways project different total temperature change by 2100, describing different levels of climate ambition and system change. Many regional and country pathways do not model a temperature rise.",
       icon: <Thermometer className="h-8 w-8" />,
       multi: false,
-      component: StepPageDiscrete,
-      options: optionsByFacet["modelTempIncrease"],
+      component: StepPageNumericRangeModelTemp,
     },
     {
       id: "policyAmbition",
