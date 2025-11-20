@@ -173,6 +173,61 @@ export const filterPathways = (
   filters: FiltersWithArrays,
 ): PathwayMetadataType[] => {
   return pathways.filter((pathway) => {
+    // --- Helpers
+    const isNil = (v: unknown): v is null | undefined =>
+      v === null || v === undefined;
+    const modeOf = (facet: keyof NonNullable<(typeof filters)["modes"]>) =>
+      filters.modes?.[facet] === "ALL" ? "ALL" : "ANY";
+
+    // ----- A) Primitive (single-value) numeric facets behave as equality
+    if (typeof filters.modelTempIncrease === "number") {
+      const want = filters.modelTempIncrease;
+      if (
+        isNil(pathway.modelTempIncrease) ||
+        pathway.modelTempIncrease !== want
+      )
+        return false;
+    }
+    if (typeof filters.modelYearNetzero === "number") {
+      const want = filters.modelYearNetzero;
+      if (isNil(pathway.modelYearNetzero) || pathway.modelYearNetzero !== want)
+        return false;
+    }
+
+    // ----- B) Array-backed numerics (OR by default; respect ABSENT; ALL for single-valued facets)
+    const numericFacet = <K extends "modelTempIncrease" | "modelYearNetzero">(
+      key: K,
+    ) => {
+      const sel = filters[key] as unknown[];
+      if (!Array.isArray(sel) || sel.length === 0) return true; // no filter for this facet
+
+      const hasAbsent = sel.includes(ABSENT_FILTER_TOKEN);
+      const nums = sel.filter((v): v is number => typeof v === "number");
+      const val = pathway[key] as number | null | undefined;
+      const mode = modeOf(key); // "ANY" | "ALL"
+
+      // Single-valued facet: a pathway can have at most one numeric value
+      // ANY: matches if val equals any selected number (OR), or if ABSENT is selected and val is nil
+      // ALL: matches only if:
+      //   - nums.length === 1 and val equals that single number; AND
+      //   - if hasAbsent is also selected, that would require val to be both present and absent -> impossible,
+      //     so treat it as no match when nums.length >= 1.
+      const matchNumber =
+        !isNil(val) &&
+        (mode === "ALL"
+          ? nums.length === 1 && val === nums[0]
+          : nums.length > 0 && nums.includes(val));
+
+      const matchAbsent = hasAbsent && isNil(val);
+
+      // If user selected some numbers but not ABSENT, nil values must NOT pass.
+      // If user selected only ABSENT, only nil values pass.
+      return matchNumber || matchAbsent;
+    };
+
+    if (!numericFacet("modelTempIncrease")) return false;
+    if (!numericFacet("modelYearNetzero")) return false;
+
     // ---- Pathway type: ANY/ALL over selected tokens; empty array => no filter; ABSENT-aware
     {
       const selected = toArray(filters.pathwayType);
