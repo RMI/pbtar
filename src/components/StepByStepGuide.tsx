@@ -13,7 +13,7 @@ import {
 import { SearchFilters } from "../types";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 import { getGlobalFacetOptions } from "../utils/searchUtils";
-import { StepPageDiscrete, StepOption, StepRendererProps } from "./StepPage";
+import { StepPageDiscrete, StepOption } from "./StepPage";
 import StepPageRemap, { RemapCategory } from "./StepPageRemap";
 import StepPageNumericRange from "./StepPageNumericRange";
 
@@ -74,10 +74,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
   );
 
   // Stable component registry
-  const COMPONENTS: Record<
-    NonNullable<GuideStep["componentId"]>,
-    React.FC<any>
-  > = {
+  const COMPONENTS: Record<NonNullable<GuideStep["componentId"]>, React.FC> = {
     discrete: StepPageDiscrete,
     remap: StepPageRemap,
     numericRange: StepPageNumericRange,
@@ -142,6 +139,10 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       componentProps: {
         // optional: stepKey override; bounds derived at render time
         stepKey: "temp",
+        minBound: 0,
+        maxBound: 6,
+        minBar: 1,
+        maxBar: 3,
       },
     },
     {
@@ -304,7 +305,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                     // Discrete/remap receive arrays; numericRange receives RangeValue.
                     if (step.componentId === "numericRange") {
                       const nums = resolvedOptions
-                        .map((o: any) => Number(o.value))
+                        .map((o: { value: number | string }) => Number(o.value))
                         .filter((v: number) => Number.isFinite(v));
                       const minBound = nums.length ? Math.min(...nums) : 0;
                       const maxBound = nums.length ? Math.max(...nums) : 6;
@@ -313,13 +314,11 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                           title={step.title}
                           description={step.description}
                           // numeric range value comes directly from filters as RangeValue
-                          value={(filters as any)[step.id] ?? null}
-                          onChange={(next: any) => onFilterChange(step.id, next)}
+                          value={filters[step.id] ?? null}
+                          onChange={(next) => onFilterChange(step.id, next)}
                           minBound={minBound}
                           maxBound={maxBound}
-                          stepKey={
-                            (step.componentProps as any)?.stepKey ?? "temp"
-                          }
+                          stepKey={step.componentProps?.stepKey ?? "temp"}
                         />
                       );
                     }
