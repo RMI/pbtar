@@ -24,9 +24,9 @@ export interface GuideStep {
   icon: React.ReactNode;
   /** allow selecting multiple values on this page; default single */
   multi?: boolean;
-  /** Optional custom renderer; defaults to StepPageDiscrete. */
-  component?: React.FC<StepRendererProps>;
+  componentId?: "discrete" | "remap" | "numericRange";
   options?: StepOption[];
+  componentProps?: Record<string, unknown>;
 }
 
 interface StepByStepGuideProps {
@@ -73,35 +73,15 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
     [globalFacetOptions],
   );
 
-  // Small adapter that fixes the prop wiring for modelTempIncrease
-  const StepPageNumericRangeModelTemp: React.FC<StepRendererProps> = (
-    props,
-  ) => {
-    const values = optionsByFacet["modelTempIncrease"]
-      .map((o) => Number(o.value))
-      .filter((v) => !isNaN(v));
-
-    const minBound = Math.min(...values);
-    const maxBound = Math.max(...values);
-
-    return (
-      <StepPageNumericRange
-        title={props.title}
-        description={props.description}
-        value={props.value}
-        onChange={props.onChange}
-        minBound={minBound}
-        maxBound={maxBound}
-        stepKey="temp"
-      />
-    );
+  // Stable component registry
+  const COMPONENTS: Record<
+    NonNullable<GuideStep["componentId"]>,
+    React.FC<any>
+  > = {
+    discrete: StepPageDiscrete,
+    remap: StepPageRemap,
+    numericRange: StepPageNumericRange,
   };
-
-  console.log(
-    optionsByFacet["modelTempIncrease"].reduce((max, current) => {
-      return current.value > max.value ? current : max;
-    }),
-  );
 
   const descriptions: Record<string, Record<string, string>> = {
     pathwayType: {
@@ -145,7 +125,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         "Different pathway types are constructed with different objectives, making them suited for different analytical applications. Analyses of ambitious scenarios, such as strategic target setting, often use normative pathways. Risk analyses often use predictive or explorative pathways.",
       icon: <GitFork className="h-8 w-8" />,
       multi: false,
-      component: StepPageDiscrete,
+      componentId: "discrete",
       options: optionsByFacet["pathwayType"].map((o) => ({
         ...o,
         description: descriptions["pathwayType"][o.title] || undefined,
@@ -158,7 +138,11 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         "Pathways project different total temperature change by 2100, describing different levels of climate ambition and system change. Many regional and country pathways do not model a temperature rise.",
       icon: <Thermometer className="h-8 w-8" />,
       multi: false,
-      component: StepPageNumericRangeModelTemp,
+      componentId: "numericRange",
+      componentProps: {
+        // optional: stepKey override; bounds derived at render time
+        stepKey: "temp",
+      },
     },
     {
       id: "policyAmbition",
@@ -167,7 +151,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         "Pathways differ in the types of policies included, providing benchmarks for different policy action scenarios. This is relevant both for setting appropriately ambitious targets and for policy alignment analysis.",
       icon: <ScrollText className="h-8 w-8" />,
       multi: false,
-      component: StepPageDiscrete,
+      componentId: "discrete",
       options: (() => {
         return [...(optionsByFacet["policyAmbition"] ?? [])]
           .map((o) => ({
@@ -189,8 +173,9 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       icon: <FileDown className="h-8 w-8" />,
       multi: false,
       options: optionsByFacet["dataAvailability"],
-      component: (props) => {
-        const categories: RemapCategory[] = [
+      componentId: "remap",
+      componentProps: {
+        categories: [
           {
             label: "Freely available",
             values: ["Download"],
@@ -206,14 +191,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
             label: "Benchmark data availability not relevant",
             values: [null],
           },
-        ];
-        return (
-          <StepPageRemap
-            {...props}
-            categories={categories}
-            clampToAvailable
-          />
-        );
+        ] as RemapCategory[],
+        clampToAvailable: true,
       },
     },
   ];
@@ -316,17 +295,43 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                 <div className="space-y-6">
                   {(() => {
                     const step = steps[currentView];
-                    const Comp = step.component ?? StepPageDiscrete;
+                    const Comp =
+                      COMPONENTS[step.componentId ?? "discrete"] ??
+                      StepPageDiscrete;
+                    const resolvedOptions =
+                      step.options ?? optionsByFacet[step.id] ?? [];
+
+                    // Discrete/remap receive arrays; numericRange receives RangeValue.
+                    if (step.componentId === "numericRange") {
+                      const nums = resolvedOptions
+                        .map((o: any) => Number(o.value))
+                        .filter((v: number) => Number.isFinite(v));
+                      const minBound = nums.length ? Math.min(...nums) : 0;
+                      const maxBound = nums.length ? Math.max(...nums) : 6;
+                      return (
+                        <Comp
+                          title={step.title}
+                          description={step.description}
+                          // numeric range value comes directly from filters as RangeValue
+                          value={(filters as any)[step.id] ?? null}
+                          onChange={(next: any) => onFilterChange(step.id, next)}
+                          minBound={minBound}
+                          maxBound={maxBound}
+                          stepKey={
+                            (step.componentProps as any)?.stepKey ?? "temp"
+                          }
+                        />
+                      );
+                    }
+
+                    // Default: discrete / remap (array-based)
                     const currentArray = Array.isArray(filters[step.id])
                       ? ((filters[step.id] as (string | number)[]) ?? [])
                       : filters[step.id] != null
                         ? [filters[step.id] as string | number]
                         : [];
-
                     const selectionMode: "single" | "multi" =
                       (step.multi ?? false) ? "multi" : "single";
-
-                    // Unified array-based filters: always emit arrays
                     const onChange = (next: Array<string | number>) =>
                       onFilterChange(step.id, next);
 
@@ -334,10 +339,11 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                       <Comp
                         title={step.title}
                         description={step.description}
-                        options={step.options}
+                        options={resolvedOptions}
                         value={currentArray}
                         selectionMode={selectionMode}
                         onChange={onChange}
+                        {...(step.componentProps ?? {})}
                       />
                     );
                   })()}
