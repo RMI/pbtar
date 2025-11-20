@@ -40,13 +40,12 @@ const HANDLE_R = 8;
 function tempToHex(t: number) {
   // Use deeper theme tokens (CSS variables) for a richer gradient.
   // These variables are defined in src/index.css (see --color-...).
-  if (t <= 1.5) return "var(--color-pinishgreen-200)";   // stronger blue
-  if (t <= 1.75) return "var(--color-pinishgreen-400)"; // deeper green
-  if (t <= 2.0) return "var(--color-solar-400)";    // stronger yellow
-  if (t <= 2.5) return "var(--color-solar-800)";    // orange-ish
-  if (t <= 3.0) return "var(--color-rmired-200)";   // warm orange
-  if (t <= 3.5) return "var(--color-rmired-400)";   // deep red
-  return "var(--color-rmired-800)";                 // darkest red
+  if (t <= 1.5) return "#2888C9";   // stronger blue
+  if (t <= 1.75) return "#77B8E4"; // deeper green
+  if (t <= 2.0) return "#91CBF2";    // stronger yellow
+  if (t <= 3.0) return "#DF4E39";   // warm orange
+  if (t <= 3.5) return "#DF4E39";   // deep red
+  return "#AB3C2C";                 // red-brown
 }
 
 const NumericRangeSlider: React.FC<Props> = ({
