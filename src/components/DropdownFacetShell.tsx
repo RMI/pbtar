@@ -135,6 +135,8 @@ export default function DropdownFacetShell({
           className="relative z-20"
         >
           <div
+            role="dialog"
+            aria-label={label}
             className={clsx(
               "absolute z-20 mt-2 origin-top-right rounded-md border border-gray-200 bg-white shadow-lg focus:outline-none",
               menuWidthClassName ?? null,
