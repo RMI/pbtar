@@ -72,7 +72,7 @@ export const StepPageDiscrete: React.FC<StepRendererProps> = ({
         {description ? <p className="text-rmigray-600">{description}</p> : null}
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-3">
         {options.map((option) => {
           const state = computeState(option.value);
           const selected = state === "on";
@@ -81,14 +81,23 @@ export const StepPageDiscrete: React.FC<StepRendererProps> = ({
             <button
               key={option.id}
               onClick={() => handleClick(option.value)}
-              className={`p-4 border rounded-lg transition-colors bg-gray-50 ${
-                selected
-                  ? "border-energy bg-energy-50"
+              className={`group relative w-full text-left pl-10 pr-4 py-3 min-h-[76px] rounded-lg flex flex-col justify-center gap-2 transition-colors
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-rmiblue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white
+                border-2 ${selected
+                  ? "border-rmiblue-800 bg-rmiblue-100"
                   : partial
-                    ? "border-energy/50 bg-energy-50/40"
-                    : "hover:border-energy hover:bg-energy-50"
-              }`}
+                    ? "border-rmiblue-400 bg-rmiblue-100"
+                    : "border-transparent shadow-sm hover:border-neutral-300 hover:shadow-sm bg-white"
+                }`}
             >
+              {selected && (
+                <span
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-rmiblue-800 text-sm font-semibold"
+                  aria-hidden="true"
+                >
+                  ✓
+                </span>
+              )}
               <div className="text-sm font-medium text-rmigray-800">
                 {option.title}
               </div>
