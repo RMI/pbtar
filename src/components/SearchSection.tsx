@@ -52,23 +52,16 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     dataAvailabilityOptions,
   } = React.useMemo(() => getGlobalFacetOptions(pathwayMetadata), []);
 
-  const { tempBounds, netZeroBounds } = React.useMemo(() => {
+  const { tempBounds } = React.useMemo(() => {
     const tVals = (temperatureOptions ?? [])
-      .filter((o) => !o.disabled)
-      .map((o) => Number(o.value))
-      .filter((n) => Number.isFinite(n));
-    const nzVals = (modelYearNetzeroOptions ?? [])
       .filter((o) => !o.disabled)
       .map((o) => Number(o.value))
       .filter((n) => Number.isFinite(n));
     const tb = tVals.length
       ? { min: Math.min(...tVals), max: Math.max(...tVals) }
       : { min: 0, max: 0 };
-    const nzb = nzVals.length
-      ? { min: Math.min(...nzVals), max: Math.max(...nzVals) }
-      : { min: 0, max: 0 };
-    return { tempBounds: tb, netZeroBounds: nzb };
-  }, [temperatureOptions, modelYearNetzeroOptions]);
+    return { tempBounds: tb };
+  }, [temperatureOptions]);
 
   const areFiltersApplied =
     Boolean(filters.searchTerm) ||
