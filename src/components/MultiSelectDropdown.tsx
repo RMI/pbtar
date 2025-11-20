@@ -77,7 +77,6 @@ export default function MultiSelectDropdown<
     }
 
     onChange(next);
-    if (closeOnSelect) setOpen(false);
   };
 
   const enabled = options.filter((o) => !o.disabled);
