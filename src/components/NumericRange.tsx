@@ -56,12 +56,7 @@ export default function NumericRange({
     }
     const v = Number(raw);
     if (!Number.isFinite(v)) return; // allow free typing; apply only when it's a number
-    if (value?.max != null && v > value.max) {
-      // swap to keep a valid interval
-      update({ min: value.max, max: v });
-    } else {
-      update({ min: v, max });
-    }
+    update({ min: v, max });
   };
 
   const handleMaxInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,12 +67,7 @@ export default function NumericRange({
     }
     const v = Number(raw);
     if (!Number.isFinite(v)) return; // allow free typing; apply only when it's a number
-    if (value?.min != null && v < value.min) {
-      // swap to keep a valid interval
-      update({ min: v, max: value.min });
-    } else {
-      update({ min, max: v });
-    }
+    update({ min, max: v });
   };
 
   return (
@@ -86,27 +76,49 @@ export default function NumericRange({
       aria-label={label}
       className="space-y-3"
     >
-      <div className="flex items-center gap-2">
-        <input
-          type="number"
-          step={step}
-          value={min ?? ""}
-          onChange={handleMinInput}
-          className="w-28 rounded border px-2 py-1"
-          placeholder={`${minBound}`}
-          aria-label={`${label} min`}
-        />
-        <span className="text-gray-500">to</span>
-        <input
-          type="number"
-          step={step}
-          value={max ?? ""}
-          onChange={handleMaxInput}
-          className="w-28 rounded border px-2 py-1"
-          placeholder={`${maxBound}`}
-          aria-label={`${label} max`}
-        />
-      </div>
+      {/*
+        Mark inverted ranges for a11y and show a small inline hint.
+        Inverted = both numeric and max < min.
+      */}
+      {(() => {
+        const inverted =
+          typeof min === "number" && typeof max === "number" && max < min;
+        return (
+          <>
+            <div className="flex items-center gap-2">
+              <input
+                type="number"
+                step={step}
+                value={min ?? ""}
+                onChange={handleMinInput}
+                className="w-28 rounded border px-2 py-1"
+                placeholder={`${minBound}`}
+                aria-label={`${label} min`}
+                aria-invalid={inverted ? true : undefined}
+              />
+              <span className="text-gray-500">to</span>
+              <input
+                type="number"
+                step={step}
+                value={max ?? ""}
+                onChange={handleMaxInput}
+                className="w-28 rounded border px-2 py-1"
+                placeholder={`${maxBound}`}
+                aria-label={`${label} max`}
+                aria-invalid={inverted ? true : undefined}
+              />
+            </div>
+            {inverted && (
+              <p
+                role="alert"
+                className="text-xs text-red-600"
+              >
+                End value must be ≥ start value
+              </p>
+            )}
+          </>
+        );
+      })()}
 
       <label className="flex items-center gap-2 text-sm">
         <input
