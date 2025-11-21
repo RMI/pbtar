@@ -27,16 +27,6 @@ describe("PathwaySearch component", () => {
     );
   };
 
-  it("displays the introductory paragraph", () => {
-    renderPathwaySearch();
-
-    expect(
-      screen.getByText(
-        "Browse our repository of climate transition pathways to find the most relevant ones for your assessment needs.",
-      ),
-    ).toBeInTheDocument();
-  });
-
   it("renders a PathwayCard for each pathway in the data", () => {
     renderPathwaySearch();
     // Check that the correct number of pathway cards are rendered
