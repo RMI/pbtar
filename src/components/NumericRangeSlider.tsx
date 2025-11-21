@@ -222,8 +222,9 @@ const NumericRangeSlider: React.FC<Props> = ({
   const minPctOnBar = toPct(clamp(effMin, minBar, maxBar), minBar, maxBar);
   const maxPctOnBar = toPct(clamp(effMax, minBar, maxBar), minBar, maxBar);
 
-  const minVisible = effMin >= minBar && effMin <= maxBar;
-  const maxVisible = effMax >= minBar && effMax <= maxBar;
+  // Show a handle only if that bound is explicitly set AND it lies in the visible window
+  const minVisible = isNum(min) && effMin >= minBar && effMin <= maxBar;
+  const maxVisible = isNum(max) && effMax >= minBar && effMax <= maxBar;
 
   const lo = Math.min(minPctOnBar, maxPctOnBar);
   const hi = Math.max(minPctOnBar, maxPctOnBar);
