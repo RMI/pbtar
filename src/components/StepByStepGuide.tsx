@@ -147,9 +147,11 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         // recompute minBar and maxBar dynamically
         minBar: Math.min(
           0,
-          Math.floor(optionsByFacet["modelTempIncrease"].reduce((min, current) => {
-            return current.value < min.value ? current : min;
-          }).value),
+          Math.floor(
+            optionsByFacet["modelTempIncrease"].reduce((min, current) => {
+              return current.value < min.value ? current : min;
+            }).value,
+          ),
         ),
         maxBar: Math.ceil(
           optionsByFacet["modelTempIncrease"].reduce((max, current) => {
