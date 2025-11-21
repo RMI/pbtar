@@ -93,7 +93,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           <button
             type="button"
             aria-label="Clear all filters"
-            className="ml-2 text-xs px-2 py-1 rounded border border-gray-200 bg-white text-indigo-600 hover:bg-gray-50 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+            className="ml-2 text-xs px-2 py-1 rounded border border-gray-200 bg-white text-energy-700 hover:bg-gray-50 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
             onClick={onClear}
             data-testid="clear-all-filters"
           >
