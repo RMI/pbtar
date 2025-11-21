@@ -140,7 +140,9 @@ const NumericRangeSlider: React.FC<Props> = ({
     const rect = el.getBoundingClientRect();
     const t = clamp((clientX - rect.left) / rect.width, 0, 1);
     const raw = minBar + t * (maxBar - minBar);
-    return clamp(roundToStepDisplay(raw, step), minBound, maxBound);
+    // Clicks/dragging should NOT clamp to [minBound,maxBound];
+    // we only snap+round to step precision and return the raw value.
+    return roundToStepDisplay(raw, step);
   };
 
   const chooseHandle = (v: number): "min" | "max" => {
