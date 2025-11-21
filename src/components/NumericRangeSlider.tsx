@@ -28,6 +28,22 @@ function clamp(n: number, lo: number, hi: number) {
 function snap(n: number, step: number) {
   return Math.round(n / step) * step;
 }
+
+function stepDecimals(step: number): number {
+  // Count decimals needed to represent the step (e.g., 0.1 -> 1, 0.25 -> 2)
+  if (!Number.isFinite(step) || step <= 0) return 0;
+  let d = 0;
+  // Cap at 10 to avoid infinite loops on pathological inputs
+  while (d < 10 && Math.round(step * 10 ** d) / 10 ** d !== step) d++;
+  return d;
+}
+function roundToStepDisplay(n: number, step: number): number {
+  const d = stepDecimals(step);
+  // Snap first, then trim floating error like 2.8000000000000003
+  const snapped = snap(n, step);
+  return Number(snapped.toFixed(d));
+}
+
 function toPct(n: number, lo: number, hi: number) {
   return ((n - lo) / (hi - lo)) * 100;
 }
@@ -94,8 +110,7 @@ const NumericRangeSlider: React.FC<Props> = ({
       fromUserRef.current = false;
       return next;
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value?.min, value?.max, value?.includeAbsent, minBound, maxBound]);
+  }, [value, minBound, maxBound]);
 
   // Notify parent when user commits changes
   React.useEffect(() => {
@@ -125,7 +140,7 @@ const NumericRangeSlider: React.FC<Props> = ({
     const rect = el.getBoundingClientRect();
     const t = clamp((clientX - rect.left) / rect.width, 0, 1);
     const raw = minBar + t * (maxBar - minBar);
-    return clamp(snap(raw, step), minBound, maxBound);
+    return clamp(roundToStepDisplay(raw, step), minBound, maxBound);
   };
 
   // Choose which handle to move:
@@ -143,16 +158,10 @@ const NumericRangeSlider: React.FC<Props> = ({
     if (!isNum(v)) return;
     const which = chooseHandle(v);
     activeHandle.current = which;
-    setDraggingWhich(which);
-    setIsDragging(true);
-    commit({ [which]: v } as Partial<Internal>);
-
-    const move = (ev: MouseEvent) => {
-      const nv = pxToValue(ev.clientX);
-      if (!isNum(nv)) return;
-      if (activeHandle.current) {
-        commit({ [activeHandle.current]: nv } as Partial<Internal>);
-      }
+      if (activeHandle.current)
+        commit({
+          [activeHandle.current]: roundToStepDisplay(nv, step),
+        } as Partial<Internal>);
     };
     const up = () => {
       activeHandle.current = null;
