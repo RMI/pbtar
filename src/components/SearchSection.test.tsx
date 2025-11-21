@@ -63,9 +63,6 @@ describe("SearchSection", () => {
       screen.getByRole("button", { name: /^Pathway Type\b/i }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: /^Net Zero By\b/i }),
-    ).toBeInTheDocument();
-    expect(
       screen.getByRole("button", { name: /^Temperature\b/i }),
     ).toBeInTheDocument();
     expect(
@@ -170,11 +167,7 @@ describe("SearchSection", () => {
   });
 
   describe("does NOT render ANY/ALL toggle for scalar facets", () => {
-    for (const facet of [
-      "Pathway Type",
-      "Net Zero By",
-      "Temperature",
-    ] as const) {
+    for (const facet of ["Pathway Type", "Temperature"] as const) {
       it(`facet: ${facet}`, () => {
         render(<SearchSection {...defaultProps} />);
         const trigger = screen.getByRole("button", {
@@ -216,7 +209,7 @@ describe("SearchSection", () => {
       expect(defaultProps.onClear).toHaveBeenCalledTimes(1);
     });
 
-    it("Temperature and Net Zero By use range panels (no ANY/ALL), with 'include absent' checkbox", async () => {
+    it("Temperature use range panels (no ANY/ALL), with 'include absent' checkbox", async () => {
       render(<SearchSection {...defaultProps} />);
       // Open Temperature
       const tempTrigger = screen.getByRole("button", {
@@ -232,17 +225,6 @@ describe("SearchSection", () => {
       // ANY/ALL toggle should not be present in the header for range facets
       expect(screen.queryByRole("button", { name: /any/i })).toBeNull();
       expect(screen.queryByRole("button", { name: /all/i })).toBeNull();
-
-      // Close, then open Net Zero By
-      await userEvent.keyboard("{Escape}");
-      const nzTrigger = screen.getByRole("button", { name: /^net zero by\b/i });
-      await userEvent.click(nzTrigger);
-      expect(screen.getAllByRole("spinbutton")).toHaveLength(2);
-      expect(
-        screen.getByRole("checkbox", {
-          name: /include entries with no value/i,
-        }),
-      ).toBeInTheDocument();
     });
   });
 });
