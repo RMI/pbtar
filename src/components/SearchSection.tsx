@@ -31,9 +31,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       facet:
         | "geography"
         | "sector"
-        | "metric"
+        | "policyAmbition"
+        | "dataAvailability"
         | "pathwayType"
-        | "modelYearNetzero"
         | "modelTempIncrease",
       m: FacetMode,
     ) => {
@@ -45,30 +45,23 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   // Single source of truth for option lists (global, data-driven)
   const {
     pathwayTypeOptions,
-    modelYearNetzeroOptions,
     temperatureOptions,
     geographyOptions,
     sectorOptions,
-    metricOptions,
+    policyAmbitionOptions,
+    dataAvailabilityOptions,
   } = React.useMemo(() => getGlobalFacetOptions(pathwayMetadata), []);
 
-  const { tempBounds, netZeroBounds } = React.useMemo(() => {
+  const { tempBounds } = React.useMemo(() => {
     const tVals = (temperatureOptions ?? [])
-      .filter((o) => !o.disabled)
-      .map((o) => Number(o.value))
-      .filter((n) => Number.isFinite(n));
-    const nzVals = (modelYearNetzeroOptions ?? [])
       .filter((o) => !o.disabled)
       .map((o) => Number(o.value))
       .filter((n) => Number.isFinite(n));
     const tb = tVals.length
       ? { min: Math.min(...tVals), max: Math.max(...tVals) }
       : { min: 0, max: 0 };
-    const nzb = nzVals.length
-      ? { min: Math.min(...nzVals), max: Math.max(...nzVals) }
-      : { min: 0, max: 0 };
-    return { tempBounds: tb, netZeroBounds: nzb };
-  }, [temperatureOptions, modelYearNetzeroOptions]);
+    return { tempBounds: tb };
+  }, [temperatureOptions]);
 
   const areFiltersApplied =
     Boolean(filters.searchTerm) ||
@@ -80,15 +73,15 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     (Array.isArray(filters.sector)
       ? filters.sector.length > 0
       : filters.sector != null) ||
-    (Array.isArray(filters.metric)
-      ? filters.metric.length > 0
-      : filters.metric != null) ||
-    (Array.isArray(filters.modelYearNetzero)
-      ? filters.modelYearNetzero.length > 0
-      : filters.modelYearNetzero != null) ||
     (Array.isArray(filters.modelTempIncrease)
       ? filters.modelTempIncrease.length > 0
-      : filters.modelTempIncrease != null);
+      : filters.modelTempIncrease != null) ||
+    (Array.isArray(filters.policyAmbition)
+      ? filters.policyAmbition.length > 0
+      : filters.policyAmbition != null) ||
+    (Array.isArray(filters.dataAvailability)
+      ? filters.dataAvailability.length > 0
+      : filters.dataAvailability != null);
 
   return (
     <div className="bg-gray-50">
@@ -103,6 +96,17 @@ const SearchSection: React.FC<SearchSectionProps> = ({
 
       <div className="flex flex-wrap gap-2">
         <MultiSelectDropdown<string>
+          label="Geography"
+          options={geographyOptions}
+          value={filters.geography}
+          onChange={(arr) => onFilterChange("geography", arr)}
+          showModeToggle
+          mode={filters.modes?.geography ?? "ANY"}
+          onModeChange={(m) => setMode("geography", m)}
+          menuWidthClassName="w-60"
+        />
+
+        <MultiSelectDropdown<string>
           label="Pathway Type"
           options={pathwayTypeOptions}
           value={filters.pathwayType}
@@ -110,19 +114,6 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           showModeToggle={false}
           mode={filters.modes?.pathwayType ?? "ANY"}
           onModeChange={(m) => setMode("pathwayType", m)}
-        />
-
-        <NumericRangeDropdown
-          label="Net Zero By"
-          minBound={netZeroBounds.min}
-          maxBound={netZeroBounds.max}
-          step={getStep("netZeroBy")}
-          value={
-            !Array.isArray(filters.modelYearNetzero)
-              ? filters.modelYearNetzero
-              : null
-          }
-          onChange={(r) => onFilterChange("modelYearNetzero", r)}
         />
 
         <NumericRangeDropdown
@@ -139,13 +130,13 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         />
 
         <MultiSelectDropdown<string>
-          label="Geography"
-          options={geographyOptions}
-          value={filters.geography}
-          onChange={(arr) => onFilterChange("geography", arr)}
-          showModeToggle
-          mode={filters.modes?.geography ?? "ANY"}
-          onModeChange={(m) => setMode("geography", m)}
+          label="Policy Ambition"
+          options={policyAmbitionOptions}
+          value={filters.policyAmbition}
+          onChange={(arr) => onFilterChange("policyAmbition", arr)}
+          showModeToggle={false}
+          mode={filters.modes?.policyAmbition ?? "ANY"}
+          onModeChange={(m) => setMode("policyAmbition", m)}
           menuWidthClassName="w-60"
         />
 
@@ -161,13 +152,13 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         />
 
         <MultiSelectDropdown<string>
-          label="Benchmark Metric"
-          options={metricOptions}
-          value={filters.metric}
-          onChange={(arr) => onFilterChange("metric", arr)}
-          showModeToggle
-          mode={filters.modes?.metric ?? "ANY"}
-          onModeChange={(m) => setMode("metric", m)}
+          label="Data Availability"
+          options={dataAvailabilityOptions}
+          value={filters.dataAvailability}
+          onChange={(arr) => onFilterChange("dataAvailability", arr)}
+          showModeToggle={false}
+          mode={filters.modes?.dataAvailability ?? "ANY"}
+          onModeChange={(m) => setMode("dataAvailability", m)}
           menuWidthClassName="w-60"
         />
       </div>

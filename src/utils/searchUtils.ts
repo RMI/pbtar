@@ -8,6 +8,7 @@ import { matchesOptionalFacetAny, matchesOptionalFacetAll } from "./facets";
 import { ABSENT_FILTER_TOKEN } from "./absent";
 import { buildOptionsFromValues, hasAbsent, withAbsentOption } from "./facets";
 import type { LabeledOption } from "./facets";
+import { index } from "../data/index.gen";
 
 // ───────────────────────────────────────────────────────────────────────────────
 // Global facet option provider
@@ -53,6 +54,20 @@ export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
     pathways.map((d) => d.metric).flat(),
   );
 
+  // emissionsTrajectory
+  const emissionsTrajectoryOptions = buildOptionsFromValues(
+    pathways.map((d) => d.keyFeatures.emissionsTrajectory).flat(),
+  );
+
+  // Policy ambition
+  const policyAmbitionOptions = buildOptionsFromValues(
+    pathways.map((d) => d.keyFeatures.policyAmbition).flat(),
+  );
+
+  const dataAvailabilityOptions = buildOptionsFromValues(
+    pathways.map((d) => availabilityFor(d)).flat(),
+  );
+
   return {
     pathwayTypeOptions,
     modelYearNetzeroOptions,
@@ -60,29 +75,9 @@ export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
     geographyOptions,
     sectorOptions,
     metricOptions,
-  };
-}
-
-// (Optional compatibility) If other code expects raw arrays, derive them here.
-export function getUniqueFilterValuesFromGlobalOptions(
-  pathways: PathwayMetadataType[],
-) {
-  const {
-    pathwayTypeOptions,
-    modelYearNetzeroOptions,
-    temperatureOptions,
-    geographyOptions,
-    sectorOptions,
-    metricOptions,
-  } = getGlobalFacetOptions(pathways);
-
-  return {
-    pathwayTypes: pathwayTypeOptions.map((o) => String(o.value)),
-    targetYears: modelYearNetzeroOptions.map((o) => Number(o.value)),
-    temperatures: temperatureOptions.map((o) => Number(o.value)),
-    geographies: geographyOptions.map((o: LabeledOption) => String(o.value)),
-    sectors: sectorOptions.map((o) => String(o.value)),
-    metrics: metricOptions.map((o) => String(o.value)),
+    emissionsTrajectoryOptions,
+    policyAmbitionOptions,
+    dataAvailabilityOptions,
   };
 }
 
@@ -107,6 +102,8 @@ export type FilterModes = Partial<{
   geography: FacetMode;
   sector: FacetMode;
   metric: FacetMode;
+  emissionsTrajectory: FacetMode;
+  policyAmbition: FacetMode;
 }>;
 
 // Extend your existing Filters type minimally:
@@ -124,6 +121,9 @@ export type FiltersWithArrays = {
   geography?: Arrayable;
   sector?: Arrayable;
   metric?: Arrayable;
+  emissionsTrajectory?: Arrayable;
+  policyAmbition?: Arrayable;
+  dataAvailability?: Arrayable;
   pathwayType?: Arrayable;
   modelYearNetzero?: Arrayable;
   modelTempIncrease?: Arrayable;
@@ -166,6 +166,26 @@ export function makeGeographyOptions(
 
   // ✅ value stays raw, label is full name (or passthrough for regions/Global)
   return sorted.map((v) => ({ value: v, label: geographyLabel(v) }));
+}
+
+// Determine data availability per pathway using the generated index
+// - "download": pathway id exists in index.byPathway
+// - "link": has link to data set
+// - "unavailable": otherwise
+export type DataAvailability = "Download" | "Foo" | "Unavailable";
+
+function availabilityFor(pathway: PathwayMetadataType): DataAvailability {
+  const hasDownload = Boolean(index?.byPathway?.[pathway.id]);
+  if (hasDownload) return "Download";
+  const hasLink =
+    Array.isArray(pathway.publication?.links) &&
+    pathway.publication.links.some(
+      (l) =>
+        typeof l?.description === "string" &&
+        ["dataset", "data"].includes(l.description.toLowerCase()),
+    );
+  if (hasLink) return "Link";
+  return "Unavailable";
 }
 
 export const filterPathways = (
@@ -344,6 +364,107 @@ export const filterPathways = (
           ? matchesOptionalFacetAll(normalizedSelected, values, (s) => s)
           : matchesOptionalFacetAny(normalizedSelected, values, (s) => s);
       if (!ok) return false;
+    }
+
+    // emissionsTrajectory filter
+    {
+      const selected = toArray(filters.emissionsTrajectory);
+      if (selected.length) {
+        const hasAbsent = selected.includes(ABSENT_FILTER_TOKEN);
+        const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
+        const v = pathway.keyFeatures?.emissionsTrajectory ?? null;
+        const mode = pickMode(
+          "emissionsTrajectory",
+          filters.modes as FilterModes,
+        );
+        let ok = true;
+
+        if (mode === "ANY") {
+          ok =
+            (v == null && hasAbsent) ||
+            (v != null && (concrete.length ? concrete.includes(v) : false));
+        } else {
+          // ALL: for single-valued fields, all selected tokens must hold.
+          // That is only possible when exactly one token is selected:
+          //  - [ABSENT]  -> v == null
+          //  - [X]       -> v == X
+          // Any combination (ABSENT + X, or X + Y) cannot be satisfied.
+          if (hasAbsent && concrete.length === 0) {
+            ok = v == null;
+          } else if (!hasAbsent && concrete.length === 1) {
+            ok = v != null && v === concrete[0];
+          } else {
+            ok = false;
+          }
+        }
+        if (!ok) return false;
+      }
+    }
+
+    // policyAmbition filter
+    {
+      const selected = toArray(filters.policyAmbition);
+      if (selected.length) {
+        const hasAbsent = selected.includes(ABSENT_FILTER_TOKEN);
+        const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
+        const v = pathway.keyFeatures?.policyAmbition ?? null;
+        const mode = pickMode("policyAmbition", filters.modes as FilterModes);
+        let ok = true;
+
+        if (mode === "ANY") {
+          ok =
+            (v == null && hasAbsent) ||
+            (v != null && (concrete.length ? concrete.includes(v) : false));
+        } else {
+          // ALL: for single-valued fields, all selected tokens must hold.
+          // That is only possible when exactly one token is selected:
+          //  - [ABSENT]  -> v == null
+          //  - [X]       -> v == X
+          // Any combination (ABSENT + X, or X + Y) cannot be satisfied.
+          if (hasAbsent && concrete.length === 0) {
+            ok = v == null;
+          } else if (!hasAbsent && concrete.length === 1) {
+            ok = v != null && v === concrete[0];
+          } else {
+            ok = false;
+          }
+        }
+        if (!ok) return false;
+      }
+    }
+
+    // dataAvailability filter
+    // Expect `filters.dataAvailability` to be an array of DataAvailability values.
+    // Empty array or undefined => do not filter on availability.
+    {
+      const selected = toArray(filters.dataAvailability ?? []);
+      if (selected.length) {
+        const hasAbsent = selected.includes(ABSENT_FILTER_TOKEN);
+        const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
+        const v = availabilityFor(pathway) ?? null;
+        const mode = pickMode("dataAvailability", filters.modes as FilterModes);
+        let ok = true;
+
+        if (mode === "ANY") {
+          ok =
+            (v == null && hasAbsent) ||
+            (v != null && (concrete.length ? concrete.includes(v) : false));
+        } else {
+          // ALL: for single-valued fields, all selected tokens must hold.
+          // That is only possible when exactly one token is selected:
+          //  - [ABSENT]  -> v == null
+          //  - [X]       -> v == X
+          // Any combination (ABSENT + X, or X + Y) cannot be satisfied.
+          if (hasAbsent && concrete.length === 0) {
+            ok = v == null;
+          } else if (!hasAbsent && concrete.length === 1) {
+            ok = v != null && v === concrete[0];
+          } else {
+            ok = false;
+          }
+        }
+        if (!ok) return false;
+      }
     }
 
     // Search term
