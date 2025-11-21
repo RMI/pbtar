@@ -93,74 +93,85 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           onClear={onClear}
         />
       </div>
+      <div className="grid gap-2 grid-cols-[repeat(auto-fit,minmax(12rem,1fr))]">
+        <div>
+          <MultiSelectDropdown<string>
+            label="Geography"
+            options={geographyOptions}
+            value={filters.geography}
+            onChange={(arr) => onFilterChange("geography", arr)}
+            showModeToggle
+            mode={filters.modes?.geography ?? "ANY"}
+            onModeChange={(m) => setMode("geography", m)}
+            menuWidthClassName="w-60"
+          />
+        </div>
 
-      <div className="flex flex-wrap gap-2">
-        <MultiSelectDropdown<string>
-          label="Geography"
-          options={geographyOptions}
-          value={filters.geography}
-          onChange={(arr) => onFilterChange("geography", arr)}
-          showModeToggle
-          mode={filters.modes?.geography ?? "ANY"}
-          onModeChange={(m) => setMode("geography", m)}
-          menuWidthClassName="w-60"
-        />
+        <div>
+          <MultiSelectDropdown<string>
+            label="Pathway Type"
+            options={pathwayTypeOptions}
+            value={filters.pathwayType}
+            onChange={(arr) => onFilterChange("pathwayType", arr)}
+            showModeToggle={false}
+            mode={filters.modes?.pathwayType ?? "ANY"}
+            onModeChange={(m) => setMode("pathwayType", m)}
+          />
+        </div>
 
-        <MultiSelectDropdown<string>
-          label="Pathway Type"
-          options={pathwayTypeOptions}
-          value={filters.pathwayType}
-          onChange={(arr) => onFilterChange("pathwayType", arr)}
-          showModeToggle={false}
-          mode={filters.modes?.pathwayType ?? "ANY"}
-          onModeChange={(m) => setMode("pathwayType", m)}
-        />
+        <div>
+          <NumericRangeDropdown
+            label="Temperature (°C)"
+            minBound={tempBounds.min}
+            maxBound={tempBounds.max}
+            step={getStep("temp")}
+            value={
+              !Array.isArray(filters.modelTempIncrease)
+                ? filters.modelTempIncrease
+                : null
+            }
+            onChange={(r) => onFilterChange("modelTempIncrease", r)}
+          />
+        </div>
 
-        <NumericRangeDropdown
-          label="Temperature (°C)"
-          minBound={tempBounds.min}
-          maxBound={tempBounds.max}
-          step={getStep("temp")}
-          value={
-            !Array.isArray(filters.modelTempIncrease)
-              ? filters.modelTempIncrease
-              : null
-          }
-          onChange={(r) => onFilterChange("modelTempIncrease", r)}
-        />
+        <div>
+          <MultiSelectDropdown<string>
+            label="Policy Ambition"
+            options={policyAmbitionOptions}
+            value={filters.policyAmbition}
+            onChange={(arr) => onFilterChange("policyAmbition", arr)}
+            showModeToggle={false}
+            mode={filters.modes?.policyAmbition ?? "ANY"}
+            onModeChange={(m) => setMode("policyAmbition", m)}
+            menuWidthClassName="w-60"
+          />
+        </div>
 
-        <MultiSelectDropdown<string>
-          label="Policy Ambition"
-          options={policyAmbitionOptions}
-          value={filters.policyAmbition}
-          onChange={(arr) => onFilterChange("policyAmbition", arr)}
-          showModeToggle={false}
-          mode={filters.modes?.policyAmbition ?? "ANY"}
-          onModeChange={(m) => setMode("policyAmbition", m)}
-          menuWidthClassName="w-60"
-        />
+        <div>
+          <MultiSelectDropdown<string>
+            label="Sector"
+            options={sectorOptions}
+            value={filters.sector}
+            onChange={(arr) => onFilterChange("sector", arr)}
+            showModeToggle
+            mode={filters.modes?.sector ?? "ANY"}
+            onModeChange={(m) => setMode("sector", m)}
+            menuWidthClassName="w-60"
+          />
+        </div>
 
-        <MultiSelectDropdown<string>
-          label="Sector"
-          options={sectorOptions}
-          value={filters.sector}
-          onChange={(arr) => onFilterChange("sector", arr)}
-          showModeToggle
-          mode={filters.modes?.sector ?? "ANY"}
-          onModeChange={(m) => setMode("sector", m)}
-          menuWidthClassName="w-60"
-        />
-
-        <MultiSelectDropdown<string>
-          label="Data Availability"
-          options={dataAvailabilityOptions}
-          value={filters.dataAvailability}
-          onChange={(arr) => onFilterChange("dataAvailability", arr)}
-          showModeToggle={false}
-          mode={filters.modes?.dataAvailability ?? "ANY"}
-          onModeChange={(m) => setMode("dataAvailability", m)}
-          menuWidthClassName="w-60"
-        />
+        <div>
+          <MultiSelectDropdown<string>
+            label="Data Availability"
+            options={dataAvailabilityOptions}
+            value={filters.dataAvailability}
+            onChange={(arr) => onFilterChange("dataAvailability", arr)}
+            showModeToggle={false}
+            mode={filters.modes?.dataAvailability ?? "ANY"}
+            onModeChange={(m) => setMode("dataAvailability", m)}
+            menuWidthClassName="w-60"
+          />
+        </div>
       </div>
       <div className="mt-4 ml-1 flex items-center justify-between gap-3">
         <p className="text-sm text-rmigray-500">

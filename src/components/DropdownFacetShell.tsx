@@ -76,7 +76,7 @@ export default function DropdownFacetShell({
         ref={triggerRef}
         type="button"
         className={clsx(
-          "inline-flex w-auto items-center justify-between rounded-md px-3 py-2 text-left text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500",
+          "inline-flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500",
           active
             ? "text-energy-800 bg-energy-100 border border-energy-100"
             : "text-rmigray-800 bg-white border border-gray-300 hover:bg-gray-50",
