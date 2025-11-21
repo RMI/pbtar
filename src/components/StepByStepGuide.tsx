@@ -307,8 +307,12 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                       const nums = resolvedOptions
                         .map((o: { value: number | string }) => Number(o.value))
                         .filter((v: number) => Number.isFinite(v));
-                      const minBound = nums.length ? Math.min(...nums) : 0;
-                      const maxBound = nums.length ? Math.max(...nums) : 6;
+                      const minBound =
+                        (step.componentProps?.minBound as number | undefined) ??
+                        (nums.length ? Math.min(...nums) : 0);
+                      const maxBound =
+                        (step.componentProps?.maxBound as number | undefined) ??
+                        (nums.length ? Math.max(...nums) : 6);
                       const minBar =
                         (step.componentProps?.minBar as number | undefined) ??
                         minBound;
