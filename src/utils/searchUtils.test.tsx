@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { filterPathways } from "./searchUtils";
+import { filterPathways, getGlobalFacetOptions } from "./searchUtils";
 import type { FiltersWithArrays } from "./searchUtils";
 import { ABSENT_FILTER_TOKEN } from "./absent";
 import { PathwayMetadataType, SearchFilters } from "../types";
@@ -462,5 +462,46 @@ describe("filterPathways (array-backed facets)", () => {
       { modelTempIncrease: [2.0], modes: { modelTempIncrease: "ALL" } },
     );
     expect(out2.map((s) => s.id)).toEqual(["B"]);
+  });
+});
+
+describe("getGlobalFacetOptions", () => {
+  it("builds global options for all facets from data", () => {
+    const {
+      pathwayTypeOptions,
+      modelYearNetzeroOptions,
+      temperatureOptions,
+      geographyOptions,
+      sectorOptions,
+      metricOptions,
+    } = getGlobalFacetOptions(mockPathways);
+
+    // spot checks; exact sets depend on fixtures
+    expect(pathwayTypeOptions.map((o) => o.value)).toContain("Normative");
+    expect(modelYearNetzeroOptions.map((o) => o.value)).toContain(2050);
+    expect(temperatureOptions.map((o) => o.value)).toEqual(
+      expect.arrayContaining([1, 2]),
+    );
+    // geography options are objects (value/label or structured Geography)
+    expect(geographyOptions.length).toBeGreaterThan(0);
+    // sectors are strings; ensure dedup worked
+    expect(new Set(sectorOptions.map((o) => o.value)).size).toBe(
+      sectorOptions.length,
+    );
+    // metrics: flattened set from all pathways
+    expect(metricOptions.length).toBeGreaterThan(0);
+  });
+
+  it("includes 'None' ABSENT option for sectors/geography when missing in data", () => {
+    // Build a dataset with a missing sectors and missing geography entry
+    const withMissing: PathwayMetadataType[] = [
+      { ...mockPathways[0], sectors: undefined, geography: undefined },
+      ...mockPathways.slice(1),
+    ];
+    const { geographyOptions, sectorOptions } =
+      getGlobalFacetOptions(withMissing);
+    expect(sectorOptions.map((o) => o.label)).toContain("None");
+    // geographyOptions uses withAbsentOption; presence of ABSENT is encoded as an extra option
+    expect(geographyOptions.map((o) => o.label)).toContain("None");
   });
 });

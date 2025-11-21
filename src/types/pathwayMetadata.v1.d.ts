@@ -5,6 +5,10 @@
  */
 
 /**
+ * Name of the pathway.
+ */
+export type Label = import("./common/label.v1").LabelV1;
+/**
  * Bibliographic information about the report or dataset.
  */
 export type Publication = import("./publication.v1").PublicationV1;
@@ -21,10 +25,7 @@ export interface PathwayMetadataV1 {
    * The unique identifier for a pathway.
    */
   id: string;
-  /**
-   * Name of the pathway.
-   */
-  name: string;
+  name: Label;
   /**
    * Brief description of the pathway.
    */
@@ -146,7 +147,7 @@ export interface PathwayMetadataV1 {
     /**
      * Describes the overall trend of greenhouse gas emissions over time, from continued growth to rapid decline.
      */
-    emissionsPathway:
+    emissionsTrajectory:
       | "No information"
       | "Significant increase"
       | "Moderate increase"

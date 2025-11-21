@@ -26,11 +26,13 @@ import {
   summarizeSummary,
 } from "../utils/timeseriesIndex";
 import PublicationBlock from "../components/PublicationBlock";
+import { PlotSelector, TimeSeries } from "../components/PlotSelector";
 
 const PathwayDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [pathway, setPathway] = useState<PathwayMetadataType | null>(null);
   const [loading, setLoading] = useState(true);
+  const [timeseriesdata, setTimeseriesdata] = useState<TimeSeries | null>(null);
 
   useEffect(() => {
     setLoading(true);
@@ -81,6 +83,20 @@ const PathwayDetailPage: React.FC = () => {
       isMounted = false;
     };
   }, [pathway]); // depend on the full object to avoid eslint warning
+
+  useEffect(() => {
+    if (datasets.length > 0) {
+      fetch(datasets[0].path.replace(/\.csv$/, ".json"))
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data: TimeSeries) => setTimeseriesdata(data))
+        .catch((error) => console.error("Error fetching JSON:", error));
+    }
+  }, [datasets]);
 
   if (loading) {
     return (
@@ -134,7 +150,8 @@ const PathwayDetailPage: React.FC = () => {
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="bg-bluespruce p-6 text-white">
           <h1 className="text-2xl md:text-3xl font-bold mb-2">
-            {pathway.name}
+            {pathway.name.full +
+              (pathway.name.short ? ` (${pathway.name.short})` : "")}
           </h1>
           <p className="text-white mb-4">{pathway.description}</p>
 
@@ -173,7 +190,7 @@ const PathwayDetailPage: React.FC = () => {
 
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div className="md:col-span-8">
+            <div className="md:col-span-7">
               <section className="mb-8">
                 <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
                   Expert Overview
@@ -185,30 +202,29 @@ const PathwayDetailPage: React.FC = () => {
 
               <PublicationBlock publication={pathway.publication} />
 
-              {tsIndexLoaded && datasets.length > 0 ? (
-                <section className="mt-8">
-                  <h3 className="text-sm font-semibold text-neutral-600 mb-3">
-                    Related datasets
-                  </h3>
-                  <div className="grid gap-3">
-                    {datasets.map((d) => {
-                      const label = d.label ?? d.datasetId;
-                      const summary = summarizeSummary(d.summary);
-                      return (
-                        <DownloadDataset
-                          key={d.datasetId}
-                          label={label}
-                          href={d.path}
-                          summary={summary}
-                        />
-                      );
-                    })}
-                  </div>
-                </section>
-              ) : null}
+              {tsIndexLoaded && datasets.length > 0
+                ? datasets.map((d) => {
+                    const label = d.label ?? d.datasetId;
+                    const summary = summarizeSummary(d.summary);
+                    return (
+                      <DownloadDataset
+                        key={d.datasetId}
+                        label={label}
+                        href={d.path}
+                        summary={summary}
+                      />
+                    );
+                  })
+                : null}
             </div>
 
-            <div className="md:col-span-4">
+            <div className="md:col-span-5">
+              <PlotSelector
+                timeseriesdata={timeseriesdata}
+                datasetId={datasets[0]?.datasetId}
+                className="mb-6"
+              />
+
               <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
                 <h3 className="text-lg font-medium text-rmigray-800 mb-3">
                   Key Features
@@ -219,7 +235,7 @@ const PathwayDetailPage: React.FC = () => {
                     keyof PathwayMetadataType["keyFeatures"],
                     string
                   > = {
-                    emissionsPathway: "Emissions pathway",
+                    emissionsTrajectory: "Emissions trajectory",
                     energyEfficiency: "Energy efficiency",
                     energyDemand: "Energy demand",
                     electrification: "Electrification",
@@ -294,9 +310,6 @@ const PathwayDetailPage: React.FC = () => {
                 </h3>
                 {/* Sectors section with dynamic badge count */}
                 <div className="mb-3">
-                  <p className="text-xs font-medium text-rmigray-500 mb-1">
-                    Sectors:
-                  </p>
                   <BadgeArray
                     variant="sector"
                     tooltipGetter={getSectorTooltip}

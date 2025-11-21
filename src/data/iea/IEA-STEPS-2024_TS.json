@@ -1,5 +1,5 @@
 {
-  "$schema": "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
+  "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
   "pathwayId": ["IEA-STEPS-2024"],
   "id": "IEA-STEPS-2024_TS",
   "name": "Stated Policies Scenario (STEPS) Timeseries Data",

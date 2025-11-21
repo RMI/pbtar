@@ -81,7 +81,7 @@ export function getKeyFeatureTooltip(
   // NOTE: Fill in real copy later — these are just placeholders.
   // Use the exact enum strings from your schema/data as the nested keys.
   const MAP: Partial<Record<KeyFeatureSection, Record<string, string>>> = {
-    emissionsPathway: {
+    emissionsTrajectory: {
       "No information":
         "There is no quantitative information available on the trend of emissions",
       "Significant increase":

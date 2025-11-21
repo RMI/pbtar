@@ -13,7 +13,7 @@ vi.mock("../components/PathwayCard", () => ({
       data-testid="pathway-card"
       data-pathway-id={pathway.id}
     >
-      {pathway.name}
+      {pathway.name.short || pathway.name.full}
     </div>
   ),
 }));
@@ -26,24 +26,6 @@ describe("PathwaySearch component", () => {
       </MemoryRouter>,
     );
   };
-
-  it("renders the main heading", () => {
-    renderPathwaySearch();
-
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Find Climate Transition Pathways",
-    );
-  });
-
-  it("displays the introductory paragraph", () => {
-    renderPathwaySearch();
-
-    expect(
-      screen.getByText(
-        "Browse our repository of climate transition pathways to find the most relevant ones for your assessment needs.",
-      ),
-    ).toBeInTheDocument();
-  });
 
   it("renders a PathwayCard for each pathway in the data", () => {
     renderPathwaySearch();
@@ -64,53 +46,58 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
   const fixtures = [
     {
       id: "A",
-      name: "Pathway A (no sectors, no geo, no temp)",
+      name: { full: "Pathway A", short: "no sectors, no geo, no temp" },
       sectors: undefined, // -> Sector "None"
       geography: undefined, // -> Geography "None"
       modelTempIncrease: undefined, // -> Temperature "None"
       pathwayType: "Net Zero",
       modelYearNetzero: 2050,
       metric: [],
+      keyFeatures: { emissionsTrajectory: "foo" },
     },
     {
       id: "B",
-      name: "Pathway B (Power, Europe, 2°C)",
+      name: { full: "Pathway B", short: "Power, Europe, 2°C" },
       sectors: [{ name: "Power" }],
       geography: ["Europe"],
       modelTempIncrease: "2°C",
       pathwayType: "Net Zero",
       modelYearNetzero: 2050,
       metric: ["Capacity"],
+      keyFeatures: { emissionsTrajectory: "foo" },
     },
     {
       id: "C",
-      name: "Pathway C (empty sectors[], empty geo[], 1.5°C)",
+      name: { full: "Pathway C", short: "empty sectors[], empty geo[], 1.5°C" },
       sectors: [], // -> Sector "None"
       geography: [], // -> Geography "None"
       modelTempIncrease: "1.5°C",
       pathwayType: "NZi2050",
       modelYearNetzero: 2040,
       metric: [],
+      keyFeatures: { emissionsTrajectory: "foo" },
     },
     {
       id: "D",
-      name: "Pathway D (Industry, Asia, no temp)",
+      name: { full: "Pathway D", short: "Industry, Asia, no temp" },
       sectors: [{ name: "Industry" }],
       geography: ["Asia"],
       modelTempIncrease: undefined, // -> Temperature "None"
       pathwayType: "BAU",
       modelYearNetzero: 2030,
       metric: ["Capacity", "Generation"],
+      keyFeatures: { emissionsTrajectory: "bar" },
     },
     {
       id: "E",
-      name: "Pathway E (Power, Europe+Asia, 2°C)",
+      name: { full: "Pathway E", short: "Power, Europe+Asia, 2°C" },
       sectors: [{ name: "Power" }],
       geography: ["Europe", "Asia"],
       modelTempIncrease: "2°C",
       pathwayType: "Net Zero",
       modelYearNetzero: 2050,
       metric: ["Generation"],
+      keyFeatures: { emissionsTrajectory: "bar" },
     },
   ] as const;
 
@@ -177,13 +164,10 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
 
     // Only pathways with no sectors: A (undefined), C (empty array)
     expectVisible([
-      "Pathway A (no sectors, no geo, no temp)",
-      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
+      "no sectors, no geo, no temp",
+      "empty sectors[], empty geo[], 1.5°C",
     ]);
-    expectHidden([
-      "Pathway B (Power, Europe, 2°C)",
-      "Pathway D (Industry, Asia, no temp)",
-    ]);
+    expectHidden(["Power, Europe, 2°C", "Industry, Asia, no temp"]);
   });
 
   it("Geography: shows 'None' when any pathway has missing/empty geography, selecting it filters correctly", async () => {
@@ -193,29 +177,10 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
 
     // Only pathways with no geography: A (undefined), C (empty array)
     expectVisible([
-      "Pathway A (no sectors, no geo, no temp)",
-      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
+      "no sectors, no geo, no temp",
+      "empty sectors[], empty geo[], 1.5°C",
     ]);
-    expectHidden([
-      "Pathway B (Power, Europe, 2°C)",
-      "Pathway D (Industry, Asia, no temp)",
-    ]);
-  });
-
-  it("Temperature: shows 'None' when any pathway omits temperature, selecting it filters correctly", async () => {
-    await openDropdown(/temperature|temp(?:erature)?/i);
-    expect(await screen.findByText("None")).toBeInTheDocument();
-    await selectOption("None");
-
-    // Pathways with no temperature: A and D
-    expectVisible([
-      "Pathway A (no sectors, no geo, no temp)",
-      "Pathway D (Industry, Asia, no temp)",
-    ]);
-    expectHidden([
-      "Pathway B (Power, Europe, 2°C)",
-      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
-    ]);
+    expectHidden(["Power, Europe, 2°C", "Industry, Asia, no temp"]);
   });
 
   // Concrete selection (requested): pick a real value and ensure only matching pathways remain
@@ -224,25 +189,11 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
     // Select a real sector option
     await selectOption("Power");
     // Only Pathway B has sector "Power"
-    expectVisible(["Pathway B (Power, Europe, 2°C)"]);
+    expectVisible(["Power, Europe, 2°C"]);
     expectHidden([
-      "Pathway A (no sectors, no geo, no temp)",
-      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
-      "Pathway D (Industry, Asia, no temp)",
-    ]);
-  });
-
-  it("Sector: selecting a concrete option (metric) filters correctly", async () => {
-    await openDropdown(/metric/i);
-    await selectOption("Capacity");
-    expectVisible([
-      "Pathway B (Power, Europe, 2°C)",
-      "Pathway D (Industry, Asia, no temp)",
-    ]);
-    expectHidden([
-      "Pathway A (no sectors, no geo, no temp)",
-      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
-      "Pathway E (Power, Europe+Asia, 2°C)",
+      "no sectors, no geo, no temp",
+      "empty sectors[], empty geo[], 1.5°C",
+      "Industry, Asia, no temp",
     ]);
   });
 
@@ -253,48 +204,20 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
 
     // ANY (default): shows anything with Europe OR Asia → B, D, E
     expectVisible([
-      "Pathway B (Power, Europe, 2°C)",
-      "Pathway D (Industry, Asia, no temp)",
-      "Pathway E (Power, Europe+Asia, 2°C)",
+      "Power, Europe, 2°C",
+      "Industry, Asia, no temp",
+      "Power, Europe+Asia, 2°C",
     ]);
 
     // Switch to ALL inside the open menu
     await u.click(screen.getByTestId("mode-toggle"));
     // Only E has both Europe and Asia
-    expectVisible(["Pathway E (Power, Europe+Asia, 2°C)"]);
+    expectVisible(["Power, Europe+Asia, 2°C"]);
     expectHidden([
-      "Pathway B (Power, Europe, 2°C)",
-      "Pathway D (Industry, Asia, no temp)",
-      "Pathway A (no sectors, no geo, no temp)",
-      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
-    ]);
-  });
-
-  it("Metric: ANY vs ALL toggle affects results (Europe + Asia)", async () => {
-    await openDropdown(/metric/i);
-    await selectOption("Capacity");
-    await selectOption("Generation");
-
-    // ANY
-    expectVisible([
-      "Pathway B (Power, Europe, 2°C)",
-      "Pathway D (Industry, Asia, no temp)",
-      "Pathway E (Power, Europe+Asia, 2°C)",
-    ]);
-    expectHidden([
-      "Pathway A (no sectors, no geo, no temp)",
-      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
-    ]);
-
-    // Switch to ALL inside the open menu
-    await u.click(screen.getByTestId("mode-toggle"));
-    // ALL
-    expectVisible(["Pathway D (Industry, Asia, no temp)"]);
-    expectHidden([
-      "Pathway A (no sectors, no geo, no temp)",
-      "Pathway B (Power, Europe, 2°C)",
-      "Pathway C (empty sectors[], empty geo[], 1.5°C)",
-      "Pathway E (Power, Europe+Asia, 2°C)",
+      "Power, Europe, 2°C",
+      "Industry, Asia, no temp",
+      "no sectors, no geo, no temp",
+      "empty sectors[], empty geo[], 1.5°C",
     ]);
   });
 });

@@ -112,6 +112,20 @@ export const index: TimeseriesIndex = {
         path: "/data/iea/IEA-STEPS-2024_TS.csv",
       },
     ],
+    "JETP-CIPP-2023": [
+      {
+        datasetId: "JETP-CIPP-2023_TS",
+        label:
+          "Comprehensive Investment and Policy Plan (CIPP) Timeseries Data",
+        summary: {
+          rowCount: 126,
+          yearRange: [2022, 2050],
+          sectorCount: 1,
+          geographyCount: 1,
+        },
+        path: "/data/jetp-id/jetp-cipp-2023_timeseries.csv",
+      },
+    ],
     "JRC-GECO-1.5C-2025": [
       {
         datasetId: "JRC-GECO-1.5C-2025_TS",
@@ -150,6 +164,58 @@ export const index: TimeseriesIndex = {
           geographyCount: 6,
         },
         path: "/data/jrc/jrc-geco_reference-2025_timeseries.csv",
+      },
+    ],
+    "TZ-BAU-2024": [
+      {
+        datasetId: "TZ-BAU-2024_TS",
+        label: "Business as Usual (BAU) Timeseries Data",
+        summary: {
+          rowCount: 418,
+          yearRange: [2023, 2035],
+          sectorCount: 1,
+          geographyCount: 11,
+        },
+        path: "/data/transitionzero/TZ-BAU-2024_timeseries.csv",
+      },
+    ],
+    "TZ-EBAU-2024": [
+      {
+        datasetId: "TZ-EBAU-2024_TS",
+        label: "Enhanced Business as Usual (EBAU) Timeseries Data",
+        summary: {
+          rowCount: 418,
+          yearRange: [2023, 2035],
+          sectorCount: 1,
+          geographyCount: 11,
+        },
+        path: "/data/transitionzero/TZ-EBAU-2024_timeseries.csv",
+      },
+    ],
+    "TZ-ISG-2024": [
+      {
+        datasetId: "TZ-ISG-2024_TS",
+        label: "Indonesia Supergrid (ISG) Timeseries Data",
+        summary: {
+          rowCount: 418,
+          yearRange: [2023, 2035],
+          sectorCount: 1,
+          geographyCount: 11,
+        },
+        path: "/data/transitionzero/TZ-ISG-2024_timeseries.csv",
+      },
+    ],
+    "TZ-REGI-2024": [
+      {
+        datasetId: "TZ-REGI-2024_TS",
+        label: "Regional Interconnection (REGI) Timeseries Data",
+        summary: {
+          rowCount: 418,
+          yearRange: [2023, 2035],
+          sectorCount: 1,
+          geographyCount: 11,
+        },
+        path: "/data/transitionzero/TZ-REGI-2024_timeseries.csv",
       },
     ],
   },
@@ -238,6 +304,18 @@ export const index: TimeseriesIndex = {
       },
       path: "/data/iea/IEA-STEPS-2024_TS.csv",
     },
+    "JETP-CIPP-2023_TS": {
+      datasetId: "JETP-CIPP-2023_TS",
+      pathwayIds: ["JETP-CIPP-2023"],
+      label: "Comprehensive Investment and Policy Plan (CIPP) Timeseries Data",
+      summary: {
+        rowCount: 126,
+        yearRange: [2022, 2050],
+        sectorCount: 1,
+        geographyCount: 1,
+      },
+      path: "/data/jetp-id/jetp-cipp-2023_timeseries.csv",
+    },
     "JRC-GECO-1.5C-2025_TS": {
       datasetId: "JRC-GECO-1.5C-2025_TS",
       pathwayIds: ["JRC-GECO-1.5C-2025"],
@@ -274,6 +352,54 @@ export const index: TimeseriesIndex = {
         geographyCount: 6,
       },
       path: "/data/jrc/jrc-geco_reference-2025_timeseries.csv",
+    },
+    "TZ-BAU-2024_TS": {
+      datasetId: "TZ-BAU-2024_TS",
+      pathwayIds: ["TZ-BAU-2024"],
+      label: "Business as Usual (BAU) Timeseries Data",
+      summary: {
+        rowCount: 418,
+        yearRange: [2023, 2035],
+        sectorCount: 1,
+        geographyCount: 11,
+      },
+      path: "/data/transitionzero/TZ-BAU-2024_timeseries.csv",
+    },
+    "TZ-EBAU-2024_TS": {
+      datasetId: "TZ-EBAU-2024_TS",
+      pathwayIds: ["TZ-EBAU-2024"],
+      label: "Enhanced Business as Usual (EBAU) Timeseries Data",
+      summary: {
+        rowCount: 418,
+        yearRange: [2023, 2035],
+        sectorCount: 1,
+        geographyCount: 11,
+      },
+      path: "/data/transitionzero/TZ-EBAU-2024_timeseries.csv",
+    },
+    "TZ-ISG-2024_TS": {
+      datasetId: "TZ-ISG-2024_TS",
+      pathwayIds: ["TZ-ISG-2024"],
+      label: "Indonesia Supergrid (ISG) Timeseries Data",
+      summary: {
+        rowCount: 418,
+        yearRange: [2023, 2035],
+        sectorCount: 1,
+        geographyCount: 11,
+      },
+      path: "/data/transitionzero/TZ-ISG-2024_timeseries.csv",
+    },
+    "TZ-REGI-2024_TS": {
+      datasetId: "TZ-REGI-2024_TS",
+      pathwayIds: ["TZ-REGI-2024"],
+      label: "Regional Interconnection (REGI) Timeseries Data",
+      summary: {
+        rowCount: 418,
+        yearRange: [2023, 2035],
+        sectorCount: 1,
+        geographyCount: 11,
+      },
+      path: "/data/transitionzero/TZ-REGI-2024_timeseries.csv",
     },
   },
 } as const;
