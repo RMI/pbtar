@@ -143,14 +143,18 @@ const NumericRangeSlider: React.FC<Props> = ({
     return clamp(roundToStepDisplay(raw, step), minBound, maxBound);
   };
 
-  // Choose which handle to move:
-  // 1) If min is unset, set min first
-  // 2) Else if max is unset, set max
-  // 3) Else move the nearest of the two
   const chooseHandle = (v: number): "min" | "max" => {
-    if (!isNum(min)) return "min";
-    if (!isNum(max)) return "max";
-    return Math.abs(v - min) <= Math.abs(v - max) ? "min" : "max";
+    const hasMin = isNum(min);
+    const hasMax = isNum(max);
+
+    if (!hasMin && !hasMax) return "max"; // new: set max first
+    if (!hasMin) return "min";
+    if (!hasMax) return "max";
+
+    // fallback: nearest
+    return Math.abs(v - (min as number)) <= Math.abs(v - (max as number))
+      ? "min"
+      : "max";
   };
 
   const onTrackMouseDown: React.MouseEventHandler<HTMLDivElement> = (e) => {
