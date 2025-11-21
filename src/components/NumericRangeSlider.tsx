@@ -76,8 +76,7 @@ const NumericRangeSlider: React.FC<Props> = ({
       fromUserRef.current = false;
       return next;
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value?.min, value?.max, value?.includeAbsent, minBound, maxBound]);
+  }, [value, minBound, maxBound]);
 
   // Notify parent when user commits changes
   React.useEffect(() => {
