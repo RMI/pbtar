@@ -145,10 +145,10 @@ export default function DropdownFacetShell({
               menuWidthClassName
                 ? undefined
                 : {
-                  minWidth: menuMinWidthPx
-                    ? `${menuMinWidthPx}px`
-                    : undefined,
-                }
+                    minWidth: menuMinWidthPx
+                      ? `${menuMinWidthPx}px`
+                      : undefined,
+                  }
             }
           >
             {/* Header row: left/right zones */}
@@ -160,10 +160,10 @@ export default function DropdownFacetShell({
             <div className="p-2">
               {typeof children === "function"
                 ? (children as (api: { close: () => void }) => React.ReactNode)(
-                  {
-                    close: () => setOpen(false),
-                  },
-                )
+                    {
+                      close: () => setOpen(false),
+                    },
+                  )
                 : children}
             </div>
           </div>

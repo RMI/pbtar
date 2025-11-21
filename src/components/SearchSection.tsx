@@ -93,9 +93,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           onClear={onClear}
         />
       </div>
-      <div
-        className="grid gap-2 grid-cols-[repeat(auto-fit,minmax(12rem,1fr))]"
-      >
+      <div className="grid gap-2 grid-cols-[repeat(auto-fit,minmax(12rem,1fr))]">
         <div>
           <MultiSelectDropdown<string>
             label="Geography"
