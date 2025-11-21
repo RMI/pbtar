@@ -149,12 +149,14 @@ const NumericRangeSlider: React.FC<Props> = ({
     const hasMin = isNum(min);
     const hasMax = isNum(max);
 
-    if (!hasMin && !hasMax) return "max"; // new: set max first
-    if (!hasMin) return "min";
-    if (!hasMax) return "max";
+    if (!hasMin && !hasMax) return "max"; // still prefer max first
+    if (!hasMin && hasMax) return v <= max ? "min" : "max";
+    if (hasMin && !hasMax) return v >= min ? "max" : "min";
 
-    // fallback: nearest
-    return Math.abs(v - min) <= Math.abs(v - max) ? "min" : "max";
+    // both handles exist → nearest
+    return Math.abs(v - (min as number)) <= Math.abs(v - (max as number))
+      ? "min"
+      : "max";
   };
 
   const onTrackMouseDown: React.MouseEventHandler<HTMLDivElement> = (e) => {
