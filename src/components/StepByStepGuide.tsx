@@ -137,12 +137,25 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       multi: false,
       componentId: "numericRange",
       componentProps: {
-        // optional: stepKey override; bounds derived at render time
         stepKey: "temp",
-        minBound: 0,
-        maxBound: 6,
-        minBar: 1,
-        maxBar: 3,
+        minBound: optionsByFacet["modelTempIncrease"].reduce((min, current) => {
+          return current.value < min.value ? current : min;
+        }).value,
+        maxBound: optionsByFacet["modelTempIncrease"].reduce((max, current) => {
+          return current.value > max.value ? current : max;
+        }).value,
+        // recompute minBar and maxBar dynamically
+        minBar: Math.min(
+          0,
+          Math.floor(optionsByFacet["modelTempIncrease"].reduce((min, current) => {
+            return current.value < min.value ? current : min;
+          }).value),
+        ),
+        maxBar: Math.ceil(
+          optionsByFacet["modelTempIncrease"].reduce((max, current) => {
+            return current.value > max.value ? current : max;
+          }).value * 1.1,
+        ),
       },
     },
     {
