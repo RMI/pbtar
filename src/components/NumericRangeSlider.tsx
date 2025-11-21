@@ -158,11 +158,21 @@ const NumericRangeSlider: React.FC<Props> = ({
     if (!isNum(v)) return;
     const which = chooseHandle(v);
     activeHandle.current = which;
-      if (activeHandle.current)
+    setDraggingWhich(which);
+    setIsDragging(true);
+    // commit the initial click position (rounded to step)
+    commit({ [which]: roundToStepDisplay(v, step) } as Partial<Internal>);
+
+    const move = (ev: MouseEvent) => {
+      const nv = pxToValue(ev.clientX);
+      if (!isNum(nv)) return;
+      if (activeHandle.current) {
         commit({
           [activeHandle.current]: roundToStepDisplay(nv, step),
         } as Partial<Internal>);
+      }
     };
+
     const up = () => {
       activeHandle.current = null;
       setIsDragging(false);
@@ -176,26 +186,28 @@ const NumericRangeSlider: React.FC<Props> = ({
 
   const dragHandle =
     (which: "min" | "max"): React.MouseEventHandler<HTMLDivElement> =>
-      (e) => {
-        e.stopPropagation();
-        activeHandle.current = which;
-        setDraggingWhich(which);
-        setIsDragging(true);
-        const move = (ev: MouseEvent) => {
-          const nv = pxToValue(ev.clientX);
-          if (!isNum(nv)) return;
-          commit({ [which]: nv } as Partial<Internal>);
-        };
-        const up = () => {
-          activeHandle.current = null;
-          setIsDragging(false);
-          setDraggingWhich(null);
-          window.removeEventListener("mousemove", move);
-          window.removeEventListener("mouseup", up);
-        };
-        window.addEventListener("mousemove", move);
-        window.addEventListener("mouseup", up);
+    (e) => {
+      e.stopPropagation();
+      activeHandle.current = which;
+      setDraggingWhich(which);
+      setIsDragging(true);
+
+      const move = (ev: MouseEvent) => {
+        const nv = pxToValue(ev.clientX);
+        if (!isNum(nv)) return;
+        commit({ [which]: roundToStepDisplay(nv, step) } as Partial<Internal>);
       };
+
+      const up = () => {
+        activeHandle.current = null;
+        setIsDragging(false);
+        setDraggingWhich(null);
+        window.removeEventListener("mousemove", move);
+        window.removeEventListener("mouseup", up);
+      };
+      window.addEventListener("mousemove", move);
+      window.addEventListener("mouseup", up);
+    };
 
   // --- visuals ---
   // For visuals, show handles at bounds when undefined; hide if off the visible window.
@@ -331,10 +343,11 @@ const NumericRangeSlider: React.FC<Props> = ({
                 aria-valuemax={maxBound}
                 aria-valuenow={min}
                 onMouseDown={dragHandle("min")}
-                className={`absolute -top-1 h-4 w-4 rounded-full border bg-white transition-shadow duration-150 ${isActive
-                  ? "border-rmiblue-800 shadow-md ring-2 ring-rmiblue-100"
-                  : "border-rmigray-400 shadow-sm"
-                  } z-50`}
+                className={`absolute -top-1 h-4 w-4 rounded-full border bg-white transition-shadow duration-150 ${
+                  isActive
+                    ? "border-rmiblue-800 shadow-md ring-2 ring-rmiblue-100"
+                    : "border-rmigray-400 shadow-sm"
+                } z-50`}
                 style={{ left: `calc(${minPctOnBar}% - ${HANDLE_R}px)` }}
               />
             )}
@@ -348,10 +361,11 @@ const NumericRangeSlider: React.FC<Props> = ({
                 aria-valuemax={maxBound}
                 aria-valuenow={max}
                 onMouseDown={dragHandle("max")}
-                className={`absolute -top-1 h-4 w-4 rounded-full border bg-white transition-shadow duration-150 ${isActive
-                  ? "border-rmiblue-800 shadow-md ring-2 ring-rmiblue-100"
-                  : "border-rmigray-400 shadow-sm"
-                  } z-50`}
+                className={`absolute -top-1 h-4 w-4 rounded-full border bg-white transition-shadow duration-150 ${
+                  isActive
+                    ? "border-rmiblue-800 shadow-md ring-2 ring-rmiblue-100"
+                    : "border-rmigray-400 shadow-sm"
+                } z-50`}
                 style={{ left: `calc(${maxPctOnBar}% - ${HANDLE_R}px)` }}
               />
             )}
