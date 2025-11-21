@@ -77,13 +77,29 @@ const SearchSection: React.FC<SearchSectionProps> = ({
 
   return (
     <div className="bg-gray-50">
-      <div className="mb-4 pt-8">
-        <SearchBox
-          value={filters.searchTerm}
-          onChange={(value) => onFilterChange("searchTerm", value)}
-          onSearch={onSearch}
-          onClear={onClear}
-        />
+      <div className="flex items-center gap-4 pt-8 mb-4">
+        <div className="flex-1">
+          <SearchBox
+            value={filters.searchTerm}
+            onChange={(value) => onFilterChange("searchTerm", value)}
+            onSearch={onSearch}
+            onClear={onClear}
+          />
+        </div>
+        <div className="flex items-center gap-2 whitespace-nowrap">
+          <span className="text-sm text-rmigray-500 relative">
+            Found {pathwaysNumber} pathways
+          </span>
+          <button
+            type="button"
+            aria-label="Clear all filters"
+            className="ml-2 text-xs px-2 py-1 rounded border border-gray-200 bg-white text-indigo-600 hover:bg-gray-50 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+            onClick={onClear}
+            data-testid="clear-all-filters"
+          >
+            Reset filters
+          </button>
+        </div>
       </div>
       <div className="grid gap-2 grid-cols-[repeat(auto-fit,minmax(12rem,1fr))]">
         <div>
@@ -164,23 +180,6 @@ const SearchSection: React.FC<SearchSectionProps> = ({
             menuWidthClassName="w-60"
           />
         </div>
-      </div>
-      <div className="mt-4 ml-1 flex items-center justify-between gap-3">
-        <p className="text-sm text-rmigray-500">
-          Found {pathwaysNumber} pathways
-          {areFiltersApplied && " matching your criteria"}
-          {areFiltersApplied && (
-            <button
-              type="button"
-              aria-label="Clear all filters"
-              className="ml-2 text-sm text-indigo-600 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded"
-              onClick={onClear}
-              data-testid="clear-all-filters"
-            >
-              Clear all filters
-            </button>
-          )}
-        </p>
       </div>
     </div>
   );
