@@ -298,25 +298,45 @@ const NumericRangeSlider: React.FC<Props> = ({
 
         {/* Inputs + Include-absent (checkbox to the right) */}
         <div className="flex items-center gap-3">
-          <input
-            type="number"
-            step={step}
-            value={min ?? ""}
-            onChange={onMinInput}
-            className="w-28 rounded border px-2 py-1"
-            placeholder={`${minBound}`}
-            aria-label={`${label} min`}
-          />
-          <span className="text-gray-500">to</span>
-          <input
-            type="number"
-            step={step}
-            value={max ?? ""}
-            onChange={onMaxInput}
-            className="w-28 rounded border px-2 py-1"
-            placeholder={`${maxBound}`}
-            aria-label={`${label} max`}
-          />
+          {(() => {
+            const inverted =
+              typeof min === "number" && typeof max === "number" && max < min;
+            return (
+              <>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="number"
+                    step={step}
+                    value={min ?? ""}
+                    onChange={onMinInput}
+                    className="w-28 rounded border px-2 py-1"
+                    placeholder={`${minBound}`}
+                    aria-label={`${label} min`}
+                    aria-invalid={inverted ? true : undefined}
+                  />
+                  <span className="text-gray-500">to</span>
+                  <input
+                    type="number"
+                    step={step}
+                    value={max ?? ""}
+                    onChange={onMaxInput}
+                    className="w-28 rounded border px-2 py-1"
+                    placeholder={`${maxBound}`}
+                    aria-label={`${label} max`}
+                    aria-invalid={inverted ? true : undefined}
+                  />
+                </div>
+                {inverted && (
+                  <p
+                    role="alert"
+                    className="text-xs text-red-600"
+                  >
+                    End value must be ≥ start value
+                  </p>
+                )}
+              </>
+            );
+          })()}
           <label className="ml-auto flex items-center gap-2 text-sm">
             <input
               type="checkbox"
