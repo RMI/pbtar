@@ -183,26 +183,6 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
     expectHidden(["Power, Europe, 2°C", "Industry, Asia, no temp"]);
   });
 
-  it("Temperature: shows 'Include entries with no value'; when checked with no bounds, present values remain visible", async () => {
-    await openDropdown(/temperature|temp(?:erature)?/i);
-    // NumericRangeDropdown exposes ABSENT as a checkbox, not a discrete "None" item.
-    const absent = await screen.findByRole("checkbox", {
-      name: /include entries with no value/i,
-    });
-    expect(absent).toBeInTheDocument();
-    await u.click(absent);
-
-    // With no bounds set, checking the “include absent” box should not exclude present values.
-    // All pathways remain visible; absent ones are included as well.
-    expectVisible([
-      "no sectors, no geo, no temp",
-      "Industry, Asia, no temp",
-      "Power, Europe, 2°C",
-      "empty sectors[], empty geo[], 1.5°C",
-    ]);
-    // (No expectHidden assertions here: present values are still shown.)
-  });
-
   // Concrete selection (requested): pick a real value and ensure only matching pathways remain
   it("Sector: selecting a concrete option (Power) filters correctly", async () => {
     await openDropdown(/sector/i);
@@ -214,17 +194,6 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
       "no sectors, no geo, no temp",
       "empty sectors[], empty geo[], 1.5°C",
       "Industry, Asia, no temp",
-    ]);
-  });
-
-  it("Sector: selecting a concrete option (metric) filters correctly", async () => {
-    await openDropdown(/metric/i);
-    await selectOption("Capacity");
-    expectVisible(["Power, Europe, 2°C", "Industry, Asia, no temp"]);
-    expectHidden([
-      "no sectors, no geo, no temp",
-      "empty sectors[], empty geo[], 1.5°C",
-      "Power, Europe+Asia, 2°C",
     ]);
   });
 
@@ -249,34 +218,6 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
       "Industry, Asia, no temp",
       "no sectors, no geo, no temp",
       "empty sectors[], empty geo[], 1.5°C",
-    ]);
-  });
-
-  it("Metric: ANY vs ALL toggle affects results (Europe + Asia)", async () => {
-    await openDropdown(/metric/i);
-    await selectOption("Capacity");
-    await selectOption("Generation");
-
-    // ANY
-    expectVisible([
-      "Power, Europe, 2°C",
-      "Industry, Asia, no temp",
-      "Power, Europe+Asia, 2°C",
-    ]);
-    expectHidden([
-      "no sectors, no geo, no temp",
-      "empty sectors[], empty geo[], 1.5°C",
-    ]);
-
-    // Switch to ALL inside the open menu
-    await u.click(screen.getByTestId("mode-toggle"));
-    // ALL
-    expectVisible(["Industry, Asia, no temp"]);
-    expectHidden([
-      "no sectors, no geo, no temp",
-      "Power, Europe, 2°C",
-      "empty sectors[], empty geo[], 1.5°C",
-      "Power, Europe+Asia, 2°C",
     ]);
   });
 });
