@@ -226,8 +226,24 @@ const NumericRangeSlider: React.FC<Props> = ({
   const minVisible = isNum(min) && effMin >= minBar && effMin <= maxBar;
   const maxVisible = isNum(max) && effMax >= minBar && effMax <= maxBar;
 
-  const lo = Math.min(minPctOnBar, maxPctOnBar);
-  const hi = Math.max(minPctOnBar, maxPctOnBar);
+  // Compute the highlighted segment to indicate bounded vs unbounded within [barMin, barMax]
+  const hasMin = isNum(min);
+  const hasMax = isNum(max);
+  let segStartPct = 0;
+  let segEndPct = 0;
+  if (hasMin && hasMax) {
+    segStartPct = Math.min(minPctOnBar, maxPctOnBar);
+    segEndPct = Math.max(minPctOnBar, maxPctOnBar);
+  } else if (hasMin && !hasMax) {
+    segStartPct = minPctOnBar;
+    segEndPct = 100; // unbounded to the right up to maxBar
+  } else if (!hasMin && hasMax) {
+    segStartPct = 0; // unbounded to the left from minBar
+    segEndPct = maxPctOnBar;
+  } else {
+    segStartPct = 0;
+    segEndPct = 0; // no selection
+  }
 
   // Active if any non-default or includeAbsent
   // Active if any non-default (min/max set) or includeAbsent checked
@@ -297,7 +313,7 @@ const NumericRangeSlider: React.FC<Props> = ({
               className="absolute top-0 h-2 rounded-l"
               style={{
                 left: 0,
-                width: `${lo}%`,
+                width: `${segStartPct}%`,
                 background: "rgb(230 236 239)", // rmigray-200 fallback (matches bg-rmigray-200)
                 zIndex: 20,
                 transition: "width 200ms ease",
@@ -307,8 +323,8 @@ const NumericRangeSlider: React.FC<Props> = ({
             <div
               className="absolute top-0 h-2 rounded-r"
               style={{
-                left: `${hi}%`,
-                width: `${Math.max(0, 100 - hi)}%`,
+                left: `${segEndPct}%`,
+                width: `${Math.max(0, 100 - segEndPct)}%`,
                 background: "rgb(230 236 239)",
                 zIndex: 20,
                 transition: "left 200ms ease, width 200ms ease",
