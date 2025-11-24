@@ -5,6 +5,9 @@ import publicationSchemaJson from "./publication.v1.json" with { type: "json" };
 export const publicationSchema: SchemaObject =
   publicationSchemaJson as SchemaObject;
 
+import metricSchemaJson from "./metric.v1.json" with { type: "json" };
+export const metricSchema: SchemaObject = metricSchemaJson as SchemaObject;
+
 import labelSchemaJson from "./label.v1.json" with { type: "json" };
 export const labelSchema: SchemaObject = labelSchemaJson as SchemaObject;
 
@@ -19,6 +22,7 @@ export const emissionsScopeSchema: SchemaObject =
 // Aggregate — type stays correct
 export const commonSchemas: SchemaObject[] = [
   publicationSchema,
+  metricSchema,
   labelSchema,
   geographyItemSchema,
   emissionsScopeSchema,

@@ -170,15 +170,8 @@
       "type": "array",
       "uniqueItems": true,
       "items": {
-        "description": "Metrics used in the pathway",
-        "type": "string",
-        "enum": [
-          "Emissions Intensity",
-          "Capacity",
-          "Generation",
-          "Technology Mix",
-          "Absolute Emissions"
-        ]
+        "$ref": "http://pathways.rmi.org/schema/common/metric.v1.json#/$defs/displayName",
+        "tsType": "import('./common/metric.v1').MetricV1['displayName']"
       }
     },
     "keyFeatures": {
