@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { validateDataCollect, FileEntry } from "./validateData";
 import { PathwayMetadataType } from "../types";
 import pathwayMetadata from "../schema/pathwayMetadata.v1.json" with { type: "json" };
-import publicationSchema from "../schema/publication.v1.json" with { type: "json" };
+import publicationSchema from "../schema/common/publication.v1.json" with { type: "json" };
 import labelSchema from "../schema/common/label.v1.json" with { type: "json" };
 
 function ok(entry: FileEntry | FileEntry[]) {
