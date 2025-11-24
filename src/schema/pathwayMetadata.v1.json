@@ -93,40 +93,7 @@
             "type": "array",
             "description": "Technologies applicable to this sector.",
             "items": {
-              "type": "string",
-              "enum": [
-                "Precision Agriculture",
-                "Agroforestry",
-                "Bioenergy Crops",
-                "Energy Efficiency",
-                "Smart Grids",
-                "Renewable Heating",
-                "Heat Pumps",
-                "Building Automation",
-                "Smart Appliances",
-                "Insulation",
-                "Carbon Capture and Storage",
-                "Electrification",
-                "Process Optimization",
-                "Hydrogen Use",
-                "Coal",
-                "Oil",
-                "Gas",
-                "Wind",
-                "Solar",
-                "Nuclear",
-                "Biomass",
-                "Hydro",
-                "Renewables",
-                "Electric Vehicles",
-                "Hydrogen Vehicles",
-                "Biofuels",
-                "Public Transport",
-                "Active Mobility",
-                "Aviation Efficiency",
-                "Maritime Efficiency",
-                "Other"
-              ]
+              "$ref": "http://pathways.rmi.org/schema/common/technology.v1.json#/$defs/displayName"
             }
           }
         },

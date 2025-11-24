@@ -82,53 +82,7 @@
               "type": "object",
               "patternProperties": {
                 "^[A-Za-z0-9 _-]{1,100}$": {
-                  "type": "object",
-                  "properties": {
-                    "displayName": {
-                      "description": "Display name of the technology as presented in charts or tables.",
-                      "type": "string",
-                      "enum": [
-                        "Precision Agriculture",
-                        "Agroforestry",
-                        "Bioenergy Crops",
-                        "Energy Efficiency",
-                        "Smart Grids",
-                        "Renewable Heating",
-                        "Heat Pumps",
-                        "Building Automation",
-                        "Smart Appliances",
-                        "Insulation",
-                        "Carbon Capture and Storage",
-                        "Electrification",
-                        "Process Optimization",
-                        "Hydrogen Use",
-                        "Coal",
-                        "Oil",
-                        "Gas",
-                        "Wind",
-                        "Solar",
-                        "Nuclear",
-                        "Biomass",
-                        "Hydro",
-                        "Renewables",
-                        "Electric Vehicles",
-                        "Hydrogen Vehicles",
-                        "Biofuels",
-                        "Public Transport",
-                        "Active Mobility",
-                        "Aviation Efficiency",
-                        "Maritime Efficiency",
-                        "Other"
-                      ]
-                    },
-                    "definition": {
-                      "description": "Brief definition or description of the technology scope (e.g., what it includes or excludes).",
-                      "type": "string",
-                      "maxLength": 1000
-                    }
-                  },
-                  "additionalProperties": false,
-                  "required": ["displayName", "definition"]
+                  "$ref": "http://pathways.rmi.org/schema/common/technology.v1.json"
                 }
               },
               "additionalProperties": false,

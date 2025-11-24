@@ -8,6 +8,10 @@ export const publicationSchema: SchemaObject =
 import sectorSchemaJson from "./sector.v1.json" with { type: "json" };
 export const sectorSchema: SchemaObject = sectorSchemaJson as SchemaObject;
 
+import technologySchemaJson from "./technology.v1.json" with { type: "json" };
+export const technologySchema: SchemaObject =
+  technologySchemaJson as SchemaObject;
+
 import metricSchemaJson from "./metric.v1.json" with { type: "json" };
 export const metricSchema: SchemaObject = metricSchemaJson as SchemaObject;
 
@@ -26,6 +30,7 @@ export const emissionsScopeSchema: SchemaObject =
 export const commonSchemas: SchemaObject[] = [
   publicationSchema,
   sectorSchema,
+  technologySchema,
   metricSchema,
   labelSchema,
   geographyItemSchema,
