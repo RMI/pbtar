@@ -238,7 +238,6 @@ export default function MultiLineChart({
     ]);
 
     const dot = select(tooltip_grp.current);
-    dot.attr("display", "none");
 
     const tooltipBoxElem = dot
       .selectAll<SVGPathElement, unknown>("path")
@@ -354,7 +353,7 @@ export default function MultiLineChart({
         />
         <g ref={lines} />
         <g ref={dots} />
-        <g ref={tooltip_grp} class="tooltip">
+        <g ref={tooltip_grp} class="tooltip" display="none">
           <circle r="2.5" />
         </g>
       </svg>
