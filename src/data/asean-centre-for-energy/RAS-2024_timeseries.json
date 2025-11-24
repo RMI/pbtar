@@ -1,6 +1,6 @@
 {
   "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
-  "id": "ACE-RAS-2024_TS",
+  "id": "ACE-RAS-2024_timeseries",
   "pathwayId": ["ACE-RAS-2024"],
   "name": "Regional Aspiration Scenario (RAS) Timeseries Data",
   "description": "ASEAN-specific pathway exploring impact of unconditional NDCs and long-term pledges.",

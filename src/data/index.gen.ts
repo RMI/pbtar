@@ -23,7 +23,7 @@ export const index: TimeseriesIndex = {
   byPathway: {
     "ACE-ATS-2024": [
       {
-        datasetId: "ACE-ATS-2024_TS",
+        datasetId: "ACE-ATS-2024_timeseries",
         label: "ASEAN Member State Targets Scenario (ATS) Timeseries Data",
         summary: {
           rowCount: 203,
@@ -36,7 +36,7 @@ export const index: TimeseriesIndex = {
     ],
     "ACE-BAS-2024": [
       {
-        datasetId: "ACE-BAS-2024_TS",
+        datasetId: "ACE-BAS-2024_timeseries",
         label: "Baseline Scenario (BAS) Timeseries Data",
         summary: {
           rowCount: 203,
@@ -49,7 +49,7 @@ export const index: TimeseriesIndex = {
     ],
     "ACE-CNS-2024": [
       {
-        datasetId: "ACE-CNS-2024_TS",
+        datasetId: "ACE-CNS-2024_timeseries",
         label: "Carbon Neutrality Scenario (CNS) Timeseries Data",
         summary: {
           rowCount: 203,
@@ -62,7 +62,7 @@ export const index: TimeseriesIndex = {
     ],
     "ACE-RAS-2024": [
       {
-        datasetId: "ACE-RAS-2024_TS",
+        datasetId: "ACE-RAS-2024_timeseries",
         label: "Regional Aspiration Scenario (RAS) Timeseries Data",
         summary: {
           rowCount: 203,
@@ -75,7 +75,7 @@ export const index: TimeseriesIndex = {
     ],
     "IEA-APS-2024": [
       {
-        datasetId: "IEA-APS-2024_TS",
+        datasetId: "IEA-APS-2024_timeseries",
         label: "Announced Pledges Scenario (APS) Timeseries Data",
         summary: {
           rowCount: 242,
@@ -83,12 +83,12 @@ export const index: TimeseriesIndex = {
           sectorCount: 1,
           geographyCount: 2,
         },
-        path: "/data/iea/IEA-APS-2024_TS.csv",
+        path: "/data/iea/IEA-APS-2024_timeseries.csv",
       },
     ],
     "IEA-NZE-2024": [
       {
-        datasetId: "IEA-NZE-2024_TS",
+        datasetId: "IEA-NZE-2024_timeseries",
         label: "Net Zero Emissions by 2050 Scenario (NZE) Timeseries Data",
         summary: {
           rowCount: 186,
@@ -96,12 +96,12 @@ export const index: TimeseriesIndex = {
           sectorCount: 1,
           geographyCount: 1,
         },
-        path: "/data/iea/IEA-NZE-2024_TS.csv",
+        path: "/data/iea/IEA-NZE-2024_timeseries.csv",
       },
     ],
     "IEA-STEPS-2024": [
       {
-        datasetId: "IEA-STEPS-2024_TS",
+        datasetId: "IEA-STEPS-2024_timeseries",
         label: "Stated Policies Scenario (STEPS) Timeseries Data",
         summary: {
           rowCount: 256,
@@ -109,12 +109,12 @@ export const index: TimeseriesIndex = {
           sectorCount: 1,
           geographyCount: 2,
         },
-        path: "/data/iea/IEA-STEPS-2024_TS.csv",
+        path: "/data/iea/IEA-STEPS-2024_timeseries.csv",
       },
     ],
     "JETP-CIPP-2023": [
       {
-        datasetId: "JETP-CIPP-2023_TS",
+        datasetId: "JETP-CIPP-2023_timeseries",
         label:
           "Comprehensive Investment and Policy Plan (CIPP) Timeseries Data",
         summary: {
@@ -128,7 +128,7 @@ export const index: TimeseriesIndex = {
     ],
     "JRC-GECO-1.5C-2025": [
       {
-        datasetId: "JRC-GECO-1.5C-2025_TS",
+        datasetId: "JRC-GECO-1.5C-2025_timeseries",
         label: "1.5C scenario (1.5C) Timeseries Data",
         summary: {
           rowCount: 1566,
@@ -141,7 +141,7 @@ export const index: TimeseriesIndex = {
     ],
     "JRC-GECO-NDC-LTS-2025": [
       {
-        datasetId: "JRC-GECO-NDC-LTS-2025_TS",
+        datasetId: "JRC-GECO-NDC-LTS-2025_timeseries",
         label:
           "Nationally Determined Contributions and Long-Term Strategies (NDC-LTS) Timeseries Data",
         summary: {
@@ -155,7 +155,7 @@ export const index: TimeseriesIndex = {
     ],
     "JRC-GECO-Reference-2025": [
       {
-        datasetId: "JRC-GECO-Reference-2025",
+        datasetId: "JRC-GECO-Reference-2025_timeseries",
         label: "Reference Scenario (Reference) Timeseries Data",
         summary: {
           rowCount: 1566,
@@ -168,7 +168,7 @@ export const index: TimeseriesIndex = {
     ],
     "TZ-BAU-2024": [
       {
-        datasetId: "TZ-BAU-2024_TS",
+        datasetId: "TZ-BAU-2024_timeseries",
         label: "Business as Usual (BAU) Timeseries Data",
         summary: {
           rowCount: 418,
@@ -181,7 +181,7 @@ export const index: TimeseriesIndex = {
     ],
     "TZ-EBAU-2024": [
       {
-        datasetId: "TZ-EBAU-2024_TS",
+        datasetId: "TZ-EBAU-2024_timeseries",
         label: "Enhanced Business as Usual (EBAU) Timeseries Data",
         summary: {
           rowCount: 418,
@@ -194,7 +194,7 @@ export const index: TimeseriesIndex = {
     ],
     "TZ-ISG-2024": [
       {
-        datasetId: "TZ-ISG-2024_TS",
+        datasetId: "TZ-ISG-2024_timeseries",
         label: "Indonesia Supergrid (ISG) Timeseries Data",
         summary: {
           rowCount: 418,
@@ -207,7 +207,7 @@ export const index: TimeseriesIndex = {
     ],
     "TZ-REGI-2024": [
       {
-        datasetId: "TZ-REGI-2024_TS",
+        datasetId: "TZ-REGI-2024_timeseries",
         label: "Regional Interconnection (REGI) Timeseries Data",
         summary: {
           rowCount: 418,
@@ -220,8 +220,8 @@ export const index: TimeseriesIndex = {
     ],
   },
   byDataset: {
-    "ACE-ATS-2024_TS": {
-      datasetId: "ACE-ATS-2024_TS",
+    "ACE-ATS-2024_timeseries": {
+      datasetId: "ACE-ATS-2024_timeseries",
       pathwayIds: ["ACE-ATS-2024"],
       label: "ASEAN Member State Targets Scenario (ATS) Timeseries Data",
       summary: {
@@ -232,8 +232,8 @@ export const index: TimeseriesIndex = {
       },
       path: "/data/asean-centre-for-energy/ATS-2024_timeseries.csv",
     },
-    "ACE-BAS-2024_TS": {
-      datasetId: "ACE-BAS-2024_TS",
+    "ACE-BAS-2024_timeseries": {
+      datasetId: "ACE-BAS-2024_timeseries",
       pathwayIds: ["ACE-BAS-2024"],
       label: "Baseline Scenario (BAS) Timeseries Data",
       summary: {
@@ -244,8 +244,8 @@ export const index: TimeseriesIndex = {
       },
       path: "/data/asean-centre-for-energy/BAS-2024_timeseries.csv",
     },
-    "ACE-CNS-2024_TS": {
-      datasetId: "ACE-CNS-2024_TS",
+    "ACE-CNS-2024_timeseries": {
+      datasetId: "ACE-CNS-2024_timeseries",
       pathwayIds: ["ACE-CNS-2024"],
       label: "Carbon Neutrality Scenario (CNS) Timeseries Data",
       summary: {
@@ -256,8 +256,8 @@ export const index: TimeseriesIndex = {
       },
       path: "/data/asean-centre-for-energy/CNS-2024_timeseries.csv",
     },
-    "ACE-RAS-2024_TS": {
-      datasetId: "ACE-RAS-2024_TS",
+    "ACE-RAS-2024_timeseries": {
+      datasetId: "ACE-RAS-2024_timeseries",
       pathwayIds: ["ACE-RAS-2024"],
       label: "Regional Aspiration Scenario (RAS) Timeseries Data",
       summary: {
@@ -268,8 +268,8 @@ export const index: TimeseriesIndex = {
       },
       path: "/data/asean-centre-for-energy/RAS-2024_timeseries.csv",
     },
-    "IEA-APS-2024_TS": {
-      datasetId: "IEA-APS-2024_TS",
+    "IEA-APS-2024_timeseries": {
+      datasetId: "IEA-APS-2024_timeseries",
       pathwayIds: ["IEA-APS-2024"],
       label: "Announced Pledges Scenario (APS) Timeseries Data",
       summary: {
@@ -278,10 +278,10 @@ export const index: TimeseriesIndex = {
         sectorCount: 1,
         geographyCount: 2,
       },
-      path: "/data/iea/IEA-APS-2024_TS.csv",
+      path: "/data/iea/IEA-APS-2024_timeseries.csv",
     },
-    "IEA-NZE-2024_TS": {
-      datasetId: "IEA-NZE-2024_TS",
+    "IEA-NZE-2024_timeseries": {
+      datasetId: "IEA-NZE-2024_timeseries",
       pathwayIds: ["IEA-NZE-2024"],
       label: "Net Zero Emissions by 2050 Scenario (NZE) Timeseries Data",
       summary: {
@@ -290,10 +290,10 @@ export const index: TimeseriesIndex = {
         sectorCount: 1,
         geographyCount: 1,
       },
-      path: "/data/iea/IEA-NZE-2024_TS.csv",
+      path: "/data/iea/IEA-NZE-2024_timeseries.csv",
     },
-    "IEA-STEPS-2024_TS": {
-      datasetId: "IEA-STEPS-2024_TS",
+    "IEA-STEPS-2024_timeseries": {
+      datasetId: "IEA-STEPS-2024_timeseries",
       pathwayIds: ["IEA-STEPS-2024"],
       label: "Stated Policies Scenario (STEPS) Timeseries Data",
       summary: {
@@ -302,10 +302,10 @@ export const index: TimeseriesIndex = {
         sectorCount: 1,
         geographyCount: 2,
       },
-      path: "/data/iea/IEA-STEPS-2024_TS.csv",
+      path: "/data/iea/IEA-STEPS-2024_timeseries.csv",
     },
-    "JETP-CIPP-2023_TS": {
-      datasetId: "JETP-CIPP-2023_TS",
+    "JETP-CIPP-2023_timeseries": {
+      datasetId: "JETP-CIPP-2023_timeseries",
       pathwayIds: ["JETP-CIPP-2023"],
       label: "Comprehensive Investment and Policy Plan (CIPP) Timeseries Data",
       summary: {
@@ -316,8 +316,8 @@ export const index: TimeseriesIndex = {
       },
       path: "/data/jetp-id/jetp-cipp-2023_timeseries.csv",
     },
-    "JRC-GECO-1.5C-2025_TS": {
-      datasetId: "JRC-GECO-1.5C-2025_TS",
+    "JRC-GECO-1.5C-2025_timeseries": {
+      datasetId: "JRC-GECO-1.5C-2025_timeseries",
       pathwayIds: ["JRC-GECO-1.5C-2025"],
       label: "1.5C scenario (1.5C) Timeseries Data",
       summary: {
@@ -328,8 +328,8 @@ export const index: TimeseriesIndex = {
       },
       path: "/data/jrc/jrc-geco_1_5-2025_timeseries.csv",
     },
-    "JRC-GECO-NDC-LTS-2025_TS": {
-      datasetId: "JRC-GECO-NDC-LTS-2025_TS",
+    "JRC-GECO-NDC-LTS-2025_timeseries": {
+      datasetId: "JRC-GECO-NDC-LTS-2025_timeseries",
       pathwayIds: ["JRC-GECO-NDC-LTS-2025"],
       label:
         "Nationally Determined Contributions and Long-Term Strategies (NDC-LTS) Timeseries Data",
@@ -341,8 +341,8 @@ export const index: TimeseriesIndex = {
       },
       path: "/data/jrc/jrc-geco_ndc_lts-2025_timeseries.csv",
     },
-    "JRC-GECO-Reference-2025": {
-      datasetId: "JRC-GECO-Reference-2025",
+    "JRC-GECO-Reference-2025_timeseries": {
+      datasetId: "JRC-GECO-Reference-2025_timeseries",
       pathwayIds: ["JRC-GECO-Reference-2025"],
       label: "Reference Scenario (Reference) Timeseries Data",
       summary: {
@@ -353,8 +353,8 @@ export const index: TimeseriesIndex = {
       },
       path: "/data/jrc/jrc-geco_reference-2025_timeseries.csv",
     },
-    "TZ-BAU-2024_TS": {
-      datasetId: "TZ-BAU-2024_TS",
+    "TZ-BAU-2024_timeseries": {
+      datasetId: "TZ-BAU-2024_timeseries",
       pathwayIds: ["TZ-BAU-2024"],
       label: "Business as Usual (BAU) Timeseries Data",
       summary: {
@@ -365,8 +365,8 @@ export const index: TimeseriesIndex = {
       },
       path: "/data/transitionzero/TZ-BAU-2024_timeseries.csv",
     },
-    "TZ-EBAU-2024_TS": {
-      datasetId: "TZ-EBAU-2024_TS",
+    "TZ-EBAU-2024_timeseries": {
+      datasetId: "TZ-EBAU-2024_timeseries",
       pathwayIds: ["TZ-EBAU-2024"],
       label: "Enhanced Business as Usual (EBAU) Timeseries Data",
       summary: {
@@ -377,8 +377,8 @@ export const index: TimeseriesIndex = {
       },
       path: "/data/transitionzero/TZ-EBAU-2024_timeseries.csv",
     },
-    "TZ-ISG-2024_TS": {
-      datasetId: "TZ-ISG-2024_TS",
+    "TZ-ISG-2024_timeseries": {
+      datasetId: "TZ-ISG-2024_timeseries",
       pathwayIds: ["TZ-ISG-2024"],
       label: "Indonesia Supergrid (ISG) Timeseries Data",
       summary: {
@@ -389,8 +389,8 @@ export const index: TimeseriesIndex = {
       },
       path: "/data/transitionzero/TZ-ISG-2024_timeseries.csv",
     },
-    "TZ-REGI-2024_TS": {
-      datasetId: "TZ-REGI-2024_TS",
+    "TZ-REGI-2024_timeseries": {
+      datasetId: "TZ-REGI-2024_timeseries",
       pathwayIds: ["TZ-REGI-2024"],
       label: "Regional Interconnection (REGI) Timeseries Data",
       summary: {
