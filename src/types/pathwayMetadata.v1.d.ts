@@ -12,6 +12,10 @@ export type Label = import("./common/label.v1").LabelV1;
  * Bibliographic information about the report or dataset.
  */
 export type Publication = import("./common/publication.v1").PublicationV1;
+/**
+ * A single geography identifier used across schemas. Accepts 'Global', ISO-3166-1 alpha-2 country codes (e.g., 'US', 'DE'), or free-text region names (e.g., 'Europe', 'North America'). Any 2-letter items in the array will be treated as an ISO code. Any 2-letter entries that do not map to a country will throw errors (EU). Do not use full country names, only ISO alpha-2 codes. To avoid typographical errors, items may not be 3 letters long (USA)
+ */
+export type GeographyItem = import("./common/geographyItem.v1").GeographyItemV1;
 
 /**
  * A schema for the pathway metadata dataset in PBTAR.
@@ -60,11 +64,9 @@ export interface PathwayMetadataV1 {
    */
   ssp?: "SSP1" | "SSP2" | "SSP3" | "SSP4" | "SSP5";
   /**
-   * Geographical areas that the pathway covers. Can include 'Global', country ISO-3166-1 alpha-2 codes (US, DE), or free-text region names (e.g., 'Europe', 'OECD'). Any 2-letter items in the array will be treated as an ISO code. Any 2-letter entries that do not map to a country will throw errors (EU). Do not use full country names, only ISO alpha-2 codes. To avoid typographical errors, items in this array may not be 3 letters long (USA)
+   * Geographical areas that the pathway covers.
    */
-  geography: ({
-    [k: string]: unknown;
-  } & string)[];
+  geography: GeographyItem[];
   /**
    * Sectors that the pathway covers.
    */

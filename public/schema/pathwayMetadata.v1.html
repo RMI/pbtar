@@ -3056,20 +3056,9 @@
                 >geography</a
               >
             </div>
-            <span class="badge badge-dark value-type"
-              >Type: array of string</span
-            ><br />
+            <span class="badge badge-dark value-type">Type: array</span><br />
             <span class="description"
-              ><p>
-                Geographical areas that the pathway covers. Can include
-                'Global', country ISO-3166-1 alpha-2 codes (US, DE), or
-                free-text region names (e.g., 'Europe', 'OECD'). Any 2-letter
-                items in the array will be treated as an ISO code. Any 2-letter
-                entries that do not map to a country will throw errors (EU). Do
-                not use full country names, only ISO alpha-2 codes. To avoid
-                typographical errors, items in this array may not be 3 letters
-                long (USA)
-              </p>
+              ><p>Geographical areas that the pathway covers.</p>
             </span>
 
             <p>
@@ -3124,10 +3113,25 @@
                   <a
                     href="#geography_items"
                     onclick="anchorLink('geography_items')"
-                    >geography items</a
+                    >Geography Item</a
                   >
                 </div>
-                <br />
+                <h4>Geography Item</h4>
+                <span class="badge badge-dark value-type">Type: string</span
+                ><br />
+                <span class="description"
+                  ><p>
+                    A single geography identifier used across schemas. Accepts
+                    'Global', ISO-3166-1 alpha-2 country codes (e.g., 'US',
+                    'DE'), or free-text region names (e.g., 'Europe', 'North
+                    America'). Any 2-letter items in the array will be treated
+                    as an ISO code. Any 2-letter entries that do not map to a
+                    country will throw errors (EU). Do not use full country
+                    names, only ISO alpha-2 codes. To avoid typographical
+                    errors, items may not be 3 letters long (USA)
+                  </p>
+                </span>
+
                 <div
                   class="all-of-value"
                   id="geography_items_allOf"
@@ -3205,7 +3209,7 @@
                         <a
                           href="#geography_items"
                           onclick="anchorLink('geography_items')"
-                          >geography items</a
+                          >Geography Item</a
                         >
                         <svg
                           width="1em"
@@ -3295,7 +3299,7 @@
                         <a
                           href="#geography_items"
                           onclick="anchorLink('geography_items')"
-                          >geography items</a
+                          >Geography Item</a
                         >
                         <svg
                           width="1em"
@@ -3378,7 +3382,7 @@
                               <a
                                 href="#geography_items"
                                 onclick="anchorLink('geography_items')"
-                                >geography items</a
+                                >Geography Item</a
                               >
                               <svg
                                 width="1em"
@@ -3458,6 +3462,73 @@
                     >Must be at least <code>1</code> characters long</span
                   >
                 </p>
+
+                <br />
+                <div class="badge badge-secondary">Examples:</div>
+                <br />
+                <div
+                  id="geography_items_ex1"
+                  class="jumbotron examples"
+                >
+                  <div class="highlight">
+                    <pre><span></span><span class="s2">&quot;Global&quot;</span>
+</pre>
+                  </div>
+                </div>
+                <div
+                  id="geography_items_ex2"
+                  class="jumbotron examples"
+                >
+                  <div class="highlight">
+                    <pre><span></span><span class="s2">&quot;South East Asia&quot;</span>
+</pre>
+                  </div>
+                </div>
+                <div
+                  id="geography_items_ex3"
+                  class="jumbotron examples"
+                >
+                  <div class="highlight">
+                    <pre><span></span><span class="s2">&quot;Europe&quot;</span>
+</pre>
+                  </div>
+                </div>
+                <div
+                  id="geography_items_ex4"
+                  class="jumbotron examples"
+                >
+                  <div class="highlight">
+                    <pre><span></span><span class="s2">&quot;North America&quot;</span>
+</pre>
+                  </div>
+                </div>
+                <div
+                  id="geography_items_ex5"
+                  class="jumbotron examples"
+                >
+                  <div class="highlight">
+                    <pre><span></span><span class="s2">&quot;US&quot;</span>
+</pre>
+                  </div>
+                </div>
+                <div
+                  id="geography_items_ex6"
+                  class="jumbotron examples"
+                >
+                  <div class="highlight">
+                    <pre><span></span><span class="s2">&quot;DE&quot;</span>
+</pre>
+                  </div>
+                </div>
+                <div
+                  id="geography_items_ex7"
+                  class="jumbotron examples"
+                >
+                  <div class="highlight">
+                    <pre><span></span><span class="s2">&quot;PH&quot;</span>
+</pre>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

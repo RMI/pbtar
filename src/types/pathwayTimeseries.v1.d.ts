@@ -5,6 +5,11 @@
  */
 
 /**
+ * Geographical area that the data covers. This should be a single string value: either 'Global', a country ISO-3166-1 alpha-2 code (e.g., 'US', 'DE'), or a free-text region name (e.g., 'North America', 'South East Asia'). Only 2-letter codes are accepted for countries; do not use full country names or 3-letter codes (e.g., 'USA' is not allowed). If a 2-letter code does not map to a country (e.g., 'EU'), it will result in an error.
+ */
+export type GeographyItem = import("./common/geographyItem.v1").GeographyItemV1;
+
+/**
  * A schema for the pathway timeseries dataset in PBTAR.
  */
 export interface PathwayTimeseriesV1 {
@@ -177,12 +182,7 @@ export interface PathwayTimeseriesV1 {
      * Calendar year of the data point.
      */
     year: number;
-    /**
-     * Geographical area that the data covers. This should be a single string value: either 'Global', a country ISO-3166-1 alpha-2 code (e.g., 'US', 'DE'), or a free-text region name (e.g., 'North America', 'South East Asia'). Only 2-letter codes are accepted for countries; do not use full country names or 3-letter codes (e.g., 'USA' is not allowed). If a 2-letter code does not map to a country (e.g., 'EU'), it will result in an error.
-     */
-    geography: {
-      [k: string]: unknown;
-    } & string;
+    geography: GeographyItem;
     /**
      * Sector to which this data point belongs (must match one of the defined sectors).
      */
