@@ -275,16 +275,8 @@
           ]
         },
         "emissionsScope": {
-          "description": "Defines which greenhouse gases are covered in the pathway’s emissions accounting.",
-          "type": "string",
-          "enum": [
-            "No information",
-            "CO2",
-            "CO2e (Kyoto)",
-            "CO2e (CO2, Methane)",
-            "CO2e (unspecified GHGs)",
-            "Other emissions scope"
-          ]
+          "$ref": "http://pathways.rmi.org/schema/common/emissionsScope.v1.json",
+          "tsType": "import('./common/emissionsScope.v1').EmissionsScopeV1"
         },
         "policyAmbition": {
           "description": "Represents the overall stringency and intent of modeled policies relative to climate targets, often reflecting if and how far the included policies go beyond currently legislated ones",

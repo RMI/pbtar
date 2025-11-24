@@ -12,11 +12,16 @@ import geographyItemSchemaJson from "./geographyItem.v1.json" with { type: "json
 export const geographyItemSchema: SchemaObject =
   geographyItemSchemaJson as SchemaObject;
 
+import emissionsScopeSchemaJson from "./emissionsScope.v1.json" with { type: "json" };
+export const emissionsScopeSchema: SchemaObject =
+  emissionsScopeSchemaJson as SchemaObject;
+
 // Aggregate — type stays correct
 export const commonSchemas: SchemaObject[] = [
   publicationSchema,
   labelSchema,
   geographyItemSchema,
+  emissionsScopeSchema,
 ];
 
 export default commonSchemas;
