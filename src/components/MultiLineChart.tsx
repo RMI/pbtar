@@ -353,7 +353,11 @@ export default function MultiLineChart({
         />
         <g ref={lines} />
         <g ref={dots} />
-        <g ref={tooltip_grp} class="tooltip" display="none">
+        <g
+          ref={tooltip_grp}
+          class="tooltip"
+          display="none"
+        >
           <circle r="2.5" />
         </g>
       </svg>
