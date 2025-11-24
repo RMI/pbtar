@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://pathways.rmi.org/schema/common/sector.v1.json",
+  "title": "Sector",
+  "description": "Common definition of a sector used across pathway schemata.",
+  "type": "object",
+  "properties": {
+    "displayName": { "$ref": "#/$defs/displayName" },
+    "definition": {
+      "type": "string",
+      "description": "Narrative description of the sector's scope."
+    }
+  },
+  "required": ["displayName", "definition"],
+  "additionalProperties": false,
+
+  "$defs": {
+    "displayName": {
+      "description": "Display name of a sector.",
+      "type": "string",
+      "enum": [
+        "Land Use",
+        "Agriculture",
+        "Buildings",
+        "Industry",
+        "Steel",
+        "Cement",
+        "Chemicals",
+        "Coal Mining",
+        "Oil (Upstream)",
+        "Gas (Upstream)",
+        "Power",
+        "Automotive",
+        "Transport",
+        "Road transport",
+        "Aviation",
+        "Rail",
+        "Shipping",
+        "Other"
+      ]
+    }
+  }
+}

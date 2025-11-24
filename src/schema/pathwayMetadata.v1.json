@@ -87,27 +87,7 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string",
-            "enum": [
-              "Land Use",
-              "Agriculture",
-              "Buildings",
-              "Industry",
-              "Steel",
-              "Cement",
-              "Chemicals",
-              "Coal Mining",
-              "Oil (Upstream)",
-              "Gas (Upstream)",
-              "Power",
-              "Automotive",
-              "Transport",
-              "Road transport",
-              "Aviation",
-              "Rail",
-              "Shipping",
-              "Other"
-            ]
+            "$ref": "http://pathways.rmi.org/schema/common/sector.v1.json#/$defs/displayName"
           },
           "technologies": {
             "type": "array",
