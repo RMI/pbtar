@@ -10,14 +10,16 @@
     },
     "definition": {
       "type": "string",
+      "maxLength": 1000,
       "description": "Detailed description of what the metric represents."
     },
     "sectorScope": {
       "type": "string",
-      "description": "Scope or context within which the metric applies, if any."
+      "maxLength": 1000,
+      "description": "Specifies which parts of the sector value chain the metric applies to."
     }
   },
-  "required": ["displayName", "definition"],
+  "required": ["displayName", "definition", "sectorScope"],
   "additionalProperties": false,
 
   "$defs": {

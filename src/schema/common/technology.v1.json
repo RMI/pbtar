@@ -17,7 +17,7 @@
 
   "$defs": {
     "displayName": {
-      "description": "Display name of a technology, used in both metadata and timeseries schemata.",
+      "description": "Display name of the technology as presented in charts or tables.",
       "type": "string",
       "enum": [
         "Precision Agriculture",
