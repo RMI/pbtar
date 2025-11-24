@@ -16,6 +16,7 @@ import pkg from "./package.json";
 import pathwayMetadata from "./src/schema/pathwayMetadata.v1.json" with { type: "json" };
 import publicationSchema from "./src/schema/common/publication.v1.json" with { type: "json" };
 import labelSchema from "./src/schema/common/label.v1.json" with { type: "json" };
+import geographyItemSchema from "./src/schema/common/geographyItem.v1.json" with { type: "json" };
 
 // Safe wrapper for OS functions with proper typing
 const getOsInfo = (): {
@@ -152,7 +153,7 @@ function dataValidationPlugin(dir: string = "src/data") {
       assembleData(
         entries,
         pathwayMetadata as object,
-        [publicationSchema, labelSchema],
+        [publicationSchema, labelSchema, geographyItemSchema],
         {
           includeInvalid,
           warn: (msg: string): void => {

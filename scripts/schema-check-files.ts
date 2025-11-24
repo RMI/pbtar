@@ -8,6 +8,7 @@ import pathwayMetadata from "../src/schema/pathwayMetadata.v1.json" with { type:
 import pathwayTimeseries from "../src/schema/pathwayTimeseries.v1.json" with { type: "json" };
 import publicationSchema from "../src/schema/common/publication.v1.json" with { type: "json" };
 import labelSchema from "../src/schema/common/label.v1.json" with { type: "json" };
+import geographyItemSchema from "../src/schema/common/geographyItem.v1.json" with { type: "json" };
 
 async function run(dir: string) {
   async function getJsonFilesRecursive(base: string): Promise<string[]> {
@@ -38,6 +39,7 @@ async function run(dir: string) {
     pathwayTimeseries,
     publicationSchema,
     labelSchema,
+    geographyItemSchema,
   ]);
   return { dir, validCount: valid.length, invalid };
 }

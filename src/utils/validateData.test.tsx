@@ -4,12 +4,14 @@ import { PathwayMetadataType } from "../types";
 import pathwayMetadata from "../schema/pathwayMetadata.v1.json" with { type: "json" };
 import publicationSchema from "../schema/common/publication.v1.json" with { type: "json" };
 import labelSchema from "../schema/common/label.v1.json" with { type: "json" };
+import geographyItemSchema from "../schema/common/geographyItem.v1.json" with { type: "json" };
 
 function ok(entry: FileEntry | FileEntry[]) {
   const arr = Array.isArray(entry) ? entry : [entry];
   const { valid, invalid } = validateDataCollect(arr, pathwayMetadata, [
     publicationSchema,
     labelSchema,
+    geographyItemSchema,
   ] as object[]);
   expect(valid.length).toBeGreaterThan(0);
   expect(invalid.length).toBe(0);
@@ -20,6 +22,7 @@ function fail(entry: FileEntry | FileEntry[], rx?: RegExp | string) {
   const rawValidation = validateDataCollect(arr, pathwayMetadata, [
     publicationSchema,
     labelSchema,
+    geographyItemSchema,
   ] as object[]);
   const invalid = rawValidation.invalid;
   expect(invalid.length).toBeGreaterThan(0);
