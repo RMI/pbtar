@@ -71,6 +71,10 @@
           {
             "context": "Unit Tests / Run unit tests",
             "integration_id": 15368
+          },
+          {
+            "context": "Node Package Checks / Check generated timeseries index / Check generated timeseries index",
+            "integration_id": 15368
           }
         ]
       }
