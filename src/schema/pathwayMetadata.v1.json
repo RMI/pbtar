@@ -17,7 +17,7 @@
     },
     "name": {
       "description": "Name of the pathway.",
-      "$ref": "./common/label.v1.json",
+      "$ref": "http://pathways.rmi.org/schema/common/label.v1.json",
       "tsType": "import('./common/label.v1').LabelV1"
     },
     "description": {
@@ -28,8 +28,8 @@
     },
     "publication": {
       "description": "Bibliographic information about the report or dataset.",
-      "$ref": "./publication.v1.json",
-      "tsType": "import('./publication.v1').PublicationV1"
+      "$ref": "http://pathways.rmi.org/schema/common/publication.v1.json",
+      "tsType": "import('./common/publication.v1').PublicationV1"
     },
     "pathwayType": {
       "description": "Type of the pathway pathway.",
