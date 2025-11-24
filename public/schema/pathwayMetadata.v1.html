@@ -3745,6 +3745,10 @@
                         <span class="badge badge-dark value-type"
                           >Type: enum (of string)</span
                         ><br />
+                        <span class="description"
+                          ><p>Display name of a sector.</p>
+                        </span>
+
                         <div
                           class="enum-value"
                           id="sectors_items_name_enum"
@@ -3893,7 +3897,7 @@
                           >
                         </div>
                         <span class="badge badge-dark value-type"
-                          >Type: array of enum (of string)</span
+                          >Type: array</span
                         ><br />
                         <span class="description"
                           ><p>Technologies applicable to this sector.</p>
@@ -3980,12 +3984,19 @@
                               <a
                                 href="#sectors_items_technologies_items"
                                 onclick="anchorLink('sectors_items_technologies_items')"
-                                >technologies items</a
+                                >displayName</a
                               >
                             </div>
                             <span class="badge badge-dark value-type"
                               >Type: enum (of string)</span
                             ><br />
+                            <span class="description"
+                              ><p>
+                                Display name of a technology, used in both
+                                metadata and timeseries schemata.
+                              </p>
+                            </span>
+
                             <div
                               class="enum-value"
                               id="sectors_items_technologies_items_enum"
@@ -4296,9 +4307,7 @@
                 >metric</a
               >
             </div>
-            <span class="badge badge-dark value-type"
-              >Type: array of enum (of string)</span
-            ><br />
+            <span class="badge badge-dark value-type">Type: array</span><br />
 
             <p>
               <span
@@ -4352,15 +4361,16 @@
                   <a
                     href="#metric_items"
                     onclick="anchorLink('metric_items')"
-                    >metric items</a
+                    >displayName</a
                   >
                 </div>
                 <span class="badge badge-dark value-type"
                   >Type: enum (of string)</span
                 ><br />
                 <span class="description"
-                  ><p>Metrics used in the pathway</p>
+                  ><p>Display name of the metric</p>
                 </span>
+
                 <div
                   class="enum-value"
                   id="metric_items_enum"
@@ -5404,15 +5414,17 @@
                         >emissionsScope</a
                       >
                     </div>
+                    <h4>Emissions Scope</h4>
                     <span class="badge badge-dark value-type"
                       >Type: enum (of string)</span
                     ><br />
                     <span class="description"
                       ><p>
                         Defines which greenhouse gases are covered in the
-                        pathway’s emissions accounting.
+                        pathway's modeled emissions.
                       </p>
                     </span>
+
                     <div
                       class="enum-value"
                       id="keyFeatures_emissionsScope_enum"

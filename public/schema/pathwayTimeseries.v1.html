@@ -894,6 +894,7 @@
                 >emissionsScope</a
               >
             </div>
+            <h4>Emissions Scope</h4>
             <span class="badge badge-dark value-type"
               >Type: enum (of string)</span
             ><br />
@@ -903,6 +904,7 @@
                 modeled emissions.
               </p>
             </span>
+
             <div
               class="enum-value"
               id="emissionsScope_enum"
@@ -1362,7 +1364,7 @@
                                       onclick="setAnchor('#sector_pattern1_technology_pattern1')"
                                     >
                                       <span class="property-name"
-                                        >^[A-Za-z0-9 _-]{1,100}$</span
+                                        >Technology</span
                                       >
                                       <span
                                         class="badge badge-info pattern-property"
@@ -1465,12 +1467,17 @@
                                       <a
                                         href="#sector_pattern1_technology_pattern1"
                                         onclick="anchorLink('sector_pattern1_technology_pattern1')"
-                                        >^[A-Za-z0-9 _-]{1,100}$</a
+                                        >Technology</a
                                       >
                                     </div>
+                                    <h4>Technology</h4>
                                     <span class="badge badge-dark value-type"
                                       >Type: object</span
                                     ><br />
+                                    <span class="description"
+                                      ><p>Technologies for sectors</p>
+                                    </span>
+
                                     <span class="badge badge-info no-additional"
                                       >No Additional Properties</span
                                     >
@@ -1584,7 +1591,7 @@
                                               <a
                                                 href="#sector_pattern1_technology_pattern1"
                                                 onclick="anchorLink('sector_pattern1_technology_pattern1')"
-                                                >^[A-Za-z0-9 _-]{1,100}$</a
+                                                >Technology</a
                                               >
                                               <svg
                                                 width="1em"
@@ -1611,11 +1618,12 @@
                                             ><br />
                                             <span class="description"
                                               ><p>
-                                                Display name of the technology
-                                                as presented in charts or
-                                                tables.
+                                                Display name of a technology,
+                                                used in both metadata and
+                                                timeseries schemata.
                                               </p>
                                             </span>
+
                                             <div
                                               class="enum-value"
                                               id="sector_pattern1_technology_pattern1_displayName_enum"
@@ -1892,7 +1900,7 @@
                                               <a
                                                 href="#sector_pattern1_technology_pattern1"
                                                 onclick="anchorLink('sector_pattern1_technology_pattern1')"
-                                                >^[A-Za-z0-9 _-]{1,100}$</a
+                                                >Technology</a
                                               >
                                               <svg
                                                 width="1em"
@@ -2067,9 +2075,7 @@
                                       aria-controls="sector_pattern1_metric_pattern1"
                                       onclick="setAnchor('#sector_pattern1_metric_pattern1')"
                                     >
-                                      <span class="property-name"
-                                        >^[A-Za-z0-9 _-]{1,100}$</span
-                                      >
+                                      <span class="property-name">Metric</span>
                                       <span
                                         class="badge badge-info pattern-property"
                                         >Pattern Property</span
@@ -2171,12 +2177,20 @@
                                       <a
                                         href="#sector_pattern1_metric_pattern1"
                                         onclick="anchorLink('sector_pattern1_metric_pattern1')"
-                                        >^[A-Za-z0-9 _-]{1,100}$</a
+                                        >Metric</a
                                       >
                                     </div>
+                                    <h4>Metric</h4>
                                     <span class="badge badge-dark value-type"
                                       >Type: object</span
                                     ><br />
+                                    <span class="description"
+                                      ><p>
+                                        Common definition of a metric used
+                                        across pathway schemas.
+                                      </p>
+                                    </span>
+
                                     <span class="badge badge-info no-additional"
                                       >No Additional Properties</span
                                     >
@@ -2290,7 +2304,7 @@
                                               <a
                                                 href="#sector_pattern1_metric_pattern1"
                                                 onclick="anchorLink('sector_pattern1_metric_pattern1')"
-                                                >^[A-Za-z0-9 _-]{1,100}$</a
+                                                >Metric</a
                                               >
                                               <svg
                                                 width="1em"
@@ -2316,11 +2330,9 @@
                                               >Type: enum (of string)</span
                                             ><br />
                                             <span class="description"
-                                              ><p>
-                                                Display name of the metric as
-                                                presented in charts or tables.
-                                              </p>
+                                              ><p>Display name of the metric</p>
                                             </span>
+
                                             <div
                                               class="enum-value"
                                               id="sector_pattern1_metric_pattern1_displayName_enum"
@@ -2467,7 +2479,7 @@
                                               <a
                                                 href="#sector_pattern1_metric_pattern1"
                                                 onclick="anchorLink('sector_pattern1_metric_pattern1')"
-                                                >^[A-Za-z0-9 _-]{1,100}$</a
+                                                >Metric</a
                                               >
                                               <svg
                                                 width="1em"
@@ -2494,20 +2506,10 @@
                                             ><br />
                                             <span class="description"
                                               ><p>
-                                                Brief definition or description
-                                                of the metric.
+                                                Detailed description of what the
+                                                metric represents.
                                               </p>
                                             </span>
-
-                                            <p>
-                                              <span
-                                                class="badge badge-light restriction max-length-restriction"
-                                                id="sector_pattern1_metric_pattern1_definition_maxLength"
-                                                >Must be at most
-                                                <code>1000</code> characters
-                                                long</span
-                                              >
-                                            </p>
                                           </div>
                                         </div>
                                       </div>
@@ -2533,10 +2535,6 @@
                                             >
                                               <span class="property-name"
                                                 >sectorScope</span
-                                              >
-                                              <span
-                                                class="badge badge-warning required-property"
-                                                >Required</span
                                               >
                                             </button>
                                           </h2>
@@ -2621,7 +2619,7 @@
                                               <a
                                                 href="#sector_pattern1_metric_pattern1"
                                                 onclick="anchorLink('sector_pattern1_metric_pattern1')"
-                                                >^[A-Za-z0-9 _-]{1,100}$</a
+                                                >Metric</a
                                               >
                                               <svg
                                                 width="1em"
@@ -2648,21 +2646,10 @@
                                             ><br />
                                             <span class="description"
                                               ><p>
-                                                Specifies which parts of the
-                                                sector value chain the metric
-                                                applies to.
+                                                Scope or context within which
+                                                the metric applies, if any.
                                               </p>
                                             </span>
-
-                                            <p>
-                                              <span
-                                                class="badge badge-light restriction max-length-restriction"
-                                                id="sector_pattern1_metric_pattern1_sectorScope_maxLength"
-                                                >Must be at most
-                                                <code>1000</code> characters
-                                                long</span
-                                              >
-                                            </p>
                                           </div>
                                         </div>
                                       </div>
