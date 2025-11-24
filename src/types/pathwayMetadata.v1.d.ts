@@ -11,7 +11,7 @@ export type Label = import("./common/label.v1").LabelV1;
 /**
  * Bibliographic information about the report or dataset.
  */
-export type Publication = import("./publication.v1").PublicationV1;
+export type Publication = import("./common/publication.v1").PublicationV1;
 
 /**
  * A schema for the pathway metadata dataset in PBTAR.
