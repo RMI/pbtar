@@ -47,3 +47,7 @@ jobs:
   scan:
     name: "Check for forbidden patterns"
     uses: ./.github/workflows/admin-forbidden-patterns.yml
+
+  timeseries:
+    name: "Check generated timeseries index"
+    uses: ./.github/workflows/node-build-committed-files.yml
