@@ -1,7 +1,7 @@
 {
   "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
   "pathwayId": ["IEA-APS-2024"],
-  "id": "IEA-APS-2024_TS",
+  "id": "IEA-APS-2024_timeseries",
   "name": "Announced Pledges Scenario (APS) Timeseries Data",
   "description": "Countries meet aspirational targets including NDCs and net zero pledges.",
   "publisher": "IEA",

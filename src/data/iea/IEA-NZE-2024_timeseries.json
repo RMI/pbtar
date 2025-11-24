@@ -1,7 +1,7 @@
 {
   "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
   "pathwayId": ["IEA-NZE-2024"],
-  "id": "IEA-NZE-2024_TS",
+  "id": "IEA-NZE-2024_timeseries",
   "name": "Net Zero Emissions by 2050 Scenario (NZE) Timeseries Data",
   "description": "Normative global 1.5C aligned pathway that achieves net zero emissions by 2050.",
   "publisher": "IEA",

@@ -1,7 +1,7 @@
 {
   "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
   "pathwayId": ["TZ-BAU-2024"],
-  "id": "TZ-BAU-2024_TS",
+  "id": "TZ-BAU-2024_timeseries",
   "name": "Business as Usual (BAU) Timeseries Data",
   "description": "Business-as-usual continuation of existing ASEAN power and transmission systems.",
   "publisher": "TransitionZero",
