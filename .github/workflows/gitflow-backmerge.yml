@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     name: backmerge
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Create Pull Request
         id: create-pr
         run: |

@@ -2,15 +2,11 @@ import React from "react";
 import SearchBox from "./SearchBox";
 import MultiSelectDropdown from "./MultiSelectDropdown";
 import { pathwayMetadata } from "../data/pathwayMetadata";
-import { SearchFilters, Geography } from "../types";
-import { makeGeographyOptions } from "../utils/searchUtils";
+import { SearchFilters } from "../types";
 import type { FacetMode } from "../utils/searchUtils";
-import {
-  buildOptionsFromValues,
-  hasAbsent,
-  withAbsentOption,
-} from "../utils/facets";
-import { ABSENT_FILTER_TOKEN } from "../utils/absent";
+import { getGlobalFacetOptions } from "../utils/searchUtils";
+import { getStep } from "./NumericRange";
+import NumericRangeDropdown from "./NumericRangeDropdown";
 
 interface SearchSectionProps {
   filters: SearchFilters;
@@ -35,9 +31,9 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       facet:
         | "geography"
         | "sector"
-        | "metric"
+        | "policyAmbition"
+        | "dataAvailability"
         | "pathwayType"
-        | "modelYearNetzero"
         | "modelTempIncrease",
       m: FacetMode,
     ) => {
@@ -46,42 +42,26 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     [filters.modes, onFilterChange],
   );
 
-  const pathwayTypeOptions = buildOptionsFromValues(
-    pathwayMetadata.map((d) => d.pathwayType),
-  );
+  // Single source of truth for option lists (global, data-driven)
+  const {
+    pathwayTypeOptions,
+    temperatureOptions,
+    geographyOptions,
+    sectorOptions,
+    policyAmbitionOptions,
+    dataAvailabilityOptions,
+  } = React.useMemo(() => getGlobalFacetOptions(pathwayMetadata), []);
 
-  const modelYearNetzeroOptions = buildOptionsFromValues(
-    pathwayMetadata.map((d) => d.modelYearNetzero),
-  );
-
-  const temperatureOptions = buildOptionsFromValues(
-    pathwayMetadata.map((d) => d.modelTempIncrease),
-  );
-
-  const geographyOptionsRaw: Geography[] = React.useMemo(
-    () => makeGeographyOptions(pathwayMetadata),
-    [],
-  ) as Geography[];
-  const sawAbsentGeography = hasAbsent(pathwayMetadata.map((d) => d.geography));
-  const geographyOptions = withAbsentOption(
-    geographyOptionsRaw,
-    sawAbsentGeography,
-  );
-
-  const sectorNames = pathwayMetadata.flatMap(
-    (d) => d.sectors?.map((s) => s.name) ?? [],
-  );
-  const sectorOptionsBase = buildOptionsFromValues(sectorNames);
-  const sawAbsentSectors = pathwayMetadata.some(
-    (d) => !d.sectors || d.sectors.length === 0,
-  );
-  const sectorOptions = sawAbsentSectors
-    ? [...sectorOptionsBase, { label: "None", value: ABSENT_FILTER_TOKEN }]
-    : sectorOptionsBase;
-
-  const metricOptions = buildOptionsFromValues(
-    pathwayMetadata.map((d) => d.metric).flat(),
-  );
+  const { tempBounds } = React.useMemo(() => {
+    const tVals = (temperatureOptions ?? [])
+      .filter((o) => !o.disabled)
+      .map((o) => Number(o.value))
+      .filter((n) => Number.isFinite(n));
+    const tb = tVals.length
+      ? { min: Math.min(...tVals), max: Math.max(...tVals) }
+      : { min: 0, max: 0 };
+    return { tempBounds: tb };
+  }, [temperatureOptions]);
 
   const areFiltersApplied =
     Boolean(filters.searchTerm) ||
@@ -93,15 +73,15 @@ const SearchSection: React.FC<SearchSectionProps> = ({
     (Array.isArray(filters.sector)
       ? filters.sector.length > 0
       : filters.sector != null) ||
-    (Array.isArray(filters.metric)
-      ? filters.metric.length > 0
-      : filters.metric != null) ||
-    (Array.isArray(filters.modelYearNetzero)
-      ? filters.modelYearNetzero.length > 0
-      : filters.modelYearNetzero != null) ||
     (Array.isArray(filters.modelTempIncrease)
       ? filters.modelTempIncrease.length > 0
-      : filters.modelTempIncrease != null);
+      : filters.modelTempIncrease != null) ||
+    (Array.isArray(filters.policyAmbition)
+      ? filters.policyAmbition.length > 0
+      : filters.policyAmbition != null) ||
+    (Array.isArray(filters.dataAvailability)
+      ? filters.dataAvailability.length > 0
+      : filters.dataAvailability != null);
 
   return (
     <div className="bg-gray-50">
@@ -113,70 +93,85 @@ const SearchSection: React.FC<SearchSectionProps> = ({
           onClear={onClear}
         />
       </div>
+      <div className="grid gap-2 grid-cols-[repeat(auto-fit,minmax(12rem,1fr))]">
+        <div>
+          <MultiSelectDropdown<string>
+            label="Geography"
+            options={geographyOptions}
+            value={filters.geography}
+            onChange={(arr) => onFilterChange("geography", arr)}
+            showModeToggle
+            mode={filters.modes?.geography ?? "ANY"}
+            onModeChange={(m) => setMode("geography", m)}
+            menuWidthClassName="w-60"
+          />
+        </div>
 
-      <div className="flex flex-wrap gap-2">
-        <MultiSelectDropdown<string>
-          label="Pathway Type"
-          options={pathwayTypeOptions}
-          value={filters.pathwayType}
-          onChange={(arr) => onFilterChange("pathwayType", arr)}
-          showModeToggle={false}
-          mode={filters.modes?.pathwayType ?? "ANY"}
-          onModeChange={(m) => setMode("pathwayType", m)}
-        />
+        <div>
+          <MultiSelectDropdown<string>
+            label="Pathway Type"
+            options={pathwayTypeOptions}
+            value={filters.pathwayType}
+            onChange={(arr) => onFilterChange("pathwayType", arr)}
+            showModeToggle={false}
+            mode={filters.modes?.pathwayType ?? "ANY"}
+            onModeChange={(m) => setMode("pathwayType", m)}
+          />
+        </div>
 
-        <MultiSelectDropdown<number>
-          label="Target Year"
-          options={modelYearNetzeroOptions}
-          value={filters.modelYearNetzero}
-          onChange={(arr) => onFilterChange("modelYearNetzero", arr)}
-          showModeToggle={false}
-          mode={filters.modes?.modelYearNetzero ?? "ANY"}
-          onModeChange={(m) => setMode("modelYearNetzero", m)}
-        />
+        <div>
+          <NumericRangeDropdown
+            label="Temperature (°C)"
+            minBound={tempBounds.min}
+            maxBound={tempBounds.max}
+            step={getStep("temp")}
+            value={
+              !Array.isArray(filters.modelTempIncrease)
+                ? filters.modelTempIncrease
+                : null
+            }
+            onChange={(r) => onFilterChange("modelTempIncrease", r)}
+          />
+        </div>
 
-        <MultiSelectDropdown<string | number>
-          label="Temperature (°C)"
-          options={temperatureOptions}
-          value={filters.modelTempIncrease}
-          onChange={(arr) => onFilterChange("modelTempIncrease", arr)}
-          showModeToggle={false}
-          mode={filters.modes?.modelTempIncrease ?? "ANY"}
-          onModeChange={(m) => setMode("modelTempIncrease", m)}
-        />
+        <div>
+          <MultiSelectDropdown<string>
+            label="Policy Ambition"
+            options={policyAmbitionOptions}
+            value={filters.policyAmbition}
+            onChange={(arr) => onFilterChange("policyAmbition", arr)}
+            showModeToggle={false}
+            mode={filters.modes?.policyAmbition ?? "ANY"}
+            onModeChange={(m) => setMode("policyAmbition", m)}
+            menuWidthClassName="w-60"
+          />
+        </div>
 
-        <MultiSelectDropdown<string>
-          label="Geography"
-          options={geographyOptions}
-          value={filters.geography}
-          onChange={(arr) => onFilterChange("geography", arr)}
-          showModeToggle
-          mode={filters.modes?.geography ?? "ANY"}
-          onModeChange={(m) => setMode("geography", m)}
-          menuWidthClassName="w-60"
-        />
+        <div>
+          <MultiSelectDropdown<string>
+            label="Sector"
+            options={sectorOptions}
+            value={filters.sector}
+            onChange={(arr) => onFilterChange("sector", arr)}
+            showModeToggle
+            mode={filters.modes?.sector ?? "ANY"}
+            onModeChange={(m) => setMode("sector", m)}
+            menuWidthClassName="w-60"
+          />
+        </div>
 
-        <MultiSelectDropdown<string>
-          label="Sector"
-          options={sectorOptions}
-          value={filters.sector}
-          onChange={(arr) => onFilterChange("sector", arr)}
-          showModeToggle
-          mode={filters.modes?.sector ?? "ANY"}
-          onModeChange={(m) => setMode("sector", m)}
-          menuWidthClassName="w-60"
-        />
-
-        <MultiSelectDropdown<string>
-          label="Benchmark Metric"
-          options={metricOptions}
-          value={filters.metric}
-          onChange={(arr) => onFilterChange("metric", arr)}
-          showModeToggle
-          mode={filters.modes?.metric ?? "ANY"}
-          onModeChange={(m) => setMode("metric", m)}
-          menuWidthClassName="w-60"
-        />
+        <div>
+          <MultiSelectDropdown<string>
+            label="Data Availability"
+            options={dataAvailabilityOptions}
+            value={filters.dataAvailability}
+            onChange={(arr) => onFilterChange("dataAvailability", arr)}
+            showModeToggle={false}
+            mode={filters.modes?.dataAvailability ?? "ANY"}
+            onModeChange={(m) => setMode("dataAvailability", m)}
+            menuWidthClassName="w-60"
+          />
+        </div>
       </div>
       <div className="mt-4 ml-1 flex items-center justify-between gap-3">
         <p className="text-sm text-rmigray-500">

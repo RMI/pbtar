@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import PathwayCard from "../components/PathwayCard";
 import SearchSection from "../components/SearchSection";
+import StepByStepGuide from "../components/StepByStepGuide";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 import { filterPathways } from "../utils/searchUtils";
 import { SearchFilters, PathwayMetadataType } from "../types";
@@ -21,6 +22,9 @@ const PathwaySearch: React.FC = () => {
     geography: null,
     sector: null,
     metric: null,
+    emissionsTrajectory: null,
+    policyAmbition: null,
+    dataAvailability: null,
     searchTerm: "",
   });
 
@@ -105,24 +109,20 @@ const PathwaySearch: React.FC = () => {
       geography: null,
       sector: null,
       metric: null,
+      emissionsTrajectory: null,
+      policyAmbition: null,
+      dataAvailability: null,
       searchTerm: "",
     });
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <section
-        ref={topSectionRef}
-        className="mb-8"
-      >
-        <h1 className="text-2xl font-bold text-rmigray-800 mb-2">
-          Find Climate Transition Pathways
-        </h1>
-        <p className="text-rmigray-600">
-          Browse our repository of climate transition pathways to find the most
-          relevant ones for your assessment needs.
-        </p>
-      </section>
+    <div className="container mx-auto px-4 py-8 bg-gray-50">
+      <StepByStepGuide
+        filters={filters}
+        onFilterChange={handleFilterChange}
+      />
+      <div className="border-t border-slate-200"></div>
       <div
         ref={searchSectionRef}
         className={`sticky rounded-lg top-0 z-10 bg-gray-50 inset-x-0 transition-shadow duration-200 ${isSticky ? "shadow-md" : ""}`}
@@ -140,7 +140,9 @@ const PathwaySearch: React.FC = () => {
       </div>
 
       <div
-        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300 ${isFiltering ? "opacity-50" : "opacity-100"}`}
+        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300 bg-gray-50 ${
+          isFiltering ? "opacity-50" : "opacity-100"
+        }`}
       >
         {filteredPathways.map((pathway) => (
           <PathwayCard

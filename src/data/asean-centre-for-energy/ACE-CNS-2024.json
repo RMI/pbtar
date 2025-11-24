@@ -1,5 +1,5 @@
 {
-  "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
+  "$schema": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "ACE-CNS-2024",
   "publication": {
     "title": { "full": "8th ASEAN Energy Outlook", "short": "AEO8" },
@@ -14,7 +14,7 @@
       }
     ]
   },
-  "name": "Carbon Neutrality Scenario (CNS)",
+  "name": { "full": "Carbon Neutrality Scenario", "short": "CNS" },
   "description": "Pathway for ASEAN to achieve significant CO2 emissions reductions by 2050.",
   "geography": ["South East Asia"],
   "pathwayType": "Normative",
@@ -50,7 +50,7 @@
     "Absolute Emissions"
   ],
   "keyFeatures": {
-    "emissionsPathway": "Moderate decrease",
+    "emissionsTrajectory": "Moderate decrease",
     "energyEfficiency": "Significant improvement",
     "energyDemand": "Minor increase",
     "electrification": "Moderate increase",

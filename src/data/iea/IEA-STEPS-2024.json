@@ -1,5 +1,5 @@
 {
-  "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
+  "$schema": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "IEA-STEPS-2024",
   "publication": {
     "title": { "full": "World Energy Outlook 2024", "short": "WEO" },
@@ -20,7 +20,7 @@
       }
     ]
   },
-  "name": "Stated Policies Scenario (STEPS)",
+  "name": { "full": "Stated Policies Scenario", "short": "STEPS" },
   "description": "Global projection of current energy system trends and the impact of stated policies.",
   "geography": [
     "Global",
@@ -86,7 +86,7 @@
     "Absolute Emissions"
   ],
   "keyFeatures": {
-    "emissionsPathway": "Minor decrease",
+    "emissionsTrajectory": "Minor decrease",
     "energyEfficiency": "Moderate improvement",
     "energyDemand": "Moderate increase",
     "electrification": "Moderate increase",

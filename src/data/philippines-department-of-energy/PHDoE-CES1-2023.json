@@ -1,5 +1,5 @@
 {
-  "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
+  "$schema": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "PHDoE-CES1-2023",
   "publication": {
     "title": { "full": "Power Development Plan 2023-2050" },
@@ -16,7 +16,7 @@
       }
     ]
   },
-  "name": "Clean Energy Scenario 1 (CES 1)",
+  "name": { "full": "Clean Energy Scenario 1", "short": "CES 1" },
   "description": "Philippines pathway following National Renewable Energy Plan with some offshore wind development.",
   "geography": ["PH"],
   "pathwayType": "Direct Policy",
@@ -49,7 +49,7 @@
     "Absolute Emissions"
   ],
   "keyFeatures": {
-    "emissionsPathway": "Moderate increase",
+    "emissionsTrajectory": "Moderate increase",
     "energyEfficiency": "Significant improvement",
     "energyDemand": "Significant increase",
     "electrification": "Moderate increase",

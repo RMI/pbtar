@@ -60,7 +60,7 @@ const OUT_FILE = path.join(DATA_DIR, "index.json");
 
 const TS_SCHEMA_MATCHERS = [
   "pathwayTimeseries.v1.json",
-  "http://pathways-library.rmi.org/schema/pathwayTimeseries.v1.json",
+  "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
 ];
 
 function logDebug(...args: any[]) {

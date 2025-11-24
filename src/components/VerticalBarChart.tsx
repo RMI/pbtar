@@ -4,6 +4,7 @@ import { max } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import "d3-transition";
 import { useRef, useEffect, useMemo } from "react";
+import { capitalizeWords } from "../utils/capitalizeWords";
 
 interface DataPoint {
   sector: string;
@@ -80,8 +81,7 @@ export default function VerticalBarChart({
       !gx.current ||
       !gy.current ||
       !bars.current ||
-      !title.current ||
-      !chartSetup
+      !title.current
     )
       return;
 
@@ -89,21 +89,22 @@ export default function VerticalBarChart({
 
     // Update title
     select(title.current)
-      .selectAll("text")
-      .data([metric, unit])
+      .selectAll<SVGTextElement, string>("text")
+      .data([`${capitalizeWords(sector)} ${capitalizeWords(metric)} [${unit}]`])
       .join("text")
-      .text((d) => d)
-      .attr("dy", (_, i) => (i === 0 ? "15" : "30"))
-      .attr("font-weight", (_, i) => (i === 0 ? "bold" : "normal"))
-      .attr("font-variant", (_, i) => (i === 0 ? "small-caps" : "normal"));
+      .attr("x", width / 2)
+      .attr("y", marginTop - 30)
+      .attr("text-anchor", "middle")
+      .attr("font-size", "16px")
+      .attr("font-weight", "bold")
+      .text((d) => d);
 
     // Update X axis
     select(gx.current)
       .transition()
       .duration(750)
       .call(axisBottom(x).tickSize(0))
-      .style("font-size", "14px")
-      .style("font-weight", "bold");
+      .style("font-size", "14px");
 
     // Update Y axis
     select(gy.current)
@@ -141,6 +142,7 @@ export default function VerticalBarChart({
     metric,
     barColor,
     chartSetup,
+    sector,
   ]);
 
   return (
@@ -148,12 +150,9 @@ export default function VerticalBarChart({
       ref={ref}
       width={width}
       height={height}
-      viewBox={[0, 0, width, height]}
+      viewBox={`0 0 ${width} ${height}`}
     >
-      <g
-        ref={title}
-        className="title"
-      />
+      <g ref={title} />
       <g
         ref={gx}
         className="xaxis"

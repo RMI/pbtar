@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import SearchSection from "./SearchSection";
 import { SearchFilters } from "../types";
 import { PathwayMetadataType } from "../types";
+import userEvent from "@testing-library/user-event";
 
 // Mock the pathwayMetadata import
 vi.mock("../data/pathwayMetadata", async () => {
@@ -60,9 +61,6 @@ describe("SearchSection", () => {
     // Labels are the button’s accessible name prefix (followed by "..." or ": N").
     expect(
       screen.getByRole("button", { name: /^Pathway Type\b/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: /^Target Year\b/i }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /^Temperature\b/i }),
@@ -169,11 +167,7 @@ describe("SearchSection", () => {
   });
 
   describe("does NOT render ANY/ALL toggle for scalar facets", () => {
-    for (const facet of [
-      "Pathway Type",
-      "Target Year",
-      "Temperature",
-    ] as const) {
+    for (const facet of ["Pathway Type", "Temperature"] as const) {
       it(`facet: ${facet}`, () => {
         render(<SearchSection {...defaultProps} />);
         const trigger = screen.getByRole("button", {
@@ -213,6 +207,24 @@ describe("SearchSection", () => {
 
       clearBtn.click();
       expect(defaultProps.onClear).toHaveBeenCalledTimes(1);
+    });
+
+    it("Temperature use range panels (no ANY/ALL), with 'include absent' checkbox", async () => {
+      render(<SearchSection {...defaultProps} />);
+      // Open Temperature
+      const tempTrigger = screen.getByRole("button", {
+        name: /^temperature\b/i,
+      });
+      await userEvent.click(tempTrigger);
+      expect(screen.getAllByRole("spinbutton")).toHaveLength(2);
+      expect(
+        screen.getByRole("checkbox", {
+          name: /include entries with no value/i,
+        }),
+      ).toBeInTheDocument();
+      // ANY/ALL toggle should not be present in the header for range facets
+      expect(screen.queryByRole("button", { name: /any/i })).toBeNull();
+      expect(screen.queryByRole("button", { name: /all/i })).toBeNull();
     });
   });
 });
