@@ -355,7 +355,7 @@ export default function MultiLineChart({
         <g ref={dots} />
         <g
           ref={tooltip_grp}
-          class="tooltip"
+          className="tooltip"
           display="none"
         >
           <circle r="2.5" />
