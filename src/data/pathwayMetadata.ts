@@ -2,9 +2,7 @@ import { PathwayMetadataType } from "../types";
 import { FileEntry } from "../utils/validateData";
 import { assembleData, decideIncludeInvalid } from "../utils/loadData";
 import pathwayMetadataSchema from "../schema/pathwayMetadata.v1.json" with { type: "json" };
-import publicationSchema from "../schema/common/publication.v1.json" with { type: "json" };
-import labelSchema from "../schema/common/label.v1.json" with { type: "json" };
-import geographyItemSchema from "../schema/common/geographyItem.v1.json" with { type: "json" };
+import { commonSchemas } from "../schema/common";
 
 // 1) Grab every JSON file in this folder **and subfolders**
 //    `eager:true` = load at build time (no async), `import:'default'` = get the parsed JSON
@@ -25,7 +23,7 @@ const entries: FileEntry[] = Object.entries(modules)
 export const pathwayMetadata: PathwayMetadataType[] = assembleData(
   entries,
   pathwayMetadataSchema,
-  [publicationSchema, labelSchema, geographyItemSchema],
+  commonSchemas,
   {
     includeInvalid: decideIncludeInvalid(),
   },

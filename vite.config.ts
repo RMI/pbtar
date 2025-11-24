@@ -14,9 +14,7 @@ import { resolve } from "node:path";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import pkg from "./package.json";
 import pathwayMetadata from "./src/schema/pathwayMetadata.v1.json" with { type: "json" };
-import publicationSchema from "./src/schema/common/publication.v1.json" with { type: "json" };
-import labelSchema from "./src/schema/common/label.v1.json" with { type: "json" };
-import geographyItemSchema from "./src/schema/common/geographyItem.v1.json" with { type: "json" };
+import { commonSchemas } from "./src/schema/common";
 
 // Safe wrapper for OS functions with proper typing
 const getOsInfo = (): {
@@ -150,38 +148,33 @@ function dataValidationPlugin(dir: string = "src/data") {
         String(process.env.GITHUB_ACTIONS || "").toLowerCase() === "true";
 
       // Validate + assemble; surface warnings via Vite's logger
-      assembleData(
-        entries,
-        pathwayMetadata as object,
-        [publicationSchema, labelSchema, geographyItemSchema],
-        {
-          includeInvalid,
-          warn: (msg: string): void => {
-            console.warn(msg);
-          },
-          onInvalid: (problems): void => {
-            // Emit per-file annotations for Actions
-            if (inCI) {
-              for (const p of problems) {
-                const file = join(dir, p.name);
-                // one line per error keeps annotations readable; cap to 20
-                const errs = p.errors.slice(0, 20);
-                for (const e of errs) {
-                  // GitHub Actions workflow command:
-                  // ::warning file=<path>,line=<n>,col=<n>::message
-                  // We don't have line/col (JSON), so omit them.
-                  console.log(`::warning file=${file}::${e}`);
-                }
-                if (p.errors.length > errs.length) {
-                  console.log(
-                    `::notice file=${file}::…and ${p.errors.length - errs.length} more error(s)`,
-                  );
-                }
+      assembleData(entries, pathwayMetadata as object, commonSchemas, {
+        includeInvalid,
+        warn: (msg: string): void => {
+          console.warn(msg);
+        },
+        onInvalid: (problems): void => {
+          // Emit per-file annotations for Actions
+          if (inCI) {
+            for (const p of problems) {
+              const file = join(dir, p.name);
+              // one line per error keeps annotations readable; cap to 20
+              const errs = p.errors.slice(0, 20);
+              for (const e of errs) {
+                // GitHub Actions workflow command:
+                // ::warning file=<path>,line=<n>,col=<n>::message
+                // We don't have line/col (JSON), so omit them.
+                console.log(`::warning file=${file}::${e}`);
+              }
+              if (p.errors.length > errs.length) {
+                console.log(
+                  `::notice file=${file}::…and ${p.errors.length - errs.length} more error(s)`,
+                );
               }
             }
-          },
+          }
         },
-      );
+      });
     },
   };
 }
