@@ -1,7 +1,7 @@
 {
   "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
   "pathwayId": ["TZ-EBAU-2024"],
-  "id": "TZ-EBAU-2024_TS",
+  "id": "TZ-EBAU-2024_timeseries",
   "name": "Enhanced Business as Usual (EBAU) Timeseries Data",
   "description": "ASEAN power model where existing transmission assets expand without altering network configuration.",
   "publisher": "TransitionZero",
