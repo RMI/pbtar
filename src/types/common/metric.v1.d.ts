@@ -24,7 +24,7 @@ export interface MetricV1 {
    */
   definition: string;
   /**
-   * Scope or context within which the metric applies, if any.
+   * Specifies which parts of the sector value chain the metric applies to.
    */
-  sectorScope?: string;
+  sectorScope: string;
 }

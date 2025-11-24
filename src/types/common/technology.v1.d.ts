@@ -5,7 +5,7 @@
  */
 
 /**
- * Display name of a technology, used in both metadata and timeseries schemata.
+ * Display name of the technology as presented in charts or tables.
  */
 export type DisplayName =
   | "Precision Agriculture"

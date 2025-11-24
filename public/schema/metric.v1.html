@@ -202,6 +202,14 @@
             <span class="description"
               ><p>Detailed description of what the metric represents.</p>
             </span>
+
+            <p>
+              <span
+                class="badge badge-light restriction max-length-restriction"
+                id="definition_maxLength"
+                >Must be at most <code>1000</code> characters long</span
+              >
+            </p>
           </div>
         </div>
       </div>
@@ -226,6 +234,9 @@
               onclick="setAnchor('#sectorScope')"
             >
               <span class="property-name">sectorScope</span>
+              <span class="badge badge-warning required-property"
+                >Required</span
+              >
             </button>
           </h2>
         </div>
@@ -260,8 +271,19 @@
             </div>
             <span class="badge badge-dark value-type">Type: string</span><br />
             <span class="description"
-              ><p>Scope or context within which the metric applies, if any.</p>
+              ><p>
+                Specifies which parts of the sector value chain the metric
+                applies to.
+              </p>
             </span>
+
+            <p>
+              <span
+                class="badge badge-light restriction max-length-restriction"
+                id="sectorScope_maxLength"
+                >Must be at most <code>1000</code> characters long</span
+              >
+            </p>
           </div>
         </div>
       </div>

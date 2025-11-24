@@ -198,7 +198,7 @@ export interface PathwayTimeseriesV1 {
  */
 export interface Technology {
   /**
-   * Display name of a technology, used in both metadata and timeseries schemata.
+   * Display name of the technology as presented in charts or tables.
    */
   displayName:
     | "Precision Agriculture"
@@ -258,7 +258,7 @@ export interface Metric {
    */
   definition: string;
   /**
-   * Scope or context within which the metric applies, if any.
+   * Specifies which parts of the sector value chain the metric applies to.
    */
-  sectorScope?: string;
+  sectorScope: string;
 }
