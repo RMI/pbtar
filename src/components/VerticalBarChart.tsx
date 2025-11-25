@@ -3,7 +3,7 @@ import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from "d3-scale";
 import { max } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import "d3-transition";
-import { useRef, useEffect, useMemo } from "react";
+import { MouseEvent, useRef, useEffect, useMemo } from "react";
 import { capitalizeWords } from "../utils/capitalizeWords";
 
 interface DataPoint {
@@ -195,7 +195,7 @@ export default function VerticalBarChart({
         );
     }
 
-    function onMouseOver(event) {
+    function onMouseOver(event: MouseEvent) {
       const selectedYear = select(event.currentTarget).datum().year as string;
       setTooltipDisplay(selectedYear);
     }
