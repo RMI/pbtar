@@ -169,7 +169,7 @@ export default function NumericRange({
           checked={includeAbsent}
           onChange={(e) => update({ includeAbsent: e.target.checked })}
         />
-        Include entries with no value
+        Include pathways without temperature value
       </label>
     </fieldset>
   );

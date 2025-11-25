@@ -416,7 +416,7 @@ const NumericRangeSlider: React.FC<Props> = ({
               checked={internal.includeAbsent}
               onChange={(e) => commit({ includeAbsent: e.target.checked })}
             />
-            <span>Include entries with no value</span>
+            <span>Include pathways without temperature value</span>
           </div>
         </div>
       </div>
