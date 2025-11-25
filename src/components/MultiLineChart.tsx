@@ -60,7 +60,11 @@ export default function MultiLineChart({
   const dots = useRef<SVGGElement>(null);
   const title = useRef<SVGGElement>(null);
   const tooltip_grp = useRef<SVGGElement>(null);
-  const [selectRef, setSelectRef] = useState<string>("");
+  const [selectRef, setSelectRef] = useState<string>(
+    data.data
+      .filter((d) => d.sector === sector && d.metric === metric)
+      .map((d) => d.technology)[0],
+  );
 
   // Memoize scales and data transformations
   const chartSetup = useMemo(() => {
