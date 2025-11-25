@@ -56,7 +56,7 @@ describe("<NumericRangeDropdown>", () => {
     const inputs = screen.getAllByRole("spinbutton");
     expect(inputs).toHaveLength(2);
     const includeAbsent = screen.getByRole("checkbox", {
-      name: /include entries with no value/i,
+      name: /include pathways without temperature value/i,
     });
     expect(includeAbsent).toBeInTheDocument();
 
