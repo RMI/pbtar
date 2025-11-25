@@ -11,7 +11,16 @@ export type Label = import("./common/label.v1").LabelV1;
 /**
  * Bibliographic information about the report or dataset.
  */
-export type Publication = import("./publication.v1").PublicationV1;
+export type Publication = import("./common/publication.v1").PublicationV1;
+/**
+ * A single geography identifier used across schemas. Accepts 'Global', ISO-3166-1 alpha-2 country codes (e.g., 'US', 'DE'), or free-text region names (e.g., 'Europe', 'North America'). Any 2-letter items in the array will be treated as an ISO code. Any 2-letter entries that do not map to a country will throw errors (EU). Do not use full country names, only ISO alpha-2 codes. To avoid typographical errors, items may not be 3 letters long (USA)
+ */
+export type GeographyItem = import("./common/geographyItem.v1").GeographyItemV1;
+/**
+ * Defines which greenhouse gases are covered in the pathway's modeled emissions.
+ */
+export type EmissionsScope =
+  import("./common/emissionsScope.v1").EmissionsScopeV1;
 
 /**
  * A schema for the pathway metadata dataset in PBTAR.
@@ -60,15 +69,16 @@ export interface PathwayMetadataV1 {
    */
   ssp?: "SSP1" | "SSP2" | "SSP3" | "SSP4" | "SSP5";
   /**
-   * Geographical areas that the pathway covers. Can include 'Global', country ISO-3166-1 alpha-2 codes (US, DE), or free-text region names (e.g., 'Europe', 'OECD'). Any 2-letter items in the array will be treated as an ISO code. Any 2-letter entries that do not map to a country will throw errors (EU). Do not use full country names, only ISO alpha-2 codes. To avoid typographical errors, items in this array may not be 3 letters long (USA)
+   * Geographical areas that the pathway covers.
    */
-  geography: ({
-    [k: string]: unknown;
-  } & string)[];
+  geography: GeographyItem[];
   /**
    * Sectors that the pathway covers.
    */
   sectors: {
+    /**
+     * Display name of a sector.
+     */
     name:
       | "Land Use"
       | "Agriculture"
@@ -133,13 +143,7 @@ export interface PathwayMetadataV1 {
    * Expert recommendation for the pathway.
    */
   expertOverview: string;
-  metric: (
-    | "Emissions Intensity"
-    | "Capacity"
-    | "Generation"
-    | "Technology Mix"
-    | "Absolute Emissions"
-  )[];
+  metric: import("./common/metric.v1").MetricV1["displayName"][];
   /**
    * Key features of the pathway.
    */
@@ -232,16 +236,7 @@ export interface PathwayMetadataV1 {
       | "Minor technology deployment"
       | "Moderate technology deployment"
       | "Signif. technology deployment";
-    /**
-     * Defines which greenhouse gases are covered in the pathway’s emissions accounting.
-     */
-    emissionsScope:
-      | "No information"
-      | "CO2"
-      | "CO2e (Kyoto)"
-      | "CO2e (CO2, Methane)"
-      | "CO2e (unspecified GHGs)"
-      | "Other emissions scope";
+    emissionsScope: EmissionsScope;
     /**
      * Represents the overall stringency and intent of modeled policies relative to climate targets, often reflecting if and how far the included policies go beyond currently legislated ones
      */

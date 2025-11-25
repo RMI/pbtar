@@ -1,5 +1,4 @@
 import { describe, test, expect } from "vitest";
-import pathwayMetadata from "../schema/pathwayMetadata.v1.json";
 import {
   pathwayTypeTooltips,
   sectorTooltips,
@@ -7,6 +6,9 @@ import {
   getSectorTooltip,
   unknownTooltip,
 } from "./tooltipUtils";
+
+import pathwayMetadata from "../schema/pathwayMetadata.v1.json";
+import sectorSchema from "../schema/common/sector.v1.json" with { type: "json" };
 
 const schema: unknown = pathwayMetadata;
 
@@ -112,24 +114,6 @@ const CHECKS: Array<{
     record: pathwayTypeTooltips,
     getter: getPathwayTypeTooltip,
   },
-  {
-    label: "sectors.name",
-    // schema.items.properties.sectors.items.properties.name.enum
-    schemaPath: [
-      "properties",
-      "sectors",
-      "items",
-      "properties",
-      "name",
-      "enum",
-    ] as const,
-    record: sectorTooltips,
-    getter: getSectorTooltip,
-  },
-  // If/when you add tooltip Records for other enums, add them here:
-  // ssp
-  // metric
-  // technologies
 ];
 
 describe("Tooltip <-> JSON Schema enum integration", () => {
@@ -141,5 +125,23 @@ describe("Tooltip <-> JSON Schema enum integration", () => {
       record,
       getter,
     });
+  });
+});
+
+// sectors.name now comes from the extracted common schema:
+describe("sectors.name tooltip coverage (from common/sector.v1.json)", () => {
+  const sectorEnum =
+    isRecord(sectorSchema) &&
+    isRecord(sectorSchema.$defs) &&
+    isRecord(sectorSchema.$defs.displayName) &&
+    Array.isArray(sectorSchema.$defs.displayName.enum)
+      ? sectorSchema.$defs.displayName.enum
+      : [];
+
+  expectTooltipCoverage({
+    label: "sectors.name",
+    schemaValues: sectorEnum,
+    record: sectorTooltips,
+    getter: getSectorTooltip,
   });
 });

@@ -4,31 +4,6 @@
   "title": "Pathway Timeseries",
   "description": "A schema for the pathway timeseries dataset in PBTAR.",
   "type": "object",
-  "$defs": {
-    "sectorDisplayName": {
-      "type": "string",
-      "enum": [
-        "Land Use",
-        "Agriculture",
-        "Buildings",
-        "Industry",
-        "Steel",
-        "Cement",
-        "Chemicals",
-        "Coal Mining",
-        "Oil (Upstream)",
-        "Gas (Upstream)",
-        "Power",
-        "Automotive",
-        "Transport",
-        "Road transport",
-        "Aviation",
-        "Rail",
-        "Shipping",
-        "Other"
-      ]
-    }
-  },
   "properties": {
     "$schema": {
       "description": "URI of the schema that validates this document (see https://json-schema.org/).",
@@ -87,16 +62,8 @@
       "maxLength": 500
     },
     "emissionsScope": {
-      "description": "Defines which greenhouse gases are covered in the pathway's modeled emissions.",
-      "type": "string",
-      "enum": [
-        "No information",
-        "CO2",
-        "CO2e (Kyoto)",
-        "CO2e (CO2, Methane)",
-        "CO2e (unspecified GHGs)",
-        "Other emissions scope"
-      ]
+      "$ref": "http://pathways.rmi.org/schema/common/emissionsScope.v1.json",
+      "tsType": "import('./common/emissionsScope.v1').EmissionsScopeV1"
     },
     "sector": {
       "description": "Sectors that the timeseries data covers.",
@@ -107,60 +74,15 @@
           "properties": {
             "displayName": {
               "description": "Display name of the sector as presented in charts or tables.",
-              "$ref": "#/$defs/sectorDisplayName"
+
+              "$ref": "http://pathways.rmi.org/schema/common/sector.v1.json#/$defs/displayName"
             },
             "technology": {
               "description": "Technologies that belong to this sector, each with a name and definition.",
               "type": "object",
               "patternProperties": {
                 "^[A-Za-z0-9 _-]{1,100}$": {
-                  "type": "object",
-                  "properties": {
-                    "displayName": {
-                      "description": "Display name of the technology as presented in charts or tables.",
-                      "type": "string",
-                      "enum": [
-                        "Precision Agriculture",
-                        "Agroforestry",
-                        "Bioenergy Crops",
-                        "Energy Efficiency",
-                        "Smart Grids",
-                        "Renewable Heating",
-                        "Heat Pumps",
-                        "Building Automation",
-                        "Smart Appliances",
-                        "Insulation",
-                        "Carbon Capture and Storage",
-                        "Electrification",
-                        "Process Optimization",
-                        "Hydrogen Use",
-                        "Coal",
-                        "Oil",
-                        "Gas",
-                        "Wind",
-                        "Solar",
-                        "Nuclear",
-                        "Biomass",
-                        "Hydro",
-                        "Renewables",
-                        "Electric Vehicles",
-                        "Hydrogen Vehicles",
-                        "Biofuels",
-                        "Public Transport",
-                        "Active Mobility",
-                        "Aviation Efficiency",
-                        "Maritime Efficiency",
-                        "Other"
-                      ]
-                    },
-                    "definition": {
-                      "description": "Brief definition or description of the technology scope (e.g., what it includes or excludes).",
-                      "type": "string",
-                      "maxLength": 1000
-                    }
-                  },
-                  "additionalProperties": false,
-                  "required": ["displayName", "definition"]
+                  "$ref": "http://pathways.rmi.org/schema/common/technology.v1.json"
                 }
               },
               "additionalProperties": false,
@@ -171,32 +93,7 @@
               "type": "object",
               "patternProperties": {
                 "^[A-Za-z0-9 _-]{1,100}$": {
-                  "type": "object",
-                  "properties": {
-                    "displayName": {
-                      "description": "Display name of the metric as presented in charts or tables.",
-                      "type": "string",
-                      "enum": [
-                        "Emissions Intensity",
-                        "Capacity",
-                        "Generation",
-                        "Technology Mix",
-                        "Absolute Emissions"
-                      ]
-                    },
-                    "definition": {
-                      "description": "Brief definition or description of the metric.",
-                      "type": "string",
-                      "maxLength": 1000
-                    },
-                    "sectorScope": {
-                      "description": "Specifies which parts of the sector value chain the metric applies to.",
-                      "type": "string",
-                      "maxLength": 1000
-                    }
-                  },
-                  "additionalProperties": false,
-                  "required": ["displayName", "definition", "sectorScope"]
+                  "$ref": "http://pathways.rmi.org/schema/common/metric.v1.json"
                 }
               },
               "additionalProperties": false,
@@ -222,11 +119,8 @@
           },
           "geography": {
             "description": "Geographical area that the data covers. This should be a single string value: either 'Global', a country ISO-3166-1 alpha-2 code (e.g., 'US', 'DE'), or a free-text region name (e.g., 'North America', 'South East Asia'). Only 2-letter codes are accepted for countries; do not use full country names or 3-letter codes (e.g., 'USA' is not allowed). If a 2-letter code does not map to a country (e.g., 'EU'), it will result in an error.",
-            "type": "string",
-            "allOf": [
-              { "pattern": "^(?!\\s*$).+" },
-              { "not": { "pattern": "^[A-Za-z]{3}$" } }
-            ]
+            "$ref": "http://pathways.rmi.org/schema/common/geographyItem.v1.json",
+            "tsType": "import('./common/geographyItem.v1').GeographyItemV1"
           },
           "sector": {
             "description": "Sector to which this data point belongs (must match one of the defined sectors).",

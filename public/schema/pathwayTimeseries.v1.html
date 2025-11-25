@@ -894,6 +894,7 @@
                 >emissionsScope</a
               >
             </div>
+            <h4>Emissions Scope</h4>
             <span class="badge badge-dark value-type"
               >Type: enum (of string)</span
             ><br />
@@ -903,6 +904,7 @@
                 modeled emissions.
               </p>
             </span>
+
             <div
               class="enum-value"
               id="emissionsScope_enum"
@@ -1362,7 +1364,7 @@
                                       onclick="setAnchor('#sector_pattern1_technology_pattern1')"
                                     >
                                       <span class="property-name"
-                                        >^[A-Za-z0-9 _-]{1,100}$</span
+                                        >Technology</span
                                       >
                                       <span
                                         class="badge badge-info pattern-property"
@@ -1465,12 +1467,17 @@
                                       <a
                                         href="#sector_pattern1_technology_pattern1"
                                         onclick="anchorLink('sector_pattern1_technology_pattern1')"
-                                        >^[A-Za-z0-9 _-]{1,100}$</a
+                                        >Technology</a
                                       >
                                     </div>
+                                    <h4>Technology</h4>
                                     <span class="badge badge-dark value-type"
                                       >Type: object</span
                                     ><br />
+                                    <span class="description"
+                                      ><p>Technologies for sectors</p>
+                                    </span>
+
                                     <span class="badge badge-info no-additional"
                                       >No Additional Properties</span
                                     >
@@ -1584,7 +1591,7 @@
                                               <a
                                                 href="#sector_pattern1_technology_pattern1"
                                                 onclick="anchorLink('sector_pattern1_technology_pattern1')"
-                                                >^[A-Za-z0-9 _-]{1,100}$</a
+                                                >Technology</a
                                               >
                                               <svg
                                                 width="1em"
@@ -1616,6 +1623,7 @@
                                                 tables.
                                               </p>
                                             </span>
+
                                             <div
                                               class="enum-value"
                                               id="sector_pattern1_technology_pattern1_displayName_enum"
@@ -1892,7 +1900,7 @@
                                               <a
                                                 href="#sector_pattern1_technology_pattern1"
                                                 onclick="anchorLink('sector_pattern1_technology_pattern1')"
-                                                >^[A-Za-z0-9 _-]{1,100}$</a
+                                                >Technology</a
                                               >
                                               <svg
                                                 width="1em"
@@ -2067,9 +2075,7 @@
                                       aria-controls="sector_pattern1_metric_pattern1"
                                       onclick="setAnchor('#sector_pattern1_metric_pattern1')"
                                     >
-                                      <span class="property-name"
-                                        >^[A-Za-z0-9 _-]{1,100}$</span
-                                      >
+                                      <span class="property-name">Metric</span>
                                       <span
                                         class="badge badge-info pattern-property"
                                         >Pattern Property</span
@@ -2171,12 +2177,20 @@
                                       <a
                                         href="#sector_pattern1_metric_pattern1"
                                         onclick="anchorLink('sector_pattern1_metric_pattern1')"
-                                        >^[A-Za-z0-9 _-]{1,100}$</a
+                                        >Metric</a
                                       >
                                     </div>
+                                    <h4>Metric</h4>
                                     <span class="badge badge-dark value-type"
                                       >Type: object</span
                                     ><br />
+                                    <span class="description"
+                                      ><p>
+                                        Common definition of a metric used
+                                        across pathway schemas.
+                                      </p>
+                                    </span>
+
                                     <span class="badge badge-info no-additional"
                                       >No Additional Properties</span
                                     >
@@ -2290,7 +2304,7 @@
                                               <a
                                                 href="#sector_pattern1_metric_pattern1"
                                                 onclick="anchorLink('sector_pattern1_metric_pattern1')"
-                                                >^[A-Za-z0-9 _-]{1,100}$</a
+                                                >Metric</a
                                               >
                                               <svg
                                                 width="1em"
@@ -2316,11 +2330,9 @@
                                               >Type: enum (of string)</span
                                             ><br />
                                             <span class="description"
-                                              ><p>
-                                                Display name of the metric as
-                                                presented in charts or tables.
-                                              </p>
+                                              ><p>Display name of the metric</p>
                                             </span>
+
                                             <div
                                               class="enum-value"
                                               id="sector_pattern1_metric_pattern1_displayName_enum"
@@ -2467,7 +2479,7 @@
                                               <a
                                                 href="#sector_pattern1_metric_pattern1"
                                                 onclick="anchorLink('sector_pattern1_metric_pattern1')"
-                                                >^[A-Za-z0-9 _-]{1,100}$</a
+                                                >Metric</a
                                               >
                                               <svg
                                                 width="1em"
@@ -2494,8 +2506,8 @@
                                             ><br />
                                             <span class="description"
                                               ><p>
-                                                Brief definition or description
-                                                of the metric.
+                                                Detailed description of what the
+                                                metric represents.
                                               </p>
                                             </span>
 
@@ -2621,7 +2633,7 @@
                                               <a
                                                 href="#sector_pattern1_metric_pattern1"
                                                 onclick="anchorLink('sector_pattern1_metric_pattern1')"
-                                                >^[A-Za-z0-9 _-]{1,100}$</a
+                                                >Metric</a
                                               >
                                               <svg
                                                 width="1em"
@@ -7350,7 +7362,10 @@
                             >geography</a
                           >
                         </div>
-                        <br />
+                        <h4>Geography Item</h4>
+                        <span class="badge badge-dark value-type"
+                          >Type: string</span
+                        ><br />
                         <span class="description"
                           ><p>
                             Geographical area that the data covers. This should
@@ -7364,6 +7379,7 @@
                             result in an error.
                           </p>
                         </span>
+
                         <div
                           class="all-of-value"
                           id="data_items_geography_allOf"
@@ -7738,6 +7754,82 @@
                                 </div>
                               </div>
                             </div>
+                          </div>
+                        </div>
+
+                        <p>
+                          <span
+                            class="badge badge-light restriction min-length-restriction"
+                            id="data_items_geography_minLength"
+                            >Must be at least <code>1</code> characters
+                            long</span
+                          >
+                        </p>
+
+                        <br />
+                        <div class="badge badge-secondary">Examples:</div>
+                        <br />
+                        <div
+                          id="data_items_geography_ex1"
+                          class="jumbotron examples"
+                        >
+                          <div class="highlight">
+                            <pre><span></span><span class="s2">&quot;Global&quot;</span>
+</pre>
+                          </div>
+                        </div>
+                        <div
+                          id="data_items_geography_ex2"
+                          class="jumbotron examples"
+                        >
+                          <div class="highlight">
+                            <pre><span></span><span class="s2">&quot;South East Asia&quot;</span>
+</pre>
+                          </div>
+                        </div>
+                        <div
+                          id="data_items_geography_ex3"
+                          class="jumbotron examples"
+                        >
+                          <div class="highlight">
+                            <pre><span></span><span class="s2">&quot;Europe&quot;</span>
+</pre>
+                          </div>
+                        </div>
+                        <div
+                          id="data_items_geography_ex4"
+                          class="jumbotron examples"
+                        >
+                          <div class="highlight">
+                            <pre><span></span><span class="s2">&quot;North America&quot;</span>
+</pre>
+                          </div>
+                        </div>
+                        <div
+                          id="data_items_geography_ex5"
+                          class="jumbotron examples"
+                        >
+                          <div class="highlight">
+                            <pre><span></span><span class="s2">&quot;US&quot;</span>
+</pre>
+                          </div>
+                        </div>
+                        <div
+                          id="data_items_geography_ex6"
+                          class="jumbotron examples"
+                        >
+                          <div class="highlight">
+                            <pre><span></span><span class="s2">&quot;DE&quot;</span>
+</pre>
+                          </div>
+                        </div>
+                        <div
+                          id="data_items_geography_ex7"
+                          class="jumbotron examples"
+                        >
+                          <div class="highlight">
+                            <pre><span></span><span class="s2">&quot;PH&quot;</span>
+</pre>
                           </div>
                         </div>
                       </div>

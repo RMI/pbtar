@@ -5,6 +5,16 @@
  */
 
 /**
+ * Defines which greenhouse gases are covered in the pathway's modeled emissions.
+ */
+export type EmissionsScope =
+  import("./common/emissionsScope.v1").EmissionsScopeV1;
+/**
+ * Geographical area that the data covers. This should be a single string value: either 'Global', a country ISO-3166-1 alpha-2 code (e.g., 'US', 'DE'), or a free-text region name (e.g., 'North America', 'South East Asia'). Only 2-letter codes are accepted for countries; do not use full country names or 3-letter codes (e.g., 'USA' is not allowed). If a 2-letter code does not map to a country (e.g., 'EU'), it will result in an error.
+ */
+export type GeographyItem = import("./common/geographyItem.v1").GeographyItemV1;
+
+/**
  * A schema for the pathway timeseries dataset in PBTAR.
  */
 export interface PathwayTimeseriesV1 {
@@ -48,16 +58,7 @@ export interface PathwayTimeseriesV1 {
    * Data source for the timeseries data.
    */
   source: string;
-  /**
-   * Defines which greenhouse gases are covered in the pathway's modeled emissions.
-   */
-  emissionsScope:
-    | "No information"
-    | "CO2"
-    | "CO2e (Kyoto)"
-    | "CO2e (CO2, Methane)"
-    | "CO2e (unspecified GHGs)"
-    | "Other emissions scope";
+  emissionsScope: EmissionsScope;
   /**
    * Sectors that the timeseries data covers.
    */
@@ -93,79 +94,13 @@ export interface PathwayTimeseriesV1 {
        * Technologies that belong to this sector, each with a name and definition.
        */
       technology?: {
-        /**
-         * This interface was referenced by `undefined`'s JSON-Schema definition
-         * via the `patternProperty` "^[A-Za-z0-9 _-]{1,100}$".
-         */
-        [k: string]: {
-          /**
-           * Display name of the technology as presented in charts or tables.
-           */
-          displayName:
-            | "Precision Agriculture"
-            | "Agroforestry"
-            | "Bioenergy Crops"
-            | "Energy Efficiency"
-            | "Smart Grids"
-            | "Renewable Heating"
-            | "Heat Pumps"
-            | "Building Automation"
-            | "Smart Appliances"
-            | "Insulation"
-            | "Carbon Capture and Storage"
-            | "Electrification"
-            | "Process Optimization"
-            | "Hydrogen Use"
-            | "Coal"
-            | "Oil"
-            | "Gas"
-            | "Wind"
-            | "Solar"
-            | "Nuclear"
-            | "Biomass"
-            | "Hydro"
-            | "Renewables"
-            | "Electric Vehicles"
-            | "Hydrogen Vehicles"
-            | "Biofuels"
-            | "Public Transport"
-            | "Active Mobility"
-            | "Aviation Efficiency"
-            | "Maritime Efficiency"
-            | "Other";
-          /**
-           * Brief definition or description of the technology scope (e.g., what it includes or excludes).
-           */
-          definition: string;
-        };
+        [k: string]: Technology;
       };
       /**
        * Metrics available for this sector, describing what quantities are tracked (e.g., capacity, emissions).
        */
       metric?: {
-        /**
-         * This interface was referenced by `undefined`'s JSON-Schema definition
-         * via the `patternProperty` "^[A-Za-z0-9 _-]{1,100}$".
-         */
-        [k: string]: {
-          /**
-           * Display name of the metric as presented in charts or tables.
-           */
-          displayName:
-            | "Emissions Intensity"
-            | "Capacity"
-            | "Generation"
-            | "Technology Mix"
-            | "Absolute Emissions";
-          /**
-           * Brief definition or description of the metric.
-           */
-          definition: string;
-          /**
-           * Specifies which parts of the sector value chain the metric applies to.
-           */
-          sectorScope: string;
-        };
+        [k: string]: Metric;
       };
     };
   };
@@ -177,12 +112,7 @@ export interface PathwayTimeseriesV1 {
      * Calendar year of the data point.
      */
     year: number;
-    /**
-     * Geographical area that the data covers. This should be a single string value: either 'Global', a country ISO-3166-1 alpha-2 code (e.g., 'US', 'DE'), or a free-text region name (e.g., 'North America', 'South East Asia'). Only 2-letter codes are accepted for countries; do not use full country names or 3-letter codes (e.g., 'USA' is not allowed). If a 2-letter code does not map to a country (e.g., 'EU'), it will result in an error.
-     */
-    geography: {
-      [k: string]: unknown;
-    } & string;
+    geography: GeographyItem;
     /**
      * Sector to which this data point belongs (must match one of the defined sectors).
      */
@@ -259,4 +189,76 @@ export interface PathwayTimeseriesV1 {
      */
     unit: "tCO2e/MWh" | "MtCO2e" | "GW" | "TWh" | "%";
   }[];
+}
+/**
+ * Technologies for sectors
+ *
+ * This interface was referenced by `undefined`'s JSON-Schema definition
+ * via the `patternProperty` "^[A-Za-z0-9 _-]{1,100}$".
+ */
+export interface Technology {
+  /**
+   * Display name of the technology as presented in charts or tables.
+   */
+  displayName:
+    | "Precision Agriculture"
+    | "Agroforestry"
+    | "Bioenergy Crops"
+    | "Energy Efficiency"
+    | "Smart Grids"
+    | "Renewable Heating"
+    | "Heat Pumps"
+    | "Building Automation"
+    | "Smart Appliances"
+    | "Insulation"
+    | "Carbon Capture and Storage"
+    | "Electrification"
+    | "Process Optimization"
+    | "Hydrogen Use"
+    | "Coal"
+    | "Oil"
+    | "Gas"
+    | "Wind"
+    | "Solar"
+    | "Nuclear"
+    | "Biomass"
+    | "Hydro"
+    | "Renewables"
+    | "Electric Vehicles"
+    | "Hydrogen Vehicles"
+    | "Biofuels"
+    | "Public Transport"
+    | "Active Mobility"
+    | "Aviation Efficiency"
+    | "Maritime Efficiency"
+    | "Other";
+  /**
+   * Brief definition or description of the technology scope (e.g., what it includes or excludes).
+   */
+  definition: string;
+}
+/**
+ * Common definition of a metric used across pathway schemas.
+ *
+ * This interface was referenced by `undefined`'s JSON-Schema definition
+ * via the `patternProperty` "^[A-Za-z0-9 _-]{1,100}$".
+ */
+export interface Metric {
+  /**
+   * Display name of the metric
+   */
+  displayName:
+    | "Emissions Intensity"
+    | "Capacity"
+    | "Generation"
+    | "Technology Mix"
+    | "Absolute Emissions";
+  /**
+   * Detailed description of what the metric represents.
+   */
+  definition: string;
+  /**
+   * Specifies which parts of the sector value chain the metric applies to.
+   */
+  sectorScope: string;
 }
