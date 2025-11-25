@@ -4,7 +4,7 @@ import { line } from "d3-shape";
 import { utcParse } from "d3-time-format";
 import { ascending, extent, groups, leastIndex, range } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
-import { useRef, useEffect, useMemo } from "react";
+import { useRef, useEffect, useMemo, useState } from "react";
 import { capitalizeWords } from "../utils/capitalizeWords";
 
 interface DataPoint {
@@ -43,7 +43,7 @@ export default function MultiLineChart({
   height = 400,
   marginTop = 40,
   marginRight = 80,
-  marginBottom = 30,
+  marginBottom = 55,
   marginLeft = 50,
   sector = "power",
   metric = "capacity",
@@ -59,7 +59,12 @@ export default function MultiLineChart({
   const lines = useRef<SVGGElement>(null);
   const dots = useRef<SVGGElement>(null);
   const title = useRef<SVGGElement>(null);
-  const selectRef = useRef<HTMLSelectElement>(null);
+  const tooltip_grp = useRef<SVGGElement>(null);
+  const [selectRef, setSelectRef] = useState<string>(
+    data.data
+      .filter((d) => d.sector === sector && d.metric === metric)
+      .map((d) => d.technology)[0],
+  );
 
   // Memoize scales and data transformations
   const chartSetup = useMemo(() => {
@@ -132,6 +137,7 @@ export default function MultiLineChart({
       !gy.current ||
       !lines.current ||
       !title.current ||
+      !tooltip_grp.current ||
       !chartSetup
     )
       return;
@@ -173,7 +179,7 @@ export default function MultiLineChart({
       .style("font-size", "12px");
 
     const groupedData = groups(d3data, (d) => d.technology);
-    const selectedTech = selectRef.current?.value;
+    const selectedTech = selectRef;
 
     // Update lines
     (
@@ -235,9 +241,7 @@ export default function MultiLineChart({
       d.unit,
     ]);
 
-    const dot = svg.append("g").attr("display", "none");
-
-    dot.append("circle").attr("r", 2.5);
+    const dot = select(tooltip_grp.current);
 
     const tooltipBoxElem = dot
       .selectAll<SVGPathElement, unknown>("path")
@@ -257,7 +261,9 @@ export default function MultiLineChart({
       .on("pointerenter", pointerentered)
       .on("pointermove", pointermoved)
       .on("pointerleave", pointerleft)
-      .on("touchstart", (event: TouchEvent) => event.preventDefault());
+      .on("touchstart", (event: TouchEvent) => event.preventDefault())
+      .on("click", pointerclicked);
+
     function pointermoved(event: PointerEvent) {
       const [xm, ym] = pointer(event);
       const i = leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
@@ -298,7 +304,7 @@ export default function MultiLineChart({
     }
 
     function pointerleft() {
-      const selectedTech = selectRef.current?.value;
+      const selectedTech = selectRef;
       path
         .style("mix-blend-mode", "multiply")
         .attr("stroke", (d: GroupedData) =>
@@ -310,7 +316,13 @@ export default function MultiLineChart({
       dot.attr("display", "none");
     }
 
-    svg.on("touchstart", (event: TouchEvent) => event.preventDefault());
+    function pointerclicked(event: PointerEvent) {
+      const [xm, ym] = pointer(event);
+      const i = leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
+      if (i === undefined || i < 0) return;
+      const clicked_tech = points[i][2];
+      setSelectRef(clicked_tech as string);
+    }
 
     function size(
       text: Selection<SVGTextElement, unknown, null, undefined>,
@@ -325,28 +337,7 @@ export default function MultiLineChart({
         `M${-w / 2 - 10},5H-5l5,-5l5,5H${w / 2 + 10}v${h + 20}h-${w + 20}z`,
       );
     }
-  }, [d3data, chartSetup, sector, metric, marginTop, width]);
-
-  const highlightSelectedTech = (selectedTech: string): void => {
-    if (!lines.current) return;
-
-    select(lines.current)
-      .selectAll<SVGPathElement, GroupedData>(".line")
-      .attr("stroke", (d) =>
-        d[0] === selectedTech ? "var(--color-donate)" : "var(--color-coal)",
-      )
-      .attr("stroke-width", (d) => (d[0] === selectedTech ? 3 : 1));
-  };
-
-  const uniqueTechs = (data: ChartData): string[] => {
-    return Array.from(
-      new Set(
-        data.data
-          .map((a) => a.technology)
-          .filter((n): n is string => n !== null && n !== undefined),
-      ),
-    );
-  };
+  }, [d3data, selectRef, chartSetup, sector, metric, marginTop, width]);
 
   return (
     <div className="flex flex-col items-center">
@@ -366,27 +357,14 @@ export default function MultiLineChart({
         />
         <g ref={lines} />
         <g ref={dots} />
+        <g
+          ref={tooltip_grp}
+          className="tooltip"
+          display="none"
+        >
+          <circle r="2.5" />
+        </g>
       </svg>
-      <div className="mt-4">
-        <label className="mr-2">
-          Highlight:
-          <select
-            ref={selectRef}
-            onChange={(e) => highlightSelectedTech(e.target.value)}
-            className="ml-2 p-1 border rounded"
-          >
-            {data &&
-              uniqueTechs(data).map((tech) => (
-                <option
-                  key={tech}
-                  value={tech}
-                >
-                  {capitalizeWords(tech)}
-                </option>
-              ))}
-          </select>
-        </label>
-      </div>
     </div>
   );
 }
