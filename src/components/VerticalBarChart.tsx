@@ -185,12 +185,12 @@ export default function VerticalBarChart({
       select(tooltips.current)
         .selectAll<SVGTextElement, string>("text")
         .join()
-        .attr("display", (d) => (d.year === selectedYear ? "display" : "none"));
+        .attr("display", (d) => (d.year === selectedYear ? "inline" : "none"));
 
       select(tooltips.current)
         .selectAll<SVGPathElement, unknown>("path")
         .join()
-        .attr("display", (d) => (d.year === selectedYear ? "display" : "none"));
+        .attr("display", (d) => (d.year === selectedYear ? "inline" : "none"));
     }
 
     function onMouseOut() {
