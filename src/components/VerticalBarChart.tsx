@@ -179,30 +179,25 @@ export default function VerticalBarChart({
       .attr("font-size", "12px")
       .text((d) => d.value + " " + d.unit);
 
-    function onMouseOver() {
-      const selectedYear = select(this).datum().year as number;
-
+    function setTooltipDisplay(year: string | null) {
       select(tooltips.current)
         .selectAll<SVGTextElement, string>("text")
         .join()
-        .attr("display", (d) => (d.year === selectedYear ? "inline" : "none"));
+        .attr("display", (d) => (year !== null && d.year === year ? "display" : "none"));
 
       select(tooltips.current)
         .selectAll<SVGPathElement, unknown>("path")
         .join()
-        .attr("display", (d) => (d.year === selectedYear ? "inline" : "none"));
+        .attr("display", (d) => (year !== null && d.year === year ? "display" : "none"));
+    }
+
+    function onMouseOver() {
+      const selectedYear = select(this).datum().year as string;
+      setTooltipDisplay(selectedYear);
     }
 
     function onMouseOut() {
-      select(tooltips.current)
-        .selectAll<SVGTextElement, string>("text")
-        .join()
-        .attr("display", "none");
-
-      select(tooltips.current)
-        .selectAll<SVGPathElement, unknown>("path")
-        .join()
-        .attr("display", "none");
+      setTooltipDisplay(null);
     }
   }, [
     d3data,
