@@ -183,16 +183,20 @@ export default function VerticalBarChart({
       select(tooltips.current)
         .selectAll<SVGTextElement, string>("text")
         .join()
-        .attr("display", (d) => (year !== null && d.year === year ? "display" : "none"));
+        .attr("display", (d) =>
+          year !== null && d.year === year ? "display" : "none",
+        );
 
       select(tooltips.current)
         .selectAll<SVGPathElement, unknown>("path")
         .join()
-        .attr("display", (d) => (year !== null && d.year === year ? "display" : "none"));
+        .attr("display", (d) =>
+          year !== null && d.year === year ? "display" : "none",
+        );
     }
 
-    function onMouseOver() {
-      const selectedYear = select(this).datum().year as string;
+    function onMouseOver(event) {
+      const selectedYear = select(event.currentTarget).datum().year as string;
       setTooltipDisplay(selectedYear);
     }
 
