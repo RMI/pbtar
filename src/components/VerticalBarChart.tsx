@@ -3,7 +3,7 @@ import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from "d3-scale";
 import { max } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import "d3-transition";
-import { useRef, useEffect, useMemo } from "react";
+import { MouseEvent, useRef, useEffect, useMemo } from "react";
 import { capitalizeWords } from "../utils/capitalizeWords";
 
 interface DataPoint {
@@ -59,6 +59,7 @@ export default function VerticalBarChart({
   const gy = useRef<SVGGElement>(null);
   const bars = useRef<SVGGElement>(null);
   const title = useRef<SVGGElement>(null);
+  const tooltips = useRef<SVGGElement>(null);
 
   const chartSetup = useMemo<ChartScales>(() => {
     const unit = d3data[0]?.unit ?? "";
@@ -81,7 +82,8 @@ export default function VerticalBarChart({
       !gx.current ||
       !gy.current ||
       !bars.current ||
-      !title.current
+      !title.current ||
+      !tooltips.current
     )
       return;
 
@@ -130,7 +132,77 @@ export default function VerticalBarChart({
       .attr("x", (d) => x(d.year) ?? 0)
       .attr("y", (d) => y(d.value))
       .attr("height", (d) => y(0) - y(d.value))
-      .attr("width", x.bandwidth());
+      .attr("width", x.bandwidth())
+      .on("mouseover", onMouseOver)
+      .on("mouseout", onMouseOut);
+
+    // Update tooltips
+    const ttwidth = 110;
+
+    select(tooltips.current)
+      .selectAll<SVGPathElement, unknown>("path")
+      .data(d3data)
+      .join("path")
+      .attr("display", "none")
+      .attr("fill", "white")
+      .attr("stroke", "black")
+      .attr("stroke-width", 1)
+      .attr("stroke-linejoin", "round")
+      .attr(
+        "transform",
+        (d) =>
+          "translate(" +
+          (x(d.year) + x.bandwidth() / 2) +
+          " " +
+          y(d.value) +
+          ")",
+      )
+      .attr(
+        "d",
+        "M0,0 l 5,-5 h " +
+          (ttwidth / 2 - 5) +
+          " v -20 h -" +
+          ttwidth +
+          " v 20 h " +
+          (ttwidth / 2 - 5) +
+          " Z",
+      );
+
+    select(tooltips.current)
+      .selectAll<SVGTextElement, string>("text")
+      .data(d3data)
+      .join("text")
+      .attr("display", "none")
+      .attr("x", (d) => x(d.year) + x.bandwidth() / 2)
+      .attr("y", (d) => y(d.value) - 10)
+      .attr("text-anchor", "middle")
+      .attr("font-size", "12px")
+      .text((d) => d.value + " " + d.unit);
+
+    function setTooltipDisplay(year: string | null) {
+      select(tooltips.current)
+        .selectAll<SVGTextElement, string>("text")
+        .join()
+        .attr("display", (d) =>
+          year !== null && d.year === year ? "display" : "none",
+        );
+
+      select(tooltips.current)
+        .selectAll<SVGPathElement, unknown>("path")
+        .join()
+        .attr("display", (d) =>
+          year !== null && d.year === year ? "display" : "none",
+        );
+    }
+
+    function onMouseOver(event: MouseEvent) {
+      const selectedYear = select(event.currentTarget).datum().year as string;
+      setTooltipDisplay(selectedYear);
+    }
+
+    function onMouseOut() {
+      setTooltipDisplay(null);
+    }
   }, [
     d3data,
     width,
@@ -166,6 +238,10 @@ export default function VerticalBarChart({
       <g
         ref={bars}
         className="bars"
+      />
+      <g
+        ref={tooltips}
+        className="tooltips"
       />
     </svg>
   );
