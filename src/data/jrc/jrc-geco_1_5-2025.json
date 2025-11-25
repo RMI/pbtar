@@ -22,7 +22,7 @@
       }
     ]
   },
-  "name": { "full": "1.5°C scenario", "short": "1.5°C" },
+  "name": { "full": "1.5°C Scenario", "short": "1.5°C" },
   "description": "Global normative pathway peaking at 1.5°C warming before declining to 1.3°C by 2100.",
   "geography": [
     "Global",
