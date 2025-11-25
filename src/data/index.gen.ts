@@ -129,7 +129,7 @@ export const index: TimeseriesIndex = {
     "JRC-GECO-1.5C-2025": [
       {
         datasetId: "JRC-GECO-1.5C-2025_timeseries",
-        label: "1.5C scenario (1.5C) Timeseries Data",
+        label: "1.5C Scenario (1.5C) Timeseries Data",
         summary: {
           rowCount: 1566,
           yearRange: [2020, 2070],
@@ -319,7 +319,7 @@ export const index: TimeseriesIndex = {
     "JRC-GECO-1.5C-2025_timeseries": {
       datasetId: "JRC-GECO-1.5C-2025_timeseries",
       pathwayIds: ["JRC-GECO-1.5C-2025"],
-      label: "1.5C scenario (1.5C) Timeseries Data",
+      label: "1.5C Scenario (1.5C) Timeseries Data",
       summary: {
         rowCount: 1566,
         yearRange: [2020, 2070],
