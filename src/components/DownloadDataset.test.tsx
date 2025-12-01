@@ -29,4 +29,14 @@ describe("<DownloadDataset />", () => {
     );
     expect(screen.getByText(/1990/)).toBeInTheDocument();
   });
+
+  it("displays disclaimer about data deviations", () => {
+    render(
+      <DownloadDataset
+        label="Dataset"
+        href="/data/ds.json"
+      />,
+    );
+    expect(screen.getByText(/Minor deviations from the source data may occur/)).toBeInTheDocument();
+  });
 });
