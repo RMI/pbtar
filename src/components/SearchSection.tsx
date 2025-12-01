@@ -7,6 +7,10 @@ import type { FacetMode } from "../utils/searchUtils";
 import { getGlobalFacetOptions } from "../utils/searchUtils";
 import { getStep } from "./NumericRange";
 import NumericRangeDropdown from "./NumericRangeDropdown";
+import {
+  limitMinTempIncrease,
+  limitMaxTempIncrease,
+} from "../utils/NumericRangeLimits.ts";
 
 interface SearchSectionProps {
   filters: SearchFilters;
@@ -45,23 +49,11 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   // Single source of truth for option lists (global, data-driven)
   const {
     pathwayTypeOptions,
-    temperatureOptions,
     geographyOptions,
     sectorOptions,
     policyAmbitionOptions,
     dataAvailabilityOptions,
   } = React.useMemo(() => getGlobalFacetOptions(pathwayMetadata), []);
-
-  const { tempBounds } = React.useMemo(() => {
-    const tVals = (temperatureOptions ?? [])
-      .filter((o) => !o.disabled)
-      .map((o) => Number(o.value))
-      .filter((n) => Number.isFinite(n));
-    const tb = tVals.length
-      ? { min: Math.min(...tVals), max: Math.max(...tVals) }
-      : { min: 0, max: 0 };
-    return { tempBounds: tb };
-  }, [temperatureOptions]);
 
   const areFiltersApplied =
     Boolean(filters.searchTerm) ||
@@ -122,8 +114,8 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         <div>
           <NumericRangeDropdown
             label="Temperature (°C)"
-            minBound={tempBounds.min}
-            maxBound={tempBounds.max}
+            minBound={limitMinTempIncrease}
+            maxBound={limitMaxTempIncrease}
             step={getStep("temp")}
             value={
               !Array.isArray(filters.modelTempIncrease)
