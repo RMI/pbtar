@@ -218,7 +218,7 @@ export function getKeyFeatureTooltip(
     },
     technologyCostsDetail: {
       "No information":
-        "This pathway does not have any information quantiative on technology costs.",
+        "This pathway does not have any quantitative information on technology costs.",
       "Total costs": "Technology costs are provided as total unit costs.",
       "Capital costs, O&M, etc.":
         "Technology cost breakdown provides capital costs, O&M, and potentially additional other categories.",
