@@ -16,6 +16,10 @@ import { getGlobalFacetOptions } from "../utils/searchUtils";
 import { StepPageDiscrete, StepOption } from "./StepPage";
 import StepPageRemap, { RemapCategory } from "./StepPageRemap";
 import StepPageNumericRange from "./StepPageNumericRange";
+import {
+  limitMinTempIncrease,
+  limitMaxTempIncrease,
+} from "../utils/NumericRangeLimits";
 
 export interface GuideStep {
   id: keyof SearchFilters;
@@ -145,19 +149,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
           return current.value > max.value ? current : max;
         }).value,
         // recompute minBar and maxBar dynamically
-        minBar: Math.min(
-          0,
-          Math.floor(
-            optionsByFacet["modelTempIncrease"].reduce((min, current) => {
-              return current.value < min.value ? current : min;
-            }).value,
-          ),
-        ),
-        maxBar: Math.ceil(
-          optionsByFacet["modelTempIncrease"].reduce((max, current) => {
-            return current.value > max.value ? current : max;
-          }).value * 1.1,
-        ),
+        minBar: limitMinTempIncrease,
+        maxBar: limitMaxTempIncrease,
       },
     },
     {
