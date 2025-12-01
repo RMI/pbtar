@@ -57,7 +57,7 @@ export const metricTooltips: Record<string, string> = {
   "Capacity":
     "The maximum output a power plant or energy source can produce under ideal conditions, measured in GW.",
   "Generation":
-    "The actual amount of electricity produced over a specific period, typically measured in TWh",
+    "The actual amount of electricity produced over a specific period, typically measured in TWh.",
   "Technology Mix":
     "The breakdown of energy sources used for electricity generation (e.g., coal, solar, wind, nuclear). Reflects the diversity and sustainability of the energy portfolio.",
   "Absolute Emissions":
