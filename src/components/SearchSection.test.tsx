@@ -219,7 +219,7 @@ describe("SearchSection", () => {
       expect(screen.getAllByRole("spinbutton")).toHaveLength(2);
       expect(
         screen.getByRole("checkbox", {
-          name: /include entries with no value/i,
+          name: /include pathways without temperature value/i,
         }),
       ).toBeInTheDocument();
       // ANY/ALL toggle should not be present in the header for range facets
