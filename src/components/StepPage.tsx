@@ -16,11 +16,10 @@ export interface StepRendererProps {
   selectionMode: "single" | "multi"; // click behavior
   mapSelect?: (opt: string | number) => (string | number)[]; // default: identity
   onChange: (next: (string | number)[]) => void; // emit new underlying values
-  /** Optional: visual state hook for partial selection */
   getState?: (
     opt: string | number,
     selected: ReadonlySet<string | number>,
-  ) => "on" | "partial" | "off";
+  ) => "on" | "off";
 }
 
 export const StepPageDiscrete: React.FC<StepRendererProps> = ({
