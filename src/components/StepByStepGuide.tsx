@@ -142,15 +142,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       componentId: "numericRange",
       componentProps: {
         stepKey: "temp",
-        minBound: optionsByFacet["modelTempIncrease"].reduce((min, current) => {
-          return current.value < min.value ? current : min;
-        }).value,
-        maxBound: optionsByFacet["modelTempIncrease"].reduce((max, current) => {
-          return current.value > max.value ? current : max;
-        }).value,
-        // recompute minBar and maxBar dynamically
-        minBar: limitMinTempIncrease,
-        maxBar: limitMaxTempIncrease,
+        minBound: limitMinTempIncrease,
+        maxBound: limitMaxTempIncrease,
       },
     },
     {
@@ -321,12 +314,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                       const maxBound =
                         (step.componentProps?.maxBound as number | undefined) ??
                         (nums.length ? Math.max(...nums) : 6);
-                      const minBar =
-                        (step.componentProps?.minBar as number | undefined) ??
-                        minBound;
-                      const maxBar =
-                        (step.componentProps?.maxBar as number | undefined) ??
-                        maxBound;
 
                       return (
                         <Comp
@@ -337,8 +324,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                           onChange={(next) => onFilterChange(step.id, next)}
                           minBound={minBound}
                           maxBound={maxBound}
-                          minBar={minBar}
-                          maxBar={maxBar}
                           stepKey={step.componentProps?.stepKey ?? "temp"}
                         />
                       );
