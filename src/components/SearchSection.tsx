@@ -10,7 +10,7 @@ import NumericRangeDropdown from "./NumericRangeDropdown";
 import {
   limitMinTempIncrease,
   limitMaxTempIncrease,
-} from "../utils/NumericRangeLimits.ts";
+} from "../utils/NumericRangeLimits";
 
 interface SearchSectionProps {
   filters: SearchFilters;

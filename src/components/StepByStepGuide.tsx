@@ -19,7 +19,7 @@ import StepPageNumericRange from "./StepPageNumericRange";
 import {
   limitMinTempIncrease,
   limitMaxTempIncrease,
-} from "../utils/NumericRangeLimits.ts";
+} from "../utils/NumericRangeLimits";
 
 export interface GuideStep {
   id: keyof SearchFilters;
