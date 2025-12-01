@@ -214,8 +214,16 @@ const NumericRangeSlider: React.FC<Props> = ({
   // For visuals, show handles at bounds when undefined; hide if off the visible window.
   const effMin = isNum(min) ? min : minBound;
   const effMax = isNum(max) ? max : maxBound;
-  const minPctOnBar = toPct(clamp(effMin, minBound, maxBound), minBound, maxBound);
-  const maxPctOnBar = toPct(clamp(effMax, minBound, maxBound), minBound, maxBound);
+  const minPctOnBar = toPct(
+    clamp(effMin, minBound, maxBound),
+    minBound,
+    maxBound,
+  );
+  const maxPctOnBar = toPct(
+    clamp(effMax, minBound, maxBound),
+    minBound,
+    maxBound,
+  );
 
   // Show a handle only if that bound is explicitly set AND it lies in the visible window
   const minVisible = isNum(min) && effMin >= minBound && effMin <= maxBound;
@@ -277,7 +285,6 @@ const NumericRangeSlider: React.FC<Props> = ({
       {/* Slider track */}
       <div className="flex flex-col gap-4 md:p-5 md:gap-4 my-6">
         <div className="relative">
-
           <div
             ref={trackRef}
             onMouseDown={onTrackMouseDown}
