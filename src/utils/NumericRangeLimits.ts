@@ -1,4 +1,4 @@
-import { getGlobalFacetOptions } from "../utils/searchUtils";
+import { getGlobalFacetOptions } from "./searchUtils";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 
 const globalFacetOptions = getGlobalFacetOptions(pathwayMetadata);
