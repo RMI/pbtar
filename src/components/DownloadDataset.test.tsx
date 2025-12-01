@@ -37,6 +37,8 @@ describe("<DownloadDataset />", () => {
         href="/data/ds.json"
       />,
     );
-    expect(screen.getByText(/Minor deviations from the source data may occur/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Minor deviations from the source data may occur/),
+    ).toBeInTheDocument();
   });
 });

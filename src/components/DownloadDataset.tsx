@@ -35,7 +35,8 @@ export default function DownloadDataset({
         <p className="text-xs text-neutral-500 mt-1 truncate">{summary}</p>
       )}
       <p className="text-xs text-rmigray-700 mt-1">
-        Note: Minor deviations from the source data may occur due to light processing required for standardizing pathways to a common format.
+        Note: Minor deviations from the source data may occur due to light
+        processing required for standardizing pathways to a common format.
       </p>
     </AdditionalInfoBox>
   );
