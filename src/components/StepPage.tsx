@@ -36,13 +36,14 @@ export const StepPageDiscrete: React.FC<StepRendererProps> = ({
   const selectedSet = useMemo(() => new Set(value), [value]);
   const mapFn = mapSelect ?? ((opt: string | number) => [opt]); // identity for pure discrete steps
 
-  const computeState = (opt: string | number): "on" | "partial" | "off" => {
+  const computeState = (opt: string | number): "on" | "off" => {
     if (getState) return getState(opt, selectedSet);
     const mapped = mapFn(opt).filter((v) => v != null); // ignore null/undefined
     const hits = mapped.filter((v) => selectedSet.has(v)).length;
     if (hits === 0) return "off";
     if (hits === mapped.length) return "on";
-    return "partial";
+    // to restore "partial" behavior, change this line to return "partial";
+    return "off";
   };
 
   const handleClick = (opt: string | number) => {
