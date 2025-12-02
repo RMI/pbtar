@@ -149,11 +149,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       componentProps: {
         categories: [
           {
-            label: "No policies included",
-            values: ["No policies included"],
-            description: "Excludes policy impacts.",
-          },
-          {
             label: "Current and/or drafted policies",
             values: [
               "Current/legislated policies",
@@ -179,6 +174,11 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
             label: "Other policy ambition",
             values: ["Other policy ambition"],
             description: "See pathway details",
+          },
+          {
+            label: "No policies included",
+            values: ["No policies included"],
+            description: "Excludes policy impacts.",
           },
           {
             // Use a null array to unset filter
