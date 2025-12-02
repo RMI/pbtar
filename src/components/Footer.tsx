@@ -19,6 +19,12 @@ const Footer: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0">
             <Link
+              to="/legal"
+              className="text-sm text-white hover:text-energy transition-colors duration-200 sm:mr-6"
+            >
+              Legal
+            </Link>
+            <Link
               to="/about"
               className="text-sm text-white hover:text-energy transition-colors duration-200 sm:mr-6"
             >
