@@ -26,9 +26,14 @@ export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
     "Direct Policy",
   ];
   const pathwayTypeOptionsUnsorted = buildOptionsFromValues(rawPathwayTypes);
-  const pathwayTypeOptions = orderedTypes
-    .map((type) => pathwayTypeOptionsUnsorted.find((opt) => opt.label === type))
-    .filter(Boolean);
+  const pathwayTypeOptions = [
+    ...orderedTypes
+      .map((type) => pathwayTypeOptionsUnsorted.find((opt) => opt.label === type))
+      .filter(Boolean),
+    ...pathwayTypeOptionsUnsorted.filter(
+      (opt) => !orderedTypes.includes(opt.label)
+    ),
+  ];
 
   // Net Zero Year
   const modelYearNetzeroOptions = buildOptionsFromValues(
