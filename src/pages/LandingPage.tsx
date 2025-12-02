@@ -217,7 +217,7 @@ const LandingPage: React.FC = () => {
             <img
               src="/RMILogo-white.svg"
               alt="RMI logo"
-              className="h-18 w-auto"
+              className="h-16 w-auto"
             />
           </div>
         </div>
