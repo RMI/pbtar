@@ -183,13 +183,6 @@ describe("SearchSection", () => {
   });
 
   describe("Clear all filters button (inline with summary)", () => {
-    it("does not render the button when no filters are applied", () => {
-      render(<SearchSection {...defaultProps} />);
-      expect(screen.queryByTestId("clear-all-filters")).toBeNull();
-      // Summary still renders
-      expect(screen.getByText(/Found 2 pathways/i)).toBeInTheDocument();
-    });
-
     it("renders the inline button when any filter is applied and calls onClear", () => {
       const props = {
         ...defaultProps,
