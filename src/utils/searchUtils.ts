@@ -7,6 +7,7 @@ import {
 import { matchesOptionalFacetAny, matchesOptionalFacetAll } from "./facets";
 import { ABSENT_FILTER_TOKEN } from "./absent";
 import { buildOptionsFromValues, hasAbsent, withAbsentOption } from "./facets";
+import { sortPathwayType } from "./sortUtils";
 import type { LabeledOption } from "./facets";
 import { index } from "../data/index.gen";
 
@@ -17,25 +18,15 @@ import { index } from "../data/index.gen";
 // ───────────────────────────────────────────────────────────────────────────────
 export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
   // Pathway Type
-  // Reorder pathwayType options: Predictive, Exploratory, Normative, Direct Policy
+  // Use sortPathwayType to order pathwayType options
   const rawPathwayTypes = pathways.map((d) => d.pathwayType);
-  const orderedTypes = [
-    "Predictive",
-    "Exploratory",
-    "Normative",
-    "Direct Policy",
-  ];
   const pathwayTypeOptionsUnsorted = buildOptionsFromValues(rawPathwayTypes);
-  const pathwayTypeOptions = [
-    ...orderedTypes
-      .map((type) =>
-        pathwayTypeOptionsUnsorted.find((opt) => opt.label === type),
-      )
-      .filter(Boolean),
-    ...pathwayTypeOptionsUnsorted.filter(
-      (opt) => !orderedTypes.includes(opt.label),
-    ),
-  ];
+  const pathwayTypeOptions = sortPathwayType(
+    pathwayTypeOptionsUnsorted.map((opt) => ({
+      ...opt,
+      title: opt.label,
+    })),
+  ).map(({ value, label }) => ({ value, label }));
 
   // Net Zero Year
   const modelYearNetzeroOptions = buildOptionsFromValues(
