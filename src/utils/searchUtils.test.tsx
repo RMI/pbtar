@@ -490,6 +490,15 @@ describe("getGlobalFacetOptions", () => {
     );
     // metrics: flattened set from all pathways
     expect(metricOptions.length).toBeGreaterThan(0);
+
+    // pathwayTypeOptions should be in expected order
+    const pathwayTypeLabels = pathwayTypeOptions.map((opt) => opt.label);
+    expect(pathwayTypeLabels.slice(0, 4)).toEqual([
+      "Predictive",
+      "Exploratory",
+      "Normative",
+      "Direct Policy",
+    ]);
   });
 
   it("includes 'None' ABSENT option for sectors/geography when missing in data", () => {
