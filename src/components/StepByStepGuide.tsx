@@ -127,21 +127,25 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       icon: <GitFork className="h-8 w-8" />,
       multi: false,
       componentId: "discrete",
-      options: [
-        ...optionsByFacet["pathwayType"].filter(
-          (o) => o.title === "Predictive",
-        ),
-        ...optionsByFacet["pathwayType"].filter(
-          (o) => o.title === "Exploratory",
-        ),
-        ...optionsByFacet["pathwayType"].filter((o) => o.title === "Normative"),
-        ...optionsByFacet["pathwayType"].filter(
-          (o) => o.title === "Direct Policy",
-        ),
-      ].map((o) => ({
-        ...o,
-        description: descriptions["pathwayType"][o.title] || undefined,
-      })),
+      options: optionsByFacet["pathwayType"]
+        .sort((a, b) => {
+          const order = [
+            "Predictive",
+            "Exploratory",
+            "Normative",
+            "Direct Policy",
+          ];
+          const indexA = order.indexOf(a.title);
+          const indexB = order.indexOf(b.title);
+          return (
+            (indexA === -1 ? Infinity : indexA) -
+            (indexB === -1 ? Infinity : indexB)
+          );
+        })
+        .map((o) => ({
+          ...o,
+          description: descriptions["pathwayType"][o.title] || undefined,
+        })),
     },
     {
       id: "modelTempIncrease",
