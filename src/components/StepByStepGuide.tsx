@@ -13,6 +13,7 @@ import {
 import { SearchFilters } from "../types";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 import { getGlobalFacetOptions } from "../utils/searchUtils";
+import { sortPathwayType } from "../utils/sortUtils";
 import { StepPageDiscrete, StepOption } from "./StepPage";
 import StepPageRemap, { RemapCategory } from "./StepPageRemap";
 import StepPageNumericRange from "./StepPageNumericRange";
@@ -118,10 +119,12 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       icon: <GitFork className="h-8 w-8" />,
       multi: false,
       componentId: "discrete",
-      options: optionsByFacet["pathwayType"].map((o) => ({
-        ...o,
-        description: descriptions["pathwayType"][o.title] || undefined,
-      })),
+      options: sortPathwayType(
+        optionsByFacet["pathwayType"].map((o) => ({
+          ...o,
+          description: descriptions["pathwayType"][o.title] || undefined,
+        })),
+      ),
     },
     {
       id: "modelTempIncrease",

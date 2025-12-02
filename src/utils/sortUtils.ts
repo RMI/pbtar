@@ -41,3 +41,21 @@ export const prioritizeGeographies = (
   }
   return [...matched, ...rest]; // preserve relative order within each bucket
 };
+
+// Utility for sorting pathway types according to a fixed order
+export const pathwayTypeOrder = [
+  "Predictive",
+  "Exploratory",
+  "Normative",
+  "Direct Policy",
+];
+
+export function sortPathwayType<T extends { title: string }>(arr: T[]): T[] {
+  return arr.slice().sort((a, b) => {
+    const indexA = pathwayTypeOrder.indexOf(a.title);
+    const indexB = pathwayTypeOrder.indexOf(b.title);
+    return (
+      (indexA === -1 ? Infinity : indexA) - (indexB === -1 ? Infinity : indexB)
+    );
+  });
+}
