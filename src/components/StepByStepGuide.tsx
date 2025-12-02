@@ -100,15 +100,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       "Moderate decrease": "Decrease 15%-50% by 2050",
       "Significant decrease": "Decrease more than 50% by 2050",
     },
-    policyAmbition: {
-      "No policies included": "Excludes policy impacts.",
-      "Current/legislated policies": "Only policies already in place.",
-      "Current and drafted policies": "Includes in-process policy drafts.",
-      "NDCs, unconditional only": "Policies to reach unconditional targets",
-      "NDCs incl. conditional targets": "Policies to reach all targets",
-      "Normative/Optimization-based": "Policies to reach a climate outcome.",
-      "Other policy ambition": "See pathway details",
-    },
     metric: {
       "Capacity": "Generation capacity by technology/fuel",
       "Generation": "Generation by technology/fuel",
@@ -168,19 +159,50 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         "Pathways differ in the types of policies included, providing benchmarks for different policy action scenarios. This is relevant both for setting appropriately ambitious targets and for policy alignment analysis.",
       icon: <ScrollText className="h-8 w-8" />,
       multi: false,
-      componentId: "discrete",
-      options: (() => {
-        return [...(optionsByFacet["policyAmbition"] ?? [])]
-          .map((o) => ({
-            ...o,
-            description: descriptions["policyAmbition"][o.title] || undefined,
-          }))
-          .concat({
-            id: "__policyAmbition_clear__",
-            title: "Include any policy ambition",
-            value: null, // null value clears the filter
-          });
-      })(),
+      options: optionsByFacet["policyAmbition"],
+      componentId: "remap",
+      componentProps: {
+        categories: [
+          {
+            label: "Current and/or drafted policies",
+            values: [
+              "Current/legislated policies",
+              "Current and drafted policies",
+            ],
+            description: "Legislated policies and in-process policy drafts.",
+          },
+          {
+            label: "Nationally Determined Contributions",
+            values: [
+              "NDCs, unconditional only",
+              "NDCs incl. conditional targets",
+            ],
+            description:
+              "Policies to reach unconditional and/or conditional targets.",
+          },
+          {
+            label: "Normative/Optimization-based",
+            values: ["Normative/Optimization-based"],
+            description: "Policies to reach a climate outcome.",
+          },
+          {
+            label: "Other policy ambition",
+            values: ["Other policy ambition"],
+            description: "See pathway details",
+          },
+          {
+            label: "No policies included",
+            values: ["No policies included"],
+            description: "Excludes policy impacts.",
+          },
+          {
+            // Use a null array to unset filter
+            label: "Include any policy ambition",
+            values: [null],
+          },
+        ] as RemapCategory[],
+        clampToAvailable: true,
+      },
     },
     {
       id: "dataAvailability",
