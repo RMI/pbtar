@@ -17,9 +17,18 @@ import { index } from "../data/index.gen";
 // ───────────────────────────────────────────────────────────────────────────────
 export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
   // Pathway Type
-  const pathwayTypeOptions = buildOptionsFromValues(
-    pathways.map((d) => d.pathwayType),
-  );
+  // Reorder pathwayType options: Predictive, Exploratory, Normative, Direct Policy
+  const rawPathwayTypes = pathways.map((d) => d.pathwayType);
+  const orderedTypes = [
+    "Predictive",
+    "Exploratory",
+    "Normative",
+    "Direct Policy",
+  ];
+  const pathwayTypeOptionsUnsorted = buildOptionsFromValues(rawPathwayTypes);
+  const pathwayTypeOptions = orderedTypes
+    .map((type) => pathwayTypeOptionsUnsorted.find((opt) => opt.label === type))
+    .filter(Boolean);
 
   // Net Zero Year
   const modelYearNetzeroOptions = buildOptionsFromValues(

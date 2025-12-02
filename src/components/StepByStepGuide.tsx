@@ -127,7 +127,18 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       icon: <GitFork className="h-8 w-8" />,
       multi: false,
       componentId: "discrete",
-      options: optionsByFacet["pathwayType"].map((o) => ({
+      options: [
+        ...optionsByFacet["pathwayType"].filter(
+          (o) => o.title === "Predictive",
+        ),
+        ...optionsByFacet["pathwayType"].filter(
+          (o) => o.title === "Exploratory",
+        ),
+        ...optionsByFacet["pathwayType"].filter((o) => o.title === "Normative"),
+        ...optionsByFacet["pathwayType"].filter(
+          (o) => o.title === "Direct Policy",
+        ),
+      ].map((o) => ({
         ...o,
         description: descriptions["pathwayType"][o.title] || undefined,
       })),
