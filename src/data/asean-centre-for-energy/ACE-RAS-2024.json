@@ -1,5 +1,5 @@
 {
-  "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
+  "$schema": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "ACE-RAS-2024",
   "publication": {
     "title": { "full": "8th ASEAN Energy Outlook", "short": "AEO8" },
@@ -49,7 +49,7 @@
     "Absolute Emissions"
   ],
   "keyFeatures": {
-    "emissionsPathway": "Low or no change",
+    "emissionsTrajectory": "Low or no change",
     "energyEfficiency": "Significant improvement",
     "energyDemand": "Moderate increase",
     "electrification": "Low or no change",

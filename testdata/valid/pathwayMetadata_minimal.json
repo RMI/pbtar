@@ -1,5 +1,5 @@
 {
-  "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
+  "$schema": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "pathway-minimal",
   "name": { "full": "Minimal Pathway" },
   "publication": {
@@ -20,7 +20,7 @@
   "expertOverview": "Test recommendation.",
   "metric": ["Capacity"],
   "keyFeatures": {
-    "emissionsPathway": "No information",
+    "emissionsTrajectory": "No information",
     "energyEfficiency": "No information",
     "energyDemand": "No information",
     "electrification": "No information",

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
+  "$id": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
   "title": "Pathway Metadata",
   "description": "A schema for the pathway metadata dataset in PBTAR.",
   "type": "object",
@@ -17,7 +17,7 @@
     },
     "name": {
       "description": "Name of the pathway.",
-      "$ref": "./common/label.v1.json",
+      "$ref": "http://pathways.rmi.org/schema/common/label.v1.json",
       "tsType": "import('./common/label.v1').LabelV1"
     },
     "description": {
@@ -28,8 +28,8 @@
     },
     "publication": {
       "description": "Bibliographic information about the report or dataset.",
-      "$ref": "./publication.v1.json",
-      "tsType": "import('./publication.v1').PublicationV1"
+      "$ref": "http://pathways.rmi.org/schema/common/publication.v1.json",
+      "tsType": "import('./common/publication.v1').PublicationV1"
     },
     "pathwayType": {
       "description": "Type of the pathway pathway.",
@@ -72,16 +72,12 @@
       "enum": ["SSP1", "SSP2", "SSP3", "SSP4", "SSP5"]
     },
     "geography": {
-      "description": "Geographical areas that the pathway covers. Can include 'Global', country ISO-3166-1 alpha-2 codes (US, DE), or free-text region names (e.g., 'Europe', 'OECD'). Any 2-letter items in the array will be treated as an ISO code. Any 2-letter entries that do not map to a country will throw errors (EU). Do not use full country names, only ISO alpha-2 codes. To avoid typographical errors, items in this array may not be 3 letters long (USA)",
+      "description": "Geographical areas that the pathway covers.",
       "type": "array",
       "uniqueItems": true,
       "items": {
-        "type": "string",
-        "minLength": 1,
-        "allOf": [
-          { "pattern": "^(?!\\s*$).+" },
-          { "not": { "pattern": "^[A-Za-z]{3}$" } }
-        ]
+        "$ref": "http://pathways.rmi.org/schema/common/geographyItem.v1.json",
+        "tsType": "import('./common/geographyItem.v1').GeographyItemV1"
       }
     },
     "sectors": {
@@ -91,66 +87,13 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string",
-            "enum": [
-              "Land Use",
-              "Agriculture",
-              "Buildings",
-              "Industry",
-              "Steel",
-              "Cement",
-              "Chemicals",
-              "Coal Mining",
-              "Oil (Upstream)",
-              "Gas (Upstream)",
-              "Power",
-              "Automotive",
-              "Transport",
-              "Road transport",
-              "Aviation",
-              "Rail",
-              "Shipping",
-              "Other"
-            ]
+            "$ref": "http://pathways.rmi.org/schema/common/sector.v1.json#/$defs/displayName"
           },
           "technologies": {
             "type": "array",
             "description": "Technologies applicable to this sector.",
             "items": {
-              "type": "string",
-              "enum": [
-                "Precision Agriculture",
-                "Agroforestry",
-                "Bioenergy Crops",
-                "Energy Efficiency",
-                "Smart Grids",
-                "Renewable Heating",
-                "Heat Pumps",
-                "Building Automation",
-                "Smart Appliances",
-                "Insulation",
-                "Carbon Capture and Storage",
-                "Electrification",
-                "Process Optimization",
-                "Hydrogen Use",
-                "Coal",
-                "Oil",
-                "Gas",
-                "Wind",
-                "Solar",
-                "Nuclear",
-                "Biomass",
-                "Hydro",
-                "Renewables",
-                "Electric Vehicles",
-                "Hydrogen Vehicles",
-                "Biofuels",
-                "Public Transport",
-                "Active Mobility",
-                "Aviation Efficiency",
-                "Maritime Efficiency",
-                "Other"
-              ]
+              "$ref": "http://pathways.rmi.org/schema/common/technology.v1.json#/$defs/displayName"
             }
           }
         },
@@ -174,22 +117,15 @@
       "type": "array",
       "uniqueItems": true,
       "items": {
-        "description": "Metrics used in the pathway",
-        "type": "string",
-        "enum": [
-          "Emissions Intensity",
-          "Capacity",
-          "Generation",
-          "Technology Mix",
-          "Absolute Emissions"
-        ]
+        "$ref": "http://pathways.rmi.org/schema/common/metric.v1.json#/$defs/displayName",
+        "tsType": "import('./common/metric.v1').MetricV1['displayName']"
       }
     },
     "keyFeatures": {
       "description": "Key features of the pathway.",
       "type": "object",
       "properties": {
-        "emissionsPathway": {
+        "emissionsTrajectory": {
           "description": "Describes the overall trend of greenhouse gas emissions over time, from continued growth to rapid decline.",
           "type": "string",
           "enum": [
@@ -279,16 +215,8 @@
           ]
         },
         "emissionsScope": {
-          "description": "Defines which greenhouse gases are covered in the pathway’s emissions accounting.",
-          "type": "string",
-          "enum": [
-            "No information",
-            "CO2",
-            "CO2e (Kyoto)",
-            "CO2e (CO2, Methane)",
-            "CO2e (unspecified GHGs)",
-            "Other emissions scope"
-          ]
+          "$ref": "http://pathways.rmi.org/schema/common/emissionsScope.v1.json",
+          "tsType": "import('./common/emissionsScope.v1').EmissionsScopeV1"
         },
         "policyAmbition": {
           "description": "Represents the overall stringency and intent of modeled policies relative to climate targets, often reflecting if and how far the included policies go beyond currently legislated ones",
@@ -368,7 +296,7 @@
       },
       "additionalProperties": false,
       "required": [
-        "emissionsPathway",
+        "emissionsTrajectory",
         "energyEfficiency",
         "energyDemand",
         "electrification",

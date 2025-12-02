@@ -1,0 +1,39 @@
+on:
+  workflow_call:
+
+jobs:
+  timeseries-index-gen:
+    name: "Check generated timeseries index"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: package.json
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run JSON Types render
+        run: npm run build:timeseries
+
+      - name: Compare Results
+        run: |
+          git add --all
+          changes=$(git diff-index HEAD --name-only -- $OUTPUTS)
+          if [ -n "$changes" ]; then
+            echo "Changes found after generating."
+            echo "$changes"
+            echo "Please update."
+            git --no-pager diff HEAD
+            exit 1
+          else
+            echo "No changes found after generating."
+            exit 0
+          fi

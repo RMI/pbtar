@@ -1,5 +1,5 @@
 {
-  "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
+  "$schema": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "JRC-GECO-Reference-2025",
   "publication": {
     "title": {
@@ -80,7 +80,7 @@
     "Absolute Emissions"
   ],
   "keyFeatures": {
-    "emissionsPathway": "Minor decrease",
+    "emissionsTrajectory": "Minor decrease",
     "energyEfficiency": "Moderate improvement",
     "energyDemand": "Minor increase",
     "electrification": "Significant increase",

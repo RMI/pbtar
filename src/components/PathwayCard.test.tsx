@@ -62,14 +62,24 @@ describe("PathwayCard component", () => {
     );
   };
 
-  it("renders the pathway name and description", () => {
+  it("renders both publisher and pathway name in the title", () => {
     renderPathwayCard();
 
-    expect(
-      screen.getByText(
-        mockPathway.name.full + " (" + mockPathway.name.short + ")",
-      ),
-    ).toBeInTheDocument();
+    const titleEl = screen.getByRole("heading", { level: 2 });
+    expect(titleEl).toBeInTheDocument();
+
+    // assert that both strings appear somewhere in the same element
+    const titleText = titleEl.textContent ?? "";
+    expect(titleText).toContain(
+      mockPathway.publication.publisher.short ??
+        mockPathway.publication.publisher.full,
+    );
+    expect(titleText).toContain(mockPathway.name.full);
+  });
+
+  it("renders the pathway description", () => {
+    renderPathwayCard();
+
     expect(screen.getByText(mockPathway.description)).toBeInTheDocument();
   });
 
@@ -110,9 +120,9 @@ describe("PathwayCard component", () => {
   it("shows publisher information", () => {
     renderPathwayCard();
 
-    expect(screen.getByText("Publisher:")).toBeInTheDocument();
+    expect(screen.getByText("Publication:")).toBeInTheDocument();
     expect(
-      screen.getByText(mockPathway.publication.publisher.full),
+      screen.getByText(mockPathway.publication.title.full),
     ).toBeInTheDocument();
   });
 
@@ -453,7 +463,7 @@ describe("tooltip functionality", () => {
 
       expect(() => renderWithRouter(s, "rmi")).not.toThrow();
       // Card chrome still there
-      expect(screen.getByText("Publisher:")).toBeInTheDocument();
+      expect(screen.getByText("Publication:")).toBeInTheDocument();
       // No “[object Object]” leaks
       expect(document.body.textContent).not.toContain("[object Object]");
     });

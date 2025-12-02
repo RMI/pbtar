@@ -1,5 +1,5 @@
 {
-  "$schema": "http://pathways-library.rmi.org/schema/pathwayMetadata.v1.json",
+  "$schema": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
   "id": "IEA-NZE-2024",
   "publication": {
     "title": { "full": "World Energy Outlook 2024", "short": "WEO" },
@@ -70,7 +70,7 @@
     "Absolute Emissions"
   ],
   "keyFeatures": {
-    "emissionsPathway": "Significant decrease",
+    "emissionsTrajectory": "Significant decrease",
     "energyEfficiency": "Significant improvement",
     "energyDemand": "Significant decrease",
     "electrification": "Significant increase",

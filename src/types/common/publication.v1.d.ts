@@ -7,11 +7,11 @@
 /**
  * Title of the report or publication.
  */
-export type Label = import("./common/label.v1").LabelV1;
+export type Label = import("./label.v1").LabelV1;
 /**
  * Publisher or organization responsible for the publication.
  */
-export type Label1 = import("./common/label.v1").LabelV1;
+export type Label1 = import("./label.v1").LabelV1;
 
 /**
  * Bibliographic information about the report or dataset.
