@@ -159,7 +159,7 @@ const LandingPage: React.FC = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-energy/5 to-transparent"></div>
       {/* Content */}
       <div className="relative">
-        <div className="container mx-auto px-4 py-12 min-h-screen flex items-center">
+        <div className="container mx-auto px-4 py-12 min-h-screen flex flex-col justify-center">
           <div className="flex flex-col md:flex-row gap-10 items-stretch w-full">
             {/* Left Column */}
             <div className="md:w-1/2">
@@ -210,6 +210,15 @@ const LandingPage: React.FC = () => {
                 methodologies.
               </Card>
             </div>
+          </div>
+
+          {/* Logo centered under BOTH columns */}
+          <div className="w-full flex justify-center mt-6">
+            <img
+              src="/RMILogo-white.svg"
+              alt="RMI logo"
+              className="h-18 w-auto"
+            />
           </div>
         </div>
       </div>
