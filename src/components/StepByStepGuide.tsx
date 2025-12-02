@@ -119,6 +119,10 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       multi: false,
       componentId: "discrete",
       options: optionsByFacet["pathwayType"]
+        .map((o) => ({
+          ...o,
+          description: descriptions["pathwayType"][o.title] || undefined,
+        }))
         .sort((a, b) => {
           const order = [
             "Predictive",
@@ -132,11 +136,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
             (indexA === -1 ? Infinity : indexA) -
             (indexB === -1 ? Infinity : indexB)
           );
-        })
-        .map((o) => ({
-          ...o,
-          description: descriptions["pathwayType"][o.title] || undefined,
-        })),
+        }),
     },
     {
       id: "modelTempIncrease",
