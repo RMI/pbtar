@@ -500,6 +500,8 @@ export const filterPathways = (
         pathway.publication.publisher.full,
         pathway.publication.publisher.short,
         pathway.publication.year,
+        pathway.publication.title.short,
+        pathway.publication.title.full,
       ];
 
       return searchFields.some((field) =>

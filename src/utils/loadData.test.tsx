@@ -62,9 +62,9 @@ describe("validate files on disk", () => {
     const entries = await Promise.all(
       names.map(async (name) => ({
         name,
-        data: JSON.parse(await fs.readFile(join(dir, name), "utf8")) as
-          | PathwayMetadataType[]
-          | unknown[],
+        data: JSON.parse(
+          await fs.readFile(join(dir, name), "utf8"),
+        ) as PathwayMetadataType[],
       })),
     );
     // In app code we now *filter* invalid blobs rather than throw.
@@ -83,9 +83,9 @@ describe("validate files on disk", () => {
     const entries = await Promise.all(
       names.map(async (name) => ({
         name,
-        data: JSON.parse(await fs.readFile(join(dir, name), "utf8")) as
-          | PathwayMetadataType[]
-          | unknown[],
+        data: JSON.parse(
+          await fs.readFile(join(dir, name), "utf8"),
+        ) as PathwayMetadataType[],
       })),
     );
     // In app code we now *filter* invalid blobs rather than throw.
