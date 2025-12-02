@@ -23,4 +23,10 @@ describe("Header component", () => {
     renderHeader();
     expect(screen.getByText("by RMI")).toBeInTheDocument();
   });
+
+  it("contains the RMI logo image", () => {
+    renderHeader();
+    const logo = screen.getByAltText("RMI logo");
+    expect(logo).toBeInTheDocument();
+  });
 });
