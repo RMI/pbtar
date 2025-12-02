@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { BarChart3 } from "lucide-react";
 
 const Header: React.FC = () => {
   return (
@@ -10,9 +9,10 @@ const Header: React.FC = () => {
           to="/pathway"
           className="flex items-center space-x-3 group transition-all duration-300"
         >
-          <BarChart3
-            size={32}
-            className="text-white group-hover:scale-110 transition-transform duration-300"
+          <img
+            src="/RMILogo-white.svg"
+            alt="RMI logo"
+            className="h-8 w-auto mr-2 group-hover:scale-110 transition-transform duration-300"
           />
           <div>
             <h1 className="text-xl md:text-2xl font-bold tracking-tight">
