@@ -28,10 +28,12 @@ export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
   const pathwayTypeOptionsUnsorted = buildOptionsFromValues(rawPathwayTypes);
   const pathwayTypeOptions = [
     ...orderedTypes
-      .map((type) => pathwayTypeOptionsUnsorted.find((opt) => opt.label === type))
+      .map((type) =>
+        pathwayTypeOptionsUnsorted.find((opt) => opt.label === type),
+      )
       .filter(Boolean),
     ...pathwayTypeOptionsUnsorted.filter(
-      (opt) => !orderedTypes.includes(opt.label)
+      (opt) => !orderedTypes.includes(opt.label),
     ),
   ];
 
