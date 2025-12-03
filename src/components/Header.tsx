@@ -12,9 +12,7 @@ export const HeaderBrand: React.FC = () => {
           Transition Pathways Repository
         </h1>
         <div className="mt-1 flex items-center gap-2">
-          <span className="text-xs md:text-sm text-white/80">
-            Created by
-          </span>
+          <span className="text-xs md:text-sm text-white/80">Created by</span>
           <img
             src="/RMILogo-white.svg"
             alt="RMI logo"
