@@ -391,12 +391,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
 
                     <div className="flex items-center space-x-4">
                       <button
-                        onClick={() => setCurrentView("home")}
-                        className="p-2 hover:text-energy"
-                      >
-                        <Home className="h-5 w-5" />
-                      </button>
-                      <button
                         onClick={() =>
                           setCurrentView(Math.max(0, currentView - 1))
                         }
@@ -404,6 +398,12 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                         className="p-2 hover:text-energy disabled:opacity-50"
                       >
                         <ChevronLeft className="h-5 w-5" />
+                      </button>
+                      <button
+                        onClick={() => setCurrentView("home")}
+                        className="p-2 hover:text-energy"
+                      >
+                        <Home className="h-5 w-5" />
                       </button>
                       <button
                         onClick={() =>
