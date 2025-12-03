@@ -86,19 +86,41 @@ const SearchSection: React.FC<SearchSectionProps> = ({
             onClear={onClear}
           />
         </div>
-        <div className="flex items-center gap-2 whitespace-nowrap">
-          <span className="text-sm text-rmigray-500 relative">
-            Found {pathwaysNumber} pathways
-          </span>
-          <button
-            type="button"
-            aria-label="Clear all filters"
-            className="ml-2 text-xs px-2 py-1 rounded border border-gray-200 bg-white text-energy-700 hover:bg-gray-50 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-            onClick={onClear}
-            data-testid="clear-all-filters"
+
+        {/* Reserve fixed space so layout doesn't shift as filters / counts change */}
+        <div className="relative flex items-center whitespace-nowrap">
+          {/* Invisible placeholder: defines the max width + height of this area */}
+          <div
+            className="invisible flex items-center gap-2"
+            aria-hidden="true"
           >
-            Reset filters
-          </button>
+            {/* Use a "wide" example so width doesn't change when the number shrinks */}
+            <span className="text-sm text-rmigray-500">Found 888 pathways</span>
+            <button
+              type="button"
+              className="ml-2 text-xs px-2 py-1 rounded border border-gray-200 bg-white text-energy-700"
+            >
+              Reset filters
+            </button>
+          </div>
+
+          {/* Actual visible content, absolutely positioned over the placeholder */}
+          {areFiltersApplied && (
+            <div className="absolute inset-0 flex items-center gap-2">
+              <span className="text-sm text-rmigray-500">
+                Found {pathwaysNumber} pathways
+              </span>
+              <button
+                type="button"
+                aria-label="Clear all filters"
+                className="ml-2 text-xs px-2 py-1 rounded border border-gray-200 bg-white text-energy-700 hover:bg-gray-50 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                onClick={onClear}
+                data-testid="clear-all-filters"
+              >
+                Reset filters
+              </button>
+            </div>
+          )}
         </div>
       </div>
       <div className="grid gap-2 grid-cols-[repeat(auto-fit,minmax(12rem,1fr))]">
