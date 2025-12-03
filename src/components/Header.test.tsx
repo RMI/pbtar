@@ -21,7 +21,7 @@ describe("Header component", () => {
 
   it("displays the organization name", () => {
     renderHeader();
-    expect(screen.getByText("by RMI")).toBeInTheDocument();
+    expect(screen.getByText("Created by")).toBeInTheDocument();
   });
 
   it("contains the RMI logo image", () => {
