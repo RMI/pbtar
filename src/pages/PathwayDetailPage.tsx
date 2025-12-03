@@ -229,17 +229,17 @@ const PathwayDetailPage: React.FC = () => {
 
               {tsIndexLoaded && datasets.length > 0
                 ? datasets.map((d) => {
-                  const label = d.label ?? d.datasetId;
-                  const summary = summarizeSummary(d.summary);
-                  return (
-                    <DownloadDataset
-                      key={d.datasetId}
-                      label={label}
-                      href={d.path}
-                      summary={summary}
-                    />
-                  );
-                })
+                    const label = d.label ?? d.datasetId;
+                    const summary = summarizeSummary(d.summary);
+                    return (
+                      <DownloadDataset
+                        key={d.datasetId}
+                        label={label}
+                        href={d.path}
+                        summary={summary}
+                      />
+                    );
+                  })
                 : null}
             </div>
 
