@@ -275,8 +275,9 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                       relevant policy assumption set.
                     </p>
                     <p className="text-base text-rmigray-600 leading-[1.6] tracking-normal mb-2">
-                      The following steps guide users through key pathway
-                      features, while filters below offer additional options.
+                      The following four categories guide users through key
+                      pathway features, while filters below offer additional
+                      options.
                     </p>
                   </div>
 
