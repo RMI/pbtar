@@ -378,8 +378,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                     );
                   })()}
 
-                  <div className="flex items-center justify-between mt-6">
-                    <div className="flex space-x-2">
+                  <div className="grid grid-cols-3 items-center mt-6">
+                    <div className="flex space-x-2 justify-start">
                       {steps.map((_, index) => (
                         <button
                           key={index}
@@ -388,8 +388,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                         />
                       ))}
                     </div>
-
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-4 justify-center">
                       <button
                         onClick={() =>
                           setCurrentView(Math.max(0, currentView - 1))
@@ -417,6 +416,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                         <ChevronRight className="h-5 w-5" />
                       </button>
                     </div>
+                    <div /> {/* Empty right column */}
                   </div>
                 </div>
               )}
