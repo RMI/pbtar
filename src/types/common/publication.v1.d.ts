@@ -56,6 +56,10 @@ export interface PublicationV1 {
    */
   issn?: string;
   /**
+   * License under which the document is published
+   */
+  license?: string;
+  /**
    * Links to related materials such as data, supplementary files, or the full report.
    */
   links?: {
