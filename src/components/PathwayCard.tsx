@@ -13,22 +13,12 @@ import { ChevronRight } from "lucide-react";
 import HighlightedText from "./HighlightedText";
 import { prioritizeMatches, prioritizeGeographies } from "../utils/sortUtils";
 import { getSectorTooltip, getMetricTooltip } from "../utils/tooltipUtils";
+import getTemperatureColor from "../utils/getTemperatureColor";
 
 interface PathwayCardProps {
   pathway: PathwayMetadataType;
   searchTerm?: string;
 }
-
-const getTemperatureColor = (temp: number): string => {
-  // Define temperature ranges and corresponding colors
-  // Using colors from the style guide
-  if (temp <= 1.5) return "bg-pinishgreen-100"; // Yellowish
-  if (temp <= 2.0) return "bg-solar-100";
-  if (temp <= 2.5) return "bg-solar-200";
-  if (temp <= 3.0) return "bg-rmired-100"; // Orange
-  if (temp <= 3.5) return "bg-rmired-200";
-  return "bg-rmired-400"; // Red for higher temperatures
-};
 
 const truncateText = (text: string, maxLength: number) =>
   text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
@@ -194,7 +184,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
                 <HighlightedText
                   text={truncateText(
                     pathway.publication.title.short ||
-                      pathway.publication.title.full,
+                    pathway.publication.title.full,
                     40, // <-- set your desired max length here
                   )}
                   searchTerm={searchTerm}
