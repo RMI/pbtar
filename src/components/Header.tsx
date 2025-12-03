@@ -9,7 +9,7 @@ export const HeaderBrand: React.FC = () => {
     >
       <div>
         <h1 className="text-xl md:text-2xl font-bold tracking-tight">
-          Climate Transition Pathways Repository
+          Transition Pathways Repository
         </h1>
         <div className="mt-1 flex items-center gap-2">
           <span className="text-xs md:text-sm text-white/80">

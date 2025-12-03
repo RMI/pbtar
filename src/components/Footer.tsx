@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
               className="h-6 w-auto mr-2"
             />
             <span className="text-sm font-medium text-white">
-              Climate Transition Pathways Repository
+              Transition Pathways Repository
             </span>
           </div>
 

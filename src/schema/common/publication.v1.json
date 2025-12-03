@@ -64,6 +64,11 @@
       "type": "string",
       "pattern": "^[0-9]{4}-[0-9]{3}[0-9X]$"
     },
+    "license": {
+      "description": "License under which the document is published",
+      "type": "string",
+      "maxLength": 100
+    },
     "links": {
       "description": "Links to related materials such as data, supplementary files, or the full report.",
       "type": "array",

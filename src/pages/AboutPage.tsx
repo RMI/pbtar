@@ -7,7 +7,7 @@ const AboutPage: React.FC = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-rmigray-800 mb-6">
-          About the Climate Transition Pathways Repository
+          About the Transition Pathways Repository
         </h1>
 
         <section className="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -15,9 +15,9 @@ const AboutPage: React.FC = () => {
             Purpose
           </h2>
           <p className="text-rmigray-700 mb-4">
-            The Climate Transition Pathways Repository is designed to help
-            financial institutions efficiently discover, compare, and utilize
-            diverse climate transition pathways for their assessments.
+            The Transition Pathways Repository is designed to help financial
+            institutions efficiently discover, compare, and utilize diverse
+            climate transition pathways for their assessments.
           </p>
           <p className="text-rmigray-700 mb-4">
             Our goal is to simplify the process of finding relevant pathways and

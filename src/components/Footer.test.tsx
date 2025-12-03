@@ -16,7 +16,7 @@ describe("Footer component", () => {
   it("renders the title text correctly", () => {
     renderFooter();
     expect(
-      screen.getByText("Climate Transition Pathways Repository"),
+      screen.getByText("Transition Pathways Repository"),
     ).toBeInTheDocument();
   });
 
