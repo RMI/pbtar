@@ -379,31 +379,32 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                   })()}
 
                   <div className="grid grid-cols-3 items-center mt-6">
-                    <div className="flex space-x-2 justify-start">
-                      {steps.map((_, index) => (
-                        <button
-                          key={index}
-                          onClick={() => setCurrentView(index)}
-                          className={`w-4 h-4 rounded-full ${currentView === index ? "bg-energy" : "bg-gray-300"} p-1`}
-                        />
-                      ))}
-                    </div>
-                    <div className="flex items-center space-x-4 justify-center">
+                    <div /> {/* Empty left column */}
+                    <div className="flex items-center justify-center">
                       <button
                         onClick={() =>
                           setCurrentView(Math.max(0, currentView - 1))
                         }
                         disabled={currentView === 0}
-                        className="p-2 hover:text-energy disabled:opacity-50"
+                        className="p-1 hover:text-energy disabled:opacity-50"
                       >
                         <ChevronLeft className="h-5 w-5" />
                       </button>
                       <button
                         onClick={() => setCurrentView("home")}
-                        className="p-2 hover:text-energy"
+                        className="p-1 text-gray-300 hover:text-energy"
                       >
                         <Home className="h-5 w-5" />
                       </button>
+                      <div className="flex space-x-2">
+                        {steps.map((_, index) => (
+                          <button
+                            key={index}
+                            onClick={() => setCurrentView(index)}
+                            className={`w-4 h-4 rounded-full ${currentView === index ? "bg-energy" : "bg-gray-300"} p-1`}
+                          />
+                        ))}
+                      </div>
                       <button
                         onClick={() =>
                           setCurrentView(
@@ -411,7 +412,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                           )
                         }
                         disabled={currentView === steps.length - 1}
-                        className="p-2 hover:text-energy disabled:opacity-50"
+                        className="p-1 hover:text-energy disabled:opacity-50"
                       >
                         <ChevronRight className="h-5 w-5" />
                       </button>
