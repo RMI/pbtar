@@ -45,14 +45,9 @@ describe("Footer component", () => {
     ).toBeInTheDocument();
   });
 
-  it("contains the BarChart3 icon", () => {
+  it("contains the RMI logo image", () => {
     renderFooter();
-    // Since icons don't have accessible text, we check for their parent container
-    const titleSection = screen
-      .getByText("Transition Pathways Repository")
-      .closest("div");
-    expect(titleSection).toBeInTheDocument();
-    // We can check that the SVG is present (assuming BarChart3 renders as SVG)
-    expect(titleSection?.querySelector("svg")).toBeInTheDocument();
+    const logo = screen.getByAltText("RMI logo");
+    expect(logo).toBeInTheDocument();
   });
 });
