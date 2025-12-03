@@ -384,7 +384,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                         <button
                           key={index}
                           onClick={() => setCurrentView(index)}
-                          className={`w-2 h-2 rounded-full ${currentView === index ? "bg-energy" : "bg-gray-300"}`}
+                          className={`w-4 h-4 rounded-full ${currentView === index ? "bg-energy" : "bg-gray-300"} p-1`}
                         />
                       ))}
                     </div>
