@@ -76,7 +76,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       : filters.dataAvailability != null);
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 pb-4">
       <div className="flex items-center pt-8 mb-4">
         <div className="flex-1">
           <SearchBox

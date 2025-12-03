@@ -378,24 +378,17 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                     );
                   })()}
 
-                  <div className="flex items-center justify-between mt-6">
-                    <div className="flex space-x-2">
+                  <div className="grid grid-cols-3 items-center mt-6">
+                    <div className="flex space-x-2 justify-start">
                       {steps.map((_, index) => (
                         <button
                           key={index}
                           onClick={() => setCurrentView(index)}
-                          className={`w-2 h-2 rounded-full ${currentView === index ? "bg-energy" : "bg-gray-300"}`}
+                          className={`w-4 h-4 rounded-full ${currentView === index ? "bg-energy" : "bg-gray-300"} p-1`}
                         />
                       ))}
                     </div>
-
-                    <div className="flex items-center space-x-4">
-                      <button
-                        onClick={() => setCurrentView("home")}
-                        className="p-2 hover:text-energy"
-                      >
-                        <Home className="h-5 w-5" />
-                      </button>
+                    <div className="flex items-center space-x-4 justify-center">
                       <button
                         onClick={() =>
                           setCurrentView(Math.max(0, currentView - 1))
@@ -404,6 +397,12 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                         className="p-2 hover:text-energy disabled:opacity-50"
                       >
                         <ChevronLeft className="h-5 w-5" />
+                      </button>
+                      <button
+                        onClick={() => setCurrentView("home")}
+                        className="p-2 hover:text-energy"
+                      >
+                        <Home className="h-5 w-5" />
                       </button>
                       <button
                         onClick={() =>
@@ -417,6 +416,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                         <ChevronRight className="h-5 w-5" />
                       </button>
                     </div>
+                    <div /> {/* Empty right column */}
                   </div>
                 </div>
               )}
