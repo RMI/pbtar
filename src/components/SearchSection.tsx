@@ -118,7 +118,6 @@ const SearchSection: React.FC<SearchSectionProps> = ({
               {/* Left spacer (takes up remaining space to allow centering) */}
               <div></div>
 
-              {/* Centered summary */}
               <span className="text-sm text-rmigray-500 text-center">
                 Found {pathwaysNumber} pathways
               </span>
