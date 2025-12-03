@@ -1,5 +1,5 @@
 import React from "react";
-import { BarChart3, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
@@ -7,9 +7,10 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center mb-4 md:mb-0">
-            <BarChart3
-              size={24}
-              className="text-white mr-2"
+            <img
+              src="/RMILogo-white.svg"
+              alt="RMI logo"
+              className="h-6 w-auto mr-2"
             />
             <span className="text-sm font-medium text-white">
               Transition Pathways Repository
