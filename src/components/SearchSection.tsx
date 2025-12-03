@@ -91,7 +91,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         <div className="relative">
           {/* Invisible placeholder: defines the max width + height of this area */}
           <div
-            className="invisible flex items-center gap-2"
+            className="invisible flex items-center"
             aria-hidden="true"
           >
             {/* Use a "wide" example so width doesn't change when the number shrinks */}
