@@ -29,7 +29,6 @@ import PublicationBlock from "../components/PublicationBlock";
 import { PlotSelector, TimeSeries } from "../components/PlotSelector";
 import getTemperatureColor from "../utils/getTemperatureColor";
 
-
 const PathwayDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [pathway, setPathway] = useState<PathwayMetadataType | null>(null);
@@ -160,9 +159,7 @@ const PathwayDetailPage: React.FC = () => {
           </h1>
 
           <div className="mt-2 space-y-4">
-            <p className="text-white">
-              {pathway.description}
-            </p>
+            <p className="text-white">{pathway.description}</p>
 
             <div className="space-y-1 inline-block">
               <div className="flex text-[10px] font-semibold text-white tracking-wider uppercase">
@@ -233,17 +230,17 @@ const PathwayDetailPage: React.FC = () => {
 
               {tsIndexLoaded && datasets.length > 0
                 ? datasets.map((d) => {
-                  const label = d.label ?? d.datasetId;
-                  const summary = summarizeSummary(d.summary);
-                  return (
-                    <DownloadDataset
-                      key={d.datasetId}
-                      label={label}
-                      href={d.path}
-                      summary={summary}
-                    />
-                  );
-                })
+                    const label = d.label ?? d.datasetId;
+                    const summary = summarizeSummary(d.summary);
+                    return (
+                      <DownloadDataset
+                        key={d.datasetId}
+                        label={label}
+                        href={d.path}
+                        summary={summary}
+                      />
+                    );
+                  })
                 : null}
             </div>
 

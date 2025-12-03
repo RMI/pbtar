@@ -184,7 +184,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
                 <HighlightedText
                   text={truncateText(
                     pathway.publication.title.short ||
-                    pathway.publication.title.full,
+                      pathway.publication.title.full,
                     40, // <-- set your desired max length here
                   )}
                   searchTerm={searchTerm}
