@@ -320,12 +320,27 @@ async function main() {
         logDebug(
           `  getRowMetadata: sector=${sector}, metric=${metric}, technology=${technology}`,
         );
+        const pub = parsed.publication;
+        // License (optional)
+        const licensePart = pub.license ? `License: ${pub.license}` : "";
+        // Links (optional array)
+        const linksPart =
+          Array.isArray(pub.links) && pub.links.length > 0
+            ? pub.links.map((l) => `${l.description}: ${l.url}`).join(", ")
+            : "";
+        // Collect optional parentheses content
+        const optionalParts = [licensePart, linksPart]
+          .filter(Boolean)
+          .join(", ");
+        const optionalBlock = optionalParts ? ` (${optionalParts})` : "";
+        // Final string
+        const source = `${pub.publisher.short}, ${pub.year}, ${pub.title.full}${optionalBlock}`;
         const out = {
-          publisher: parsed.publisher,
-          publicationName: parsed.publicationName,
-          publicationYear: parsed.publicationYear,
+          publisher: parsed.publication.publisher.short,
+          publicationName: parsed.publication.title.full,
+          publicationYear: parsed.publication.year,
           pathwayName: parsed.pathwayName,
-          source: parsed.source,
+          source: source,
           sector: parsed.sector?.[sector]?.displayName,
           emissionsScope: parsed.emissionsScope,
           sectorScope: parsed.sector?.[sector]?.metric?.[metric]?.sectorScope,
