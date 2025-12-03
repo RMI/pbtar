@@ -157,7 +157,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
               "Current/legislated policies",
               "Current and drafted policies",
             ],
-            description: "Legislated policies and in-process policy drafts.",
+            description: "Legislated policies and in-process policy drafts",
           },
           {
             label: "Nationally Determined Contributions",
@@ -166,12 +166,12 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
               "NDCs incl. conditional targets",
             ],
             description:
-              "Policies to reach unconditional and/or conditional targets.",
+              "Policies to reach unconditional and/or conditional targets",
           },
           {
             label: "Normative/Optimization-based",
             values: ["Normative/Optimization-based"],
-            description: "Policies to reach a climate outcome.",
+            description: "Policies to reach a climate outcome",
           },
           {
             label: "Other policy ambition",
@@ -181,7 +181,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
           {
             label: "No policies included",
             values: ["No policies included"],
-            description: "Excludes policy impacts.",
+            description: "Excludes policy impacts",
           },
           {
             // Use a null array to unset filter
