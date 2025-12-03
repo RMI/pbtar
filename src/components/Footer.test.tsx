@@ -16,7 +16,7 @@ describe("Footer component", () => {
   it("renders the title text correctly", () => {
     renderFooter();
     expect(
-      screen.getByText("Climate Transition Pathways Repository"),
+      screen.getByText("Transition Pathways Repository"),
     ).toBeInTheDocument();
   });
 
@@ -49,7 +49,7 @@ describe("Footer component", () => {
     renderFooter();
     // Since icons don't have accessible text, we check for their parent container
     const titleSection = screen
-      .getByText("Climate Transition Pathways Repository")
+      .getByText("Transition Pathways Repository")
       .closest("div");
     expect(titleSection).toBeInTheDocument();
     // We can check that the SVG is present (assuming BarChart3 renders as SVG)
