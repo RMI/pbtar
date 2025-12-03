@@ -183,30 +183,45 @@ describe("SearchSection", () => {
   });
 
   describe("Clear all filters button (inline with summary)", () => {
-    it("does not render the button when no filters are applied", () => {
-      render(<SearchSection {...defaultProps} />);
-      expect(screen.queryByTestId("clear-all-filters")).toBeNull();
-      // Summary still renders
-      expect(screen.getByText(/Found 2 pathways/i)).toBeInTheDocument();
-    });
-
-    it("renders the inline button when any filter is applied and calls onClear", () => {
+    it("renders the summary and clear button together when any filter is applied and calls onClear", () => {
       const props = {
         ...defaultProps,
         filters: { ...defaultProps.filters, geography: ["Europe"] },
       };
       render(<SearchSection {...props} />);
 
-      // Button should be present and visually near the summary (inline within the same <p>)
-      const paragraph = screen.getByText(/Found \d+ pathways/i).closest("p");
-      expect(paragraph).toBeTruthy();
+      // There are two matches: placeholder (aria-hidden) + visible summary.
+      const allSummaries = screen.getAllByText(/Found \d+ pathways/i);
+      const visibleSummary = allSummaries.find(
+        (el) => !el.closest('[aria-hidden="true"]'),
+      );
+
+      expect(visibleSummary).toBeDefined();
+
       const clearBtn = screen.getByTestId("clear-all-filters");
       expect(clearBtn).toBeInTheDocument();
-      // Ensure the button is inside the same paragraph node (inline placement)
-      expect(paragraph?.contains(clearBtn)).toBe(true);
+
+      // Visible summary and clear button share a container (the overlay grid div)
+      const container = visibleSummary?.closest("div");
+      expect(container).not.toBeNull();
+      expect(container?.contains(clearBtn)).toBe(true);
 
       clearBtn.click();
       expect(defaultProps.onClear).toHaveBeenCalledTimes(1);
+    });
+
+    it("does not render visible summary or clear button when no filters are applied", () => {
+      render(<SearchSection {...defaultProps} />);
+
+      const visibleSummaries = screen
+        .queryAllByText(/Found \d+ pathways/i)
+        .filter((el) => !el.closest('[aria-hidden="true"]'));
+
+      // Only placeholder should exist; no visible summary
+      expect(visibleSummaries).toHaveLength(0);
+
+      // Clear button should not be rendered at all
+      expect(screen.queryByTestId("clear-all-filters")).not.toBeInTheDocument();
     });
 
     it("Temperature use range panels (no ANY/ALL), with 'include absent' checkbox", async () => {
