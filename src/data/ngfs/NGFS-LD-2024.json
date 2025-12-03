@@ -78,6 +78,7 @@
     "month": 11,
     "day": 5,
     "doi": "10.5281/zenodo.13989530",
+    "license": "CC BY-NC-SA 4.0 with adaptations listed here: https://data.ene.iiasa.ac.at/ngfs/#/license",
     "links": [
       {
         "url": "https://www.ngfs.net/en/publications-and-statistics/publications/ngfs-climate-scenarios-central-banks-and-supervisors-phase-v",
