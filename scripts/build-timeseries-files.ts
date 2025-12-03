@@ -76,6 +76,15 @@ function logError(...args: any[]) {
   console.error("[timeseries-index]", ...args);
 }
 
+function sanitizeStrings<T>(obj: T): T {
+  const clean = (v: unknown): unknown =>
+    typeof v === "string" ? v.replace(/\s+/g, " ").trim() : v;
+
+  return Object.fromEntries(
+    Object.entries(obj).map(([k, v]) => [k, clean(v)]),
+  ) as T;
+}
+
 async function isDir(p: string) {
   try {
     return (await fs.stat(p)).isDirectory();
@@ -335,7 +344,7 @@ async function main() {
         const optionalBlock = optionalParts ? ` (${optionalParts})` : "";
         // Final string
         const source = `${pub.publisher.short}, ${pub.year}, ${pub.title.full}${optionalBlock}`;
-        const out = {
+        const outRaw = {
           publisher: parsed.publication.publisher.short,
           publicationName: parsed.publication.title.full,
           publicationYear: parsed.publication.year,
@@ -352,6 +361,7 @@ async function main() {
           definitionTechnology:
             parsed.sector?.[sector]?.technology?.[technology]?.definition,
         };
+        const out = sanitizeStrings(outRaw);
         logDebug(`    returning metadata: ${JSON.stringify(out)}`);
         return out;
       };
