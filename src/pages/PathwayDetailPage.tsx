@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import Markdown from "../components/Markdown";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 import { PathwayMetadataType } from "../types";
-import { BadgeMaybeAbsent } from "../components/Badge";
 import BadgeArray from "../components/BadgeArray";
 import {
   geographyKind,
@@ -27,6 +26,7 @@ import {
 } from "../utils/timeseriesIndex";
 import PublicationBlock from "../components/PublicationBlock";
 import { PlotSelector, TimeSeries } from "../components/PlotSelector";
+import getTemperatureColor from "../utils/getTemperatureColor";
 
 const PathwayDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -56,6 +56,9 @@ const PathwayDetailPage: React.FC = () => {
       summary?: unknown;
     }>
   >([]);
+
+  const formatTemp = (t: number | undefined | null) =>
+    t == null ? null : `${t}°C`;
 
   useEffect(() => {
     let isMounted = true;
@@ -153,38 +156,60 @@ const PathwayDetailPage: React.FC = () => {
             {pathway.name.full +
               (pathway.name.short ? ` (${pathway.name.short})` : "")}
           </h1>
-          <p className="text-white mb-4">{pathway.description}</p>
 
-          <div className="flex flex-wrap gap-2 mb-4">
-            <BadgeMaybeAbsent
-              tooltip={getPathwayTypeTooltip(pathway.pathwayType)}
-              variant="pathwayType"
-            >
-              {pathway.pathwayType}
-            </BadgeMaybeAbsent>
-            <BadgeMaybeAbsent variant="year">
-              {pathway.modelYearNetzero}
-            </BadgeMaybeAbsent>
-            <BadgeMaybeAbsent
-              variant="temperature"
-              toLabel={(t) => {
-                const s = String(t);
-                return s.endsWith("°C") ? s : `${s}°C`;
-              }}
-            >
-              {pathway.modelTempIncrease}
-            </BadgeMaybeAbsent>
-          </div>
+          <div className="mt-2 space-y-4">
+            <p className="text-white">{pathway.description}</p>
 
-          <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
-            <p className="mb-1 sm:mb-0">
-              <span className="text-white">Publisher:</span>{" "}
-              {pathway.publication.publisher.full}
-            </p>
-            <p>
-              <span className="text-white">Published:</span>{" "}
-              {pathway.publication.year}
-            </p>
+            <div className="space-y-1 inline-block">
+              <div className="flex text-[10px] font-semibold text-white tracking-wider uppercase">
+                <span className="w-30 text-center">Type</span>
+
+                {pathway.modelYearNetzero && (
+                  <span className="w-30 text-center">Net zero by</span>
+                )}
+
+                {typeof pathway.modelTempIncrease === "number" && (
+                  <span className="w-30 text-center">Warming by 2100</span>
+                )}
+              </div>
+
+              <div className="flex overflow-hidden rounded-full bg-neutral-100/90 text-sm font-medium text-rmigray-800 shadow-sm">
+                <span
+                  className="w-30 px-3 py-1 text-center"
+                  title={getPathwayTypeTooltip(pathway.pathwayType)}
+                >
+                  {pathway.pathwayType}
+                </span>
+
+                {pathway.modelYearNetzero && (
+                  <span className="w-30 px-3 py-1 border-l bg-rmiblue-100 border-white/60 text-center">
+                    {pathway.modelYearNetzero}
+                  </span>
+                )}
+
+                {typeof pathway.modelTempIncrease === "number" && (
+                  <span
+                    className={
+                      "w-30 px-3 py-1 border-l border-white/60 text-center " +
+                      getTemperatureColor(pathway.modelTempIncrease)
+                    }
+                  >
+                    {formatTemp(pathway.modelTempIncrease)}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between text-xs sm:text-sm text-white gap-1">
+              <p className="sm:max-w-[60%]">
+                <span className="font-semibold">Publisher:</span>{" "}
+                {pathway.publication.publisher.full}
+              </p>
+              <p className="sm:text-right">
+                <span className="font-semibold">Published:</span>{" "}
+                {pathway.publication.year}
+              </p>
+            </div>
           </div>
         </div>
 
