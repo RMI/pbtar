@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import Markdown from "../components/Markdown";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 import { PathwayMetadataType } from "../types";
-import { BadgeMaybeAbsent } from "../components/Badge";
 import BadgeArray from "../components/BadgeArray";
 import {
   geographyKind,
@@ -230,17 +229,17 @@ const PathwayDetailPage: React.FC = () => {
 
               {tsIndexLoaded && datasets.length > 0
                 ? datasets.map((d) => {
-                    const label = d.label ?? d.datasetId;
-                    const summary = summarizeSummary(d.summary);
-                    return (
-                      <DownloadDataset
-                        key={d.datasetId}
-                        label={label}
-                        href={d.path}
-                        summary={summary}
-                      />
-                    );
-                  })
+                  const label = d.label ?? d.datasetId;
+                  const summary = summarizeSummary(d.summary);
+                  return (
+                    <DownloadDataset
+                      key={d.datasetId}
+                      label={label}
+                      href={d.path}
+                      summary={summary}
+                    />
+                  );
+                })
                 : null}
             </div>
 
