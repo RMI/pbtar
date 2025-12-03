@@ -5,6 +5,10 @@
  */
 
 /**
+ * Bibliographic information about the report or dataset.
+ */
+export type Publication = import("./common/publication.v1").PublicationV1;
+/**
  * Defines which greenhouse gases are covered in the pathway's modeled emissions.
  */
 export type EmissionsScope =
@@ -38,26 +42,11 @@ export interface PathwayTimeseriesV1 {
    * Brief description of the timeseries.
    */
   description: string;
-  /**
-   * Publisher of the timeseries.
-   */
-  publisher: string;
-  /**
-   * Title of the publication.
-   */
-  publicationName: string;
-  /**
-   * Year that the timeseries was published.
-   */
-  publicationYear: number;
+  publication: Publication;
   /**
    * Name of the associated pathway.
    */
   pathwayName: string;
-  /**
-   * Data source for the timeseries data.
-   */
-  source: string;
   emissionsScope: EmissionsScope;
   /**
    * Sectors that the timeseries data covers.
