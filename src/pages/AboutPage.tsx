@@ -15,9 +15,9 @@ const AboutPage: React.FC = () => {
             Purpose
           </h2>
           <p className="text-rmigray-700 mb-4">
-            The Transition Pathways Repository is designed to help
-            financial institutions efficiently discover, compare, and utilize
-            diverse climate transition pathways for their assessments.
+            The Transition Pathways Repository is designed to help financial
+            institutions efficiently discover, compare, and utilize diverse
+            climate transition pathways for their assessments.
           </p>
           <p className="text-rmigray-700 mb-4">
             Our goal is to simplify the process of finding relevant pathways and
