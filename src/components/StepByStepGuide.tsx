@@ -115,7 +115,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       id: "pathwayType",
       title: "Pathway Type",
       description:
-        "Different pathway types are constructed with different objectives, making them suited for different analytical applications. Analyses of ambitious scenarios, such as strategic target setting, often use normative pathways. Risk analyses often use predictive or explorative pathways.",
+        "Different pathway types are constructed with different objectives, making them suited for different analytical applications. Use cases such as strategic target setting often use normative pathways, for example. Risk analyses often use predictive or explorative pathways.",
       icon: <GitFork className="h-8 w-8" />,
       multi: false,
       componentId: "discrete",
@@ -275,8 +275,9 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                       relevant policy assumption set.
                     </p>
                     <p className="text-base text-rmigray-600 leading-[1.6] tracking-normal mb-2">
-                      The following steps guide users through key pathway
-                      features, while filters below offer additional options.
+                      The following four categories guide users through key
+                      pathway features, while filters below offer additional
+                      options.
                     </p>
                   </div>
 
