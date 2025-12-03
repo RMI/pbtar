@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { BarChart3, Mail } from "lucide-react";
 
 const Footer: React.FC = () => {
