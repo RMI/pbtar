@@ -4,11 +4,23 @@
   "id": "JETP-CIPP-2023_timeseries",
   "name": "Comprehensive Investment and Policy Plan (CIPP) Timeseries Data",
   "description": "Power transition strategy driven by managed coal phasedown and renewables scale-up.",
-  "publisher": "JETP ID",
-  "publicationName": "Just Energy Transition Partnership Indonesia, Comprehensive Investment and Policy Plan 2023",
-  "publicationYear": 2023,
+  "publication": {
+    "title": {
+      "full": "Just Energy Transition Partnership Indonesia, Comprehensive Investment and Policy Plan 2023"
+    },
+    "publisher": {
+      "full": "Indonesia Just Energy Transition Partnership Secretariat",
+      "short": "JETP ID"
+    },
+    "year": 2023,
+    "links": [
+      {
+        "url": "https://jetp-id.org/cipp",
+        "description": "Report"
+      }
+    ]
+  },
   "pathwayName": "Comprehensive Investment and Policy Plan (CIPP)",
-  "source": "JETP ID, 2023, Just Energy Transition Partnership Indonesia, Comprehensive Investment and Policy Plan (CIPP). Report URL: https://jetp-id.org/cipp",
   "emissionsScope": "CO2",
   "sector": {
     "power": {

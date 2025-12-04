@@ -123,6 +123,11 @@ const NumericRangeSlider: React.FC<Props> = ({
     setInternal((prev) => ({ ...prev, ...patch }));
   };
 
+  const handleClear = () => {
+    fromUserRef.current = true;
+    setInternal({ min: undefined, max: undefined, includeAbsent: false });
+  };
+
   const { min, max, includeAbsent } = internal;
 
   // --- slider interactions (confined to visible bar) ---
@@ -403,15 +408,24 @@ const NumericRangeSlider: React.FC<Props> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-3 mt-4">
-          <div className="ml-auto flex items-center gap-2 text-sm">
+        <div className="flex items-center justify-between gap-3 mt-4">
+          <button
+            type="button"
+            className="underline text-sm disabled:opacity-50"
+            onClick={handleClear}
+            disabled={!isActive}
+          >
+            Clear
+          </button>
+
+          <label className="ml-auto flex items-center gap-2 text-sm">
             <input
               type="checkbox"
               checked={internal.includeAbsent}
               onChange={(e) => commit({ includeAbsent: e.target.checked })}
             />
             <span>Include pathways without temperature value</span>
-          </div>
+          </label>
         </div>
       </div>
     </fieldset>

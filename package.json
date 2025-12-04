@@ -202,13 +202,6 @@
         }
       ],
       [
-        "@semantic-release/npm",
-        {
-          "npmPublish": false,
-          "tarballDir": "dist"
-        }
-      ],
-      [
         "@semantic-release/exec",
         {
           "prepareCmd": "npm run prepare:tarball"

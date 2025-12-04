@@ -4,11 +4,29 @@
   "id": "JRC-GECO-1.5C-2025_timeseries",
   "name": "1.5C Scenario (1.5C) Timeseries Data",
   "description": "Global normative pathway peaking at 1.5°C warming before declining to 1.3°C by 2100.",
-  "publisher": "JRC",
-  "publicationName": "Global Energy and Climate Outlook (GECO)",
-  "publicationYear": 2024,
+  "publication": {
+    "title": {
+      "full": "Global energy and climate outlook 2024 – Updating NDCs and closing the ambition gap – Indicators for 1.5°C alignment",
+      "short": "GECO"
+    },
+    "publisher": {
+      "full": "European Commission, Joint Research Centre",
+      "short": "JRC"
+    },
+    "year": 2025,
+    "license": "Commission decision 2011/833/EU",
+    "links": [
+      {
+        "url": "https://data.europa.eu/doi/10.2760/9028706",
+        "description": "Report"
+      },
+      {
+        "url": "http://data.europa.eu/89h/b3be46d2-568b-40e0-a426-a25b136bc336",
+        "description": "Dataset"
+      }
+    ]
+  },
   "pathwayName": "1.5C Scenario (1.5C)",
-  "source": "European Commission, Joint Research Centre (JRC), 2025, Global energy and climate outlook 2024 – Updating NDCs and closing the ambition gap – Indicators for 1.5C alignment\n\nReport URL: https://data.europa.eu/doi/10.2760/9028706\n\nDataset URL: http://data.europa.eu/89h/b3be46d2-568b-40e0-a426-a25b136bc336",
   "emissionsScope": "CO2e (Kyoto)",
   "sector": {
     "power": {
