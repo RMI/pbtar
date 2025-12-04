@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Mail } from "lucide-react";
 
 const Footer: React.FC = () => {
@@ -19,12 +18,6 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0">
-            <Link
-              to="/about"
-              className="text-sm text-white hover:text-energy transition-colors duration-200 sm:mr-6"
-            >
-              About Us
-            </Link>
             <a
               href="mailto:contact@rmi.org"
               className="flex items-center text-sm text-white hover:text-energy transition-colors duration-200"
