@@ -1,6 +1,6 @@
 {
   "$schema": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
-  "id": "TKTK",
+  "id": "uts-isf_1-5_2023",
   "publication": {
     "title": {
       "full": "One Earth Climate Model 2024",
@@ -11,7 +11,7 @@
       "Teske, S.", "Feenstra, S.", "Rispler, J.", "Niklas, S."
     ],
     "publisher": {
-      "full": "TKTK",
+      "full": "Institute for Sustainable Futures, University of Technology Sydney",
       "short": "UTS ISF"
     },
     "year": 2024,
