@@ -4,11 +4,33 @@
   "id": "TZ-EBAU-2024_timeseries",
   "name": "Enhanced Business as Usual (EBAU) Timeseries Data",
   "description": "ASEAN power model where existing transmission assets expand without altering network configuration.",
-  "publisher": "TransitionZero",
-  "publicationName": "From Vision to Voltage\nOpen Access Modelling of the ASEAN Power Grid with TZ-APG",
-  "publicationYear": 2024,
+  "publication": {
+    "title": {
+      "full": "From Vision to Voltage"
+    },
+    "subtitle": "Open Access Modelling of the ASEAN Power Grid with TZ-APG",
+    "author": [
+      "Vu, T.",
+      "Shivakumar, A.",
+      "Suarez, I.",
+      "Puspitarini, H. D.",
+      "Majid, A."
+    ],
+    "publisher": {
+      "full": "TransitionZero"
+    },
+    "year": 2024,
+    "month": 12,
+    "day": 2,
+    "license": "CC BY 4.0",
+    "links": [
+      {
+        "url": "https://blog.transitionzero.org/hubfs/Analysis/TZ-APG/TZ-APG%20-%20From%20Vision%20to%20Voltage%20-%20Report.pdf",
+        "description": "Report"
+      }
+    ]
+  },
   "pathwayName": "Enhanced Business as Usual (EBAU)",
-  "source": "Vu, T., Shivakumar, A., Suarez, I., Puspitarini, H. D., & Majid, A. (2024, December 2). From Vision to Voltage: Open Access Modelling of the ASEAN Power Grid with TZ-APG. TransitionZero.\n\nReport URL: https://blog.transitionzero.org/hubfs/Analysis/TZ-APG/TZ-APG%20-%20From%20Vision%20to%20Voltage%20-%20Report.pdf",
   "emissionsScope": "CO2e (unspecified GHGs)",
   "sector": {
     "power": {

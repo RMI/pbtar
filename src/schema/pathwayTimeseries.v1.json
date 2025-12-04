@@ -35,31 +35,15 @@
       "pattern": "\\.$",
       "maxLength": 100
     },
-    "publisher": {
-      "description": "Publisher of the timeseries.",
-      "type": "string",
-      "maxLength": 100
-    },
-    "publicationName": {
-      "description": "Title of the publication.",
-      "type": "string",
-      "maxLength": 100
-    },
-    "publicationYear": {
-      "description": "Year that the timeseries was published.",
-      "type": "integer",
-      "minimum": 1900,
-      "maximum": 2030
+    "publication": {
+      "description": "Bibliographic information about the report or dataset.",
+      "$ref": "http://pathways.rmi.org/schema/common/publication.v1.json",
+      "tsType": "import('./common/publication.v1').PublicationV1"
     },
     "pathwayName": {
       "description": "Name of the associated pathway.",
       "type": "string",
       "maxLength": 100
-    },
-    "source": {
-      "description": "Data source for the timeseries data.",
-      "type": "string",
-      "maxLength": 500
     },
     "emissionsScope": {
       "$ref": "http://pathways.rmi.org/schema/common/emissionsScope.v1.json",
@@ -302,11 +286,8 @@
     "pathwayId",
     "name",
     "description",
-    "publisher",
-    "publicationName",
-    "publicationYear",
+    "publication",
     "pathwayName",
-    "source",
     "emissionsScope",
     "sector",
     "data"
