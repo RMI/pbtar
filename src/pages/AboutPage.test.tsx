@@ -17,7 +17,7 @@ describe("AboutPage component", () => {
     renderAboutPage();
     // Assuming your AboutPage has a site title text
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "About the Climate Transition Pathways Repository",
+      "About the Transition Pathways Repository",
     );
   });
 
@@ -124,7 +124,7 @@ describe("AboutPage component", () => {
     it("uses container class for layout", () => {
       renderAboutPage();
       const container = screen
-        .getByText("About the Climate Transition Pathways Repository")
+        .getByText("About the Transition Pathways Repository")
         .closest("div.container");
       expect(container).toBeInTheDocument();
     });
