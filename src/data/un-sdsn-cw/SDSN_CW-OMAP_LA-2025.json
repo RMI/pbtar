@@ -1,0 +1,68 @@
+{
+  "$schema": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
+  "id": "SDSN_CW-OMAP_LA-2025",
+  "publication": {
+    "title": {
+      "full": "ASEAN Green Future Project Phase 2.2 Report, Optimization of Laos's Power Generation Sector"
+    },
+    "author": [
+      "Phouphet Kyophilavong",
+      "Phongsili Soukchalern",
+      "Thanouxay Volavong",
+      "Vonethaly Vongsavanthong"
+    ],
+    "publisher": {
+      "full": "Sustainable Development Solutions Network and ClimateWorks Centre",
+      "short": "UN SDSN, CW"
+    },
+    "year": 2025,
+    "month": 2,
+    "links": [
+      {
+        "description": "Report",
+        "url": "https://files.unsdsn.org/AGF%20-%20Laos%202.2%20Report%20-%20release.pdf"
+      }
+    ]
+  },
+  "name": {
+    "full": "Optimized More Ambitious Policy Scenario LA",
+    "short": "OMAP LA"
+  },
+  "description": "Pathway balancing high renewables uptake with minimal coal use and reduced hydropower investment.",
+  "geography": ["LA"],
+  "pathwayType": "Normative",
+  "modelYearStart": 2020,
+  "modelYearEnd": 2050,
+  "modelYearNetzero": 2050,
+  "ssp": "SSP2",
+  "sectors": [
+    {
+      "name": "Power",
+      "technologies": ["Coal", "Hydro", "Solar", "Wind", "Biomass"]
+    }
+  ],
+  "expertOverview": "#### Pathway Description\n\nThe Optimized More Ambitious Policy (OMAP) scenario models Laos’s power and energy systems using the Low Emissions Analysis Platform (LEAP) under the ASEAN Green Future (AGF) project. It builds on the More Ambitious Policy (MAP) scenario by applying a least-cost optimization approach, seeking the lowest-cost pathway to reach near-zero emissions in Laos’s power sector and economy-wide. The resulting trajectory differs from MAP in several ways. Unlike in MAP, the power sector does not reach true-zero emissions in OMAP, with residual emissions from biomass totaling 22,960 metric tons, less than 1% of 2020 levels. \n\nAdditionally, this pathway meets demand with less total capacity (25.6 GW in 2050, versus 40.9 GW in the More Ambitious Policy scenario), and it does so using renewables, which are cheaper than hydro (hydropower peaks at 10 GW in 2050, compared to 26 GW in the More Ambitious Policy scenario). As a result, the total power system costs in OMAP are lower than in both the MAP pathway and the Existing Policy pathway, indicating that the large-scale investments in the OMAP pathway significantly improve future cost-competitiveness. \n\n#### Core Drivers\n\nThe OMAP pathway is primarily driven by cost optimization under a more ambitious policy set, with deployment of low-cost renewable resources. \n\n*Policy:* Similarly to the MAP scenario, the OMAP model is required to reach near net-zero emissions. This includes requirements for renewables-based generation and policy-supported phasedown of coal power, which is largely retired by 2050. This phaseout date differs from the MAP scenario, which substantively phases down coal-fired generation by 2040. \n\n*Technology cost and deployment:* The OMAP pathway is driven by cost optimization. Declining costs for solar and wind lead these resources to be less expensive than capital-intensive hydropower or coal power, leading to reduced hydropower development and significantly expanded wind and solar capacity build-out. As a result, cumulative power sector investment costs are lower in OMAP than in the MAP or Existing Policy pathways, although they are higher than in the Optimized Existing Policy pathway. \n\n#### Application to Transition Assessment\n\nThe Optimized More Ambitious Policy pathway builds on the MAP pathway and fills a similar role in transition assessments, with the added advantage of incorporating strong cost-optimization dynamics. It provides a benchmark for companies seeking alignment with accelerated national transition goals in Laos under a least-cost trajectory. As a country-level pathway, the OMAP pathway does not model a global temperature rise and should not be used to directly set or measure temperature alignment targets. However, as a detailed projection of aspirational targets, it may be a relevant benchmark for the ambition of company goals. \n\nAs a detailed, country-level policy pathway, OMAP provides valuable information for comparing companies to Laos-specific trajectories. Misalignment to the MAP pathway may be a useful indicator of potential future risks such as exposure to evolving energy policies or reduced competitiveness where low-carbon technologies are prioritized. Alignment may indicate that a company is strategically positioned to benefit from market shifts. \n\nAs the OMAP pathway includes significant aspirational policies and targets that have not yet been implemented, misalignment does not necessarily imply exposure to current regulatory risk but rather a potential gap in future readiness. Because the pathway includes a strong focus on cost optimization, it is a useful candidate for contextualizing the commercial and technical feasibility of transition strategies under accelerated transition objectives.\n\nThe OMAP pathway models power and energy systems to 2050, providing country-level projections for generation and capacity at 10-year intervals, with a high-level breakdown by energy source such as coal, gas, and renewables. Due to its country-specific nature, the OMAP pathway has limited applicability to companies with operations across multiple geographies, but it offers greater detail and specificity for companies in Laos, as compared to global or regional pathways.",
+  "metric": [
+    "Emissions Intensity",
+    "Absolute Emissions",
+    "Capacity",
+    "Generation",
+    "Technology Mix"
+  ],
+  "keyFeatures": {
+    "emissionsTrajectory": "Significant decrease",
+    "energyEfficiency": "No information",
+    "energyDemand": "No information",
+    "electrification": "Significant increase",
+    "policyTypes": ["Target technology shares", "Phaseout dates"],
+    "technologyCostTrend": "Decrease",
+    "technologyDeploymentTrend": "No information",
+    "emissionsScope": "CO2e (Kyoto)",
+    "policyAmbition": "Normative/Optimization-based",
+    "technologyCostsDetail": "Total costs",
+    "newTechnologiesIncluded": ["No information"],
+    "supplyChain": "No information",
+    "investmentNeeds": "Total investment",
+    "infrastructureRequirements": "No information"
+  }
+}
