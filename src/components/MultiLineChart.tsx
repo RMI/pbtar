@@ -48,10 +48,15 @@ export default function MultiLineChart({
   sector = "power",
   metric = "capacity",
 }: MultiLineChartProps) {
-  const d3data = useMemo(
-    () => data.data.filter((d) => d.sector === sector && d.metric === metric),
-    [data.data, sector, metric],
-  );
+  const d3data = useMemo(() => {
+    let filtered = data.data.filter(
+      (d) => d.sector === sector && d.metric === metric,
+    );
+    if (metric == "emissionsIntensity" || metric == "absoluteEmissions") {
+      filtered = filtered.map((d) => ({ ...d, technology: d.metric }));
+    }
+    return filtered;
+  }, [data.data, sector, metric]);
 
   const ref = useRef<SVGSVGElement>(null);
   const gx = useRef<SVGGElement>(null);
