@@ -213,7 +213,9 @@ const LandingPage: React.FC = () => {
                 This repository connects users with the right transition
                 pathways for their needs, with structured guidance for
                 navigating diverse pathway types, geographies, developers, and
-                methodologies.
+                methodologies. This repository is currently being piloted for
+                the pathways that cover the power sector in Southeast Asia, and
+                expansion to other sectors and geographies is coming soon.
               </Card>
             </div>
           </div>

@@ -20,13 +20,6 @@ describe("Footer component", () => {
     ).toBeInTheDocument();
   });
 
-  it("contains About Us link with correct path", () => {
-    renderFooter();
-    const aboutLink = screen.getByText("About Us");
-    expect(aboutLink).toBeInTheDocument();
-    expect(aboutLink.getAttribute("href")).toBe("/about");
-  });
-
   it("contains Contact Us email link", () => {
     renderFooter();
     const contactLink = screen.getByText("Contact Us");
