@@ -30,7 +30,7 @@
   },
   "description": "Cost-optimized pathway under current policies with coal and hydropower expansion.",
   "geography": ["LA"],
-  "pathwayType": "Normative",
+  "pathwayType": "Exploratory",
   "modelYearStart": 2020,
   "modelYearEnd": 2050,
   "ssp": "SSP2",
