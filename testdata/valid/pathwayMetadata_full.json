@@ -31,11 +31,10 @@
   "ssp": "SSP1",
   "geography": [
     "Global",
-    "EU",
-    "Americas",
-    "Asia Pacific",
-    "US",
-    "Country-Specific"
+    "Europe and Central Asia",
+    "North America",
+    "South East Asia",
+    "US"
   ],
   "sectors": [
     {

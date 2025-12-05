@@ -11,7 +11,7 @@
   "pathwayType": "Direct Policy",
   "modelTempIncrease": 3,
   "ssp": "SSP3",
-  "geography": ["Americas"],
+  "geography": ["North America"],
   "sectors": [
     { "name": "Land Use", "technologies": ["Precision Agriculture"] },
     { "name": "Steel", "technologies": ["Carbon Capture and Storage"] }

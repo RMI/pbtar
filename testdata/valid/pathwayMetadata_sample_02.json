@@ -14,7 +14,7 @@
   "modelYearEnd": 2050,
   "modelTempIncrease": 2,
   "ssp": "SSP2",
-  "geography": ["EU"],
+  "geography": ["South East Asia"],
   "sectors": [{ "name": "Agriculture", "technologies": ["Agroforestry"] }],
   "pathwayOverview": "UIOP Overview.",
   "expertOverview": "Example Expert Recommendation.",
