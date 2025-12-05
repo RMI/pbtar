@@ -4,7 +4,7 @@
   "name": { "full": "Sample Pathway 03" },
   "publication": {
     "title": { "full": "Example Title" },
-    "publisher": { "full": "Example Publisher" },
+    "publisher": { "full": "ASEAN Centre for Energy", "short": "ACE" },
     "year": 2024
   },
   "description": "Third Sample Pathway. asdf description.",

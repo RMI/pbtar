@@ -4,7 +4,7 @@
   "name": { "full": "Minimal Pathway" },
   "publication": {
     "title": { "full": "Example Title" },
-    "publisher": { "full": "Example Publisher" },
+    "publisher": { "full": "TransitionZero"},
     "year": 2024
   },
   "description": "A minimal pathway file that passes schema validation.",

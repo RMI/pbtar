@@ -6,7 +6,7 @@
     "title": { "full": "Example Title", "short": "Example" },
     "subtitle": "An Example Subtitle",
     "author": ["Foo bar", "Baz qux"],
-    "publisher": { "full": "Example Publisher", "short": "ExPub" },
+    "publisher": { "full": "ASEAN Centre for Energy", "short": "ACE" },
     "year": 2024,
     "month": 6,
     "day": 15,
