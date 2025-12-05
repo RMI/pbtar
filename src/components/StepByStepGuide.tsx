@@ -90,7 +90,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       "Direct Policy": "Sourced directly from policy frameworks",
       "Exploratory": "Future states under explicit assumptions",
       "Normative": "Pre-determined target outcome",
-      "Predictive": "Extrapolates from current trends.",
+      "Predictive": "Extrapolates from current trends",
     },
     emissionsTrajectory: {
       "Significant increase": "Grow more than 50% by 2050",
