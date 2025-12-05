@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Mail } from "lucide-react";
 
 const Footer: React.FC = () => {
@@ -24,12 +23,6 @@ const Footer: React.FC = () => {
               className="text-sm text-white hover:text-energy transition-colors duration-200 sm:mr-6"
             >
               Legal
-            </Link>
-            <Link
-              to="/about"
-              className="text-sm text-white hover:text-energy transition-colors duration-200 sm:mr-6"
-            >
-              About Us
             </Link>
             <a
               href="mailto:contact@rmi.org"

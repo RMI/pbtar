@@ -20,13 +20,6 @@ describe("Footer component", () => {
     ).toBeInTheDocument();
   });
 
-  it("contains About Us link with correct path", () => {
-    renderFooter();
-    const aboutLink = screen.getByText("About Us");
-    expect(aboutLink).toBeInTheDocument();
-    expect(aboutLink.getAttribute("href")).toBe("/about");
-  });
-
   it("contains Legal link with correct path", () => {
     renderFooter();
     const legalLink = screen.getByText("Legal");

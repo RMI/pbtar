@@ -6,6 +6,7 @@ import { group } from "d3-array";
 import { extent } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { stackOffsetExpand } from "d3-shape";
+import "d3-transition";
 import { useRef, useEffect, useState, useMemo } from "react";
 import { capitalizeWords } from "../utils/capitalizeWords";
 
