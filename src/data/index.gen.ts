@@ -218,6 +218,19 @@ export const index: TimeseriesIndex = {
         path: "/data/transitionzero/TZ-REGI-2024_timeseries.csv",
       },
     ],
+    "UTS-ISF-OECM-2024": [
+      {
+        datasetId: "UTS-ISF-OECM-2024_timeseries",
+        label: "1.5°C Pathway Timeseries Data",
+        summary: {
+          rowCount: 406,
+          yearRange: [2020, 2050],
+          sectorCount: 1,
+          geographyCount: 2,
+        },
+        path: "/data/uts-isf/UTS-ISF-OECM-2024_timeseries.csv",
+      },
+    ],
   },
   byDataset: {
     "ACE-ATS-2024_timeseries": {
@@ -400,6 +413,18 @@ export const index: TimeseriesIndex = {
         geographyCount: 11,
       },
       path: "/data/transitionzero/TZ-REGI-2024_timeseries.csv",
+    },
+    "UTS-ISF-OECM-2024_timeseries": {
+      datasetId: "UTS-ISF-OECM-2024_timeseries",
+      pathwayIds: ["UTS-ISF-OECM-2024"],
+      label: "1.5°C Pathway Timeseries Data",
+      summary: {
+        rowCount: 406,
+        yearRange: [2020, 2050],
+        sectorCount: 1,
+        geographyCount: 2,
+      },
+      path: "/data/uts-isf/UTS-ISF-OECM-2024_timeseries.csv",
     },
   },
 } as const;
