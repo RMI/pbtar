@@ -1,7 +1,7 @@
 {
   "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
-  "pathwayId": ["JRC-GECO-Reference-2025"],
-  "id": "JRC-GECO-Reference-2025_timeseries",
+  "pathwayId": ["JRC-GECO-REFERENCE-2025"],
+  "id": "JRC-GECO-REFERENCE-2025_timeseries",
   "name": "Reference Scenario (Reference) Timeseries Data",
   "description": "Global model extrapolating trends under currently legislated policies.",
   "publication": {
