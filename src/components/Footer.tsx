@@ -1,5 +1,6 @@
 import React from "react";
 import { Mail } from "lucide-react";
+import Colophon from "../components/Colophon";
 
 const Footer: React.FC = () => {
   return (
@@ -32,9 +33,10 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="mt-4 pt-4 border-t border-basalt text-center">
-          <p className="text-xs text-white">
-            &copy; {new Date().getFullYear()} RMI. All rights reserved.
-          </p>
+          <Colophon
+            className="inline-block text-xs text-white"
+            trigger={`© ${new Date().getFullYear()} RMI. All rights reserved.`}
+          />
         </div>
       </div>
     </footer>
