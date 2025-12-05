@@ -26,7 +26,9 @@
     "schema:generate:docs": "scripts/generate-schema-docs.sh",
     "schema:generate:types": "npx ts-node --esm scripts/generate-types.ts && prettier --write \"src/types/**/*.d.ts\"",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "typecheck": "tsc -b",
+    "typecheck:watch": "tsc -b -w"
   },
   "author": "RMI",
   "license": "MIT",
