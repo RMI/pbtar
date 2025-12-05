@@ -123,7 +123,7 @@ export const index: TimeseriesIndex = {
           sectorCount: 1,
           geographyCount: 1,
         },
-        path: "/data/jetp-id/jetp-cipp-2023_timeseries.csv",
+        path: "/data/jetp-id/JETP-CIPP-2023_timeseries.csv",
       },
     ],
     "JRC-GECO-1.5C-2025": [
@@ -136,7 +136,7 @@ export const index: TimeseriesIndex = {
           sectorCount: 1,
           geographyCount: 6,
         },
-        path: "/data/jrc/jrc-geco_1_5-2025_timeseries.csv",
+        path: "/data/jrc/JRC-GECO-1-5-2025_timeseries.csv",
       },
     ],
     "JRC-GECO-NDC-LTS-2025": [
@@ -150,12 +150,12 @@ export const index: TimeseriesIndex = {
           sectorCount: 1,
           geographyCount: 6,
         },
-        path: "/data/jrc/jrc-geco_ndc_lts-2025_timeseries.csv",
+        path: "/data/jrc/JRC-GECO-NDC-LTS-2025_timeseries.csv",
       },
     ],
-    "JRC-GECO-Reference-2025": [
+    "JRC-GECO-REFERENCE-2025": [
       {
-        datasetId: "JRC-GECO-Reference-2025_timeseries",
+        datasetId: "JRC-GECO-REFERENCE-2025_timeseries",
         label: "Reference Scenario (Reference) Timeseries Data",
         summary: {
           rowCount: 1566,
@@ -163,7 +163,7 @@ export const index: TimeseriesIndex = {
           sectorCount: 1,
           geographyCount: 6,
         },
-        path: "/data/jrc/jrc-geco_reference-2025_timeseries.csv",
+        path: "/data/jrc/JRC-GECO-REFERENCE-2025_timeseries.csv",
       },
     ],
     "TZ-BAU-2024": [
@@ -314,7 +314,7 @@ export const index: TimeseriesIndex = {
         sectorCount: 1,
         geographyCount: 1,
       },
-      path: "/data/jetp-id/jetp-cipp-2023_timeseries.csv",
+      path: "/data/jetp-id/JETP-CIPP-2023_timeseries.csv",
     },
     "JRC-GECO-1.5C-2025_timeseries": {
       datasetId: "JRC-GECO-1.5C-2025_timeseries",
@@ -326,7 +326,7 @@ export const index: TimeseriesIndex = {
         sectorCount: 1,
         geographyCount: 6,
       },
-      path: "/data/jrc/jrc-geco_1_5-2025_timeseries.csv",
+      path: "/data/jrc/JRC-GECO-1-5-2025_timeseries.csv",
     },
     "JRC-GECO-NDC-LTS-2025_timeseries": {
       datasetId: "JRC-GECO-NDC-LTS-2025_timeseries",
@@ -339,11 +339,11 @@ export const index: TimeseriesIndex = {
         sectorCount: 1,
         geographyCount: 6,
       },
-      path: "/data/jrc/jrc-geco_ndc_lts-2025_timeseries.csv",
+      path: "/data/jrc/JRC-GECO-NDC-LTS-2025_timeseries.csv",
     },
-    "JRC-GECO-Reference-2025_timeseries": {
-      datasetId: "JRC-GECO-Reference-2025_timeseries",
-      pathwayIds: ["JRC-GECO-Reference-2025"],
+    "JRC-GECO-REFERENCE-2025_timeseries": {
+      datasetId: "JRC-GECO-REFERENCE-2025_timeseries",
+      pathwayIds: ["JRC-GECO-REFERENCE-2025"],
       label: "Reference Scenario (Reference) Timeseries Data",
       summary: {
         rowCount: 1566,
@@ -351,7 +351,7 @@ export const index: TimeseriesIndex = {
         sectorCount: 1,
         geographyCount: 6,
       },
-      path: "/data/jrc/jrc-geco_reference-2025_timeseries.csv",
+      path: "/data/jrc/JRC-GECO-REFERENCE-2025_timeseries.csv",
     },
     "TZ-BAU-2024_timeseries": {
       datasetId: "TZ-BAU-2024_timeseries",
