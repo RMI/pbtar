@@ -20,6 +20,13 @@ describe("Footer component", () => {
     ).toBeInTheDocument();
   });
 
+  it("contains Legal link with correct path", () => {
+    renderFooter();
+    const legalLink = screen.getByText("Legal");
+    expect(legalLink).toBeInTheDocument();
+    expect(legalLink.getAttribute("href")).toBe("/legal");
+  });
+
   it("contains Contact Us email link", () => {
     renderFooter();
     const contactLink = screen.getByText("Contact Us");
