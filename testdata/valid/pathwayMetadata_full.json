@@ -6,7 +6,7 @@
     "title": { "full": "Example Title", "short": "Example" },
     "subtitle": "An Example Subtitle",
     "author": ["Foo bar", "Baz qux"],
-    "publisher": { "full": "Example Publisher", "short": "ExPub" },
+    "publisher": { "full": "ASEAN Centre for Energy", "short": "ACE" },
     "year": 2024,
     "month": 6,
     "day": 15,
@@ -31,11 +31,10 @@
   "ssp": "SSP1",
   "geography": [
     "Global",
-    "EU",
-    "Americas",
-    "Asia Pacific",
-    "US",
-    "Country-Specific"
+    "Europe and Central Asia",
+    "North America",
+    "South East Asia",
+    "US"
   ],
   "sectors": [
     {

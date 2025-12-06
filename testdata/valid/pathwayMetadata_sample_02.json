@@ -4,7 +4,7 @@
   "name": { "full": "Sample Pathway 02" },
   "publication": {
     "title": { "full": "Example Title" },
-    "publisher": { "full": "Example Publisher" },
+    "publisher": { "full": "ASEAN Centre for Energy", "short": "ACE" },
     "year": 2024
   },
   "description": "Second Sample Pathway. uiop description.",
@@ -14,7 +14,7 @@
   "modelYearEnd": 2050,
   "modelTempIncrease": 2,
   "ssp": "SSP2",
-  "geography": ["EU"],
+  "geography": ["South East Asia"],
   "sectors": [{ "name": "Agriculture", "technologies": ["Agroforestry"] }],
   "pathwayOverview": "UIOP Overview.",
   "expertOverview": "Example Expert Recommendation.",
