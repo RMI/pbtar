@@ -159,7 +159,8 @@ const PathwaySearch: React.FC = () => {
             No pathways found for your filter selection
           </h3>
           <p className="text-rmigray-500 mb-4">
-            You can try other combinations of filters in the pathway guide or add more options in the drop down filters to find more pathways.
+            You can try other combinations of filters in the pathway guide or
+            add more options in the drop down filters to find more pathways.
           </p>
           <button
             onClick={handleClear}
