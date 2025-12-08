@@ -226,7 +226,7 @@ const PathwayDetailPage: React.FC = () => {
               </section>
 
               <section className="mt-8">
-                <div class="prose text-rmigray-700">
+                <div className="prose text-rmigray-700">
                   <h4>Supplemental Information</h4>
                   <PublicationBlock publication={pathway.publication} />
 
