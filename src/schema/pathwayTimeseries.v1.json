@@ -200,7 +200,7 @@
           "unit"
         ],
         "if": {
-          "properties": { "sector": { "const": "Power" } },
+          "properties": { "sector": { "const": "power" } },
           "required": ["sector"]
         },
         "then": {
@@ -208,30 +208,30 @@
             "technology": {
               "type": ["string", "null"],
               "enum": [
-                "Coal",
-                "Oil",
-                "Gas",
-                "Nuclear",
-                "Hydro",
-                "Wind",
-                "Solar",
-                "Biomass",
-                "Geothermal",
-                "Hydrogen",
-                "Renewables",
-                "Battery",
-                "Other",
+                "coal",
+                "oil",
+                "gas",
+                "nuclear",
+                "hydro",
+                "wind",
+                "solar",
+                "biomass",
+                "geothermal",
+                "hydrogen",
+                "renewables",
+                "battery",
+                "other",
                 null
               ]
             },
             "metric": {
               "type": "string",
               "enum": [
-                "Emissions Intensity",
-                "Absolute Emissions",
-                "Capacity",
-                "Generation",
-                "Technology Mix"
+                "emissionsIntensity",
+                "absoluteEmissions",
+                "capacity",
+                "generation",
+                "technologyMix"
               ]
             }
           },
@@ -239,7 +239,7 @@
             {
               "if": {
                 "properties": {
-                  "metric": { "const": "Emissions Intensity" }
+                  "metric": { "const": "emissionsIntensity" }
                 },
                 "required": ["metric"]
               },
@@ -248,7 +248,7 @@
             {
               "if": {
                 "properties": {
-                  "metric": { "const": "Absolute Emissions" }
+                  "metric": { "const": "absoluteEmissions" }
                 },
                 "required": ["metric"]
               },
@@ -256,21 +256,21 @@
             },
             {
               "if": {
-                "properties": { "metric": { "const": "Capacity" } },
+                "properties": { "metric": { "const": "capacity" } },
                 "required": ["metric"]
               },
               "then": { "properties": { "unit": { "const": "GW" } } }
             },
             {
               "if": {
-                "properties": { "metric": { "const": "Generation" } },
+                "properties": { "metric": { "const": "generation" } },
                 "required": ["metric"]
               },
               "then": { "properties": { "unit": { "const": "TWh" } } }
             },
             {
               "if": {
-                "properties": { "metric": { "const": "Technology Mix" } },
+                "properties": { "metric": { "const": "technologyMix" } },
                 "required": ["metric"]
               },
               "then": { "properties": { "unit": { "const": "%" } } }
