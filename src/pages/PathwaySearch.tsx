@@ -156,10 +156,10 @@ const PathwaySearch: React.FC = () => {
       {filteredPathways.length === 0 && (
         <div className="text-center py-12">
           <h3 className="text-lg font-medium text-rmigray-700 mb-2">
-            No pathways found
+            No pathways found for your filter selection
           </h3>
           <p className="text-rmigray-500 mb-4">
-            Try adjusting your search filters.
+            You can try other combinations of filters in the pathway guide or add more options in the drop down filters to find more pathways.
           </p>
           <button
             onClick={handleClear}
