@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
                 size={16}
                 className="mr-1"
               />
-              Contact Us
+              Give Feedback
             </a>
           </div>
         </div>
