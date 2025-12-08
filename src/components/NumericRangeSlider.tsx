@@ -11,9 +11,6 @@ type Props = {
   /** Domain low/high (true bounds used for “default” and emitting null) */
   minBound: number;
   maxBound: number;
-  /** Visible window on the bar; can be narrower than bounds */
-  minBar: number;
-  maxBar: number;
   /** Snap increment (e.g., getStep("temp") = 0.1) */
   step: number;
   /** Parent-controlled value; null = no filter */
@@ -70,8 +67,6 @@ const NumericRangeSlider: React.FC<Props> = ({
   label,
   minBound,
   maxBound,
-  minBar,
-  maxBar,
   step,
   value,
   onChange,
@@ -128,6 +123,11 @@ const NumericRangeSlider: React.FC<Props> = ({
     setInternal((prev) => ({ ...prev, ...patch }));
   };
 
+  const handleClear = () => {
+    fromUserRef.current = true;
+    setInternal({ min: undefined, max: undefined, includeAbsent: false });
+  };
+
   const { min, max, includeAbsent } = internal;
 
   // --- slider interactions (confined to visible bar) ---
@@ -139,7 +139,7 @@ const NumericRangeSlider: React.FC<Props> = ({
     if (!el) return undefined;
     const rect = el.getBoundingClientRect();
     const t = clamp((clientX - rect.left) / rect.width, 0, 1);
-    const raw = minBar + t * (maxBar - minBar);
+    const raw = minBound + t * (maxBound - minBound);
     // Clicks/dragging should NOT clamp to [minBound,maxBound];
     // we only snap+round to step precision and return the raw value.
     return roundToStepDisplay(raw, step);
@@ -219,12 +219,20 @@ const NumericRangeSlider: React.FC<Props> = ({
   // For visuals, show handles at bounds when undefined; hide if off the visible window.
   const effMin = isNum(min) ? min : minBound;
   const effMax = isNum(max) ? max : maxBound;
-  const minPctOnBar = toPct(clamp(effMin, minBar, maxBar), minBar, maxBar);
-  const maxPctOnBar = toPct(clamp(effMax, minBar, maxBar), minBar, maxBar);
+  const minPctOnBar = toPct(
+    clamp(effMin, minBound, maxBound),
+    minBound,
+    maxBound,
+  );
+  const maxPctOnBar = toPct(
+    clamp(effMax, minBound, maxBound),
+    minBound,
+    maxBound,
+  );
 
   // Show a handle only if that bound is explicitly set AND it lies in the visible window
-  const minVisible = isNum(min) && effMin >= minBar && effMin <= maxBar;
-  const maxVisible = isNum(max) && effMax >= minBar && effMax <= maxBar;
+  const minVisible = isNum(min) && effMin >= minBound && effMin <= maxBound;
+  const maxVisible = isNum(max) && effMax >= minBound && effMax <= maxBound;
 
   // Compute the highlighted segment to indicate bounded vs unbounded within [barMin, barMax]
   const hasMin = isNum(min);
@@ -236,9 +244,9 @@ const NumericRangeSlider: React.FC<Props> = ({
     segEndPct = Math.max(minPctOnBar, maxPctOnBar);
   } else if (hasMin && !hasMax) {
     segStartPct = minPctOnBar;
-    segEndPct = 100; // unbounded to the right up to maxBar
+    segEndPct = 100; // unbounded to the right up to maxBound
   } else if (!hasMin && hasMax) {
-    segStartPct = 0; // unbounded to the left from minBar
+    segStartPct = 0; // unbounded to the left from maxBound
     segEndPct = maxPctOnBar;
   } else {
     segStartPct = 0;
@@ -250,22 +258,22 @@ const NumericRangeSlider: React.FC<Props> = ({
   const isActive = includeAbsent || isNum(min) || isNum(max);
 
   // prepare gradient stops across the visible domain. We'll use a set of logical temperature marks.
-  const marks = [minBar, 1.5, 2.0, 2.5, 3.0, 3.5, maxBar]
-    .filter((m) => m >= minBar && m <= maxBar)
+  const marks = [minBound, 1.5, 2.0, 2.5, 3.0, 3.5, maxBound]
+    .filter((m) => m >= minBound && m <= maxBound)
     .sort((a, b) => a - b);
 
   // Build gradient string with percentage stops relative to the visible bar
   const gradientStops = marks
     .map((m) => {
-      const pct = toPct(m, minBar, maxBar);
+      const pct = toPct(m, minBound, maxBound);
       return `${tempToHex(m)} ${pct}%`;
     })
     .join(", ");
 
   // Simple tick labels at 0.5 degree steps within the visible bar
   const ticks: number[] = [];
-  const startI = Math.ceil(minBar * 2);
-  const endI = Math.floor(maxBar * 2);
+  const startI = Math.ceil(minBound * 2);
+  const endI = Math.floor(maxBound * 2);
   for (let ti = startI; ti <= endI; ti++) ticks.push(ti / 2);
 
   // format tooltip value (1 decimal)
@@ -282,15 +290,6 @@ const NumericRangeSlider: React.FC<Props> = ({
       {/* Slider track */}
       <div className="flex flex-col gap-4 md:p-5 md:gap-4 my-6">
         <div className="relative">
-          {/* left fade if bar > domain */}
-          {minBar > minBound && (
-            <div className="pointer-events-none absolute left-0 top-0 h-2 w-6 bg-gradient-to-r from-rmigray-200 to-transparent rounded-l" />
-          )}
-          {/* right fade if bar < domain */}
-          {maxBar < maxBound && (
-            <div className="pointer-events-none absolute right-0 top-0 h-2 w-6 bg-gradient-to-l from-rmigray-200 to-transparent rounded-r" />
-          )}
-
           <div
             ref={trackRef}
             onMouseDown={onTrackMouseDown}
@@ -395,7 +394,7 @@ const NumericRangeSlider: React.FC<Props> = ({
 
             {/* tick labels every 0.5° with °C appended */}
             {ticks.map((t) => {
-              const pct = toPct(t, minBar, maxBar);
+              const pct = toPct(t, minBound, maxBound);
               return (
                 <div
                   key={String(t)}
@@ -409,15 +408,24 @@ const NumericRangeSlider: React.FC<Props> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-3 mt-4">
-          <div className="ml-auto flex items-center gap-2 text-sm">
+        <div className="flex items-center justify-between gap-3 mt-4">
+          <button
+            type="button"
+            className="underline text-sm disabled:opacity-50"
+            onClick={handleClear}
+            disabled={!isActive}
+          >
+            Clear
+          </button>
+
+          <label className="ml-auto flex items-center gap-2 text-sm">
             <input
               type="checkbox"
               checked={internal.includeAbsent}
               onChange={(e) => commit({ includeAbsent: e.target.checked })}
             />
-            <span>Include entries with no value</span>
-          </div>
+            <span>Include pathways without temperature value</span>
+          </label>
         </div>
       </div>
     </fieldset>

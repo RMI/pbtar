@@ -7,6 +7,10 @@ import type { FacetMode } from "../utils/searchUtils";
 import { getGlobalFacetOptions } from "../utils/searchUtils";
 import { getStep } from "./NumericRange";
 import NumericRangeDropdown from "./NumericRangeDropdown";
+import {
+  limitMinTempIncrease,
+  limitMaxTempIncrease,
+} from "../utils/NumericRangeLimits";
 
 interface SearchSectionProps {
   filters: SearchFilters;
@@ -45,23 +49,11 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   // Single source of truth for option lists (global, data-driven)
   const {
     pathwayTypeOptions,
-    temperatureOptions,
     geographyOptions,
     sectorOptions,
     policyAmbitionOptions,
     dataAvailabilityOptions,
   } = React.useMemo(() => getGlobalFacetOptions(pathwayMetadata), []);
-
-  const { tempBounds } = React.useMemo(() => {
-    const tVals = (temperatureOptions ?? [])
-      .filter((o) => !o.disabled)
-      .map((o) => Number(o.value))
-      .filter((n) => Number.isFinite(n));
-    const tb = tVals.length
-      ? { min: Math.min(...tVals), max: Math.max(...tVals) }
-      : { min: 0, max: 0 };
-    return { tempBounds: tb };
-  }, [temperatureOptions]);
 
   const areFiltersApplied =
     Boolean(filters.searchTerm) ||
@@ -84,14 +76,68 @@ const SearchSection: React.FC<SearchSectionProps> = ({
       : filters.dataAvailability != null);
 
   return (
-    <div className="bg-gray-50">
-      <div className="mb-4 pt-8">
-        <SearchBox
-          value={filters.searchTerm}
-          onChange={(value) => onFilterChange("searchTerm", value)}
-          onSearch={onSearch}
-          onClear={onClear}
-        />
+    <div className="bg-gray-50 pb-4">
+      <div className="flex items-center pt-8 mb-4">
+        <div className="flex-1">
+          <SearchBox
+            value={filters.searchTerm}
+            onChange={(value) => onFilterChange("searchTerm", value)}
+            onSearch={onSearch}
+            onClear={onClear}
+          />
+        </div>
+
+        {/* Reserve fixed space so layout doesn't shift as filters / counts change */}
+        <div className="relative">
+          {/* Invisible placeholder: defines the max width + height of this area */}
+          <div
+            className="invisible flex items-center"
+            aria-hidden="true"
+          >
+            {/* Use a "wide" example so width doesn't change when the number shrinks */}
+            <span className="text-sm">Found 888 pathways</span>
+            <button
+              type="button"
+              className="ml-2 text-xs px-2 py-1 rounded border border-gray-200 bg-white text-energy-700"
+            >
+              Reset filters
+            </button>
+          </div>
+
+          {/* Actual visible content, absolutely positioned over the placeholder */}
+          {areFiltersApplied && (
+            <div
+              className="
+                absolute inset-0 
+                grid 
+                grid-cols-[1fr_auto_auto] 
+                items-center 
+                w-full
+              "
+            >
+              {/* Left spacer (takes up remaining space to allow centering) */}
+              <div></div>
+
+              <span className="text-sm text-rmigray-500 text-center">
+                Found {pathwaysNumber} pathways
+              </span>
+              <button
+                type="button"
+                aria-label="Clear all filters"
+                className="
+                  ml-2 text-xs px-2 py-1 rounded border border-gray-200 
+                  bg-white text-energy-700 hover:bg-gray-50 hover:underline 
+                  focus:outline-none focus:ring-2 focus:ring-indigo-500 
+                  transition
+                "
+                onClick={onClear}
+                data-testid="clear-all-filters"
+              >
+                Reset filters
+              </button>
+            </div>
+          )}
+        </div>
       </div>
       <div className="grid gap-2 grid-cols-[repeat(auto-fit,minmax(12rem,1fr))]">
         <div>
@@ -122,8 +168,8 @@ const SearchSection: React.FC<SearchSectionProps> = ({
         <div>
           <NumericRangeDropdown
             label="Temperature (°C)"
-            minBound={tempBounds.min}
-            maxBound={tempBounds.max}
+            minBound={limitMinTempIncrease}
+            maxBound={limitMaxTempIncrease}
             step={getStep("temp")}
             value={
               !Array.isArray(filters.modelTempIncrease)
@@ -172,23 +218,6 @@ const SearchSection: React.FC<SearchSectionProps> = ({
             menuWidthClassName="w-60"
           />
         </div>
-      </div>
-      <div className="mt-4 ml-1 flex items-center justify-between gap-3">
-        <p className="text-sm text-rmigray-500">
-          Found {pathwaysNumber} pathways
-          {areFiltersApplied && " matching your criteria"}
-          {areFiltersApplied && (
-            <button
-              type="button"
-              aria-label="Clear all filters"
-              className="ml-2 text-sm text-indigo-600 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded"
-              onClick={onClear}
-              data-testid="clear-all-filters"
-            >
-              Clear all filters
-            </button>
-          )}
-        </p>
       </div>
     </div>
   );

@@ -30,7 +30,6 @@
         "require_code_owner_review": true,
         "require_last_push_approval": true,
         "required_review_thread_resolution": false,
-        "automatic_copilot_code_review_enabled": true,
         "allowed_merge_methods": ["merge"]
       }
     },
@@ -71,6 +70,10 @@
           {
             "context": "Unit Tests / Run unit tests",
             "integration_id": 15368
+          },
+          {
+            "context": "Check generated timeseries index / Check generated timeseries index",
+            "integration_id": 15368
           }
         ]
       }
@@ -81,6 +84,9 @@
         "review_on_push": false,
         "review_draft_pull_requests": false
       }
+    },
+    {
+      "type": "copilot_code_review"
     }
   ],
   "bypass_actors": [

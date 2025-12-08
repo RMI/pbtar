@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://pathways.rmi.org/schema/common/metric.v1.json",
+  "title": "Metric",
+  "description": "Common definition of a metric used across pathway schemas.",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "$ref": "#/$defs/displayName"
+    },
+    "definition": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Detailed description of what the metric represents."
+    },
+    "sectorScope": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Specifies which parts of the sector value chain the metric applies to."
+    }
+  },
+  "required": ["displayName", "definition", "sectorScope"],
+  "additionalProperties": false,
+
+  "$defs": {
+    "displayName": {
+      "description": "Display name of the metric",
+      "type": "string",
+      "enum": [
+        "Emissions Intensity",
+        "Capacity",
+        "Generation",
+        "Technology Mix",
+        "Absolute Emissions"
+      ]
+    }
+  }
+}

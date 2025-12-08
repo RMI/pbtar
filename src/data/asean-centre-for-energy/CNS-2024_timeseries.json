@@ -1,14 +1,23 @@
 {
   "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
-  "id": "ACE-CNS-2024_TS",
+  "id": "ACE-CNS-2024_timeseries",
   "pathwayId": ["ACE-CNS-2024"],
   "name": "Carbon Neutrality Scenario (CNS) Timeseries Data",
   "description": "Pathway for ASEAN to achieve significant CO2 emissions reductions by 2050.",
-  "publisher": "ASEAN Centre for Energy (ACE)",
-  "publicationName": "8th ASEAN Energy Outlook",
-  "publicationYear": 2024,
+  "publication": {
+    "title": { "full": "8th ASEAN Energy Outlook", "short": "AEO8" },
+    "publisher": { "full": "ASEAN Centre for Energy", "short": "ACE" },
+    "year": 2024,
+    "city": "Jakarta",
+    "issn": "2963-539X",
+    "links": [
+      {
+        "description": "Report",
+        "url": "https://aseanenergy.org/publications/the-8th-asean-energy-outlook/"
+      }
+    ]
+  },
   "pathwayName": "Carbon Neutrality Scenario (CNS)",
-  "source": "ACE, 2024, 8th ASEAN Energy Outlook (AEO8)\nReport URL:https://aseanenergy.org/publications/the-8th-asean-energy-outlook/",
   "emissionsScope": "CO2e (unspecified GHGs)",
   "sector": {
     "power": {

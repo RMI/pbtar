@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { TrendingUp, Lightbulb } from "lucide-react";
+import { HeaderBrand } from "../components/Header";
 
 const WavePattern: React.FC = () => {
   return (
@@ -158,7 +159,12 @@ const LandingPage: React.FC = () => {
       {/* Additional gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-energy/5 to-transparent"></div>
       {/* Content */}
-      <div className="relative">
+      <div className="relative min-h-screen">
+        <div className="absolute top-6 left-0 right-0">
+          <div className="container mx-auto px-4 text-white">
+            <HeaderBrand />
+          </div>
+        </div>
         <div className="container mx-auto px-4 py-12 min-h-screen flex items-center">
           <div className="flex flex-col md:flex-row gap-10 items-stretch w-full">
             {/* Left Column */}
@@ -207,7 +213,9 @@ const LandingPage: React.FC = () => {
                 This repository connects users with the right transition
                 pathways for their needs, with structured guidance for
                 navigating diverse pathway types, geographies, developers, and
-                methodologies.
+                methodologies. This repository is currently being piloted for
+                the pathways that cover the power sector in Southeast Asia, and
+                expansion to other sectors and geographies is coming soon.
               </Card>
             </div>
           </div>

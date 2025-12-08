@@ -1,0 +1,61 @@
+{
+  "$schema": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
+  "id": "SDSN-CW-OEP-LA-2025",
+  "publication": {
+    "title": {
+      "full": "ASEAN Green Future Project Phase 2.2 Report, Optimization of Laos's Power Generation Sector"
+    },
+    "author": [
+      "Phouphet Kyophilavong",
+      "Phongsili Soukchalern",
+      "Thanouxay Volavong",
+      "Vonethaly Vongsavanthong"
+    ],
+    "publisher": {
+      "full": "Sustainable Development Solutions Network and ClimateWorks Centre",
+      "short": "UN SDSN, CW"
+    },
+    "year": 2025,
+    "month": 2,
+    "links": [
+      {
+        "description": "Report",
+        "url": "https://files.unsdsn.org/AGF%20-%20Laos%202.2%20Report%20-%20release.pdf"
+      }
+    ]
+  },
+  "name": {
+    "full": "Optimized Existing Policy Scenario LA",
+    "short": "OEP LA"
+  },
+  "description": "Cost-optimized pathway under current policies with coal and hydropower expansion.",
+  "geography": ["LA"],
+  "pathwayType": "Exploratory",
+  "modelYearStart": 2020,
+  "modelYearEnd": 2050,
+  "ssp": "SSP2",
+  "sectors": [
+    {
+      "name": "Power",
+      "technologies": ["Coal", "Hydro", "Solar", "Wind", "Biomass"]
+    }
+  ],
+  "expertOverview": "#### Pathway Description\n\nThe Optimized Existing Policy scenario models Laos’s power and energy systems using the Low Emissions Analysis Platform (LEAP) under the ASEAN Green Future (AGF) project. The Optimized Existing Policy (OEP) scenario applies a market-optimal lens to the same policy context as the Existing Policy scenario, but it removes the policy-prescribed constraints on the power generation mix and optimizes for minimum system cost while still satisfying energy demand growth under existing policies. Under this scenario, the result is a more carbon-intensive but economically efficient variant of the Existing Policy pathway. \n\nNotably, total electricity generation in this scenario far exceeds that in the baseline, as the model maximizes Laos’s low-cost resources (especially hydropower) to produce as much power as needed at the lowest cost. By 2050, annual generation is 132.8 TWh in the OEP scenario, compared to only 57.3 TWh under the baseline, despite having the same installed capacity, indicating much higher utilization rates. \n\n#### Core Drivers\n\nThe OEP pathway is driven by cost optimization under market conditions with limited policy intervention. \n\n*Cost optimization:* Economic optimization is the defining driver of this scenario. It determines the cheapest mix of generation to meet electricity demand, without introducing any new climate constraints. This means that capital and operating costs dictate the outcome, and as such no additional renewables beyond those already mandated by policy are built unless they are cost-competitive.\n\n*Technology deployment:* Hydropower experiences large-scale expansions similar to those in the Existing Policy scenario. With no carbon price or emissions cap, coal-fired power remains in the mix as a low-cost source for baseload and export. The model keeps coal capacity at 4 GW through 2050, but generation is slightly higher in this scenario, resulting in higher power sector emissions in 2050 than in the Existing Policy scenario.\n\n#### Application to Transition Assessment\n\nAs a cost-optimized extension of the Existing Policy scenario, the Optimized Existing Policy scenario serves as a useful baseline for climate transition analysis. It represents a potential business-as-usual trajectory in which Laos’s power sector follows the present policy path without any new climate interventions. The OEP scenario offers a conservative planning case that helps financial actors understand the outcomes of current policies in Laos, which is useful for benchmarking. It also shows that significant emissions reductions are not a given without additional incentives or actions.\n\nDue to its focus on modeling cost optimization within existing policy, the OEP scenario is well-suited to assessing the alignment of corporate targets, plans, and investment pipelines against a cost-driven forecast of country-specific market shifts. Misalignment with the pathway indicates that a company or plan may already be lagging behind potential rates of change, potentially exposing it to regulatory risks or declining market share as other segments of the energy sector grow. Because the pathway includes a strong focus on cost optimization, it is a useful candidate for contextualizing the commercial and technical feasibility of transition strategies under the aggressive least-cost parameters described by the OEP pathway. Strategies that exceed the pace of change forecast under OEP may imply reliance on future policy or technology shifts. \n\nThe OEP pathway models power and energy systems to 2050, providing country-level projections for generation and capacity at 10-year intervals, with a high-level breakdown by energy source such as coal, gas, and renewables. Due to its country-specific nature, the OEP pathway has limited applicability to companies with operations across multiple geographies, but it offers greater detail and specificity for companies in Laos, as compared to global or regional pathways.",
+  "metric": ["Absolute Emissions", "Capacity", "Generation", "Technology Mix"],
+  "keyFeatures": {
+    "emissionsTrajectory": "Significant increase",
+    "energyEfficiency": "No information",
+    "energyDemand": "No information",
+    "electrification": "Moderate increase",
+    "policyTypes": ["Target technology shares"],
+    "technologyCostTrend": "Decrease",
+    "technologyDeploymentTrend": "No information",
+    "emissionsScope": "CO2e (Kyoto)",
+    "policyAmbition": "Current/legislated policies",
+    "technologyCostsDetail": "Total costs",
+    "newTechnologiesIncluded": ["No information"],
+    "supplyChain": "No information",
+    "investmentNeeds": "Total investment",
+    "infrastructureRequirements": "No information"
+  }
+}

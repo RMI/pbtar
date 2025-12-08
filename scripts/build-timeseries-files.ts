@@ -76,6 +76,15 @@ function logError(...args: any[]) {
   console.error("[timeseries-index]", ...args);
 }
 
+function sanitizeStrings<T>(obj: T): T {
+  const clean = (v: unknown): unknown =>
+    typeof v === "string" ? v.replace(/\s+/g, " ").trim() : v;
+
+  return Object.fromEntries(
+    Object.entries(obj).map(([k, v]) => [k, clean(v)]),
+  ) as T;
+}
+
 async function isDir(p: string) {
   try {
     return (await fs.stat(p)).isDirectory();
@@ -320,12 +329,27 @@ async function main() {
         logDebug(
           `  getRowMetadata: sector=${sector}, metric=${metric}, technology=${technology}`,
         );
-        const out = {
-          publisher: parsed.publisher,
-          publicationName: parsed.publicationName,
-          publicationYear: parsed.publicationYear,
+        const pub = parsed.publication;
+        // License (optional)
+        const licensePart = pub.license ? `License: ${pub.license}` : "";
+        // Links (optional array)
+        const linksPart =
+          Array.isArray(pub.links) && pub.links.length > 0
+            ? pub.links.map((l) => `${l.description}: ${l.url}`).join(", ")
+            : "";
+        // Collect optional parentheses content
+        const optionalParts = [licensePart, linksPart]
+          .filter(Boolean)
+          .join(", ");
+        const optionalBlock = optionalParts ? ` (${optionalParts})` : "";
+        // Final string
+        const source = `${pub.publisher.short}, ${pub.year}, ${pub.title.full}${optionalBlock}`;
+        const outRaw = {
+          publisher: parsed.publication.publisher.short,
+          publicationName: parsed.publication.title.full,
+          publicationYear: parsed.publication.year,
           pathwayName: parsed.pathwayName,
-          source: parsed.source,
+          source: source,
           sector: parsed.sector?.[sector]?.displayName,
           emissionsScope: parsed.emissionsScope,
           sectorScope: parsed.sector?.[sector]?.metric?.[metric]?.sectorScope,
@@ -337,6 +361,7 @@ async function main() {
           definitionTechnology:
             parsed.sector?.[sector]?.technology?.[technology]?.definition,
         };
+        const out = sanitizeStrings(outRaw);
         logDebug(`    returning metadata: ${JSON.stringify(out)}`);
         return out;
       };

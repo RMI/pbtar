@@ -16,11 +16,10 @@ export interface StepRendererProps {
   selectionMode: "single" | "multi"; // click behavior
   mapSelect?: (opt: string | number) => (string | number)[]; // default: identity
   onChange: (next: (string | number)[]) => void; // emit new underlying values
-  /** Optional: visual state hook for partial selection */
   getState?: (
     opt: string | number,
     selected: ReadonlySet<string | number>,
-  ) => "on" | "partial" | "off";
+  ) => "on" | "off";
 }
 
 export const StepPageDiscrete: React.FC<StepRendererProps> = ({
@@ -36,13 +35,14 @@ export const StepPageDiscrete: React.FC<StepRendererProps> = ({
   const selectedSet = useMemo(() => new Set(value), [value]);
   const mapFn = mapSelect ?? ((opt: string | number) => [opt]); // identity for pure discrete steps
 
-  const computeState = (opt: string | number): "on" | "partial" | "off" => {
+  const computeState = (opt: string | number): "on" | "off" => {
     if (getState) return getState(opt, selectedSet);
     const mapped = mapFn(opt).filter((v) => v != null); // ignore null/undefined
     const hits = mapped.filter((v) => selectedSet.has(v)).length;
     if (hits === 0) return "off";
     if (hits === mapped.length) return "on";
-    return "partial";
+    // to restore "partial" behavior, change this line to return "partial";
+    return "off";
   };
 
   const handleClick = (opt: string | number) => {
@@ -82,18 +82,18 @@ export const StepPageDiscrete: React.FC<StepRendererProps> = ({
               key={option.id}
               onClick={() => handleClick(option.value)}
               className={`group relative w-full text-left pl-10 pr-4 py-3 min-h-[76px] rounded-lg flex flex-col justify-center gap-2 transition-colors
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-rmiblue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-energy-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white
                 border-2 ${
                   selected
-                    ? "border-rmiblue-800 bg-rmiblue-100"
+                    ? "border-energy-800 bg-energy-100"
                     : partial
-                      ? "border-rmiblue-400 bg-rmiblue-100"
+                      ? "border-energy-400 bg-energy-100"
                       : "border-transparent shadow-sm hover:border-neutral-300 hover:shadow-sm bg-white"
                 }`}
             >
               {selected && (
                 <span
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-rmiblue-800 text-sm font-semibold"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-energy-800 text-sm font-semibold"
                   aria-hidden="true"
                 >
                   ✓

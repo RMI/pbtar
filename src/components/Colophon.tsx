@@ -3,6 +3,7 @@ import { Copy, Check } from "lucide-react";
 
 interface ColophonProps {
   className?: string;
+  trigger?: React.ReactNode;
 }
 
 interface SystemInfo {
@@ -22,7 +23,10 @@ interface NetworkInformation {
   };
 }
 
-const Colophon: React.FC<ColophonProps> = ({ className = "" }) => {
+const Colophon: React.FC<ColophonProps> = ({
+  className = "",
+  trigger = "Build and System Information",
+}) => {
   const [systemInfo, setSystemInfo] = useState<SystemInfo>({
     userAgent: "Loading...",
     screenResolution: "Loading...",
@@ -128,10 +132,8 @@ const Colophon: React.FC<ColophonProps> = ({ className = "" }) => {
   };
 
   return (
-    <details className={`text-sm text-rmigray-500 ${className}`}>
-      <summary className="cursor-pointer hover:text-rmigray-700">
-        Build and System Information
-      </summary>
+    <details className={className}>
+      <summary className="cursor-pointer">{trigger}</summary>
       <div className="mt-2">
         <button
           onClick={(e) => {

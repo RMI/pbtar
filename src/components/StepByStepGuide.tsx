@@ -13,9 +13,14 @@ import {
 import { SearchFilters } from "../types";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 import { getGlobalFacetOptions } from "../utils/searchUtils";
+import { sortPathwayType } from "../utils/sortUtils";
 import { StepPageDiscrete, StepOption } from "./StepPage";
 import StepPageRemap, { RemapCategory } from "./StepPageRemap";
 import StepPageNumericRange from "./StepPageNumericRange";
+import {
+  limitMinTempIncrease,
+  limitMaxTempIncrease,
+} from "../utils/NumericRangeLimits";
 
 export interface GuideStep {
   id: keyof SearchFilters;
@@ -85,7 +90,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       "Direct Policy": "Sourced directly from policy frameworks",
       "Exploratory": "Future states under explicit assumptions",
       "Normative": "Pre-determined target outcome",
-      "Predictive": "Extrapolates from current trends.",
+      "Predictive": "Extrapolates from current trends",
     },
     emissionsTrajectory: {
       "Significant increase": "Grow more than 50% by 2050",
@@ -95,15 +100,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       "Minor decrease": "Decrease 5%-15% by 2050",
       "Moderate decrease": "Decrease 15%-50% by 2050",
       "Significant decrease": "Decrease more than 50% by 2050",
-    },
-    policyAmbition: {
-      "No policies included": "Excludes policy impacts.",
-      "Current/legislated policies": "Only policies already in place.",
-      "Current and drafted policies": "Includes in-process policy drafts.",
-      "NDCs, unconditional only": "Policies to reach unconditional targets",
-      "NDCs incl. conditional targets": "Policies to reach all targets",
-      "Normative/Optimization-based": "Policies to reach a climate outcome.",
-      "Other policy ambition": "See pathway details",
     },
     metric: {
       "Capacity": "Generation capacity by technology/fuel",
@@ -119,14 +115,16 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       id: "pathwayType",
       title: "Pathway Type",
       description:
-        "Different pathway types are constructed with different objectives, making them suited for different analytical applications. Analyses of ambitious scenarios, such as strategic target setting, often use normative pathways. Risk analyses often use predictive or explorative pathways.",
+        "Different pathway types are constructed with different objectives, making them suited for different analytical applications. Use cases such as strategic target setting often use normative pathways, for example. Risk analyses often use predictive or explorative pathways.",
       icon: <GitFork className="h-8 w-8" />,
       multi: false,
       componentId: "discrete",
-      options: optionsByFacet["pathwayType"].map((o) => ({
-        ...o,
-        description: descriptions["pathwayType"][o.title] || undefined,
-      })),
+      options: sortPathwayType(
+        optionsByFacet["pathwayType"].map((o) => ({
+          ...o,
+          description: descriptions["pathwayType"][o.title] || undefined,
+        })),
+      ),
     },
     {
       id: "modelTempIncrease",
@@ -138,26 +136,8 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
       componentId: "numericRange",
       componentProps: {
         stepKey: "temp",
-        minBound: optionsByFacet["modelTempIncrease"].reduce((min, current) => {
-          return current.value < min.value ? current : min;
-        }).value,
-        maxBound: optionsByFacet["modelTempIncrease"].reduce((max, current) => {
-          return current.value > max.value ? current : max;
-        }).value,
-        // recompute minBar and maxBar dynamically
-        minBar: Math.min(
-          0,
-          Math.floor(
-            optionsByFacet["modelTempIncrease"].reduce((min, current) => {
-              return current.value < min.value ? current : min;
-            }).value,
-          ),
-        ),
-        maxBar: Math.ceil(
-          optionsByFacet["modelTempIncrease"].reduce((max, current) => {
-            return current.value > max.value ? current : max;
-          }).value * 1.1,
-        ),
+        minBound: limitMinTempIncrease,
+        maxBound: limitMaxTempIncrease,
       },
     },
     {
@@ -167,19 +147,50 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
         "Pathways differ in the types of policies included, providing benchmarks for different policy action scenarios. This is relevant both for setting appropriately ambitious targets and for policy alignment analysis.",
       icon: <ScrollText className="h-8 w-8" />,
       multi: false,
-      componentId: "discrete",
-      options: (() => {
-        return [...(optionsByFacet["policyAmbition"] ?? [])]
-          .map((o) => ({
-            ...o,
-            description: descriptions["policyAmbition"][o.title] || undefined,
-          }))
-          .concat({
-            id: "__policyAmbition_clear__",
-            title: "Include any policy ambition",
-            value: null, // null value clears the filter
-          });
-      })(),
+      options: optionsByFacet["policyAmbition"],
+      componentId: "remap",
+      componentProps: {
+        categories: [
+          {
+            label: "Current and/or drafted policies",
+            values: [
+              "Current/legislated policies",
+              "Current and drafted policies",
+            ],
+            description: "Legislated policies and in-process policy drafts",
+          },
+          {
+            label: "Nationally Determined Contributions",
+            values: [
+              "NDCs, unconditional only",
+              "NDCs incl. conditional targets",
+            ],
+            description:
+              "Policies to reach unconditional and/or conditional targets",
+          },
+          {
+            label: "Normative/Optimization-based",
+            values: ["Normative/Optimization-based"],
+            description: "Policies to reach a climate outcome",
+          },
+          {
+            label: "Other policy ambition",
+            values: ["Other policy ambition"],
+            description: "See pathway details",
+          },
+          {
+            label: "No policies included",
+            values: ["No policies included"],
+            description: "Excludes policy impacts",
+          },
+          {
+            // Use a null array to unset filter
+            label: "Include any policy ambition",
+            values: [null],
+          },
+        ] as RemapCategory[],
+        clampToAvailable: true,
+      },
     },
     {
       id: "dataAvailability",
@@ -264,8 +275,9 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                       relevant policy assumption set.
                     </p>
                     <p className="text-base text-rmigray-600 leading-[1.6] tracking-normal mb-2">
-                      The following steps guide users through key pathway
-                      features, while filters below offer additional options.
+                      The following four categories guide users through key
+                      pathway features, while filters below offer additional
+                      options.
                     </p>
                   </div>
 
@@ -328,12 +340,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                       const maxBound =
                         (step.componentProps?.maxBound as number | undefined) ??
                         (nums.length ? Math.max(...nums) : 6);
-                      const minBar =
-                        (step.componentProps?.minBar as number | undefined) ??
-                        minBound;
-                      const maxBar =
-                        (step.componentProps?.maxBar as number | undefined) ??
-                        maxBound;
 
                       return (
                         <Comp
@@ -344,8 +350,6 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                           onChange={(next) => onFilterChange(step.id, next)}
                           minBound={minBound}
                           maxBound={maxBound}
-                          minBar={minBar}
-                          maxBar={maxBar}
                           stepKey={step.componentProps?.stepKey ?? "temp"}
                         />
                       );
@@ -375,24 +379,17 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                     );
                   })()}
 
-                  <div className="flex items-center justify-between mt-6">
-                    <div className="flex space-x-2">
+                  <div className="grid grid-cols-3 items-center mt-6">
+                    <div className="flex space-x-2 justify-start">
                       {steps.map((_, index) => (
                         <button
                           key={index}
                           onClick={() => setCurrentView(index)}
-                          className={`w-2 h-2 rounded-full ${currentView === index ? "bg-energy" : "bg-gray-300"}`}
+                          className={`w-4 h-4 rounded-full ${currentView === index ? "bg-energy" : "bg-gray-300"} p-1`}
                         />
                       ))}
                     </div>
-
-                    <div className="flex items-center space-x-4">
-                      <button
-                        onClick={() => setCurrentView("home")}
-                        className="p-2 hover:text-energy"
-                      >
-                        <Home className="h-5 w-5" />
-                      </button>
+                    <div className="flex items-center space-x-4 justify-center">
                       <button
                         onClick={() =>
                           setCurrentView(Math.max(0, currentView - 1))
@@ -401,6 +398,12 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                         className="p-2 hover:text-energy disabled:opacity-50"
                       >
                         <ChevronLeft className="h-5 w-5" />
+                      </button>
+                      <button
+                        onClick={() => setCurrentView("home")}
+                        className="p-2 hover:text-energy"
+                      >
+                        <Home className="h-5 w-5" />
                       </button>
                       <button
                         onClick={() =>
@@ -414,6 +417,7 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
                         <ChevronRight className="h-5 w-5" />
                       </button>
                     </div>
+                    <div /> {/* Empty right column */}
                   </div>
                 </div>
               )}
