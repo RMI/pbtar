@@ -20,11 +20,11 @@ describe("Footer component", () => {
     ).toBeInTheDocument();
   });
 
-  it("contains Contact Us email link", () => {
+  it("contains Give Feedback email link", () => {
     renderFooter();
-    const contactLink = screen.getByText("Contact Us");
-    expect(contactLink).toBeInTheDocument();
-    expect(contactLink.closest("a")).toHaveAttribute(
+    const feedbackLink = screen.getByText("Give Feedback");
+    expect(feedbackLink).toBeInTheDocument();
+    expect(feedbackLink.closest("a")).toHaveAttribute(
       "href",
       "mailto:contact@rmi.org",
     );
