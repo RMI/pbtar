@@ -202,7 +202,7 @@
       [
         "@semantic-release/exec",
         {
-          "prepareCmd": "npm run prepare:tarball"
+          "prepareCmd": "VITE_APP_VERSION=${nextRelease.version} npm run prepare:tarball"
         }
       ],
       [
