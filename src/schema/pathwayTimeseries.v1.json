@@ -49,46 +49,6 @@
       "$ref": "http://pathways.rmi.org/schema/common/emissionsScope.v1.json",
       "tsType": "import('./common/emissionsScope.v1').EmissionsScopeV1"
     },
-    "sector": {
-      "description": "Sectors that the timeseries data covers.",
-      "type": "object",
-      "patternProperties": {
-        "^[A-Za-z0-9 _-]{1,100}$": {
-          "type": "object",
-          "properties": {
-            "displayName": {
-              "description": "Display name of the sector as presented in charts or tables.",
-
-              "$ref": "http://pathways.rmi.org/schema/common/sector.v1.json#/$defs/displayName"
-            },
-            "technology": {
-              "description": "Technologies that belong to this sector, each with a name and definition.",
-              "type": "object",
-              "patternProperties": {
-                "^[A-Za-z0-9 _-]{1,100}$": {
-                  "$ref": "http://pathways.rmi.org/schema/common/technology.v1.json"
-                }
-              },
-              "additionalProperties": false,
-              "minProperties": 1
-            },
-            "metric": {
-              "description": "Metrics available for this sector, describing what quantities are tracked (e.g., capacity, emissions).",
-              "type": "object",
-              "patternProperties": {
-                "^[A-Za-z0-9 _-]{1,100}$": {
-                  "$ref": "http://pathways.rmi.org/schema/common/metric.v1.json"
-                }
-              },
-              "additionalProperties": false,
-              "minProperties": 1
-            }
-          }
-        }
-      },
-      "additionalProperties": false,
-      "minProperties": 1
-    },
     "data": {
       "description": "Array of yearly data points for each sector, technology, and metric defined in this timeseries.",
       "type": "array",
@@ -289,7 +249,6 @@
     "publication",
     "pathwayName",
     "emissionsScope",
-    "sector",
     "data"
   ]
 }
