@@ -121,8 +121,7 @@
               "properties": {
                 "full": {
                   "const": "Philippines Department of Energy"
-                },
-                "short": { "const": "VN EREA, DEA" }
+                }
               },
               "required": ["full"],
               "not": { "required": ["short"] }
@@ -140,8 +139,7 @@
               "properties": {
                 "full": {
                   "const": "TransitionZero"
-                },
-                "short": { "const": "VN EREA, DEA" }
+                }
               },
               "required": ["full"],
               "not": { "required": ["short"] }
