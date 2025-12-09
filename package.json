@@ -202,7 +202,7 @@
       [
         "@semantic-release/exec",
         {
-          "prepareCmd": "VITE_APP_VERSION=${nextRelease.version} npm run prepare:tarball"
+          "prepareCmd": "cross-env VITE_APP_VERSION=${nextRelease.version} npm run prepare:tarball"
         }
       ],
       [
