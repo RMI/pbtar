@@ -386,20 +386,20 @@ async function main() {
           definitionTechnology: techDef?.definition ?? "",
         };
 
-// First sanitize whitespace
-const sanitized = sanitizeStrings(outRaw);
+        // First sanitize whitespace
+        const sanitized = sanitizeStrings(outRaw);
 
-// Then remove empty-string / undefined / null fields
-const cleaned = Object.fromEntries(
-  Object.entries(sanitized).filter(([_, v]) => {
-    if (v === null || v === undefined) return false;
-    if (typeof v === "string" && v.trim() === "") return false;
-    return true;
-  }),
-);
+        // Then remove empty-string / undefined / null fields
+        const cleaned = Object.fromEntries(
+          Object.entries(sanitized).filter(([_, v]) => {
+            if (v === null || v === undefined) return false;
+            if (typeof v === "string" && v.trim() === "") return false;
+            return true;
+          }),
+        );
 
-logDebug(`    returning metadata: ${JSON.stringify(cleaned)}`);
-return cleaned;
+        logDebug(`    returning metadata: ${JSON.stringify(cleaned)}`);
+        return cleaned;
       };
 
       logDebug(
