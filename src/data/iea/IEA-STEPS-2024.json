@@ -73,7 +73,6 @@
     { "name": "Road transport", "technologies": [] },
     { "name": "Automotive", "technologies": [] },
     { "name": "Aviation", "technologies": [] },
-    { "name": "Rail", "technologies": [] },
     { "name": "Shipping", "technologies": [] },
     { "name": "Other", "technologies": [] }
   ],
