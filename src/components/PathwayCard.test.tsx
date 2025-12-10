@@ -84,7 +84,10 @@ describe("PathwayCard component", () => {
 
     expect(links).toHaveLength(2);
     expect(links[0]).toHaveTextContent(
-      mockPathway.publication.publisher.full + ": " + mockPathway.name.full,
+      (mockPathway.publication.publisher.short ??
+        mockPathway.publication.publisher.full) +
+        ": " +
+        mockPathway.name.full,
     );
     expect(links[1]).toHaveTextContent("View Details");
   });
