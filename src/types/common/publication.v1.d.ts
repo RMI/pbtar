@@ -5,13 +5,9 @@
  */
 
 /**
- * Title of the report or publication.
+ * Label object with optional abbreviation.
  */
 export type Label = import("./label.v1").LabelV1;
-/**
- * Publisher or organization responsible for the publication.
- */
-export type Label1 = import("./label.v1").LabelV1;
 
 /**
  * Bibliographic information about the report or dataset.
@@ -26,7 +22,10 @@ export interface PublicationV1 {
    * List of authors or contributors.
    */
   author?: string[];
-  publisher: Label1;
+  /**
+   * Publisher or organization responsible for the publication.
+   */
+  publisher: import("./label.v1").LabelV1;
   /**
    * Year of publication.
    */

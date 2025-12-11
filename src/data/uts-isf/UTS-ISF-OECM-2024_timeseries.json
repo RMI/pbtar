@@ -1,0 +1,3691 @@
+{
+  "$schema": "http://pathways.rmi.org/schema/pathwayTimeseries.v1.json",
+  "pathwayId": ["UTS-ISF-OECM-2024"],
+  "id": "UTS-ISF-OECM-2024_timeseries",
+  "name": "1.5°C Pathway Timeseries Data",
+  "description": "Global 1.5°C pathway driven by massive rapid deployment of existing low-carbon technology.",
+  "pathwayName": "1.5C Pathway (1.5C)",
+  "publication": {
+    "title": {
+      "full": "One Earth Climate Model 2024",
+      "short": "OECM"
+    },
+    "subtitle": "Science-based Target Setting for the Finance Industry",
+    "author": ["Teske, S.", "Feenstra, S.", "Rispler, J.", "Niklas, S."],
+    "publisher": {
+      "full": "Institute for Sustainable Futures, University of Technology Sydney",
+      "short": "UTS ISF"
+    },
+    "year": 2024,
+    "month": 9,
+    "city": "Sydney",
+    "license": "CC0 1.0",
+    "links": [
+      {
+        "description": "Report",
+        "url": "https://www.uts.edu.au/globalassets/sites/default/files/2024-10/One-Earth-Climate-Model-2024-Final.pdf"
+      },
+      {
+        "description": "Dataset",
+        "url": "https://datadryad.org/dataset/doi:10.5061/dryad.cz8w9gj82"
+      }
+    ]
+  },
+  "emissionsScope": "CO2e (CO2, Methane)",
+  "data": [
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 11423,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 9036,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 5669,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 3042,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 1597,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 591,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 0,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 122.6,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 432.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 485.3,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 515.5,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 607.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 630.3,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 650.8,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 2936.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 1946.4,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 739.7,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 214,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 57.3,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 1953.5,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 1771.4,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 1325.5,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 521.5,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 309.1,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 134.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 1246.6,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 1292.7,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 1555.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 1609,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 1779.9,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 1913.6,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 2110.5,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 383.7,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 286.4,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 218,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 122.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 38.1,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 21.5,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 439.3,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 488,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 361.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 67.1,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 20.4,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 89,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 93.4,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 267.1,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 727.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 1140.3,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 1606.3,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 2209.6,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 774.9,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 4600.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 9833.7,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 16352.1,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 19523,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 22393.8,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 24880.7,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 765.9,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 1680.9,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 3214.5,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 5146,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 7161,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 9206.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 11428.7,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.434,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.273,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.132,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.053,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.023,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.007,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 564.2,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 1962.2,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 2120.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 2254.3,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 2641.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 2756.8,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 2859.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 9552.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 5931,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 2436.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 942.7,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 286,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 6371.8,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 6825.3,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 6327.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 4528.3,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 2736.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 1172.2,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 4232.3,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 4459.7,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 5365.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 5551,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 6140.7,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 6601.9,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 7386.7,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 2567.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 2174.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 1665.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 937.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 292.4,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 165,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 499.4,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 554.8,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 410.6,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 76.3,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 23.2,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 139.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 390.8,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 1110.6,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 2618.7,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 4212.9,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 5860.9,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 7995,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 862.8,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 6080.6,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 14047,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 24935.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 31214.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 35287.8,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 38321.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 1551.6,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 4730.4,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 9388.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 15704.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 22759.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 30441.3,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 37953.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 2.14,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 5.93,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 4.95,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 3.92,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 3.76,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 3.35,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 3.03,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 36.26,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 17.91,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 5.68,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 1.64,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 0.41,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 24.19,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 20.61,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 14.76,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 7.87,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 3.89,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 1.42,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 16.07,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 13.47,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 12.52,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 9.65,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 8.73,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 8.02,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 7.82,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 9.75,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 6.57,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 3.88,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 1.63,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0.42,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0.2,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 1.9,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 1.68,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 0.96,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 0.13,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 0.03,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 0.53,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 1.18,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 2.59,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 4.55,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 5.99,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 7.12,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 8.46,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 3.28,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 18.37,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 32.77,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 43.33,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 44.4,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 42.88,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 40.54,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 5.89,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 14.29,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 21.9,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 27.29,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 32.37,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 36.99,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "Global",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 40.16,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 275,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 257,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 225,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 179,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 106,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 78,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": null,
+      "metric": "absoluteEmissions",
+      "value": 0,
+      "unit": "MtCO2e"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 3.6,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 4.8,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 5.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 4.7,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 4.4,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 5.5,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "capacity",
+      "value": 6.6,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 42.5,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 42.5,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 36.9,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 27.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 11,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 5.5,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 11,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 11.4,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 13,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 14.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 13.5,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 10.8,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 5.8,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 8.7,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 11.4,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 12.9,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 14.4,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 14.9,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "capacity",
+      "value": 17.7,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 5.4,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 4.6,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 5.9,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 7.5,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 8.9,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 10.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "capacity",
+      "value": 0,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 2.3,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 5.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 9.8,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 17.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 27.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 40.4,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "capacity",
+      "value": 50,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 0.1,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 45,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 153.1,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 320.9,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 520.1,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 666.7,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "capacity",
+      "value": 875.2,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 0.3,
+      "unit": "GW"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 2.3,
+      "unit": "GW"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 13.6,
+      "unit": "GW"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 33.8,
+      "unit": "GW"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 65.6,
+      "unit": "GW"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 105.1,
+      "unit": "GW"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "capacity",
+      "value": 147.9,
+      "unit": "GW"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.845,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.583,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.363,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.204,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.09,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0.051,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": null,
+      "metric": "emissionsIntensity",
+      "value": 0,
+      "unit": "tCO2e/MWh"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 15.6,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 20.8,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 22.9,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 20.8,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 19.4,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 24.2,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "generation",
+      "value": 28.7,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 195.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 208.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 180.6,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 133.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 53.9,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 26.9,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 51.9,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 62.6,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 71.7,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 78.4,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 74.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 59.4,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 26.3,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 39.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 51.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 58.2,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 64.6,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 67.2,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "generation",
+      "value": 79.8,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 18.7,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 16.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 20.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 26.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 31,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 35.6,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "generation",
+      "value": 0,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 16.9,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 38.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 62.7,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 101.6,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 152.6,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 217.8,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "generation",
+      "value": 249.9,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 0.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 49.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 169.9,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 357.2,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 580.3,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 747.1,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "generation",
+      "value": 983.2,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 0.6,
+      "unit": "TWh"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 6.5,
+      "unit": "TWh"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 40.8,
+      "unit": "TWh"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 104,
+      "unit": "TWh"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 207.3,
+      "unit": "TWh"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 340.4,
+      "unit": "TWh"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "generation",
+      "value": 478.3,
+      "unit": "TWh"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 4.79,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 4.72,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 3.69,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 2.37,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 1.64,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 1.59,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "biomass",
+      "metric": "technologyMix",
+      "value": 1.58,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 60.04,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 47.21,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 29.1,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 15.14,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 4.55,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 1.77,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "coal",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 15.94,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 14.2,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 11.55,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 8.92,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 6.29,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 3.91,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "gas",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 8.08,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 8.87,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 8.3,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 6.62,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 5.46,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 4.43,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "hydro",
+      "metric": "technologyMix",
+      "value": 4.38,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "nuclear",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 5.74,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 3.65,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 3.3,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 2.97,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 2.62,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 2.34,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "oil",
+      "metric": "technologyMix",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 5.19,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 8.64,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 10.1,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 11.55,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 12.89,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 14.34,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "other",
+      "metric": "technologyMix",
+      "value": 13.73,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 0.03,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 11.23,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 27.38,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 40.62,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 49.03,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 49.2,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "solar",
+      "metric": "technologyMix",
+      "value": 54.02,
+      "unit": "%"
+    },
+    {
+      "year": 2020,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 0.18,
+      "unit": "%"
+    },
+    {
+      "year": 2025,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 1.47,
+      "unit": "%"
+    },
+    {
+      "year": 2030,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 6.57,
+      "unit": "%"
+    },
+    {
+      "year": 2035,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 11.83,
+      "unit": "%"
+    },
+    {
+      "year": 2040,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 17.51,
+      "unit": "%"
+    },
+    {
+      "year": 2045,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 22.42,
+      "unit": "%"
+    },
+    {
+      "year": 2050,
+      "geography": "ID",
+      "sector": "power",
+      "technology": "wind",
+      "metric": "technologyMix",
+      "value": 26.28,
+      "unit": "%"
+    }
+  ]
+}

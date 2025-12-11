@@ -77,6 +77,18 @@ describe("PathwayCard component", () => {
     expect(titleText).toContain(mockPathway.name.full);
   });
 
+  it("renders links on both the header and view details", () => {
+    renderPathwayCard();
+
+    const links = screen.getAllByRole("link");
+
+    expect(links).toHaveLength(2);
+    expect(links[0]).toHaveTextContent(
+      mockPathway.publication.publisher.full + ": " + mockPathway.name.full,
+    );
+    expect(links[1]).toHaveTextContent("View Details");
+  });
+
   it("renders the pathway description", () => {
     renderPathwayCard();
 

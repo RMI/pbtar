@@ -4,6 +4,151 @@
   "title": "Publication",
   "description": "Bibliographic information about the report or dataset.",
   "type": "object",
+  "definitions": {
+    "PublisherFullEnum": {
+      "description": "Allowed full publisher names.",
+      "type": "string",
+      "enum": [
+        "ASEAN Centre for Energy",
+        "Indonesia Just Energy Transition Partnership Secretariat",
+        "Institute for Essential Services Reform",
+        "Electricity and Renewable Energy Authority in Viet Nam, Danish Energy Agency",
+        "European Commission, Joint Research Centre",
+        "Institute for Sustainable Futures, University of Technology Sydney",
+        "International Energy Agency",
+        "Network of Central Banks and Supervisors for Greening the Financial System",
+        "Philippines Department of Energy",
+        "Sustainable Development Solutions Network and ClimateWorks Centre",
+        "TransitionZero"
+      ]
+    },
+    "PublisherShortEnum": {
+      "description": "Allowed short publisher names or acronyms.",
+      "type": "string",
+      "enum": [
+        "ACE",
+        "IEA",
+        "IESR",
+        "JETP ID",
+        "JRC",
+        "NGFS",
+        "UN SDSN, CW",
+        "UTS ISF",
+        "VN EREA, DEA"
+      ]
+    },
+    "PublisherLabel": {
+      "description": "Publisher label constrained to known full/short combinations.",
+      "allOf": [
+        {
+          "$ref": "http://pathways.rmi.org/schema/common/label.v1.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "full": { "$ref": "#/definitions/PublisherFullEnum" },
+            "short": { "$ref": "#/definitions/PublisherShortEnum" }
+          },
+          "required": ["full"],
+          "oneOf": [
+            {
+              "properties": {
+                "full": { "const": "ASEAN Centre for Energy" },
+                "short": { "const": "ACE" }
+              },
+              "required": ["full", "short"]
+            },
+            {
+              "properties": {
+                "full": {
+                  "const": "Indonesia Just Energy Transition Partnership Secretariat"
+                },
+                "short": { "const": "JETP ID" }
+              },
+              "required": ["full", "short"]
+            },
+            {
+              "properties": {
+                "full": { "const": "Institute for Essential Services Reform" },
+                "short": { "const": "IESR" }
+              },
+              "required": ["full", "short"]
+            },
+            {
+              "properties": {
+                "full": {
+                  "const": "Electricity and Renewable Energy Authority in Viet Nam, Danish Energy Agency"
+                },
+                "short": { "const": "VN EREA, DEA" }
+              },
+              "required": ["full", "short"]
+            },
+            {
+              "properties": {
+                "full": {
+                  "const": "European Commission, Joint Research Centre"
+                },
+                "short": { "const": "JRC" }
+              },
+              "required": ["full", "short"]
+            },
+            {
+              "properties": {
+                "full": {
+                  "const": "Institute for Sustainable Futures, University of Technology Sydney"
+                },
+                "short": { "const": "UTS ISF" }
+              },
+              "required": ["full", "short"]
+            },
+            {
+              "properties": {
+                "full": { "const": "International Energy Agency" },
+                "short": { "const": "IEA" }
+              },
+              "required": ["full", "short"]
+            },
+            {
+              "properties": {
+                "full": {
+                  "const": "Network of Central Banks and Supervisors for Greening the Financial System"
+                },
+                "short": { "const": "NGFS" }
+              },
+              "required": ["full", "short"]
+            },
+            {
+              "properties": {
+                "full": {
+                  "const": "Philippines Department of Energy"
+                }
+              },
+              "required": ["full"],
+              "not": { "required": ["short"] }
+            },
+            {
+              "properties": {
+                "full": {
+                  "const": "Sustainable Development Solutions Network and ClimateWorks Centre"
+                },
+                "short": { "const": "UN SDSN, CW" }
+              },
+              "required": ["full", "short"]
+            },
+            {
+              "properties": {
+                "full": {
+                  "const": "TransitionZero"
+                }
+              },
+              "required": ["full"],
+              "not": { "required": ["short"] }
+            }
+          ]
+        }
+      ]
+    }
+  },
   "properties": {
     "title": {
       "description": "Title of the report or publication.",
@@ -23,7 +168,7 @@
     },
     "publisher": {
       "description": "Publisher or organization responsible for the publication.",
-      "$ref": "http://pathways.rmi.org/schema/common/label.v1.json",
+      "$ref": "#/definitions/PublisherLabel",
       "tsType": "import('./label.v1').LabelV1"
     },
     "year": {

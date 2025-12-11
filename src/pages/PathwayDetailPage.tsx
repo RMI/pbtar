@@ -225,22 +225,27 @@ const PathwayDetailPage: React.FC = () => {
                 </div>
               </section>
 
-              <PublicationBlock publication={pathway.publication} />
+              <section className="mt-8">
+                <div className="prose text-rmigray-700">
+                  <h4>Supplemental Information</h4>
+                  <PublicationBlock publication={pathway.publication} />
 
-              {tsIndexLoaded && datasets.length > 0
-                ? datasets.map((d) => {
-                    const label = d.label ?? d.datasetId;
-                    const summary = summarizeSummary(d.summary);
-                    return (
-                      <DownloadDataset
-                        key={d.datasetId}
-                        label={label}
-                        href={d.path}
-                        summary={summary}
-                      />
-                    );
-                  })
-                : null}
+                  {tsIndexLoaded && datasets.length > 0
+                    ? datasets.map((d) => {
+                        const label = d.label ?? d.datasetId;
+                        const summary = summarizeSummary(d.summary);
+                        return (
+                          <DownloadDataset
+                            key={d.datasetId}
+                            label={label}
+                            href={d.path}
+                            summary={summary}
+                          />
+                        );
+                      })
+                    : null}
+                </div>
+              </section>
             </div>
 
             <div className="md:col-span-5">
