@@ -29,3 +29,8 @@ pnpm-debug.log*
 
 # Generated/copied files
 public/data/**/*
+
+# TypeScript build info
+*.tsbuildinfo
+tsconfig/*.tsbuildinfo
+.tsbuildcache/
