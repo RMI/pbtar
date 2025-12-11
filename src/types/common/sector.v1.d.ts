@@ -32,8 +32,4 @@ export type DisplayName =
  */
 export interface SectorV1 {
   displayName: DisplayName;
-  /**
-   * Narrative description of the sector's scope.
-   */
-  definition: string;
 }
