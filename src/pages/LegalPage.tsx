@@ -52,27 +52,24 @@ const LegalPage: React.FC = () => {
         additional oil and gas resources, as new input data are collected.
       </p>
       <ol
-        className="incremental"
         type="1"
-        className="list-decimal ml-6"
+        className="incremental list-decimal ml-6"
       >
         <li>
           <p className="mb-4">
             <strong>Access and Use of Services</strong>
           </p>
           <ol
-            className="incremental"
             type="a"
-            className="list-[lower-alpha] ml-6"
+            className="incremental list-[lower-alpha] ml-6"
           >
             <li>
               <p className="mb-4">
                 <em>Use of PBTAR Services</em>
               </p>
               <ol
-                className="incremental"
                 type="i"
-                className="list-[lower-roman] ml-6"
+                className="incremental list-[lower-roman] ml-6"
               >
                 <li>
                   <p className="mb-4">
@@ -117,9 +114,8 @@ const LegalPage: React.FC = () => {
                 Third Party Content and Copyright Attribution
               </p>
               <ol
-                className="incremental"
                 type="i"
-                className="list-[lower-roman] ml-6"
+                className="incremental list-[lower-roman] ml-6"
               >
                 <li>
                   <p className="mb-4">
@@ -151,9 +147,8 @@ const LegalPage: React.FC = () => {
             </strong>
           </p>
           <ol
-            className="incremental"
             type="a"
-            className="list-[lower-alpha] ml-6"
+            className="incremental list-[lower-alpha] ml-6"
           >
             <li>
               <p className="mb-4">
@@ -195,9 +190,8 @@ const LegalPage: React.FC = () => {
             <strong>Data Use and Attribution</strong>
           </p>
           <ol
-            className="incremental"
             type="a"
-            className="list-[lower-alpha] ml-6"
+            className="incremental list-[lower-alpha] ml-6"
           >
             <li>
               <p className="mb-4">
@@ -230,9 +224,8 @@ const LegalPage: React.FC = () => {
             <strong>Modifying or Terminating Our Services</strong>
           </p>
           <ol
-            className="incremental"
             type="a"
-            className="list-[lower-alpha] ml-6"
+            className="incremental list-[lower-alpha] ml-6"
           >
             <li>
               <p className="mb-4">
@@ -264,9 +257,8 @@ const LegalPage: React.FC = () => {
             <strong>Disclaimers</strong>
           </p>
           <ol
-            className="incremental"
             type="a"
-            className="list-[lower-alpha] ml-6"
+            className="incremental list-[lower-alpha] ml-6"
           >
             <li>
               <p className="mb-4">
@@ -297,9 +289,8 @@ const LegalPage: React.FC = () => {
             <strong>Limitation of Liability</strong>
           </p>
           <ol
-            className="incremental"
             type="a"
-            className="list-[lower-alpha] ml-6"
+            className="incremental list-[lower-alpha] ml-6"
           >
             <li>
               <p className="mb-4">
@@ -334,9 +325,8 @@ const LegalPage: React.FC = () => {
             <strong>Indemnity</strong>
           </p>
           <ol
-            className="incremental"
             type="a"
-            className="list-[lower-alpha] ml-6"
+            className="incremental list-[lower-alpha] ml-6"
           >
             <li>
               <p className="mb-4">
@@ -358,9 +348,8 @@ const LegalPage: React.FC = () => {
             <strong>Miscellaneous</strong>
           </p>
           <ol
-            className="incremental"
             type="a"
-            className="list-[lower-alpha] ml-6"
+            className="incremental list-[lower-alpha] ml-6"
           >
             <li>
               <p className="mb-4">
