@@ -61,7 +61,7 @@ describe("pathway schema enforces expected limits", () => {
         carbonBudget: 0,
         modelTempIncrease: 0.5, // min
         ssp: "SSP5",
-        geography: ["EU"],
+        geography: ["Europe and Central Asia"],
       },
     });
   });
@@ -78,7 +78,7 @@ describe("pathway schema enforces expected limits", () => {
           ...basePathway,
           id: "scn-2",
           name: { full: "Other" },
-          geography: ["Global", "EU"],
+          geography: ["Global", "Europe and Central Asia"],
         },
       },
     ]);
@@ -188,7 +188,7 @@ describe("pathway schema enforces expected limits", () => {
     fail(
       {
         name: "geography.json",
-        data: { ...basePathway, geography: ["EU", "EU"] },
+        data: { ...basePathway, geography: ["CN", "CN"] },
       },
       /must NOT have duplicate items/,
     );

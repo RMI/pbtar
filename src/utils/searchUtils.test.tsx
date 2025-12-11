@@ -161,11 +161,10 @@ describe("searchUtils - array results", () => {
   // Mock pathway data
   const geography: string[] = [
     "Global",
-    "EU",
-    "Americas",
-    "Asia Pacific",
+    "Europe and Central Asia",
+    "North America",
+    "South East Asia",
     "US",
-    "Country-Specific",
   ];
 
   const sectors: string[] = [
