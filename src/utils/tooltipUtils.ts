@@ -188,12 +188,12 @@ export function getKeyFeatureTooltip(
     emissionsScope: {
       "No information":
         "There is no information available on the emissions scope in this pathway.",
-      "CO₂": "Emissions in this pathway cover CO₂ only.",
-      "CO₂e (Kyoto)":
-        "Emissions in this pathway use CO₂-equivalent values covering the GHGs included in the Kyoto Protocol (CO₂, methane, N2O, HFCs, PFCs, SF6, NF3).",
-      "CO₂e (CO₂, Methane)":
+      "CO2": "Emissions in this pathway cover CO₂ only.",
+      "CO2e (Kyoto)":
+        "Emissions in this pathway use CO₂-equivalent values covering the GHGs included in the Kyoto Protocol (CO₂, methane, N₂O, HFCs, PFCs, SF₆, NF₃).",
+      "CO2e (CO2, Methane)":
         "Emissions in this pathway use CO₂-equivalent values, covering the CO₂ and methane.",
-      "CO₂e (unspecified GHGs)":
+      "CO2e (unspecified GHGs)":
         "Emissions in this pathway use CO₂-equivalent values, w/o specifying the exact coverage.",
       "Other emissions scope":
         "Emissions in this pathway cover another scope of GHGs that is not CO₂ or CO₂e.",
