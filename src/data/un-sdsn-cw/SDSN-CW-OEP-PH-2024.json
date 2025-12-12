@@ -32,7 +32,7 @@
   },
   "description": "Philippines-specific least-cost pathway to achieve current policy targets.",
   "geography": ["PH"],
-  "pathwayType": "Normative",
+  "pathwayType": "Exploratory",
   "modelYearStart": 2019,
   "modelYearEnd": 2060,
   "ssp": "SSP2",
