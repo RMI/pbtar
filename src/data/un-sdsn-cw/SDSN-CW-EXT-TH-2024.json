@@ -1,0 +1,74 @@
+{
+  "$schema": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
+  "id": "UNSDSN-CW-EXT-TH-2024",
+  "publication": {
+    "title": {
+      "full": "ASEAN Green Future Project Phase 2.2 Report, Analysis and Modelling of Power Sector in Thailand"
+    },
+    "author": [
+      "Bundit Limmeechokchai",
+      "Rathana Lorm",
+      "Kannika Thampanishvong"
+    ],
+    "publisher": {
+      "full": "Sustainable Development Solutions Network and ClimateWorks Centre",
+      "short": "UN SDSN, CW"
+    },
+    "year": 2024,
+    "links": [
+      {
+        "url": "https://files.unsdsn.org/AGF%202.2%20Report%20-%20Thailand%20-%20FINAL.pdf",
+        "description": "Report"
+      }
+    ]
+  },
+  "name": {
+    "full": "Existing Policy Scenario TH",
+    "short": "EXT TH"
+  },
+  "description": "Thailand-specific pathway reflecting current energy policy. Stable renewables share after 2037.",
+  "geography": ["TH"],
+  "pathwayType": "Predictive",
+  "modelYearStart": 2019,
+  "modelYearEnd": 2060,
+  "ssp": "SSP2",
+  "sectors": [
+    {
+      "name": "Power",
+      "technologies": [
+        "Coal",
+        "Oil",
+        "Gas",
+        "Hydro",
+        "Wind",
+        "Solar",
+        "Biomass",
+        "Other"
+      ]
+    }
+  ],
+  "expertOverview": "#### Pathway Description\n\nThe Existing Policy (EXT) scenario from the ASEAN Green Future project reflects Thailand’s current energy policy trajectory, integrating policy targets for renewable energy deployment and energy efficiency improvements. The EXT scenario is based on frameworks and policy plans such as the Energy Efficiency Plan 2018–2037, the Alternative Energy Development Plan 2018–2037, and the Power Development Plan 2018–2037. All these frameworks and plans end in 2037, beyond which the pathway assumes that the renewables share and energy efficiency remain constant through 2060.\n\nThe EXT is a relatively conservative outlook, without deployment at scale of new technologies (e.g., carbon capture or green hydrogen), that assumes limited ambition in renewables deployment overall. As a result, emissions from the power sector continue to increase in this pathway.\n\nThe ASEAN Green Future regional research project is run by the United Nations Sustainable Development Solutions Network, Climateworks Centre, and local researchers from leading universities. The project develops national policy analysis and near-zero pathways that are meant to provide policy recommendations and support policymakers.\n\n#### Core Drivers\n\nGDP growth, continuing urbanization, and technology shifts all contribute to sustained electricity demand growth over the full time frame of the pathway. \n\n*Policies:* The EXT assumes that the Thai power sector will reach energy efficiency targets and renewable energy share targets that are in line with existing government plans. This means that power capacity, generation, and emissions from the power sector are driven primarily by these policy targets. No further significant changes are modeled beyond the 2037 time horizon of these policy targets, and renewable energy and energy efficiency are held constant from that point until 2060. \n\n*Technology deployment and electrification:* Access to efficient lighting in residential buildings and efficiency improvements in industry moderate the growth of electricity demand despite continued economic growth.\n\n#### Application to Transition Assessment\n\nThe EXT scenario serves as a conservative baseline for energy transition analysis in Thailand, following the present policy path without any new climate interventions.\n\nThe EXT pathway is well-suited to assessing the alignment of corporate targets, plans, and investment pipelines to current government policies. Misalignment to the EXT pathway indicates that a company or plan may already be falling behind forecast rates of change. This could signal exposure to regulatory risk or declining market share as low-carbon segments of the power sector are encouraged to grow. \n\nThe EXT scenario does not include aspirational targets or potential future policies (see the More Ambitious Policy scenario and Near Zero Emission scenario that accompany the EXT scenario), which means that it can be viewed as a conservative projection of potential market dynamics. By extension, company plans that exceed the rate of transition that is forecast in the EXT scenario may still be exposed to future risks if new policies are implemented or technology shifts occur faster than modeled. \n\nThe EXT scenario does not include details about technology costs, supply chain dependencies, or investment needs, which means that it has clear limitations in assessing the commercial and technical feasibility of transition strategies.\n\nAnnual projections for power capacity, electricity generation, and emissions use a moderately detailed breakdown by energy sources including coal, natural gas, wind, solar, and biomass. These are relevant and useful for analyzing specific decarbonization levers and project investment pipelines within company plans. Due to its country-specific nature, the EXT scenario has limited applicability to companies with diversified operations across multiple geographies, but it offers solid detail and specificity for operations in Thailand.",
+  "metric": [
+    "Emissions Intensity",
+    "Absolute Emissions",
+    "Capacity",
+    "Generation",
+    "Technology Mix"
+  ],
+  "keyFeatures": {
+    "emissionsTrajectory": "Moderate increase",
+    "energyEfficiency": "No information",
+    "energyDemand": "No information",
+    "electrification": "No information",
+    "policyTypes": ["Target technology shares", "Other"],
+    "technologyCostTrend": "No information",
+    "technologyDeploymentTrend": "No new technologies deployed",
+    "emissionsScope": "CO2e (Kyoto)",
+    "policyAmbition": "Current/legislated policies",
+    "technologyCostsDetail": "No information",
+    "newTechnologiesIncluded": ["No new technologies"],
+    "supplyChain": "No information",
+    "investmentNeeds": "No information",
+    "infrastructureRequirements": "No information"
+  }
+}
