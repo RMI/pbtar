@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Mail } from "lucide-react";
-import Colophon from "../components/Colophon";
 
 const Footer: React.FC = () => {
   return (
@@ -27,7 +26,7 @@ const Footer: React.FC = () => {
               Legal
             </Link>
             <a
-              href="mailto:contact@rmi.org"
+              href="mailto:tomwhite+pbtar@rmi.org"
               className="flex items-center text-sm text-white hover:text-energy transition-colors duration-200"
             >
               <Mail
@@ -40,10 +39,9 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="mt-4 pt-4 border-t border-basalt text-center">
-          <Colophon
-            className="inline-block text-xs text-white"
-            trigger={`© ${new Date().getFullYear()} RMI. All rights reserved.`}
-          />
+          <div className="inline-block text-xs text-white">
+            © {new Date().getFullYear()} RMI. All rights reserved.
+          </div>
         </div>
       </div>
     </footer>
