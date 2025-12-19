@@ -5,13 +5,9 @@
   "description": "Common definition of a sector used across pathway schemata.",
   "type": "object",
   "properties": {
-    "displayName": { "$ref": "#/$defs/displayName" },
-    "definition": {
-      "type": "string",
-      "description": "Narrative description of the sector's scope."
-    }
+    "displayName": { "$ref": "#/$defs/displayName" }
   },
-  "required": ["displayName", "definition"],
+  "required": ["displayName"],
   "additionalProperties": false,
 
   "$defs": {

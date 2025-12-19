@@ -4,7 +4,7 @@
   "name": { "full": "Simple Standard Pathway", "short": "SimpStanPath" },
   "publication": {
     "title": { "full": "Example Title" },
-    "publisher": { "full": "Example Publisher" },
+    "publisher": { "full": "ASEAN Centre for Energy", "short": "ACE" },
     "year": 2025
   },
   "description": "This is a simple standard pathway for demonstration purposes, with all fields filled out.",

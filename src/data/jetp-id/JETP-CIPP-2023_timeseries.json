@@ -22,61 +22,6 @@
   },
   "pathwayName": "Comprehensive Investment and Policy Plan (CIPP)",
   "emissionsScope": "CO2",
-  "sector": {
-    "power": {
-      "displayName": "Power",
-      "technology": {
-        "coal": {
-          "displayName": "Coal",
-          "definition": "Electricity generation using coal combustion to produce steam that drives turbines for power."
-        },
-        "gas": {
-          "displayName": "Gas",
-          "definition": "Electricity generation using natural gas combustion in turbines or combined-cycle plants."
-        },
-        "oil": {
-          "displayName": "Oil",
-          "definition": "Electricity generation using petroleum-based fuels (diesel, heavy oil) to drive engines or steam turbines."
-        },
-        "nuclear": {
-          "displayName": "Nuclear",
-          "definition": "Electricity generation using heat from controlled nuclear fission reactors to produce steam."
-        },
-        "biomass": {
-          "displayName": "Biomass",
-          "definition": "Electricity generation using organic materials (biomass, biogas, or waste) as fuel for combustion or steam turbines."
-        },
-        "other": {
-          "displayName": "Other",
-          "definition": "Electricity generation using alternative or emerging sources such as geothermal, tidal, or hydrogen."
-        },
-        "hydro": {
-          "displayName": "Hydro",
-          "definition": "Electricity generation using flowing or falling water from rivers or dams to drive turbines (includes large and small sites, excludes pumped storage)."
-        },
-        "solar": {
-          "displayName": "Solar",
-          "definition": "Electricity generation via photovoltaic cells that convert sunlight directly into electricity."
-        },
-        "wind": {
-          "displayName": "Wind",
-          "definition": "Electricity generation via wind turbines, both onshore and offshore."
-        }
-      },
-      "metric": {
-        "generation": {
-          "displayName": "Generation",
-          "definition": "The actual amount of electricity produced over a specific period, typically measured in TWh",
-          "sectorScope": "Power generation"
-        },
-        "capacity": {
-          "displayName": "Capacity",
-          "definition": "The maximum output a power plant or energy source can produce under ideal conditions, measured in GW",
-          "sectorScope": "Power generation"
-        }
-      }
-    }
-  },
   "data": [
     {
       "year": 2022,
