@@ -144,7 +144,7 @@
             "type": "number"
           },
           "unit": {
-            "description": "Measurement unit associated with the metric value (e.g., GW, TWh, tCO2e).",
+            "description": "Measurement unit associated with the metric value (e.g., GW, TWh, tCO₂e).",
             "type": "string",
             "enum": ["tCO2e/MWh", "MtCO2e", "GW", "TWh", "%"]
           }
@@ -161,7 +161,7 @@
         ],
         "allOf": [
           {
-            "$comment": "Emissions intensity values should fall within a reasonable physical bound (−2 to 2 tCO2e/MWh). Ensures data sanity and prevents unit/scale mistakes.",
+            "$comment": "Emissions intensity values should fall within a reasonable physical bound (−2 to 2 tCO₂e/MWh). Ensures data sanity and prevents unit/scale mistakes.",
             "if": {
               "properties": {
                 "metric": { "const": "emissionsIntensity" }
@@ -232,7 +232,7 @@
             }
           },
           {
-            "$comment": "Historical global power sector emissions (<= 2023) should not exceed ~20,000 MtCO2e. Caps unrealistic values and unit mistakes.",
+            "$comment": "Historical global power sector emissions (<= 2023) should not exceed ~20,000 MtCO₂e. Caps unrealistic values and unit mistakes.",
             "if": {
               "properties": {
                 "metric": { "const": "absoluteEmissions" },
@@ -253,7 +253,7 @@
             }
           },
           {
-            "$comment": "Future global power sector emissions (>= 2024) should not exceed ~30,000 MtCO2e. Allows for scenario variability while trapping implausible values.",
+            "$comment": "Future global power sector emissions (>= 2024) should not exceed ~30,000 MtCO₂e. Allows for scenario variability while trapping implausible values.",
             "if": {
               "properties": {
                 "metric": { "const": "absoluteEmissions" },
