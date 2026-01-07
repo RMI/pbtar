@@ -68,6 +68,10 @@
             "integration_id": 15368
           },
           {
+            "context": "Linting / Run typecheck",
+            "integration_id": 15368
+          },
+          {
             "context": "Unit Tests / Run unit tests",
             "integration_id": 15368
           },

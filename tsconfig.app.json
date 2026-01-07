@@ -8,7 +8,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "strict": true
+    "strict": true,
+    "composite": true,
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "tsBuildInfoFile": ".tsbuildcache/app.tsbuildinfo"
   },
   "include": ["src"]
 }
