@@ -169,9 +169,10 @@ const StepByStepGuide: React.FC<StepByStepGuideProps> = ({
               "Policies to reach unconditional and/or conditional targets",
           },
           {
-            label: "Normative/Optimization-based",
-            values: ["Normative/Optimization-based"],
-            description: "Policies to reach a climate outcome",
+            label: "High ambition policies",
+            values: ["High ambition policies"],
+            description:
+              "Deep decarbonization targets (e.g. near or net zero, 1.5°C)",
           },
           {
             label: "Other policy ambition",

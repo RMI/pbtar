@@ -211,8 +211,8 @@ export function getKeyFeatureTooltip(
         "The policies modeled in this pathway assume policies are in place that ensure  all unconditional targets from NDCs are reached.",
       "NDCs incl. conditional targets":
         "The policies modeled in this pathway assume policies are in place that ensure  all targets from NDCs (conditional and unconditional) are reached.",
-      "Normative/Optimization-based":
-        "The policies modeled in this pathway ensure that a normative model outcome is reached, typically based on cost-optimization.",
+      "High ambition policies":
+        "The policies modeled in this pathway ensure that an ambitious outcome, such as 1.5°C, net zero or near net zero, is reached. These pathways often use normative least-cost optimization, but they do not have to.",
       "Other policy ambition":
         "The policies modeled in this pathway follow other specifications of policy ambition.",
     },

@@ -65,7 +65,7 @@
     "technologyCostTrend": "Decrease",
     "technologyDeploymentTrend": "Minor technology deployment",
     "emissionsScope": "CO2e (Kyoto)",
-    "policyAmbition": "Normative/Optimization-based",
+    "policyAmbition": "High ambition policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": ["Battery storage"],
     "supplyChain": "Exogenous input or fuel price",

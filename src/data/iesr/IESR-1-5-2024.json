@@ -78,7 +78,7 @@
     "technologyCostTrend": "Low or no change",
     "technologyDeploymentTrend": "Minor technology deployment",
     "emissionsScope": "CO2",
-    "policyAmbition": "Normative/Optimization-based",
+    "policyAmbition": "High ambition policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": ["Battery storage", "CCUS"],
     "supplyChain": "Exogenous input or fuel price",
