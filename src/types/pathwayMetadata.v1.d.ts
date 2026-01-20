@@ -247,7 +247,7 @@ export interface PathwayMetadataV1 {
       | "Current and drafted policies"
       | "NDCs, unconditional only"
       | "NDCs incl. conditional targets"
-      | "Normative/Optimization-based"
+      | "High ambition policies"
       | "Other policy ambition";
     /**
      * Specifies the level of granularity in cost data, such as total system costs or detailed CAPEX/OPEX breakdowns.
