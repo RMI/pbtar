@@ -50,6 +50,13 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git merge "origin/$HEAD_BRANCH"
 
+      - name: Generate build UUID
+        id: build_uuid
+        run: |
+          BUILD_UUID=$(uuidgen | tr '[:upper:]' '[:lower:]')
+          echo "VITE_BUILD_ID=$BUILD_UUID" >> $GITHUB_ENV
+          echo "Build UUID: $BUILD_UUID"
+
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
@@ -72,7 +79,6 @@ jobs:
               (github.event_name == 'pull_request' && format('{0}-{1}', 'pr', github.event.pull_request.number)) ||
               github.ref_name
             }}
-          VITE_BUILD_ID: gha-${{ github.run_id }}.${{ github.run_attempt }}-${{ github.sha }}
           VITE_GITHUB_ACTOR: ${{ github.actor }}
           VITE_GITHUB_EVENT_NAME: ${{ github.event_name }}
           VITE_GITHUB_REPOSITORY: ${{ github.repository }}
