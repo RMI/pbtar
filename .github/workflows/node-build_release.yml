@@ -79,6 +79,7 @@ jobs:
               (github.event_name == 'pull_request' && format('{0}-{1}', 'pr', github.event.pull_request.number)) ||
               github.ref_name
             }}
+          VITE_BUILD_ID: ${{ env.VITE_BUILD_ID }}
           VITE_GITHUB_ACTOR: ${{ github.actor }}
           VITE_GITHUB_EVENT_NAME: ${{ github.event_name }}
           VITE_GITHUB_REPOSITORY: ${{ github.repository }}
