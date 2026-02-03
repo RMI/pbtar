@@ -163,7 +163,6 @@ const Colophon: React.FC<ColophonProps> = ({
             <li>Connection: {systemInfo.connectionType}</li>
           </ul>
         </div>
-
       </div>
     </details>
   );
