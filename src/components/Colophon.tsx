@@ -71,7 +71,7 @@ const Colophon: React.FC<ColophonProps> = ({
       "Build Info": {
         "App Version": getEnvValue("VITE_APP_VERSION"),
         "Build ID": getEnvValue("VITE_BUILD_ID"),
-        "Git SHA": getEnvValue("VITE_GIT_SHA"),
+        "Git SHA": getEnvValue("VITE_GIT_SHA").slice(0, 7),
         "Node Version": getEnvValue("VITE_NODE_VERSION"),
         "Vite Version": getEnvValue("VITE_VERSION"),
       },
@@ -145,7 +145,7 @@ const Colophon: React.FC<ColophonProps> = ({
           <ul className="list-none text-s">
             <li>App Version: {import.meta.env["VITE_APP_VERSION"] ?? "N/A"}</li>
             <li>Build ID: {import.meta.env["VITE_BUILD_ID"] ?? "N/A"}</li>
-            <li>Git SHA: {import.meta.env["VITE_GIT_SHA"] ?? "N/A"}</li>
+            <li>Git SHA: {import.meta.env["VITE_GIT_SHA"].slice(0, 7) ?? "N/A"}</li>
             <li>
               Node Version: {import.meta.env["VITE_NODE_VERSION"] ?? "N/A"}
             </li>
