@@ -50,13 +50,6 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git merge "origin/$HEAD_BRANCH"
 
-      - name: Generate build UUID
-        id: build_uuid
-        run: |
-          BUILD_UUID=$(uuidgen | tr '[:upper:]' '[:lower:]')
-          echo "VITE_BUILD_ID=$BUILD_UUID" >> $GITHUB_ENV
-          echo "Build UUID: $BUILD_UUID"
-
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
