@@ -145,7 +145,9 @@ const Colophon: React.FC<ColophonProps> = ({
           <ul className="list-none text-s">
             <li>App Version: {import.meta.env["VITE_APP_VERSION"] ?? "N/A"}</li>
             <li>Build ID: {import.meta.env["VITE_BUILD_ID"] ?? "N/A"}</li>
-            <li>Git SHA: {import.meta.env["VITE_GIT_SHA"]?.slice(0, 7) ?? "N/A"}</li>
+            <li>
+              Git SHA: {import.meta.env["VITE_GIT_SHA"]?.slice(0, 7) ?? "N/A"}
+            </li>
             <li>
               Node Version: {import.meta.env["VITE_NODE_VERSION"] ?? "N/A"}
             </li>
