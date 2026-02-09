@@ -14,9 +14,6 @@ on:
 
 name: Build and Release
 
-permissions:
-  contents: read # for checkout
-
 jobs:
   build-release:
     name: Build and Release
