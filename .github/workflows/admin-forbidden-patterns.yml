@@ -1,6 +1,9 @@
 on:
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   scan:
     name: Check for forbidden patterns
