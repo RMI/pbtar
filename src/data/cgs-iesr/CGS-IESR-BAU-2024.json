@@ -1,6 +1,6 @@
 {
   "$schema": "http://pathways.rmi.org/schema/pathwayMetadata.v1.json",
-  "id": "IESR-BAU-2024",
+  "id": "CGS-IESR-BAU-2024",
   "publication": {
     "title": {
       "full": "1.5°C-aligned Coal Power Transition Pathways in Indonesia"
@@ -20,8 +20,8 @@
       "Nate Hultman"
     ],
     "publisher": {
-      "full": "Institute for Essential Services Reform",
-      "short": "IESR"
+      "full": "Center for Global Sustainability and Institute for Essential Services Reform",
+      "short": "CGS, IESR"
     },
     "year": 2024,
     "month": 6,
