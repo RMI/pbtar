@@ -16,6 +16,8 @@ on:
 
 name: Rulesets Checks
 concurrency: rulesets-checks
+permissions:
+  contents: read
 
 jobs:
   rulesets:
