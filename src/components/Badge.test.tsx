@@ -225,14 +225,14 @@ describe("Badge component", () => {
     it("displays correct tooltip for Policy pathway type", () => {
       render(
         <Badge
-          tooltip={pathwayTypeTooltips["Direct Policy"]}
+          tooltip={pathwayTypeTooltips["Normative"]}
           variant="pathwayType"
         >
-          Direct Policy
+          Normative
         </Badge>,
       );
 
-      const badge = screen.getByText("Direct Policy");
+      const badge = screen.getByText("Normative");
       expect(badge).toBeInTheDocument();
       expect(badge.closest("span")?.parentElement).toHaveAttribute(
         "tabindex",
