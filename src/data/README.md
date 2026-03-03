@@ -79,7 +79,7 @@ new_pathway_metadata <-
       id = "R-import-example",
       name = "R Import Pathway",
       description = "Pathway Imported from R",
-  pathwayType =  "Normative",
+      pathwayType =  "Normative",
       modelYearEnd = 2050,
       modelTempIncrease = 1.5,
       geography = list("Global", "US", "Europe"),
