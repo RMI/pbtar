@@ -233,7 +233,7 @@ describe("filterPathways (array-backed facets)", () => {
       sectors: [{ name: "Power" }],
       geography: ["Europe"],
       modelTempIncrease: 2.0,
-      pathwayType: "Direct Policy",
+      pathwayType: "Normative",
       modelYearNetzero: 2040,
       publisher: "X",
       publicationYear: 2020,
@@ -255,7 +255,7 @@ describe("filterPathways (array-backed facets)", () => {
 
   it("pathwayType: OR over multiple selections; empty array = no filter", () => {
     let out = filterPathways(pathways, {
-      pathwayType: ["Direct Policy", "Exploratory"],
+      pathwayType: ["Normative", "Exploratory"],
     } as FiltersWithArrays);
     expect(out.map((s) => s.id)).toEqual(["B", "C"]);
 
@@ -492,11 +492,10 @@ describe("getGlobalFacetOptions", () => {
 
     // pathwayTypeOptions should be in expected order
     const pathwayTypeLabels = pathwayTypeOptions.map((opt) => opt.label);
-    expect(pathwayTypeLabels.slice(0, 4)).toEqual([
+    expect(pathwayTypeLabels.slice(0, 3)).toEqual([
       "Predictive",
       "Exploratory",
       "Normative",
-      "Direct Policy",
     ]);
   });
 
