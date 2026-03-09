@@ -43,7 +43,7 @@ export interface PathwayMetadataV1 {
   /**
    * Type of the pathway pathway.
    */
-  pathwayType: "Normative" | "Exploratory" | "Direct Policy" | "Predictive";
+  pathwayType: "Normative" | "Exploratory" | "Predictive";
   /**
    * Year by which net zero is reached in the pathway. If Pathway does not reach net zero, this field should be omitted.
    */
