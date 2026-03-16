@@ -6,6 +6,9 @@ on:
     branches:
       - production
 
+permissions:
+  contents: read
+
 jobs:
   check_branch_name:
     runs-on: ubuntu-latest
