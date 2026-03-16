@@ -19,7 +19,7 @@
   "name": { "full": "Clean Energy Scenario 1", "short": "CES 1" },
   "description": "Philippines pathway following National Renewable Energy Plan with some offshore wind development.",
   "geography": ["PH"],
-  "pathwayType": "Direct Policy",
+  "pathwayType": "Exploratory",
   "modelYearStart": 2023,
   "modelYearEnd": 2050,
   "sectors": [

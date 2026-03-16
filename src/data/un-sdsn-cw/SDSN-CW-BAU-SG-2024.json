@@ -30,7 +30,7 @@
   },
   "description": "Singapore-specific pathway reflecting existing policy commitments and government targets.",
   "geography": ["SG"],
-  "pathwayType": "Direct Policy",
+  "pathwayType": "Predictive",
   "modelYearStart": 2023,
   "modelYearEnd": 2050,
   "ssp": "SSP2",
