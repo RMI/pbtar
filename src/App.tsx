@@ -1,6 +1,12 @@
 /// <reference types="vite/client" />
 // App.tsx
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LegalPage from "./pages/LegalPage";
@@ -8,6 +14,12 @@ import PathwaySearch from "./pages/PathwaySearch";
 import PathwayDetailPage from "./pages/PathwayDetailPage";
 import LandingPage from "./pages/LandingPage";
 import EnvironmentBanner from "./components/EnvironmentBanner";
+import {
+  ResourcesChangelogPage,
+  ResourcesContactPage,
+  ResourcesMethodologyPage,
+  ResourcesUseCasesPage,
+} from "./pages/resources";
 
 // Export the inner content for testing
 export const AppContent = () => {
@@ -35,6 +47,32 @@ export const AppContent = () => {
           <Route
             path="/legal"
             element={<LegalPage />}
+          />
+
+          <Route
+            path="/resources/methodology"
+            element={<ResourcesMethodologyPage />}
+          />
+          <Route
+            path="/resources/use-cases"
+            element={<ResourcesUseCasesPage />}
+          />
+          <Route
+            path="/resources/benchmarks"
+            element={
+              <Navigate
+                to="/resources/use-cases"
+                replace
+              />
+            }
+          />
+          <Route
+            path="/resources/changelog"
+            element={<ResourcesChangelogPage />}
+          />
+          <Route
+            path="/resources/contact"
+            element={<ResourcesContactPage />}
           />
         </Routes>
       </main>
