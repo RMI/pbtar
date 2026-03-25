@@ -27,81 +27,158 @@ const UseCaseCard: React.FC<UseCaseCardProps> = ({
 const ResourcesUseCasesPage: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold text-rmigray-800 mb-4">Use cases</h1>
+      <h1 className="text-3xl font-bold text-rmigray-800 mb-4">Use Cases</h1>
+
+      <h2 className="text-xl font-semibold text-rmigray-800 mb-2">
+        Use pathways to make corporate transition assessments more decision-useful
+      </h2>
       <p className="text-rmigray-700 max-w-4xl">
-        Transition pathways can be useful for different types of analysis, at
-        different levels. We focus mostly on corporate transition analysis,
-        which in turn informs transition plan credibility analysis, risk
-        management, and deal structuring. But other prominent use cases are
-        portfolio alignment analysis, and sector analysis.
+        The Transition Pathways Repository helps financial institutions find and
+        compare transition pathways for corporate transition assessments.
       </p>
       <p className="text-rmigray-700 max-w-4xl">
-        Generally, pathways do not tend to claim to be forecasts, but rather
-        scenarios or exploratory pathways, and they should be understood as such
-        regardless of the use case, unless the pathway modellers specifically
-        indicate otherwise.
-      </p>
-      <p className="text-rmigray-700 max-w-4xl">
-        They are most useful when applied as a structured set of external
-        reference points—for targets, trajectories, technology deployment
-        expectations, and policy context—alongside an organization’s own plan
-        and data. For many applications, it is recommendable to use multiple
-        pathways to reflect modelling uncertainty and document why each is
-        considered relevant.
+        It is designed to make pathway selection faster, more transparent, and
+        more practical. Instead of asking only whether a company has a transition
+        plan, users can also ask whether that plan looks ambitious, feasible, and
+        relevant in the markets where the company operates.
       </p>
 
-      <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <UseCaseCard
-          title="Corporate Transition Assessments"
-          subtitle="Assess the credibility and ambition of corporate transition plans."
-          bullets={[
-            "Transition Plan Credibility Assessments: compare a company’s transition plan against pathway trajectories to evaluate the feasibility and implementation gaps. Check if the plan addresses the reasons for implementation gaps and if external dependencies are considered.",
-            "Risk Management: Derive the corporate's exposure to transition related sectors and technologies and how the asset lifetimes and investment plans impact future risk exposure. Deduce if current exposure and future investment lead to a material risk profile that requires mitigation.",
-            "Deal Structuring: Implementation gaps can be a sign that future financing should include transition-related conditions, or that the company may be a less attractive counterparty for transition-related deals. Conversely, credible plans with clear milestones and pathways-aligned trajectories may be a sign of a more attractive counterparty.",
-          ]}
-        />
+      <div className="mt-10 max-w-4xl">
+        <h2 className="text-xl font-semibold text-rmigray-800 mb-3">Who this is for</h2>
 
-        <UseCaseCard
-          title="Portfolio Alignment Assessments"
-          subtitle="Evaluate alignment of financed emissions and exposures against pathway benchmarks."
-          bullets={[
-            "Choose pathway coverage: select pathways by sector and geography to match the portfolio’s exposure.",
-            "Translate to portfolio signals: derive reference rates of change (e.g., intensity decline, capacity build-out) for holdings/issuers.",
-            "Compare by time horizon: assess alignment in 5–10 year windows, not only 2050 endpoints.",
-            "Segment and attribute: use pathways to separate sector/region effects from issuer-specific under/over-performance.",
-          ]}
-        />
+        <div className="rounded-lg bg-white shadow p-6">
+          <h3 className="text-lg font-semibold text-rmigray-800 mb-2">
+            Built first for bank analysts
+          </h3>
+          <p className="text-rmigray-700">
+            TPR is designed primarily for teams in banks that use external
+            benchmarks to assess company transition plans and investment
+            strategies, especially:
+          </p>
+          <ul className="mt-3 list-disc pl-5 space-y-1 text-rmigray-700">
+            <li>Sustainability teams</li>
+            <li>Risk teams</li>
+            <li>Front-office and client coverage teams</li>
+          </ul>
 
-        <UseCaseCard
-          title="Sector Analyses"
-          subtitle="Support sector transition outlooks and strategy by comparing plausible futures."
-          bullets={[
-            "Bound the space of futures: compare pathways to understand ranges for demand, technology shares, and policy ambition.",
-            "Identify common directions of travel: look for consistent signals across pathways (e.g., electrification, efficiency).",
-            "Identify opportunities: regional trends across multiple pathways can signal areas of growth. External dependencies of those areas can signal investment opportunities in related infrastructure or supply chain projects.",
-            "Signal bottlenecks to regulators and policymakers: some dependencies that companies cannot address directly may be best handled by regulators or policymakers, e.g. permitting requirements in nascent markets. Signalling these bottlenecks to the relevant decision-makers can help drive policy action to address them.",
-          ]}
-        />
+          <h3 className="text-lg font-semibold text-rmigray-800 mt-6 mb-2">
+            Also useful for
+          </h3>
+          <ul className="list-disc pl-5 space-y-1 text-rmigray-700">
+            <li>Companies improving their transition plans</li>
+            <li>Policymakers and regulators tracking sector bottlenecks</li>
+            <li>Other financial institutions using transition assessments</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="mt-10">
+        <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
+          Main use cases for banks
+        </h2>
+
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl">
+          <UseCaseCard
+            title="Assess target ambition"
+            subtitle="Compare a company’s targets with external pathways."
+            bullets={[
+              "Classify ambition: understand whether targets look leading, lagging, or broadly aligned.",
+              "Anchor expectations: use pathway milestones to ground what ‘aligned’ could mean in the company’s sector and region.",
+              "Compare across pathways: use more than one pathway when you need to reflect uncertainty or different assumptions.",
+            ]}
+          />
+
+          <UseCaseCard
+            title="Test whether plans look feasible"
+            subtitle="Check whether key choices, timelines, and assumptions look realistic."
+            bullets={[
+              "Technology plausibility: compare technology choices (e.g., fuel switching, electrification, CCUS) to pathway narratives.",
+              "Timeline realism: use sector and regional trajectories to see if proposed ramps are consistent with modeled transitions.",
+              "Dependency checks: highlight where a plan depends on optimistic policy, market, or technology assumptions.",
+            ]}
+          />
+
+          <UseCaseCard
+            title="Review investment alignment"
+            subtitle="Compare capacity and project plans to pathway-aligned investment signals."
+            bullets={[
+              "Pipeline vs pathway: compare project pipelines or capacity plans against pathway trajectories.",
+              "Spot misalignment: identify investments that lock in high-emitting assets or delay necessary transition investments.",
+              "Translate to decision points: connect pathway signals to financing conditions, engagement priorities, or escalation.",
+            ]}
+          />
+
+          <UseCaseCard
+            title="Understand policy and market exposure"
+            subtitle="Explore how exposed a company may be to changes in regulation, demand, or technology trends."
+            bullets={[
+              "Regional policy context: use region-specific pathways to understand market/regulatory direction-of-travel.",
+              "Demand and price proxies: interpret pathway projections as stress-test inputs (not forecasts).",
+              "Risk framing: clarify whether risk comes from policy tightening, technology disruption, or shifting demand.",
+            ]}
+          />
+        </div>
+      </div>
+
+      <div className="mt-10 max-w-4xl">
+        <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
+          How this fits into a corporate transition assessment
+        </h2>
+        <div className="rounded-lg bg-white shadow p-6">
+          <p className="text-rmigray-700">
+            TPR is not a company scoring tool. It helps users find the right
+            external pathways and benchmarks to support corporate transition
+            assessments.
+          </p>
+          <p className="text-rmigray-700 mt-3">
+            Pathways are especially useful when you need to:
+          </p>
+          <ul className="mt-3 list-disc pl-5 space-y-1 text-rmigray-700">
+            <li>benchmark targets,</li>
+            <li>understand transition exposure at asset or technology level,</li>
+            <li>assess whether investment plans are aligned with stated goals,</li>
+            <li>test whether plans depend on optimistic technology, market, or policy assumptions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="mt-10 max-w-4xl">
+        <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
+          What TPR helps you do
+        </h2>
+        <div className="rounded-lg bg-white shadow p-6">
+          <ul className="list-disc pl-5 space-y-1 text-rmigray-700">
+            <li>discover relevant pathways by sector and region,</li>
+            <li>compare pathway characteristics before choosing one,</li>
+            <li>see what benchmark data is available,</li>
+            <li>avoid using the same scenario for every question.</li>
+          </ul>
+        </div>
       </div>
 
       <div className="mt-10 max-w-4xl rounded-lg bg-neutral-100 p-6 text-rmigray-700">
         <h2 className="text-lg font-semibold text-rmigray-800 mb-2">
-          Practical tips
+          Why pathway selection matters
         </h2>
-        <ul className="list-disc pl-5 space-y-2">
-          <li>
-            Prefer pathways with transparent assumptions and clear documentation
-            of scope, geography, and sector coverage.
-          </li>
-          <li>
-            Treat pathways as decision support—not a single “truth”. Use them to
-            ask better questions and to structure comparisons.
-          </li>
-          <li>
-            Record how you mapped internal metrics to pathway metrics (units,
-            definitions, boundaries) and where uncertainty remains.
-          </li>
-        </ul>
+        <p>
+          Different pathways answer different questions. A global 1.5°C pathway
+          may be useful for judging ambition. A regional policy-based pathway may
+          be more useful for understanding risk in a specific market.
+        </p>
+        <p className="mt-3">
+          TPR helps you see that difference before you use the pathway.
+        </p>
+
+        <div className="mt-5 rounded-md bg-white p-4 shadow-sm">
+          <p className="text-rmigray-700">
+            <span className="font-semibold">Looking for more detail?</span> Link to a
+            downloadable guide such as{" "}
+            <span className="font-semibold">
+              Using pathways in corporate transition assessments
+            </span>
+            .
+          </p>
+        </div>
       </div>
     </div>
   );
