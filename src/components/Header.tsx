@@ -69,19 +69,19 @@ const Header: React.FC = () => {
               >
                 <Link
                   role="menuitem"
-                  to="/resources/methodology"
-                  className="block px-4 py-3 text-sm hover:bg-neutral-100"
-                  onClick={() => setResourcesOpen(false)}
-                >
-                  Methodology
-                </Link>
-                <Link
-                  role="menuitem"
                   to="/resources/use-cases"
                   className="block px-4 py-3 text-sm hover:bg-neutral-100"
                   onClick={() => setResourcesOpen(false)}
                 >
                   Use cases
+                </Link>
+                <Link
+                  role="menuitem"
+                  to="/resources/methodology"
+                  className="block px-4 py-3 text-sm hover:bg-neutral-100"
+                  onClick={() => setResourcesOpen(false)}
+                >
+                  Methodology
                 </Link>
                 <Link
                   role="menuitem"
