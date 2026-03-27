@@ -77,7 +77,7 @@ export const POWER_SECTOR_DEFINITION: SectorDefinition = {
     absoluteEmissions: {
       displayName: "Absolute Emissions",
       definition:
-        "Total greenhouse gas emissions produced, regardless of output. Measured in metric tons of CO2 equivalent",
+        "Total greenhouse gas emissions produced, regardless of output. Measured in metric tons of CO₂ equivalent",
       sectorScope: "Power generation",
     },
     capacity: {
