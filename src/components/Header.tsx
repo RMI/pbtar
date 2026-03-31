@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-export const HeaderBrand: React.FC = () => {
+export const HeaderBrand: React.FC<{ to?: string }> = ({ to = "/pathway" }) => {
   return (
     <Link
-      to="/pathway"
+      to={to}
       className="flex items-center space-x-3 group transition-all duration-300"
     >
       <div>

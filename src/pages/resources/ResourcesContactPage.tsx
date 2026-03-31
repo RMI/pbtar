@@ -23,7 +23,9 @@ const ResourcesContactPage: React.FC = () => {
     <div className="container mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold text-rmigray-800 mb-4">Contact</h1>
 
-      <h2 className="text-xl font-semibold text-rmigray-800 mb-2">Get in touch</h2>
+      <h2 className="text-xl font-semibold text-rmigray-800 mb-2">
+        Get in touch
+      </h2>
       <p className="text-rmigray-700 max-w-4xl">
         We are building the Transition Pathways Repository to make transition
         pathways easier to find, compare, and use.
@@ -46,7 +48,6 @@ const ResourcesContactPage: React.FC = () => {
           repository with a short description of your request.
         </p>
       </div>
-
 
       <div className="mt-10">
         <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
@@ -86,7 +87,9 @@ const ResourcesContactPage: React.FC = () => {
           What feedback is most helpful
         </h2>
         <div className="rounded-lg bg-white shadow p-6">
-          <p className="text-rmigray-700 mb-3">We are especially interested in hearing about:</p>
+          <p className="text-rmigray-700 mb-3">
+            We are especially interested in hearing about:
+          </p>
           <ul className="list-disc pl-5 space-y-1 text-rmigray-700">
             <li>missing pathways or benchmarks,</li>
             <li>unclear classifications,</li>
@@ -98,7 +101,9 @@ const ResourcesContactPage: React.FC = () => {
       </div>
 
       <div className="mt-10 max-w-4xl">
-        <h2 className="text-xl font-semibold text-rmigray-800 mb-3">Collaboration</h2>
+        <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
+          Collaboration
+        </h2>
         <div className="rounded-lg bg-white shadow p-6">
           <p className="text-rmigray-700">
             We are particularly interested in hearing from financial
@@ -127,11 +132,18 @@ const ResourcesContactPage: React.FC = () => {
 
       <div className="mt-10 max-w-4xl rounded-lg bg-neutral-100 p-6 text-rmigray-700">
         <p>
-          <span className="font-semibold">Looking for more background first?</span>{" "}
+          <span className="font-semibold">
+            Looking for more background first?
+          </span>{" "}
           Link to downloadable resources such as{" "}
-          <span className="font-semibold">Using pathways in corporate transition assessments</span>{" "}
+          <span className="font-semibold">
+            Using pathways in corporate transition assessments
+          </span>{" "}
           or{" "}
-          <span className="font-semibold">Detailed methodology and classification rules</span>.
+          <span className="font-semibold">
+            Detailed methodology and classification rules
+          </span>
+          .
         </p>
       </div>
     </div>

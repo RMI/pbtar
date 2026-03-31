@@ -141,8 +141,8 @@ const ResourcesMethodologyPage: React.FC = () => {
               Predictive
             </h3>
             <p className="text-rmigray-700">
-              Shows what the pathway developer thinks is likely to happen.
-              Often useful for risk and feasibility questions.
+              Shows what the pathway developer thinks is likely to happen. Often
+              useful for risk and feasibility questions.
             </p>
           </div>
           <div className="rounded-lg bg-white shadow p-6">
@@ -160,8 +160,7 @@ const ResourcesMethodologyPage: React.FC = () => {
             </h3>
             <p className="text-rmigray-700">
               Starts with a target end state, such as a temperature goal, and
-              works backward. Often useful for ambition and alignment
-              questions.
+              works backward. Often useful for ambition and alignment questions.
             </p>
           </div>
           <div className="rounded-lg bg-white shadow p-6">
@@ -235,9 +234,7 @@ const ResourcesMethodologyPage: React.FC = () => {
         <h2 className="text-lg font-semibold text-rmigray-800 mb-2">
           Important interpretation note
         </h2>
-        <p>
-          A strong pathway for one task may be weak for another.
-        </p>
+        <p>A strong pathway for one task may be weak for another.</p>
         <p className="mt-3">
           For example, a global normative pathway may be useful for target
           ambition, while a regional policy-driven pathway may be better for
@@ -260,9 +257,12 @@ const ResourcesMethodologyPage: React.FC = () => {
 
       <div className="mt-10 max-w-4xl rounded-lg bg-neutral-100 p-6 text-rmigray-700">
         <p>
-          <span className="font-semibold">Looking for more detail?</span> Link to a
-          downloadable guide such as{" "}
-          <span className="font-semibold">Detailed methodology and classification rules</span>.
+          <span className="font-semibold">Looking for more detail?</span> Link
+          to a downloadable guide such as{" "}
+          <span className="font-semibold">
+            Detailed methodology and classification rules
+          </span>
+          .
         </p>
       </div>
     </div>

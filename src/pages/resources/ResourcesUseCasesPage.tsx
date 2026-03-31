@@ -30,7 +30,8 @@ const ResourcesUseCasesPage: React.FC = () => {
       <h1 className="text-3xl font-bold text-rmigray-800 mb-4">Use Cases</h1>
 
       <h2 className="text-xl font-semibold text-rmigray-800 mb-2">
-        Use pathways to make corporate transition assessments more decision-useful
+        Use pathways to make corporate transition assessments more
+        decision-useful
       </h2>
       <p className="text-rmigray-700 max-w-4xl">
         The Transition Pathways Repository helps financial institutions find and
@@ -38,13 +39,15 @@ const ResourcesUseCasesPage: React.FC = () => {
       </p>
       <p className="text-rmigray-700 max-w-4xl">
         It is designed to make pathway selection faster, more transparent, and
-        more practical. Instead of asking only whether a company has a transition
-        plan, users can also ask whether that plan looks ambitious, feasible, and
-        relevant in the markets where the company operates.
+        more practical. Instead of asking only whether a company has a
+        transition plan, users can also ask whether that plan looks ambitious,
+        feasible, and relevant in the markets where the company operates.
       </p>
 
       <div className="mt-10 max-w-4xl">
-        <h2 className="text-xl font-semibold text-rmigray-800 mb-3">Who this is for</h2>
+        <h2 className="text-xl font-semibold text-rmigray-800 mb-3">
+          Who this is for
+        </h2>
 
         <div className="rounded-lg bg-white shadow p-6">
           <h3 className="text-lg font-semibold text-rmigray-800 mb-2">
@@ -135,9 +138,16 @@ const ResourcesUseCasesPage: React.FC = () => {
           </p>
           <ul className="mt-3 list-disc pl-5 space-y-1 text-rmigray-700">
             <li>benchmark targets,</li>
-            <li>understand transition exposure at asset or technology level,</li>
-            <li>assess whether investment plans are aligned with stated goals,</li>
-            <li>test whether plans depend on optimistic technology, market, or policy assumptions.</li>
+            <li>
+              understand transition exposure at asset or technology level,
+            </li>
+            <li>
+              assess whether investment plans are aligned with stated goals,
+            </li>
+            <li>
+              test whether plans depend on optimistic technology, market, or
+              policy assumptions.
+            </li>
           </ul>
         </div>
       </div>
@@ -162,8 +172,8 @@ const ResourcesUseCasesPage: React.FC = () => {
         </h2>
         <p>
           Different pathways answer different questions. A global 1.5°C pathway
-          may be useful for judging ambition. A regional policy-based pathway may
-          be more useful for understanding risk in a specific market.
+          may be useful for judging ambition. A regional policy-based pathway
+          may be more useful for understanding risk in a specific market.
         </p>
         <p className="mt-3">
           TPR helps you see that difference before you use the pathway.
@@ -171,8 +181,8 @@ const ResourcesUseCasesPage: React.FC = () => {
 
         <div className="mt-5 rounded-md bg-white p-4 shadow-sm">
           <p className="text-rmigray-700">
-            <span className="font-semibold">Looking for more detail?</span> Link to a
-            downloadable guide such as{" "}
+            <span className="font-semibold">Looking for more detail?</span> Link
+            to a downloadable guide such as{" "}
             <span className="font-semibold">
               Using pathways in corporate transition assessments
             </span>
