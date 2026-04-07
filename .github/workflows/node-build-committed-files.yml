@@ -1,6 +1,9 @@
 on:
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   timeseries-index-gen:
     name: "Check generated timeseries index"
