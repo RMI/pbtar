@@ -132,7 +132,9 @@ const ContactPage: React.FC = () => {
 
       <div className="mt-10 max-w-4xl rounded-lg bg-neutral-100 p-6 text-rmigray-700">
         <p>
-          <span className="font-semibold">Looking for more background first?</span>{" "}
+          <span className="font-semibold">
+            Looking for more background first?
+          </span>{" "}
           Link to downloadable resources such as{" "}
           <span className="font-semibold">
             Using pathways in corporate transition assessments

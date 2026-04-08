@@ -42,15 +42,14 @@ const ResourcesHowToChoosePathwayPage: React.FC = () => {
         assessment question
       </h2>
       <p className="text-rmigray-700 max-w-5xl">
-        Different energy transition pathways answer different questions.
-        A pathway that is useful for assessing company target ambition may
-        not be the best fit for assessing policy exposure or technology
-        feasibility.
+        Different energy transition pathways answer different questions. A
+        pathway that is useful for assessing company target ambition may not be
+        the best fit for assessing policy exposure or technology feasibility.
       </p>
       <p className="text-rmigray-700 max-w-5xl">
-        The Transition Pathways Repository (TPR) helps you compare pathways
-        in a more structured way, so you can choose the ones that are most
-        useful for your application.
+        The Transition Pathways Repository (TPR) helps you compare pathways in a
+        more structured way, so you can choose the ones that are most useful for
+        your application.
       </p>
 
       <div className="mt-10 max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -70,8 +69,7 @@ const ResourcesHowToChoosePathwayPage: React.FC = () => {
               with its stated goals?
             </li>
             <li>
-              Are you trying to understand the technology or market
-              feasibility?
+              Are you trying to understand the technology or market feasibility?
             </li>
             <li>Are you looking at a company’s policy exposure?</li>
           </ul>
@@ -175,8 +173,8 @@ const ResourcesHowToChoosePathwayPage: React.FC = () => {
             variant="process"
           >
             <p>
-              Finally, check whether the pathway provides the actual output
-              data you need.
+              Finally, check whether the pathway provides the actual output data
+              you need.
             </p>
             <p className="mt-3">
               A pathway may model a sector in detail but still not publish the
@@ -224,7 +222,7 @@ const ResourcesHowToChoosePathwayPage: React.FC = () => {
             Important
           </h2>
           <h3 className="text-base font-semibold text-rmigray-800">
-              A credible pathway may still be the wrong fit
+            A credible pathway may still be the wrong fit
           </h3>
           <p className="mt-2">Credibility is necessary, but not sufficient.</p>
           <p className="mt-2">

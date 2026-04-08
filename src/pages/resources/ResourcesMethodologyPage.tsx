@@ -29,7 +29,8 @@ const ResourcesMethodologyPage: React.FC = () => {
       <h1 className="text-3xl font-bold text-rmigray-800 mb-4">Methodology</h1>
 
       <h2 className="text-xl font-semibold text-rmigray-800 mb-2">
-        How the Transition Pathways Repository (TPR) classifies pathways and how to interpret those classifications
+        How the Transition Pathways Repository (TPR) classifies pathways and how
+        to interpret those classifications
       </h2>
       <p className="text-rmigray-700 max-w-4xl">
         The TPR uses a structured classification approach to help analysts
@@ -37,12 +38,12 @@ const ResourcesMethodologyPage: React.FC = () => {
       </p>
       <p className="text-rmigray-700 max-w-4xl">
         These classifications are designed to support pathway selection and
-        interpretation for use cases such as client transition assessments,
-        risk analyses, and identification of opportunities. They do not
-        determine a single “best” pathway for a task - the analyst must still
-        understand the underlying pathway. The relevance of a pathway in a
-        real application still depends on the analyst understanding what
-        they are looking for and why.
+        interpretation for use cases such as client transition assessments, risk
+        analyses, and identification of opportunities. They do not determine a
+        single “best” pathway for a task - the analyst must still understand the
+        underlying pathway. The relevance of a pathway in a real application
+        still depends on the analyst understanding what they are looking for and
+        why.
       </p>
 
       <div className="mt-10">
@@ -106,13 +107,11 @@ const ResourcesMethodologyPage: React.FC = () => {
             <h2 className="text-lg font-semibold text-rmigray-800 mb-2">
               Important
             </h2>
-            <p>
-              Classifications support comparison, not automatic selection.
-            </p>
+            <p>Classifications support comparison, not automatic selection.</p>
             <p className="mt-3">
-              The TPR classifications are meant to make comparison easier
-              and more transparent. They help analysts understand what a pathway
-              can and cannot tell them, but they do not replace analyst judgment.
+              The TPR classifications are meant to make comparison easier and
+              more transparent. They help analysts understand what a pathway can
+              and cannot tell them, but they do not replace analyst judgment.
             </p>
           </div>
         </div>
@@ -123,10 +122,10 @@ const ResourcesMethodologyPage: React.FC = () => {
           Classification group 1: Pathway features
         </h2>
         <p className="text-rmigray-700 max-w-5xl">
-          Pathways usually exhibit several features that contain meta data
-          and narrative assumptions. These are useful to understand the idea
-          behind a pathway or scenario and the broad implications of the
-          modelled changes.
+          Pathways usually exhibit several features that contain meta data and
+          narrative assumptions. These are useful to understand the idea behind
+          a pathway or scenario and the broad implications of the modelled
+          changes.
         </p>
 
         <div className="mt-6 max-w-5xl">
@@ -180,8 +179,8 @@ const ResourcesMethodologyPage: React.FC = () => {
               peak increases before that.
             </p>
             <p className="mt-3">
-              Global pathways often provide a temperature outcome as they can
-              be linked to a carbon budget. Regional or sector-specific pathways
+              Global pathways often provide a temperature outcome as they can be
+              linked to a carbon budget. Regional or sector-specific pathways
               usually do not have a clear temperature outcome because a global
               model is required to calculate it.
             </p>
@@ -195,7 +194,8 @@ const ResourcesMethodologyPage: React.FC = () => {
           <TextBox>
             <p>
               The start year of the model refers to the last year before any
-              forward-looking modelling. It is the final year of the historical baseline used in the calculations of the pathway.
+              forward-looking modelling. It is the final year of the historical
+              baseline used in the calculations of the pathway.
             </p>
           </TextBox>
         </div>
@@ -212,7 +212,8 @@ const ResourcesMethodologyPage: React.FC = () => {
             </p>
             <p className="mt-3">
               For example, if the pathway metrics are available until 2050, but
-              there is a temperature outcome for 2100, then the end year is 2050.
+              there is a temperature outcome for 2100, then the end year is
+              2050.
             </p>
           </TextBox>
         </div>
@@ -228,8 +229,9 @@ const ResourcesMethodologyPage: React.FC = () => {
               be provided.
             </p>
             <p className="mt-3">
-              In some cases, net zero will refer to a specific region or (set of)
-              sector(s). Where this is the case, the scope is indicated accordingly.
+              In some cases, net zero will refer to a specific region or (set
+              of) sector(s). Where this is the case, the scope is indicated
+              accordingly.
             </p>
           </TextBox>
         </div>
@@ -240,15 +242,15 @@ const ResourcesMethodologyPage: React.FC = () => {
           Classification group 2: Scope, Granularity, Availability
         </h2>
         <p className="text-rmigray-700 max-w-5xl">
-          In corporate transition assessments, company metrics are compared
-          with benchmarks from pathways. To ensure this is a fair comparison,
-          it is important that the scope, granularity, and data availability
-          of the benchmark data in the pathway matches those of the company
-          (or that any deviations can be approximated transparently).
+          In corporate transition assessments, company metrics are compared with
+          benchmarks from pathways. To ensure this is a fair comparison, it is
+          important that the scope, granularity, and data availability of the
+          benchmark data in the pathway matches those of the company (or that
+          any deviations can be approximated transparently).
         </p>
         <p className="text-rmigray-700 max-w-5xl">
-          This matters because a pathway can appear relevant at a high level
-          but still be too coarse for the intended application.
+          This matters because a pathway can appear relevant at a high level but
+          still be too coarse for the intended application.
         </p>
 
         <div className="mt-10 max-w-5xl">
@@ -257,10 +259,11 @@ const ResourcesMethodologyPage: React.FC = () => {
           </h3>
           <TextBox>
             <p>
-              The list of regions and countries covered by the pathway. This will
-              only list countries or regions that the pathway provides benchmark
-              metrics for. All individual countries are allowed, based on ISO2
-              (3166) definitions. Regions are provided as defined in the pathway.
+              The list of regions and countries covered by the pathway. This
+              will only list countries or regions that the pathway provides
+              benchmark metrics for. All individual countries are allowed, based
+              on ISO2 (3166) definitions. Regions are provided as defined in the
+              pathway.
             </p>
             <p className="mt-3">
               NOTE: RMI does not make any statements on country delineations
@@ -276,17 +279,15 @@ const ResourcesMethodologyPage: React.FC = () => {
           <TextBox>
             <p>
               List of economic sectors that the pathway covers, where coverage
-              means that the pathway provides at least one relevant output metric
-              for each of the sectors assigned here.
+              means that the pathway provides at least one relevant output
+              metric for each of the sectors assigned here.
             </p>
             <p className="mt-3">
               NOTE: The repository is currently limited to providing detailed
               information on the power, steel, and aviation sectors. This
               variable also clarifies which other sectors a pathway models.
             </p>
-            <p className="mt-3">
-              The list of allowed values is:
-            </p>
+            <p className="mt-3">The list of allowed values is:</p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>Land Use,</li>
               <li>Agriculture,</li>
@@ -315,16 +316,16 @@ const ResourcesMethodologyPage: React.FC = () => {
             <p>
               List of segments of sectors that the pathway covers. This refers
               to the segments of a sector that are used on modelling the pathway
-              results. Sector specific metrics will additionally show the segments
-              that they refer to, which may be a subset of the full sector
-              metrics covered.
+              results. Sector specific metrics will additionally show the
+              segments that they refer to, which may be a subset of the full
+              sector metrics covered.
             </p>
             <p className="mt-3">
               For example, a pathway may describe which input fuels are used in
               the power sector and as such it covers “Upstream input fuels and
-              materials”. However, for the “Emissions intensity” benchmark metric,
-              it will only cover the “Power generation (on-grid)” segment of the
-              sector.
+              materials”. However, for the “Emissions intensity” benchmark
+              metric, it will only cover the “Power generation (on-grid)”
+              segment of the sector.
             </p>
             <p className="mt-3">
               Sector segments are only defined for the sectors that are covered
@@ -332,18 +333,20 @@ const ResourcesMethodologyPage: React.FC = () => {
             </p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>
-                Power: Upstream input fuels and materials, Power generation (on-grid),
-                Captive power generation (behind-the-meter), Power storage, Power
-                grid (transmission and distribution, grid connection),
+                Power: Upstream input fuels and materials, Power generation
+                (on-grid), Captive power generation (behind-the-meter), Power
+                storage, Power grid (transmission and distribution, grid
+                connection),
               </li>
               <li>
-                Aviation: Fuel production, Fuel system logistics, Fleet transition,
-                Fleet operation (Passenger), Fleet operation (Freight),
-                Airport and airspace system,
+                Aviation: Fuel production, Fuel system logistics, Fleet
+                transition, Fleet operation (Passenger), Fleet operation
+                (Freight), Airport and airspace system,
               </li>
               <li>
-                Steel: Iron mining, Fuel procurement, Iron reduction, Steel making
-                and casting, Steel product shaping, Finished product manufacturing.
+                Steel: Iron mining, Fuel procurement, Iron reduction, Steel
+                making and casting, Steel product shaping, Finished product
+                manufacturing.
               </li>
             </ul>
           </TextBox>
@@ -364,16 +367,15 @@ const ResourcesMethodologyPage: React.FC = () => {
             </p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>
-                Power: Coal, Oil, Gas, Nuclear, Hydro, Wind, Solar, Biomass, Renewables, Other,
+                Power: Coal, Oil, Gas, Nuclear, Hydro, Wind, Solar, Biomass,
+                Renewables, Other,
               </li>
               <li>
-                Aviation: JET A, SAF, Electricity (for battery-electric aircraft),
-                Hydrogen (for hydrogen aircraft), HEFA (Biofuels, incl. FT with biomass),
-                PtL (incl. G/FT), AtJ, Other,
+                Aviation: JET A, SAF, Electricity (for battery-electric
+                aircraft), Hydrogen (for hydrogen aircraft), HEFA (Biofuels,
+                incl. FT with biomass), PtL (incl. G/FT), AtJ, Other,
               </li>
-              <li>
-                Steel: BF-BOF, SR-BOF, DRI-EAF, Scrap-EAF, Other.
-              </li>
+              <li>Steel: BF-BOF, SR-BOF, DRI-EAF, Scrap-EAF, Other.</li>
             </ul>
           </TextBox>
         </div>
@@ -385,9 +387,9 @@ const ResourcesMethodologyPage: React.FC = () => {
           <TextBox>
             <p>
               List of sector-specific benchmark metrics that the pathway reports
-              outcomes for. Currently, this is only defined for the power sector,
-              but it will be expanded to each additional sector that we fully
-              cover in the repository.
+              outcomes for. Currently, this is only defined for the power
+              sector, but it will be expanded to each additional sector that we
+              fully cover in the repository.
             </p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>
@@ -401,11 +403,12 @@ const ResourcesMethodologyPage: React.FC = () => {
                 emissions intensity,
               </li>
               <li>
-                Steel: Emissions intensity (total), Emissions intensity (primary),
-                Emissions intensity (secondary), Absolute emissions, Emissions
-                intensity by production route, Technology mix (capacity by route),
-                Iron production by technology, Crude steel production by technology
-                (production route), Scrap share, Energy mix.
+                Steel: Emissions intensity (total), Emissions intensity
+                (primary), Emissions intensity (secondary), Absolute emissions,
+                Emissions intensity by production route, Technology mix
+                (capacity by route), Iron production by technology, Crude steel
+                production by technology (production route), Scrap share, Energy
+                mix.
               </li>
             </ul>
           </TextBox>
@@ -418,19 +421,17 @@ const ResourcesMethodologyPage: React.FC = () => {
           <TextBox>
             <p>
               Describes which GHGs are considered in scope in the pathway’s
-              emissions results. This means that this refers to absolute emissions
-              and emissions intensity metrics.
+              emissions results. This means that this refers to absolute
+              emissions and emissions intensity metrics.
             </p>
             <p className="mt-3">
-              Where the scope of GHGs covered differs from the entity the benchmark
-              data is supposed to be compared to (e.g. the emissions reported by
-              a company), the analyst may have to consider making additional
-              calculations or assumptions to be able to use the pathway, or use
-              another pathway with matching the emissions scope.
+              Where the scope of GHGs covered differs from the entity the
+              benchmark data is supposed to be compared to (e.g. the emissions
+              reported by a company), the analyst may have to consider making
+              additional calculations or assumptions to be able to use the
+              pathway, or use another pathway with matching the emissions scope.
             </p>
-            <p className="mt-3">
-              The list of allowed values is:
-            </p>
+            <p className="mt-3">The list of allowed values is:</p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>CO2,</li>
               <li>CO2e (Kyoto),</li>
@@ -456,9 +457,7 @@ const ResourcesMethodologyPage: React.FC = () => {
               potential impacts of a company’s exposure to policies in the
               region they operate in.
             </p>
-            <p className="mt-3">
-              The list of allowed values is:
-            </p>
+            <p className="mt-3">The list of allowed values is:</p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>Carbon price,</li>
               <li>Phaseout dates,</li>
@@ -477,19 +476,18 @@ const ResourcesMethodologyPage: React.FC = () => {
           </h3>
           <TextBox>
             <p>
-              A list of the main new technologies covered by the pathway that are
-              not scaling yet, but that will play a role in the future. The
-              included technologies do not necessarily come with a detailed timeseries.
+              A list of the main new technologies covered by the pathway that
+              are not scaling yet, but that will play a role in the future. The
+              included technologies do not necessarily come with a detailed
+              timeseries.
             </p>
             <p className="mt-3">
               Analysts can use this as a proxy for how optimistic the pathway is
-              regarding technological breakthroughs. This can be useful both as a
-              first steps in technology risk analysis as well as in opportunity
-              identification.
+              regarding technological breakthroughs. This can be useful both as
+              a first steps in technology risk analysis as well as in
+              opportunity identification.
             </p>
-            <p className="mt-3">
-              The list of allowed values is:
-            </p>
+            <p className="mt-3">The list of allowed values is:</p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>No new technologies,</li>
               <li>CCUS,</li>
@@ -510,17 +508,15 @@ const ResourcesMethodologyPage: React.FC = () => {
           </h3>
           <TextBox>
             <p>
-              Describes the level of granularity that is available for technology
-              unit cost data.
+              Describes the level of granularity that is available for
+              technology unit cost data.
             </p>
             <p className="mt-3">
               A more granular breakdown can be useful when a company’s future
               profitability and competitiveness is to be analyzed, especially in
               technologies whose costs are projected to decrease over time.
             </p>
-            <p className="mt-3">
-              The list of allowed values is:
-            </p>
+            <p className="mt-3">The list of allowed values is:</p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>Total costs,</li>
               <li>Capital costs, O&M, etc.,</li>
@@ -543,19 +539,17 @@ const ResourcesMethodologyPage: React.FC = () => {
               This can be an indication if the investment pipeline of a company
               is on pace with assumed requirements of the pathway. Where more
               detail is provided, it can also highlight, what part of the value
-              chain needs most investment and if that is reflected in a company’s
-              strategy.
+              chain needs most investment and if that is reflected in a
+              company’s strategy.
             </p>
             <p>
               Note: It is usually not possible to fully derive investment
               requirements based on unit costs and capacity growth numbers by
-              sector and technology. This is because capacity numbers do not show
-              how much investment goes into maintenance and infrastructure-related
-              projects.
+              sector and technology. This is because capacity numbers do not
+              show how much investment goes into maintenance and
+              infrastructure-related projects.
             </p>
-            <p className="mt-3">
-              The list of allowed values is:
-            </p>
+            <p className="mt-3">The list of allowed values is:</p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>Total investment,</li>
               <li>By sector,</li>
@@ -573,13 +567,13 @@ const ResourcesMethodologyPage: React.FC = () => {
           Classification group 3: Trends, Assumptions, Narrative
         </h2>
         <p className="text-rmigray-700 max-w-5xl">
-          Each pathway will describe trends that are built on assumptions of
-          how the future will unfold. These, together, paint a relatively
-          full picture of the pathway narrative. Different types of corporate
-          transition assessment use cases usually work with different types
-          of narratives, which is why it is crucial to have a good grasp of
-          the pathways assumptions and trends when selecting pathways for
-          an analysis.
+          Each pathway will describe trends that are built on assumptions of how
+          the future will unfold. These, together, paint a relatively full
+          picture of the pathway narrative. Different types of corporate
+          transition assessment use cases usually work with different types of
+          narratives, which is why it is crucial to have a good grasp of the
+          pathways assumptions and trends when selecting pathways for an
+          analysis.
         </p>
 
         <div className="mt-10 max-w-5xl">
@@ -598,9 +592,7 @@ const ResourcesMethodologyPage: React.FC = () => {
             <p className="mt-3">
               Comes with an indication of regional and sectoral scope.
             </p>
-            <p className="mt-3">
-              The list of allowed values is:
-            </p>
+            <p className="mt-3">The list of allowed values is:</p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>Significant increase,</li>
               <li>Moderate increase,</li>
@@ -631,9 +623,7 @@ const ResourcesMethodologyPage: React.FC = () => {
             <p className="mt-3">
               Comes with an indication of regional and sectoral scope.
             </p>
-            <p className="mt-3">
-              The list of allowed values is:
-            </p>
+            <p className="mt-3">The list of allowed values is:</p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>Significant deterioration,</li>
               <li>Moderate deterioration,</li>
@@ -663,9 +653,7 @@ const ResourcesMethodologyPage: React.FC = () => {
             <p className="mt-3">
               Comes with an indication of regional and sectoral scope.
             </p>
-            <p className="mt-3">
-              The list of allowed values is:
-            </p>
+            <p className="mt-3">The list of allowed values is:</p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>Significant increase,</li>
               <li>Moderate increase,</li>
@@ -696,9 +684,7 @@ const ResourcesMethodologyPage: React.FC = () => {
             <p className="mt-3">
               Comes with an indication of regional and sectoral scope.
             </p>
-            <p className="mt-3">
-              The list of allowed values is:
-            </p>
+            <p className="mt-3">The list of allowed values is:</p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>Significant increase,</li>
               <li>Moderate increase,</li>
@@ -727,12 +713,10 @@ const ResourcesMethodologyPage: React.FC = () => {
               likely to occur, but not the only plausible future outcome. Higher
               ambition pathways often come with remaining implementation gaps,
               which means they can be a good basis to understand bottlenecks for
-              the transition of a sector. These, in turn, can be opportunities in
-              some cases, or indicators where policymakers could intervene.
+              the transition of a sector. These, in turn, can be opportunities
+              in some cases, or indicators where policymakers could intervene.
             </p>
-            <p className="mt-3">
-              The list of allowed values is:
-            </p>
+            <p className="mt-3">The list of allowed values is:</p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>No policies included,</li>
               <li>Current/legislated policies,</li>
@@ -752,19 +736,18 @@ const ResourcesMethodologyPage: React.FC = () => {
           </h3>
           <TextBox>
             <p>
-              Describes the direction of unit costs of the low-carbon technologies
-              of in-scope sectors. This shows if newer low-carbon technologies
-              become more competitive compared to their high-carbon counterparts.
+              Describes the direction of unit costs of the low-carbon
+              technologies of in-scope sectors. This shows if newer low-carbon
+              technologies become more competitive compared to their high-carbon
+              counterparts.
             </p>
             <p className="mt-3">
-              Analysts may be interested in how fast costs of individual technologies
-              are assumed to change. Technology costs play a key role in determining
-              if a company moves too fast or too slow to capture the benefits of
-              sectoral change.
+              Analysts may be interested in how fast costs of individual
+              technologies are assumed to change. Technology costs play a key
+              role in determining if a company moves too fast or too slow to
+              capture the benefits of sectoral change.
             </p>
-            <p className="mt-3">
-              The list of allowed values is:
-            </p>
+            <p className="mt-3">The list of allowed values is:</p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>Increase,</li>
               <li>Low or no change,</li>
@@ -808,9 +791,9 @@ const ResourcesMethodologyPage: React.FC = () => {
             className="text-energy-700 hover:text-energy-800 underline underline-offset-2 font-semibold"
           >
             How to Choose a Pathway
-          </Link>
-          {" "}for a simpler, step-by-step guide to applying these
-          classifications in TPR.
+          </Link>{" "}
+          for a simpler, step-by-step guide to applying these classifications in
+          TPR.
         </p>
       </div>
     </div>

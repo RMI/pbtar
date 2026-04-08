@@ -36,7 +36,9 @@ const SectionCard: React.FC<{
         </span>
       </button>
 
-      {isOpen && <div className="border-t border-neutral-200 p-6">{children}</div>}
+      {isOpen && (
+        <div className="border-t border-neutral-200 p-6">{children}</div>
+      )}
     </div>
   );
 };
@@ -66,8 +68,7 @@ const ResourcesFaqPage: React.FC = () => {
                 </p>
                 <p>
                   It is designed to make pathway selection faster, more
-                  transparent, and easier to apply in real assessment
-                  workflows.
+                  transparent, and easier to apply in real assessment workflows.
                 </p>
               </>
             ),
@@ -163,7 +164,9 @@ const ResourcesFaqPage: React.FC = () => {
                 <p>Examples include:</p>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>Which pathway is most useful for assessing ambition?</li>
-                  <li>Which pathway is relevant for a specific country or region?</li>
+                  <li>
+                    Which pathway is relevant for a specific country or region?
+                  </li>
                   <li>Does this pathway have the benchmark data I need?</li>
                   <li>
                     Is this pathway better suited for policy questions or
@@ -182,8 +185,8 @@ const ResourcesFaqPage: React.FC = () => {
                   it does not automatically choose one for you.
                 </p>
                 <p>
-                  The most useful pathway depends on the question you are
-                  trying to answer.
+                  The most useful pathway depends on the question you are trying
+                  to answer.
                 </p>
               </>
             ),
@@ -197,15 +200,16 @@ const ResourcesFaqPage: React.FC = () => {
                   different assumptions.
                 </p>
                 <p>
-                  The classifications in TPR help users understand how a
-                  pathway should be interpreted, what it covers, and what it
-                  may be useful for.
+                  The classifications in TPR help users understand how a pathway
+                  should be interpreted, what it covers, and what it may be
+                  useful for.
                 </p>
               </>
             ),
           },
           {
-            question: "Why can’t I just use one well-known scenario for everything?",
+            question:
+              "Why can’t I just use one well-known scenario for everything?",
             answer: (
               <>
                 <p>Because different pathways answer different questions.</p>
@@ -218,12 +222,11 @@ const ResourcesFaqPage: React.FC = () => {
             ),
           },
           {
-            question: "Why do some pathways have more benchmark data than others?",
+            question:
+              "Why do some pathways have more benchmark data than others?",
             answer: (
               <>
-                <p>
-                  Not all pathway sources publish the same level of detail.
-                </p>
+                <p>Not all pathway sources publish the same level of detail.</p>
                 <p>
                   Some pathways may be robust and useful, but still not provide
                   the exact benchmark data needed for a specific comparison.
@@ -356,7 +359,8 @@ const ResourcesFaqPage: React.FC = () => {
             ),
           },
           {
-            question: "Can I use the TPR to run company-level analysis directly?",
+            question:
+              "Can I use the TPR to run company-level analysis directly?",
             answer: (
               <>
                 <p>
@@ -372,7 +376,8 @@ const ResourcesFaqPage: React.FC = () => {
             ),
           },
           {
-            question: "Can the TPR tell me whether a company is aligned with a pathway?",
+            question:
+              "Can the TPR tell me whether a company is aligned with a pathway?",
             answer: (
               <>
                 <p>Not directly.</p>
@@ -415,7 +420,8 @@ const ResourcesFaqPage: React.FC = () => {
             ),
           },
           {
-            question: "What should I do if I cannot find the pathway or data I need?",
+            question:
+              "What should I do if I cannot find the pathway or data I need?",
             answer: (
               <>
                 <p>You can contact the team to:</p>
