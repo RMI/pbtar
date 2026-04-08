@@ -1,13 +1,27 @@
 /// <reference types="vite/client" />
 // App.tsx
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LegalPage from "./pages/LegalPage";
 import PathwaySearch from "./pages/PathwaySearch";
 import PathwayDetailPage from "./pages/PathwayDetailPage";
 import LandingPage from "./pages/LandingPage";
+import ContactPage from "./pages/ContactPage";
 import EnvironmentBanner from "./components/EnvironmentBanner";
+import {
+  ResourcesChangelogPage,
+  ResourcesHowToChoosePathwayPage,
+  ResourcesFaqPage,
+  ResourcesMethodologyPage,
+  ResourcesUseCasesPage,
+} from "./pages/resources";
 
 // Export the inner content for testing
 export const AppContent = () => {
@@ -35,6 +49,50 @@ export const AppContent = () => {
           <Route
             path="/legal"
             element={<LegalPage />}
+          />
+
+          <Route
+            path="/contact"
+            element={<ContactPage />}
+          />
+
+          <Route
+            path="/resources/methodology"
+            element={<ResourcesMethodologyPage />}
+          />
+          <Route
+            path="/resources/how-to-choose-a-pathway"
+            element={<ResourcesHowToChoosePathwayPage />}
+          />
+          <Route
+            path="/resources/faq"
+            element={<ResourcesFaqPage />}
+          />
+          <Route
+            path="/resources/use-cases"
+            element={<ResourcesUseCasesPage />}
+          />
+          <Route
+            path="/resources/benchmarks"
+            element={
+              <Navigate
+                to="/resources/use-cases"
+                replace
+              />
+            }
+          />
+          <Route
+            path="/resources/changelog"
+            element={<ResourcesChangelogPage />}
+          />
+          <Route
+            path="/resources/contact"
+            element={
+              <Navigate
+                to="/contact"
+                replace
+              />
+            }
           />
         </Routes>
       </main>
