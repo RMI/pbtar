@@ -47,6 +47,13 @@ const Header: React.FC = () => {
         <HeaderBrand />
 
         <nav className="mt-3 md:mt-0 flex items-center gap-2">
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-white/90 hover:text-white hover:bg-white/10 transition-colors"
+          >
+            Contact Us
+          </Link>
+
           <div
             ref={menuRef}
             className="relative"
@@ -77,6 +84,14 @@ const Header: React.FC = () => {
                 </Link>
                 <Link
                   role="menuitem"
+                  to="/resources/how-to-choose-a-pathway"
+                  className="block px-4 py-3 text-sm hover:bg-neutral-100"
+                  onClick={() => setResourcesOpen(false)}
+                >
+                  How to choose a pathway
+                </Link>
+                <Link
+                  role="menuitem"
                   to="/resources/methodology"
                   className="block px-4 py-3 text-sm hover:bg-neutral-100"
                   onClick={() => setResourcesOpen(false)}
@@ -93,11 +108,11 @@ const Header: React.FC = () => {
                 </Link>
                 <Link
                   role="menuitem"
-                  to="/resources/contact"
+                  to="/resources/faq"
                   className="block px-4 py-3 text-sm hover:bg-neutral-100"
                   onClick={() => setResourcesOpen(false)}
                 >
-                  Contact
+                  FAQs
                 </Link>
               </div>
             )}

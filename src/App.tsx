@@ -13,10 +13,12 @@ import LegalPage from "./pages/LegalPage";
 import PathwaySearch from "./pages/PathwaySearch";
 import PathwayDetailPage from "./pages/PathwayDetailPage";
 import LandingPage from "./pages/LandingPage";
+import ContactPage from "./pages/ContactPage";
 import EnvironmentBanner from "./components/EnvironmentBanner";
 import {
   ResourcesChangelogPage,
-  ResourcesContactPage,
+  ResourcesHowToChoosePathwayPage,
+  ResourcesFaqPage,
   ResourcesMethodologyPage,
   ResourcesUseCasesPage,
 } from "./pages/resources";
@@ -50,8 +52,21 @@ export const AppContent = () => {
           />
 
           <Route
+            path="/contact"
+            element={<ContactPage />}
+          />
+
+          <Route
             path="/resources/methodology"
             element={<ResourcesMethodologyPage />}
+          />
+          <Route
+            path="/resources/how-to-choose-a-pathway"
+            element={<ResourcesHowToChoosePathwayPage />}
+          />
+          <Route
+            path="/resources/faq"
+            element={<ResourcesFaqPage />}
           />
           <Route
             path="/resources/use-cases"
@@ -72,7 +87,12 @@ export const AppContent = () => {
           />
           <Route
             path="/resources/contact"
-            element={<ResourcesContactPage />}
+            element={
+              <Navigate
+                to="/contact"
+                replace
+              />
+            }
           />
         </Routes>
       </main>

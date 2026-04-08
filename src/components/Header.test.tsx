@@ -35,6 +35,10 @@ describe("Header component", () => {
     renderHeader();
     const user = userEvent.setup();
 
+    expect(
+      screen.getByRole("link", { name: "Contact Us" }),
+    ).toBeInTheDocument();
+
     await user.click(screen.getByRole("button", { name: /resources/i }));
 
     expect(
@@ -44,10 +48,11 @@ describe("Header component", () => {
       screen.getByRole("menuitem", { name: "Use cases" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("menuitem", { name: "Blog / Changelog" }),
+      screen.getByRole("menuitem", { name: "How to choose a pathway" }),
     ).toBeInTheDocument();
+    expect(screen.getByRole("menuitem", { name: "FAQs" })).toBeInTheDocument();
     expect(
-      screen.getByRole("menuitem", { name: "Contact" }),
+      screen.getByRole("menuitem", { name: "Blog / Changelog" }),
     ).toBeInTheDocument();
   });
 });

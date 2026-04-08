@@ -18,7 +18,7 @@ const AudienceCard: React.FC<AudienceCardProps> = ({ title, bullets }) => {
   );
 };
 
-const ResourcesContactPage: React.FC = () => {
+const ContactPage: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold text-rmigray-800 mb-4">Contact</h1>
@@ -132,9 +132,7 @@ const ResourcesContactPage: React.FC = () => {
 
       <div className="mt-10 max-w-4xl rounded-lg bg-neutral-100 p-6 text-rmigray-700">
         <p>
-          <span className="font-semibold">
-            Looking for more background first?
-          </span>{" "}
+          <span className="font-semibold">Looking for more background first?</span>{" "}
           Link to downloadable resources such as{" "}
           <span className="font-semibold">
             Using pathways in corporate transition assessments
@@ -150,4 +148,4 @@ const ResourcesContactPage: React.FC = () => {
   );
 };
 
-export default ResourcesContactPage;
+export default ContactPage;
