@@ -375,7 +375,10 @@ const ResourcesMethodologyPage: React.FC = () => {
                 aircraft), Hydrogen (for hydrogen aircraft), HEFA (Biofuels,
                 incl. FT with biomass), PtL (incl. G/FT), AtJ, Other,
               </li>
-              <li>Steel: BF-BOF, SR-BOF, DRI-EAF, Scrap-EAF, Other.</li>
+              <li>
+                Steel: BOF, DRI-BOF, BF-BOF, BAT-BF-BOF, EAF, DRI-EAF, Scrap-EAF,
+                Electrolyser/Electrowinning, Other.
+              </li>
             </ul>
           </TextBox>
         </div>
@@ -397,18 +400,19 @@ const ResourcesMethodologyPage: React.FC = () => {
                 Generation, Technology mix, Storage capacity,
               </li>
               <li>
-                Aviation: Emissions intensity, Absolute emissions, Fleet
-                locked-in emissions ratio, SAF-blending rate, Total neat SAF
-                delivered, SAF lifecycle emissions factor, New propulsion
-                emissions intensity,
+                Aviation: Emissions intensity (passenger), Emissions intensity (freight),
+                Absolute emissions Well-to-Wheel (passenger), Absolute emissions
+                Well-to-Wheel (freight), Total Demand (passenger), Total Demand
+                (freight), Demand by propulsion technology (passenger), Demand by
+                propulsion technology (freight), Demand share by propulsion technology
+                (passenger), Demand share by propulsion technology (freight),
               </li>
               <li>
-                Steel: Emissions intensity (total), Emissions intensity
-                (primary), Emissions intensity (secondary), Absolute emissions,
-                Emissions intensity by production route, Technology mix
-                (capacity by route), Iron production by technology, Crude steel
-                production by technology (production route), Scrap share, Energy
-                mix.
+                Steel: Emissions intensity (total), Emissions intensity (primary),
+                Emissions intensity (secondary), Absolute emissions, Emissions
+                intensity by production route, Technology mix (capacity by route),
+                Steel production by technology (production route), Scrap share,
+                Energy mix.
               </li>
             </ul>
           </TextBox>
@@ -778,6 +782,22 @@ const ResourcesMethodologyPage: React.FC = () => {
             </p>
           </div>
         </div>
+      </div>
+
+      <div className="mt-10 max-w-5xl rounded-lg bg-neutral-100 p-6 text-rmigray-700">
+        <h2 className="text-lg font-semibold text-rmigray-800 mb-2">
+          Expert overview
+        </h2>
+        <TextBox>
+            <p>
+              The Expert Overview is a written summary that describes the
+              developer behind the pathway and their affiliations, the main
+              narrative of the pathway, the core drivers that are assumed to be
+              behind the sectoral transition, the key trends that the pathway
+              produces, the main external dependencies, and what types of
+              assessments the pathway is or is not well suited for.
+            </p>
+          </TextBox>
       </div>
 
       <div className="mt-10 max-w-5xl rounded-lg bg-neutral-100 p-6 text-rmigray-700">
