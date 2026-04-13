@@ -161,11 +161,11 @@ const ResourcesMethodologyPage: React.FC = () => {
 
       <div className="mt-10">
         <h2 className="text-xl font-semibold text-rmigray-800 mb-2">
-          Classification group 1: Pathway features
+          Classification group 1: Pathway meta data
         </h2>
         <p className="text-rmigray-700 max-w-5xl">
-          Pathways usually exhibit several features that contain meta data and
-          narrative assumptions. These are useful to understand the idea behind
+          Pathways usually contain meta data and high-level narrative
+          assumptions. These are useful to understand the idea behind
           a pathway or scenario and the broad implications of the modelled
           changes.
         </p>
