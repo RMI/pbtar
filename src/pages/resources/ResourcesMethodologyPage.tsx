@@ -414,9 +414,9 @@ const ResourcesMethodologyPage: React.FC = () => {
                     incl. FT with biomass), PtL (incl. G/FT), AtJ, Other,
                   </li>
                   <li>
-                    Steel: BOF, BF-BOF, BF-BOF + PCI, BF-BOF + CCUS, EAF, DRI-EAF
-                    (normal incl. CH4), DRI-EAF + H2, DRI-EAF + CCS, Scrap-EAF,
-                    Electrolyser/Electrowinning, Other.
+                    Steel: BOF, BF-BOF, BF-BOF + PCI, BF-BOF + CCUS, , DRI-Melt-BOF,
+                    EAF, DRI-EAF (normal incl. CH4), DRI-EAF + H2, DRI-EAF + CCS,
+                    Scrap-EAF, Electrolyser/Electrowinning, Other.
                   </li> */}
                 </ul>
               </div>
