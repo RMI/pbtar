@@ -17,7 +17,7 @@ import ContactPage from "./pages/ContactPage";
 import EnvironmentBanner from "./components/EnvironmentBanner";
 import {
   ResourcesChangelogPage,
-  ResourcesHowToChoosePathwayPage,
+  ResourcesHowToUseToolPage,
   ResourcesFaqPage,
   ResourcesMethodologyPage,
   ResourcesUseCasesPage,
@@ -61,8 +61,17 @@ export const AppContent = () => {
             element={<ResourcesMethodologyPage />}
           />
           <Route
+            path="/resources/how-to-use-this-tool"
+            element={<ResourcesHowToUseToolPage />}
+          />
+          <Route
             path="/resources/how-to-choose-a-pathway"
-            element={<ResourcesHowToChoosePathwayPage />}
+            element={
+              <Navigate
+                to="/resources/how-to-use-this-tool"
+                replace
+              />
+            }
           />
           <Route
             path="/resources/faq"

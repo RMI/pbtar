@@ -48,7 +48,7 @@ describe("Header component", () => {
       screen.getByRole("menuitem", { name: "Use cases" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("menuitem", { name: "How to choose a pathway" }),
+      screen.getByRole("menuitem", { name: "How to use this tool" }),
     ).toBeInTheDocument();
     expect(screen.getByRole("menuitem", { name: "FAQs" })).toBeInTheDocument();
     expect(

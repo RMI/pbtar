@@ -30,11 +30,11 @@ const StepCard: React.FC<StepCardProps> = ({
   );
 };
 
-const ResourcesHowToChoosePathwayPage: React.FC = () => {
+const ResourcesHowToUseToolPage: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold text-rmigray-800 mb-4">
-        How to Choose a Pathway
+        How to Use this Tool
       </h1>
 
       <h2 className="text-xl font-semibold text-rmigray-800 mb-2">
@@ -253,9 +253,7 @@ const ResourcesHowToChoosePathwayPage: React.FC = () => {
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>policy-driven assumptions,</li>
               <li>geographic relevance,</li>
-              <li>
-                benchmark data for the markets where the company operates.
-              </li>
+              <li>benchmark data for the markets where the company operates.</li>
             </ul>
           </StepCard>
 
@@ -318,4 +316,4 @@ const ResourcesHowToChoosePathwayPage: React.FC = () => {
   );
 };
 
-export default ResourcesHowToChoosePathwayPage;
+export default ResourcesHowToUseToolPage;

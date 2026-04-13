@@ -84,11 +84,11 @@ const Header: React.FC = () => {
                 </Link>
                 <Link
                   role="menuitem"
-                  to="/resources/how-to-choose-a-pathway"
+                  to="/resources/how-to-use-this-tool"
                   className="block px-4 py-3 text-sm hover:bg-neutral-100"
                   onClick={() => setResourcesOpen(false)}
                 >
-                  How to choose a pathway
+                  How to use this tool
                 </Link>
                 <Link
                   role="menuitem"

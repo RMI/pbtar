@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId, useState } from "react";
 import { Link } from "react-router-dom";
 
 type InfoCardProps = {
@@ -19,6 +19,48 @@ const TextBox: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className="rounded-lg bg-white shadow p-6 text-rmigray-700">
       {children}
+    </div>
+  );
+};
+
+const CollapsibleSubsection: React.FC<{
+  title: string;
+  children: React.ReactNode;
+  className?: string;
+}> = ({ title, children, className }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const contentId = useId();
+
+  return (
+    <div className={className ?? "mt-10 max-w-5xl"}>
+      <h3 className="text-lg font-semibold text-rmigray-800">
+        <button
+          type="button"
+          className="w-full flex items-center justify-between gap-4 py-2 text-left hover:text-rmiblue-800 transition-colors"
+          aria-expanded={isOpen}
+          aria-controls={contentId}
+          onClick={() => setIsOpen((v) => !v)}
+        >
+          <span>{title}</span>
+          <span
+            className={
+              "text-rmigray-500 transition-transform " +
+              (isOpen ? "rotate-180" : "rotate-0")
+            }
+            aria-hidden="true"
+          >
+            ▾
+          </span>
+        </button>
+      </h3>
+      {isOpen && (
+        <div
+          id={contentId}
+          className="mt-4"
+        >
+          {children}
+        </div>
+      )}
     </div>
   );
 };
@@ -128,10 +170,10 @@ const ResourcesMethodologyPage: React.FC = () => {
           changes.
         </p>
 
-        <div className="mt-6 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Pathway type
-          </h3>
+        <CollapsibleSubsection
+          title="Pathway type"
+          className="mt-6 max-w-5xl"
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <InfoCard title="Predictive">
               <p>
@@ -165,12 +207,9 @@ const ResourcesMethodologyPage: React.FC = () => {
               </p>
             </InfoCard>
           </div>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Temperature outcome
-          </h3>
+        <CollapsibleSubsection title="Temperature outcome">
           <TextBox>
             <p>
               Where available, temperature outcome acts as a proxy for pathway
@@ -185,12 +224,9 @@ const ResourcesMethodologyPage: React.FC = () => {
               model is required to calculate it.
             </p>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Start year of model
-          </h3>
+        <CollapsibleSubsection title="Start year of model">
           <TextBox>
             <p>
               The start year of the model refers to the last year before any
@@ -198,12 +234,9 @@ const ResourcesMethodologyPage: React.FC = () => {
               baseline used in the calculations of the pathway.
             </p>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            End year of model
-          </h3>
+        <CollapsibleSubsection title="End year of model">
           <TextBox>
             <p>
               The end year of the model refers to the final year of the
@@ -216,12 +249,9 @@ const ResourcesMethodologyPage: React.FC = () => {
               2050.
             </p>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Net zero reached
-          </h3>
+        <CollapsibleSubsection title="Net zero reached">
           <TextBox>
             <p>
               The year in which the pathway reaches net zero emissions. Not all
@@ -234,7 +264,7 @@ const ResourcesMethodologyPage: React.FC = () => {
               accordingly.
             </p>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
       </div>
 
       <div className="mt-10">
@@ -253,10 +283,7 @@ const ResourcesMethodologyPage: React.FC = () => {
           still be too coarse for the intended application.
         </p>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Regions
-          </h3>
+        <CollapsibleSubsection title="Regions">
           <TextBox>
             <p>
               The list of regions and countries covered by the pathway. This
@@ -270,12 +297,9 @@ const ResourcesMethodologyPage: React.FC = () => {
               and/or conflicting territorial claims.
             </p>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Sectors
-          </h3>
+        <CollapsibleSubsection title="Sectors">
           <TextBox>
             <p>
               List of economic sectors that the pathway covers, where coverage
@@ -284,34 +308,21 @@ const ResourcesMethodologyPage: React.FC = () => {
             </p>
             <p className="mt-3">
               NOTE: The repository is currently limited to providing detailed
-              information on the power, steel, and aviation sectors. This
-              variable also clarifies which other sectors a pathway models.
+              information on the power sector. Additional sectors will be added
+              in the near future. This variable also clarifies which other sectors
+              a pathway models.
             </p>
             <p className="mt-3">The list of allowed values is:</p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
-              <li>Land Use,</li>
-              <li>Agriculture,</li>
-              <li>Buildings,</li>
-              <li>Steel,</li>
-              <li>Cement,</li>
-              <li>Chemicals,</li>
-              <li>Coal Mining,</li>
-              <li>Oil (Upstream),</li>
-              <li>Gas (Upstream),</li>
+              <li>Power</li>
+              {/* <li>Steel,</li>
               <li>Power,</li>
-              <li>Automotive,</li>
-              <li>Aviation,</li>
-              <li>Rail,</li>
-              <li>Shipping,</li>
-              <li>Other.</li>
+              <li>Aviation.</li> */}
             </ul>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Sector segments
-          </h3>
+        <CollapsibleSubsection title="Sector segments">
           <TextBox>
             <p>
               List of segments of sectors that the pathway covers. This refers
@@ -336,9 +347,9 @@ const ResourcesMethodologyPage: React.FC = () => {
                 Power: Upstream input fuels and materials, Power generation
                 (on-grid), Captive power generation (behind-the-meter), Power
                 storage, Power grid (transmission and distribution, grid
-                connection),
+                connection).
               </li>
-              <li>
+              {/* <li>
                 Aviation: Fuel production, Fuel system logistics, Fleet
                 transition, Fleet operation (Passenger), Fleet operation
                 (Freight), Airport and airspace system,
@@ -347,15 +358,12 @@ const ResourcesMethodologyPage: React.FC = () => {
                 Steel: Iron mining, Fuel procurement, Iron reduction, Steel
                 making and casting, Steel product shaping, Finished product
                 manufacturing.
-              </li>
+              </li> */}
             </ul>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Technologies
-          </h3>
+        <CollapsibleSubsection title="Technologies">
           <TextBox>
             <p>
               This field shows the technologies that a pathway provides output
@@ -368,25 +376,23 @@ const ResourcesMethodologyPage: React.FC = () => {
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>
                 Power: Coal, Oil, Gas, Nuclear, Hydro, Wind, Solar, Biomass,
-                Renewables, Other,
+                Renewables, Other.
               </li>
-              <li>
+              {/* <li>
                 Aviation: JET A, SAF, Electricity (for battery-electric
                 aircraft), Hydrogen (for hydrogen aircraft), HEFA (Biofuels,
                 incl. FT with biomass), PtL (incl. G/FT), AtJ, Other,
               </li>
               <li>
-                Steel: BOF, DRI-BOF, BF-BOF, BAT-BF-BOF, EAF, DRI-EAF, Scrap-EAF,
+                Steel: BOF, BF-BOF, BF-BOF + PCI, BF-BOF + CCUS, EAF, DRI-EAF
+                (normal incl. CH4), DRI-EAF + H2, DRI-EAF + CCS, Scrap-EAF,
                 Electrolyser/Electrowinning, Other.
-              </li>
+              </li> */}
             </ul>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Metrics
-          </h3>
+        <CollapsibleSubsection title="Metrics">
           <TextBox>
             <p>
               List of sector-specific benchmark metrics that the pathway reports
@@ -397,31 +403,29 @@ const ResourcesMethodologyPage: React.FC = () => {
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>
                 Power: Emissions intensity, Absolute emissions, Capacity,
-                Generation, Technology mix, Storage capacity,
+                Generation, Technology mix, Storage capacity.
+              </li>
+              {/* <li>
+                Aviation: Emissions intensity (passenger), Emissions intensity
+                (freight), Absolute emissions Well-to-Wheel (passenger),
+                Absolute emissions Well-to-Wheel (freight), Total Demand
+                (passenger), Total Demand (freight), Demand by propulsion
+                technology (passenger), Demand by propulsion technology
+                (freight), Demand share by propulsion technology (passenger),
+                Demand share by propulsion technology (freight),
               </li>
               <li>
-                Aviation: Emissions intensity (passenger), Emissions intensity (freight),
-                Absolute emissions Well-to-Wheel (passenger), Absolute emissions
-                Well-to-Wheel (freight), Total Demand (passenger), Total Demand
-                (freight), Demand by propulsion technology (passenger), Demand by
-                propulsion technology (freight), Demand share by propulsion technology
-                (passenger), Demand share by propulsion technology (freight),
-              </li>
-              <li>
-                Steel: Emissions intensity (total), Emissions intensity (primary),
-                Emissions intensity (secondary), Absolute emissions, Emissions
-                intensity by production route, Technology mix (capacity by route),
-                Steel production by technology (production route), Scrap share,
-                Energy mix.
-              </li>
+                Steel: Emissions intensity (total), Emissions intensity
+                (primary), Emissions intensity (secondary), Absolute emissions,
+                Emissions intensity by production route, Technology mix
+                (capacity by route), Steel production by technology (production
+                route), Scrap share.
+              </li> */}
             </ul>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Emissions scope
-          </h3>
+        <CollapsibleSubsection title="Emissions scope">
           <TextBox>
             <p>
               Describes which GHGs are considered in scope in the pathway’s
@@ -445,12 +449,9 @@ const ResourcesMethodologyPage: React.FC = () => {
               <li>No information.</li>
             </ul>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Policy types
-          </h3>
+        <CollapsibleSubsection title="Policy types">
           <TextBox>
             <p>
               Lists which types of policies the pathway models. Refers only to
@@ -472,12 +473,9 @@ const ResourcesMethodologyPage: React.FC = () => {
               <li>Other.</li>
             </ul>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            New technologies included
-          </h3>
+        <CollapsibleSubsection title="New technologies included">
           <TextBox>
             <p>
               A list of the main new technologies covered by the pathway that
@@ -504,12 +502,9 @@ const ResourcesMethodologyPage: React.FC = () => {
               <li>No information.</li>
             </ul>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Technology costs detail
-          </h3>
+        <CollapsibleSubsection title="Technology costs detail">
           <TextBox>
             <p>
               Describes the level of granularity that is available for
@@ -528,12 +523,9 @@ const ResourcesMethodologyPage: React.FC = () => {
               <li>No information.</li>
             </ul>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Investment needs
-          </h3>
+        <CollapsibleSubsection title="Investment needs">
           <TextBox>
             <p>
               Describes the availability and granularity of the investment needs
@@ -563,7 +555,7 @@ const ResourcesMethodologyPage: React.FC = () => {
               <li>No information.</li>
             </ul>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
       </div>
 
       <div className="mt-10">
@@ -580,10 +572,7 @@ const ResourcesMethodologyPage: React.FC = () => {
           analysis.
         </p>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Emissions trajectory
-          </h3>
+        <CollapsibleSubsection title="Emissions trajectory">
           <TextBox>
             <p>
               Summarizes how GHG emissions develop in the pathway between the
@@ -608,12 +597,9 @@ const ResourcesMethodologyPage: React.FC = () => {
               <li>No information.</li>
             </ul>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Energy efficiency
-          </h3>
+        <CollapsibleSubsection title="Energy efficiency">
           <TextBox>
             <p>
               Summarizes how energy efficiency, defined as energy use per USD
@@ -639,12 +625,9 @@ const ResourcesMethodologyPage: React.FC = () => {
               <li>No information.</li>
             </ul>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Energy demand
-          </h3>
+        <CollapsibleSubsection title="Energy demand">
           <TextBox>
             <p>
               Summarizes how energy demand develops in the pathway between the
@@ -669,12 +652,9 @@ const ResourcesMethodologyPage: React.FC = () => {
               <li>No information.</li>
             </ul>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Electrification
-          </h3>
+        <CollapsibleSubsection title="Electrification">
           <TextBox>
             <p>
               Summarizes how the share of electricity in energy end use develops
@@ -700,12 +680,9 @@ const ResourcesMethodologyPage: React.FC = () => {
               <li>No information.</li>
             </ul>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Policy ambition
-          </h3>
+        <CollapsibleSubsection title="Policy ambition">
           <TextBox>
             <p>
               Describes the level of ambition of the policies modelled in the
@@ -732,12 +709,9 @@ const ResourcesMethodologyPage: React.FC = () => {
               <li>No information.</li>
             </ul>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
 
-        <div className="mt-10 max-w-5xl">
-          <h3 className="text-lg font-semibold text-rmigray-800 mb-3">
-            Technology cost trend
-          </h3>
+        <CollapsibleSubsection title="Technology cost trend">
           <TextBox>
             <p>
               Describes the direction of unit costs of the low-carbon
@@ -759,7 +733,7 @@ const ResourcesMethodologyPage: React.FC = () => {
               <li>No information.</li>
             </ul>
           </TextBox>
-        </div>
+        </CollapsibleSubsection>
       </div>
 
       <div className="mt-10 max-w-5xl rounded-lg bg-neutral-100 p-6 text-rmigray-700">
@@ -784,11 +758,12 @@ const ResourcesMethodologyPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-10 max-w-5xl rounded-lg bg-neutral-100 p-6 text-rmigray-700">
+      <div className="mt-10 max-w-5xl">
         <h2 className="text-lg font-semibold text-rmigray-800 mb-2">
           Expert overview
         </h2>
-        <TextBox>
+        <div className="mt-4">
+          <TextBox>
             <p>
               The Expert Overview is a written summary that describes the
               developer behind the pathway and their affiliations, the main
@@ -798,6 +773,7 @@ const ResourcesMethodologyPage: React.FC = () => {
               assessments the pathway is or is not well suited for.
             </p>
           </TextBox>
+        </div>
       </div>
 
       <div className="mt-10 max-w-5xl rounded-lg bg-neutral-100 p-6 text-rmigray-700">
@@ -807,10 +783,10 @@ const ResourcesMethodologyPage: React.FC = () => {
         <p>
           Visit{" "}
           <Link
-            to="/resources/how-to-choose-a-pathway"
+            to="/resources/how-to-use-this-tool"
             className="text-energy-700 hover:text-energy-800 underline underline-offset-2 font-semibold"
           >
-            How to Choose a Pathway
+            How to Use this Tool
           </Link>{" "}
           for a simpler, step-by-step guide to applying these classifications in
           TPR.
