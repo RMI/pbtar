@@ -89,6 +89,16 @@ const ResourcesHowToUseToolPage: React.FC = () => {
             for ambition, while a regional policy-driven pathway may be more
             useful for understanding local policy or market risk.
           </p>
+          <p className="mt-3">
+            This is because temperature-based ambition targets will require a
+            global pathway that models the feedback between the climate system
+            and the energy system. Something a regionally granular,
+            policy-focused pathway will usually not provide. Conversely, a
+            pathway with global 1.5°C ambition usually says little about the
+            current or likely policies that are being implemented in a local
+            context on the ground. More focused pathways can usually cover these
+            better.
+          </p>
         </div>
       </div>
 
@@ -107,6 +117,17 @@ const ResourcesHowToUseToolPage: React.FC = () => {
               Pathways differ in what they are designed to show. In practice,
               this means the “right” pathway for you depends on your use case.
             </p>
+            <p className="mt-3">Some relevant questions might be:</p>
+            <ul className="mt-3 list-disc pl-5 space-y-1">
+              <li>Is the transition plan of a company credible?</li>
+              <li>
+                What regional or local policies present a risk the company may
+                be exposed to?
+              </li>
+              <li>
+                What external factors may impact the transition of a company?
+              </li>
+            </ul>
           </StepCard>
 
           <StepCard
@@ -136,14 +157,29 @@ const ResourcesHowToUseToolPage: React.FC = () => {
             <p className="mt-3">These include:</p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>pathway type,</li>
-              <li>climate indicators,</li>
+              <li>
+                climate indicators (e.g. temperature outcome or year of net
+                zero),
+              </li>
               <li>sector and geographic coverage,</li>
-              <li>main drivers of change,</li>
-              <li>trends and outcomes.</li>
+              <li>
+                main drivers of change (e.g. policies or technology costs),
+              </li>
+              <li>
+                trends and outcomes (e.g. technology deployment or emissions
+                trends).
+              </li>
             </ul>
             <p className="mt-3">
               These features help you understand what the pathway is useful for
-              and how results should be interpreted.
+              and how results should be interpreted. See the{" "}
+              <Link
+                to="/resources/methodology"
+                className="text-energy-700 hover:text-energy-800 underline underline-offset-2 font-semibold"
+              >
+                Methodology page
+              </Link>{" "}
+              for more details.
             </p>
           </StepCard>
 
@@ -288,26 +324,42 @@ const ResourcesHowToUseToolPage: React.FC = () => {
                 to="/pathway"
                 className="text-energy-700 hover:text-energy-800 underline underline-offset-2"
               >
-                Explore pathways in TPR
+                Explore pathways in the TPR
               </Link>
             </li>
             <li>
+              Read the{" "}
               <Link
                 to="/resources/methodology"
                 className="text-energy-700 hover:text-energy-800 underline underline-offset-2"
               >
-                Read the Methodology page for detailed classification
-                definitions
-              </Link>
+                Methodology page
+              </Link>{" "}
+              for detailed classification definitions
             </li>
             <li>
+              Visit the{" "}
               <Link
                 to="/resources/use-cases"
                 className="text-energy-700 hover:text-energy-800 underline underline-offset-2"
               >
-                Visit the Use Cases page for examples of how pathways support
-                corporate transition assessments
-              </Link>
+                Use Cases page
+              </Link>{" "}
+              for examples of how pathways support corporate transition
+              assessments
+            </li>
+            <li>
+              Read our{" "}
+              <a
+                href="https://rmi.org/insight/leveraging-transition-pathways/"
+                className="text-energy-700 hover:text-energy-800 underline underline-offset-2"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Leveraging Transition Pathways report
+              </a>{" "}
+              for more guidance on how financial institutions can use transition
+              pathways in their assessments
             </li>
           </ul>
         </div>
