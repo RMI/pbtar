@@ -253,7 +253,9 @@ const ResourcesHowToUseToolPage: React.FC = () => {
             <ul className="mt-3 list-disc pl-5 space-y-1">
               <li>policy-driven assumptions,</li>
               <li>geographic relevance,</li>
-              <li>benchmark data for the markets where the company operates.</li>
+              <li>
+                benchmark data for the markets where the company operates.
+              </li>
             </ul>
           </StepCard>
 
