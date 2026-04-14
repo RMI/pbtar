@@ -148,9 +148,8 @@ const ResourcesMethodologyPage: React.FC = () => {
 
           <div className="rounded-lg bg-neutral-100 p-6 text-rmigray-700 border border-neutral-200 lg:col-span-4 self-start">
             <h2 className="text-lg font-semibold text-rmigray-800 mb-2">
-              Important
+              Classifications support comparison, not automatic selection
             </h2>
-            <p>Classifications support comparison, not automatic selection.</p>
             <p className="mt-3">
               The TPR classifications are meant to make comparison easier and
               more transparent. They help analysts understand what a pathway can
@@ -855,14 +854,11 @@ const ResourcesMethodologyPage: React.FC = () => {
 
       <div className="mt-10 max-w-5xl rounded-lg bg-neutral-100 p-6 text-rmigray-700">
         <h2 className="text-lg font-semibold text-rmigray-800 mb-2">
-          Important
+          Multiple pathways can complement each other
         </h2>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-base font-semibold text-rmigray-800">
-              Multiple pathways can complement each other
-            </h3>
             <p className="mt-2">
               Different pathways can help answer different parts of the same
               assessment question.

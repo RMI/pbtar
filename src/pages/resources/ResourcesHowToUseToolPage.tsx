@@ -81,14 +81,13 @@ const ResourcesHowToUseToolPage: React.FC = () => {
 
         <div className="rounded-lg bg-neutral-100 p-6 text-rmigray-700 border border-neutral-200 lg:col-span-4 self-start">
           <h2 className="text-lg font-semibold text-rmigray-800 mb-2">
-            Important
+            No single pathway fits every use case
           </h2>
-          <p>No single pathway is best for every use case.</p>
           <p className="mt-3">
-            In many cases, it is helpful to use more than one pathway. For
-            example, a global 1.5°C pathway may be useful for ambition, while a
-            regional policy-driven pathway may be more useful for understanding
-            local policy or market risk.
+            In many situations, using more than one pathway can give you a
+            clearer picture. For example, a global 1.5°C pathway may be useful
+            for ambition, while a regional policy-driven pathway may be more
+            useful for understanding local policy or market risk.
           </p>
         </div>
       </div>
@@ -219,12 +218,11 @@ const ResourcesHowToUseToolPage: React.FC = () => {
 
         <div className="rounded-lg bg-neutral-100 p-6 text-rmigray-700 border border-neutral-200 lg:col-span-4 self-start">
           <h2 className="text-lg font-semibold text-rmigray-800 mb-2">
-            Important
+            Credible does not mean suitable
           </h2>
-          <h3 className="text-base font-semibold text-rmigray-800">
-            A credible pathway may still be the wrong fit
-          </h3>
-          <p className="mt-2">Credibility is necessary, but not sufficient.</p>
+          <p className="mt-2">
+            Pathway credibility is necessary, but not sufficient.
+          </p>
           <p className="mt-2">
             A pathway can be robust and well developed, yet still be too broad,
             too generic, or missing the benchmark data needed for a given
