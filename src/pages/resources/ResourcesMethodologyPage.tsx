@@ -15,13 +15,7 @@ const CollapsibleSubsection: React.FC<{
   children: React.ReactNode;
   inBox?: boolean;
   className?: string;
-}> = ({
-  title,
-  subtitle = "placeholder",
-  children,
-  inBox = false,
-  className,
-}) => {
+}> = ({ title, subtitle, children, inBox = false, className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const contentId = useId();
 
@@ -45,7 +39,9 @@ const CollapsibleSubsection: React.FC<{
             <span className="text-lg font-semibold text-rmigray-800 group-hover:text-rmiblue-800 transition-colors">
               {title}
             </span>
-            <span className="text-sm text-rmigray-600 mt-1">{subtitle}</span>
+            {subtitle ? (
+              <span className="text-sm text-rmigray-600 mt-1">{subtitle}</span>
+            ) : null}
           </span>
           <span
             className={
@@ -178,6 +174,7 @@ const ResourcesMethodologyPage: React.FC = () => {
           <div className="divide-y divide-neutral-200/70">
             <CollapsibleSubsection
               title="Pathway type"
+              subtitle="Is the pathway predictive, exploratory, or normative?"
               inBox
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-rmigray-700">
@@ -228,6 +225,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Temperature outcome"
+              subtitle="What is the temperature rise by the end of the century?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -248,6 +246,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Start year of model"
+              subtitle="What is the first year modeled?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -261,6 +260,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="End year of model"
+              subtitle="What is the last year modeled?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -279,6 +279,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Net zero reached"
+              subtitle="When does the pathway reach net zero emissions?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -318,6 +319,7 @@ const ResourcesMethodologyPage: React.FC = () => {
           <div className="divide-y divide-neutral-200/70">
             <CollapsibleSubsection
               title="Regions"
+              subtitle="Which regions and countries are covered?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -337,6 +339,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Sectors"
+              subtitle="Which economic sectors are covered?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -363,6 +366,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Sector segments"
+              subtitle="Which parts of the sector supply chain are covered?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -409,6 +413,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Technologies"
+              subtitle="What is the technological granularity?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -441,6 +446,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Metrics"
+              subtitle="What sector-specific metrics are provided?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -477,6 +483,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Emissions scope"
+              subtitle="Which GHGs are modeled?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -515,6 +522,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Policy types"
+              subtitle="Which policy types are modeled?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -542,6 +550,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="New technologies included"
+              subtitle="Which new technologies play a role?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -574,6 +583,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Technology costs detail"
+              subtitle="How are technology unit costs broken down?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -599,6 +609,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Investment needs"
+              subtitle="In what detail are investment needs described?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -652,6 +663,7 @@ const ResourcesMethodologyPage: React.FC = () => {
           <div className="divide-y divide-neutral-200/70">
             <CollapsibleSubsection
               title="Emissions trajectory"
+              subtitle="What is the direction of the GHG emissions trend?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -682,6 +694,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Energy efficiency"
+              subtitle="What is the direction of the energy efficiency trend?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -713,6 +726,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Energy demand"
+              subtitle="What is the direction of the energy demand trend?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -743,6 +757,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Electrification"
+              subtitle="What is the direction of the electrification trend?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -774,6 +789,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Policy ambition"
+              subtitle="How ambitious are transition-related policies?"
               inBox
             >
               <div className="text-rmigray-700">
@@ -797,7 +813,7 @@ const ResourcesMethodologyPage: React.FC = () => {
                   <li>No policies included,</li>
                   <li>Current/legislated policies,</li>
                   <li>Current and drafted policies,</li>
-                  <li>NDCs, unbconditional only,</li>
+                  <li>NDCs, unconditional only,</li>
                   <li>NDCs incl conditional targets,</li>
                   <li>High-ambition policies,</li>
                   <li>Other policy ambition,</li>
@@ -808,6 +824,7 @@ const ResourcesMethodologyPage: React.FC = () => {
 
             <CollapsibleSubsection
               title="Technology cost trend"
+              subtitle="What is the cost trend for low-carbon technologies?"
               inBox
             >
               <div className="text-rmigray-700">
