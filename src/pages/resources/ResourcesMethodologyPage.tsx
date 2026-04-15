@@ -867,6 +867,10 @@ const ResourcesMethodologyPage: React.FC = () => {
               For example, one pathway may be useful for ambition and another
               for regional policy risk.
             </p>
+            <p className="mt-2">
+              Using multiple pathways provides a more complete and balanced view
+              of a company's transition readiness.
+            </p>
           </div>
         </div>
       </div>
@@ -878,12 +882,11 @@ const ResourcesMethodologyPage: React.FC = () => {
         <div className="mt-4">
           <TextBox>
             <p>
-              The Expert Overview is a written summary that describes the
-              developer behind the pathway and their affiliations, the main
-              narrative of the pathway, the core drivers that are assumed to be
-              behind the sectoral transition, the key trends that the pathway
-              produces, the main external dependencies, and what types of
-              assessments the pathway is or is not well suited for.
+              The Expert Overview is a brief summary that explains who developed the
+              pathway, its main narrative, and its core drivers. It highlights
+              the main assumptions, key trends, and external dependencies behind
+              the transition. It helps you understand what types of assessments
+              the pathway is best suited for and where it might be less suitable.
             </p>
           </TextBox>
         </div>
