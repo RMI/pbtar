@@ -6,7 +6,7 @@ import { format } from "util";
 // capture originals once
 const origError: typeof console.error = console.error.bind(console);
 const origWarn: typeof console.warn = console.warn.bind(console);
-const nodeFormat: (format: string, ...params: unknown[]) => string = format;
+const nodeFormat: (fmt: string, ...params: unknown[]) => string = format;
 
 function shouldThrow(args: unknown[]) {
   const msg = args.map((a) => String(a)).join(" ");
