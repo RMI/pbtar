@@ -2,7 +2,7 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import type { PathwayMetadataType } from "../types";
-import { join, resolve } from "path";
+import { join, resolve } from "node:path";
 import { readdir, readFile } from "node:fs/promises";
 
 type LoadDataModule = typeof import("./loadData");
