@@ -1,8 +1,16 @@
-/// <reference types="node" />
-
 import { validateDataCollect } from "./validateData.ts";
 import type { FileEntry, ValidationOutcome } from "./validateData.ts";
 import type { SchemaObject } from "ajv";
+
+declare const process:
+  | {
+      env?: {
+        NODE_ENV?: string;
+        VITE_BUILD_MODE?: string;
+        VITE_INCLUDE_INVALID?: string;
+      };
+    }
+  | undefined;
 
 type ImportMetaEnvShim = {
   meta?: {
