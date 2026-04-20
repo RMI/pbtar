@@ -30,6 +30,9 @@ export function decideIncludeInvalid(): boolean {
     // @ts-expect-error: import.meta is not defined in Node tests
     viteEnv = import.meta?.env as ViteEnv;
   } catch {
+    // Ignore runtime access failures and fall back to any injected shim below.
+  }
+  if (viteEnv === undefined) {
     // Fallback to a test shim placed at globalThis.import.meta.env
     viteEnv = (globalThis as typeof globalThis & { import?: ImportMetaEnvShim })
       .import?.meta?.env;
