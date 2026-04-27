@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { TrendingUp, Lightbulb } from "lucide-react";
 import { HeaderBrand } from "../components/Header";
 
 const WavePattern: React.FC = () => {
@@ -123,102 +122,234 @@ const WavePattern: React.FC = () => {
   );
 };
 
-const Card: React.FC<{
+const InfoCard: React.FC<{
   title: string;
-  icon: React.ReactNode;
   children: React.ReactNode;
-  linkText: string;
-  linkHref: string;
-}> = ({ title, icon, children, linkText, linkHref }) => (
-  <div className="bg-white/70 backdrop-blur-sm rounded-lg shadow-md p-6 flex flex-col">
-    {" "}
-    {/* Removed mb-6 and h-full */}
-    <div className="flex items-center mb-4">
-      <span className="text-2xl mr-3">{icon}</span>
-      <h2 className="text-xl font-semibold text-rmigray-800">{title}</h2>
-    </div>
-    <div className="flex-1 text-rmigray-600 mb-4">{children}</div>
-    <a
-      href={linkHref}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-energy-700 font-semibold hover:underline mt-auto"
-    >
-      {linkText}
-    </a>
+}> = ({ title, children }) => (
+  <div className="rounded-lg bg-white shadow p-6">
+    <h3 className="text-sm font-semibold text-rmiblue-800 mb-3 text-center">
+      {title}
+    </h3>
+    <div className="text-sm text-rmigray-700 text-center">{children}</div>
   </div>
 );
 
 const LandingPage: React.FC = () => {
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Base gradient */}
-      <div className="absolute inset-0 bg-rmiblue-800/100"></div>{" "}
-      {/* Animated waves */}
-      <WavePattern />
-      {/* Additional gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-energy/5 to-transparent"></div>
-      {/* Content */}
-      <div className="relative min-h-screen">
-        <div className="absolute top-6 left-0 right-0">
-          <div className="container mx-auto px-4 text-white">
-            <HeaderBrand />
+    <div className="bg-gray-50">
+      {/* Hero */}
+      <div className="relative overflow-x-hidden">
+        <div className="absolute inset-0 bg-rmiblue-800/100" />
+        <WavePattern />
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-energy/5 to-transparent" />
+
+        <div className="relative text-white">
+          <div className="container mx-auto px-4 pt-6">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <HeaderBrand to="/" />
+              <nav className="flex flex-wrap items-center gap-2 text-sm">
+                <Link
+                  to="/pathway"
+                  className="inline-flex items-center rounded-md px-3 py-2 font-semibold text-white/90 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  Pathways
+                </Link>
+                <Link
+                  to="/resources/methodology"
+                  className="inline-flex items-center rounded-md px-3 py-2 font-semibold text-white/90 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  Methodology
+                </Link>
+                <Link
+                  to="/resources/use-cases"
+                  className="inline-flex items-center rounded-md px-3 py-2 font-semibold text-white/90 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  Resources
+                </Link>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center rounded-md px-3 py-2 font-semibold text-white/90 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  Contact
+                </Link>
+              </nav>
+            </div>
+          </div>
+
+          <div className="container mx-auto px-4 py-16">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+                Transition Pathways Repository
+              </h1>
+              <p className="mt-4 text-lg md:text-xl text-white/90">
+                Find and compare transition pathways for corporate transition
+                assessments.
+              </p>
+
+              <p className="mt-8 text-sm md:text-base text-white/85 max-w-3xl mx-auto">
+                Built first for financial institutions, TPR helps
+                sustainability, risk, and front-office teams identify pathways
+                that fit their assessment question. Use it to benchmark
+                ambition, test feasibility, assess policy exposure, and
+                understand what benchmark data a pathway can provide.
+              </p>
+
+              <div className="mt-10">
+                <Link
+                  to="/pathway"
+                  className="inline-block px-8 py-4 bg-energy-700 text-neutral-300 rounded-md hover:bg-energy-800 transition-colors duration-200 text-lg font-semibold"
+                >
+                  Explore Pathways
+                </Link>
+              </div>
+
+              <p className="mt-6 text-sm italic text-white/80">
+                Start with pathways for the Southeast Asian power sector.
+              </p>
+            </div>
           </div>
         </div>
-        <div className="container mx-auto px-4 py-12 min-h-screen flex items-center">
-          <div className="flex flex-col md:flex-row gap-10 items-stretch w-full">
-            {/* Left Column */}
-            <div className="md:w-1/2">
-              <div className="bg-white/70 backdrop-blur-sm rounded-lg p-8 shadow-md flex flex-col h-full">
-                <div className="flex-1">
-                  <h1 className="text-5xl font-bold text-rmigray-800 mb-6">
-                    Navigating the Energy Transition
-                  </h1>
-                  <p className="text-lg text-rmigray-600">
-                    Transition pathways illustrate how the energy transition
-                    will reshape sectors and systems, giving financial
-                    institutions, corporates, and other organizations greater
-                    confidence in developing, assessing, and implementing plans
-                    in a changing energy landscape.
-                  </p>
-                </div>
-                <div className="mt-auto pt-8">
-                  <Link
-                    to="/pathway"
-                    className="inline-block px-8 py-4 bg-energy-700 text-neutral-300 rounded-md hover:bg-energy-800 transition-colors duration-200 text-lg font-semibold"
-                  >
-                    Explore Pathways
-                  </Link>
-                </div>
+      </div>
+
+      {/* Main content */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="max-w-5xl mx-auto">
+          <section className="pb-10 border-b border-neutral-200">
+            <h2 className="text-xl font-semibold text-rmiblue-800 mb-3">
+              What is TPR?
+            </h2>
+            <p className="text-rmigray-700 max-w-4xl">
+              TPR is an online repository that helps users identify and
+              interpret transition pathways relevant to their needs. It is
+              designed to make pathway selection faster, more transparent, and
+              easier to apply in real assessment workflows.
+            </p>
+          </section>
+
+          <section className="py-10 border-b border-neutral-200">
+            <h2 className="text-xl font-semibold text-rmiblue-800 mb-3">
+              Why it matters
+            </h2>
+            <p className="text-rmigray-700 max-w-4xl">
+              Different pathways answer different questions. One may be useful
+              for assessing target ambition, while another may be better for
+              understanding regional policy or market risk. TPR helps users
+              compare those differences before choosing a pathway.
+            </p>
+          </section>
+
+          <section className="py-10 border-b border-neutral-200">
+            <h2 className="text-xl font-semibold text-rmiblue-800 mb-3">
+              Who is it for?
+            </h2>
+            <p className="text-rmigray-700 max-w-4xl">
+              TPR is designed primarily for banks and other financial
+              institutions conducting corporate transition assessments.
+            </p>
+            <p className="text-rmigray-700 max-w-4xl mt-3">
+              It is especially relevant for:
+            </p>
+            <ul className="mt-3 list-disc pl-5 space-y-1 text-rmigray-700 max-w-4xl">
+              <li>sustainability teams,</li>
+              <li>risk teams,</li>
+              <li>front-office and client coverage teams.</li>
+            </ul>
+            <p className="text-rmigray-700 max-w-4xl mt-4">
+              It can also support companies, policymakers, and regulators
+              seeking a clearer view of transition dynamics in specific sectors
+              and regions.
+            </p>
+          </section>
+
+          <section className="py-10 border-b border-neutral-200">
+            <h2 className="text-xl font-semibold text-rmiblue-800 mb-6">
+              What you can do here
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <InfoCard title="Compare pathways">
+                Review pathway type, geography, granularity, and benchmark data
+                availability in one place.
+              </InfoCard>
+              <InfoCard title="Match pathways to your use case">
+                Use different pathways for ambition, feasibility, investment
+                alignment, or policy exposure.
+              </InfoCard>
+              <InfoCard title="Reduce research time">
+                Find relevant pathways faster and understand what they can
+                realistically tell you.
+              </InfoCard>
+            </div>
+          </section>
+
+          <section className="py-10 border-b border-neutral-200">
+            <h2 className="text-xl font-semibold text-rmiblue-800 mb-3">
+              Methodology
+            </h2>
+            <p className="text-rmigray-700 max-w-4xl">
+              TPR uses a structured approach to pathway comparison. It helps
+              users assess credibility, pathway features, granularity, and
+              benchmark data availability so they can choose pathways that fit
+              the question at hand.
+            </p>
+            <div className="mt-4">
+              <Link
+                to="/resources/methodology"
+                className="text-energy-700 font-semibold hover:underline"
+              >
+                Learn more about the methodology
+              </Link>
+            </div>
+          </section>
+
+          <section className="py-10">
+            <h2 className="text-xl font-semibold text-rmiblue-800 mb-3">
+              Resources
+            </h2>
+            <ul className="space-y-2 text-rmigray-700">
+              <li>
+                <Link
+                  to="/resources/use-cases"
+                  className="text-energy-700 hover:underline"
+                >
+                  How banks use transition pathways
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/resources/methodology"
+                  className="text-energy-700 hover:underline"
+                >
+                  How pathways are classified
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  className="text-energy-700 hover:underline"
+                >
+                  Questions or feedback
+                </Link>
+              </li>
+            </ul>
+
+            <div className="mt-12 pt-10 border-t border-neutral-200 text-center">
+              <h2 className="text-2xl font-semibold text-rmigray-800">
+                Ready to explore?
+              </h2>
+              <p className="mt-3 text-rmigray-700 max-w-2xl mx-auto">
+                Compare pathways and find the ones that best fit your assessment
+                question.
+              </p>
+              <div className="mt-8">
+                <Link
+                  to="/pathway"
+                  className="inline-block px-8 py-4 bg-energy-700 text-neutral-300 rounded-md hover:bg-energy-800 transition-colors duration-200 text-lg font-semibold"
+                >
+                  Explore Pathways
+                </Link>
               </div>
             </div>
-            {/* Right Column */}
-            <div className="md:w-1/2 flex flex-col gap-6">
-              <Card
-                title="Creating Transition Intelligence"
-                icon={<TrendingUp className="h-7 w-7 text-energy-700" />}
-                linkText="Learn more →"
-                linkHref="https://rmi.org/insight/creating-transition-intelligence-enhancing-corporate-transition-assessments-for-financial-decision-making"
-              >
-                Drawing on a range of transition pathways turns corporate data
-                into actionable intelligence, helping organizations test
-                strategies, manage risks, and engage stakeholders.
-              </Card>
-              <Card
-                title="RMI's Approach"
-                icon={<Lightbulb className="h-7 w-7 text-energy-700" />}
-                linkText="Learn more →"
-                linkHref="https://rmi.org/insight/leveraging-transition-pathways/"
-              >
-                This repository connects users with the right transition
-                pathways for their needs, with structured guidance for
-                navigating diverse pathway types, geographies, developers, and
-                methodologies. This repository is currently being piloted for
-                the pathways that cover the power sector in Southeast Asia, and
-                expansion to other sectors and geographies is coming soon.
-              </Card>
-            </div>
-          </div>
+          </section>
         </div>
       </div>
     </div>

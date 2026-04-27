@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import Header from "./Header";
 
@@ -28,5 +29,30 @@ describe("Header component", () => {
     renderHeader();
     const logo = screen.getByAltText("RMI logo");
     expect(logo).toBeInTheDocument();
+  });
+
+  it("shows Resources dropdown links", async () => {
+    renderHeader();
+    const user = userEvent.setup();
+
+    expect(
+      screen.getByRole("link", { name: "Contact Us" }),
+    ).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /resources/i }));
+
+    expect(
+      screen.getByRole("menuitem", { name: "Methodology" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("menuitem", { name: "Use cases" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("menuitem", { name: "How to use this tool" }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("menuitem", { name: "FAQs" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("menuitem", { name: "Blog / Changelog" }),
+    ).toBeInTheDocument();
   });
 });
