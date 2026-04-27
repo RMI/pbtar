@@ -37,7 +37,7 @@
     "d3": "^7.9.0",
     "i18n-iso-countries": "^7.14.0",
     "json-schema-to-typescript": "^15.0.4",
-    "lucide-react": "^0.577.0",
+    "lucide-react": "^1.11.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-markdown": "^10.1.0",
