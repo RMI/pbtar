@@ -12,7 +12,6 @@
   "modelYearNetzero": 2050,
   "modelYearStart": 2020,
   "modelYearEnd": 2050,
-  "ssp": "SSP4",
   "geography": ["CN"],
   "sectors": [
     { "name": "Land Use", "technologies": ["Precision Agriculture"] },

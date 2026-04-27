@@ -28,7 +28,6 @@
   "modelYearStart": 2020,
   "modelYearEnd": 2050,
   "modelTempIncrease": 1.5,
-  "ssp": "SSP1",
   "geography": [
     "Global",
     "Europe and Central Asia",
