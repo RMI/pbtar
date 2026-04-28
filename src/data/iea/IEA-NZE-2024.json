@@ -25,7 +25,6 @@
   "description": "Normative global 1.5°C aligned pathway that achieves net zero emissions by 2050.",
   "geography": ["Global"],
   "pathwayType": "Normative",
-  "carbonBudget": 433,
   "modelTempIncrease": 1.5,
   "modelYearStart": 2023,
   "modelYearEnd": 2100,
