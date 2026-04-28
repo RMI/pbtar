@@ -250,7 +250,6 @@
   "modelTempIncrease": 1.7,
   "modelYearStart": 2020,
   "modelYearEnd": 2050,
-  "ssp": "SSP2",
   "sectors": [
     { "name": "Land Use", "technologies": [] },
     { "name": "Buildings", "technologies": [] },

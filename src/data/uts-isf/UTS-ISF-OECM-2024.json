@@ -57,7 +57,6 @@
   "modelYearStart": 2019,
   "modelYearEnd": 2100,
   "modelYearNetzero": 2050,
-  "ssp": "SSP1",
   "sectors": [
     { "name": "Buildings", "technologies": [] },
     { "name": "Industry", "technologies": [] },

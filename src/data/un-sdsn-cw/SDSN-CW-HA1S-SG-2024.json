@@ -34,7 +34,6 @@
   "modelYearStart": 2023,
   "modelYearEnd": 2050,
   "modelYearNetzero": 2050,
-  "ssp": "SSP2",
   "sectors": [
     {
       "name": "Power",
