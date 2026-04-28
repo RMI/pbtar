@@ -10,7 +10,6 @@
   "description": "Third Sample Pathway. asdf description.",
   "pathwayType": "Normative",
   "modelTempIncrease": 3,
-  "ssp": "SSP3",
   "geography": ["North America"],
   "sectors": [
     { "name": "Land Use", "technologies": ["Precision Agriculture"] },

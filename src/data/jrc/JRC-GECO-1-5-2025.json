@@ -56,7 +56,6 @@
   "modelYearStart": 2022,
   "modelYearEnd": 2100,
   "modelYearNetzero": 2060,
-  "ssp": "SSP2",
   "sectors": [
     { "name": "Agriculture", "technologies": [] },
     { "name": "Buildings", "technologies": [] },

@@ -65,10 +65,6 @@ export interface PathwayMetadataV1 {
    */
   modelTempIncrease?: number;
   /**
-   * Shared Socioeconomic Pathways (SSP) associated with the pathway.
-   */
-  ssp?: "SSP1" | "SSP2" | "SSP3" | "SSP4" | "SSP5";
-  /**
    * Geographical areas that the pathway covers.
    */
   geography: GeographyItem[];

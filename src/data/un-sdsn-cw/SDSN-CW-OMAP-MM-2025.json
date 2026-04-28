@@ -33,7 +33,6 @@
   "pathwayType": "Normative",
   "modelYearStart": 2019,
   "modelYearEnd": 2050,
-  "ssp": "SSP2",
   "sectors": [
     {
       "name": "Power",

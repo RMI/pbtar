@@ -66,11 +66,6 @@
       "minimum": 0.5,
       "maximum": 3
     },
-    "ssp": {
-      "description": "Shared Socioeconomic Pathways (SSP) associated with the pathway.",
-      "type": "string",
-      "enum": ["SSP1", "SSP2", "SSP3", "SSP4", "SSP5"]
-    },
     "geography": {
       "description": "Geographical areas that the pathway covers.",
       "type": "array",

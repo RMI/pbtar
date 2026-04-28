@@ -44,7 +44,6 @@
   "modelTempIncrease": 1.7,
   "modelYearStart": 2023,
   "modelYearEnd": 2100,
-  "ssp": "SSP1",
   "sectors": [
     { "name": "Buildings", "technologies": [] },
     { "name": "Industry", "technologies": [] },

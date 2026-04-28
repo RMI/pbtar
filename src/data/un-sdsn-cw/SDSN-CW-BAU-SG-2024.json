@@ -33,7 +33,6 @@
   "pathwayType": "Predictive",
   "modelYearStart": 2023,
   "modelYearEnd": 2050,
-  "ssp": "SSP2",
   "sectors": [
     {
       "name": "Power",
