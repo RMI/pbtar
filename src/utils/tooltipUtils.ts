@@ -171,18 +171,6 @@ export function getKeyFeatureTooltip(
         "Technology costs are assumed to remain static in this pathway.",
       "Decrease": "Technology costs decline in this pathway.",
     },
-    technologyDeploymentTrend: {
-      "No information":
-        "There is no information available on technology deployment trends in this pathway.",
-      "No new technologies deployed":
-        "This pathway does not assume that meaningful new technologies will be deployed.",
-      "Minor technology deployment":
-        "No more than one new technology is deployed at pace OR no more than three new technologies are deployed at moderate speed.",
-      "Moderate technology deployment":
-        "At least two new technologies are deployed at pace OR at least four new technologies are deployed at moderate speed.",
-      "Signif. technology deployment":
-        "At least four new technologies are deployed at pace.",
-    },
     emissionsScope: {
       "No information":
         "There is no information available on the emissions scope in this pathway.",
@@ -241,16 +229,6 @@ export function getKeyFeatureTooltip(
       "Other new technologies":
         "This pathway assumes deployment of other new technologies.",
     },
-    supplyChain: {
-      "No information":
-        "This pathway does not have any information on upstream input material or fuel prices.",
-      "Static input or fuel price":
-        "Upstream input material or fuel prices are assumed to be static.",
-      "Exogenous input or fuel price":
-        "Upstream input material or fuel prices are dynamic and exogenous in this pathway.",
-      "Endogenous input or fuel price":
-        "Upstream input material or fuel prices are dynamic and endogenous in this pathway.",
-    },
     investmentNeeds: {
       "No information":
         "This pathway does not have any quantitative information on investment needs.",
@@ -261,14 +239,6 @@ export function getKeyFeatureTooltip(
       "By technology": "This pathway provides investment needs by technology.",
       "By tech, part of value chain":
         "This pathway provides investment needs by technology and part of the value chain (upstream, instream, downstream).",
-    },
-    infrastructureRequirements: {
-      "No information":
-        "This pathway does not have any information on physical infrastructure requirements.",
-      "By part of supply chain":
-        "Infrastructure requirements (in physical units) by part of the supply chain.",
-      "By supply chain, add/replace":
-        "Infrastructure requirements (in physical units) along supply chain and by replacement of existing infrastructure vs buildout of new infrastructure.",
     },
   };
 

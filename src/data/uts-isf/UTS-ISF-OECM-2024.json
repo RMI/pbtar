@@ -103,13 +103,10 @@
     "electrification": "Significant increase",
     "policyTypes": ["Phaseout dates"],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "Minor technology deployment",
     "emissionsScope": "CO2e (CO2, Methane)",
     "policyAmbition": "High ambition policies",
     "technologyCostsDetail": "No information",
     "newTechnologiesIncluded": ["SAF", "Green H2/ammonia"],
-    "supplyChain": "No information",
-    "investmentNeeds": "No information",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "No information"
   }
 }

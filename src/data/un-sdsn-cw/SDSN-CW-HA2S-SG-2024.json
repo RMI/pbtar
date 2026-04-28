@@ -64,7 +64,6 @@
     "electrification": "No information",
     "policyTypes": ["Phaseout dates", "Target technology shares"],
     "technologyCostTrend": "No information",
-    "technologyDeploymentTrend": "Signif. technology deployment",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "High ambition policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
@@ -75,8 +74,6 @@
       "EGS/AGS",
       "Other new technologies"
     ],
-    "supplyChain": "No information",
-    "investmentNeeds": "No information",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "No information"
   }
 }

@@ -55,13 +55,10 @@
     "electrification": "Significant increase",
     "policyTypes": ["Target technology shares", "Phaseout dates"],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "No information",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "High ambition policies",
     "technologyCostsDetail": "Total costs",
     "newTechnologiesIncluded": ["No information"],
-    "supplyChain": "No information",
-    "investmentNeeds": "Total investment",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "Total investment"
   }
 }

@@ -52,7 +52,6 @@
     "electrification": "Significant increase",
     "policyTypes": ["Target technology shares", "Subsidies", "Other"],
     "technologyCostTrend": "Low or no change",
-    "technologyDeploymentTrend": "Signif. technology deployment",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "NDCs incl. conditional targets",
     "technologyCostsDetail": "Total costs",
@@ -62,8 +61,6 @@
       "Green H2/ammonia",
       "Other new technologies"
     ],
-    "supplyChain": "No information",
-    "investmentNeeds": "No information",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "No information"
   }
 }

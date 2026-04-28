@@ -68,13 +68,10 @@
     "electrification": "Significant increase",
     "policyTypes": ["Target technology shares"],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "Moderate technology deployment",
     "emissionsScope": "CO2e (unspecified GHGs)",
     "policyAmbition": "Current/legislated policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": ["Battery storage", "Green H2/ammonia", "CCUS"],
-    "supplyChain": "Exogenous input or fuel price",
-    "investmentNeeds": "By technology",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "By technology"
   }
 }

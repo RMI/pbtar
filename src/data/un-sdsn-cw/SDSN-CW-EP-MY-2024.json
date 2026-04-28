@@ -52,13 +52,10 @@
     "electrification": "Moderate increase",
     "policyTypes": ["Target technology shares", "Other"],
     "technologyCostTrend": "Low or no change",
-    "technologyDeploymentTrend": "Moderate technology deployment",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "Current/legislated policies",
     "technologyCostsDetail": "Total costs",
     "newTechnologiesIncluded": ["Battery storage", "Other new technologies"],
-    "supplyChain": "No information",
-    "investmentNeeds": "No information",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "No information"
   }
 }

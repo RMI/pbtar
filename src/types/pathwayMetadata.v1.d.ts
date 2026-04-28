@@ -223,15 +223,6 @@ export interface PathwayMetadataV1 {
       | "Increase"
       | "Low or no change"
       | "Decrease";
-    /**
-     * Indicates the scale and pace of new technology adoption within the pathway, where significant deployment means that several new technologies are adopted rapidly
-     */
-    technologyDeploymentTrend:
-      | "No information"
-      | "No new technologies deployed"
-      | "Minor technology deployment"
-      | "Moderate technology deployment"
-      | "Signif. technology deployment";
     emissionsScope: EmissionsScope;
     /**
      * Represents the overall stringency and intent of modeled policies relative to climate targets, often reflecting if and how far the included policies go beyond currently legislated ones
@@ -283,14 +274,6 @@ export interface PathwayMetadataV1 {
       )[],
     ];
     /**
-     * Describes how upstream fuel or material price dynamics are represented in the pathway.
-     */
-    supplyChain:
-      | "No information"
-      | "Static input or fuel price"
-      | "Exogenous input or fuel price"
-      | "Endogenous input or fuel price";
-    /**
      * Summarizes how investment requirements are quantified, from total system to sector-level or supply-chain detail.
      */
     investmentNeeds:
@@ -300,12 +283,5 @@ export interface PathwayMetadataV1 {
       | "By sector, part of value chain"
       | "By technology"
       | "By tech, part of value chain";
-    /**
-     * Describes how infrastructure buildout and maintenance needs are represented across the supply chain.
-     */
-    infrastructureRequirements:
-      | "No information"
-      | "By part of supply chain"
-      | "By supply chain, add/replace";
   };
 }

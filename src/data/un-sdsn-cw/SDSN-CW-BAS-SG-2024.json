@@ -63,13 +63,10 @@
     "electrification": "No information",
     "policyTypes": ["None"],
     "technologyCostTrend": "No information",
-    "technologyDeploymentTrend": "No new technologies deployed",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "No policies included",
     "technologyCostsDetail": "No information",
     "newTechnologiesIncluded": ["No new technologies"],
-    "supplyChain": "No information",
-    "investmentNeeds": "No information",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "No information"
   }
 }

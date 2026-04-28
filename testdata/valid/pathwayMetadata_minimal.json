@@ -26,13 +26,10 @@
     "electrification": "No information",
     "policyTypes": ["Other"],
     "technologyCostTrend": "No information",
-    "technologyDeploymentTrend": "No information",
     "emissionsScope": "No information",
     "policyAmbition": "No information",
     "technologyCostsDetail": "No information",
     "newTechnologiesIncluded": ["No information"],
-    "supplyChain": "No information",
-    "investmentNeeds": "No information",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "No information"
   }
 }

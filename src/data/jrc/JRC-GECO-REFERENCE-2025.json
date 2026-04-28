@@ -108,7 +108,6 @@
       "Other"
     ],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "Moderate technology deployment",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "Current/legislated policies",
     "technologyCostsDetail": "No information",
@@ -119,8 +118,6 @@
       "SAF",
       "Battery storage"
     ],
-    "supplyChain": "Endogenous input or fuel price",
-    "investmentNeeds": "By technology",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "By technology"
   }
 }

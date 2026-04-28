@@ -57,7 +57,6 @@
       "Other"
     ],
     "technologyCostTrend": "Low or no change",
-    "technologyDeploymentTrend": "Signif. technology deployment",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "High ambition policies",
     "technologyCostsDetail": "Total costs",
@@ -67,8 +66,6 @@
       "Green H2/ammonia",
       "Other new technologies"
     ],
-    "supplyChain": "No information",
-    "investmentNeeds": "No information",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "No information"
   }
 }
