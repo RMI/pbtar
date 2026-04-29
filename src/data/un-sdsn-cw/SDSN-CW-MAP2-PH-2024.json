@@ -72,13 +72,10 @@
       "Phaseout dates"
     ],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "Minor technology deployment",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "High ambition policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": ["Battery storage"],
-    "supplyChain": "Exogenous input or fuel price",
-    "investmentNeeds": "By technology",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "By technology"
   }
 }

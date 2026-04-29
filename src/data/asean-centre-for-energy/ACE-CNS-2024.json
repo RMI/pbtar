@@ -61,7 +61,6 @@
       "Other"
     ],
     "technologyCostTrend": "Low or no change",
-    "technologyDeploymentTrend": "Moderate technology deployment",
     "emissionsScope": "CO2e (unspecified GHGs)",
     "policyAmbition": "High ambition policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
@@ -71,8 +70,6 @@
       "Green H2/ammonia",
       "SAF"
     ],
-    "supplyChain": "No information",
-    "investmentNeeds": "By sector",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "By sector"
   }
 }

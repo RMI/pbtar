@@ -55,13 +55,10 @@
     "electrification": "Low or no change",
     "policyTypes": ["None"],
     "technologyCostTrend": "Low or no change",
-    "technologyDeploymentTrend": "No new technologies deployed",
     "emissionsScope": "CO2e (unspecified GHGs)",
     "policyAmbition": "No policies included",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": ["No new technologies"],
-    "supplyChain": "No information",
-    "investmentNeeds": "By sector",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "By sector"
   }
 }

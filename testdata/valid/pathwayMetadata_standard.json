@@ -27,13 +27,10 @@
     "electrification": "Moderate increase",
     "policyTypes": ["Carbon price", "Phaseout dates"],
     "technologyCostTrend": "No information",
-    "technologyDeploymentTrend": "Moderate technology deployment",
     "emissionsScope": "CO2",
     "policyAmbition": "Current/legislated policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": ["DAC", "Green H2/ammonia"],
-    "supplyChain": "No information",
-    "investmentNeeds": "By sector, part of value chain",
-    "infrastructureRequirements": "By supply chain, add/replace"
+    "investmentNeeds": "By sector, part of value chain"
   }
 }

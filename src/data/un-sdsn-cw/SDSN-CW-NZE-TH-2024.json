@@ -61,13 +61,10 @@
     "electrification": "No information",
     "policyTypes": ["Target technology shares", "Phaseout dates", "Other"],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "Minor technology deployment",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "High ambition policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": ["CCUS", "Green H2/ammonia"],
-    "supplyChain": "Exogenous input or fuel price",
-    "investmentNeeds": "No information",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "No information"
   }
 }

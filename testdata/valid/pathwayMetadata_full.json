@@ -109,7 +109,6 @@
       "Other"
     ],
     "technologyCostTrend": "No information",
-    "technologyDeploymentTrend": "No information",
     "emissionsScope": "No information",
     "policyAmbition": "No information",
     "technologyCostsDetail": "No information",
@@ -122,8 +121,6 @@
       "Battery storage",
       "EGS/AGS"
     ],
-    "supplyChain": "No information",
-    "investmentNeeds": "No information",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "No information"
   }
 }

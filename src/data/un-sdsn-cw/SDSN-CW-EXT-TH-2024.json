@@ -61,13 +61,10 @@
     "electrification": "No information",
     "policyTypes": ["Target technology shares", "Other"],
     "technologyCostTrend": "No information",
-    "technologyDeploymentTrend": "No new technologies deployed",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "Current/legislated policies",
     "technologyCostsDetail": "No information",
     "newTechnologiesIncluded": ["No new technologies"],
-    "supplyChain": "No information",
-    "investmentNeeds": "No information",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "No information"
   }
 }

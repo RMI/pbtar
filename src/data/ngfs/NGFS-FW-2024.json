@@ -302,7 +302,6 @@
       "Other"
     ],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "Minor technology deployment",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "Other policy ambition",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
@@ -313,8 +312,6 @@
       "SAF",
       "Battery storage"
     ],
-    "supplyChain": "Endogenous input or fuel price",
-    "investmentNeeds": "By tech, part of value chain",
-    "infrastructureRequirements": "By part of supply chain"
+    "investmentNeeds": "By tech, part of value chain"
   }
 }

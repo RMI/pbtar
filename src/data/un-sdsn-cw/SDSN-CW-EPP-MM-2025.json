@@ -54,13 +54,10 @@
     "electrification": "No information",
     "policyTypes": ["Target technology shares", "Phaseout dates"],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "No new technologies deployed",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "Current and drafted policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": ["No new technologies"],
-    "supplyChain": "Exogenous input or fuel price",
-    "investmentNeeds": "By technology",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "By technology"
   }
 }

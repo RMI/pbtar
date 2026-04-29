@@ -68,7 +68,6 @@
       "Target technology shares"
     ],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "Signif. technology deployment",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "High ambition policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
@@ -79,8 +78,6 @@
       "EGS/AGS",
       "Other new technologies"
     ],
-    "supplyChain": "Exogenous input or fuel price",
-    "investmentNeeds": "By technology",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "By technology"
   }
 }

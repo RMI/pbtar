@@ -63,13 +63,10 @@
     "electrification": "No information",
     "policyTypes": ["Carbon price", "Target technology shares"],
     "technologyCostTrend": "No information",
-    "technologyDeploymentTrend": "Moderate technology deployment",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "Current/legislated policies",
     "technologyCostsDetail": "No information",
     "newTechnologiesIncluded": ["CCUS", "Green H2/ammonia", "Battery storage"],
-    "supplyChain": "No information",
-    "investmentNeeds": "No information",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "No information"
   }
 }
