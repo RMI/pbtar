@@ -10,7 +10,6 @@
   "description": "This is a simple standard pathway for demonstration purposes, with all fields filled out.",
   "pathwayType": "Normative",
   "modelYearNetzero": 2050,
-  "carbonBudget": 500,
   "modelYearStart": 2020,
   "modelYearEnd": 2050,
   "modelTempIncrease": 1.5,

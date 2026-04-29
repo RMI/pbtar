@@ -10,7 +10,6 @@
   "description": "First Sample Pathway. qwerty description.",
   "pathwayType": "Normative",
   "modelYearNetzero": 2050,
-  "carbonBudget": 100,
   "modelYearStart": 2020,
   "modelYearEnd": 2050,
   "modelTempIncrease": 1,

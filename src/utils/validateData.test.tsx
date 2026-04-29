@@ -58,7 +58,6 @@ describe("pathway schema enforces expected limits", () => {
         modelYearStart: 1900,
         modelYearEnd: 2100,
         modelYearNetzero: 2030,
-        carbonBudget: 0,
         modelTempIncrease: 0.5, // min
         geography: ["Europe and Central Asia"],
       },
