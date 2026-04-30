@@ -21,7 +21,6 @@ export type DisplayName =
   | "Power"
   | "Automotive"
   | "Transport"
-  | "Road transport"
   | "Aviation"
   | "Rail"
   | "Shipping"
