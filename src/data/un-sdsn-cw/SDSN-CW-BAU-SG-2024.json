@@ -61,7 +61,11 @@
     "energyEfficiency": "No information",
     "energyDemand": "No information",
     "electrification": "No information",
-    "policyTypes": ["Carbon price", "Target technology shares"],
+    "policyTypes": [
+      "Carbon price",
+      "Target technology shares",
+      "Performance standards"
+    ],
     "technologyCostTrend": "No information",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "Current/legislated policies",

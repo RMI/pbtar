@@ -62,7 +62,11 @@
     "energyEfficiency": "No information",
     "energyDemand": "No information",
     "electrification": "No information",
-    "policyTypes": ["Phaseout dates", "Target technology shares"],
+    "policyTypes": [
+      "Phaseout dates",
+      "Target technology shares",
+      "Performance standards"
+    ],
     "technologyCostTrend": "No information",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "High ambition policies",

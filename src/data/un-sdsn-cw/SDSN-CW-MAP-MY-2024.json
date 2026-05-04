@@ -50,7 +50,12 @@
     "energyEfficiency": "No information",
     "energyDemand": "No information",
     "electrification": "Significant increase",
-    "policyTypes": ["Target technology shares", "Subsidies", "Other"],
+    "policyTypes": [
+      "Target technology shares",
+      "Subsidies",
+      "Performance standards",
+      "Other"
+    ],
     "technologyCostTrend": "Low or no change",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "NDCs incl. conditional targets",
