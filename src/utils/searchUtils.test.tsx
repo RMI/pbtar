@@ -179,7 +179,6 @@ describe("searchUtils - array results", () => {
     "Gas (Upstream)",
     "Power",
     "Automotive",
-    "Road transport",
     "Aviation",
     "Rail",
     "Shipping",

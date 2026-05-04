@@ -83,7 +83,6 @@ export interface PathwayMetadataV1 {
       | "Gas (Upstream)"
       | "Power"
       | "Automotive"
-      | "Road transport"
       | "Aviation"
       | "Rail"
       | "Shipping"

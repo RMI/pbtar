@@ -19,7 +19,6 @@ export type DisplayName =
   | "Gas (Upstream)"
   | "Power"
   | "Automotive"
-  | "Road transport"
   | "Aviation"
   | "Rail"
   | "Shipping"

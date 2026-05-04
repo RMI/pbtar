@@ -45,6 +45,7 @@
         "Nuclear"
       ]
     },
+    { "name": "Automotive", "technologies": [] },
     { "name": "Aviation", "technologies": [] },
     { "name": "Rail", "technologies": [] },
     { "name": "Shipping", "technologies": [] },

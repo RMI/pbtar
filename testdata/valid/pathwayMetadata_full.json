@@ -71,7 +71,7 @@
       ]
     },
     {
-      "name": "Road transport",
+      "name": "Automotive",
       "technologies": ["Electric Vehicles", "Hydrogen Vehicles"]
     },
     { "name": "Automotive", "technologies": [] },
