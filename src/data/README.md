@@ -85,7 +85,7 @@ new_pathway_metadata <-
       geography = list("Global", "US", "Europe"),
       sectors = list(
         list(name = "Power", technologies = c("Coal", "Wind")),
-        list(name = "Industry", technologies = I(c("Other")))
+        list(name = "Steel", technologies = I(c("Other")))
         ),
       publisher = "Example Publisher",
       publicationYear = 2021,

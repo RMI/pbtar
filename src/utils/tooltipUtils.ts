@@ -28,8 +28,6 @@ export const sectorTooltips: Record<Sector, string> = {
     "Production of primary chemicals and/or chemicals for end use, such as plastics, fertilizer, pharmaceuticals.",
   "Coal Mining": "Extraction of coal.",
   "Gas (Upstream)": "Extraction of natural gas.",
-  "Industry":
-    "Focused on manufacturing activities, especially heavy industries and hard-to-abate industries.",
   "Land Use": "Agriculture, Forestry, Fishery, other forms of land use.",
   "Oil (Upstream)": "Extraction of oil.",
   "Other":
@@ -42,7 +40,6 @@ export const sectorTooltips: Record<Sector, string> = {
   "Shipping": "Logistics of passengers and cargo by ship.",
   "Steel":
     "Steel making, both primary and secondary. Can include upstream and downstream activities.",
-  "Transport": "Logistics of passengers and cargo.",
 };
 
 export const getSectorTooltip = (sector: Sector): string => {

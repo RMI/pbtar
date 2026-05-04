@@ -171,7 +171,6 @@ describe("searchUtils - array results", () => {
     "Land Use",
     "Agriculture",
     "Buildings",
-    "Industry",
     "Steel",
     "Cement",
     "Chemicals",
@@ -179,7 +178,7 @@ describe("searchUtils - array results", () => {
     "Oil (Upstream)",
     "Gas (Upstream)",
     "Power",
-    "Transport",
+    "Automotive",
     "Road transport",
     "Aviation",
     "Rail",
@@ -188,7 +187,7 @@ describe("searchUtils - array results", () => {
   ];
 
   //These tests are to ensure that search works for all array values, even when
-  //they would not be surface directly in the UI (e.g. "Power, Transport, + 15
+  //they would not be surface directly in the UI (e.g. "Power, Road transport, + 15
   //more")
   describe("filterPathways for many array values", () => {
     geography.forEach((geography) => {
@@ -242,7 +241,7 @@ describe("filterPathways (array-backed facets)", () => {
     {
       id: "C",
       name: "C",
-      sectors: [{ name: "Industry" }],
+      sectors: [{ name: "Steel" }],
       geography: ["Asia"],
       modelTempIncrease: 1.5,
       pathwayType: "Exploratory",
