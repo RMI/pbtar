@@ -79,8 +79,8 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
     },
     {
       id: "D",
-      name: { full: "Pathway D", short: "Industry, Asia, no temp" },
-      sectors: [{ name: "Industry" }],
+      name: { full: "Pathway D", short: "Steel, Asia, no temp" },
+      sectors: [{ name: "Steel" }],
       geography: ["Asia"],
       modelTempIncrease: undefined, // -> Temperature "None"
       pathwayType: "BAU",
@@ -167,7 +167,7 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
       "no sectors, no geo, no temp",
       "empty sectors[], empty geo[], 1.5°C",
     ]);
-    expectHidden(["Power, Europe, 2°C", "Industry, Asia, no temp"]);
+    expectHidden(["Power, Europe, 2°C", "Steel, Asia, no temp"]);
   });
 
   it("Geography: shows 'None' when any pathway has missing/empty geography, selecting it filters correctly", async () => {
@@ -180,7 +180,7 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
       "no sectors, no geo, no temp",
       "empty sectors[], empty geo[], 1.5°C",
     ]);
-    expectHidden(["Power, Europe, 2°C", "Industry, Asia, no temp"]);
+    expectHidden(["Power, Europe, 2°C", "Steel, Asia, no temp"]);
   });
 
   // Concrete selection (requested): pick a real value and ensure only matching pathways remain
@@ -193,7 +193,7 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
     expectHidden([
       "no sectors, no geo, no temp",
       "empty sectors[], empty geo[], 1.5°C",
-      "Industry, Asia, no temp",
+      "Steel, Asia, no temp",
     ]);
   });
 
@@ -205,7 +205,7 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
     // ANY (default): shows anything with Europe OR Asia → B, D, E
     expectVisible([
       "Power, Europe, 2°C",
-      "Industry, Asia, no temp",
+      "Steel, Asia, no temp",
       "Power, Europe+Asia, 2°C",
     ]);
 
@@ -215,7 +215,7 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
     expectVisible(["Power, Europe+Asia, 2°C"]);
     expectHidden([
       "Power, Europe, 2°C",
-      "Industry, Asia, no temp",
+      "Steel, Asia, no temp",
       "no sectors, no geo, no temp",
       "empty sectors[], empty geo[], 1.5°C",
     ]);

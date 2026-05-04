@@ -58,7 +58,6 @@
   "modelYearNetzero": 2050,
   "sectors": [
     { "name": "Buildings", "technologies": [] },
-    { "name": "Industry", "technologies": [] },
     { "name": "Steel", "technologies": [] },
     { "name": "Cement", "technologies": [] },
     { "name": "Chemicals", "technologies": [] },
@@ -79,7 +78,6 @@
         "Other"
       ]
     },
-    { "name": "Transport", "technologies": [] },
     { "name": "Automotive", "technologies": [] },
     { "name": "Aviation", "technologies": [] },
     { "name": "Rail", "technologies": [] },

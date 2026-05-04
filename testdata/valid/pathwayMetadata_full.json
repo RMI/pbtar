@@ -52,10 +52,6 @@
         "Insulation"
       ]
     },
-    {
-      "name": "Industry",
-      "technologies": ["Carbon Capture and Storage", "Electrification"]
-    },
     { "name": "Steel", "technologies": ["Process Optimization"] },
     { "name": "Cement", "technologies": ["Other"] },
     { "name": "Chemicals", "technologies": ["Hydrogen Use", "Biofuels"] },
@@ -75,13 +71,10 @@
       ]
     },
     {
-      "name": "Transport",
-      "technologies": ["Public Transport", "Active Mobility"]
-    },
-    {
       "name": "Automotive",
       "technologies": ["Electric Vehicles", "Hydrogen Vehicles"]
     },
+    { "name": "Automotive", "technologies": [] },
     { "name": "Aviation", "technologies": ["Aviation Efficiency"] },
     { "name": "Rail", "technologies": ["Other"] },
     { "name": "Shipping", "technologies": ["Maritime Efficiency"] },

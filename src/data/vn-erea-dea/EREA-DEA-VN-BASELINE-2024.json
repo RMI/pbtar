@@ -26,7 +26,6 @@
   "sectors": [
     { "name": "Agriculture", "technologies": [] },
     { "name": "Buildings", "technologies": [] },
-    { "name": "Industry", "technologies": [] },
     { "name": "Steel", "technologies": [] },
     { "name": "Cement", "technologies": [] },
     { "name": "Chemicals", "technologies": [] },
@@ -46,7 +45,6 @@
         "Nuclear"
       ]
     },
-    { "name": "Transport", "technologies": [] },
     { "name": "Automotive", "technologies": [] },
     { "name": "Aviation", "technologies": [] },
     { "name": "Rail", "technologies": [] },
