@@ -196,6 +196,8 @@ export interface PathwayMetadataV1 {
     policyTypes: [
       (
         | "Carbon price"
+        | "Feed-in tariffs"
+        | "Performance standards"
         | "Phaseout dates"
         | "Subsidies"
         | "Target technology shares"
@@ -204,6 +206,8 @@ export interface PathwayMetadataV1 {
       ),
       ...(
         | "Carbon price"
+        | "Feed-in tariffs"
+        | "Performance standards"
         | "Phaseout dates"
         | "Subsidies"
         | "Target technology shares"

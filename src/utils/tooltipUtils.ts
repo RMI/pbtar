@@ -153,6 +153,10 @@ export function getKeyFeatureTooltip(
     },
     policyTypes: {
       "Carbon price": "A carbon price is used to model policy impacts.",
+      "Feed-in tariffs":
+        "Feed-in tariffs are explicitly modeled as a policy intervention",
+      "Performance standards":
+        "Performance standards are explicitly modeled as a policy intervention",
       "Phaseout dates":
         "This pathway includes targeted phaseout dates for technologies as policy interventions.",
       "Subsidies":
@@ -160,7 +164,7 @@ export function getKeyFeatureTooltip(
       "Target technology shares":
         "Target technology shares are used to model policy impacts.",
       "Other":
-        "Other policy types beside carbon prices, phaseout dates, subsidies, and target technology shares are used to model policy impacts.",
+        "Impacts of other policy types modeled beside carbon prices, phaseout dates, subsidies, target technology shares, FiTs, and performance standards.",
       "None": "This pathway does not explicitly model the impact of policies.",
     },
     technologyCostTrend: {

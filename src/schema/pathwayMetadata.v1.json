@@ -180,6 +180,8 @@
             "type": "string",
             "enum": [
               "Carbon price",
+              "Feed-in tariffs",
+              "Performance standards",
               "Phaseout dates",
               "Subsidies",
               "Target technology shares",
