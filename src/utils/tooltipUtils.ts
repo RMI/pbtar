@@ -152,9 +152,9 @@ export function getKeyFeatureTooltip(
     policyTypes: {
       "Carbon price": "A carbon price is used to model policy impacts.",
       "Feed-in tariffs":
-        "Feed-in tariffs are explicitly modeled as a policy intervention",
+        "Feed-in tariffs are explicitly modeled as a policy intervention.",
       "Performance standards":
-        "Performance standards are explicitly modeled as a policy intervention",
+        "Performance standards are explicitly modeled as a policy intervention.",
       "Phaseout dates":
         "This pathway includes targeted phaseout dates for technologies as policy interventions.",
       "Subsidies":
