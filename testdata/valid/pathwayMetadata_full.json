@@ -79,7 +79,7 @@
       "technologies": ["Public Transport", "Active Mobility"]
     },
     {
-      "name": "Road transport",
+      "name": "Automotive",
       "technologies": ["Electric Vehicles", "Hydrogen Vehicles"]
     },
     { "name": "Aviation", "technologies": ["Aviation Efficiency"] },
