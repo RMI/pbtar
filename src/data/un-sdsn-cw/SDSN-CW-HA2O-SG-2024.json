@@ -65,7 +65,8 @@
     "policyTypes": [
       "Carbon price",
       "Phaseout dates",
-      "Target technology shares"
+      "Target technology shares",
+      "Performance standards"
     ],
     "technologyCostTrend": "Decrease",
     "emissionsScope": "CO2e (Kyoto)",

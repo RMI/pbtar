@@ -67,7 +67,7 @@
     "energyEfficiency": "No information",
     "energyDemand": "Significant increase",
     "electrification": "Significant increase",
-    "policyTypes": ["Target technology shares"],
+    "policyTypes": ["Target technology shares", "Performance standards"],
     "technologyCostTrend": "Decrease",
     "emissionsScope": "CO2e (unspecified GHGs)",
     "policyAmbition": "High ambition policies",
