@@ -40,14 +40,11 @@
     "JP"
   ],
   "pathwayType": "Predictive",
-  "carbonBudget": 868,
   "modelTempIncrease": 2.4,
   "modelYearStart": 2023,
   "modelYearEnd": 2100,
-  "ssp": "SSP2",
   "sectors": [
     { "name": "Buildings", "technologies": [] },
-    { "name": "Industry", "technologies": [] },
     { "name": "Steel", "technologies": [] },
     { "name": "Cement", "technologies": [] },
     { "name": "Chemicals", "technologies": [] },
@@ -69,8 +66,6 @@
         "Other"
       ]
     },
-    { "name": "Transport", "technologies": [] },
-    { "name": "Road transport", "technologies": [] },
     { "name": "Automotive", "technologies": [] },
     { "name": "Aviation", "technologies": [] },
     { "name": "Shipping", "technologies": [] },
@@ -95,10 +90,10 @@
       "Phaseout dates",
       "Subsidies",
       "Target technology shares",
+      "Performance standards",
       "Other"
     ],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "Minor technology deployment",
     "emissionsScope": "CO2",
     "policyAmbition": "Current and drafted policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
@@ -109,8 +104,6 @@
       "SAF",
       "Battery storage"
     ],
-    "supplyChain": "Exogenous input or fuel price",
-    "investmentNeeds": "By tech, part of value chain",
-    "infrastructureRequirements": "By supply chain, add/replace"
+    "investmentNeeds": "By tech, part of value chain"
   }
 }

@@ -23,7 +23,6 @@
   "pathwayType": "Exploratory",
   "modelYearStart": 2019,
   "modelYearEnd": 2050,
-  "ssp": "SSP2",
   "sectors": [
     {
       "name": "Power",
@@ -55,10 +54,10 @@
       "Phaseout dates",
       "Target technology shares",
       "Subsidies",
+      "Performance standards",
       "Other"
     ],
     "technologyCostTrend": "Low or no change",
-    "technologyDeploymentTrend": "Signif. technology deployment",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "High ambition policies",
     "technologyCostsDetail": "Total costs",
@@ -68,8 +67,6 @@
       "Green H2/ammonia",
       "Other new technologies"
     ],
-    "supplyChain": "No information",
-    "investmentNeeds": "No information",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "No information"
   }
 }

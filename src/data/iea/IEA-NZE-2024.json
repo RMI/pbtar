@@ -25,14 +25,12 @@
   "description": "Normative global 1.5°C aligned pathway that achieves net zero emissions by 2050.",
   "geography": ["Global"],
   "pathwayType": "Normative",
-  "carbonBudget": 433,
   "modelTempIncrease": 1.5,
   "modelYearStart": 2023,
   "modelYearEnd": 2100,
   "modelYearNetzero": 2050,
   "sectors": [
     { "name": "Buildings", "technologies": [] },
-    { "name": "Industry", "technologies": [] },
     { "name": "Steel", "technologies": [] },
     { "name": "Cement", "technologies": [] },
     { "name": "Chemicals", "technologies": [] },
@@ -54,8 +52,6 @@
         "Other"
       ]
     },
-    { "name": "Transport", "technologies": [] },
-    { "name": "Road transport", "technologies": [] },
     { "name": "Automotive", "technologies": [] },
     { "name": "Aviation", "technologies": [] },
     { "name": "Shipping", "technologies": [] },
@@ -79,10 +75,10 @@
       "Phaseout dates",
       "Subsidies",
       "Target technology shares",
+      "Performance standards",
       "Other"
     ],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "Signif. technology deployment",
     "emissionsScope": "CO2",
     "policyAmbition": "High ambition policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
@@ -93,8 +89,6 @@
       "SAF",
       "Battery storage"
     ],
-    "supplyChain": "Exogenous input or fuel price",
-    "investmentNeeds": "By tech, part of value chain",
-    "infrastructureRequirements": "By supply chain, add/replace"
+    "investmentNeeds": "By tech, part of value chain"
   }
 }

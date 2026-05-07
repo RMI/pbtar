@@ -250,11 +250,9 @@
   "modelTempIncrease": 2.3,
   "modelYearStart": 2020,
   "modelYearEnd": 2050,
-  "ssp": "SSP2",
   "sectors": [
     { "name": "Land Use", "technologies": [] },
     { "name": "Buildings", "technologies": [] },
-    { "name": "Industry", "technologies": [] },
     { "name": "Steel", "technologies": [] },
     { "name": "Cement", "technologies": [] },
     { "name": "Chemicals", "technologies": [] },
@@ -275,8 +273,6 @@
         "Other"
       ]
     },
-    { "name": "Transport", "technologies": [] },
-    { "name": "Road transport", "technologies": [] },
     { "name": "Automotive", "technologies": [] },
     { "name": "Aviation", "technologies": [] },
     { "name": "Rail", "technologies": [] },
@@ -303,7 +299,6 @@
       "Other"
     ],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "Moderate technology deployment",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "NDCs incl. conditional targets",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
@@ -314,8 +309,6 @@
       "SAF",
       "Battery storage"
     ],
-    "supplyChain": "Endogenous input or fuel price",
-    "investmentNeeds": "By tech, part of value chain",
-    "infrastructureRequirements": "By part of supply chain"
+    "investmentNeeds": "By tech, part of value chain"
   }
 }

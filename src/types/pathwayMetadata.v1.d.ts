@@ -49,10 +49,6 @@ export interface PathwayMetadataV1 {
    */
   modelYearNetzero?: number;
   /**
-   * Carbon budget of the pathway in gigatons of CO2 equivalent (GtCO2eq). If no carbon budget is defined, this field should be omitted. If the carbon budget is not applicable, it should be set to 0.
-   */
-  carbonBudget?: number;
-  /**
    * Year from which the model starts.
    */
   modelYearStart?: number;
@@ -64,10 +60,6 @@ export interface PathwayMetadataV1 {
    * Modeled temperature increase expected by the pathway (in degrees Celsius).
    */
   modelTempIncrease?: number;
-  /**
-   * Shared Socioeconomic Pathways (SSP) associated with the pathway.
-   */
-  ssp?: "SSP1" | "SSP2" | "SSP3" | "SSP4" | "SSP5";
   /**
    * Geographical areas that the pathway covers.
    */
@@ -83,7 +75,6 @@ export interface PathwayMetadataV1 {
       | "Land Use"
       | "Agriculture"
       | "Buildings"
-      | "Industry"
       | "Steel"
       | "Cement"
       | "Chemicals"
@@ -92,8 +83,6 @@ export interface PathwayMetadataV1 {
       | "Gas (Upstream)"
       | "Power"
       | "Automotive"
-      | "Transport"
-      | "Road transport"
       | "Aviation"
       | "Rail"
       | "Shipping"
@@ -204,6 +193,8 @@ export interface PathwayMetadataV1 {
     policyTypes: [
       (
         | "Carbon price"
+        | "Feed-in tariffs"
+        | "Performance standards"
         | "Phaseout dates"
         | "Subsidies"
         | "Target technology shares"
@@ -212,6 +203,8 @@ export interface PathwayMetadataV1 {
       ),
       ...(
         | "Carbon price"
+        | "Feed-in tariffs"
+        | "Performance standards"
         | "Phaseout dates"
         | "Subsidies"
         | "Target technology shares"
@@ -227,15 +220,6 @@ export interface PathwayMetadataV1 {
       | "Increase"
       | "Low or no change"
       | "Decrease";
-    /**
-     * Indicates the scale and pace of new technology adoption within the pathway, where significant deployment means that several new technologies are adopted rapidly
-     */
-    technologyDeploymentTrend:
-      | "No information"
-      | "No new technologies deployed"
-      | "Minor technology deployment"
-      | "Moderate technology deployment"
-      | "Signif. technology deployment";
     emissionsScope: EmissionsScope;
     /**
      * Represents the overall stringency and intent of modeled policies relative to climate targets, often reflecting if and how far the included policies go beyond currently legislated ones
@@ -287,14 +271,6 @@ export interface PathwayMetadataV1 {
       )[],
     ];
     /**
-     * Describes how upstream fuel or material price dynamics are represented in the pathway.
-     */
-    supplyChain:
-      | "No information"
-      | "Static input or fuel price"
-      | "Exogenous input or fuel price"
-      | "Endogenous input or fuel price";
-    /**
      * Summarizes how investment requirements are quantified, from total system to sector-level or supply-chain detail.
      */
     investmentNeeds:
@@ -304,12 +280,5 @@ export interface PathwayMetadataV1 {
       | "By sector, part of value chain"
       | "By technology"
       | "By tech, part of value chain";
-    /**
-     * Describes how infrastructure buildout and maintenance needs are represented across the supply chain.
-     */
-    infrastructureRequirements:
-      | "No information"
-      | "By part of supply chain"
-      | "By supply chain, add/replace";
   };
 }

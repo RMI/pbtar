@@ -52,15 +52,12 @@
     "US"
   ],
   "pathwayType": "Normative",
-  "carbonBudget": 400,
   "modelTempIncrease": 1.5,
   "modelYearStart": 2019,
   "modelYearEnd": 2100,
   "modelYearNetzero": 2050,
-  "ssp": "SSP1",
   "sectors": [
     { "name": "Buildings", "technologies": [] },
-    { "name": "Industry", "technologies": [] },
     { "name": "Steel", "technologies": [] },
     { "name": "Cement", "technologies": [] },
     { "name": "Chemicals", "technologies": [] },
@@ -81,8 +78,6 @@
         "Other"
       ]
     },
-    { "name": "Transport", "technologies": [] },
-    { "name": "Road transport", "technologies": [] },
     { "name": "Automotive", "technologies": [] },
     { "name": "Aviation", "technologies": [] },
     { "name": "Rail", "technologies": [] },
@@ -104,13 +99,10 @@
     "electrification": "Significant increase",
     "policyTypes": ["Phaseout dates"],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "Minor technology deployment",
     "emissionsScope": "CO2e (CO2, Methane)",
     "policyAmbition": "High ambition policies",
     "technologyCostsDetail": "No information",
     "newTechnologiesIncluded": ["SAF", "Green H2/ammonia"],
-    "supplyChain": "No information",
-    "investmentNeeds": "No information",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "No information"
   }
 }

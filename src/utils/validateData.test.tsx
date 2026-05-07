@@ -58,9 +58,7 @@ describe("pathway schema enforces expected limits", () => {
         modelYearStart: 1900,
         modelYearEnd: 2100,
         modelYearNetzero: 2030,
-        carbonBudget: 0,
         modelTempIncrease: 0.5, // min
-        ssp: "SSP5",
         geography: ["Europe and Central Asia"],
       },
     });
@@ -109,16 +107,6 @@ describe("pathway schema enforces expected limits", () => {
         data: { ...basePathway, pathwayType: "Wrong" },
       },
       /pathwayType/,
-    );
-  });
-
-  it("fails on invalid SSP enum", () => {
-    fail(
-      {
-        name: "ssp.json",
-        data: { ...basePathway, ssp: "SSP6" },
-      },
-      /ssp/,
     );
   });
 

@@ -74,13 +74,10 @@
     "electrification": "No information",
     "policyTypes": ["Target technology shares"],
     "technologyCostTrend": "Low or no change",
-    "technologyDeploymentTrend": "Minor technology deployment",
     "emissionsScope": "CO2e (unspecified GHGs)",
     "policyAmbition": "Current and drafted policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": ["Battery storage"],
-    "supplyChain": "Static input or fuel price",
-    "investmentNeeds": "Total investment",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "Total investment"
   }
 }

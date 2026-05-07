@@ -26,7 +26,6 @@
   "sectors": [
     { "name": "Agriculture", "technologies": [] },
     { "name": "Buildings", "technologies": [] },
-    { "name": "Industry", "technologies": [] },
     { "name": "Steel", "technologies": [] },
     { "name": "Cement", "technologies": [] },
     { "name": "Chemicals", "technologies": [] },
@@ -46,8 +45,7 @@
         "Nuclear"
       ]
     },
-    { "name": "Transport", "technologies": [] },
-    { "name": "Road transport", "technologies": [] },
+    { "name": "Automotive", "technologies": [] },
     { "name": "Aviation", "technologies": [] },
     { "name": "Rail", "technologies": [] },
     { "name": "Shipping", "technologies": [] },
@@ -66,15 +64,12 @@
     "energyEfficiency": "No information",
     "energyDemand": "Significant increase",
     "electrification": "Significant increase",
-    "policyTypes": ["Target technology shares"],
+    "policyTypes": ["Target technology shares", "Performance standards"],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "Moderate technology deployment",
     "emissionsScope": "CO2e (unspecified GHGs)",
     "policyAmbition": "Current/legislated policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": ["Battery storage", "Green H2/ammonia", "CCUS"],
-    "supplyChain": "Exogenous input or fuel price",
-    "investmentNeeds": "By technology",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "By technology"
   }
 }

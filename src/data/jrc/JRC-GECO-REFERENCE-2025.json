@@ -55,11 +55,9 @@
   "modelTempIncrease": 2.6,
   "modelYearStart": 2022,
   "modelYearEnd": 2100,
-  "ssp": "SSP2",
   "sectors": [
     { "name": "Agriculture", "technologies": [] },
     { "name": "Buildings", "technologies": [] },
-    { "name": "Industry", "technologies": [] },
     { "name": "Steel", "technologies": [] },
     { "name": "Cement", "technologies": [] },
     { "name": "Chemicals", "technologies": [] },
@@ -80,8 +78,6 @@
         "Other"
       ]
     },
-    { "name": "Transport", "technologies": [] },
-    { "name": "Road transport", "technologies": [] },
     { "name": "Automotive", "technologies": [] },
     { "name": "Aviation", "technologies": [] },
     { "name": "Rail", "technologies": [] },
@@ -106,10 +102,10 @@
       "Phaseout dates",
       "Subsidies",
       "Target technology shares",
+      "Performance standards",
       "Other"
     ],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "Moderate technology deployment",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "Current/legislated policies",
     "technologyCostsDetail": "No information",
@@ -120,8 +116,6 @@
       "SAF",
       "Battery storage"
     ],
-    "supplyChain": "Endogenous input or fuel price",
-    "investmentNeeds": "By technology",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "By technology"
   }
 }
