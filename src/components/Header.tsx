@@ -42,7 +42,7 @@ const Header: React.FC = () => {
   }, [resourcesOpen]);
 
   return (
-    <header className="bg-bluespruce text-white shadow-md">
+    <header className="relative z-50 bg-bluespruce text-white shadow-md">
       <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
         <HeaderBrand />
 
@@ -72,7 +72,7 @@ const Header: React.FC = () => {
             {resourcesOpen && (
               <div
                 role="menu"
-                className="absolute right-0 mt-2 w-72 overflow-hidden rounded-md bg-white text-rmigray-800 shadow-lg ring-1 ring-black/5"
+                className="absolute right-0 z-[60] mt-2 w-72 overflow-hidden rounded-md bg-white text-rmigray-800 shadow-lg ring-1 ring-black/5"
               >
                 <Link
                   role="menuitem"
@@ -100,11 +100,11 @@ const Header: React.FC = () => {
                 </Link>
                 <Link
                   role="menuitem"
-                  to="/resources/changelog"
+                  to="/resources/updates"
                   className="block px-4 py-3 text-sm hover:bg-neutral-100"
                   onClick={() => setResourcesOpen(false)}
                 >
-                  Blog / Changelog
+                  Updates
                 </Link>
                 <Link
                   role="menuitem"

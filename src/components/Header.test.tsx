@@ -52,7 +52,7 @@ describe("Header component", () => {
     ).toBeInTheDocument();
     expect(screen.getByRole("menuitem", { name: "FAQs" })).toBeInTheDocument();
     expect(
-      screen.getByRole("menuitem", { name: "Blog / Changelog" }),
+      screen.getByRole("menuitem", { name: "Updates" }),
     ).toBeInTheDocument();
   });
 });

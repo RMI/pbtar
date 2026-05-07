@@ -182,16 +182,22 @@ const LandingPage: React.FC = () => {
                 Transition Pathways Repository
               </h1>
               <p className="mt-4 text-lg md:text-xl text-white/90">
-                Find and compare transition pathways for corporate transition
-                assessments.
+                Find and compare transition pathways to support corporate
+                transition assessments.
               </p>
 
               <p className="mt-8 text-sm md:text-base text-white/85 max-w-3xl mx-auto">
-                Built first for financial institutions, TPR helps
-                sustainability, risk, and front-office teams identify pathways
-                that fit their assessment question. Use it to benchmark
-                ambition, test feasibility, assess policy exposure, and
-                understand what benchmark data a pathway can provide.
+                The Transition Pathways Repository helps financial institutions
+                identify and compare pathways based on their specific analytical
+                needs. Use it to identify key transition levers, benchmark
+                ambition, test transition plan feasibility, and assess policy
+                exposure.
+              </p>
+
+              <p className="mt-8 text-sm md:text-base text-white/85 max-w-3xl mx-auto">
+                Note that this version of the TPR is a pilot covering only
+                pathways related to the power sector in Southeast Asia. Stay
+                tuned for more pathways being added in 2026!
               </p>
 
               <div className="mt-10">
@@ -204,7 +210,8 @@ const LandingPage: React.FC = () => {
               </div>
 
               <p className="mt-6 text-sm italic text-white/80">
-                Start with pathways for the Southeast Asian power sector.
+                See what pathways are available for the Southeast Asia power
+                sector.
               </p>
             </div>
           </div>
@@ -216,129 +223,159 @@ const LandingPage: React.FC = () => {
         <div className="max-w-5xl mx-auto">
           <section className="pb-10 border-b border-neutral-200">
             <h2 className="text-xl font-semibold text-rmiblue-800 mb-3">
-              What is TPR?
+              What is the Transition Pathways Repository?
             </h2>
             <p className="text-rmigray-700 max-w-4xl">
-              TPR is an online repository that helps users identify and
-              interpret transition pathways relevant to their needs. It is
-              designed to make pathway selection faster, more transparent, and
-              easier to apply in real assessment workflows.
+              The Transition Pathways Repository (TPR) is an online repository
+              designed to help financial institutions identify, interpret, and
+              compare the transition pathways available across sectors and
+              regions.
             </p>
-          </section>
-
-          <section className="py-10 border-b border-neutral-200">
-            <h2 className="text-xl font-semibold text-rmiblue-800 mb-3">
-              Why it matters
-            </h2>
-            <p className="text-rmigray-700 max-w-4xl">
-              Different pathways answer different questions. One may be useful
-              for assessing target ambition, while another may be better for
-              understanding regional policy or market risk. TPR helps users
-              compare those differences before choosing a pathway.
-            </p>
-          </section>
-
-          <section className="py-10 border-b border-neutral-200">
-            <h2 className="text-xl font-semibold text-rmiblue-800 mb-3">
-              Who is it for?
-            </h2>
-            <p className="text-rmigray-700 max-w-4xl">
-              TPR is designed primarily for banks and other financial
-              institutions conducting corporate transition assessments.
-            </p>
-            <p className="text-rmigray-700 max-w-4xl mt-3">
-              It is especially relevant for:
-            </p>
-            <ul className="mt-3 list-disc pl-5 space-y-1 text-rmigray-700 max-w-4xl">
-              <li>sustainability teams,</li>
-              <li>risk teams,</li>
-              <li>front-office and client coverage teams.</li>
-            </ul>
             <p className="text-rmigray-700 max-w-4xl mt-4">
-              It can also support companies, policymakers, and regulators
-              seeking a clearer view of transition dynamics in specific sectors
-              and regions.
+              The goal is to support financial institutions to better
+              incorporate the opportunities and risks created by the transition
+              into their decision-making by integrating region-specific pathways
+              into transition assessments, risk analysis, client engagement, and
+              capital allocation.
+            </p>
+          </section>
+
+          <section className="py-10 border-b border-neutral-200">
+            <h2 className="text-xl font-semibold text-rmiblue-800 mb-3">
+              Why are transition pathways important?
+            </h2>
+            <p className="text-rmigray-700 max-w-4xl">
+              Transition pathways provide the critical context needed to turn
+              data into decision-useful insights for financial institutions. As
+              corporations navigate uncertainty, transition pathways can reveal
+              how different factors could impact their business.
+            </p>
+            <p className="text-rmigray-700 max-w-4xl mt-4">
+              Different pathways answer different questions. A pathway that is
+              useful for assessing target ambition may not be appropriate for
+              understanding regional policy or market risk.
+            </p>
+            <p className="text-rmigray-700 max-w-4xl mt-4">
+              The TPR helps users understand those differences to ensure that
+              selected pathways are aligned with specific assessment objectives
+              and decision-making needs.
+            </p>
+          </section>
+
+          <section className="py-10 border-b border-neutral-200">
+            <h2 className="text-xl font-semibold text-rmiblue-800 mb-3">
+              Who is the TPR designed for?
+            </h2>
+            <p className="text-rmigray-700 max-w-4xl">
+              The TPR is designed primarily for financial institutions (e.g.,
+              sustainability, risk, and front-office teams) conducting corporate
+              transition assessments. See the{" "}
+              <Link
+                to="/resources/methodology"
+                className="text-energy-700 hover:text-energy-800 underline underline-offset-2"
+              >
+                use case page
+              </Link>{" "}
+              for more details.
+            </p>
+            <p className="text-rmigray-700 max-w-4xl mt-4">
+              This tool could also be applied by corporations developing their
+              own transition strategies, and by policymakers and regulators to
+              inform policy design and regulatory frameworks.
             </p>
           </section>
 
           <section className="py-10 border-b border-neutral-200">
             <h2 className="text-xl font-semibold text-rmiblue-800 mb-6">
-              What you can do here
+              What can you do with the Transition Pathways Repository?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <InfoCard title="Find new pathways">
+                Trying to understand your clients’ exposure to transition risk?
+                Want to understand how different policies might impact your
+                client’s transition strategy? Unsure if your client’s investment
+                pipeline matches sector trends? The TPR helps you find relevant
+                pathways for these and other use cases.
+              </InfoCard>
+              <InfoCard title="Interpret them easily">
+                These use cases are made clear by detailed analysis of each
+                pathway’s scope, underlying assumptions, and output data in a
+                standardized format for streamlined integration into existing
+                workflows.
+              </InfoCard>
               <InfoCard title="Compare pathways">
-                Review pathway type, geography, granularity, and benchmark data
-                availability in one place.
+                Pathways have been assessed across key common variables for easy
+                comparison. Skip trawling through lengthy reports and let the
+                repository simplify the process of deciphering and comparing
+                pathways.
               </InfoCard>
-              <InfoCard title="Match pathways to your use case">
-                Use different pathways for ambition, feasibility, investment
-                alignment, or policy exposure.
-              </InfoCard>
-              <InfoCard title="Reduce research time">
-                Find relevant pathways faster and understand what they can
-                realistically tell you.
-              </InfoCard>
-            </div>
-          </section>
-
-          <section className="py-10 border-b border-neutral-200">
-            <h2 className="text-xl font-semibold text-rmiblue-800 mb-3">
-              Methodology
-            </h2>
-            <p className="text-rmigray-700 max-w-4xl">
-              TPR uses a structured approach to pathway comparison. It helps
-              users assess credibility, pathway features, granularity, and
-              benchmark data availability so they can choose pathways that fit
-              the question at hand.
-            </p>
-            <div className="mt-4">
-              <Link
-                to="/resources/methodology"
-                className="text-energy-700 font-semibold hover:underline"
-              >
-                Learn more about the methodology
-              </Link>
             </div>
           </section>
 
           <section className="py-10">
             <h2 className="text-xl font-semibold text-rmiblue-800 mb-3">
-              Resources
+              Learn more with these resources
             </h2>
-            <ul className="space-y-2 text-rmigray-700">
-              <li>
-                <Link
-                  to="/resources/use-cases"
-                  className="text-energy-700 hover:underline"
-                >
-                  How banks use transition pathways
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/resources/methodology"
-                  className="text-energy-700 hover:underline"
-                >
-                  How pathways are classified
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/contact"
-                  className="text-energy-700 hover:underline"
-                >
-                  Questions or feedback
-                </Link>
-              </li>
-            </ul>
+            <div className="rounded-lg bg-white shadow p-6">
+              <ul className="list-disc pl-5 space-y-2 text-rmigray-700">
+                <li>
+                  <Link
+                    to="/resources/how-to-use-this-tool"
+                    className="text-energy-700 hover:text-energy-800 underline underline-offset-2"
+                  >
+                    How to choose a pathway
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/resources/use-cases"
+                    className="text-energy-700 hover:text-energy-800 underline underline-offset-2"
+                  >
+                    Use cases for transition pathways
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/resources/methodology"
+                    className="text-energy-700 hover:text-energy-800 underline underline-offset-2"
+                  >
+                    How pathways are assessed and classified
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/resources/updates"
+                    className="text-energy-700 hover:text-energy-800 underline underline-offset-2"
+                  >
+                    Latest updates
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/resources/faq"
+                    className="text-energy-700 hover:text-energy-800 underline underline-offset-2"
+                  >
+                    FAQs
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/contact"
+                    className="text-energy-700 hover:text-energy-800 underline underline-offset-2"
+                  >
+                    Get in touch
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
             <div className="mt-12 pt-10 border-t border-neutral-200 text-center">
               <h2 className="text-2xl font-semibold text-rmigray-800">
                 Ready to explore?
               </h2>
               <p className="mt-3 text-rmigray-700 max-w-2xl mx-auto">
-                Compare pathways and find the ones that best fit your assessment
-                question.
+                See what pathways are available for the Southeast Asia power
+                sector.
               </p>
               <div className="mt-8">
                 <Link

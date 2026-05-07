@@ -16,10 +16,10 @@ import LandingPage from "./pages/LandingPage";
 import ContactPage from "./pages/ContactPage";
 import EnvironmentBanner from "./components/EnvironmentBanner";
 import {
-  ResourcesChangelogPage,
-  ResourcesHowToUseToolPage,
   ResourcesFaqPage,
+  ResourcesHowToUseToolPage,
   ResourcesMethodologyPage,
+  ResourcesUpdatesPage,
   ResourcesUseCasesPage,
 } from "./pages/resources";
 
@@ -91,8 +91,17 @@ export const AppContent = () => {
             }
           />
           <Route
+            path="/resources/updates"
+            element={<ResourcesUpdatesPage />}
+          />
+          <Route
             path="/resources/changelog"
-            element={<ResourcesChangelogPage />}
+            element={
+              <Navigate
+                to="/resources/updates"
+                replace
+              />
+            }
           />
           <Route
             path="/resources/contact"
