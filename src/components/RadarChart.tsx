@@ -113,26 +113,23 @@ export default function RadarChart({
     const axisGrid = container.append("g").attr("class", "axisWrapper");
 
     // Draw the concentric circles
-    (
-      axisGrid
-        .selectAll<SVGCircleElement, number>(".levels")
-        .data(range(1, axisCircles + 1).reverse())
-        .enter()
-        .append("circle")
-    )
+    axisGrid
+      .selectAll<SVGCircleElement, number>(".levels")
+      .data(range(1, axisCircles + 1).reverse())
+      .enter()
+      .append("circle")
       .attr("class", "gridCircle")
       .attr("r", (d) => (radius / axisCircles) * d)
       .style("fill", "none")
       .style("stroke", axisColor);
 
     // Draw the axes
-    const axis = (
-      axisGrid
-        .selectAll<SVGGElement, string>(".axis")
-        .data(axesDomain)
-        .enter()
-        .append("g")
-    ).attr("class", "axis");
+    const axis = axisGrid
+      .selectAll<SVGGElement, string>(".axis")
+      .data(axesDomain)
+      .enter()
+      .append("g")
+      .attr("class", "axis");
 
     // Draw the lines
     axis
@@ -186,12 +183,10 @@ export default function RadarChart({
       .attr("stroke-width", "2");
 
     // Add the dots
-    (
-      plots
-        .selectAll<SVGCircleElement, DataPoint>("circle")
-        .data(d3data)
-        .join("circle")
-    )
+    plots
+      .selectAll<SVGCircleElement, DataPoint>("circle")
+      .data(d3data)
+      .join("circle")
       .attr("r", dotRadius)
       .attr(
         "cx",
