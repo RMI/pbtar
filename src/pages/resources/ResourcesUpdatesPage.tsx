@@ -1,6 +1,6 @@
 import React from "react";
 
-type UpdateTag = "Coverage" | "Product" | "Methodology" | "Insights";
+type UpdateTag = "Coverage" | "Functionality" | "Methodology" | "Insights";
 
 type UpdatePost = {
   title: string;
@@ -19,7 +19,7 @@ const categories: Array<{
       "Information on which pathways, sectors, and regions you can find in the TPR.",
   },
   {
-    tag: "Product",
+    tag: "Functionality",
     description: "Improvements of the features and tools available in the TPR.",
   },
   {
@@ -36,7 +36,7 @@ const categories: Array<{
 
 const tagClassNames: Record<UpdateTag, string> = {
   Coverage: "border border-sky-200 bg-sky-50 text-sky-800",
-  Product: "border border-amber-200 bg-amber-50 text-amber-800",
+  Functionality: "border border-amber-200 bg-amber-50 text-amber-800",
   Methodology: "border border-violet-200 bg-violet-50 text-violet-800",
   Insights: "border border-emerald-200 bg-emerald-50 text-emerald-800",
 };
@@ -65,7 +65,7 @@ const posts: UpdatePost[] = [
     title:
       "Introducing the Transition Pathways Repository: Making Transition Analysis Actionable",
     date: "March 30, 2026",
-    tags: ["Product", "Coverage"],
+    tags: ["Functionality", "Coverage"],
     body: (
       <>
         <p>
