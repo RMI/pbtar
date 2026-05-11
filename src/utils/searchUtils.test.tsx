@@ -252,49 +252,58 @@ describe("filterPathways (array-backed facets)", () => {
   ];
 
   it("pathwayType: OR over multiple selections; empty array = no filter", () => {
-    let out = filterPathways(pathways, {
+    let filters: FiltersWithArrays = {
       pathwayType: ["Normative", "Exploratory"],
-    } as FiltersWithArrays);
+    };
+    let out = filterPathways(pathways, filters);
     expect(out.map((s) => s.id)).toEqual(["B", "C"]);
 
-    out = filterPathways(pathways, { pathwayType: [] } as FiltersWithArrays);
+    filters = { pathwayType: [] };
+    out = filterPathways(pathways, filters);
     expect(out.map((s) => s.id)).toEqual(["A", "B", "C"]);
   });
 
   it("pathwayType: ABSENT token matches missing value only", () => {
-    const out = filterPathways(pathways, {
+    const filters: FiltersWithArrays = {
       pathwayType: [ABSENT_FILTER_TOKEN],
-    } as FiltersWithArrays);
+    };
+    const out = filterPathways(pathways, filters);
     expect(out.map((s) => s.id)).toEqual(["A"]);
   });
 
   it("numeric (modelYearNetzero): OR over numbers, with ABSENT", () => {
-    let out = filterPathways(pathways, {
+    let filters: FiltersWithArrays = {
       modelYearNetzero: [2040, 2030],
-    } as FiltersWithArrays);
+    };
+    let out = filterPathways(pathways, filters);
     expect(out.map((s) => s.id)).toEqual(["B", "C"]);
-    out = filterPathways(pathways, {
+    filters = {
       modelYearNetzero: [2040, ABSENT_FILTER_TOKEN],
-    } as FiltersWithArrays);
+    };
+    out = filterPathways(pathways, filters);
     expect(out.map((s) => s.id)).toEqual(["A", "B"]);
-    out = filterPathways(pathways, {
+    filters = {
       modelYearNetzero: [ABSENT_FILTER_TOKEN],
-    } as FiltersWithArrays);
+    };
+    out = filterPathways(pathways, filters);
     expect(out.map((s) => s.id)).toEqual(["A"]);
-    out = filterPathways(pathways, {
+    filters = {
       modelYearNetzero: [9999],
-    } as FiltersWithArrays);
+    };
+    out = filterPathways(pathways, filters);
     expect(out.map((s) => s.id)).toEqual([]);
   });
 
   it("numeric (temperature): OR over numbers, with ABSENT", () => {
-    let out = filterPathways(pathways, {
+    let filters: FiltersWithArrays = {
       modelTempIncrease: [1.5, 2.0],
-    } as FiltersWithArrays);
+    };
+    let out = filterPathways(pathways, filters);
     expect(out.map((s) => s.id)).toEqual(["B", "C"]);
-    out = filterPathways(pathways, {
+    filters = {
       modelTempIncrease: [ABSENT_FILTER_TOKEN],
-    } as FiltersWithArrays);
+    };
+    out = filterPathways(pathways, filters);
     expect(out.map((s) => s.id)).toEqual(["A"]);
   });
 
@@ -310,15 +319,17 @@ describe("filterPathways (array-backed facets)", () => {
       },
     ];
     // ANY (default): Europe OR Asia → B, C, B2
-    let out = filterPathways(many, {
+    let filters: FiltersWithArrays = {
       geography: ["Europe", "Asia"],
-    } as FiltersWithArrays);
+    };
+    let out = filterPathways(many, filters);
     expect(out.map((s) => s.id)).toEqual(["B", "C", "B2"]);
     // ALL: must have both → only B2
-    out = filterPathways(many, {
+    filters = {
       geography: ["Europe", "Asia"],
       modes: { geography: "ALL" },
-    } as FiltersWithArrays);
+    };
+    out = filterPathways(many, filters);
     expect(out.map((s) => s.id)).toEqual(["B2"]);
   });
 

@@ -454,8 +454,8 @@ describe("tooltip functionality", () => {
       const s: PathwayMetadataType = {
         ...mockPathway,
         // Using a double cast to satisfy TS, but this still presents as numeric at runtime.
-        modelYearNetzero: 2030 as unknown as string, // number on purpose
-        publicationYear: 2024 as unknown as string, // number
+        modelYearNetzero: 2030, // number on purpose
+        publicationYear: 2024, // number
       };
 
       expect(() => renderWithRouter(s, "2030")).not.toThrow();
@@ -472,8 +472,8 @@ describe("tooltip functionality", () => {
       const s: PathwayMetadataType = {
         ...mockPathway,
         // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
-        description: null as unknown as string, // null
-        publisher: undefined as unknown as string, // undefined
+        description: null, // null
+        publisher: undefined, // undefined
       };
 
       expect(() => renderWithRouter(s, "rmi")).not.toThrow();
@@ -487,7 +487,7 @@ describe("tooltip functionality", () => {
       const s: PathwayMetadataType = {
         ...mockPathway,
         // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
-        modelYearNetzero: 2045 as unknown as string, // number on purpose
+        modelYearNetzero: 2045, // number on purpose
       };
       const { container } = renderWithRouter(s, "2045");
       const marks = container.querySelectorAll("mark");

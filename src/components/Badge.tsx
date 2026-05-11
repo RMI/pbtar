@@ -100,12 +100,12 @@ export function BadgeMaybeAbsent<T extends string | number>({
   if (absent) {
     base = noneLabel ?? "None";
   } else if (toLabel) {
-    base = toLabel(children as T);
+    base = toLabel(normalized);
   } else if (typeof children === "string" || typeof children === "number") {
     base = String(children);
   } else {
     // Should be unreachable at runtime due to typing, but keep a safe fallback
-    base = String(children as unknown as string | number);
+    base = String(children);
   }
 
   const content =

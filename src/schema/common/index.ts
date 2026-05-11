@@ -3,28 +3,28 @@ import type { SchemaObject } from "ajv";
 // Use explicit type per import to make sure the JSON is treated as an AJV schema
 import publicationSchemaJson from "./publication.v1.json" with { type: "json" };
 export const publicationSchema: SchemaObject =
-  publicationSchemaJson as SchemaObject;
+  publicationSchemaJson;
 
 import sectorSchemaJson from "./sector.v1.json" with { type: "json" };
-export const sectorSchema: SchemaObject = sectorSchemaJson as SchemaObject;
+export const sectorSchema: SchemaObject = sectorSchemaJson;
 
 import technologySchemaJson from "./technology.v1.json" with { type: "json" };
 export const technologySchema: SchemaObject =
-  technologySchemaJson as SchemaObject;
+  technologySchemaJson;
 
 import metricSchemaJson from "./metric.v1.json" with { type: "json" };
-export const metricSchema: SchemaObject = metricSchemaJson as SchemaObject;
+export const metricSchema: SchemaObject = metricSchemaJson;
 
 import labelSchemaJson from "./label.v1.json" with { type: "json" };
-export const labelSchema: SchemaObject = labelSchemaJson as SchemaObject;
+export const labelSchema: SchemaObject = labelSchemaJson;
 
 import geographyItemSchemaJson from "./geographyItem.v1.json" with { type: "json" };
 export const geographyItemSchema: SchemaObject =
-  geographyItemSchemaJson as SchemaObject;
+  geographyItemSchemaJson;
 
 import emissionsScopeSchemaJson from "./emissionsScope.v1.json" with { type: "json" };
 export const emissionsScopeSchema: SchemaObject =
-  emissionsScopeSchemaJson as SchemaObject;
+  emissionsScopeSchemaJson;
 
 // Aggregate — type stays correct
 export const commonSchemas: SchemaObject[] = [

@@ -8,7 +8,6 @@ import { matchesOptionalFacetAny, matchesOptionalFacetAll } from "./facets";
 import { ABSENT_FILTER_TOKEN } from "./absent";
 import { buildOptionsFromValues, hasAbsent, withAbsentOption } from "./facets";
 import { sortPathwayType } from "./sortUtils";
-import type { LabeledOption } from "./facets";
 import { index } from "../data/index.gen";
 
 // ───────────────────────────────────────────────────────────────────────────────
@@ -42,7 +41,7 @@ export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
   const geographyOptionsRaw: GeoOption[] = makeGeographyOptions(pathways);
   const sawAbsentGeography = hasAbsent(pathways.map((d) => d.geography));
   const geographyOptions = withAbsentOption(
-    geographyOptionsRaw as LabeledOption[],
+    geographyOptionsRaw,
     sawAbsentGeography,
   );
 
@@ -262,7 +261,7 @@ export const filterPathways = (
         const hasAbsent = selected.includes(ABSENT_FILTER_TOKEN);
         const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
         const v = pathway.pathwayType ?? null;
-        const mode = pickMode("pathwayType", filters.modes as FilterModes);
+        const mode = pickMode("pathwayType", filters.modes);
         let ok = true;
 
         if (mode === "ANY") {
@@ -293,7 +292,7 @@ export const filterPathways = (
         !Array.isArray(filters.modelYearNetzero)
           ? filters.modelYearNetzero
           : null
-      ) as { min?: number; max?: number; includeAbsent?: boolean } | null;
+      ) as NumericRange | null;
 
       if (r) {
         const v = pathway?.modelYearNetzero;
@@ -311,7 +310,7 @@ export const filterPathways = (
         !Array.isArray(filters.modelTempIncrease)
           ? filters.modelTempIncrease
           : null
-      ) as { min?: number; max?: number; includeAbsent?: boolean } | null;
+      ) as NumericRange | null;
 
       if (r) {
         const v = pathway?.modelTempIncrease;
@@ -382,7 +381,7 @@ export const filterPathways = (
         const v = pathway.keyFeatures?.emissionsTrajectory ?? null;
         const mode = pickMode(
           "emissionsTrajectory",
-          filters.modes as FilterModes,
+          filters.modes,
         );
         let ok = true;
 
@@ -415,7 +414,7 @@ export const filterPathways = (
         const hasAbsent = selected.includes(ABSENT_FILTER_TOKEN);
         const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
         const v = pathway.keyFeatures?.policyAmbition ?? null;
-        const mode = pickMode("policyAmbition", filters.modes as FilterModes);
+        const mode = pickMode("policyAmbition", filters.modes);
         let ok = true;
 
         if (mode === "ANY") {
@@ -449,7 +448,7 @@ export const filterPathways = (
         const hasAbsent = selected.includes(ABSENT_FILTER_TOKEN);
         const concrete = selected.filter((t) => t !== ABSENT_FILTER_TOKEN);
         const v = availabilityFor(pathway) ?? null;
-        const mode = pickMode("dataAvailability", filters.modes as FilterModes);
+        const mode = pickMode("dataAvailability", filters.modes);
         let ok = true;
 
         if (mode === "ANY") {
