@@ -9,7 +9,7 @@ type UpdatePost = {
   body: React.ReactNode;
 };
 
-const categories: Array<{
+/* const categories: Array<{
   tag: UpdateTag;
   description: string;
 }> = [
@@ -32,7 +32,7 @@ const categories: Array<{
     description:
       "Updates, case studies, and stories highlighting how the TPR can be leveraged in real life analyses.",
   },
-];
+]; */
 
 const tagClassNames: Record<UpdateTag, string> = {
   Coverage: "border border-sky-200 bg-sky-50 text-sky-800",
