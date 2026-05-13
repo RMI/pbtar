@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const quickStartCards = [
   {
-    title: "If your question is about target ambition",
+    title: "If your use case is about target ambition",
     priorities: [
       "Temperature outcome",
       "Pathway type",
@@ -11,7 +11,7 @@ const quickStartCards = [
     ],
   },
   {
-    title: "If your question is about policy exposure",
+    title: "If your use case is about policy exposure",
     priorities: [
       "Policy-driven assumptions",
       "Geographic scope",
@@ -19,7 +19,7 @@ const quickStartCards = [
     ],
   },
   {
-    title: "If your question is about technology readiness",
+    title: "If your use case is about technology readiness",
     priorities: [
       "Technology granularity",
       "Deployment and cost assumptions",
@@ -27,7 +27,7 @@ const quickStartCards = [
     ],
   },
   {
-    title: "If your question is about identifying dependencies",
+    title: "If your use case is about identifying dependencies",
     priorities: [
       "Geographic scope",
       "Technology detail",
@@ -43,11 +43,10 @@ const QuickStartCard: React.FC<{
 }> = ({ title, priorities }) => {
   return (
     <article className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
-      <div className="border-b border-neutral-200 bg-gradient-to-r from-rmiblue-50 via-white to-white p-6 md:p-7">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rmiblue-700">
-          Application
-        </p>
-        <h3 className="mt-3 text-xl font-semibold text-rmigray-800">{title}</h3>
+      <div className="border-b border-neutral-200 bg-gradient-to-r from-rmiblue-50 via-white to-white p-5 md:p-6">
+        <h3 className="text-xl font-semibold leading-8 text-rmigray-800">
+          {title}
+        </h3>
       </div>
 
       <div className="p-6 md:p-7">

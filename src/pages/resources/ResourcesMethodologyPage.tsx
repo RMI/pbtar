@@ -109,6 +109,13 @@ const ResourcesMethodologyPage: React.FC = () => {
                 explains the rationale behind these classifications and how they
                 can be interpreted.
               </p>
+              <p>
+                These classifications are designed to support pathway selection
+                and interpretation for use cases such as transition assessments,
+                risk analysis, and opportunity identification. They do not
+                determine a single best pathway for a task; users must still
+                understand the underlying pathway and how it meets their needs.
+              </p>
             </div>
           </div>
         </section>
