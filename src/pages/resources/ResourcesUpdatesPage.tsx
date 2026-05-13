@@ -79,22 +79,22 @@ const posts: UpdatePost[] = [
           During the launch webinar, we explored the evolving landscape of
           corporate transition analyses and discussed how transition plan
           assessments can inform decision-making within financial institutions,
-          strengthening metrics used across sustainability, risk, strategy,
-          and front office functions.
+          strengthening metrics used across sustainability, risk, strategy, and
+          front office functions.
         </p>
         <p>
-          To deliver real value, transition plan credibility assessments must
-          go beyond high-level narratives. They need to be granular, forward-looking,
-          and generate metrics that are decision-useful for existing risk and
-          front office workflows. These metrics often require transition
-          pathways to put them into context but finding the right transition
-          pathway to provide that context can be time-consuming and resource
-          intensive.{" "}
+          To deliver real value, transition plan credibility assessments must go
+          beyond high-level narratives. They need to be granular,
+          forward-looking, and generate metrics that are decision-useful for
+          existing risk and front office workflows. These metrics often require
+          transition pathways to put them into context but finding the right
+          transition pathway to provide that context can be time-consuming and
+          resource intensive.{" "}
           <b>
             The TPR helps financial institutions navigate the vast field of
             transition pathways, making it easier and faster to identify
-            relevant benchmarks for assessing how effectively companies
-            are navigating the transition.
+            relevant benchmarks for assessing how effectively companies are
+            navigating the transition.
           </b>
         </p>
         <p>
@@ -110,8 +110,8 @@ const posts: UpdatePost[] = [
         <p>
           The pilot version of this tool focuses on the power sector in
           Southeast Asia, offering a first look at the platform’s capabilities.
-          But stay tuned for updates on new features and expanded regional
-          and sectoral coverage in 2026.
+          But stay tuned for updates on new features and expanded regional and
+          sectoral coverage in 2026.
         </p>
       </>
     ),
