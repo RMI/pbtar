@@ -64,40 +64,37 @@ const posts: UpdatePost[] = [
   {
     title:
       "Introducing the Transition Pathways Repository: Making Transition Analysis Actionable",
-    date: "March 30, 2026",
+    date: "December 11, 2025",
     tags: ["Functionality", "Coverage"],
     body: (
       <>
         <p>
           On December 11, 2025, RMI’s Climate Finance team launched the pilot
-          version of the Transition Pathways Repository (TPR) – An online tool
+          version of the Transition Pathways Repository (TPR), an online tool
           designed to bring clarity and efficiency to corporate transition
-          analysis by making accessible in a single place more than 50
-          transition pathways.
+          analysis by making more than 50 transition pathways accessible in a
+          single place.
         </p>
         <p>
-          During our launch webinar, we explored the evolving landscape of
+          During the launch webinar, we explored the evolving landscape of
           corporate transition analyses and discussed how transition plan
-          assessments can inform other internal teams within financial
-          institutions, strengthening metrics used across risk, strategy, and
-          front office functions.
+          assessments can inform decision-making within financial institutions,
+          strengthening metrics used across sustainability, risk, strategy,
+          and front office functions.
         </p>
         <p>
-          To deliver real value, transition analyses, including transition plan
-          credibility assessments, must go beyond high-level narratives. They
-          need to be granular, forward-looking, and generate metrics that are
-          decision-useful for existing risk and front office workflows.
-        </p>
-        <p>
-          But even the most sophisticated metrics are only meaningful when
-          properly contextualized. This means that financial institutions need
-          to understand which transition pathways and scenarios exist, what use
-          cases they support, and what the underlying assumptions mean. This can
-          be time-consuming and resource- intensive.
+          To deliver real value, transition plan credibility assessments must
+          go beyond high-level narratives. They need to be granular, forward-looking,
+          and generate metrics that are decision-useful for existing risk and
+          front office workflows. These metrics often require transition
+          pathways to put them into context but finding the right transition
+          pathway to provide that context can be time-consuming and resource
+          intensive.{" "}
           <b>
             The TPR helps financial institutions navigate the vast field of
             transition pathways, making it easier and faster to identify
-            relevant benchmarks for assessing transitioning companies.
+            relevant benchmarks for assessing how effectively companies
+            are navigating the transition.
           </b>
         </p>
         <p>
@@ -111,10 +108,10 @@ const posts: UpdatePost[] = [
           .
         </p>
         <p>
-          The pilot version focuses on the power sector in Southeast Asia,
-          offering a first look at the platform’s capabilities. But stay tuned
-          for updates on new features and expanded regional and sectoral
-          coverage very soon.
+          The pilot version of this tool focuses on the power sector in
+          Southeast Asia, offering a first look at the platform’s capabilities.
+          But stay tuned for updates on new features and expanded regional
+          and sectoral coverage in 2026.
         </p>
       </>
     ),
@@ -142,14 +139,14 @@ const ResourcesUpdatesPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mt-12">
-          <div className="max-w-3xl">
+        <section className="mx-auto mt-12 max-w-5xl">
+          {/* <div className="max-w-5xl">
             <h2 className="text-2xl font-semibold text-rmigray-800">
               Categories
             </h2>
           </div>
 
-          <div className="mt-8 grid gap-3 md:grid-cols-2">
+          <div className="mt-8 grid max-w-5xl gap-3 md:grid-cols-2">
             {categories.map((category) => (
               <div
                 key={category.tag}
@@ -168,16 +165,16 @@ const ResourcesUpdatesPage: React.FC = () => {
                 </p>
               </div>
             ))}
-          </div>
+          </div> */}
 
-          <div className="max-w-3xl">
+          <div className="max-w-5xl">
             <h2 className="text-2xl font-semibold text-rmigray-800 mt-8">
               Latest updates
             </h2>
           </div>
 
           {posts.length > 0 ? (
-            <div className="mt-8 space-y-6">
+            <div className="mt-8 max-w-5xl space-y-6">
               {posts.map((post) => (
                 <article
                   key={`${post.date}-${post.title}`}
@@ -215,7 +212,7 @@ const ResourcesUpdatesPage: React.FC = () => {
               ))}
             </div>
           ) : (
-            <div className="mt-8 rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm">
+            <div className="mt-8 max-w-5xl rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm">
               <p className="text-rmigray-700 leading-7">
                 No posts have been added yet. When you are ready, add a new
                 entry to the `posts` array at the top of this file.

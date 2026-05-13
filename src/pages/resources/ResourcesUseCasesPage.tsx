@@ -165,8 +165,8 @@ const ResourcesUseCasesPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mt-12 max-w-6xl">
-          <div className="max-w-3xl">
+        <section className="mx-auto mt-12 max-w-5xl">
+          <div className="max-w-5xl">
             <h2 className="text-2xl font-semibold text-rmigray-800">
               Supporting the teams financing the transition
             </h2>
@@ -217,8 +217,8 @@ const ResourcesUseCasesPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mt-14 max-w-6xl">
-          <div className="max-w-3xl">
+        <section className="mx-auto mt-14 max-w-5xl">
+          <div className="max-w-5xl">
             <h2 className="text-2xl font-semibold text-rmigray-800">
               How the TPR supports decision makers
             </h2>
@@ -236,9 +236,9 @@ const ResourcesUseCasesPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mt-14 max-w-6xl">
+        <section className="mx-auto mt-14 max-w-5xl">
           <div className="grid gap-8 xl:grid-cols-[1.2fr,0.8fr]">
-            <div className="rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm">
+            <div>
               <h2 className="text-2xl font-semibold text-rmigray-800">
                 How the Transition Pathways Repository supports transition
                 intelligence
@@ -274,8 +274,8 @@ const ResourcesUseCasesPage: React.FC = () => {
               </div>
             </div>
 
-            <aside className="rounded-2xl border border-energy-200 bg-neutral-100 p-7 shadow-sm">
-              <h2 className="text-xl font-semibold text-rmigray-800">
+            <aside>
+              <h2 className="text-2xl font-semibold text-rmigray-800">
                 Why pathway selection matters
               </h2>
               <div className="mt-5 space-y-4 text-rmigray-700 leading-7">
@@ -303,7 +303,7 @@ const ResourcesUseCasesPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mt-14 rounded-[2rem] border border-neutral-200 bg-neutral-100/80 px-6 py-8 shadow-sm md:px-8 md:py-10">
+        <section className="mx-auto mt-14 max-w-5xl rounded-[2rem] border border-neutral-200 bg-neutral-100/80 px-6 py-8 shadow-sm md:px-8 md:py-10">
           <div className="max-w-5xl rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm">
             <h2 className="text-2xl font-semibold text-rmigray-800">
               Looking for more information?

@@ -106,16 +106,16 @@ const ResourcesMethodologyPage: React.FC = () => {
               <p>
                 The TPR uses a structured classification approach to help
                 analysts compare pathways in a consistent manner. This page
-                explais the rationale behind these classifications and how they
+                explains the rationale behind these classifications and how they
                 can be interpreted.
               </p>
             </div>
           </div>
         </section>
 
-        <section className="mt-12 max-w-5xl rounded-2xl border border-energy-200 bg-neutral-100 p-7 shadow-sm">
+        <section className="mx-auto mt-12 max-w-5xl rounded-2xl border border-energy-200 bg-neutral-100 p-7 shadow-sm">
           <h2 className="text-2xl font-semibold text-rmigray-800">
-            Core definitions
+            Key definitions
           </h2>
           <p className="mt-4 text-rmigray-700 leading-7">
             Throughout the TPR, you will see the use of closely related
@@ -158,29 +158,26 @@ const ResourcesMethodologyPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mt-14 rounded-[2rem] border border-rmiblue-100 bg-rmiblue-50/60 px-6 py-8 shadow-sm md:px-8 md:py-10">
+        <section className="mx-auto mt-14 max-w-5xl rounded-[2rem] border border-rmiblue-100 bg-rmiblue-50/60 px-6 py-8 shadow-sm md:px-8 md:py-10">
           <div className="max-w-5xl">
             <h2 className="text-2xl font-semibold text-rmigray-800">
               Expert overview
             </h2>
-            <div className="mt-6 rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm">
-              <div className="flex items-start gap-4">
-                <span className="mt-1 h-16 w-1.5 flex-none rounded-full bg-energy-700" />
-                <p className="text-rmigray-700 leading-7">
-                  Each pathway in the TPR has an Expert Overview that provides a
-                  brief summary explaining who developed the pathway, its main
-                  narrative, and its core drivers. It highlights the main
-                  assumptions, key trends, and external dependencies behind the
-                  transition. It helps users understand what types of
-                  assessments the pathway is best suited for and where it might
-                  be less suitable.
-                </p>
-              </div>
+            <div className="mt-6">
+              <p className="text-rmigray-700 leading-7">
+                Each pathway in the TPR has an Expert Overview that provides a
+                brief summary explaining who developed the pathway, its main
+                narrative, and its core drivers. It highlights the main
+                assumptions, key trends, and external dependencies behind the
+                transition. It helps users understand what types of assessments
+                the pathway is best suited for and where it might be less
+                suitable.
+              </p>
             </div>
           </div>
         </section>
 
-        <section className="mt-14 rounded-[2rem] bg-white px-6 py-8 shadow-sm md:px-8 md:py-10">
+        <section className="mx-auto mt-14 max-w-5xl rounded-[2rem] border border-rmiblue-100 bg-rmiblue-50/60 px-6 py-8 shadow-sm md:px-8 md:py-10">
           <div className="max-w-5xl">
             <h2 className="text-2xl font-semibold text-rmigray-800">
               Classification group 1: Pathway meta data
@@ -324,7 +321,7 @@ const ResourcesMethodologyPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mt-14 rounded-[2rem] border border-rmiblue-100 bg-rmiblue-50/60 px-6 py-8 shadow-sm md:px-8 md:py-10">
+        <section className="mx-auto mt-14 max-w-5xl rounded-[2rem] border border-rmiblue-100 bg-rmiblue-50/60 px-6 py-8 shadow-sm md:px-8 md:py-10">
           <div className="max-w-5xl">
             <h2 className="text-2xl font-semibold text-rmigray-800">
               Classification group 2: Scope, Granularity, Availability
@@ -718,7 +715,7 @@ const ResourcesMethodologyPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mt-14 rounded-[2rem] border border-energy-100 bg-neutral-100/80 px-6 py-8 shadow-sm md:px-8 md:py-10">
+        <section className="mx-auto mt-14 max-w-5xl rounded-[2rem] border border-rmiblue-100 bg-rmiblue-50/60 px-6 py-8 shadow-sm md:px-8 md:py-10">
           <div className="max-w-5xl">
             <h2 className="text-2xl font-semibold text-rmigray-800">
               Classification group 3: Trends, Assumptions, Narrative
@@ -970,7 +967,7 @@ const ResourcesMethodologyPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mt-14 rounded-[2rem] border border-neutral-200 bg-neutral-100/80 px-6 py-8 shadow-sm md:px-8 md:py-10">
+        <section className="mx-auto mt-14 max-w-5xl rounded-[2rem] border border-neutral-200 bg-neutral-100/80 px-6 py-8 shadow-sm md:px-8 md:py-10">
           <div className="max-w-5xl rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm">
             <h2 className="text-2xl font-semibold text-rmigray-800">
               Looking for practical guidance?

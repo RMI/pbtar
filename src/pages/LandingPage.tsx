@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { HeaderBrand } from "../components/Header";
 
@@ -135,6 +135,22 @@ const InfoCard: React.FC<{
 );
 
 const LandingPage: React.FC = () => {
+  const [resourcesOpen, setResourcesOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!resourcesOpen) return;
+    const onDocClick = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (menuRef.current && !menuRef.current.contains(target)) {
+        setResourcesOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, [resourcesOpen]);
+
   return (
     <div className="bg-gray-50">
       {/* Hero */}
@@ -147,31 +163,77 @@ const LandingPage: React.FC = () => {
           <div className="container mx-auto px-4 pt-6">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <HeaderBrand to="/" />
-              <nav className="flex flex-wrap items-center gap-2 text-sm">
-                <Link
-                  to="/pathway"
-                  className="inline-flex items-center rounded-md px-3 py-2 font-semibold text-white/90 hover:text-white hover:bg-white/10 transition-colors"
-                >
-                  Pathways
-                </Link>
-                <Link
-                  to="/resources/methodology"
-                  className="inline-flex items-center rounded-md px-3 py-2 font-semibold text-white/90 hover:text-white hover:bg-white/10 transition-colors"
-                >
-                  Methodology
-                </Link>
-                <Link
-                  to="/resources/use-cases"
-                  className="inline-flex items-center rounded-md px-3 py-2 font-semibold text-white/90 hover:text-white hover:bg-white/10 transition-colors"
-                >
-                  Resources
-                </Link>
+              <nav className="mt-3 md:mt-0 flex items-center gap-2">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center rounded-md px-3 py-2 font-semibold text-white/90 hover:text-white hover:bg-white/10 transition-colors"
+                  className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-white/90 hover:text-white hover:bg-white/10 transition-colors"
                 >
-                  Contact
+                  Contact Us
                 </Link>
+
+                <div
+                  ref={menuRef}
+                  className="relative"
+                >
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-white/90 hover:text-white hover:bg-white/10 transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded={resourcesOpen}
+                    onClick={() => setResourcesOpen((v) => !v)}
+                  >
+                    Resources
+                    <span className="text-white/70">▾</span>
+                  </button>
+
+                  {resourcesOpen && (
+                    <div
+                      role="menu"
+                      className="absolute right-0 z-[60] mt-2 w-72 overflow-hidden rounded-md bg-white text-rmigray-800 shadow-lg ring-1 ring-black/5"
+                    >
+                      <Link
+                        role="menuitem"
+                        to="/resources/how-to-use-this-tool"
+                        className="block px-4 py-3 text-sm hover:bg-neutral-100"
+                        onClick={() => setResourcesOpen(false)}
+                      >
+                        How to use this tool
+                      </Link>
+                      <Link
+                        role="menuitem"
+                        to="/resources/use-cases"
+                        className="block px-4 py-3 text-sm hover:bg-neutral-100"
+                        onClick={() => setResourcesOpen(false)}
+                      >
+                        Use cases
+                      </Link>
+                      <Link
+                        role="menuitem"
+                        to="/resources/methodology"
+                        className="block px-4 py-3 text-sm hover:bg-neutral-100"
+                        onClick={() => setResourcesOpen(false)}
+                      >
+                        Methodology
+                      </Link>
+                      <Link
+                        role="menuitem"
+                        to="/resources/updates"
+                        className="block px-4 py-3 text-sm hover:bg-neutral-100"
+                        onClick={() => setResourcesOpen(false)}
+                      >
+                        Updates
+                      </Link>
+                      <Link
+                        role="menuitem"
+                        to="/resources/faq"
+                        className="block px-4 py-3 text-sm hover:bg-neutral-100"
+                        onClick={() => setResourcesOpen(false)}
+                      >
+                        FAQs
+                      </Link>
+                    </div>
+                  )}
+                </div>
               </nav>
             </div>
           </div>
@@ -225,13 +287,13 @@ const LandingPage: React.FC = () => {
             <h2 className="text-xl font-semibold text-rmiblue-800 mb-3">
               What is the Transition Pathways Repository?
             </h2>
-            <p className="text-rmigray-700 max-w-4xl">
+            <p className="text-rmigray-700">
               The Transition Pathways Repository (TPR) is an online repository
               designed to help financial institutions identify, interpret, and
               compare the transition pathways available across sectors and
               regions.
             </p>
-            <p className="text-rmigray-700 max-w-4xl mt-4">
+            <p className="text-rmigray-700 mt-4">
               The goal is to support financial institutions to better
               incorporate the opportunities and risks created by the transition
               into their decision-making by integrating region-specific pathways
@@ -244,18 +306,18 @@ const LandingPage: React.FC = () => {
             <h2 className="text-xl font-semibold text-rmiblue-800 mb-3">
               Why are transition pathways important?
             </h2>
-            <p className="text-rmigray-700 max-w-4xl">
+            <p className="text-rmigray-700">
               Transition pathways provide the critical context needed to turn
               data into decision-useful insights for financial institutions. As
               corporations navigate uncertainty, transition pathways can reveal
               how different factors could impact their business.
             </p>
-            <p className="text-rmigray-700 max-w-4xl mt-4">
+            <p className="text-rmigray-700 mt-4">
               Different pathways answer different questions. A pathway that is
               useful for assessing target ambition may not be appropriate for
               understanding regional policy or market risk.
             </p>
-            <p className="text-rmigray-700 max-w-4xl mt-4">
+            <p className="text-rmigray-700 mt-4">
               The TPR helps users understand those differences to ensure that
               selected pathways are aligned with specific assessment objectives
               and decision-making needs.
@@ -266,7 +328,7 @@ const LandingPage: React.FC = () => {
             <h2 className="text-xl font-semibold text-rmiblue-800 mb-3">
               Who is the TPR designed for?
             </h2>
-            <p className="text-rmigray-700 max-w-4xl">
+            <p className="text-rmigray-700">
               The TPR is designed primarily for financial institutions (e.g.,
               sustainability, risk, and front-office teams) conducting corporate
               transition assessments. See the{" "}
@@ -278,7 +340,7 @@ const LandingPage: React.FC = () => {
               </Link>{" "}
               for more details.
             </p>
-            <p className="text-rmigray-700 max-w-4xl mt-4">
+            <p className="text-rmigray-700 mt-4">
               This tool could also be applied by corporations developing their
               own transition strategies, and by policymakers and regulators to
               inform policy design and regulatory frameworks.
@@ -331,7 +393,7 @@ const LandingPage: React.FC = () => {
                     to="/resources/use-cases"
                     className="text-energy-700 hover:text-energy-800 underline underline-offset-2"
                   >
-                    Use cases for transition pathways
+                    Use cases for pathways
                   </Link>
                 </li>
                 <li>

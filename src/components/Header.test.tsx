@@ -41,6 +41,9 @@ describe("Header component", () => {
 
     await user.click(screen.getByRole("button", { name: /resources/i }));
 
+    const menuItems = screen.getAllByRole("menuitem");
+    expect(menuItems[0]).toHaveTextContent("How to use this tool");
+
     expect(
       screen.getByRole("menuitem", { name: "Methodology" }),
     ).toBeInTheDocument();

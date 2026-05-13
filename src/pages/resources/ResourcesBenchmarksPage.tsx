@@ -2,11 +2,11 @@ import React from "react";
 
 const ResourcesBenchmarksPage: React.FC = () => {
   return (
-    <div className="container mx-auto px-4 py-10">
+    <div className="container mx-auto max-w-5xl px-4 py-10">
       <h1 className="text-3xl font-bold text-rmigray-800 mb-4">
         Using pathways as benchmarks
       </h1>
-      <p className="text-rmigray-700 max-w-3xl">
+      <p className="text-rmigray-700">
         This page provides guidance on how to use transition pathways as
         benchmarks for corporate transition assessments.
       </p>

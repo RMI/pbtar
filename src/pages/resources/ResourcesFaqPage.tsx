@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useId, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
 type FaqItem = {
@@ -11,52 +11,47 @@ type FaqSection = {
   items: FaqItem[];
 };
 
-const SectionCard: React.FC<{
-  title: string;
-  isOpen: boolean;
-  onToggle: () => void;
-  children: React.ReactNode;
-}> = ({ title, isOpen, onToggle, children }) => {
-  return (
-    <article className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
-      <button
-        type="button"
-        className="w-full text-left"
-        aria-expanded={isOpen}
-        onClick={onToggle}
-      >
-        <div className="flex items-center justify-between gap-4 border-b border-neutral-200 bg-gradient-to-r from-rmiblue-50 via-white to-white p-6 md:p-7">
-          <h2 className="text-xl font-semibold text-rmigray-800">{title}</h2>
-          <span
-            className={
-              "text-rmigray-500 transition-transform " +
-              (isOpen ? "rotate-180" : "rotate-0")
-            }
-            aria-hidden="true"
-          >
-            ▾
-          </span>
-        </div>
-      </button>
+const FaqItemBlock: React.FC<FaqItem> = ({ question, answer }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const contentId = useId();
 
-      {isOpen && (
-        <div className="p-6 md:p-7">
-          <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-5 md:p-6">
-            {children}
+  return (
+    <div className="px-6 py-5 md:px-7">
+      <h3>
+        <button
+          type="button"
+          className="group w-full text-left"
+          aria-expanded={isOpen}
+          aria-controls={contentId}
+          onClick={() => setIsOpen((value) => !value)}
+        >
+          <div className="flex items-start justify-between gap-4">
+            <span className="text-lg font-semibold text-rmigray-800 transition-colors group-hover:text-rmiblue-800">
+              {question}
+            </span>
+            <span
+              className={
+                "mt-1 text-rmigray-500 transition-transform " +
+                (isOpen ? "rotate-180" : "rotate-0")
+              }
+              aria-hidden="true"
+            >
+              ▾
+            </span>
+          </div>
+        </button>
+      </h3>
+
+      {isOpen ? (
+        <div
+          id={contentId}
+          className="mt-5 border-t border-neutral-200 pt-5 text-rmigray-700"
+        >
+          <div className="space-y-3 leading-7 [&>ul]:list-disc [&>ul]:space-y-1 [&>ul]:pl-5">
+            {answer}
           </div>
         </div>
-      )}
-    </article>
-  );
-};
-
-const FaqItemBlock: React.FC<FaqItem> = ({ question, answer }) => {
-  return (
-    <div className="rounded-xl border border-neutral-200 bg-white p-5">
-      <h3 className="text-lg font-semibold text-rmigray-800">{question}</h3>
-      <div className="mt-3 space-y-3 text-rmigray-700 leading-7 [&>ul]:list-disc [&>ul]:space-y-1 [&>ul]:pl-5">
-        {answer}
-      </div>
+      ) : null}
     </div>
   );
 };
@@ -306,12 +301,6 @@ const ResourcesFaqPage: React.FC = () => {
     [],
   );
 
-  const [openSections, setOpenSections] = useState<Record<string, boolean>>(
-    () => ({
-      [sections[0]?.title ?? "About the TPR"]: true,
-    }),
-  );
-
   return (
     <div className="bg-gray-50">
       <div className="container mx-auto px-4 py-8 md:py-10">
@@ -347,34 +336,33 @@ const ResourcesFaqPage: React.FC = () => {
           </div>
         </section>
 
-        <div className="mt-8 space-y-6">
-          {sections.map((section) => {
-            const isOpen = Boolean(openSections[section.title]);
-            return (
-              <SectionCard
-                key={section.title}
-                title={section.title}
-                isOpen={isOpen}
-                onToggle={() =>
-                  setOpenSections((current) => ({
-                    ...current,
-                    [section.title]: !current[section.title],
-                  }))
-                }
-              >
-                <div className="space-y-4">
-                  {section.items.map((item) => (
-                    <FaqItemBlock
-                      key={item.question}
-                      question={item.question}
-                      answer={item.answer}
-                    />
-                  ))}
-                </div>
-              </SectionCard>
-            );
-          })}
-        </div>
+        {sections.map((section, index) => (
+          <section
+            key={section.title}
+            className={
+              "mx-auto max-w-5xl rounded-[2rem] border border-rmiblue-100 bg-rmiblue-50/60 px-6 py-8 shadow-sm md:px-8 md:py-10 " +
+              (index === 0 ? "mt-12" : "mt-14")
+            }
+          >
+            <div className="max-w-5xl">
+              <h2 className="text-2xl font-semibold text-rmigray-800">
+                {section.title}
+              </h2>
+            </div>
+
+            <div className="mt-8 max-w-5xl overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
+              <div className="divide-y divide-neutral-200/80">
+                {section.items.map((item) => (
+                  <FaqItemBlock
+                    key={item.question}
+                    question={item.question}
+                    answer={item.answer}
+                  />
+                ))}
+              </div>
+            </div>
+          </section>
+        ))}
       </div>
     </div>
   );

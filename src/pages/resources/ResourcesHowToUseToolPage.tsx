@@ -45,7 +45,7 @@ const QuickStartCard: React.FC<{
     <article className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
       <div className="border-b border-neutral-200 bg-gradient-to-r from-rmiblue-50 via-white to-white p-6 md:p-7">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rmiblue-700">
-          Question type
+          Application
         </p>
         <h3 className="mt-3 text-xl font-semibold text-rmigray-800">{title}</h3>
       </div>
@@ -160,8 +160,8 @@ const ResourcesHowToUseToolPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mt-12 rounded-[2rem] bg-white px-6 py-8 shadow-sm md:px-8 md:py-10">
-          <div className="max-w-3xl">
+        <section className="mx-auto mt-12 max-w-5xl rounded-[2rem] bg-white px-6 py-8 shadow-sm md:px-8 md:py-10">
+          <div className="max-w-5xl">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rmiblue-700">
               5-step process
             </p>
@@ -183,7 +183,7 @@ const ResourcesHowToUseToolPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="mt-8 grid gap-8 xl:grid-cols-[1.15fr,0.85fr]">
+          <div className="mt-8 grid max-w-5xl gap-8 xl:grid-cols-[1.15fr,0.85fr]">
             <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
               <div className="border-b border-neutral-200 bg-gradient-to-r from-rmiblue-50 via-white to-white p-6 md:p-7">
                 <h3 className="text-xl font-semibold text-rmigray-800">
@@ -336,14 +336,14 @@ const ResourcesHowToUseToolPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mt-14 rounded-[2rem] border border-rmiblue-100 bg-rmiblue-50/60 px-6 py-8 shadow-sm md:px-8 md:py-10">
-          <div className="max-w-3xl">
+        <section className="mx-auto mt-14 max-w-5xl rounded-[2rem] border border-rmiblue-100 bg-rmiblue-50/60 px-6 py-8 shadow-sm md:px-8 md:py-10">
+          <div className="max-w-5xl">
             <h2 className="text-2xl font-semibold text-rmigray-800">
               A simple way to start finding the right pathways
             </h2>
           </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-2">
+          <div className="mt-8 grid max-w-5xl grid-cols-1 gap-6 xl:grid-cols-2">
             {quickStartCards.map((card) => (
               <QuickStartCard
                 key={card.title}
@@ -354,52 +354,43 @@ const ResourcesHowToUseToolPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mt-14 rounded-[2rem] border border-neutral-200 bg-neutral-100/80 px-6 py-8 shadow-sm md:px-8 md:py-10">
+        <section className="mx-auto mt-14 max-w-5xl rounded-[2rem] border border-neutral-200 bg-neutral-100/80 px-6 py-8 shadow-sm md:px-8 md:py-10">
           <div className="max-w-5xl rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm">
             <h2 className="text-2xl font-semibold text-rmigray-800">
               What to do next
             </h2>
-            <ul className="mt-5 space-y-3 text-rmigray-700">
-              <li className="flex gap-3 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-4">
-                <span className="mt-2 h-2.5 w-2.5 flex-none rounded-full bg-energy-700" />
-                <span className="leading-7">
-                  <Link
-                    to="/pathway"
-                    className="text-energy-700 underline underline-offset-2 hover:text-energy-800"
-                  >
-                    <b>Explore the available pathways</b>
-                  </Link>
-                </span>
+            <ul className="mt-5 list-disc space-y-3 pl-6 text-rmigray-700 marker:text-lg">
+              <li className="font-semibold leading-7">
+                <Link
+                  to="/pathway"
+                  className="text-energy-700 underline underline-offset-2 hover:text-energy-800"
+                >
+                  Explore the available pathways
+                </Link>
               </li>
-              <li className="flex gap-3 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-4">
-                <span className="mt-2 h-2.5 w-2.5 flex-none rounded-full bg-energy-700" />
-                <span className="leading-7">
-                  Read the{" "}
-                  <Link
-                    to="/resources/methodology"
-                    className="text-energy-700 underline underline-offset-2 hover:text-energy-800"
-                  >
-                    <b>Methodology page</b>
-                  </Link>{" "}
-                  for detailed definitions of pathway features and their
-                  interpretation
-                </span>
+              <li className="font-semibold leading-7">
+                Read the{" "}
+                <Link
+                  to="/resources/methodology"
+                  className="text-energy-700 underline underline-offset-2 hover:text-energy-800"
+                >
+                  Methodology page
+                </Link>{" "}
+                for detailed definitions of pathway features and their
+                interpretation
               </li>
-              <li className="flex gap-3 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-4">
-                <span className="mt-2 h-2.5 w-2.5 flex-none rounded-full bg-energy-700" />
-                <span className="leading-7">
-                  Read our{" "}
-                  <a
-                    href="https://rmi.org/insight/leveraging-transition-pathways/"
-                    className="text-energy-700 underline underline-offset-2 hover:text-energy-800"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <b>Leveraging Transition Pathways report</b>
-                  </a>{" "}
-                  for more guidance on how financial institutions can use
-                  transition pathways in their assessments
-                </span>
+              <li className="font-semibold leading-7">
+                Read our{" "}
+                <a
+                  href="https://rmi.org/insight/leveraging-transition-pathways/"
+                  className="text-energy-700 underline underline-offset-2 hover:text-energy-800"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Leveraging Transition Pathways report
+                </a>{" "}
+                for more guidance on how financial institutions can use
+                transition pathways in their assessments
               </li>
             </ul>
           </div>

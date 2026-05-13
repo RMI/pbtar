@@ -14,11 +14,7 @@ const ContactPage: React.FC = () => {
               Contact
             </h1>
 
-            <h2 className="mt-6 max-w-3xl text-xl font-semibold leading-8 text-white/95 md:text-2xl">
-              Get in Touch
-            </h2>
-
-            <div className="mt-8 max-w-3xl space-y-4 text-sm leading-7 text-white/85 md:text-base">
+            <div className="mt-6 max-w-3xl space-y-4 text-sm leading-7 text-white/85 md:text-base">
               <p>
                 We are building the Transition Pathways Repository to support
                 informed transition-related decisions by making pathway data
@@ -35,7 +31,7 @@ const ContactPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mt-12 max-w-5xl rounded-2xl border border-energy-200 bg-neutral-100 p-7 shadow-sm">
+        <section className="mx-auto mt-12 max-w-5xl rounded-2xl border border-energy-200 bg-neutral-100 p-7 shadow-sm">
           <h2 className="text-2xl font-semibold text-rmigray-800">
             How to reach us
           </h2>
@@ -68,7 +64,7 @@ const ContactPage: React.FC = () => {
           </p>
         </section>
 
-        <section className="mt-14 max-w-5xl rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm">
+        <section className="mx-auto mt-14 max-w-5xl rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm">
           <h2 className="text-2xl font-semibold text-rmigray-800">
             Feedback and suggestions
           </h2>
@@ -80,32 +76,19 @@ const ContactPage: React.FC = () => {
             We are especially interested in hearing about:
           </p>
 
-          <ul className="mt-5 space-y-3 text-rmigray-700">
-            <li className="flex gap-3 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-4">
-              <span className="mt-2 h-2.5 w-2.5 flex-none rounded-full bg-energy-700" />
-              <span className="leading-7">Missing pathways or benchmarks</span>
+          <ul className="mt-5 list-disc space-y-3 pl-6 text-rmigray-700 marker:text-lg">
+            <li className="font-semibold leading-7">
+              Missing pathways or benchmarks
             </li>
-            <li className="flex gap-3 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-4">
-              <span className="mt-2 h-2.5 w-2.5 flex-none rounded-full bg-energy-700" />
-              <span className="leading-7">
-                Unclear classifications or assumptions
-              </span>
+            <li className="font-semibold leading-7">
+              Unclear classifications or assumptions
             </li>
-            <li className="flex gap-3 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-4">
-              <span className="mt-2 h-2.5 w-2.5 flex-none rounded-full bg-energy-700" />
-              <span className="leading-7">
-                Gaps in sector or regional coverage
-              </span>
+            <li className="font-semibold leading-7">
+              Gaps in sector or regional coverage
             </li>
-            <li className="flex gap-3 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-4">
-              <span className="mt-2 h-2.5 w-2.5 flex-none rounded-full bg-energy-700" />
-              <span className="leading-7">Workflow pain points</span>
-            </li>
-            <li className="flex gap-3 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-4">
-              <span className="mt-2 h-2.5 w-2.5 flex-none rounded-full bg-energy-700" />
-              <span className="leading-7">
-                Requests for training, guidance, or additional support
-              </span>
+            <li className="font-semibold leading-7">Workflow pain points</li>
+            <li className="font-semibold leading-7">
+              Requests for training, guidance, or additional support
             </li>
           </ul>
         </section>
