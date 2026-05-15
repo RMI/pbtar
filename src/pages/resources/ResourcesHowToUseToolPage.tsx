@@ -133,17 +133,17 @@ const ResourcesHowToUseToolPage: React.FC = () => {
           <div className="absolute -right-10 top-0 h-32 w-32 rounded-full bg-white/7 blur-2xl" />
           <div className="absolute bottom-0 left-0 h-40 w-40 rounded-full bg-energy-500/8 blur-2xl" />
 
-          <div className="relative max-w-4xl">
+          <div className="relative">
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
               How to Choose a Pathway
             </h1>
 
-            <h2 className="mt-6 max-w-3xl text-xl font-semibold leading-8 text-white/95 md:text-2xl">
+            <h2 className="mt-6 text-xl font-semibold leading-8 text-white/95 md:text-2xl">
               Five steps to identify the pathways that fit your assessment
               question
             </h2>
 
-            <div className="mt-8 max-w-3xl space-y-4 text-sm leading-7 text-white/85 md:text-base">
+            <div className="mt-8 space-y-4 text-sm leading-7 text-white/85 md:text-base">
               <p>
                 Different energy transition pathways answer different questions.
                 A pathway that is useful for assessing company target ambition

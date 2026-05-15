@@ -9,12 +9,12 @@ const ContactPage: React.FC = () => {
           <div className="absolute -right-10 top-0 h-32 w-32 rounded-full bg-white/7 blur-2xl" />
           <div className="absolute bottom-0 left-0 h-36 w-36 rounded-full bg-energy-500/8 blur-2xl" />
 
-          <div className="relative max-w-4xl">
+          <div className="relative">
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
               Contact
             </h1>
 
-            <div className="mt-6 max-w-3xl space-y-4 text-sm leading-7 text-white/85 md:text-base">
+            <div className="mt-6 space-y-4 text-sm leading-7 text-white/85 md:text-base">
               <p>
                 We are building the Transition Pathways Repository to support
                 informed transition-related decisions by making pathway data

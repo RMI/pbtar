@@ -63,6 +63,89 @@ const posts: UpdatePost[] = [
   // },
   {
     title:
+      "Four lessons learned from evaluating the transition pathway landscape in the Southeast Asia power sector",
+    date: "May 15, 2026",
+    tags: ["Insights"],
+    body: (
+      <>
+        <p>
+          RMI’s Transition Pathway Repository was developed to make transition
+          pathways easier to find and use, starting with the Southeast Asia
+          power sector. The development process revealed where decision-useful
+          pathways data already exists, but also where key gaps still limit how
+          these pathways can be effectively used in transition assessments.
+        </p>
+        <p>Four key lessons learned from this process were:</p>
+        <ol className="list-decimal space-y-4 pl-5">
+          <li>
+            <p>
+              <b>
+                The power pathway landscape in emerging markets is richer than
+                expected
+              </b>
+            </p>
+            <p>
+              RMI’s systematic review of the pathways available in Southeast
+              Asia revealed almost 60 pathways currently available on the
+              Repository from 17 different publications and 11 different
+              institutions.
+            </p>
+          </li>
+          <li>
+            <p>
+              <b>
+                Pathway developers output consistent and granular data points
+                for most power sector indicators
+              </b>
+            </p>
+            <p>
+              Transition assessment methodologies show a high degree of
+              convergence around a core set of power-sector indicators,
+              including absolute emissions, installed capacity mix, generation
+              mix, and emissions intensity.
+            </p>
+          </li>
+          <li>
+            <p>
+              <b>Access to underlying pathway data is still limited</b>
+            </p>
+            <p>
+              Underlying data for these pathways is often confined to high-level
+              reports and not readily available publicly.
+            </p>
+          </li>
+          <li>
+            <p>
+              <b>
+                By focusing on generation, transition pathways can miss other
+                dependencies
+              </b>
+            </p>
+            <p>
+              Assumptions or modeling related to grid infrastructure, demand
+              flexibility, interconnection, and investment needs are frequently
+              simplified, lack granularity, or are absent.
+            </p>
+          </li>
+        </ol>
+
+        <p>
+          <b>
+            Read the{" "}
+            <a
+              href="https://rmi.org/improving-energy-transition-assessments-with-regional-pathways/"
+              className="text-energy-700 underline underline-offset-2 hover:text-energy-800"
+            >
+              full article
+            </a>{" "}
+            for a complete explanation of these lessons.
+          </b>
+        </p>
+      </>
+    ),
+  },
+  {
+    title:
       "Introducing the Transition Pathways Repository: Making Transition Analysis Actionable",
     date: "December 11, 2025",
     tags: ["Functionality", "Coverage"],
@@ -127,12 +210,12 @@ const ResourcesUpdatesPage: React.FC = () => {
           <div className="absolute -right-10 top-0 h-32 w-32 rounded-full bg-white/7 blur-2xl" />
           <div className="absolute bottom-0 left-0 h-40 w-40 rounded-full bg-energy-500/8 blur-2xl" />
 
-          <div className="relative max-w-4xl">
+          <div className="relative">
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
               Updates
             </h1>
 
-            <p className="mt-6 max-w-3xl text-xl font-semibold leading-8 text-white/95 md:text-2xl">
+            <p className="mt-6 text-xl font-semibold leading-8 text-white/95 md:text-2xl">
               Check out the latest from our team on the Transition Pathways
               Repository (TPR) and its use cases.
             </p>
@@ -180,8 +263,8 @@ const ResourcesUpdatesPage: React.FC = () => {
                   key={`${post.date}-${post.title}`}
                   className="rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm"
                 >
-                  <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                    <div>
+                  <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start">
+                    <div className="min-w-0">
                       <h3 className="text-2xl font-semibold text-rmigray-800">
                         {post.title}
                       </h3>
@@ -190,7 +273,7 @@ const ResourcesUpdatesPage: React.FC = () => {
                       </p>
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 md:justify-end">
                       {post.tags.map((tag) => (
                         <span
                           key={`${post.title}-${tag}`}
