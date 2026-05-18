@@ -29,10 +29,7 @@ export default tseslint.config(
     ...eslintReact.configs["recommended-typescript"],
     rules: {
       ...eslintReact.configs["recommended-typescript"].rules,
-      "@eslint-react/dom-no-unknown-property": [
-        "error",
-        { ignore: ["css"] },
-      ],
+      "@eslint-react/dom-no-unknown-property": ["error", { ignore: ["css"] }],
       "@eslint-react/naming-convention-ref-name": "off",
       "@eslint-react/no-missing-component-display-name": "error",
       "@eslint-react/no-missing-context-display-name": "error",
