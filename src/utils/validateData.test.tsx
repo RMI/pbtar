@@ -225,7 +225,7 @@ describe("pathway schema enforces expected limits", () => {
     fail(
       {
         name: "extra-top.json",
-        data: { ...basePathway, foobar: 1 } as PathwayMetadataType,
+        data: { ...basePathway, foobar: 1 },
       },
       /must NOT have additional properties/,
     );
