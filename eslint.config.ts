@@ -1,5 +1,6 @@
 import js from "@eslint/js";
 import eslintReact from "@eslint-react/eslint-plugin";
+import pluginReactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -27,6 +28,10 @@ export default tseslint.config(
   {
     files: ["src/**/*.{tsx,jsx}"],
     ...eslintReact.configs["recommended-typescript"],
+    plugins: {
+      ...eslintReact.configs["recommended-typescript"].plugins,
+      "react-hooks": pluginReactHooks,
+    },
     rules: {
       ...eslintReact.configs["recommended-typescript"].rules,
       "@eslint-react/dom-no-unknown-property": ["error", { ignore: ["css"] }],
@@ -40,6 +45,8 @@ export default tseslint.config(
       "@eslint-react/unsupported-syntax": "off",
       "@eslint-react/web-api-no-leaked-fetch": "off",
       "@eslint-react/web-api-no-leaked-timeout": "off",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
     },
   },
   {
