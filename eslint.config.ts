@@ -1,7 +1,7 @@
 import js from "@eslint/js";
+import eslintReact from "@eslint-react/eslint-plugin";
 import globals from "globals";
 import tseslint from "typescript-eslint";
-import pluginReactHooks from "eslint-plugin-react-hooks";
 
 export default tseslint.config(
   { ignores: ["dist", "node_modules"] },
@@ -26,13 +26,23 @@ export default tseslint.config(
   },
   {
     files: ["src/**/*.{tsx,jsx}"],
-    plugins: {
-      "react-hooks": pluginReactHooks,
-    },
+    ...eslintReact.configs["recommended-typescript"],
     rules: {
-      // Instead of extending react-hooks' legacy preset, enable its rules explicitly:
-      "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn",
+      ...eslintReact.configs["recommended-typescript"].rules,
+      "@eslint-react/dom-no-unknown-property": [
+        "error",
+        { ignore: ["css"] },
+      ],
+      "@eslint-react/naming-convention-ref-name": "off",
+      "@eslint-react/no-missing-component-display-name": "error",
+      "@eslint-react/no-missing-context-display-name": "error",
+      "@eslint-react/no-array-index-key": "off",
+      "@eslint-react/no-clone-element": "off",
+      "@eslint-react/purity": "off",
+      "@eslint-react/set-state-in-effect": "off",
+      "@eslint-react/unsupported-syntax": "off",
+      "@eslint-react/web-api-no-leaked-fetch": "off",
+      "@eslint-react/web-api-no-leaked-timeout": "off",
     },
   },
   {
