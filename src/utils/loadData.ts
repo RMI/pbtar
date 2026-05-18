@@ -36,7 +36,7 @@ export function decideIncludeInvalid(): boolean {
 
   try {
     // @ts-expect-error: import.meta is not defined in Node tests
-    viteEnv = import.meta?.env as ViteEnv;
+    viteEnv = import.meta?.env;
   } catch {
     // Ignore runtime access failures and fall back to any injected shim below.
   }
