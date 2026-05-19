@@ -91,11 +91,16 @@ function buildInfoPlugin(): Plugin {
       const gitInfo = await getGitInfo();
       const osInfo = getOsInfo();
       const pkgVersion = (pkg as { version: string | undefined }).version;
+      const appVersion =
+        // CI / releases: injected by semantic-release exec plugin
+        process.env.VITE_APP_VERSION ||
+        // Local dev / fallback
+        pkgVersion;
 
       return {
         define: {
           // Build Env
-          "import.meta.env.VITE_APP_VERSION": JSON.stringify(pkgVersion),
+          "import.meta.env.VITE_APP_VERSION": JSON.stringify(appVersion),
           "import.meta.env.VITE_NODE_VERSION": JSON.stringify(process.version),
           "import.meta.env.VITE_VERSION": JSON.stringify(viteVersion),
           "import.meta.env.VITE_ENVIRONMENT": JSON.stringify(mode),

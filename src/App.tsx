@@ -3,6 +3,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import LegalPage from "./pages/LegalPage";
 import PathwaySearch from "./pages/PathwaySearch";
 import PathwayDetailPage from "./pages/PathwayDetailPage";
 import LandingPage from "./pages/LandingPage";
@@ -30,6 +31,10 @@ export const AppContent = () => {
           <Route
             path="/pathway/:id"
             element={<PathwayDetailPage />}
+          />
+          <Route
+            path="/legal"
+            element={<LegalPage />}
           />
         </Routes>
       </main>

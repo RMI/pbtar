@@ -11,7 +11,6 @@ export type DisplayName =
   | "Land Use"
   | "Agriculture"
   | "Buildings"
-  | "Industry"
   | "Steel"
   | "Cement"
   | "Chemicals"
@@ -20,8 +19,6 @@ export type DisplayName =
   | "Gas (Upstream)"
   | "Power"
   | "Automotive"
-  | "Transport"
-  | "Road transport"
   | "Aviation"
   | "Rail"
   | "Shipping"
@@ -32,8 +29,4 @@ export type DisplayName =
  */
 export interface SectorV1 {
   displayName: DisplayName;
-  /**
-   * Narrative description of the sector's scope.
-   */
-  definition: string;
 }

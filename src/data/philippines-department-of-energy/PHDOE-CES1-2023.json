@@ -19,7 +19,7 @@
   "name": { "full": "Clean Energy Scenario 1", "short": "CES 1" },
   "description": "Philippines pathway following National Renewable Energy Plan with some offshore wind development.",
   "geography": ["PH"],
-  "pathwayType": "Direct Policy",
+  "pathwayType": "Exploratory",
   "modelYearStart": 2023,
   "modelYearEnd": 2050,
   "sectors": [
@@ -55,13 +55,10 @@
     "electrification": "Moderate increase",
     "policyTypes": ["Subsidies", "Target technology shares", "Other"],
     "technologyCostTrend": "Decrease",
-    "technologyDeploymentTrend": "Minor technology deployment",
     "emissionsScope": "CO2e (unspecified GHGs)",
     "policyAmbition": "Current and drafted policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
     "newTechnologiesIncluded": ["Battery storage"],
-    "supplyChain": "No information",
-    "investmentNeeds": "By sector, part of value chain",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "By sector, part of value chain"
   }
 }

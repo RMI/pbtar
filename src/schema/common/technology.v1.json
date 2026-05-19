@@ -5,14 +5,9 @@
   "description": "Technologies for sectors",
   "type": "object",
   "properties": {
-    "displayName": { "$ref": "#/$defs/displayName" },
-    "definition": {
-      "description": "Brief definition or description of the technology scope (e.g., what it includes or excludes).",
-      "type": "string",
-      "maxLength": 1000
-    }
+    "displayName": { "$ref": "#/$defs/displayName" }
   },
-  "required": ["displayName", "definition"],
+  "required": ["displayName"],
   "additionalProperties": false,
 
   "$defs": {

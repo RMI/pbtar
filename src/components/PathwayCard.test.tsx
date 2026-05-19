@@ -77,6 +77,21 @@ describe("PathwayCard component", () => {
     expect(titleText).toContain(mockPathway.name.full);
   });
 
+  it("renders links on both the header and view details", () => {
+    renderPathwayCard();
+
+    const links = screen.getAllByRole("link");
+
+    expect(links).toHaveLength(2);
+    expect(links[0]).toHaveTextContent(
+      (mockPathway.publication.publisher.short ??
+        mockPathway.publication.publisher.full) +
+        ": " +
+        mockPathway.name.full,
+    );
+    expect(links[1]).toHaveTextContent("View Details");
+  });
+
   it("renders the pathway description", () => {
     renderPathwayCard();
 
@@ -439,7 +454,7 @@ describe("tooltip functionality", () => {
       const s: PathwayMetadataType = {
         ...mockPathway,
         // Using a double cast to satisfy TS, but this still presents as numeric at runtime.
-        modelYearNetzero: 2030 as unknown as string, // number on purpose
+        modelYearNetzero: 2030, // number on purpose
         publicationYear: 2024 as unknown as string, // number
       };
 
@@ -472,7 +487,7 @@ describe("tooltip functionality", () => {
       const s: PathwayMetadataType = {
         ...mockPathway,
         // Using a double cast to satisfy TS, but this still presents as null/undefined at runtime.
-        modelYearNetzero: 2045 as unknown as string, // number on purpose
+        modelYearNetzero: 2045, // number on purpose
       };
       const { container } = renderWithRouter(s, "2045");
       const marks = container.querySelectorAll("mark");

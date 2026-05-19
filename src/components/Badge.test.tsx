@@ -222,17 +222,17 @@ describe("Badge component", () => {
       );
     });
 
-    it("displays correct tooltip for Policy pathway type", () => {
+    it("displays correct tooltip for Exploratory pathway type", () => {
       render(
         <Badge
-          tooltip={pathwayTypeTooltips["Direct Policy"]}
+          tooltip={pathwayTypeTooltips["Exploratory"]}
           variant="pathwayType"
         >
-          Direct Policy
+          Exploratory
         </Badge>,
       );
 
-      const badge = screen.getByText("Direct Policy");
+      const badge = screen.getByText("Exploratory");
       expect(badge).toBeInTheDocument();
       expect(badge.closest("span")?.parentElement).toHaveAttribute(
         "tabindex",
@@ -258,17 +258,17 @@ describe("Badge component", () => {
       );
     });
 
-    it("displays correct tooltip for Transport sector", () => {
+    it("displays correct tooltip for Aviation sector", () => {
       render(
         <Badge
-          tooltip={sectorTooltips["Transport"]}
+          tooltip={sectorTooltips["Aviation"]}
           variant="sector"
         >
-          Transport
+          Aviation
         </Badge>,
       );
 
-      const badge = screen.getByText("Transport");
+      const badge = screen.getByText("Aviation");
       expect(badge).toBeInTheDocument();
       expect(badge.closest("span")?.parentElement).toHaveAttribute(
         "tabindex",

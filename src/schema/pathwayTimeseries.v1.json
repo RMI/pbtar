@@ -49,46 +49,6 @@
       "$ref": "http://pathways.rmi.org/schema/common/emissionsScope.v1.json",
       "tsType": "import('./common/emissionsScope.v1').EmissionsScopeV1"
     },
-    "sector": {
-      "description": "Sectors that the timeseries data covers.",
-      "type": "object",
-      "patternProperties": {
-        "^[A-Za-z0-9 _-]{1,100}$": {
-          "type": "object",
-          "properties": {
-            "displayName": {
-              "description": "Display name of the sector as presented in charts or tables.",
-
-              "$ref": "http://pathways.rmi.org/schema/common/sector.v1.json#/$defs/displayName"
-            },
-            "technology": {
-              "description": "Technologies that belong to this sector, each with a name and definition.",
-              "type": "object",
-              "patternProperties": {
-                "^[A-Za-z0-9 _-]{1,100}$": {
-                  "$ref": "http://pathways.rmi.org/schema/common/technology.v1.json"
-                }
-              },
-              "additionalProperties": false,
-              "minProperties": 1
-            },
-            "metric": {
-              "description": "Metrics available for this sector, describing what quantities are tracked (e.g., capacity, emissions).",
-              "type": "object",
-              "patternProperties": {
-                "^[A-Za-z0-9 _-]{1,100}$": {
-                  "$ref": "http://pathways.rmi.org/schema/common/metric.v1.json"
-                }
-              },
-              "additionalProperties": false,
-              "minProperties": 1
-            }
-          }
-        }
-      },
-      "additionalProperties": false,
-      "minProperties": 1
-    },
     "data": {
       "description": "Array of yearly data points for each sector, technology, and metric defined in this timeseries.",
       "type": "array",
@@ -199,8 +159,123 @@
           "metric",
           "unit"
         ],
+        "allOf": [
+          {
+            "$comment": "Emissions intensity values should fall within a reasonable physical bound (−2 to 2 tCO2e/MWh). Ensures data sanity and prevents unit/scale mistakes.",
+            "if": {
+              "properties": {
+                "metric": { "const": "emissionsIntensity" }
+              },
+              "required": ["metric"]
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "minimum": -2,
+                  "maximum": 2
+                }
+              }
+            }
+          },
+          {
+            "$comment": "Capacity (GW) cannot be negative. Enforces basic physical constraint.",
+            "if": {
+              "properties": {
+                "metric": { "const": "capacity" }
+              },
+              "required": ["metric"]
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          {
+            "$comment": "Electricity generation (TWh) must be non-negative. Ensures no sign errors or inverted units.",
+            "if": {
+              "properties": {
+                "metric": { "const": "generation" }
+              },
+              "required": ["metric"]
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          {
+            "$comment": "Technology mix values represent percentages, so each row must lie between 0% and 100%.",
+            "if": {
+              "properties": {
+                "metric": { "const": "technologyMix" },
+                "unit": { "const": "%" }
+              },
+              "required": ["metric", "unit"]
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              }
+            }
+          },
+          {
+            "$comment": "Historical global power sector emissions (<= 2023) should not exceed ~20,000 MtCO2e. Caps unrealistic values and unit mistakes.",
+            "if": {
+              "properties": {
+                "metric": { "const": "absoluteEmissions" },
+                "unit": { "const": "MtCO2e" },
+                "geography": { "const": "Global" },
+                "sector": { "const": "power" },
+                "year": { "type": "integer", "maximum": 2023 }
+              },
+              "required": ["metric", "unit", "geography", "sector", "year"]
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "maximum": 20000
+                }
+              }
+            }
+          },
+          {
+            "$comment": "Future global power sector emissions (>= 2024) should not exceed ~30,000 MtCO2e. Allows for scenario variability while trapping implausible values.",
+            "if": {
+              "properties": {
+                "metric": { "const": "absoluteEmissions" },
+                "unit": { "const": "MtCO2e" },
+                "geography": { "const": "Global" },
+                "sector": { "const": "power" },
+                "year": { "type": "integer", "minimum": 2024 }
+              },
+              "required": ["metric", "unit", "geography", "sector", "year"]
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "maximum": 30000
+                }
+              }
+            }
+          }
+        ],
         "if": {
-          "properties": { "sector": { "const": "Power" } },
+          "properties": { "sector": { "const": "power" } },
           "required": ["sector"]
         },
         "then": {
@@ -208,30 +283,30 @@
             "technology": {
               "type": ["string", "null"],
               "enum": [
-                "Coal",
-                "Oil",
-                "Gas",
-                "Nuclear",
-                "Hydro",
-                "Wind",
-                "Solar",
-                "Biomass",
-                "Geothermal",
-                "Hydrogen",
-                "Renewables",
-                "Battery",
-                "Other",
+                "coal",
+                "oil",
+                "gas",
+                "nuclear",
+                "hydro",
+                "wind",
+                "solar",
+                "biomass",
+                "geothermal",
+                "hydrogen",
+                "renewables",
+                "battery",
+                "other",
                 null
               ]
             },
             "metric": {
               "type": "string",
               "enum": [
-                "Emissions Intensity",
-                "Absolute Emissions",
-                "Capacity",
-                "Generation",
-                "Technology Mix"
+                "emissionsIntensity",
+                "absoluteEmissions",
+                "capacity",
+                "generation",
+                "technologyMix"
               ]
             }
           },
@@ -239,7 +314,7 @@
             {
               "if": {
                 "properties": {
-                  "metric": { "const": "Emissions Intensity" }
+                  "metric": { "const": "emissionsIntensity" }
                 },
                 "required": ["metric"]
               },
@@ -248,7 +323,7 @@
             {
               "if": {
                 "properties": {
-                  "metric": { "const": "Absolute Emissions" }
+                  "metric": { "const": "absoluteEmissions" }
                 },
                 "required": ["metric"]
               },
@@ -256,21 +331,21 @@
             },
             {
               "if": {
-                "properties": { "metric": { "const": "Capacity" } },
+                "properties": { "metric": { "const": "capacity" } },
                 "required": ["metric"]
               },
               "then": { "properties": { "unit": { "const": "GW" } } }
             },
             {
               "if": {
-                "properties": { "metric": { "const": "Generation" } },
+                "properties": { "metric": { "const": "generation" } },
                 "required": ["metric"]
               },
               "then": { "properties": { "unit": { "const": "TWh" } } }
             },
             {
               "if": {
-                "properties": { "metric": { "const": "Technology Mix" } },
+                "properties": { "metric": { "const": "technologyMix" } },
                 "required": ["metric"]
               },
               "then": { "properties": { "unit": { "const": "%" } } }
@@ -289,7 +364,6 @@
     "publication",
     "pathwayName",
     "emissionsScope",
-    "sector",
     "data"
   ]
 }

@@ -4,7 +4,7 @@
   "name": { "full": "Sample Pathway 04" },
   "publication": {
     "title": { "full": "Example Title" },
-    "publisher": { "full": "Example Publisher" },
+    "publisher": { "full": "ASEAN Centre for Energy", "short": "ACE" },
     "year": 2024
   },
   "description": "Fourth Sample Pathway. ghjkl description.",
@@ -12,7 +12,6 @@
   "modelYearNetzero": 2050,
   "modelYearStart": 2020,
   "modelYearEnd": 2050,
-  "ssp": "SSP4",
   "geography": ["CN"],
   "sectors": [
     { "name": "Land Use", "technologies": ["Precision Agriculture"] },
@@ -34,7 +33,6 @@
       "Other"
     ],
     "technologyCostTrend": "No information",
-    "technologyDeploymentTrend": "Moderate technology deployment",
     "emissionsScope": "CO2",
     "policyAmbition": "Current/legislated policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
@@ -45,8 +43,6 @@
       "SAF",
       "Battery storage"
     ],
-    "supplyChain": "No information",
-    "investmentNeeds": "By sector, part of value chain",
-    "infrastructureRequirements": "By supply chain, add/replace"
+    "investmentNeeds": "By sector, part of value chain"
   }
 }

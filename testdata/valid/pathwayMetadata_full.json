@@ -6,7 +6,7 @@
     "title": { "full": "Example Title", "short": "Example" },
     "subtitle": "An Example Subtitle",
     "author": ["Foo bar", "Baz qux"],
-    "publisher": { "full": "Example Publisher", "short": "ExPub" },
+    "publisher": { "full": "ASEAN Centre for Energy", "short": "ACE" },
     "year": 2024,
     "month": 6,
     "day": 15,
@@ -24,18 +24,15 @@
   "description": "Pathway with all enum values populated where possible.",
   "pathwayType": "Normative",
   "modelYearNetzero": 2050,
-  "carbonBudget": 500,
   "modelYearStart": 2020,
   "modelYearEnd": 2050,
   "modelTempIncrease": 1.5,
-  "ssp": "SSP1",
   "geography": [
     "Global",
-    "EU",
-    "Americas",
-    "Asia Pacific",
-    "US",
-    "Country-Specific"
+    "Europe and Central Asia",
+    "North America",
+    "South East Asia",
+    "US"
   ],
   "sectors": [
     {
@@ -54,10 +51,6 @@
         "Smart Appliances",
         "Insulation"
       ]
-    },
-    {
-      "name": "Industry",
-      "technologies": ["Carbon Capture and Storage", "Electrification"]
     },
     { "name": "Steel", "technologies": ["Process Optimization"] },
     { "name": "Cement", "technologies": ["Other"] },
@@ -78,13 +71,10 @@
       ]
     },
     {
-      "name": "Transport",
-      "technologies": ["Public Transport", "Active Mobility"]
-    },
-    {
-      "name": "Road transport",
+      "name": "Automotive",
       "technologies": ["Electric Vehicles", "Hydrogen Vehicles"]
     },
+    { "name": "Automotive", "technologies": [] },
     { "name": "Aviation", "technologies": ["Aviation Efficiency"] },
     { "name": "Rail", "technologies": ["Other"] },
     { "name": "Shipping", "technologies": ["Maritime Efficiency"] },
@@ -112,7 +102,6 @@
       "Other"
     ],
     "technologyCostTrend": "No information",
-    "technologyDeploymentTrend": "No information",
     "emissionsScope": "No information",
     "policyAmbition": "No information",
     "technologyCostsDetail": "No information",
@@ -125,8 +114,6 @@
       "Battery storage",
       "EGS/AGS"
     ],
-    "supplyChain": "No information",
-    "investmentNeeds": "No information",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "No information"
   }
 }

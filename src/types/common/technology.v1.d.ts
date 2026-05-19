@@ -45,8 +45,4 @@ export type DisplayName =
  */
 export interface TechnologyV1 {
   displayName: DisplayName;
-  /**
-   * Brief definition or description of the technology scope (e.g., what it includes or excludes).
-   */
-  definition: string;
 }

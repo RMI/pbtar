@@ -20,13 +20,20 @@ describe("Footer component", () => {
     ).toBeInTheDocument();
   });
 
-  it("contains Contact Us email link", () => {
+  it("contains Legal link with correct path", () => {
     renderFooter();
-    const contactLink = screen.getByText("Contact Us");
-    expect(contactLink).toBeInTheDocument();
-    expect(contactLink.closest("a")).toHaveAttribute(
+    const legalLink = screen.getByText("Legal");
+    expect(legalLink).toBeInTheDocument();
+    expect(legalLink.getAttribute("href")).toBe("/legal");
+  });
+
+  it("contains Give Feedback email link", () => {
+    renderFooter();
+    const feedbackLink = screen.getByText("Give Feedback");
+    expect(feedbackLink).toBeInTheDocument();
+    expect(feedbackLink.closest("a")).toHaveAttribute(
       "href",
-      "mailto:contact@rmi.org",
+      "mailto:tomwhite+pbtar@rmi.org",
     );
   });
 

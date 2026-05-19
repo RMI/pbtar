@@ -16,6 +16,12 @@
 
 import { promises as fs } from "node:fs";
 import * as path from "node:path";
+import {
+  getSectorDefinition,
+  getMetricDefinition,
+  getTechnologyDefinition,
+  UnknownTaxonomyError,
+} from "../src/utils/timeseriesTaxonomy.ts";
 
 const STRICT = process.env.TS_INDEX_STRICT === "1";
 const DEBUG = process.env.TS_INDEX_DEBUG === "1";
@@ -322,13 +328,21 @@ async function main() {
       const parsed = parseJsonWithComments(raw);
 
       const getRowMetadata = (
-        sector: string,
-        metric: string,
-        technology: string,
+        sectorRaw: string,
+        metricRaw: string,
+        technologyRaw: string,
       ): object => {
+        // Normalize keys; treat null / "null" / empty as "no key"
+        const sector = sectorRaw?.trim();
+        const metric =
+          metricRaw && metricRaw !== "null" ? metricRaw.trim() : "";
+        const technology =
+          technologyRaw && technologyRaw !== "null" ? technologyRaw.trim() : "";
+
         logDebug(
           `  getRowMetadata: sector=${sector}, metric=${metric}, technology=${technology}`,
         );
+
         const pub = parsed.publication;
         // License (optional)
         const licensePart = pub.license ? `License: ${pub.license}` : "";
@@ -344,26 +358,48 @@ async function main() {
         const optionalBlock = optionalParts ? ` (${optionalParts})` : "";
         // Final string
         const source = `${pub.publisher.short}, ${pub.year}, ${pub.title.full}${optionalBlock}`;
+
+        // Look up definitions from centralized taxonomy.
+        // These WILL throw if unknown, which is what we want in strict mode.
+        const sectorDef = getSectorDefinition(sector);
+
+        const metricDef = metric
+          ? getMetricDefinition(sectorDef.key, metric)
+          : undefined;
+
+        const techDef = technology
+          ? getTechnologyDefinition(sectorDef.key, technology)
+          : undefined;
+
         const outRaw = {
           publisher: parsed.publication.publisher.short,
           publicationName: parsed.publication.title.full,
           publicationYear: parsed.publication.year,
           pathwayName: parsed.pathwayName,
-          source: source,
-          sector: parsed.sector?.[sector]?.displayName,
+          source,
+          sector: sectorDef.displayName,
           emissionsScope: parsed.emissionsScope,
-          sectorScope: parsed.sector?.[sector]?.metric?.[metric]?.sectorScope,
-          metric: parsed.sector?.[sector]?.metric?.[metric]?.displayName,
-          definitionMetric:
-            parsed.sector?.[sector]?.metric?.[metric]?.definition,
-          technology:
-            parsed.sector?.[sector]?.technology?.[technology]?.displayName,
-          definitionTechnology:
-            parsed.sector?.[sector]?.technology?.[technology]?.definition,
+          sectorScope: metricDef?.sectorScope ?? "",
+          metric: metricDef?.displayName ?? "",
+          definitionMetric: metricDef?.definition ?? "",
+          technology: techDef?.displayName ?? "",
+          definitionTechnology: techDef?.definition ?? "",
         };
-        const out = sanitizeStrings(outRaw);
-        logDebug(`    returning metadata: ${JSON.stringify(out)}`);
-        return out;
+
+        // First sanitize whitespace
+        const sanitized = sanitizeStrings(outRaw);
+
+        // Then remove empty-string / undefined / null fields
+        const cleaned = Object.fromEntries(
+          Object.entries(sanitized).filter(([_, v]) => {
+            if (v === null || v === undefined) return false;
+            if (typeof v === "string" && v.trim() === "") return false;
+            return true;
+          }),
+        );
+
+        logDebug(`    returning metadata: ${JSON.stringify(cleaned)}`);
+        return cleaned;
       };
 
       logDebug(
@@ -377,9 +413,17 @@ async function main() {
               logDebug(`    Processing row: ${JSON.stringify(rowRaw)}`);
               const row = rowRaw as Record<string, unknown>;
               const sector = String(row.sector ?? "");
-              const metric = String(row.metric ?? "");
-              const technology = String(row.technology ?? "");
+              const metric =
+                row.metric === null || row.metric === undefined
+                  ? ""
+                  : String(row.metric);
+              const technology =
+                row.technology === null || row.technology === undefined
+                  ? ""
+                  : String(row.technology);
+
               const rowMetadata = getRowMetadata(sector, metric, technology);
+
               const out = {
                 publisher: rowMetadata.publisher,
                 publication_name: rowMetadata.publicationName,
@@ -420,6 +464,10 @@ async function main() {
       }
     } catch (err) {
       console.error("Error copying or processing file:", srcAbs, err);
+      if (err instanceof UnknownTaxonomyError) {
+        // Fatal error — unknown metric/technology, fail build
+        process.exit(1);
+      }
       // If copy fails, leave original path (SWA won't find it, but we don't crash the build).
       if (DEBUG) logDebug("copyFile or CSV failed (skipping):", srcAbs);
     }
@@ -436,13 +484,13 @@ async function main() {
   const tsExport =
     banner +
     `export type TimeseriesIndexItem = { datasetId: string; label?: string; path: string; summary?: unknown };
-export type TimeseriesIndex = {
-  byPathway: Record<string, TimeseriesIndexItem[]>;
-  byDataset: Record<string, { datasetId: string; pathwayIds: string[]; label?: string; path: string; summary?: unknown }>;
-};
-export const index: TimeseriesIndex = ${JSON.stringify(out, null, 2)} as const;
-export default index;
-`;
+  export type TimeseriesIndex = {
+    byPathway: Record<string, TimeseriesIndexItem[]>;
+    byDataset: Record<string, { datasetId: string; pathwayIds: string[]; label?: string; path: string; summary?: unknown }>;
+  };
+  export const index: TimeseriesIndex = ${JSON.stringify(out, null, 2)} as const;
+  export default index;
+  `;
   await fs.writeFile(GEN_TS, tsExport, "utf8");
   logInfo(`Wrote ${path.relative(ROOT, GEN_TS)}.`);
 
