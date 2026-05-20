@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import Header from "./Header";
@@ -40,22 +40,27 @@ describe("Header component", () => {
     ).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: /resources/i }));
+    const resourcesNav = screen.getByRole("navigation", { name: "Resources" });
 
-    const menuItems = screen.getAllByRole("menuitem");
-    expect(menuItems[0]).toHaveTextContent("How to choose a pathway");
+    const menuLinks = within(resourcesNav).getAllByRole("link");
+    expect(menuLinks[0]).toHaveTextContent("How to choose a pathway");
 
     expect(
-      screen.getByRole("menuitem", { name: "Methodology" }),
+      within(resourcesNav).getByRole("link", { name: "Methodology" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("menuitem", { name: "Use cases" }),
+      within(resourcesNav).getByRole("link", { name: "Use cases" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("menuitem", { name: "How to choose a pathway" }),
+      within(resourcesNav).getByRole("link", {
+        name: "How to choose a pathway",
+      }),
     ).toBeInTheDocument();
-    expect(screen.getByRole("menuitem", { name: "FAQs" })).toBeInTheDocument();
     expect(
-      screen.getByRole("menuitem", { name: "Updates" }),
+      within(resourcesNav).getByRole("link", { name: "FAQs" }),
+    ).toBeInTheDocument();
+    expect(
+      within(resourcesNav).getByRole("link", { name: "Updates" }),
     ).toBeInTheDocument();
   });
 });

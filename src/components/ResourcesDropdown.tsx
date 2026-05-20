@@ -38,7 +38,6 @@ const ResourcesDropdown: React.FC = () => {
       <button
         type="button"
         className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-white/90 transition-colors hover:bg-white/10 hover:text-white"
-        aria-haspopup="menu"
         aria-expanded={resourcesOpen}
         onClick={() => setResourcesOpen((value) => !value)}
       >
@@ -47,14 +46,13 @@ const ResourcesDropdown: React.FC = () => {
       </button>
 
       {resourcesOpen && (
-        <div
-          role="menu"
+        <nav
+          aria-label="Resources"
           className="absolute right-0 z-[60] mt-2 w-72 overflow-hidden rounded-md bg-white text-rmigray-800 shadow-lg ring-1 ring-black/5"
         >
           {resourceMenuItems.map((item) => (
             <Link
               key={item.to}
-              role="menuitem"
               to={item.to}
               className="block px-4 py-3 text-sm hover:bg-neutral-100"
               onClick={() => setResourcesOpen(false)}
@@ -62,7 +60,7 @@ const ResourcesDropdown: React.FC = () => {
               {item.label}
             </Link>
           ))}
-        </div>
+        </nav>
       )}
     </div>
   );

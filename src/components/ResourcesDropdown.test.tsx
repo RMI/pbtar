@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import ResourcesDropdown from "./ResourcesDropdown";
@@ -17,25 +17,25 @@ describe("ResourcesDropdown component", () => {
     const user = userEvent.setup();
 
     await user.click(screen.getByRole("button", { name: /resources/i }));
+    const resourcesNav = screen.getByRole("navigation", { name: "Resources" });
 
     expect(
-      screen.getByRole("menuitem", { name: "How to choose a pathway" }),
+      within(resourcesNav).getByRole("link", {
+        name: "How to choose a pathway",
+      }),
     ).toHaveAttribute("href", "/resources/how-to-choose-a-pathway");
-    expect(screen.getByRole("menuitem", { name: "Use cases" })).toHaveAttribute(
-      "href",
-      "/resources/use-cases",
-    );
     expect(
-      screen.getByRole("menuitem", { name: "Methodology" }),
+      within(resourcesNav).getByRole("link", { name: "Use cases" }),
+    ).toHaveAttribute("href", "/resources/use-cases");
+    expect(
+      within(resourcesNav).getByRole("link", { name: "Methodology" }),
     ).toHaveAttribute("href", "/resources/methodology");
-    expect(screen.getByRole("menuitem", { name: "Updates" })).toHaveAttribute(
-      "href",
-      "/resources/updates",
-    );
-    expect(screen.getByRole("menuitem", { name: "FAQs" })).toHaveAttribute(
-      "href",
-      "/resources/faq",
-    );
+    expect(
+      within(resourcesNav).getByRole("link", { name: "Updates" }),
+    ).toHaveAttribute("href", "/resources/updates");
+    expect(
+      within(resourcesNav).getByRole("link", { name: "FAQs" }),
+    ).toHaveAttribute("href", "/resources/faq");
   });
 
   it("closes when clicking outside the menu", async () => {
@@ -44,13 +44,13 @@ describe("ResourcesDropdown component", () => {
 
     await user.click(screen.getByRole("button", { name: /resources/i }));
     expect(
-      screen.getByRole("menuitem", { name: "How to choose a pathway" }),
+      screen.getByRole("link", { name: "How to choose a pathway" }),
     ).toBeInTheDocument();
 
     await user.click(document.body);
 
     expect(
-      screen.queryByRole("menuitem", { name: "How to choose a pathway" }),
+      screen.queryByRole("navigation", { name: "Resources" }),
     ).not.toBeInTheDocument();
   });
 
@@ -60,11 +60,11 @@ describe("ResourcesDropdown component", () => {
 
     await user.click(screen.getByRole("button", { name: /resources/i }));
     await user.click(
-      screen.getByRole("menuitem", { name: "How to choose a pathway" }),
+      screen.getByRole("link", { name: "How to choose a pathway" }),
     );
 
     expect(
-      screen.queryByRole("menuitem", { name: "How to choose a pathway" }),
+      screen.queryByRole("navigation", { name: "Resources" }),
     ).not.toBeInTheDocument();
   });
 });
