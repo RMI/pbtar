@@ -952,7 +952,7 @@ const ResourcesMethodologyPage: React.FC = () => {
                       <p>
                         Describes the direction of unit costs of the low-carbon
                         technologies of in-scope sectors. This shows if/when
-                        newer low-carbon technologies are assumed tobecome more
+                        newer low-carbon technologies are assumed to become more
                         competitive compared to their high-carbon counterparts.
                       </p>
                     </>
