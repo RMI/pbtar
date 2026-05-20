@@ -11,9 +11,10 @@ describe("HeaderNav component", () => {
       </MemoryRouter>,
     );
 
-    expect(
-      screen.getByRole("link", { name: "Contact Us" }),
-    ).toHaveAttribute("href", "/contact");
+    expect(screen.getByRole("link", { name: "Contact Us" })).toHaveAttribute(
+      "href",
+      "/contact",
+    );
     expect(
       screen.getByRole("button", { name: /resources/i }),
     ).toBeInTheDocument();

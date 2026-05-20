@@ -48,7 +48,7 @@ const ContactPage: React.FC = () => {
               >
                 Tom White
               </a>{" "}
-               or{" "}
+              or{" "}
               <a
                 href="mailto:nherrera+pbtar@rmi.org"
                 className="text-energy-700 underline underline-offset-2 hover:text-energy-800"
