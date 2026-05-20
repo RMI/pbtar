@@ -333,7 +333,7 @@ const LandingPage: React.FC = () => {
               sustainability, risk, and front-office teams) conducting corporate
               transition assessments. See the{" "}
               <Link
-                to="/resources/methodology"
+                to="/resources/use-cases"
                 className="text-energy-700 hover:text-energy-800 underline underline-offset-2"
               >
                 use case page
