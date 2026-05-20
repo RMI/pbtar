@@ -1,44 +1,9 @@
 import React from "react";
 
-type UpdateTag = "Coverage" | "Functionality" | "Methodology" | "Insights";
-
 type UpdatePost = {
   title: string;
   date: string;
-  tags: UpdateTag[];
   body: React.ReactNode;
-};
-
-/* const categories: Array<{
-  tag: UpdateTag;
-  description: string;
-}> = [
-  {
-    tag: "Coverage",
-    description:
-      "Information on which pathways, sectors, and regions you can find in the TPR.",
-  },
-  {
-    tag: "Functionality",
-    description: "Improvements of the features and tools available in the TPR.",
-  },
-  {
-    tag: "Methodology",
-    description:
-      "Information on how pathways are assessed and presented in the TPR.",
-  },
-  {
-    tag: "Insights",
-    description:
-      "Updates, case studies, and stories highlighting how the TPR can be leveraged in real life analyses.",
-  },
-]; */
-
-const tagClassNames: Record<UpdateTag, string> = {
-  Coverage: "border border-sky-200 bg-sky-50 text-sky-800",
-  Functionality: "border border-amber-200 bg-amber-50 text-amber-800",
-  Methodology: "border border-violet-200 bg-violet-50 text-violet-800",
-  Insights: "border border-emerald-200 bg-emerald-50 text-emerald-800",
 };
 
 const posts: UpdatePost[] = [
@@ -47,7 +12,6 @@ const posts: UpdatePost[] = [
   // {
   //   title: "Power sector coverage expanded for Southeast Asia",
   //   date: "May 7, 2026",
-  //   tags: ["Coverage", "Insights"],
   //   body: (
   //     <>
   //       <p>
@@ -65,7 +29,6 @@ const posts: UpdatePost[] = [
     title:
       "Four lessons learned from evaluating the transition pathway landscape in the Southeast Asia power sector",
     date: "May 15, 2026",
-    tags: ["Insights"],
     body: (
       <>
         <p>
@@ -148,7 +111,6 @@ const posts: UpdatePost[] = [
     title:
       "Introducing the Transition Pathways Repository: Making Transition Analysis Actionable",
     date: "December 11, 2025",
-    tags: ["Functionality", "Coverage"],
     body: (
       <>
         <p>
@@ -223,33 +185,6 @@ const ResourcesUpdatesPage: React.FC = () => {
         </section>
 
         <section className="mx-auto mt-12 max-w-5xl">
-          {/* <div className="max-w-5xl">
-            <h2 className="text-2xl font-semibold text-rmigray-800">
-              Categories
-            </h2>
-          </div>
-
-          <div className="mt-8 grid max-w-5xl gap-3 md:grid-cols-2">
-            {categories.map((category) => (
-              <div
-                key={category.tag}
-                className="rounded-2xl border border-neutral-200 bg-neutral-100/80 p-4 shadow-sm"
-              >
-                <span
-                  className={
-                    "inline-flex rounded-full px-3 py-1 text-xs font-semibold " +
-                    tagClassNames[category.tag]
-                  }
-                >
-                  {category.tag}
-                </span>
-                <p className="mt-3 text-sm leading-7 text-rmigray-700">
-                  {category.description}
-                </p>
-              </div>
-            ))}
-          </div> */}
-
           <div className="max-w-5xl">
             <h2 className="text-2xl font-semibold text-rmigray-800 mt-8">
               Latest updates
@@ -263,29 +198,13 @@ const ResourcesUpdatesPage: React.FC = () => {
                   key={`${post.date}-${post.title}`}
                   className="rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm"
                 >
-                  <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start">
-                    <div className="min-w-0">
-                      <h3 className="text-2xl font-semibold text-rmigray-800">
-                        {post.title}
-                      </h3>
-                      <p className="mt-2 text-sm font-medium text-rmigray-500">
-                        {post.date}
-                      </p>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 md:justify-end">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={`${post.title}-${tag}`}
-                          className={
-                            "rounded-full px-3 py-1 text-sm font-semibold " +
-                            tagClassNames[tag]
-                          }
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                  <div>
+                    <h3 className="text-2xl font-semibold text-rmigray-800">
+                      {post.title}
+                    </h3>
+                    <p className="mt-2 text-sm font-medium text-rmigray-500">
+                      {post.date}
+                    </p>
                   </div>
 
                   <div className="mt-6 space-y-4 text-rmigray-700 leading-7">
