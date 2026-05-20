@@ -160,7 +160,7 @@ const ResourcesFaqPage: React.FC = () => {
                   A full description of how to make the most of the TPR can be
                   found in our{" "}
                   <Link
-                    to="/resources/how-to-use-this-tool"
+                    to="/resources/how-to-choose-a-pathway"
                     className="text-energy-700 underline underline-offset-2 font-semibold hover:text-energy-800"
                   >
                     user guide

@@ -193,11 +193,11 @@ const LandingPage: React.FC = () => {
                     >
                       <Link
                         role="menuitem"
-                        to="/resources/how-to-use-this-tool"
+                        to="/resources/how-to-choose-a-pathway"
                         className="block px-4 py-3 text-sm hover:bg-neutral-100"
                         onClick={() => setResourcesOpen(false)}
                       >
-                        How to use this tool
+                        How to choose a pathway
                       </Link>
                       <Link
                         role="menuitem"
@@ -382,7 +382,7 @@ const LandingPage: React.FC = () => {
               <ul className="list-disc pl-5 space-y-2 text-rmigray-700">
                 <li>
                   <Link
-                    to="/resources/how-to-use-this-tool"
+                    to="/resources/how-to-choose-a-pathway"
                     className="text-energy-700 hover:text-energy-800 underline underline-offset-2"
                   >
                     How to choose a pathway

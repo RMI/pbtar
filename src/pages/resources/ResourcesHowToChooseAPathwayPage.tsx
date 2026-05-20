@@ -124,7 +124,7 @@ const CollapsibleRow: React.FC<{
   );
 };
 
-const ResourcesHowToUseToolPage: React.FC = () => {
+const ResourcesHowToChooseAPathwayPage: React.FC = () => {
   return (
     <div className="bg-gray-50">
       <div className="container mx-auto px-4 py-8 md:py-10">
@@ -399,4 +399,4 @@ const ResourcesHowToUseToolPage: React.FC = () => {
   );
 };
 
-export default ResourcesHowToUseToolPage;
+export default ResourcesHowToChooseAPathwayPage;

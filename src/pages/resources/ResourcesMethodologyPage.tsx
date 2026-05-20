@@ -982,7 +982,7 @@ const ResourcesMethodologyPage: React.FC = () => {
             <p className="mt-4 text-rmigray-700 leading-7">
               Visit the{" "}
               <Link
-                to="/resources/how-to-use-this-tool"
+                to="/resources/how-to-choose-a-pathway"
                 className="text-energy-700 underline underline-offset-2 font-semibold hover:text-energy-800"
               >
                 How to Choose a Pathway page

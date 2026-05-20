@@ -42,7 +42,7 @@ describe("Header component", () => {
     await user.click(screen.getByRole("button", { name: /resources/i }));
 
     const menuItems = screen.getAllByRole("menuitem");
-    expect(menuItems[0]).toHaveTextContent("How to use this tool");
+    expect(menuItems[0]).toHaveTextContent("How to choose a pathway");
 
     expect(
       screen.getByRole("menuitem", { name: "Methodology" }),
@@ -51,7 +51,7 @@ describe("Header component", () => {
       screen.getByRole("menuitem", { name: "Use cases" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("menuitem", { name: "How to use this tool" }),
+      screen.getByRole("menuitem", { name: "How to choose a pathway" }),
     ).toBeInTheDocument();
     expect(screen.getByRole("menuitem", { name: "FAQs" })).toBeInTheDocument();
     expect(
