@@ -296,7 +296,7 @@ const ResourcesUseCasesPage: React.FC = () => {
                   The Transition Pathways Repository helps users understand
                   these differences up front — making it easier to choose the
                   most appropriate pathway for their specific objective and
-                  avoid misinterpretationor an inaccurate analysis.
+                  avoid misinterpretation or an inaccurate analysis.
                 </p>
               </div>
             </aside>
