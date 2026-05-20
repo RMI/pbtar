@@ -41,19 +41,19 @@ const ContactPage: React.FC = () => {
               collaboration.
             </p>
             <p className="mt-4 text-rmigray-700 leading-7">
-              To get in touch, reach out to Tom White or Nayra Herrera at{" "}
+              To get in touch, reach out to{" "}
               <a
                 href="mailto:tomwhite+pbtar@rmi.org"
                 className="text-energy-700 underline underline-offset-2 hover:text-energy-800"
               >
-                tomwhite@rmi.org
+                Tom White
               </a>{" "}
-              and{" "}
+               or{" "}
               <a
                 href="mailto:nherrera+pbtar@rmi.org"
                 className="text-energy-700 underline underline-offset-2 hover:text-energy-800"
               >
-                nherrera@rmi.org
+                Nayra Herrera
               </a>
               , or open an issue on our{" "}
               <a

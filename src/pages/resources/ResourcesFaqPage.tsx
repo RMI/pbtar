@@ -316,19 +316,19 @@ const ResourcesFaqPage: React.FC = () => {
             <div className="mt-8 space-y-4 text-sm leading-7 text-white/85 md:text-base">
               <p>
                 If you can’t find an answer to your question here, we would love
-                to hear from you. Reach out to Tom White or Jacob Kastl at{" "}
+                to hear from you. Reach out to{" "}
                 <a
                   href="mailto:tomwhite+pbtar@rmi.org"
                   className="text-white underline underline-offset-2 transition-colors hover:text-white/80"
                 >
-                  tomwhite@rmi.org
+                  Tom White
                 </a>{" "}
-                and{" "}
+                or{" "}
                 <a
                   href="mailto:jkastl+pbtar@rmi.org"
                   className="text-white underline underline-offset-2 transition-colors hover:text-white/80"
                 >
-                  jkastl@rmi.org
+                  Jacob Kastl
                 </a>
                 .
               </p>
