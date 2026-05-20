@@ -42,7 +42,7 @@ const useCases = [
     subtitle:
       "Ambition is often benchmarked on the basis of global 1.5°C pathways. This is a fair approach for a diversified global portfolio, but global pathways that lack regional granularity do not account for local constraints. Region-specific pathways may not always align to a clear temperature outcome, but they can provide a useful indication of what high ambition looks like in a specific region.",
     bullets: [
-      "Test ambition against common global benchmarks: Check if company targetsare leading, lagging, or broadly aligned with global benchmarks.",
+      "Test ambition against common global benchmarks: Check if company targets are leading, lagging, or broadly aligned with global benchmarks.",
       "Understand ambition under local constraints: Complement global benchmarks with region-specific benchmarks to prevent unfairly locking some regions out of transition finance.",
     ],
   },
