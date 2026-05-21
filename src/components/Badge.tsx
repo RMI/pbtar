@@ -105,7 +105,7 @@ export function BadgeMaybeAbsent<T extends string | number>({
     base = String(children);
   } else {
     // Should be unreachable at runtime due to typing, but keep a safe fallback
-    base = String(children as unknown as string | number);
+    base = String(children);
   }
 
   const content =
