@@ -171,7 +171,6 @@ describe("searchUtils - array results", () => {
     "Land Use",
     "Agriculture",
     "Buildings",
-    "Industry",
     "Steel",
     "Cement",
     "Chemicals",
@@ -179,8 +178,7 @@ describe("searchUtils - array results", () => {
     "Oil (Upstream)",
     "Gas (Upstream)",
     "Power",
-    "Transport",
-    "Road transport",
+    "Automotive",
     "Aviation",
     "Rail",
     "Shipping",
@@ -188,7 +186,7 @@ describe("searchUtils - array results", () => {
   ];
 
   //These tests are to ensure that search works for all array values, even when
-  //they would not be surface directly in the UI (e.g. "Power, Transport, + 15
+  //they would not be surface directly in the UI (e.g. "Power, Road transport, + 15
   //more")
   describe("filterPathways for many array values", () => {
     geography.forEach((geography) => {
@@ -242,7 +240,7 @@ describe("filterPathways (array-backed facets)", () => {
     {
       id: "C",
       name: "C",
-      sectors: [{ name: "Industry" }],
+      sectors: [{ name: "Steel" }],
       geography: ["Asia"],
       modelTempIncrease: 1.5,
       pathwayType: "Exploratory",
@@ -256,24 +254,24 @@ describe("filterPathways (array-backed facets)", () => {
   it("pathwayType: OR over multiple selections; empty array = no filter", () => {
     let out = filterPathways(pathways, {
       pathwayType: ["Normative", "Exploratory"],
-    } as FiltersWithArrays);
+    });
     expect(out.map((s) => s.id)).toEqual(["B", "C"]);
 
-    out = filterPathways(pathways, { pathwayType: [] } as FiltersWithArrays);
+    out = filterPathways(pathways, { pathwayType: [] });
     expect(out.map((s) => s.id)).toEqual(["A", "B", "C"]);
   });
 
   it("pathwayType: ABSENT token matches missing value only", () => {
     const out = filterPathways(pathways, {
       pathwayType: [ABSENT_FILTER_TOKEN],
-    } as FiltersWithArrays);
+    });
     expect(out.map((s) => s.id)).toEqual(["A"]);
   });
 
   it("numeric (modelYearNetzero): OR over numbers, with ABSENT", () => {
     let out = filterPathways(pathways, {
       modelYearNetzero: [2040, 2030],
-    } as FiltersWithArrays);
+    });
     expect(out.map((s) => s.id)).toEqual(["B", "C"]);
     out = filterPathways(pathways, {
       modelYearNetzero: [2040, ABSENT_FILTER_TOKEN],
@@ -281,22 +279,22 @@ describe("filterPathways (array-backed facets)", () => {
     expect(out.map((s) => s.id)).toEqual(["A", "B"]);
     out = filterPathways(pathways, {
       modelYearNetzero: [ABSENT_FILTER_TOKEN],
-    } as FiltersWithArrays);
+    });
     expect(out.map((s) => s.id)).toEqual(["A"]);
     out = filterPathways(pathways, {
       modelYearNetzero: [9999],
-    } as FiltersWithArrays);
+    });
     expect(out.map((s) => s.id)).toEqual([]);
   });
 
   it("numeric (temperature): OR over numbers, with ABSENT", () => {
     let out = filterPathways(pathways, {
       modelTempIncrease: [1.5, 2.0],
-    } as FiltersWithArrays);
+    });
     expect(out.map((s) => s.id)).toEqual(["B", "C"]);
     out = filterPathways(pathways, {
       modelTempIncrease: [ABSENT_FILTER_TOKEN],
-    } as FiltersWithArrays);
+    });
     expect(out.map((s) => s.id)).toEqual(["A"]);
   });
 
@@ -314,13 +312,13 @@ describe("filterPathways (array-backed facets)", () => {
     // ANY (default): Europe OR Asia → B, C, B2
     let out = filterPathways(many, {
       geography: ["Europe", "Asia"],
-    } as FiltersWithArrays);
+    });
     expect(out.map((s) => s.id)).toEqual(["B", "C", "B2"]);
     // ALL: must have both → only B2
     out = filterPathways(many, {
       geography: ["Europe", "Asia"],
       modes: { geography: "ALL" },
-    } as FiltersWithArrays);
+    });
     expect(out.map((s) => s.id)).toEqual(["B2"]);
   });
 

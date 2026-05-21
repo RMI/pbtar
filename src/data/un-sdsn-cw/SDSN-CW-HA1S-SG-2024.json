@@ -34,7 +34,6 @@
   "modelYearStart": 2023,
   "modelYearEnd": 2050,
   "modelYearNetzero": 2050,
-  "ssp": "SSP2",
   "sectors": [
     {
       "name": "Power",
@@ -63,9 +62,12 @@
     "energyEfficiency": "No information",
     "energyDemand": "No information",
     "electrification": "No information",
-    "policyTypes": ["Phaseout dates", "Target technology shares"],
+    "policyTypes": [
+      "Phaseout dates",
+      "Target technology shares",
+      "Performance standards"
+    ],
     "technologyCostTrend": "No information",
-    "technologyDeploymentTrend": "Signif. technology deployment",
     "emissionsScope": "CO2e (Kyoto)",
     "policyAmbition": "High ambition policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
@@ -76,8 +78,6 @@
       "EGS/AGS",
       "Other new technologies"
     ],
-    "supplyChain": "No information",
-    "investmentNeeds": "No information",
-    "infrastructureRequirements": "No information"
+    "investmentNeeds": "No information"
   }
 }

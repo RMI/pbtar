@@ -9,11 +9,9 @@
   },
   "description": "Second Sample Pathway. uiop description.",
   "pathwayType": "Exploratory",
-  "carbonBudget": 200,
   "modelYearStart": 2020,
   "modelYearEnd": 2050,
   "modelTempIncrease": 2,
-  "ssp": "SSP2",
   "geography": ["South East Asia"],
   "sectors": [{ "name": "Agriculture", "technologies": ["Agroforestry"] }],
   "pathwayOverview": "UIOP Overview.",
@@ -31,7 +29,6 @@
       "Other"
     ],
     "technologyCostTrend": "No information",
-    "technologyDeploymentTrend": "Moderate technology deployment",
     "emissionsScope": "CO2",
     "policyAmbition": "Current/legislated policies",
     "technologyCostsDetail": "Capital costs, O&M, etc.",
@@ -42,9 +39,7 @@
       "SAF",
       "Battery storage"
     ],
-    "supplyChain": "No information",
-    "investmentNeeds": "By sector, part of value chain",
-    "infrastructureRequirements": "By supply chain, add/replace"
+    "investmentNeeds": "By sector, part of value chain"
   },
   "metric": ["Capacity", "Generation"]
 }
