@@ -129,13 +129,6 @@ const ResourcesMethodologyPage: React.FC = () => {
             terminology when describing pathways and their content. These are
             the definitions used in the context of the TPR.
           </p>
-          <p className="mt-4 text-rmigray-700 leading-7">
-            These classifications are designed to support pathway selection and
-            interpretation for use cases such as transition assessments, risk
-            analysis, and opportunity identification. They do not determine a
-            single best pathway for a task; users must still understand the
-            underlying pathway and how it meets their needs
-          </p>
 
           <div className="mt-6 grid gap-6 xl:grid-cols-3">
             <DefinitionCard title="Transition pathway">
