@@ -19,7 +19,13 @@ const SESSION_KEY = "pathway-filters";
 function loadFromSession(): SearchFilters {
   try {
     const raw = sessionStorage.getItem(SESSION_KEY);
-    return raw ? (JSON.parse(raw) as SearchFilters) : { ...EMPTY_FILTERS };
+    const parsed = raw ? (JSON.parse(raw) as Partial<SearchFilters>) : {};
+    return {
+      ...EMPTY_FILTERS,
+      ...parsed,
+      searchTerm:
+        typeof parsed.searchTerm === "string" ? parsed.searchTerm : "",
+    };
   } catch {
     return { ...EMPTY_FILTERS };
   }
