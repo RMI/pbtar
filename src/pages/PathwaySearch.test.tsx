@@ -5,6 +5,7 @@ import PathwaySearch from "./PathwaySearch";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 import { PathwayMetadataType } from "../types";
 import userEvent from "@testing-library/user-event";
+import { FilterProvider } from "../context/FilterContext";
 
 // Mock the PathwayCard component to simplify testing
 vi.mock("../components/PathwayCard", () => ({
@@ -19,10 +20,16 @@ vi.mock("../components/PathwayCard", () => ({
 }));
 
 describe("PathwaySearch component", () => {
+  beforeEach(() => {
+    sessionStorage.clear();
+  });
+
   const renderPathwaySearch = () => {
     return render(
       <MemoryRouter>
-        <PathwaySearch />
+        <FilterProvider>
+          <PathwaySearch />
+        </FilterProvider>
       </MemoryRouter>,
     );
   };
@@ -102,6 +109,7 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
   ] as const;
 
   async function mountWithFixtures(): Promise<void> {
+    sessionStorage.clear();
     // Reset module graph so our mock applies to the next import.
     vi.resetModules();
     // Mock BEFORE importing PathwaySearch
@@ -112,8 +120,18 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
         virtual: true,
       },
     );
-    PathwaySearchUnderTest = (await import("./PathwaySearch")).default;
-    render(<PathwaySearchUnderTest />);
+    // FilterProvider must be imported from the same fresh module graph so
+    // it shares the same React context instance as the re-imported PathwaySearch.
+    const [{ default: Component }, { FilterProvider: FP }] = await Promise.all([
+      import("./PathwaySearch"),
+      import("../context/FilterContext"),
+    ]);
+    PathwaySearchUnderTest = Component;
+    render(
+      <FP>
+        <PathwaySearchUnderTest />
+      </FP>,
+    );
   }
 
   async function openDropdown(labelRegex: RegExp): Promise<HTMLButtonElement> {
