@@ -2,7 +2,12 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Routes, Route, Link } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
-import { FilterProvider, useFilters, EMPTY_FILTERS } from "./FilterContext";
+import {
+  FilterProvider,
+  useFilters,
+  EMPTY_FILTERS,
+  SESSION_KEY,
+} from "./FilterContext";
 import type { SearchFilters } from "../types";
 
 const FilterConsumer = () => {
@@ -64,14 +69,14 @@ describe("FilterContext", () => {
     );
     await u.click(screen.getByTestId("set-filter"));
     const stored = JSON.parse(
-      sessionStorage.getItem("pathway-filters")!,
+      sessionStorage.getItem(SESSION_KEY)!,
     ) as SearchFilters;
     expect(stored.searchTerm).toBe("persistent");
   });
 
   it("hydrates from sessionStorage on mount", () => {
     sessionStorage.setItem(
-      "pathway-filters",
+      SESSION_KEY,
       JSON.stringify({ ...EMPTY_FILTERS, searchTerm: "pre-saved" }),
     );
     render(
@@ -94,11 +99,38 @@ describe("FilterContext", () => {
 
     await u.click(screen.getByTestId("reset"));
     expect(screen.getByTestId("search-term").textContent).toBe("");
-    expect(sessionStorage.getItem("pathway-filters")).toBeNull();
+    expect(sessionStorage.getItem(SESSION_KEY)).toBeNull();
+  });
+
+  it("merges partial sessionStorage data with EMPTY_FILTERS on mount", () => {
+    sessionStorage.setItem(
+      SESSION_KEY,
+      JSON.stringify({ searchTerm: "partial" }),
+    );
+    render(
+      <FilterProvider>
+        <FilterConsumer />
+      </FilterProvider>,
+    );
+    expect(screen.getByTestId("search-term").textContent).toBe("partial");
+    expect(screen.getByTestId("geography").textContent).toBe("null");
+  });
+
+  it("coerces non-string searchTerm from sessionStorage to empty string", () => {
+    sessionStorage.setItem(
+      SESSION_KEY,
+      JSON.stringify({ ...EMPTY_FILTERS, searchTerm: 42 }),
+    );
+    render(
+      <FilterProvider>
+        <FilterConsumer />
+      </FilterProvider>,
+    );
+    expect(screen.getByTestId("search-term").textContent).toBe("");
   });
 
   it("falls back to empty filters when sessionStorage contains invalid JSON", () => {
-    sessionStorage.setItem("pathway-filters", "not-valid-json{{{");
+    sessionStorage.setItem(SESSION_KEY, "not-valid-json{{{");
     render(
       <FilterProvider>
         <FilterConsumer />

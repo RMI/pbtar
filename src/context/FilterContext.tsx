@@ -14,7 +14,7 @@ export const EMPTY_FILTERS: SearchFilters = {
   searchTerm: "",
 };
 
-const SESSION_KEY = "pathway-filters";
+export const SESSION_KEY = "pathway-filters";
 
 function loadFromSession(): SearchFilters {
   try {
