@@ -16,8 +16,8 @@ import {
   getPathwayTypeTooltip,
   getSectorTooltip,
   getMetricTooltip,
-  getKeyFeatureTooltip,
 } from "../utils/tooltipUtils";
+import KeyFeatures from "../components/KeyFeatures";
 import DownloadDataset from "../components/DownloadDataset";
 import {
   fetchTimeseriesIndex,
@@ -255,67 +255,7 @@ const PathwayDetailPage: React.FC = () => {
                 className="mb-6"
               />
 
-              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
-                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
-                  Key Features
-                </h3>
-                {(() => {
-                  // Pretty labels for keys from schema (kept small & explicit to avoid surprises)
-                  const LABELS: Record<
-                    keyof PathwayMetadataType["keyFeatures"],
-                    string
-                  > = {
-                    emissionsTrajectory: "Emissions trajectory",
-                    energyEfficiency: "Energy efficiency",
-                    energyDemand: "Energy demand",
-                    electrification: "Electrification",
-                    policyTypes: "Policy types",
-                    technologyCostTrend: "Technology cost trend",
-                    technologyDeploymentTrend: "Technology deployment trend",
-                    emissionsScope: "Emissions scope",
-                    policyAmbition: "Policy ambition",
-                    technologyCostsDetail: "Technology costs detail",
-                    newTechnologiesIncluded: "New technologies included",
-                    supplyChain: "Supply chain",
-                    investmentNeeds: "Investment needs",
-                    infrastructureRequirements: "Infrastructure requirements",
-                  };
-
-                  return Object.entries(
-                    pathway.keyFeatures as string | string[],
-                  ).map(([rawKey, rawVal]) => {
-                    const key =
-                      rawKey as keyof PathwayMetadataType["keyFeatures"];
-                    // Normalize to an array of strings for BadgeArray
-                    const values = Array.isArray(rawVal) ? rawVal : [rawVal];
-                    // Defensive guard for any accidental empties
-                    const clean = values.filter((v): v is string =>
-                      Boolean(v && String(v).trim()),
-                    );
-                    if (clean.length === 0) return null;
-
-                    return (
-                      <div
-                        key={rawKey}
-                        className="mb-3"
-                      >
-                        <p className="text-xs font-medium text-rmigray-500 mb-1">
-                          {LABELS[key] ?? rawKey}
-                        </p>
-                        <BadgeArray
-                          variant="keyFeature"
-                          visibleCount={Infinity}
-                          tooltipGetter={(v: string) =>
-                            getKeyFeatureTooltip(key, v)
-                          }
-                        >
-                          {clean}
-                        </BadgeArray>
-                      </div>
-                    );
-                  });
-                })()}
-              </div>
+              <KeyFeatures keyFeatures={pathway.keyFeatures} />
 
               <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
                 <h3 className="text-lg font-medium text-rmigray-800 mb-3">
