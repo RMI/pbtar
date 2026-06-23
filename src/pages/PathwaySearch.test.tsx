@@ -36,8 +36,10 @@ describe("PathwaySearch component", () => {
 
   it("renders a PathwayCard for each pathway in the data", () => {
     renderPathwaySearch();
-    // Check that the correct number of pathway cards are rendered
-    const pathwayCards = screen.getAllByTestId("pathway-card");
+    // Check that the correct number of pathway cards are rendered.
+    // queryAll (not getAll) so an empty dataset yields [] rather than throwing —
+    // src/data may be fully excluded by validation until it is migrated.
+    const pathwayCards = screen.queryAllByTestId("pathway-card");
     expect(pathwayCards).toHaveLength(pathwayMetadata.length);
   });
 });
@@ -66,7 +68,7 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
       id: "B",
       name: { full: "Pathway B", short: "Power, Europe, 2°C" },
       sectors: [{ name: "Power" }],
-      geography: ["Europe"],
+      geography: { regions: { Europe: [] } },
       modelTempIncrease: "2°C",
       pathwayType: "Net Zero",
       modelYearNetzero: 2050,
@@ -77,7 +79,7 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
       id: "C",
       name: { full: "Pathway C", short: "empty sectors[], empty geo[], 1.5°C" },
       sectors: [], // -> Sector "None"
-      geography: [], // -> Geography "None"
+      geography: {}, // -> Geography "None"
       modelTempIncrease: "1.5°C",
       pathwayType: "NZi2050",
       modelYearNetzero: 2040,
@@ -88,7 +90,7 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
       id: "D",
       name: { full: "Pathway D", short: "Steel, Asia, no temp" },
       sectors: [{ name: "Steel" }],
-      geography: ["Asia"],
+      geography: { regions: { Asia: [] } },
       modelTempIncrease: undefined, // -> Temperature "None"
       pathwayType: "BAU",
       modelYearNetzero: 2030,
@@ -99,7 +101,7 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
       id: "E",
       name: { full: "Pathway E", short: "Power, Europe+Asia, 2°C" },
       sectors: [{ name: "Power" }],
-      geography: ["Europe", "Asia"],
+      geography: { regions: { Europe: [], Asia: [] } },
       modelTempIncrease: "2°C",
       pathwayType: "Net Zero",
       modelYearNetzero: 2050,

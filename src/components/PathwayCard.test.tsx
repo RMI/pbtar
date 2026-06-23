@@ -119,8 +119,8 @@ describe("PathwayCard component", () => {
 
     expect(screen.getByText("Geographies:")).toBeInTheDocument();
 
-    // Check that at least the first geography is displayed
-    expect(screen.getByText(mockPathway.geography[0])).toBeInTheDocument();
+    // Check that the geography is displayed (standard fixture is global-only)
+    expect(screen.getByText("Global")).toBeInTheDocument();
   });
 
   it("displays sector information with some sectors visible", () => {
@@ -256,7 +256,7 @@ describe("PathwayCard component", () => {
       // Create a pathway with only 2 geographies
       const pathwayWithFewGeography = {
         ...mockPathwayFull,
-        geography: ["Global", "EU"], // Only 2 geography
+        geography: { global: true, regions: { EU: [] } }, // Only 2 geography
       };
 
       const { container } = renderPathwayCard(pathwayWithFewGeography);
@@ -300,7 +300,7 @@ describe("PathwayCard component", () => {
   it("renders mapped country names on badges (not ISO2 codes)", () => {
     const pathway = {
       ...mockPathway,
-      geography: ["Global", "APAC", "DE"], // CN should render as "China"
+      geography: { global: true, regions: { APAC: [] }, country: ["DE"] }, // DE should render as "Germany"
     };
 
     // Make the container wide enough for 3+ badges in JSDOM
@@ -318,7 +318,13 @@ describe("PathwayCard component", () => {
 describe("PathwayCard search highlighting", () => {
   const mockPathway: PathwayMetadataType = {
     ...mockPathwayFull,
-    geography: [...mockPathwayFull.geography, "Hidden Match Geography"],
+    geography: {
+      ...mockPathwayFull.geography,
+      regions: {
+        ...mockPathwayFull.geography.regions,
+        "Hidden Match Geography": [],
+      },
+    },
     sectors: [
       ...mockPathwayFull.sectors,
       { name: "Hidden Match Sector", technologies: ["Other"] },

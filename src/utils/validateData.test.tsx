@@ -59,7 +59,7 @@ describe("pathway schema enforces expected limits", () => {
         modelYearEnd: 2100,
         modelYearNetzero: 2030,
         modelTempIncrease: 0.5, // min
-        geography: ["Europe and Central Asia"],
+        geography: { regions: { "Europe and Central Asia": [] } },
       },
     });
   });
@@ -76,7 +76,10 @@ describe("pathway schema enforces expected limits", () => {
           ...basePathway,
           id: "scn-2",
           name: { full: "Other" },
-          geography: ["Global", "Europe and Central Asia"],
+          geography: {
+            global: true,
+            regions: { "Europe and Central Asia": [] },
+          },
         },
       },
     ]);
@@ -172,11 +175,11 @@ describe("pathway schema enforces expected limits", () => {
     );
   });
 
-  it("fails when geography has duplicates (uniqueItems)", () => {
+  it("fails when geography country has duplicates (uniqueItems)", () => {
     fail(
       {
         name: "geography.json",
-        data: { ...basePathway, geography: ["CN", "CN"] },
+        data: { ...basePathway, geography: { country: ["CN", "CN"] } },
       },
       /must NOT have duplicate items/,
     );

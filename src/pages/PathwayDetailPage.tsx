@@ -5,6 +5,7 @@ import { pathwayMetadata } from "../data/pathwayMetadata";
 import { PathwayMetadataType } from "../types";
 import BadgeArray from "../components/BadgeArray";
 import {
+  flattenGeography,
   geographyKind,
   geographyLabel,
   geographyVariant,
@@ -323,14 +324,16 @@ const PathwayDetailPage: React.FC = () => {
                 </h3>
                 <BadgeArray
                   variant={sortGeographiesForDetails(
-                    pathway.geography ?? [],
+                    flattenGeography(pathway.geography),
                   ).map(
                     (geo) => geographyVariant(geographyKind(geo)) as string,
                   )}
                   toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
                   visibleCount={Infinity}
                 >
-                  {sortGeographiesForDetails(pathway.geography ?? [])}
+                  {sortGeographiesForDetails(
+                    flattenGeography(pathway.geography),
+                  )}
                 </BadgeArray>
               </div>
 
