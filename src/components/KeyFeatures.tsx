@@ -41,7 +41,7 @@ interface NeutralFeatureConfig {
   scaleValues: string[];
 }
 
-type FeatureConfig =
+export type FeatureConfig =
   | SingleSelectFeatureConfig
   | MultiSelectFeatureConfig
   | SentimentFeatureConfig
@@ -52,7 +52,7 @@ interface GroupConfig {
   features: FeatureConfig[];
 }
 
-const GROUPS: GroupConfig[] = [
+export const GROUPS: GroupConfig[] = [
   {
     label: "Emissions Boundary & Trajectory",
     features: [
@@ -222,12 +222,15 @@ const GROUPS: GroupConfig[] = [
   },
 ];
 
-interface FeatureItemProps {
+export interface FeatureItemProps {
   feature: FeatureConfig;
   keyFeatures: PathwayMetadataType["keyFeatures"];
 }
 
-const FeatureItem: React.FC<FeatureItemProps> = ({ feature, keyFeatures }) => {
+export const FeatureItem: React.FC<FeatureItemProps> = ({
+  feature,
+  keyFeatures,
+}) => {
   const rawValue = keyFeatures[feature.key];
 
   const label = (
