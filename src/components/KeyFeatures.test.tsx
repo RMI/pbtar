@@ -86,4 +86,38 @@ describe("KeyFeatures", () => {
     expect(label).toHaveClass("text-rmigray-500");
     expect(label).not.toHaveClass("bg-rmiblue-100");
   });
+
+  it("applies horizontal divider classes to bottom-row groups only", () => {
+    render(<KeyFeatures keyFeatures={mockKeyFeatures} />);
+    const groups = screen
+      .getAllByRole("heading", { level: 4 })
+      .map((h) => h.parentElement as HTMLElement);
+
+    // top row — no border-t
+    expect(groups[0]).not.toHaveClass("border-t");
+    expect(groups[1]).not.toHaveClass("border-t");
+    // bottom row — border-t present
+    expect(groups[2]).toHaveClass("border-t");
+    expect(groups[3]).toHaveClass("border-t");
+  });
+
+  it("does not render old box styling on any group", () => {
+    render(<KeyFeatures keyFeatures={mockKeyFeatures} />);
+    const groups = screen
+      .getAllByRole("heading", { level: 4 })
+      .map((h) => h.parentElement as HTMLElement);
+
+    groups.forEach((g) => {
+      expect(g).not.toHaveClass("bg-white");
+      expect(g).not.toHaveClass("rounded-md");
+    });
+  });
+
+  it("renders without crashing when a feature value is missing", () => {
+    const sparse = {
+      ...mockKeyFeatures,
+      emissionsScope: undefined,
+    } as PathwayMetadataType["keyFeatures"];
+    expect(() => render(<KeyFeatures keyFeatures={sparse} />)).not.toThrow();
+  });
 });

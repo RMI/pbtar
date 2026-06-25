@@ -352,15 +352,23 @@ interface KeyFeaturesProps {
 
 const KeyFeatures: React.FC<KeyFeaturesProps> = ({ keyFeatures }) => {
   return (
-    <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+    <div className="bg-neutral-50 border border-neutral-200 rounded-lg px-4 pt-4 pb-2 mb-6">
       <h3 className="text-lg font-medium text-rmigray-800 mb-3">
         Key Features
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {GROUPS.map((group) => (
+      <div className="grid grid-cols-1 md:grid-cols-2">
+        {GROUPS.map((group, idx) => (
           <div
             key={group.label}
-            className="border border-neutral-200 rounded-md p-3 bg-white"
+            className={[
+              "py-4",
+              idx >= 2 ? "border-t border-neutral-200" : "",
+              idx % 2 === 1
+                ? "md:pl-6 md:border-l md:border-neutral-200"
+                : "md:pr-6",
+            ]
+              .filter(Boolean)
+              .join(" ")}
           >
             <h4 className="text-xs font-semibold text-rmigray-500 uppercase tracking-wide mb-3">
               {group.label}
