@@ -244,21 +244,13 @@ const FeatureItem: React.FC<FeatureItemProps> = ({ feature, keyFeatures }) => {
         <div className="flex flex-wrap">
           {feature.options.map((opt) => {
             if (opt === selected) {
-              const tooltip = getKeyFeatureTooltip(feature.key, opt);
-              return tooltip ? (
+              return (
                 <TextWithTooltip
                   key={opt}
                   text={<span className={PILL_SELECTED}>{opt}</span>}
-                  tooltip={tooltip}
+                  tooltip={getKeyFeatureTooltip(feature.key, opt)}
                   position="right"
                 />
-              ) : (
-                <span
-                  key={opt}
-                  className={PILL_SELECTED}
-                >
-                  {opt}
-                </span>
               );
             }
             return (
@@ -285,21 +277,13 @@ const FeatureItem: React.FC<FeatureItemProps> = ({ feature, keyFeatures }) => {
         <div className="flex flex-wrap">
           {feature.options.map((opt) => {
             if (selectedArr.includes(opt)) {
-              const tooltip = getKeyFeatureTooltip(feature.key, opt);
-              return tooltip ? (
+              return (
                 <TextWithTooltip
                   key={opt}
                   text={<span className={PILL_SELECTED}>{opt}</span>}
-                  tooltip={tooltip}
+                  tooltip={getKeyFeatureTooltip(feature.key, opt)}
                   position="right"
                 />
-              ) : (
-                <span
-                  key={opt}
-                  className={PILL_SELECTED}
-                >
-                  {opt}
-                </span>
               );
             }
             return (
