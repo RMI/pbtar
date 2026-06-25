@@ -27,7 +27,9 @@ describe("KeyFeatures", () => {
       screen.getByText("Energy System & Transition Levers"),
     ).toBeInTheDocument();
     expect(screen.getByText("Policy Environment")).toBeInTheDocument();
-    expect(screen.getByText("Technology Assumptions")).toBeInTheDocument();
+    expect(
+      screen.getByText("Technology & Feasibility Assumptions"),
+    ).toBeInTheDocument();
   });
 
   it("single-select: selected pill has blue classes, unselected have neutral classes", () => {

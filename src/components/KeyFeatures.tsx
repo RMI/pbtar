@@ -171,7 +171,7 @@ const GROUPS: GroupConfig[] = [
     ],
   },
   {
-    label: "Technology Assumptions",
+    label: "Technology & Feasibility Assumptions",
     features: [
       {
         key: "newTechnologiesIncluded",
