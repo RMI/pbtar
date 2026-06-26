@@ -171,7 +171,7 @@ export const GROUPS: GroupConfig[] = [
     ],
   },
   {
-    label: "Technology Assumptions",
+    label: "Technology & Feasibility Assumptions",
     features: [
       {
         key: "newTechnologiesIncluded",
@@ -240,28 +240,23 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
   );
 
   if (feature.type === "single-select") {
-    const selected = rawValue as string;
+    const selected =
+      typeof rawValue === "string" && feature.options.includes(rawValue)
+        ? rawValue
+        : "No information";
     return (
       <div>
         {label}
         <div className="flex flex-wrap">
           {feature.options.map((opt) => {
             if (opt === selected) {
-              const tooltip = getKeyFeatureTooltip(feature.key, opt);
-              return tooltip ? (
+              return (
                 <TextWithTooltip
                   key={opt}
                   text={<span className={PILL_SELECTED}>{opt}</span>}
-                  tooltip={tooltip}
+                  tooltip={getKeyFeatureTooltip(feature.key, opt)}
                   position="right"
                 />
-              ) : (
-                <span
-                  key={opt}
-                  className={PILL_SELECTED}
-                >
-                  {opt}
-                </span>
               );
             }
             return (
@@ -288,21 +283,13 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
         <div className="flex flex-wrap">
           {feature.options.map((opt) => {
             if (selectedArr.includes(opt)) {
-              const tooltip = getKeyFeatureTooltip(feature.key, opt);
-              return tooltip ? (
+              return (
                 <TextWithTooltip
                   key={opt}
                   text={<span className={PILL_SELECTED}>{opt}</span>}
-                  tooltip={tooltip}
+                  tooltip={getKeyFeatureTooltip(feature.key, opt)}
                   position="right"
                 />
-              ) : (
-                <span
-                  key={opt}
-                  className={PILL_SELECTED}
-                >
-                  {opt}
-                </span>
               );
             }
             return (
@@ -320,12 +307,16 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
   }
 
   if (feature.type === "sentiment") {
+    const selectedValue =
+      typeof rawValue === "string" && rawValue.trim()
+        ? rawValue
+        : "No information";
     return (
       <div>
         {label}
         <SentimentScale
           values={feature.scaleValues}
-          selectedValue={rawValue as string}
+          selectedValue={selectedValue}
           greenEnd={feature.greenEnd}
           tooltipGetter={(v) => getKeyFeatureTooltip(feature.key, v)}
         />
@@ -334,12 +325,16 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
   }
 
   if (feature.type === "neutral") {
+    const selectedValue =
+      typeof rawValue === "string" && rawValue.trim()
+        ? rawValue
+        : "No information";
     return (
       <div>
         {label}
         <NeutralScale
           values={feature.scaleValues}
-          selectedValue={rawValue as string}
+          selectedValue={selectedValue}
           tooltipGetter={(v) => getKeyFeatureTooltip(feature.key, v)}
         />
       </div>
@@ -355,15 +350,23 @@ interface KeyFeaturesProps {
 
 const KeyFeatures: React.FC<KeyFeaturesProps> = ({ keyFeatures }) => {
   return (
-    <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+    <div className="bg-neutral-50 border border-neutral-200 rounded-lg px-4 pt-4 pb-2 mb-6">
       <h3 className="text-lg font-medium text-rmigray-800 mb-3">
         Key Features
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {GROUPS.map((group) => (
+      <div className="grid grid-cols-1 md:grid-cols-2">
+        {GROUPS.map((group, idx) => (
           <div
             key={group.label}
-            className="border border-neutral-200 rounded-md p-3 bg-white"
+            className={[
+              "py-4",
+              idx >= 2 ? "border-t border-neutral-200" : "",
+              idx % 2 === 1
+                ? "md:pl-6 md:border-l md:border-neutral-200"
+                : "md:pr-6",
+            ]
+              .filter(Boolean)
+              .join(" ")}
           >
             <h4 className="text-xs font-semibold text-rmigray-500 uppercase tracking-wide mb-3">
               {group.label}

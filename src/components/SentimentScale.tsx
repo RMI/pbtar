@@ -7,13 +7,13 @@ const COLORS_7 = [
   "bg-rmired-400",
   "bg-rmired-200",
   "bg-rmired-100",
-  "bg-neutral-300",
+  "bg-neutral-400",
   "bg-success-400",
   "bg-success-600",
   "bg-success-800",
 ];
 
-const COLORS_3 = ["bg-rmired-400", "bg-neutral-300", "bg-success-600"];
+const COLORS_3 = ["bg-rmired-400", "bg-neutral-400", "bg-success-600"];
 
 interface SentimentScaleProps {
   /** Ordered scale values, excluding "No information" */
@@ -30,7 +30,8 @@ const SentimentScale: React.FC<SentimentScaleProps> = ({
   greenEnd,
   tooltipGetter,
 }) => {
-  const isNoInfo = selectedValue === "No information";
+  const isNoInfo =
+    selectedValue === "No information" || !values.includes(selectedValue);
   const selectedIndex = values.indexOf(selectedValue);
 
   // Build per-position color array. Base is unfavorable→favorable; reverse if first value is favorable.
@@ -50,8 +51,8 @@ const SentimentScale: React.FC<SentimentScaleProps> = ({
           return (
             <div
               key={value}
-              style={{ flex: isSelected ? 2 : 1 }}
-              className={`${isSelected ? "h-3" : "h-1.5"} rounded-sm ${colors[i] ?? "bg-neutral-300"} ${
+              style={{ flex: 1 }}
+              className={`${isSelected ? "h-3" : "h-1.5"} rounded-sm ${colors[i] ?? "bg-neutral-400"} ${
                 isNoInfo || !isSelected ? "opacity-20" : ""
               }`}
             />

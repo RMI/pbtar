@@ -14,7 +14,8 @@ const NeutralScale: React.FC<NeutralScaleProps> = ({
   selectedValue,
   tooltipGetter,
 }) => {
-  const isNoInfo = selectedValue === "No information";
+  const isNoInfo =
+    selectedValue === "No information" || !values.includes(selectedValue);
   const selectedIndex = values.indexOf(selectedValue);
 
   const tooltip =
@@ -30,7 +31,7 @@ const NeutralScale: React.FC<NeutralScaleProps> = ({
           return (
             <div
               key={value}
-              style={{ flex: isSelected ? 2 : 1 }}
+              style={{ flex: 1 }}
               className={`${isSelected ? "h-3" : "h-1.5"} rounded-sm ${
                 isSelected ? "bg-rmiblue-400" : "bg-neutral-200"
               }`}
