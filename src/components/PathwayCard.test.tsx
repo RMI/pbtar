@@ -3,6 +3,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import PathwayCard from "./PathwayCard";
 import { PathwayMetadataType } from "../types";
+import { ComparisonProvider } from "../context/ComparisonContext";
 
 // Mock pathway data
 import mockPathway from "../../testdata/valid/pathwayMetadata_standard.json" assert { type: "json" };
@@ -14,10 +15,12 @@ import mockPathwayFull from "../../testdata/valid/pathwayMetadata_full.json" ass
 const renderPathwayCard = (pathway: PathwayMetadataType = mockPathway) => {
   return render(
     <MemoryRouter>
-      <PathwayCard
-        pathway={pathway}
-        searchTerm=""
-      />
+      <ComparisonProvider>
+        <PathwayCard
+          pathway={pathway}
+          searchTerm=""
+        />
+      </ComparisonProvider>
     </MemoryRouter>,
   );
 };
@@ -57,7 +60,9 @@ describe("PathwayCard component", () => {
   const renderPathwayCard = (pathway: PathwayMetadataType = mockPathway) => {
     return render(
       <MemoryRouter>
-        <PathwayCard pathway={pathway} />
+        <ComparisonProvider>
+          <PathwayCard pathway={pathway} />
+        </ComparisonProvider>
       </MemoryRouter>,
     );
   };
@@ -328,10 +333,12 @@ describe("PathwayCard search highlighting", () => {
   const renderWithRouter = (searchTerm = "") => {
     return render(
       <MemoryRouter>
-        <PathwayCard
-          pathway={mockPathway}
-          searchTerm={searchTerm}
-        />
+        <ComparisonProvider>
+          <PathwayCard
+            pathway={mockPathway}
+            searchTerm={searchTerm}
+          />
+        </ComparisonProvider>
       </MemoryRouter>,
     );
   };
@@ -443,10 +450,12 @@ describe("tooltip functionality", () => {
     const renderWithRouter = (pathway: PathwayMetadataType, searchTerm = "") =>
       render(
         <MemoryRouter>
-          <PathwayCard
-            pathway={pathway}
-            searchTerm={searchTerm}
-          />
+          <ComparisonProvider>
+            <PathwayCard
+              pathway={pathway}
+              searchTerm={searchTerm}
+            />
+          </ComparisonProvider>
         </MemoryRouter>,
       );
 

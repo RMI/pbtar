@@ -16,7 +16,7 @@ const ComparisonRibbon: React.FC = () => {
 
   const handleCompare = () => {
     if (!canCompare) return;
-    navigate(`/compare?ids=${comparedPathwayIds.join(",")}`);
+    void navigate(`/compare?ids=${comparedPathwayIds.join(",")}`);
   };
 
   if (!expanded) {

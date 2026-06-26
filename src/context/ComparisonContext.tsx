@@ -32,7 +32,7 @@ ComparisonContext.displayName = "ComparisonContext";
 export const ComparisonProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [comparedPathwayIds, setIds] = useState<string[]>(loadFromSession);
+  const [comparedPathwayIds, setIds] = useState<string[]>(loadFromSession); // eslint-disable-line @eslint-react/use-state
 
   const addToComparison = useCallback((id: string) => {
     setIds((prev) => {
@@ -40,7 +40,9 @@ export const ComparisonProvider: React.FC<{ children: React.ReactNode }> = ({
       const next = [...prev, id];
       try {
         sessionStorage.setItem(SESSION_KEY, JSON.stringify(next));
-      } catch {}
+      } catch {
+        /* non-critical: sessionStorage unavailable */
+      }
       return next;
     });
   }, []);
@@ -50,7 +52,9 @@ export const ComparisonProvider: React.FC<{ children: React.ReactNode }> = ({
       const next = prev.filter((x) => x !== id);
       try {
         sessionStorage.setItem(SESSION_KEY, JSON.stringify(next));
-      } catch {}
+      } catch {
+        /* non-critical: sessionStorage unavailable */
+      }
       return next;
     });
   }, []);
@@ -58,7 +62,9 @@ export const ComparisonProvider: React.FC<{ children: React.ReactNode }> = ({
   const clearComparison = useCallback(() => {
     try {
       sessionStorage.removeItem(SESSION_KEY);
-    } catch {}
+    } catch {
+      /* non-critical: sessionStorage unavailable */
+    }
     setIds([]);
   }, []);
 
@@ -71,7 +77,9 @@ export const ComparisonProvider: React.FC<{ children: React.ReactNode }> = ({
     const next = ids.slice(0, MAX_COMPARED);
     try {
       sessionStorage.setItem(SESSION_KEY, JSON.stringify(next));
-    } catch {}
+    } catch {
+      /* non-critical: sessionStorage unavailable */
+    }
     setIds(next);
   }, []);
 

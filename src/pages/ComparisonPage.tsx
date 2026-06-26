@@ -308,9 +308,7 @@ const ComparisonPage: React.FC = () => {
     return () => {
       cancelled = true;
     };
-    // depend on stable joined string so this only re-runs when pathway set changes
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathways.map((p) => p.id).join(",")]);
+  }, [pathways]);
 
   // Guard: need at least 2 valid pathways
   if (ids.length < 2) {

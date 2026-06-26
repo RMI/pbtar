@@ -85,7 +85,7 @@ const PlotPanel: React.FC<PlotPanelProps> = ({
         return (
           <NormalizedStackedAreaChart
             key={key}
-            data={filteredData as TimeSeries}
+            data={filteredData}
             width={dims.width}
             height={dims.height}
             sector="power"
@@ -96,7 +96,7 @@ const PlotPanel: React.FC<PlotPanelProps> = ({
         return (
           <VerticalBarChart
             key={key}
-            data={filteredData as TimeSeries}
+            data={filteredData}
             width={dims.width}
             height={dims.height}
             metric="absoluteEmissions"
@@ -106,7 +106,7 @@ const PlotPanel: React.FC<PlotPanelProps> = ({
         return (
           <VerticalBarChart
             key={key}
-            data={filteredData as TimeSeries}
+            data={filteredData}
             width={dims.width}
             height={dims.height}
             metric="emissionsIntensity"
@@ -116,7 +116,7 @@ const PlotPanel: React.FC<PlotPanelProps> = ({
         return (
           <MultiLineChart
             key={key}
-            data={filteredData as TimeSeries}
+            data={filteredData}
             width={dims.width}
             height={dims.height}
             metric="capacity"
@@ -126,7 +126,7 @@ const PlotPanel: React.FC<PlotPanelProps> = ({
         return (
           <MultiLineChart
             key={key}
-            data={filteredData as TimeSeries}
+            data={filteredData}
             width={dims.width}
             height={dims.height}
             metric="generation"
