@@ -119,7 +119,7 @@ describe("KeyFeatures", () => {
     const sparse = {
       ...mockKeyFeatures,
       emissionsScope: undefined,
-    } as PathwayMetadataType["keyFeatures"];
+    } as unknown as PathwayMetadataType["keyFeatures"];
     expect(() => render(<KeyFeatures keyFeatures={sparse} />)).not.toThrow();
   });
 });

@@ -237,7 +237,10 @@ const FeatureItem: React.FC<FeatureItemProps> = ({ feature, keyFeatures }) => {
   );
 
   if (feature.type === "single-select") {
-    const selected = rawValue as string;
+    const selected =
+      typeof rawValue === "string" && feature.options.includes(rawValue)
+        ? rawValue
+        : "No information";
     return (
       <div>
         {label}
@@ -301,12 +304,16 @@ const FeatureItem: React.FC<FeatureItemProps> = ({ feature, keyFeatures }) => {
   }
 
   if (feature.type === "sentiment") {
+    const selectedValue =
+      typeof rawValue === "string" && rawValue.trim()
+        ? rawValue
+        : "No information";
     return (
       <div>
         {label}
         <SentimentScale
           values={feature.scaleValues}
-          selectedValue={rawValue as string}
+          selectedValue={selectedValue}
           greenEnd={feature.greenEnd}
           tooltipGetter={(v) => getKeyFeatureTooltip(feature.key, v)}
         />
@@ -315,12 +322,16 @@ const FeatureItem: React.FC<FeatureItemProps> = ({ feature, keyFeatures }) => {
   }
 
   if (feature.type === "neutral") {
+    const selectedValue =
+      typeof rawValue === "string" && rawValue.trim()
+        ? rawValue
+        : "No information";
     return (
       <div>
         {label}
         <NeutralScale
           values={feature.scaleValues}
-          selectedValue={rawValue as string}
+          selectedValue={selectedValue}
           tooltipGetter={(v) => getKeyFeatureTooltip(feature.key, v)}
         />
       </div>
