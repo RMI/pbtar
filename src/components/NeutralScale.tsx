@@ -14,7 +14,8 @@ const NeutralScale: React.FC<NeutralScaleProps> = ({
   selectedValue,
   tooltipGetter,
 }) => {
-  const isNoInfo = selectedValue === "No information";
+  const isNoInfo =
+    selectedValue === "No information" || !values.includes(selectedValue);
   const selectedIndex = values.indexOf(selectedValue);
 
   const tooltip =

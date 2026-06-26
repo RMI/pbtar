@@ -30,7 +30,8 @@ const SentimentScale: React.FC<SentimentScaleProps> = ({
   greenEnd,
   tooltipGetter,
 }) => {
-  const isNoInfo = selectedValue === "No information";
+  const isNoInfo =
+    selectedValue === "No information" || !values.includes(selectedValue);
   const selectedIndex = values.indexOf(selectedValue);
 
   // Build per-position color array. Base is unfavorable→favorable; reverse if first value is favorable.
