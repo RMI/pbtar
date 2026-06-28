@@ -32,7 +32,7 @@ ComparisonContext.displayName = "ComparisonContext";
 export const ComparisonProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [comparedPathwayIds, setIds] = useState<string[]>(loadFromSession); // eslint-disable-line @eslint-react/use-state
+  const [ids, setIds] = useState<string[]>(loadFromSession);
 
   const addToComparison = useCallback((id: string) => {
     setIds((prev) => {
@@ -68,10 +68,7 @@ export const ComparisonProvider: React.FC<{ children: React.ReactNode }> = ({
     setIds([]);
   }, []);
 
-  const isInComparison = useCallback(
-    (id: string) => comparedPathwayIds.includes(id),
-    [comparedPathwayIds],
-  );
+  const isInComparison = useCallback((id: string) => ids.includes(id), [ids]);
 
   const setComparedPathwayIds = useCallback((ids: string[]) => {
     const next = ids.slice(0, MAX_COMPARED);
@@ -86,7 +83,7 @@ export const ComparisonProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <ComparisonContext
       value={{
-        comparedPathwayIds,
+        comparedPathwayIds: ids,
         addToComparison,
         removeFromComparison,
         clearComparison,
