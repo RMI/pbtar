@@ -55,7 +55,9 @@ const NeutralScale: React.FC<NeutralScaleProps> = ({
             tooltip ? (
               <TextWithTooltip
                 text={
-                  <span className={`text-xs font-semibold cursor-help ${NEUTRAL_SELECTED_COLOR.text}`}>
+                  <span
+                    className={`text-xs font-semibold cursor-help ${NEUTRAL_SELECTED_COLOR.text}`}
+                  >
                     {selectedValue}
                   </span>
                 }
@@ -63,7 +65,11 @@ const NeutralScale: React.FC<NeutralScaleProps> = ({
                 position="right"
               />
             ) : (
-              <span className={`text-xs font-semibold ${NEUTRAL_SELECTED_COLOR.text}`}>{selectedValue}</span>
+              <span
+                className={`text-xs font-semibold ${NEUTRAL_SELECTED_COLOR.text}`}
+              >
+                {selectedValue}
+              </span>
             )
           ) : null}
         </div>

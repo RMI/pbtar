@@ -367,12 +367,16 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
         position="right"
       />
     ) : (
-      <span className={`text-xs font-semibold ${textColor}`}>{selectedValue}</span>
+      <span className={`text-xs font-semibold ${textColor}`}>
+        {selectedValue}
+      </span>
     );
     return (
       <div>
         <div className="flex items-center justify-between flex-wrap gap-x-2 mb-1.5">
-          <p className="text-xs font-medium text-rmigray-500">{feature.label}</p>
+          <p className="text-xs font-medium text-rmigray-500">
+            {feature.label}
+          </p>
           <div className="ml-auto">{valueDisplay}</div>
         </div>
         <SentimentScale
@@ -411,12 +415,16 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
         position="right"
       />
     ) : (
-      <span className={`text-xs font-semibold ${textColor}`}>{selectedValue}</span>
+      <span className={`text-xs font-semibold ${textColor}`}>
+        {selectedValue}
+      </span>
     );
     return (
       <div>
         <div className="flex items-center justify-between flex-wrap gap-x-2 mb-1.5">
-          <p className="text-xs font-medium text-rmigray-500">{feature.label}</p>
+          <p className="text-xs font-medium text-rmigray-500">
+            {feature.label}
+          </p>
           <div className="ml-auto">{valueDisplay}</div>
         </div>
         <NeutralScale

@@ -81,7 +81,9 @@ const SentimentScale: React.FC<SentimentScaleProps> = ({
             tooltip ? (
               <TextWithTooltip
                 text={
-                  <span className={`text-xs font-semibold cursor-help ${palette[selectedIndex]?.text ?? "text-rmigray-500"}`}>
+                  <span
+                    className={`text-xs font-semibold cursor-help ${palette[selectedIndex]?.text ?? "text-rmigray-500"}`}
+                  >
                     {selectedValue}
                   </span>
                 }
@@ -89,7 +91,11 @@ const SentimentScale: React.FC<SentimentScaleProps> = ({
                 position="right"
               />
             ) : (
-              <span className={`text-xs font-semibold ${palette[selectedIndex]?.text ?? "text-rmigray-500"}`}>{selectedValue}</span>
+              <span
+                className={`text-xs font-semibold ${palette[selectedIndex]?.text ?? "text-rmigray-500"}`}
+              >
+                {selectedValue}
+              </span>
             )
           ) : null}
         </div>
