@@ -2,8 +2,9 @@ import React from "react";
 import { PathwayMetadataType } from "../types";
 import { getKeyFeatureTooltip } from "../utils/tooltipUtils";
 import TextWithTooltip from "./TextWithTooltip";
-import SentimentScale from "./SentimentScale";
-import NeutralScale from "./NeutralScale";
+import Badge from "./Badge";
+import SentimentScale, { getSentimentPalette } from "./SentimentScale";
+import NeutralScale, { NEUTRAL_SELECTED_COLOR } from "./NeutralScale";
 
 const PILL_SELECTED =
   "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border bg-rmiblue-100 text-rmiblue-800 border-rmiblue-200 mr-2 mb-1";
@@ -225,11 +226,13 @@ export const GROUPS: GroupConfig[] = [
 export interface FeatureItemProps {
   feature: FeatureConfig;
   keyFeatures: PathwayMetadataType["keyFeatures"];
+  selectedOnly?: boolean;
 }
 
 export const FeatureItem: React.FC<FeatureItemProps> = ({
   feature,
   keyFeatures,
+  selectedOnly = false,
 }) => {
   const rawValue = keyFeatures[feature.key];
 
@@ -248,26 +251,38 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
       <div>
         {label}
         <div className="flex flex-wrap">
-          {feature.options.map((opt) => {
-            if (opt === selected) {
+          {selectedOnly ? (
+            selected === "No information" ? (
+              <Badge>No information</Badge>
+            ) : (
+              <TextWithTooltip
+                text={<span className={PILL_SELECTED}>{selected}</span>}
+                tooltip={getKeyFeatureTooltip(feature.key, selected)}
+                position="right"
+              />
+            )
+          ) : (
+            feature.options.map((opt) => {
+              if (opt === selected) {
+                return (
+                  <TextWithTooltip
+                    key={opt}
+                    text={<span className={PILL_SELECTED}>{opt}</span>}
+                    tooltip={getKeyFeatureTooltip(feature.key, opt)}
+                    position="right"
+                  />
+                );
+              }
               return (
-                <TextWithTooltip
+                <span
                   key={opt}
-                  text={<span className={PILL_SELECTED}>{opt}</span>}
-                  tooltip={getKeyFeatureTooltip(feature.key, opt)}
-                  position="right"
-                />
+                  className={PILL_UNSELECTED}
+                >
+                  {opt}
+                </span>
               );
-            }
-            return (
-              <span
-                key={opt}
-                className={PILL_UNSELECTED}
-              >
-                {opt}
-              </span>
-            );
-          })}
+            })
+          )}
         </div>
       </div>
     );
@@ -277,30 +292,48 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
     const selectedArr = (
       Array.isArray(rawValue) ? rawValue : [rawValue]
     ) as string[];
+    const validSelected = feature.options.filter((opt) =>
+      selectedArr.includes(opt),
+    );
     return (
       <div>
         {label}
         <div className="flex flex-wrap">
-          {feature.options.map((opt) => {
-            if (selectedArr.includes(opt)) {
-              return (
+          {selectedOnly ? (
+            validSelected.length === 0 ? (
+              <Badge>No information</Badge>
+            ) : (
+              validSelected.map((opt) => (
                 <TextWithTooltip
                   key={opt}
                   text={<span className={PILL_SELECTED}>{opt}</span>}
                   tooltip={getKeyFeatureTooltip(feature.key, opt)}
                   position="right"
                 />
+              ))
+            )
+          ) : (
+            feature.options.map((opt) => {
+              if (selectedArr.includes(opt)) {
+                return (
+                  <TextWithTooltip
+                    key={opt}
+                    text={<span className={PILL_SELECTED}>{opt}</span>}
+                    tooltip={getKeyFeatureTooltip(feature.key, opt)}
+                    position="right"
+                  />
+                );
+              }
+              return (
+                <span
+                  key={opt}
+                  className={PILL_UNSELECTED}
+                >
+                  {opt}
+                </span>
               );
-            }
-            return (
-              <span
-                key={opt}
-                className={PILL_UNSELECTED}
-              >
-                {opt}
-              </span>
-            );
-          })}
+            })
+          )}
         </div>
       </div>
     );
@@ -311,14 +344,42 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
       typeof rawValue === "string" && rawValue.trim()
         ? rawValue
         : "No information";
+    const selectedIndex = feature.scaleValues.indexOf(selectedValue);
+    const isNoInfo = selectedValue === "No information" || selectedIndex < 0;
+    const tooltip = isNoInfo
+      ? undefined
+      : getKeyFeatureTooltip(feature.key, selectedValue);
+    const palette = getSentimentPalette(
+      feature.scaleValues.length,
+      feature.greenEnd,
+    );
+    const textColor = palette[selectedIndex]?.text ?? "text-rmigray-500";
+    const valueDisplay = isNoInfo ? (
+      <Badge>No information</Badge>
+    ) : tooltip ? (
+      <TextWithTooltip
+        text={
+          <span className={`text-xs font-semibold cursor-help ${textColor}`}>
+            {selectedValue}
+          </span>
+        }
+        tooltip={tooltip}
+        position="right"
+      />
+    ) : (
+      <span className={`text-xs font-semibold ${textColor}`}>{selectedValue}</span>
+    );
     return (
       <div>
-        {label}
+        <div className="flex items-center justify-between flex-wrap gap-x-2 mb-1.5">
+          <p className="text-xs font-medium text-rmigray-500">{feature.label}</p>
+          <div className="ml-auto">{valueDisplay}</div>
+        </div>
         <SentimentScale
           values={feature.scaleValues}
           selectedValue={selectedValue}
           greenEnd={feature.greenEnd}
-          tooltipGetter={(v) => getKeyFeatureTooltip(feature.key, v)}
+          showLabel={false}
         />
       </div>
     );
@@ -329,13 +390,39 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
       typeof rawValue === "string" && rawValue.trim()
         ? rawValue
         : "No information";
+    const selectedIndex = feature.scaleValues.indexOf(selectedValue);
+    const isNoInfo = selectedValue === "No information" || selectedIndex < 0;
+    const tooltip = isNoInfo
+      ? undefined
+      : getKeyFeatureTooltip(feature.key, selectedValue);
+    const textColor = isNoInfo
+      ? "text-rmigray-500"
+      : NEUTRAL_SELECTED_COLOR.text;
+    const valueDisplay = isNoInfo ? (
+      <Badge>No information</Badge>
+    ) : tooltip ? (
+      <TextWithTooltip
+        text={
+          <span className={`text-xs font-semibold cursor-help ${textColor}`}>
+            {selectedValue}
+          </span>
+        }
+        tooltip={tooltip}
+        position="right"
+      />
+    ) : (
+      <span className={`text-xs font-semibold ${textColor}`}>{selectedValue}</span>
+    );
     return (
       <div>
-        {label}
+        <div className="flex items-center justify-between flex-wrap gap-x-2 mb-1.5">
+          <p className="text-xs font-medium text-rmigray-500">{feature.label}</p>
+          <div className="ml-auto">{valueDisplay}</div>
+        </div>
         <NeutralScale
           values={feature.scaleValues}
           selectedValue={selectedValue}
-          tooltipGetter={(v) => getKeyFeatureTooltip(feature.key, v)}
+          showLabel={false}
         />
       </div>
     );

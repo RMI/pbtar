@@ -71,21 +71,55 @@ describe("KeyFeatures", () => {
     expect(phaseout).not.toHaveClass("bg-rmiblue-100");
   });
 
-  it("sentiment feature: selected value appears as a scale text label, not a blue pill", () => {
+  it("sentiment feature: selected value is bold, uses scale segment color, not a pill", () => {
     render(<KeyFeatures keyFeatures={mockKeyFeatures} />);
 
-    // "Moderate decrease" is the emissionsTrajectory value — rendered by SentimentScale
+    // "Moderate decrease" is index 5 in emissionsTrajectory (greenEnd: last, 7 values)
+    // → PALETTE_7[5] = text-success-600
     const label = screen.getByText("Moderate decrease");
-    expect(label).toHaveClass("text-rmigray-500");
+    expect(label).toHaveClass("font-semibold");
+    expect(label).toHaveClass("text-success-600");
+    expect(label).not.toHaveClass("text-rmigray-500");
     expect(label).not.toHaveClass("bg-rmiblue-100");
   });
 
-  it("neutral feature: selected value appears as a scale text label, not a blue pill", () => {
+  it("sentiment feature: unfavorable value uses red scale color", () => {
+    const unfavorable = {
+      ...mockKeyFeatures,
+      emissionsTrajectory: "Significant increase",
+    } as unknown as PathwayMetadataType["keyFeatures"];
+    render(<KeyFeatures keyFeatures={unfavorable} />);
+
+    // "Significant increase" is index 0 in emissionsTrajectory (greenEnd: last, 7 values)
+    // → PALETTE_7[0] = text-rmired-400
+    const label = screen.getByText("Significant increase");
+    expect(label).toHaveClass("font-semibold");
+    expect(label).toHaveClass("text-rmired-400");
+    expect(label).not.toHaveClass("text-rmigray-500");
+  });
+
+  it("sentiment feature: no-info value renders a Badge, not a colored text span", () => {
+    const noInfo = {
+      ...mockKeyFeatures,
+      emissionsTrajectory: undefined,
+    } as unknown as PathwayMetadataType["keyFeatures"];
+    render(<KeyFeatures keyFeatures={noInfo} />);
+
+    // The Badge text should be present; no span with colored font for that feature
+    const badge = screen.getAllByText("No information")[0];
+    expect(badge).toBeInTheDocument();
+    expect(badge).not.toHaveClass("text-success-600");
+    expect(badge).not.toHaveClass("text-rmired-400");
+  });
+
+  it("neutral feature: selected value is bold, uses blue scale color, not a pill", () => {
     render(<KeyFeatures keyFeatures={mockKeyFeatures} />);
 
-    // "NDCs incl. conditional targets" is the policyAmbition value — rendered by NeutralScale
+    // "NDCs incl. conditional targets" is the policyAmbition value — NeutralScale color
     const label = screen.getByText("NDCs incl. conditional targets");
-    expect(label).toHaveClass("text-rmigray-500");
+    expect(label).toHaveClass("font-semibold");
+    expect(label).toHaveClass("text-rmiblue-400");
+    expect(label).not.toHaveClass("text-rmigray-500");
     expect(label).not.toHaveClass("bg-rmiblue-100");
   });
 

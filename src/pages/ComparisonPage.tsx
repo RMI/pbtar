@@ -17,34 +17,12 @@ import {
   sortGeographiesForDetails,
 } from "../utils/geographyUtils";
 import BadgeArray from "../components/BadgeArray";
-import Badge from "../components/Badge";
 import getTemperatureColor from "../utils/getTemperatureColor";
 import { getSectorTooltip, getMetricTooltip } from "../utils/tooltipUtils";
 import ComparisonKeyFeatures from "../components/ComparisonKeyFeatures";
 import ComparisonPlots, {
   ComparisonPlotsEntry,
 } from "../components/ComparisonPlots";
-
-// All known sectors in display order (union source)
-const ALL_SECTORS = [
-  "Agriculture",
-  "Aviation",
-  "Buildings",
-  "Cement",
-  "Chemicals",
-  "Coal Mining",
-  "Gas (Upstream)",
-  "Industry",
-  "Land Use",
-  "Oil (Upstream)",
-  "Power",
-  "Rail",
-  "Road Transport",
-  "Shipping",
-  "Steel",
-  "Transport",
-  "Other",
-];
 
 // ── Pathway summary card (compact) ──────────────────────────────────────────
 
@@ -130,49 +108,6 @@ const PathwaySummaryCard: React.FC<{ pathway: PathwayMetadataType }> = ({
   );
 };
 
-// ── Sectors comparison: union of all sectors, yellow = included, grey = not ──
-
-interface ComparisonSectorsProps {
-  pathways: PathwayMetadataType[];
-}
-
-const ComparisonSectors: React.FC<ComparisonSectorsProps> = ({ pathways }) => {
-  // Union of all sector names across compared pathways
-  const unionSectors = useMemo(() => {
-    const present = new Set<string>();
-    pathways.forEach((p) => p.sectors.forEach((s) => present.add(s.name)));
-    return ALL_SECTORS.filter((s) => present.has(s));
-  }, [pathways]);
-
-  const n = pathways.length;
-
-  return (
-    <div
-      className="grid gap-x-6"
-      style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
-    >
-      {unionSectors.map((sectorName) =>
-        pathways.map((pathway, i) => {
-          const hasIt = pathway.sectors.some((s) => s.name === sectorName);
-          return (
-            <div
-              key={`${sectorName}-${i}`}
-              className="pb-1"
-            >
-              <Badge
-                variant={hasIt ? "sector" : "default"}
-                tooltip={hasIt ? getSectorTooltip(sectorName) : undefined}
-              >
-                {sectorName}
-              </Badge>
-            </div>
-          );
-        }),
-      )}
-    </div>
-  );
-};
-
 // ── Geographies: one BadgeArray per pathway column ───────────────────────────
 
 interface ComparisonGeographiesProps {
@@ -216,16 +151,6 @@ const SectionHeading: React.FC<{ children: React.ReactNode }> = ({
   >
     <h2 className="text-base font-semibold text-rmigray-800">{children}</h2>
   </div>
-);
-
-// ── Column heading (pathway name in its column) ───────────────────────────────
-
-const ColumnHeading: React.FC<{ pathway: PathwayMetadataType }> = ({
-  pathway,
-}) => (
-  <h3 className="text-xs font-semibold text-rmigray-500 mb-2 uppercase tracking-wide truncate">
-    {pathway.publication.publisher.short ?? pathway.publication.publisher.full}
-  </h3>
 );
 
 // ── Main page ────────────────────────────────────────────────────────────────
@@ -393,7 +318,6 @@ const ComparisonPage: React.FC = () => {
             key={p.id}
             className="min-w-0"
           >
-            <ColumnHeading pathway={p} />
             <BadgeArray
               variant="metric"
               tooltipGetter={getMetricTooltip}
@@ -420,18 +344,20 @@ const ComparisonPage: React.FC = () => {
         style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
       >
         <SectionHeading>Sectors</SectionHeading>
-        {/* Column headings */}
         {pathways.map((p) => (
-          <ColumnHeading
+          <div
             key={p.id}
-            pathway={p}
-          />
+            className="min-w-0"
+          >
+            <BadgeArray
+              variant="sector"
+              tooltipGetter={getSectorTooltip}
+              visibleCount={Infinity}
+            >
+              {p.sectors.map((s) => s.name)}
+            </BadgeArray>
+          </div>
         ))}
-        {/* Sector rows: union, yellow = covered, grey = not — span all columns so
-            ComparisonSectors's own N-column grid fills full width */}
-        <div style={{ gridColumn: "1 / -1" }}>
-          <ComparisonSectors pathways={pathways} />
-        </div>
       </div>
     </div>
   );

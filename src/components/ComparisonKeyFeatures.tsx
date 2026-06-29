@@ -16,11 +16,11 @@ const ComparisonKeyFeatures: React.FC<ComparisonKeyFeaturesProps> = ({
       className="grid gap-x-6"
       style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
     >
-      {GROUPS.map((group) => (
+      {GROUPS.map((group, groupIdx) => (
         <React.Fragment key={group.label}>
           {/* Group header — spans all pathway columns */}
           <div
-            className="border-t border-neutral-200 pt-3 pb-1 mt-2"
+            className={`pt-3 pb-1 ${groupIdx > 0 ? "border-t border-neutral-200 mt-2" : ""}`}
             style={{ gridColumn: "1 / -1" }}
           >
             <h4 className="text-xs font-semibold text-rmigray-500 uppercase tracking-wide">
@@ -39,6 +39,7 @@ const ComparisonKeyFeatures: React.FC<ComparisonKeyFeaturesProps> = ({
                 <FeatureItem
                   feature={feature}
                   keyFeatures={pathway.keyFeatures}
+                  selectedOnly
                 />
               </div>
             )),
