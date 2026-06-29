@@ -9,11 +9,12 @@ import {
   sortGeographiesForDetails,
 } from "../utils/geographyUtils";
 import { PathwayMetadataType } from "../types";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Plus, Check } from "lucide-react";
 import HighlightedText from "./HighlightedText";
 import { prioritizeMatches, prioritizeGeographies } from "../utils/sortUtils";
 import { getSectorTooltip, getMetricTooltip } from "../utils/tooltipUtils";
 import getTemperatureColor from "../utils/getTemperatureColor";
+import { useComparison, MAX_COMPARED } from "../context/ComparisonContext";
 
 interface PathwayCardProps {
   pathway: PathwayMetadataType;
@@ -27,6 +28,15 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
   pathway,
   searchTerm = "",
 }) => {
+  const {
+    addToComparison,
+    removeFromComparison,
+    isInComparison,
+    comparedPathwayIds,
+  } = useComparison();
+  const inComparison = isInComparison(pathway.id);
+  const comparisonFull =
+    comparedPathwayIds.length >= MAX_COMPARED && !inComparison;
   // Sort geography and sectors to prioritize matches
   const sortedGeography = useMemo(
     () =>
@@ -201,10 +211,10 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
               </p>
             </div>
           </div>
-          <div className="flex flex-col">
+          <div className="flex gap-2">
             <Link
               to={`/pathway/${pathway.id}`}
-              className="bg-rmiblue-100 hover:bg-rmiblue-200 transition-colors duration-200 h-12 flex items-center justify-center w-full"
+              className="bg-rmiblue-100 hover:bg-rmiblue-200 transition-colors duration-200 h-12 flex items-center justify-center flex-1"
             >
               <span className="text-bluespruce font-medium">View Details</span>
               <ChevronRight
@@ -212,6 +222,39 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
                 className="ml-2 text-bluespruce"
               />
             </Link>
+            <button
+              type="button"
+              onClick={() =>
+                inComparison
+                  ? removeFromComparison(pathway.id)
+                  : addToComparison(pathway.id)
+              }
+              disabled={comparisonFull}
+              aria-label={
+                inComparison
+                  ? "Remove from comparison"
+                  : comparisonFull
+                    ? "Comparison full (max 3)"
+                    : "Add to comparison"
+              }
+              aria-pressed={inComparison}
+              title={
+                inComparison
+                  ? "Remove from comparison"
+                  : comparisonFull
+                    ? "Comparison full (max 3)"
+                    : "Add to comparison"
+              }
+              className={`h-12 w-12 flex-shrink-0 flex items-center justify-center border transition-colors duration-200 ${
+                inComparison
+                  ? "bg-bluespruce border-bluespruce text-white hover:bg-energy hover:border-energy"
+                  : comparisonFull
+                    ? "bg-neutral-100 border-neutral-200 text-neutral-300 cursor-not-allowed"
+                    : "bg-white border-neutral-200 text-rmigray-500 hover:bg-rmiblue-50 hover:border-rmiblue-300 hover:text-bluespruce"
+              }`}
+            >
+              {inComparison ? <Check size={18} /> : <Plus size={18} />}
+            </button>
           </div>
         </div>
       </div>
