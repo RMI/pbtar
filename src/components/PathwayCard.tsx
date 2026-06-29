@@ -223,12 +223,21 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
               />
             </Link>
             <button
+              type="button"
               onClick={() =>
                 inComparison
                   ? removeFromComparison(pathway.id)
                   : addToComparison(pathway.id)
               }
               disabled={comparisonFull}
+              aria-label={
+                inComparison
+                  ? "Remove from comparison"
+                  : comparisonFull
+                    ? "Comparison full (max 3)"
+                    : "Add to comparison"
+              }
+              aria-pressed={inComparison}
               title={
                 inComparison
                   ? "Remove from comparison"
