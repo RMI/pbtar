@@ -159,22 +159,30 @@ const ComparisonPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const { setComparedPathwayIds } = useComparison();
 
-  // Parse IDs from URL — the source of truth for which pathways to compare
+  // Parse IDs from URL — the source of truth for which pathways to compare.
+  // De-duplicate and validate against known pathways so an invalid/shared URL
+  // can never leave the page or ribbon in an inconsistent state.
   const ids = useMemo(() => {
     const raw = searchParams.get("ids");
     if (!raw) return [];
+    const seen = new Set<string>();
     return raw
       .split(",")
       .map((s) => s.trim())
       .filter(Boolean)
+      .filter((id) => pathwayMetadata.some((p) => p.id === id))
+      .filter((id) => {
+        if (seen.has(id)) return false;
+        seen.add(id);
+        return true;
+      })
       .slice(0, 3);
   }, [searchParams]);
 
-  // Sync URL IDs back into context so the ribbon stays current
+  // Always sync URL IDs back into context so the ribbon stays current,
+  // including when the URL resolves to 0–1 valid IDs (clears stale state).
   useEffect(() => {
-    if (ids.length >= 2) {
-      setComparedPathwayIds(ids);
-    }
+    setComparedPathwayIds(ids);
   }, [ids, setComparedPathwayIds]);
 
   const pathways = useMemo(
