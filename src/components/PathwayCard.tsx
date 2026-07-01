@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import BadgeArray from "./BadgeArray";
 import {
+  flattenGeography,
   geographyKind,
   geographyLabel,
   geographyVariant,
@@ -41,7 +42,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
   const sortedGeography = useMemo(
     () =>
       prioritizeGeographies(
-        sortGeographiesForDetails(pathway.geography),
+        sortGeographiesForDetails(flattenGeography(pathway.geography)),
         searchTerm,
       ),
     [pathway.geography, searchTerm],

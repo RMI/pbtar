@@ -1,8 +1,24 @@
 import countries from "i18n-iso-countries";
 import en from "i18n-iso-countries/langs/en.json";
+import type { Geography } from "../types";
 countries.registerLocale(en);
 
 export type GeographyKind = "global" | "region" | "country";
+
+// Flatten the structured geography object into the ordered flat token list the
+// rest of the app historically operated on: "Global" (when global) → region
+// labels → country codes. This intentionally does NOT expand region membership
+// into countries — the canonical region→country intersection is a later phase.
+// `geographyKind`/`geographyLabel`/`sortGeographiesForDetails` continue to work
+// on the individual string tokens this returns.
+export function flattenGeography(geo: Geography | null | undefined): string[] {
+  if (!geo || typeof geo !== "object") return [];
+  const tokens: string[] = [];
+  if (geo.global) tokens.push("Global");
+  if (geo.regions) tokens.push(...Object.keys(geo.regions));
+  if (geo.country) tokens.push(...geo.country);
+  return tokens;
+}
 
 //Normalize to a safe string: accept strings (and basic primitives), drop everything else.
 export function normalizeGeography(raw: unknown): string {

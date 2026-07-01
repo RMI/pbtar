@@ -106,6 +106,24 @@ describe("assertKnownCountryISO2 (strict ISO2 validation)", () => {
   });
 });
 
+// Build the structured geography object from a flat list of tokens by
+// classifying each one (global / region label / country code). flattenGeography
+// is the inverse, so makeGeographyOptions sees the same tokens as before.
+const toGeographyObject = (tokens: string[]) => {
+  const geo: {
+    global?: boolean;
+    regions?: Record<string, string[]>;
+    country?: string[];
+  } = {};
+  for (const t of tokens) {
+    const kind = geographyKind(t);
+    if (kind === "global") geo.global = true;
+    else if (kind === "country") (geo.country ??= []).push(t);
+    else (geo.regions ??= {})[t] = [];
+  }
+  return geo;
+};
+
 const mkPathway = (id: string, geography: string[]): PathwayMetadataType =>
   ({
     id,
@@ -114,7 +132,7 @@ const mkPathway = (id: string, geography: string[]): PathwayMetadataType =>
     pathwayType: "Mitigation",
     modelYearEnd: 2050,
     modelTempIncrease: 1.5,
-    geography,
+    geography: toGeographyObject(geography),
     sectors: [],
     publisher: "RMI",
     publicationYear: 2024,
