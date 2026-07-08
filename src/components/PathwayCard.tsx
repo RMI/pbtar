@@ -9,12 +9,18 @@ import {
   sortGeographiesForDetails,
 } from "../utils/geographyUtils";
 import { PathwayMetadataType } from "../types";
-import { ChevronRight, Plus, Check } from "lucide-react";
+import { ChevronRight, Plus, Check, Info } from "lucide-react";
 import HighlightedText from "./HighlightedText";
 import { prioritizeMatches, prioritizeGeographies } from "../utils/sortUtils";
 import { getSectorTooltip, getMetricTooltip } from "../utils/tooltipUtils";
 import getTemperatureColor from "../utils/getTemperatureColor";
 import { useComparison, MAX_COMPARED } from "../context/ComparisonContext";
+import { index } from "../data/index.gen";
+import {
+  pathwayToolAvailability,
+  TOOL_AVAILABILITY_TOOLTIP,
+} from "../utils/timeseriesAvailability";
+import TextWithTooltip from "./TextWithTooltip";
 
 interface PathwayCardProps {
   pathway: PathwayMetadataType;
@@ -50,6 +56,11 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
   const sortedSectors = useMemo(
     () => prioritizeMatches(pathway.sectors, searchTerm),
     [pathway.sectors, searchTerm],
+  );
+
+  const availability = useMemo(
+    () => pathwayToolAvailability(index.byPathway[pathway.id] ?? []),
+    [pathway.id],
   );
 
   // Helper function to conditionally highlight text based on search term
@@ -138,14 +149,25 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
 
         {/* Geographies section with dynamic badge count */}
         <div className="mb-3">
-          <p className="text-xs font-medium text-rmigray-500 mb-1">
+          <p className="text-xs font-medium text-rmigray-500 mb-1 flex items-center gap-1">
             Geographies:
+            <TextWithTooltip
+              text={
+                <Info
+                  size={12}
+                  className="text-rmigray-400 cursor-help"
+                />
+              }
+              tooltip={TOOL_AVAILABILITY_TOOLTIP}
+              position="right"
+            />
           </p>
           <div className="flex flex-wrap">
             <BadgeArray
-              variant={sortedGeography.map(
-                (geo) => geographyVariant(geographyKind(geo)) as string,
-              )}
+              variant={sortedGeography.map((geo) => {
+                const base = geographyVariant(geographyKind(geo));
+                return availability.hasGeography(geo) ? base : `${base}-pub`;
+              })}
               toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
               maxRows={2}
@@ -157,10 +179,24 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
 
         {/* Sectors section with dynamic badge count */}
         <div className="mb-3">
-          <p className="text-xs font-medium text-rmigray-500 mb-1">Sectors:</p>
+          <p className="text-xs font-medium text-rmigray-500 mb-1 flex items-center gap-1">
+            Sectors:
+            <TextWithTooltip
+              text={
+                <Info
+                  size={12}
+                  className="text-rmigray-400 cursor-help"
+                />
+              }
+              tooltip={TOOL_AVAILABILITY_TOOLTIP}
+              position="right"
+            />
+          </p>
           <div className="flex flex-wrap">
             <BadgeArray
-              variant="sector"
+              variant={sortedSectors.map((s) =>
+                availability.hasSector(s.name) ? "sector" : "sector-pub",
+              )}
               tooltipGetter={getSectorTooltip}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
               maxRows={2}
@@ -172,12 +208,24 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
 
         {/* Metrics section with dynamic badge count */}
         <div className="mb-3">
-          <p className="text-xs font-medium text-rmigray-500 mb-1">
+          <p className="text-xs font-medium text-rmigray-500 mb-1 flex items-center gap-1">
             Benchmark Metrics:
+            <TextWithTooltip
+              text={
+                <Info
+                  size={12}
+                  className="text-rmigray-400 cursor-help"
+                />
+              }
+              tooltip={TOOL_AVAILABILITY_TOOLTIP}
+              position="right"
+            />
           </p>
           <div className="flex flex-wrap">
             <BadgeArray
-              variant="metric"
+              variant={pathway.metric.map((m) =>
+                availability.hasMetric(m) ? "metric" : "metric-pub",
+              )}
               tooltipGetter={getMetricTooltip}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
               maxRows={2}

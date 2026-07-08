@@ -11,7 +11,8 @@ function renderShell(opts?: {
   menuWidthClassName?: string;
   header?: React.ReactNode;
   children?:
-    React.ReactNode | ((api: { close: () => void }) => React.ReactNode);
+    | React.ReactNode
+    | ((api: { close: () => void }) => React.ReactNode);
 }) {
   const onClear = vi.fn();
   const utils = render(

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Markdown from "../components/Markdown";
 import { pathwayMetadata } from "../data/pathwayMetadata";
@@ -11,7 +11,7 @@ import {
   normalizeGeography,
   sortGeographiesForDetails,
 } from "../utils/geographyUtils";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Info } from "lucide-react";
 import {
   getPathwayTypeTooltip,
   getSectorTooltip,
@@ -27,6 +27,11 @@ import {
 import PublicationBlock from "../components/PublicationBlock";
 import { PlotSelector, TimeSeries } from "../components/PlotSelector";
 import getTemperatureColor from "../utils/getTemperatureColor";
+import TextWithTooltip from "../components/TextWithTooltip";
+import {
+  pathwayToolAvailability,
+  TOOL_AVAILABILITY_TOOLTIP,
+} from "../utils/timeseriesAvailability";
 
 const PathwayDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -100,6 +105,11 @@ const PathwayDetailPage: React.FC = () => {
         .catch((error) => console.error("Error fetching JSON:", error));
     }
   }, [datasets]);
+
+  const availability = useMemo(
+    () => pathwayToolAvailability(datasets),
+    [datasets],
+  );
 
   if (loading) {
     return (
@@ -258,15 +268,28 @@ const PathwayDetailPage: React.FC = () => {
               <KeyFeatures keyFeatures={pathway.keyFeatures} />
 
               <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
-                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
+                <h3 className="text-lg font-medium text-rmigray-800 mb-3 flex items-center gap-1.5">
                   Geographies
+                  <TextWithTooltip
+                    text={
+                      <Info
+                        size={14}
+                        className="text-rmigray-400 cursor-help"
+                      />
+                    }
+                    tooltip={TOOL_AVAILABILITY_TOOLTIP}
+                    position="right"
+                  />
                 </h3>
                 <BadgeArray
                   variant={sortGeographiesForDetails(
                     pathway.geography ?? [],
-                  ).map(
-                    (geo) => geographyVariant(geographyKind(geo)) as string,
-                  )}
+                  ).map((geo) => {
+                    const base = geographyVariant(geographyKind(geo));
+                    return availability.hasGeography(geo)
+                      ? base
+                      : `${base}-pub`;
+                  })}
                   toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
                   visibleCount={Infinity}
                 >
@@ -275,27 +298,48 @@ const PathwayDetailPage: React.FC = () => {
               </div>
 
               <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
-                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
+                <h3 className="text-lg font-medium text-rmigray-800 mb-3 flex items-center gap-1.5">
                   Sectors
+                  <TextWithTooltip
+                    text={
+                      <Info
+                        size={14}
+                        className="text-rmigray-400 cursor-help"
+                      />
+                    }
+                    tooltip={TOOL_AVAILABILITY_TOOLTIP}
+                    position="right"
+                  />
                 </h3>
-                {/* Sectors section with dynamic badge count */}
-                <div className="mb-3">
-                  <BadgeArray
-                    variant="sector"
-                    tooltipGetter={getSectorTooltip}
-                    visibleCount={Infinity}
-                  >
-                    {pathway.sectors.map((sector) => sector.name)}
-                  </BadgeArray>
-                </div>
+                <BadgeArray
+                  variant={pathway.sectors.map((s) =>
+                    availability.hasSector(s.name) ? "sector" : "sector-pub",
+                  )}
+                  tooltipGetter={getSectorTooltip}
+                  visibleCount={Infinity}
+                >
+                  {pathway.sectors.map((sector) => sector.name)}
+                </BadgeArray>
               </div>
 
               <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
-                <h3 className="text-lg font-medium text-rmigray-800 mb-3">
+                <h3 className="text-lg font-medium text-rmigray-800 mb-3 flex items-center gap-1.5">
                   Benchmark Metrics
+                  <TextWithTooltip
+                    text={
+                      <Info
+                        size={14}
+                        className="text-rmigray-400 cursor-help"
+                      />
+                    }
+                    tooltip={TOOL_AVAILABILITY_TOOLTIP}
+                    position="right"
+                  />
                 </h3>
                 <BadgeArray
-                  variant="metric"
+                  variant={pathway.metric.map((m) =>
+                    availability.hasMetric(m) ? "metric" : "metric-pub",
+                  )}
                   tooltipGetter={getMetricTooltip}
                   visibleCount={Infinity}
                 >

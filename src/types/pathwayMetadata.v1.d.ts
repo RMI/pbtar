@@ -216,7 +216,10 @@ export interface PathwayMetadataV1 {
      * Describes how technology costs evolve over time, from static cost assumptions to rapidly declining costs (e.g., via learning curves).
      */
     technologyCostTrend:
-      "No information" | "Increase" | "Low or no change" | "Decrease";
+      | "No information"
+      | "Increase"
+      | "Low or no change"
+      | "Decrease";
     emissionsScope: EmissionsScope;
     /**
      * Represents the overall stringency and intent of modeled policies relative to climate targets, often reflecting if and how far the included policies go beyond currently legislated ones
