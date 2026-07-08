@@ -116,12 +116,7 @@ export type FilterModes = Partial<{
 // - geography/sector may be string | string[]
 // - optionally accept a modes map
 export type Arrayable =
-  | string
-  | string[]
-  | number
-  | number[]
-  | null
-  | undefined;
+  string | string[] | number | number[] | null | undefined;
 
 export type FiltersWithArrays = {
   geography?: Arrayable;
