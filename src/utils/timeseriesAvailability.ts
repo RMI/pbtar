@@ -10,7 +10,16 @@ interface TimeseriesSummary {
 
 function parseSummary(summary: unknown): TimeseriesSummary {
   if (!summary || typeof summary !== "object") return {};
-  return summary;
+  const s = summary as Record<string, unknown>;
+  const toStringArray = (v: unknown): string[] | undefined =>
+    Array.isArray(v)
+      ? v.filter((x): x is string => typeof x === "string" && x.length > 0)
+      : undefined;
+  return {
+    sectors: toStringArray(s["sectors"]),
+    geographies: toStringArray(s["geographies"]),
+    metrics: toStringArray(s["metrics"]),
+  };
 }
 
 function sectorDisplayNames(summary: unknown): Set<string> {
