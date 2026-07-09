@@ -18,6 +18,7 @@ import { useComparison, MAX_COMPARED } from "../context/ComparisonContext";
 import { index } from "../data/index.gen";
 import {
   pathwayToolAvailability,
+  sortByAvailability,
   GEOGRAPHY_AVAILABILITY_TOOLTIP,
   SECTOR_AVAILABILITY_TOOLTIP,
   METRIC_AVAILABILITY_TOOLTIP,
@@ -45,24 +46,35 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
   const inComparison = isInComparison(pathway.id);
   const comparisonFull =
     comparedPathwayIds.length >= MAX_COMPARED && !inComparison;
-  // Sort geography and sectors to prioritize matches
-  const sortedGeography = useMemo(
-    () =>
-      prioritizeGeographies(
-        sortGeographiesForDetails(pathway.geography),
-        searchTerm,
-      ),
-    [pathway.geography, searchTerm],
-  );
-
-  const sortedSectors = useMemo(
-    () => prioritizeMatches(pathway.sectors, searchTerm),
-    [pathway.sectors, searchTerm],
-  );
-
   const availability = useMemo(
     () => pathwayToolAvailability(index.byPathway[pathway.id] ?? []),
     [pathway.id],
+  );
+
+  // Sort geography and sectors to prioritize matches, then by availability
+  const sortedGeography = useMemo(
+    () =>
+      sortByAvailability(
+        prioritizeGeographies(
+          sortGeographiesForDetails(pathway.geography),
+          searchTerm,
+        ),
+        (geo) => availability.hasGeography(geo),
+      ),
+    [pathway.geography, searchTerm, availability],
+  );
+
+  const sortedSectors = useMemo(
+    () =>
+      sortByAvailability(prioritizeMatches(pathway.sectors, searchTerm), (s) =>
+        availability.hasSector(s.name),
+      ),
+    [pathway.sectors, searchTerm, availability],
+  );
+
+  const sortedMetrics = useMemo(
+    () => sortByAvailability(pathway.metric, (m) => availability.hasMetric(m)),
+    [pathway.metric, availability],
   );
 
   // Helper function to conditionally highlight text based on search term
@@ -228,14 +240,14 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
           </p>
           <div className="flex flex-wrap">
             <BadgeArray
-              variant={pathway.metric.map((m) =>
+              variant={sortedMetrics.map((m) =>
                 availability.hasMetric(m) ? "metric" : "metric-pub",
               )}
               tooltipGetter={getMetricTooltip}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
               maxRows={2}
             >
-              {pathway.metric}
+              {sortedMetrics}
             </BadgeArray>
           </div>
         </div>

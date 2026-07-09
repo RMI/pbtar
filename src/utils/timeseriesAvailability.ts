@@ -83,6 +83,16 @@ export function pathwayToolAvailability(
   };
 }
 
+export function sortByAvailability<T>(
+  items: T[],
+  isAvailable: (item: T) => boolean,
+): T[] {
+  return [
+    ...items.filter(isAvailable),
+    ...items.filter((item) => !isAvailable(item)),
+  ];
+}
+
 export const GEOGRAPHY_AVAILABILITY_TOOLTIP =
   "Filled badges indicate that data is available for visualization and download in this tool. Outlined badges indicate the data for this geography is available in the source publication, but not currently in this tool.";
 

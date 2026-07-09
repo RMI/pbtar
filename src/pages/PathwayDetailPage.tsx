@@ -30,6 +30,7 @@ import getTemperatureColor from "../utils/getTemperatureColor";
 import TextWithTooltip from "../components/TextWithTooltip";
 import {
   pathwayToolAvailability,
+  sortByAvailability,
   GEOGRAPHY_AVAILABILITY_TOOLTIP,
   SECTOR_AVAILABILITY_TOOLTIP,
   METRIC_AVAILABILITY_TOOLTIP,
@@ -111,6 +112,31 @@ const PathwayDetailPage: React.FC = () => {
   const availability = useMemo(
     () => pathwayToolAvailability(datasets),
     [datasets],
+  );
+
+  const sortedGeos = useMemo(
+    () =>
+      sortByAvailability(
+        sortGeographiesForDetails(pathway?.geography ?? []),
+        (geo) => availability.hasGeography(geo),
+      ),
+    [pathway, availability],
+  );
+
+  const sortedSectors = useMemo(
+    () =>
+      sortByAvailability(pathway?.sectors ?? [], (s) =>
+        availability.hasSector(s.name),
+      ),
+    [pathway, availability],
+  );
+
+  const sortedMetrics = useMemo(
+    () =>
+      sortByAvailability(pathway?.metric ?? [], (m) =>
+        availability.hasMetric(m),
+      ),
+    [pathway, availability],
   );
 
   if (loading) {
@@ -285,9 +311,7 @@ const PathwayDetailPage: React.FC = () => {
                   />
                 </h3>
                 <BadgeArray
-                  variant={sortGeographiesForDetails(
-                    pathway.geography ?? [],
-                  ).map((geo) => {
+                  variant={sortedGeos.map((geo) => {
                     const base = geographyVariant(geographyKind(geo));
                     return availability.hasGeography(geo)
                       ? base
@@ -296,7 +320,7 @@ const PathwayDetailPage: React.FC = () => {
                   toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
                   visibleCount={Infinity}
                 >
-                  {sortGeographiesForDetails(pathway.geography ?? [])}
+                  {sortedGeos}
                 </BadgeArray>
               </div>
 
@@ -316,13 +340,13 @@ const PathwayDetailPage: React.FC = () => {
                   />
                 </h3>
                 <BadgeArray
-                  variant={pathway.sectors.map((s) =>
+                  variant={sortedSectors.map((s) =>
                     availability.hasSector(s.name) ? "sector" : "sector-pub",
                   )}
                   tooltipGetter={getSectorTooltip}
                   visibleCount={Infinity}
                 >
-                  {pathway.sectors.map((sector) => sector.name)}
+                  {sortedSectors.map((s) => s.name)}
                 </BadgeArray>
               </div>
 
@@ -342,13 +366,13 @@ const PathwayDetailPage: React.FC = () => {
                   />
                 </h3>
                 <BadgeArray
-                  variant={pathway.metric.map((m) =>
+                  variant={sortedMetrics.map((m) =>
                     availability.hasMetric(m) ? "metric" : "metric-pub",
                   )}
                   tooltipGetter={getMetricTooltip}
                   visibleCount={Infinity}
                 >
-                  {pathway.metric}
+                  {sortedMetrics}
                 </BadgeArray>
               </div>
             </div>

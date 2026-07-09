@@ -26,6 +26,7 @@ import ComparisonPlots, {
 import { index } from "../data/index.gen";
 import {
   pathwayToolAvailability,
+  sortByAvailability,
   PathwayToolAvailability,
   GEOGRAPHY_AVAILABILITY_TOOLTIP,
   SECTOR_AVAILABILITY_TOOLTIP,
@@ -130,8 +131,11 @@ const ComparisonGeographies: React.FC<ComparisonGeographiesProps> = ({
 }) => (
   <>
     {pathways.map((pathway, idx) => {
-      const sorted = sortGeographiesForDetails(pathway.geography ?? []);
       const availability = availabilities[idx];
+      const sorted = sortByAvailability(
+        sortGeographiesForDetails(pathway.geography ?? []),
+        (geo) => availability.hasGeography(geo),
+      );
       return (
         <div
           key={pathway.id}
@@ -355,22 +359,27 @@ const ComparisonPage: React.FC = () => {
             />
           </span>
         </SectionHeading>
-        {pathways.map((p, idx) => (
-          <div
-            key={p.id}
-            className="min-w-0"
-          >
-            <BadgeArray
-              variant={p.metric.map((m) =>
-                availabilities[idx].hasMetric(m) ? "metric" : "metric-pub",
-              )}
-              tooltipGetter={getMetricTooltip}
-              visibleCount={Infinity}
+        {pathways.map((p, idx) => {
+          const sortedMetrics = sortByAvailability(p.metric, (m) =>
+            availabilities[idx].hasMetric(m),
+          );
+          return (
+            <div
+              key={p.id}
+              className="min-w-0"
             >
-              {p.metric}
-            </BadgeArray>
-          </div>
-        ))}
+              <BadgeArray
+                variant={sortedMetrics.map((m) =>
+                  availabilities[idx].hasMetric(m) ? "metric" : "metric-pub",
+                )}
+                tooltipGetter={getMetricTooltip}
+                visibleCount={Infinity}
+              >
+                {sortedMetrics}
+              </BadgeArray>
+            </div>
+          );
+        })}
       </div>
 
       {/* ── Geographies ── */}
@@ -421,22 +430,29 @@ const ComparisonPage: React.FC = () => {
             />
           </span>
         </SectionHeading>
-        {pathways.map((p, idx) => (
-          <div
-            key={p.id}
-            className="min-w-0"
-          >
-            <BadgeArray
-              variant={p.sectors.map((s) =>
-                availabilities[idx].hasSector(s.name) ? "sector" : "sector-pub",
-              )}
-              tooltipGetter={getSectorTooltip}
-              visibleCount={Infinity}
+        {pathways.map((p, idx) => {
+          const sortedSectors = sortByAvailability(p.sectors, (s) =>
+            availabilities[idx].hasSector(s.name),
+          );
+          return (
+            <div
+              key={p.id}
+              className="min-w-0"
             >
-              {p.sectors.map((s) => s.name)}
-            </BadgeArray>
-          </div>
-        ))}
+              <BadgeArray
+                variant={sortedSectors.map((s) =>
+                  availabilities[idx].hasSector(s.name)
+                    ? "sector"
+                    : "sector-pub",
+                )}
+                tooltipGetter={getSectorTooltip}
+                visibleCount={Infinity}
+              >
+                {sortedSectors.map((s) => s.name)}
+              </BadgeArray>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
