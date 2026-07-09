@@ -161,6 +161,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
                 />
               }
               tooltip={GEOGRAPHY_AVAILABILITY_TOOLTIP}
+              ariaLabel="Geography availability information"
               position="right"
             />
           </p>
@@ -191,6 +192,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
                 />
               }
               tooltip={SECTOR_AVAILABILITY_TOOLTIP}
+              ariaLabel="Sector availability information"
               position="right"
             />
           </p>
@@ -220,6 +222,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
                 />
               }
               tooltip={METRIC_AVAILABILITY_TOOLTIP}
+              ariaLabel="Benchmark metric availability information"
               position="right"
             />
           </p>

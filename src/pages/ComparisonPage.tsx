@@ -350,6 +350,7 @@ const ComparisonPage: React.FC = () => {
                 />
               }
               tooltip={METRIC_AVAILABILITY_TOOLTIP}
+              ariaLabel="Benchmark metric availability information"
               position="right"
             />
           </span>
@@ -388,6 +389,7 @@ const ComparisonPage: React.FC = () => {
                 />
               }
               tooltip={GEOGRAPHY_AVAILABILITY_TOOLTIP}
+              ariaLabel="Geography availability information"
               position="right"
             />
           </span>
@@ -414,6 +416,7 @@ const ComparisonPage: React.FC = () => {
                 />
               }
               tooltip={SECTOR_AVAILABILITY_TOOLTIP}
+              ariaLabel="Sector availability information"
               position="right"
             />
           </span>
