@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ChevronRight, Info } from "lucide-react";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 import { PathwayMetadataType } from "../types";
 import { useComparison } from "../context/ComparisonContext";
@@ -23,6 +23,16 @@ import ComparisonKeyFeatures from "../components/ComparisonKeyFeatures";
 import ComparisonPlots, {
   ComparisonPlotsEntry,
 } from "../components/ComparisonPlots";
+import { index } from "../data/index.gen";
+import {
+  pathwayToolAvailability,
+  sortByAvailability,
+  PathwayToolAvailability,
+  GEOGRAPHY_AVAILABILITY_TOOLTIP,
+  SECTOR_AVAILABILITY_TOOLTIP,
+  METRIC_AVAILABILITY_TOOLTIP,
+} from "../utils/timeseriesAvailability";
+import TextWithTooltip from "../components/TextWithTooltip";
 
 // ── Pathway summary card (compact) ──────────────────────────────────────────
 
@@ -112,23 +122,30 @@ const PathwaySummaryCard: React.FC<{ pathway: PathwayMetadataType }> = ({
 
 interface ComparisonGeographiesProps {
   pathways: PathwayMetadataType[];
+  availabilities: PathwayToolAvailability[];
 }
 
 const ComparisonGeographies: React.FC<ComparisonGeographiesProps> = ({
   pathways,
+  availabilities,
 }) => (
   <>
-    {pathways.map((pathway) => {
-      const sorted = sortGeographiesForDetails(pathway.geography ?? []);
+    {pathways.map((pathway, idx) => {
+      const availability = availabilities[idx];
+      const sorted = sortByAvailability(
+        sortGeographiesForDetails(pathway.geography ?? []),
+        (geo) => availability.hasGeography(geo),
+      );
       return (
         <div
           key={pathway.id}
           className="min-w-0"
         >
           <BadgeArray
-            variant={sorted.map(
-              (geo) => geographyVariant(geographyKind(geo)) as string,
-            )}
+            variant={sorted.map((geo) => {
+              const base = geographyVariant(geographyKind(geo));
+              return availability.hasGeography(geo) ? base : `${base}-pub`;
+            })}
             toLabel={(geo) => geographyLabel(normalizeGeography(geo ?? ""))}
             visibleCount={Infinity}
           >
@@ -194,6 +211,12 @@ const ComparisonPage: React.FC = () => {
   );
 
   const n = pathways.length;
+
+  const availabilities = useMemo(
+    () =>
+      pathways.map((p) => pathwayToolAvailability(index.byPathway[p.id] ?? [])),
+    [pathways],
+  );
 
   // Timeseries data state: one entry per pathway
   const [plotEntries, setPlotEntries] = useState<ComparisonPlotsEntry[]>([]);
@@ -320,21 +343,43 @@ const ComparisonPage: React.FC = () => {
         className="grid gap-x-6 mt-8"
         style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
       >
-        <SectionHeading>Benchmark Metrics</SectionHeading>
-        {pathways.map((p) => (
-          <div
-            key={p.id}
-            className="min-w-0"
-          >
-            <BadgeArray
-              variant="metric"
-              tooltipGetter={getMetricTooltip}
-              visibleCount={Infinity}
+        <SectionHeading>
+          <span className="flex items-center gap-1.5">
+            Benchmark Metrics
+            <TextWithTooltip
+              text={
+                <Info
+                  size={14}
+                  className="text-rmigray-400 cursor-help"
+                />
+              }
+              tooltip={METRIC_AVAILABILITY_TOOLTIP}
+              ariaLabel="Benchmark metric availability information"
+              position="right"
+            />
+          </span>
+        </SectionHeading>
+        {pathways.map((p, idx) => {
+          const sortedMetrics = sortByAvailability(p.metric, (m) =>
+            availabilities[idx].hasMetric(m),
+          );
+          return (
+            <div
+              key={p.id}
+              className="min-w-0"
             >
-              {p.metric}
-            </BadgeArray>
-          </div>
-        ))}
+              <BadgeArray
+                variant={sortedMetrics.map((m) =>
+                  availabilities[idx].hasMetric(m) ? "metric" : "metric-pub",
+                )}
+                tooltipGetter={getMetricTooltip}
+                visibleCount={Infinity}
+              >
+                {sortedMetrics}
+              </BadgeArray>
+            </div>
+          );
+        })}
       </div>
 
       {/* ── Geographies ── */}
@@ -342,8 +387,26 @@ const ComparisonPage: React.FC = () => {
         className="grid gap-x-6 mt-8"
         style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
       >
-        <SectionHeading>Geographies</SectionHeading>
-        <ComparisonGeographies pathways={pathways} />
+        <SectionHeading>
+          <span className="flex items-center gap-1.5">
+            Geographies
+            <TextWithTooltip
+              text={
+                <Info
+                  size={14}
+                  className="text-rmigray-400 cursor-help"
+                />
+              }
+              tooltip={GEOGRAPHY_AVAILABILITY_TOOLTIP}
+              ariaLabel="Geography availability information"
+              position="right"
+            />
+          </span>
+        </SectionHeading>
+        <ComparisonGeographies
+          pathways={pathways}
+          availabilities={availabilities}
+        />
       </div>
 
       {/* ── Sectors ── */}
@@ -351,21 +414,45 @@ const ComparisonPage: React.FC = () => {
         className="grid gap-x-6 mt-8"
         style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
       >
-        <SectionHeading>Sectors</SectionHeading>
-        {pathways.map((p) => (
-          <div
-            key={p.id}
-            className="min-w-0"
-          >
-            <BadgeArray
-              variant="sector"
-              tooltipGetter={getSectorTooltip}
-              visibleCount={Infinity}
+        <SectionHeading>
+          <span className="flex items-center gap-1.5">
+            Sectors
+            <TextWithTooltip
+              text={
+                <Info
+                  size={14}
+                  className="text-rmigray-400 cursor-help"
+                />
+              }
+              tooltip={SECTOR_AVAILABILITY_TOOLTIP}
+              ariaLabel="Sector availability information"
+              position="right"
+            />
+          </span>
+        </SectionHeading>
+        {pathways.map((p, idx) => {
+          const sortedSectors = sortByAvailability(p.sectors, (s) =>
+            availabilities[idx].hasSector(s.name),
+          );
+          return (
+            <div
+              key={p.id}
+              className="min-w-0"
             >
-              {p.sectors.map((s) => s.name)}
-            </BadgeArray>
-          </div>
-        ))}
+              <BadgeArray
+                variant={sortedSectors.map((s) =>
+                  availabilities[idx].hasSector(s.name)
+                    ? "sector"
+                    : "sector-pub",
+                )}
+                tooltipGetter={getSectorTooltip}
+                visibleCount={Infinity}
+              >
+                {sortedSectors.map((s) => s.name)}
+              </BadgeArray>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

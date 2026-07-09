@@ -302,6 +302,28 @@ describe("PathwayCard component", () => {
     });
   });
 
+  it("renders all pills as publication-only (outlined) when pathway has no timeseries data", () => {
+    // pathway-simple-standard is not in the generated index, so
+    // pathwayToolAvailability returns NO_DATA with all checkers → false.
+    // Every badge should therefore use the -pub (transparent) variant.
+    renderPathwayCard();
+
+    // Global → geographyGlobal-pub: bg-transparent, not bg-pinishgreen-800
+    const globalBadge = screen.getByText("Global");
+    expect(globalBadge).toHaveClass("bg-transparent");
+    expect(globalBadge).not.toHaveClass("bg-pinishgreen-800");
+
+    // Land Use → sector-pub: bg-transparent, not bg-solar-100
+    const sectorBadge = screen.getByText("Land Use");
+    expect(sectorBadge).toHaveClass("bg-transparent");
+    expect(sectorBadge).not.toHaveClass("bg-solar-100");
+
+    // Emissions Intensity → metric-pub: bg-transparent, not bg-rmipurple-100
+    const metricBadge = screen.getByText("Emissions Intensity");
+    expect(metricBadge).toHaveClass("bg-transparent");
+    expect(metricBadge).not.toHaveClass("bg-rmipurple-100");
+  });
+
   it("renders mapped country names on badges (not ISO2 codes)", () => {
     const pathway = {
       ...mockPathway,

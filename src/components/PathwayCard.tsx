@@ -9,12 +9,21 @@ import {
   sortGeographiesForDetails,
 } from "../utils/geographyUtils";
 import { PathwayMetadataType } from "../types";
-import { ChevronRight, Plus, Check } from "lucide-react";
+import { ChevronRight, Plus, Check, Info } from "lucide-react";
 import HighlightedText from "./HighlightedText";
 import { prioritizeMatches, prioritizeGeographies } from "../utils/sortUtils";
 import { getSectorTooltip, getMetricTooltip } from "../utils/tooltipUtils";
 import getTemperatureColor from "../utils/getTemperatureColor";
 import { useComparison, MAX_COMPARED } from "../context/ComparisonContext";
+import { index } from "../data/index.gen";
+import {
+  pathwayToolAvailability,
+  sortByAvailability,
+  GEOGRAPHY_AVAILABILITY_TOOLTIP,
+  SECTOR_AVAILABILITY_TOOLTIP,
+  METRIC_AVAILABILITY_TOOLTIP,
+} from "../utils/timeseriesAvailability";
+import TextWithTooltip from "./TextWithTooltip";
 
 interface PathwayCardProps {
   pathway: PathwayMetadataType;
@@ -37,19 +46,35 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
   const inComparison = isInComparison(pathway.id);
   const comparisonFull =
     comparedPathwayIds.length >= MAX_COMPARED && !inComparison;
-  // Sort geography and sectors to prioritize matches
+  const availability = useMemo(
+    () => pathwayToolAvailability(index.byPathway[pathway.id] ?? []),
+    [pathway.id],
+  );
+
+  // Sort geography and sectors to prioritize matches, then by availability
   const sortedGeography = useMemo(
     () =>
-      prioritizeGeographies(
-        sortGeographiesForDetails(pathway.geography),
-        searchTerm,
+      sortByAvailability(
+        prioritizeGeographies(
+          sortGeographiesForDetails(pathway.geography),
+          searchTerm,
+        ),
+        (geo) => availability.hasGeography(geo),
       ),
-    [pathway.geography, searchTerm],
+    [pathway.geography, searchTerm, availability],
   );
 
   const sortedSectors = useMemo(
-    () => prioritizeMatches(pathway.sectors, searchTerm),
-    [pathway.sectors, searchTerm],
+    () =>
+      sortByAvailability(prioritizeMatches(pathway.sectors, searchTerm), (s) =>
+        availability.hasSector(s.name),
+      ),
+    [pathway.sectors, searchTerm, availability],
+  );
+
+  const sortedMetrics = useMemo(
+    () => sortByAvailability(pathway.metric, (m) => availability.hasMetric(m)),
+    [pathway.metric, availability],
   );
 
   // Helper function to conditionally highlight text based on search term
@@ -138,14 +163,26 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
 
         {/* Geographies section with dynamic badge count */}
         <div className="mb-3">
-          <p className="text-xs font-medium text-rmigray-500 mb-1">
+          <p className="text-xs font-medium text-rmigray-500 mb-1 flex items-center gap-1">
             Geographies:
+            <TextWithTooltip
+              text={
+                <Info
+                  size={12}
+                  className="text-rmigray-400 cursor-help"
+                />
+              }
+              tooltip={GEOGRAPHY_AVAILABILITY_TOOLTIP}
+              ariaLabel="Geography availability information"
+              position="right"
+            />
           </p>
           <div className="flex flex-wrap">
             <BadgeArray
-              variant={sortedGeography.map(
-                (geo) => geographyVariant(geographyKind(geo)) as string,
-              )}
+              variant={sortedGeography.map((geo) => {
+                const base = geographyVariant(geographyKind(geo));
+                return availability.hasGeography(geo) ? base : `${base}-pub`;
+              })}
               toLabel={(geo) => geographyLabel(normalizeGeography(geo))}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
               maxRows={2}
@@ -157,10 +194,25 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
 
         {/* Sectors section with dynamic badge count */}
         <div className="mb-3">
-          <p className="text-xs font-medium text-rmigray-500 mb-1">Sectors:</p>
+          <p className="text-xs font-medium text-rmigray-500 mb-1 flex items-center gap-1">
+            Sectors:
+            <TextWithTooltip
+              text={
+                <Info
+                  size={12}
+                  className="text-rmigray-400 cursor-help"
+                />
+              }
+              tooltip={SECTOR_AVAILABILITY_TOOLTIP}
+              ariaLabel="Sector availability information"
+              position="right"
+            />
+          </p>
           <div className="flex flex-wrap">
             <BadgeArray
-              variant="sector"
+              variant={sortedSectors.map((s) =>
+                availability.hasSector(s.name) ? "sector" : "sector-pub",
+              )}
               tooltipGetter={getSectorTooltip}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
               maxRows={2}
@@ -172,17 +224,30 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
 
         {/* Metrics section with dynamic badge count */}
         <div className="mb-3">
-          <p className="text-xs font-medium text-rmigray-500 mb-1">
+          <p className="text-xs font-medium text-rmigray-500 mb-1 flex items-center gap-1">
             Benchmark Metrics:
+            <TextWithTooltip
+              text={
+                <Info
+                  size={12}
+                  className="text-rmigray-400 cursor-help"
+                />
+              }
+              tooltip={METRIC_AVAILABILITY_TOOLTIP}
+              ariaLabel="Benchmark metric availability information"
+              position="right"
+            />
           </p>
           <div className="flex flex-wrap">
             <BadgeArray
-              variant="metric"
+              variant={sortedMetrics.map((m) =>
+                availability.hasMetric(m) ? "metric" : "metric-pub",
+              )}
               tooltipGetter={getMetricTooltip}
               renderLabel={(label) => highlightTextIfSearchMatch(label)}
               maxRows={2}
             >
-              {pathway.metric}
+              {sortedMetrics}
             </BadgeArray>
           </div>
         </div>
