@@ -201,6 +201,7 @@ const TextWithTooltip: React.FC<TextWithTooltipProps> = ({
       opacity: isVisible ? 1 : 0,
       visibility: isVisible ? "visible" : "hidden",
       transition: "opacity 200ms ease-in-out, visibility 200ms ease-in-out",
+      pointerEvents: "none",
     } as React.CSSProperties;
   };
 
