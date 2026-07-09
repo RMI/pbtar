@@ -27,7 +27,9 @@ import { index } from "../data/index.gen";
 import {
   pathwayToolAvailability,
   PathwayToolAvailability,
-  TOOL_AVAILABILITY_TOOLTIP,
+  GEOGRAPHY_AVAILABILITY_TOOLTIP,
+  SECTOR_AVAILABILITY_TOOLTIP,
+  METRIC_AVAILABILITY_TOOLTIP,
 } from "../utils/timeseriesAvailability";
 import TextWithTooltip from "../components/TextWithTooltip";
 
@@ -347,7 +349,7 @@ const ComparisonPage: React.FC = () => {
                   className="text-rmigray-400 cursor-help"
                 />
               }
-              tooltip={TOOL_AVAILABILITY_TOOLTIP}
+              tooltip={METRIC_AVAILABILITY_TOOLTIP}
               position="right"
             />
           </span>
@@ -385,7 +387,7 @@ const ComparisonPage: React.FC = () => {
                   className="text-rmigray-400 cursor-help"
                 />
               }
-              tooltip={TOOL_AVAILABILITY_TOOLTIP}
+              tooltip={GEOGRAPHY_AVAILABILITY_TOOLTIP}
               position="right"
             />
           </span>
@@ -411,7 +413,7 @@ const ComparisonPage: React.FC = () => {
                   className="text-rmigray-400 cursor-help"
                 />
               }
-              tooltip={TOOL_AVAILABILITY_TOOLTIP}
+              tooltip={SECTOR_AVAILABILITY_TOOLTIP}
               position="right"
             />
           </span>

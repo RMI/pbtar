@@ -30,7 +30,9 @@ import getTemperatureColor from "../utils/getTemperatureColor";
 import TextWithTooltip from "../components/TextWithTooltip";
 import {
   pathwayToolAvailability,
-  TOOL_AVAILABILITY_TOOLTIP,
+  GEOGRAPHY_AVAILABILITY_TOOLTIP,
+  SECTOR_AVAILABILITY_TOOLTIP,
+  METRIC_AVAILABILITY_TOOLTIP,
 } from "../utils/timeseriesAvailability";
 
 const PathwayDetailPage: React.FC = () => {
@@ -277,7 +279,7 @@ const PathwayDetailPage: React.FC = () => {
                         className="text-rmigray-400 cursor-help"
                       />
                     }
-                    tooltip={TOOL_AVAILABILITY_TOOLTIP}
+                    tooltip={GEOGRAPHY_AVAILABILITY_TOOLTIP}
                     position="right"
                   />
                 </h3>
@@ -307,7 +309,7 @@ const PathwayDetailPage: React.FC = () => {
                         className="text-rmigray-400 cursor-help"
                       />
                     }
-                    tooltip={TOOL_AVAILABILITY_TOOLTIP}
+                    tooltip={SECTOR_AVAILABILITY_TOOLTIP}
                     position="right"
                   />
                 </h3>
@@ -332,7 +334,7 @@ const PathwayDetailPage: React.FC = () => {
                         className="text-rmigray-400 cursor-help"
                       />
                     }
-                    tooltip={TOOL_AVAILABILITY_TOOLTIP}
+                    tooltip={METRIC_AVAILABILITY_TOOLTIP}
                     position="right"
                   />
                 </h3>

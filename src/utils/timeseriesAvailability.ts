@@ -74,5 +74,11 @@ export function pathwayToolAvailability(
   };
 }
 
-export const TOOL_AVAILABILITY_TOOLTIP =
-  "Solid/filled badges indicate that benchmark data is available for visualization and download in this tool. Outlined badges indicate the data point is available in the publication, but not currently in this tool.";
+export const GEOGRAPHY_AVAILABILITY_TOOLTIP =
+  "Filled badges indicate that data is available for visualization and download in this tool. Outlined badges indicate the data for this geography is available in the source publication, but not currently in this tool.";
+
+export const SECTOR_AVAILABILITY_TOOLTIP =
+  "Filled badges indicate that data is available for visualization and download in this tool. Outlined badges indicate the data for this sector is available in the source publication, but not currently in this tool.";
+
+export const METRIC_AVAILABILITY_TOOLTIP =
+  "Filled badges indicate that data is available for visualization and download in this tool. Outlined badges indicate the data for this metric is available in the source publication, but not currently in this tool.";

@@ -18,7 +18,9 @@ import { useComparison, MAX_COMPARED } from "../context/ComparisonContext";
 import { index } from "../data/index.gen";
 import {
   pathwayToolAvailability,
-  TOOL_AVAILABILITY_TOOLTIP,
+  GEOGRAPHY_AVAILABILITY_TOOLTIP,
+  SECTOR_AVAILABILITY_TOOLTIP,
+  METRIC_AVAILABILITY_TOOLTIP,
 } from "../utils/timeseriesAvailability";
 import TextWithTooltip from "./TextWithTooltip";
 
@@ -158,7 +160,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
                   className="text-rmigray-400 cursor-help"
                 />
               }
-              tooltip={TOOL_AVAILABILITY_TOOLTIP}
+              tooltip={GEOGRAPHY_AVAILABILITY_TOOLTIP}
               position="right"
             />
           </p>
@@ -188,7 +190,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
                   className="text-rmigray-400 cursor-help"
                 />
               }
-              tooltip={TOOL_AVAILABILITY_TOOLTIP}
+              tooltip={SECTOR_AVAILABILITY_TOOLTIP}
               position="right"
             />
           </p>
@@ -217,7 +219,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
                   className="text-rmigray-400 cursor-help"
                 />
               }
-              tooltip={TOOL_AVAILABILITY_TOOLTIP}
+              tooltip={METRIC_AVAILABILITY_TOOLTIP}
               position="right"
             />
           </p>
