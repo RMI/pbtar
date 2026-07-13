@@ -112,8 +112,8 @@ export default function VerticalBarChart({
       .selectAll("text")
       .attr("transform", "rotate(-45)")
       .attr("text-anchor", "end")
-      .attr("dx", "-0.5em")
-      .attr("dy", "0.15em");
+      .attr("dx", "0")
+      .attr("dy", "0.71em");
 
     // Update Y axis
     select(gy.current)

@@ -55,7 +55,7 @@ export default function NormalizedStackedAreaChart({
   height = 400,
   marginTop = 40,
   marginRight = 80,
-  marginBottom = 30,
+  marginBottom = 55,
   marginLeft = 40,
   sector = "power",
   metric = "technologyMix",
@@ -200,7 +200,12 @@ export default function NormalizedStackedAreaChart({
       .transition()
       .duration(750)
       .call(axisBottom(x).tickValues(xticks))
-      .style("font-size", "14px");
+      .style("font-size", "14px")
+      .selectAll("text")
+      .attr("transform", "rotate(-45)")
+      .attr("text-anchor", "end")
+      .attr("dx", "-0.5em")
+      .attr("dy", "0.15em");
 
     // Update Y axis
     select(gy.current)
