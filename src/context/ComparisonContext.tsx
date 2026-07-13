@@ -24,6 +24,8 @@ interface ComparisonContextValue {
   clearComparison: () => void;
   isInComparison: (id: string) => boolean;
   setComparedPathwayIds: (ids: string[]) => void;
+  ribbonExpanded: boolean;
+  setRibbonExpanded: (expanded: boolean) => void;
 }
 
 const ComparisonContext = createContext<ComparisonContextValue | null>(null);
@@ -33,6 +35,7 @@ export const ComparisonProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [ids, setIds] = useState<string[]>(loadFromSession);
+  const [ribbonExpanded, setRibbonExpanded] = useState(false);
 
   const addToComparison = useCallback((id: string) => {
     setIds((prev) => {
@@ -89,6 +92,8 @@ export const ComparisonProvider: React.FC<{ children: React.ReactNode }> = ({
         clearComparison,
         isInComparison,
         setComparedPathwayIds,
+        ribbonExpanded,
+        setRibbonExpanded,
       }}
     >
       {children}

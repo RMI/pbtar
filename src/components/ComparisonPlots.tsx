@@ -26,36 +26,44 @@ function hasDataForMetric(data: TimeSeries | null, metric: string): boolean {
   return new Set(filtered.map((d) => d.year)).size > 1;
 }
 
+function hasDataForMetricAndGeo(
+  data: TimeSeries | null,
+  metric: string,
+  geo: string,
+): boolean {
+  if (!data?.data) return false;
+  const filtered = data.data.filter(
+    (d) => d.metric === metric && d.geography === geo,
+  );
+  if (filtered.length === 0) return false;
+  return new Set(filtered.map((d) => d.year)).size > 1;
+}
+
 // ── Single pathway plot panel ────────────────────────────────────────────────
 
 interface PlotPanelProps {
   timeseriesdata: TimeSeries | null;
   datasetId?: string;
   plotType: PlotType;
+  selectedGeography: string;
   dims: { width: number; height: number };
+  yMin?: number;
+  yMax?: number;
+  hoveredSeries?: string | null;
+  onHoverSeries?: (series: string | null) => void;
 }
 
 const PlotPanel: React.FC<PlotPanelProps> = ({
   timeseriesdata,
   datasetId,
   plotType,
+  selectedGeography,
   dims,
+  yMin,
+  yMax,
+  hoveredSeries,
+  onHoverSeries,
 }) => {
-  const availableGeographies = useMemo(() => {
-    if (!timeseriesdata?.data) return [];
-    return Array.from(
-      new Set(timeseriesdata.data.map((d) => d.geography).filter(Boolean)),
-    );
-  }, [timeseriesdata]);
-
-  const [selectedGeography, setSelectedGeography] = useState<string>("");
-
-  useEffect(() => {
-    if (availableGeographies.length > 0) {
-      setSelectedGeography(availableGeographies[0]);
-    }
-  }, [availableGeographies]);
-
   const filteredData = useMemo(() => {
     if (!timeseriesdata?.data || !selectedGeography) return { data: [] };
     return {
@@ -67,12 +75,13 @@ const PlotPanel: React.FC<PlotPanelProps> = ({
 
   if (
     !timeseriesdata ||
-    !hasDataForMetric(timeseriesdata, plotType) ||
-    !selectedGeography
+    !selectedGeography ||
+    !hasDataForMetricAndGeo(timeseriesdata, plotType, selectedGeography)
   ) {
     return (
-      <div className="flex items-center justify-center h-32 text-xs text-rmigray-400 italic">
-        No data available
+      <div className="flex items-center justify-center h-32 text-xs text-rmigray-400 italic text-center px-4">
+        For this pathway, there is currently no data available for the selected
+        combination of sector, region, and metric.
       </div>
     );
   }
@@ -100,6 +109,7 @@ const PlotPanel: React.FC<PlotPanelProps> = ({
             width={dims.width}
             height={dims.height}
             metric="absoluteEmissions"
+            yMax={yMax}
           />
         );
       case "emissionsIntensity":
@@ -110,6 +120,7 @@ const PlotPanel: React.FC<PlotPanelProps> = ({
             width={dims.width}
             height={dims.height}
             metric="emissionsIntensity"
+            yMax={yMax}
           />
         );
       case "capacity":
@@ -120,6 +131,10 @@ const PlotPanel: React.FC<PlotPanelProps> = ({
             width={dims.width}
             height={dims.height}
             metric="capacity"
+            yMin={yMin}
+            yMax={yMax}
+            externalHoveredSeries={hoveredSeries}
+            onHoverSeries={onHoverSeries}
           />
         );
       case "generation":
@@ -130,6 +145,10 @@ const PlotPanel: React.FC<PlotPanelProps> = ({
             width={dims.width}
             height={dims.height}
             metric="generation"
+            yMin={yMin}
+            yMax={yMax}
+            externalHoveredSeries={hoveredSeries}
+            onHoverSeries={onHoverSeries}
           />
         );
       default:
@@ -137,32 +156,7 @@ const PlotPanel: React.FC<PlotPanelProps> = ({
     }
   };
 
-  return (
-    <div>
-      {availableGeographies.length > 1 && (
-        <div className="mb-2">
-          <label className="text-xs text-rmigray-500 mb-1 block">
-            Geography
-          </label>
-          <select
-            value={selectedGeography}
-            onChange={(e) => setSelectedGeography(e.target.value)}
-            className="block w-full rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy text-xs"
-          >
-            {availableGeographies.map((geo) => (
-              <option
-                key={geo}
-                value={geo}
-              >
-                {geographyLabel(geo)}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-      <div className="overflow-x-auto">{renderChart()}</div>
-    </div>
-  );
+  return <div className="overflow-x-auto">{renderChart()}</div>;
 };
 
 // ── Shared plot-type selector + N panels ─────────────────────────────────────
@@ -181,7 +175,7 @@ const ComparisonPlots: React.FC<ComparisonPlotsProps> = ({ entries }) => {
   const n = entries.length;
   const dims = CHART_DIMS[n] ?? CHART_DIMS[3];
 
-  // Derive which plot types have data across any pathway
+  // Derive which plot types have data across any pathway (for any geography)
   const availablePlotOptions = useMemo(
     () =>
       PLOT_OPTIONS.filter((opt) =>
@@ -192,7 +186,6 @@ const ComparisonPlots: React.FC<ComparisonPlotsProps> = ({ entries }) => {
 
   const [selectedPlot, setSelectedPlot] = useState<PlotType>("technologyMix");
 
-  // When available options change, ensure selection is valid
   useEffect(() => {
     if (
       availablePlotOptions.length > 0 &&
@@ -201,6 +194,63 @@ const ComparisonPlots: React.FC<ComparisonPlotsProps> = ({ entries }) => {
       setSelectedPlot(availablePlotOptions[0].value);
     }
   }, [availablePlotOptions, selectedPlot]);
+
+  // Union of all geographies across all compared pathways
+  const availableGeographies = useMemo(() => {
+    const geoSet = new Set<string>();
+    entries.forEach((e) => {
+      e.timeseriesdata?.data?.forEach((d) => {
+        if (d.geography) geoSet.add(d.geography);
+      });
+    });
+    return Array.from(geoSet);
+  }, [entries]);
+
+  const [selectedGeography, setSelectedGeography] = useState<string>("");
+
+  useEffect(() => {
+    if (
+      availableGeographies.length > 0 &&
+      !availableGeographies.includes(selectedGeography)
+    ) {
+      setSelectedGeography(availableGeographies[0]);
+    }
+  }, [availableGeographies, selectedGeography]);
+
+  // Shared y-axis bounds across all pathways for the current plot type + geography
+  const sharedYBounds = useMemo(() => {
+    const isMultiLine =
+      selectedPlot === "capacity" || selectedPlot === "generation";
+    const isBar =
+      selectedPlot === "absoluteEmissions" ||
+      selectedPlot === "emissionsIntensity";
+
+    if (!isMultiLine && !isBar) return undefined;
+
+    const allValues: number[] = [];
+    entries.forEach((e) => {
+      e.timeseriesdata?.data
+        ?.filter(
+          (d) =>
+            d.geography === selectedGeography &&
+            d.sector === "power" &&
+            d.metric === selectedPlot,
+        )
+        .forEach((d) => allValues.push(d.value));
+    });
+
+    if (allValues.length === 0) return undefined;
+
+    const yMax = Math.max(...allValues);
+    const yMin = isMultiLine ? Math.min(...allValues) : 0;
+    return { yMin, yMax };
+  }, [entries, selectedPlot, selectedGeography]);
+
+  const [hoveredSeries, setHoveredSeries] = useState<string | null>(null);
+
+  const handleHoverSeries = useCallback((series: string | null) => {
+    setHoveredSeries(series);
+  }, []);
 
   const hasAnyData = availablePlotOptions.length > 0;
 
@@ -211,35 +261,65 @@ const ComparisonPlots: React.FC<ComparisonPlotsProps> = ({ entries }) => {
     [],
   );
 
+  const handleGeoChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setSelectedGeography(e.target.value);
+    },
+    [],
+  );
+
   return (
     <div
       className="grid gap-x-6"
       style={{ gridTemplateColumns: `repeat(${n}, 1fr)`, alignItems: "start" }}
     >
-      {/* Shared plot-type selector — spans all pathway columns */}
+      {/* Shared filters — spans all pathway columns */}
       <div
         className="mb-4"
         style={{ gridColumn: "1 / -1" }}
       >
         {hasAnyData ? (
-          <div className="flex items-center gap-3">
-            <label className="text-sm font-medium text-rmigray-700 whitespace-nowrap">
-              Plot type
-            </label>
-            <select
-              value={selectedPlot}
-              onChange={handlePlotChange}
-              className="rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
-            >
-              {availablePlotOptions.map((opt) => (
-                <option
-                  key={opt.value}
-                  value={opt.value}
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3">
+              <label className="text-sm font-medium text-rmigray-700 whitespace-nowrap">
+                Plot type
+              </label>
+              <select
+                value={selectedPlot}
+                onChange={handlePlotChange}
+                className="rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
+              >
+                {availablePlotOptions.map((opt) => (
+                  <option
+                    key={opt.value}
+                    value={opt.value}
+                  >
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {availableGeographies.length > 1 && (
+              <div className="flex items-center gap-3">
+                <label className="text-sm font-medium text-rmigray-700 whitespace-nowrap">
+                  Geography
+                </label>
+                <select
+                  value={selectedGeography}
+                  onChange={handleGeoChange}
+                  className="rounded-md border-rmigray-300 shadow-sm focus:border-energy focus:ring-energy sm:text-sm"
                 >
-                  {opt.label}
-                </option>
-              ))}
-            </select>
+                  {availableGeographies.map((geo) => (
+                    <option
+                      key={geo}
+                      value={geo}
+                    >
+                      {geographyLabel(geo)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
           </div>
         ) : (
           <p className="text-sm text-rmigray-400 italic">
@@ -258,7 +338,12 @@ const ComparisonPlots: React.FC<ComparisonPlotsProps> = ({ entries }) => {
             timeseriesdata={entry.timeseriesdata}
             datasetId={entry.datasetId}
             plotType={selectedPlot}
+            selectedGeography={selectedGeography}
             dims={dims}
+            yMin={sharedYBounds?.yMin}
+            yMax={sharedYBounds?.yMax}
+            hoveredSeries={hoveredSeries}
+            onHoverSeries={handleHoverSeries}
           />
         </div>
       ))}

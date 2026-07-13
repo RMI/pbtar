@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { X, Plus, GitCompareArrows, Trash2 } from "lucide-react";
 import { useComparison, MAX_COMPARED } from "../context/ComparisonContext";
@@ -7,9 +7,13 @@ import { pathwayMetadata } from "../data/pathwayMetadata";
 const SLOTS = [0, 1, 2] as const;
 
 const ComparisonRibbon: React.FC = () => {
-  const [expanded, setExpanded] = useState(false);
-  const { comparedPathwayIds, removeFromComparison, clearComparison } =
-    useComparison();
+  const {
+    comparedPathwayIds,
+    removeFromComparison,
+    clearComparison,
+    ribbonExpanded: expanded,
+    setRibbonExpanded: setExpanded,
+  } = useComparison();
   const navigate = useNavigate();
 
   const canCompare = comparedPathwayIds.length >= 2;
@@ -40,7 +44,7 @@ const ComparisonRibbon: React.FC = () => {
   }
 
   return (
-    <div className="border-t border-neutral-200 py-3">
+    <div className="border-t border-neutral-300 py-4 px-3 bg-neutral-100">
       <div className="flex items-start gap-3">
         {/* Pathway slots */}
         <div className="flex gap-3 flex-1 min-w-0">

@@ -36,12 +36,15 @@ const defaultContext = {
   clearComparison: vi.fn(),
   isInComparison: vi.fn(),
   setComparedPathwayIds: vi.fn(),
+  ribbonExpanded: false,
+  setRibbonExpanded: vi.fn(),
 };
 
-const renderRibbon = (ids: string[] = []) => {
+const renderRibbon = (ids: string[] = [], expanded = false) => {
   vi.mocked(useComparison).mockReturnValue({
     ...defaultContext,
     comparedPathwayIds: ids,
+    ribbonExpanded: expanded,
   });
   return render(
     <MemoryRouter>
@@ -83,72 +86,91 @@ describe("ComparisonRibbon", () => {
   });
 
   describe("expanded state", () => {
-    const expand = async () => {
-      const u = userEvent.setup();
-      await u.click(screen.getByRole("button", { name: /compare pathways/i }));
-      return u;
-    };
+    it("calls setRibbonExpanded(true) when Compare Pathways is clicked", async () => {
+      const setRibbonExpanded = vi.fn();
+      vi.mocked(useComparison).mockReturnValue({
+        ...defaultContext,
+        ribbonExpanded: false,
+        setRibbonExpanded,
+      });
+      render(
+        <MemoryRouter>
+          <ComparisonRibbon />
+        </MemoryRouter>,
+      );
+      await userEvent
+        .setup()
+        .click(screen.getByRole("button", { name: /compare pathways/i }));
+      expect(setRibbonExpanded).toHaveBeenCalledWith(true);
+    });
 
-    it("expands when Compare Pathways is clicked", async () => {
-      renderRibbon();
-      await expand();
+    it("calls setRibbonExpanded(false) when Hide is clicked", async () => {
+      const setRibbonExpanded = vi.fn();
+      vi.mocked(useComparison).mockReturnValue({
+        ...defaultContext,
+        ribbonExpanded: true,
+        setRibbonExpanded,
+      });
+      render(
+        <MemoryRouter>
+          <ComparisonRibbon />
+        </MemoryRouter>,
+      );
+      await userEvent
+        .setup()
+        .click(screen.getByRole("button", { name: /hide/i }));
+      expect(setRibbonExpanded).toHaveBeenCalledWith(false);
+    });
+
+    it("shows action buttons when expanded", () => {
+      renderRibbon([], true);
       expect(screen.getByText("Clear All")).toBeInTheDocument();
       expect(screen.getByText("Hide")).toBeInTheDocument();
     });
 
-    it("collapses when Hide is clicked", async () => {
-      renderRibbon();
-      const u = await expand();
-      await u.click(screen.getByRole("button", { name: /hide/i }));
-      expect(screen.queryByText("Clear All")).not.toBeInTheDocument();
-    });
-
     describe("Compare button gate", () => {
-      it("is disabled and labelled 'Compare (min. 2)' with 0 pathways selected", async () => {
-        renderRibbon([]);
-        await expand();
-        const btn = screen.getByRole("button", { name: "Compare (min. 2)" });
-        expect(btn).toBeDisabled();
+      it("is disabled and labelled 'Compare (min. 2)' with 0 pathways selected", () => {
+        renderRibbon([], true);
+        expect(
+          screen.getByRole("button", { name: "Compare (min. 2)" }),
+        ).toBeDisabled();
       });
 
-      it("is disabled and labelled 'Compare (min. 2)' with 1 pathway selected", async () => {
-        renderRibbon(["p1"]);
-        await expand();
-        const btn = screen.getByRole("button", { name: "Compare (min. 2)" });
-        expect(btn).toBeDisabled();
+      it("is disabled and labelled 'Compare (min. 2)' with 1 pathway selected", () => {
+        renderRibbon(["p1"], true);
+        expect(
+          screen.getByRole("button", { name: "Compare (min. 2)" }),
+        ).toBeDisabled();
       });
 
-      it("is enabled and labelled 'Compare' with 2 pathways selected", async () => {
-        renderRibbon(["p1", "p2"]);
-        await expand();
-        const btn = screen.getByRole("button", { name: "Compare" });
-        expect(btn).not.toBeDisabled();
+      it("is enabled and labelled 'Compare' with 2 pathways selected", () => {
+        renderRibbon(["p1", "p2"], true);
+        expect(
+          screen.getByRole("button", { name: "Compare" }),
+        ).not.toBeDisabled();
       });
 
-      it("is enabled and labelled 'Compare' with 3 pathways selected", async () => {
-        renderRibbon(["p1", "p2", "p3"]);
-        await expand();
-        const btn = screen.getByRole("button", { name: "Compare" });
-        expect(btn).not.toBeDisabled();
+      it("is enabled and labelled 'Compare' with 3 pathways selected", () => {
+        renderRibbon(["p1", "p2", "p3"], true);
+        expect(
+          screen.getByRole("button", { name: "Compare" }),
+        ).not.toBeDisabled();
       });
     });
 
     describe("pathway slots", () => {
-      it("shows the selected pathway name in its slot", async () => {
-        renderRibbon(["p1"]);
-        await expand();
+      it("shows the selected pathway name in its slot", () => {
+        renderRibbon(["p1"], true);
         expect(screen.getByText(/Pathway One/)).toBeInTheDocument();
       });
 
-      it("uses publisher short name when available", async () => {
-        renderRibbon(["p1"]);
-        await expand();
+      it("uses publisher short name when available", () => {
+        renderRibbon(["p1"], true);
         expect(screen.getByText(/Pub1/)).toBeInTheDocument();
       });
 
-      it("falls back to full publisher name when short is absent", async () => {
-        renderRibbon(["p2"]);
-        await expand();
+      it("falls back to full publisher name when short is absent", () => {
+        renderRibbon(["p2"], true);
         expect(screen.getByText(/Publisher Two/)).toBeInTheDocument();
       });
 
@@ -158,19 +180,18 @@ describe("ComparisonRibbon", () => {
           ...defaultContext,
           comparedPathwayIds: ["p1"],
           removeFromComparison: remove,
+          ribbonExpanded: true,
         });
-        const u = userEvent.setup();
         render(
           <MemoryRouter>
             <ComparisonRibbon />
           </MemoryRouter>,
         );
-        await u.click(
-          screen.getByRole("button", { name: /compare pathways/i }),
-        );
-        await u.click(
-          screen.getByRole("button", { name: /remove from comparison/i }),
-        );
+        await userEvent
+          .setup()
+          .click(
+            screen.getByRole("button", { name: /remove from comparison/i }),
+          );
         expect(remove).toHaveBeenCalledWith("p1");
       });
 
@@ -180,17 +201,16 @@ describe("ComparisonRibbon", () => {
           ...defaultContext,
           comparedPathwayIds: ["p1", "p2"],
           clearComparison: clear,
+          ribbonExpanded: true,
         });
-        const u = userEvent.setup();
         render(
           <MemoryRouter>
             <ComparisonRibbon />
           </MemoryRouter>,
         );
-        await u.click(
-          screen.getByRole("button", { name: /compare pathways/i }),
-        );
-        await u.click(screen.getByRole("button", { name: /clear all/i }));
+        await userEvent
+          .setup()
+          .click(screen.getByRole("button", { name: /clear all/i }));
         expect(clear).toHaveBeenCalledOnce();
       });
     });

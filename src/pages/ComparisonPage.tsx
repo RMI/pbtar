@@ -314,18 +314,6 @@ const ComparisonPage: React.FC = () => {
         ))}
       </div>
 
-      {/* ── Key Features (subgrid-aligned) ── */}
-      <div
-        className="grid gap-x-6 mt-8"
-        style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
-      >
-        <SectionHeading>Key Features</SectionHeading>
-        {/* Span all columns so ComparisonKeyFeatures's own N-column grid fills full width */}
-        <div style={{ gridColumn: "1 / -1" }}>
-          <ComparisonKeyFeatures pathways={pathways} />
-        </div>
-      </div>
-
       {/* ── Benchmark Metric Plots ── */}
       <div
         className="grid gap-x-6 mt-8"
@@ -335,6 +323,18 @@ const ComparisonPage: React.FC = () => {
         {/* Span all columns so ComparisonPlots's own N-column grid fills full width */}
         <div style={{ gridColumn: "1 / -1" }}>
           <ComparisonPlots entries={plotEntries} />
+        </div>
+      </div>
+
+      {/* ── Key Features (subgrid-aligned) ── */}
+      <div
+        className="grid gap-x-6 mt-8"
+        style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
+      >
+        <SectionHeading>Key Features</SectionHeading>
+        {/* Span all columns so ComparisonKeyFeatures's own N-column grid fills full width */}
+        <div style={{ gridColumn: "1 / -1" }}>
+          <ComparisonKeyFeatures pathways={pathways} />
         </div>
       </div>
 
