@@ -107,7 +107,7 @@ describe("NeutralScale", () => {
     });
   });
 
-  it("calls tooltipGetter only with the selected value", () => {
+  it("calls tooltipGetter for every scale value", () => {
     const tooltipGetter = vi.fn().mockReturnValue("a tooltip");
     render(
       <NeutralScale
@@ -116,12 +116,12 @@ describe("NeutralScale", () => {
         tooltipGetter={tooltipGetter}
       />,
     );
-    expect(tooltipGetter).toHaveBeenCalledWith("High ambition policies");
-    expect(tooltipGetter).toHaveBeenCalledTimes(1);
+    expect(tooltipGetter).toHaveBeenCalledTimes(VALUES.length);
+    VALUES.forEach((v) => expect(tooltipGetter).toHaveBeenCalledWith(v));
   });
 
-  it("does not call tooltipGetter when value is 'No information'", () => {
-    const tooltipGetter = vi.fn();
+  it("calls tooltipGetter for every scale value even when selected value is 'No information'", () => {
+    const tooltipGetter = vi.fn().mockReturnValue("a tooltip");
     render(
       <NeutralScale
         values={VALUES}
@@ -129,6 +129,6 @@ describe("NeutralScale", () => {
         tooltipGetter={tooltipGetter}
       />,
     );
-    expect(tooltipGetter).not.toHaveBeenCalled();
+    expect(tooltipGetter).toHaveBeenCalledTimes(VALUES.length);
   });
 });

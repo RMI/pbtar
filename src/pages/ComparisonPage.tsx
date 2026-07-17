@@ -163,10 +163,10 @@ const SectionHeading: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => (
   <div
-    className="mt-6 mb-3 pb-2 border-b border-neutral-200"
+    className="mt-6 mb-3 bg-bluespruce px-3 py-1"
     style={{ gridColumn: "1 / -1" }}
   >
-    <h2 className="text-base font-semibold text-rmigray-800">{children}</h2>
+    <h2 className="text-base font-semibold text-white">{children}</h2>
   </div>
 );
 
@@ -305,7 +305,7 @@ const ComparisonPage: React.FC = () => {
       </Link>
 
       {/* ── Pathway summary cards ── */}
-      <div className={colClass}>
+      <div className={`${colClass} sticky top-0 z-20`}>
         {pathways.map((p) => (
           <PathwaySummaryCard
             key={p.id}
@@ -314,72 +314,14 @@ const ComparisonPage: React.FC = () => {
         ))}
       </div>
 
-      {/* ── Key Features (subgrid-aligned) ── */}
-      <div
-        className="grid gap-x-6 mt-8"
-        style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
-      >
-        <SectionHeading>Key Features</SectionHeading>
-        {/* Span all columns so ComparisonKeyFeatures's own N-column grid fills full width */}
-        <div style={{ gridColumn: "1 / -1" }}>
-          <ComparisonKeyFeatures pathways={pathways} />
-        </div>
-      </div>
-
       {/* ── Benchmark Metric Plots ── */}
-      <div
-        className="grid gap-x-6 mt-8"
-        style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
-      >
-        <SectionHeading>Benchmark Metric Plots</SectionHeading>
-        {/* Span all columns so ComparisonPlots's own N-column grid fills full width */}
-        <div style={{ gridColumn: "1 / -1" }}>
-          <ComparisonPlots entries={plotEntries} />
-        </div>
+      <div className="mt-8">
+        <ComparisonPlots entries={plotEntries} />
       </div>
 
-      {/* ── Benchmark Metrics (badge arrays) ── */}
-      <div
-        className="grid gap-x-6 mt-8"
-        style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
-      >
-        <SectionHeading>
-          <span className="flex items-center gap-1.5">
-            Benchmark Metrics
-            <TextWithTooltip
-              text={
-                <Info
-                  size={14}
-                  className="text-rmigray-400 cursor-help"
-                />
-              }
-              tooltip={METRIC_AVAILABILITY_TOOLTIP}
-              ariaLabel="Benchmark metric availability information"
-              position="right"
-            />
-          </span>
-        </SectionHeading>
-        {pathways.map((p, idx) => {
-          const sortedMetrics = sortByAvailability(p.metric, (m) =>
-            availabilities[idx].hasMetric(m),
-          );
-          return (
-            <div
-              key={p.id}
-              className="min-w-0"
-            >
-              <BadgeArray
-                variant={sortedMetrics.map((m) =>
-                  availabilities[idx].hasMetric(m) ? "metric" : "metric-pub",
-                )}
-                tooltipGetter={getMetricTooltip}
-                visibleCount={Infinity}
-              >
-                {sortedMetrics}
-              </BadgeArray>
-            </div>
-          );
-        })}
+      {/* ── Key Features ── */}
+      <div className="mt-8">
+        <ComparisonKeyFeatures pathways={pathways} />
       </div>
 
       {/* ── Geographies ── */}
@@ -449,6 +391,50 @@ const ComparisonPage: React.FC = () => {
                 visibleCount={Infinity}
               >
                 {sortedSectors.map((s) => s.name)}
+              </BadgeArray>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ── Benchmark Metrics (badge arrays) ── */}
+      <div
+        className="grid gap-x-6 mt-8"
+        style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
+      >
+        <SectionHeading>
+          <span className="flex items-center gap-1.5">
+            Benchmark Metrics
+            <TextWithTooltip
+              text={
+                <Info
+                  size={14}
+                  className="text-rmigray-400 cursor-help"
+                />
+              }
+              tooltip={METRIC_AVAILABILITY_TOOLTIP}
+              ariaLabel="Benchmark metric availability information"
+              position="right"
+            />
+          </span>
+        </SectionHeading>
+        {pathways.map((p, idx) => {
+          const sortedMetrics = sortByAvailability(p.metric, (m) =>
+            availabilities[idx].hasMetric(m),
+          );
+          return (
+            <div
+              key={p.id}
+              className="min-w-0"
+            >
+              <BadgeArray
+                variant={sortedMetrics.map((m) =>
+                  availabilities[idx].hasMetric(m) ? "metric" : "metric-pub",
+                )}
+                tooltipGetter={getMetricTooltip}
+                visibleCount={Infinity}
+              >
+                {sortedMetrics}
               </BadgeArray>
             </div>
           );

@@ -42,6 +42,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
     removeFromComparison,
     isInComparison,
     comparedPathwayIds,
+    ribbonExpanded,
   } = useComparison();
   const inComparison = isInComparison(pathway.id);
   const comparisonFull =
@@ -287,39 +288,41 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
                 className="ml-2 text-bluespruce"
               />
             </Link>
-            <button
-              type="button"
-              onClick={() =>
-                inComparison
-                  ? removeFromComparison(pathway.id)
-                  : addToComparison(pathway.id)
-              }
-              disabled={comparisonFull}
-              aria-label={
-                inComparison
-                  ? "Remove from comparison"
-                  : comparisonFull
-                    ? "Comparison full (max 3)"
-                    : "Add to comparison"
-              }
-              aria-pressed={inComparison}
-              title={
-                inComparison
-                  ? "Remove from comparison"
-                  : comparisonFull
-                    ? "Comparison full (max 3)"
-                    : "Add to comparison"
-              }
-              className={`h-12 w-12 flex-shrink-0 flex items-center justify-center border transition-colors duration-200 ${
-                inComparison
-                  ? "bg-bluespruce border-bluespruce text-white hover:bg-energy hover:border-energy"
-                  : comparisonFull
-                    ? "bg-neutral-100 border-neutral-200 text-neutral-300 cursor-not-allowed"
-                    : "bg-white border-neutral-200 text-rmigray-500 hover:bg-rmiblue-50 hover:border-rmiblue-300 hover:text-bluespruce"
-              }`}
-            >
-              {inComparison ? <Check size={18} /> : <Plus size={18} />}
-            </button>
+            {ribbonExpanded && (
+              <button
+                type="button"
+                onClick={() =>
+                  inComparison
+                    ? removeFromComparison(pathway.id)
+                    : addToComparison(pathway.id)
+                }
+                disabled={comparisonFull}
+                aria-label={
+                  inComparison
+                    ? "Remove from comparison"
+                    : comparisonFull
+                      ? "Comparison full (max 3)"
+                      : "Add to comparison"
+                }
+                aria-pressed={inComparison}
+                title={
+                  inComparison
+                    ? "Remove from comparison"
+                    : comparisonFull
+                      ? "Comparison full (max 3)"
+                      : "Add to comparison"
+                }
+                className={`h-12 w-12 flex-shrink-0 flex items-center justify-center border transition-colors duration-200 ${
+                  inComparison
+                    ? "bg-bluespruce border-bluespruce text-white hover:bg-energy hover:border-energy"
+                    : comparisonFull
+                      ? "bg-neutral-100 border-neutral-200 text-neutral-300 cursor-not-allowed"
+                      : "bg-white border-neutral-200 text-rmigray-500 hover:bg-rmiblue-50 hover:border-rmiblue-300 hover:text-bluespruce"
+                }`}
+              >
+                {inComparison ? <Check size={18} /> : <Plus size={18} />}
+              </button>
+            )}
           </div>
         </div>
       </div>

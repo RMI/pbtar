@@ -110,7 +110,7 @@ describe("SentimentScale", () => {
     });
   });
 
-  it("calls tooltipGetter only with the selected value", () => {
+  it("calls tooltipGetter for every scale value", () => {
     const tooltipGetter = vi.fn().mockReturnValue("a tooltip");
     render(
       <SentimentScale
@@ -120,12 +120,12 @@ describe("SentimentScale", () => {
         tooltipGetter={tooltipGetter}
       />,
     );
-    expect(tooltipGetter).toHaveBeenCalledWith("Minor decrease");
-    expect(tooltipGetter).toHaveBeenCalledTimes(1);
+    expect(tooltipGetter).toHaveBeenCalledTimes(VALUES_7.length);
+    VALUES_7.forEach((v) => expect(tooltipGetter).toHaveBeenCalledWith(v));
   });
 
-  it("does not call tooltipGetter when value is 'No information'", () => {
-    const tooltipGetter = vi.fn();
+  it("calls tooltipGetter for every scale value even when selected value is 'No information'", () => {
+    const tooltipGetter = vi.fn().mockReturnValue("a tooltip");
     render(
       <SentimentScale
         values={VALUES_7}
@@ -134,7 +134,7 @@ describe("SentimentScale", () => {
         tooltipGetter={tooltipGetter}
       />,
     );
-    expect(tooltipGetter).not.toHaveBeenCalled();
+    expect(tooltipGetter).toHaveBeenCalledTimes(VALUES_7.length);
   });
 
   it("works correctly with a 3-step scale", () => {
