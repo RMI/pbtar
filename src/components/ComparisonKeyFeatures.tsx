@@ -18,32 +18,52 @@ const ComparisonKeyFeatures: React.FC<ComparisonKeyFeaturesProps> = ({
     >
       {GROUPS.map((group, groupIdx) => (
         <React.Fragment key={group.label}>
-          {/* Group header — spans all pathway columns */}
+          {/* Group header — spans all pathway columns, styled as a section heading */}
           <div
-            className={`pt-3 pb-1 ${groupIdx > 0 ? "border-t border-neutral-200 mt-2" : ""}`}
+            className={`${groupIdx > 0 ? "mt-6" : ""} mb-3 bg-bluespruce px-3 py-1`}
             style={{ gridColumn: "1 / -1" }}
           >
-            <h4 className="text-xs font-semibold text-rmigray-500 uppercase tracking-wide">
+            <h3 className="text-base font-semibold text-white">
               {group.label}
-            </h4>
+            </h3>
           </div>
 
-          {/* One row per feature: N cells auto-placed side by side.
-              CSS grid assigns them to the same row; row height = tallest cell. */}
-          {group.features.flatMap((feature) =>
-            pathways.map((pathway, i) => (
+          {/* One row per feature: label spans all columns, then N content cells side by side */}
+          {group.features.map((feature, featureIdx) => (
+            <React.Fragment key={feature.key}>
+              {/* Single label above all pathway cells */}
               <div
-                key={`${feature.key}-${i}`}
-                className="pb-4 min-w-0"
+                className="pt-3 pb-1"
+                style={{ gridColumn: "1 / -1" }}
               >
-                <FeatureItem
-                  feature={feature}
-                  keyFeatures={pathway.keyFeatures}
-                  selectedOnly
-                />
+                <p className="text-xs font-semibold text-rmigray-500 uppercase tracking-wide">
+                  {feature.label}
+                </p>
               </div>
-            )),
-          )}
+
+              {/* Content cells — one per pathway, no label inside */}
+              {pathways.map((pathway, i) => (
+                <div
+                  key={i}
+                  className="pb-3 min-w-0"
+                >
+                  <FeatureItem
+                    feature={feature}
+                    keyFeatures={pathway.keyFeatures}
+                    showLabel={false}
+                  />
+                </div>
+              ))}
+
+              {/* Separator between feature rows, not after the last one */}
+              {featureIdx < group.features.length - 1 && (
+                <div
+                  className="border-b border-neutral-200"
+                  style={{ gridColumn: "1 / -1" }}
+                />
+              )}
+            </React.Fragment>
+          ))}
         </React.Fragment>
       ))}
     </div>

@@ -227,20 +227,20 @@ export interface FeatureItemProps {
   feature: FeatureConfig;
   keyFeatures: PathwayMetadataType["keyFeatures"];
   selectedOnly?: boolean;
+  labelClassName?: string;
+  showLabel?: boolean;
 }
 
 export const FeatureItem: React.FC<FeatureItemProps> = ({
   feature,
   keyFeatures,
   selectedOnly = false,
+  labelClassName = "text-xs font-medium text-rmigray-500",
+  showLabel = true,
 }) => {
   const rawValue = keyFeatures[feature.key];
 
-  const label = (
-    <p className="text-xs font-medium text-rmigray-500 mb-1.5">
-      {feature.label}
-    </p>
-  );
+  const label = <p className={`${labelClassName} mb-1.5`}>{feature.label}</p>;
 
   if (feature.type === "single-select") {
     const selected =
@@ -249,7 +249,7 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
         : "No information";
     return (
       <div>
-        {label}
+        {showLabel && label}
         <div className="flex flex-wrap">
           {selectedOnly ? (
             selected === "No information" ? (
@@ -274,12 +274,12 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
                 );
               }
               return (
-                <span
+                <TextWithTooltip
                   key={opt}
-                  className={PILL_UNSELECTED}
-                >
-                  {opt}
-                </span>
+                  text={<span className={PILL_UNSELECTED}>{opt}</span>}
+                  tooltip={getKeyFeatureTooltip(feature.key, opt)}
+                  position="right"
+                />
               );
             })
           )}
@@ -297,7 +297,7 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
     );
     return (
       <div>
-        {label}
+        {showLabel && label}
         <div className="flex flex-wrap">
           {selectedOnly ? (
             validSelected.length === 0 ? (
@@ -325,12 +325,12 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
                 );
               }
               return (
-                <span
+                <TextWithTooltip
                   key={opt}
-                  className={PILL_UNSELECTED}
-                >
-                  {opt}
-                </span>
+                  text={<span className={PILL_UNSELECTED}>{opt}</span>}
+                  tooltip={getKeyFeatureTooltip(feature.key, opt)}
+                  position="right"
+                />
               );
             })
           )}
@@ -373,12 +373,14 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
     );
     return (
       <div>
-        <div className="flex items-center justify-between flex-wrap gap-x-2 mb-1.5">
-          <p className="text-xs font-medium text-rmigray-500">
-            {feature.label}
-          </p>
-          <div className="ml-auto">{valueDisplay}</div>
-        </div>
+        {showLabel ? (
+          <div className="flex items-center justify-between flex-wrap gap-x-2 mb-1.5">
+            <p className={labelClassName}>{feature.label}</p>
+            <div className="ml-auto">{valueDisplay}</div>
+          </div>
+        ) : (
+          <div className="mb-1.5">{valueDisplay}</div>
+        )}
         <SentimentScale
           values={feature.scaleValues}
           selectedValue={selectedValue}
@@ -421,12 +423,14 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
     );
     return (
       <div>
-        <div className="flex items-center justify-between flex-wrap gap-x-2 mb-1.5">
-          <p className="text-xs font-medium text-rmigray-500">
-            {feature.label}
-          </p>
-          <div className="ml-auto">{valueDisplay}</div>
-        </div>
+        {showLabel ? (
+          <div className="flex items-center justify-between flex-wrap gap-x-2 mb-1.5">
+            <p className={labelClassName}>{feature.label}</p>
+            <div className="ml-auto">{valueDisplay}</div>
+          </div>
+        ) : (
+          <div className="mb-1.5">{valueDisplay}</div>
+        )}
         <NeutralScale
           values={feature.scaleValues}
           selectedValue={selectedValue}
