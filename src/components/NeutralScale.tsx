@@ -26,24 +26,33 @@ const NeutralScale: React.FC<NeutralScaleProps> = ({
     selectedValue === "No information" || !values.includes(selectedValue);
   const selectedIndex = values.indexOf(selectedValue);
 
-  const tooltip =
-    !isNoInfo && selectedValue && tooltipGetter
-      ? tooltipGetter(selectedValue)
-      : undefined;
-
   return (
     <div>
       <div className="flex gap-0.5 items-center">
         {values.map((value, i) => {
           const isSelected = !isNoInfo && i === selectedIndex;
-          return (
+          const bar = (
             <div
-              key={value}
-              style={{ flex: 1 }}
-              className={`${isSelected ? "h-3" : "h-1.5"} rounded-sm ${
+              className={`${isSelected ? "h-3" : "h-1.5"} w-full rounded-sm ${
                 isSelected ? "bg-rmiblue-400" : "bg-neutral-200"
               }`}
             />
+          );
+          return tooltipGetter ? (
+            <TextWithTooltip
+              key={value}
+              text={bar}
+              tooltip={tooltipGetter(value)}
+              position="top"
+              className="flex-1 !block"
+            />
+          ) : (
+            <div
+              key={value}
+              style={{ flex: 1 }}
+            >
+              {bar}
+            </div>
           );
         })}
       </div>
@@ -52,25 +61,11 @@ const NeutralScale: React.FC<NeutralScaleProps> = ({
           {isNoInfo ? (
             <Badge>No information</Badge>
           ) : selectedValue && selectedIndex >= 0 ? (
-            tooltip ? (
-              <TextWithTooltip
-                text={
-                  <span
-                    className={`text-xs font-semibold cursor-help ${NEUTRAL_SELECTED_COLOR.text}`}
-                  >
-                    {selectedValue}
-                  </span>
-                }
-                tooltip={tooltip}
-                position="right"
-              />
-            ) : (
-              <span
-                className={`text-xs font-semibold ${NEUTRAL_SELECTED_COLOR.text}`}
-              >
-                {selectedValue}
-              </span>
-            )
+            <span
+              className={`text-xs font-semibold ${NEUTRAL_SELECTED_COLOR.text}`}
+            >
+              {selectedValue}
+            </span>
           ) : null}
         </div>
       )}

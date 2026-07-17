@@ -315,64 +315,13 @@ const ComparisonPage: React.FC = () => {
       </div>
 
       {/* ── Benchmark Metric Plots ── */}
-      <div
-        className="grid gap-x-6 mt-8"
-        style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
-      >
-        <SectionHeading>Benchmark Metric Plots</SectionHeading>
-        {/* Span all columns so ComparisonPlots's own N-column grid fills full width */}
-        <div style={{ gridColumn: "1 / -1" }}>
-          <ComparisonPlots entries={plotEntries} />
-        </div>
+      <div className="mt-8">
+        <ComparisonPlots entries={plotEntries} />
       </div>
 
       {/* ── Key Features ── */}
       <div className="mt-8">
         <ComparisonKeyFeatures pathways={pathways} />
-      </div>
-
-      {/* ── Benchmark Metrics (badge arrays) ── */}
-      <div
-        className="grid gap-x-6 mt-8"
-        style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
-      >
-        <SectionHeading>
-          <span className="flex items-center gap-1.5">
-            Benchmark Metrics
-            <TextWithTooltip
-              text={
-                <Info
-                  size={14}
-                  className="text-rmigray-400 cursor-help"
-                />
-              }
-              tooltip={METRIC_AVAILABILITY_TOOLTIP}
-              ariaLabel="Benchmark metric availability information"
-              position="right"
-            />
-          </span>
-        </SectionHeading>
-        {pathways.map((p, idx) => {
-          const sortedMetrics = sortByAvailability(p.metric, (m) =>
-            availabilities[idx].hasMetric(m),
-          );
-          return (
-            <div
-              key={p.id}
-              className="min-w-0"
-            >
-              <BadgeArray
-                variant={sortedMetrics.map((m) =>
-                  availabilities[idx].hasMetric(m) ? "metric" : "metric-pub",
-                )}
-                tooltipGetter={getMetricTooltip}
-                visibleCount={Infinity}
-              >
-                {sortedMetrics}
-              </BadgeArray>
-            </div>
-          );
-        })}
       </div>
 
       {/* ── Geographies ── */}
@@ -442,6 +391,50 @@ const ComparisonPage: React.FC = () => {
                 visibleCount={Infinity}
               >
                 {sortedSectors.map((s) => s.name)}
+              </BadgeArray>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ── Benchmark Metrics (badge arrays) ── */}
+      <div
+        className="grid gap-x-6 mt-8"
+        style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
+      >
+        <SectionHeading>
+          <span className="flex items-center gap-1.5">
+            Benchmark Metrics
+            <TextWithTooltip
+              text={
+                <Info
+                  size={14}
+                  className="text-rmigray-400 cursor-help"
+                />
+              }
+              tooltip={METRIC_AVAILABILITY_TOOLTIP}
+              ariaLabel="Benchmark metric availability information"
+              position="right"
+            />
+          </span>
+        </SectionHeading>
+        {pathways.map((p, idx) => {
+          const sortedMetrics = sortByAvailability(p.metric, (m) =>
+            availabilities[idx].hasMetric(m),
+          );
+          return (
+            <div
+              key={p.id}
+              className="min-w-0"
+            >
+              <BadgeArray
+                variant={sortedMetrics.map((m) =>
+                  availabilities[idx].hasMetric(m) ? "metric" : "metric-pub",
+                )}
+                tooltipGetter={getMetricTooltip}
+                visibleCount={Infinity}
+              >
+                {sortedMetrics}
               </BadgeArray>
             </div>
           );

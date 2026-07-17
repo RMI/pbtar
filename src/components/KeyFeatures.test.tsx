@@ -74,8 +74,8 @@ describe("KeyFeatures", () => {
   it("sentiment feature: selected value is bold, uses scale segment color, not a pill", () => {
     render(<KeyFeatures keyFeatures={mockKeyFeatures} />);
 
-    // "Moderate decrease" is index 5 in emissionsTrajectory (greenEnd: last, 7 values)
-    // → PALETTE_7[5] = text-success-600
+    // "Moderate decrease" is index 1 in emissionsTrajectory (greenEnd: first, 7 values)
+    // → reversed PALETTE_7[1] = text-success-600
     const label = screen.getByText("Moderate decrease");
     expect(label).toHaveClass("font-semibold");
     expect(label).toHaveClass("text-success-600");
@@ -90,8 +90,8 @@ describe("KeyFeatures", () => {
     } as unknown as PathwayMetadataType["keyFeatures"];
     render(<KeyFeatures keyFeatures={unfavorable} />);
 
-    // "Significant increase" is index 0 in emissionsTrajectory (greenEnd: last, 7 values)
-    // → PALETTE_7[0] = text-rmired-400
+    // "Significant increase" is index 6 in emissionsTrajectory (greenEnd: first, 7 values)
+    // → reversed PALETTE_7[6] = text-rmired-400
     const label = screen.getByText("Significant increase");
     expect(label).toHaveClass("font-semibold");
     expect(label).toHaveClass("text-rmired-400");
