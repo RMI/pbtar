@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import PathwayCard from "../components/PathwayCard";
 import SearchSection from "../components/SearchSection";
 import StepByStepGuide from "../components/StepByStepGuide";
+import ComparisonRibbon from "../components/ComparisonRibbon";
 import { pathwayMetadata } from "../data/pathwayMetadata";
 import { filterPathways } from "../utils/searchUtils";
 import { SearchFilters, PathwayMetadataType } from "../types";
@@ -113,6 +114,7 @@ const PathwaySearch: React.FC = () => {
             onSearch={handleSearch}
             onClear={handleClear}
           />
+          <ComparisonRibbon />
         </div>
       </div>
 

@@ -6,6 +6,7 @@ import { pathwayMetadata } from "../data/pathwayMetadata";
 import { PathwayMetadataType } from "../types";
 import userEvent from "@testing-library/user-event";
 import { FilterProvider } from "../context/FilterContext";
+import { ComparisonProvider } from "../context/ComparisonContext";
 
 // Mock the PathwayCard component to simplify testing
 vi.mock("../components/PathwayCard", () => ({
@@ -28,7 +29,9 @@ describe("PathwaySearch component", () => {
     return render(
       <MemoryRouter>
         <FilterProvider>
-          <PathwaySearch />
+          <ComparisonProvider>
+            <PathwaySearch />
+          </ComparisonProvider>
         </FilterProvider>
       </MemoryRouter>,
     );
@@ -122,15 +125,24 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
     );
     // FilterProvider must be imported from the same fresh module graph so
     // it shares the same React context instance as the re-imported PathwaySearch.
-    const [{ default: Component }, { FilterProvider: FP }] = await Promise.all([
+    const [
+      { default: Component },
+      { FilterProvider: FP },
+      { ComparisonProvider: CP },
+    ] = await Promise.all([
       import("./PathwaySearch"),
       import("../context/FilterContext"),
+      import("../context/ComparisonContext"),
     ]);
     PathwaySearchUnderTest = Component;
     render(
-      <FP>
-        <PathwaySearchUnderTest />
-      </FP>,
+      <MemoryRouter>
+        <FP>
+          <CP>
+            <PathwaySearchUnderTest />
+          </CP>
+        </FP>
+      </MemoryRouter>,
     );
   }
 
