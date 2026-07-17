@@ -21,7 +21,9 @@ const CHART_DIMS: Record<number, { width: number; height: number }> = {
 
 function hasDataForMetric(data: TimeSeries | null, metric: string): boolean {
   if (!data?.data) return false;
-  const filtered = data.data.filter((d) => d.metric === metric);
+  const filtered = data.data.filter(
+    (d) => d.sector === "power" && d.metric === metric,
+  );
   if (filtered.length === 0) return false;
   return new Set(filtered.map((d) => d.year)).size > 1;
 }
@@ -33,7 +35,7 @@ function hasDataForMetricAndGeo(
 ): boolean {
   if (!data?.data) return false;
   const filtered = data.data.filter(
-    (d) => d.metric === metric && d.geography === geo,
+    (d) => d.sector === "power" && d.metric === metric && d.geography === geo,
   );
   if (filtered.length === 0) return false;
   return new Set(filtered.map((d) => d.year)).size > 1;
