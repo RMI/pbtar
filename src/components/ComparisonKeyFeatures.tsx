@@ -42,9 +42,9 @@ const ComparisonKeyFeatures: React.FC<ComparisonKeyFeaturesProps> = ({
               </div>
 
               {/* Content cells — one per pathway, no label inside */}
-              {pathways.map((pathway, i) => (
+              {pathways.map((pathway) => (
                 <div
-                  key={i}
+                  key={pathway.id}
                   className="pb-3 min-w-0"
                 >
                   <FeatureItem
