@@ -92,7 +92,7 @@
     "node": ">=20.19.0"
   },
   "overrides": {
-    "npm": "npm:@favware/skip-dependency@1.2.2"
+    "npm": "npm:@favware/skip-dependency@^1.2.2"
   },
   "release": {
     "branches": [
