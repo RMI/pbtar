@@ -10,6 +10,8 @@ import LandingPage from "./pages/LandingPage";
 import ContactPage from "./pages/ContactPage";
 import EnvironmentBanner from "./components/EnvironmentBanner";
 import { FilterProvider } from "./context/FilterContext";
+import { ComparisonProvider } from "./context/ComparisonContext";
+import ComparisonPage from "./pages/ComparisonPage";
 import {
   ResourcesFaqPage,
   ResourcesHowToChooseAPathwayPage,
@@ -40,6 +42,10 @@ export const AppContent = () => {
           <Route
             path="/pathway/:id"
             element={<PathwayDetailPage />}
+          />
+          <Route
+            path="/compare"
+            element={<ComparisonPage />}
           />
           <Route
             path="/legal"
@@ -82,7 +88,9 @@ function App() {
   return (
     <BrowserRouter>
       <FilterProvider>
-        <AppContent />
+        <ComparisonProvider>
+          <AppContent />
+        </ComparisonProvider>
       </FilterProvider>
     </BrowserRouter>
   );

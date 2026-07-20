@@ -3,6 +3,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import PathwayCard from "./PathwayCard";
 import { PathwayMetadataType } from "../types";
+import { ComparisonProvider } from "../context/ComparisonContext";
 
 // Mock pathway data
 import mockPathway from "../../testdata/valid/pathwayMetadata_standard.json" assert { type: "json" };
@@ -14,10 +15,12 @@ import mockPathwayFull from "../../testdata/valid/pathwayMetadata_full.json" ass
 const renderPathwayCard = (pathway: PathwayMetadataType = mockPathway) => {
   return render(
     <MemoryRouter>
-      <PathwayCard
-        pathway={pathway}
-        searchTerm=""
-      />
+      <ComparisonProvider>
+        <PathwayCard
+          pathway={pathway}
+          searchTerm=""
+        />
+      </ComparisonProvider>
     </MemoryRouter>,
   );
 };
@@ -57,7 +60,9 @@ describe("PathwayCard component", () => {
   const renderPathwayCard = (pathway: PathwayMetadataType = mockPathway) => {
     return render(
       <MemoryRouter>
-        <PathwayCard pathway={pathway} />
+        <ComparisonProvider>
+          <PathwayCard pathway={pathway} />
+        </ComparisonProvider>
       </MemoryRouter>,
     );
   };
@@ -297,6 +302,28 @@ describe("PathwayCard component", () => {
     });
   });
 
+  it("renders all pills as publication-only (outlined) when pathway has no timeseries data", () => {
+    // pathway-simple-standard is not in the generated index, so
+    // pathwayToolAvailability returns NO_DATA with all checkers → false.
+    // Every badge should therefore use the -pub (transparent) variant.
+    renderPathwayCard();
+
+    // Global → geographyGlobal-pub: bg-transparent, not bg-pinishgreen-800
+    const globalBadge = screen.getByText("Global");
+    expect(globalBadge).toHaveClass("bg-transparent");
+    expect(globalBadge).not.toHaveClass("bg-pinishgreen-800");
+
+    // Land Use → sector-pub: bg-transparent, not bg-solar-100
+    const sectorBadge = screen.getByText("Land Use");
+    expect(sectorBadge).toHaveClass("bg-transparent");
+    expect(sectorBadge).not.toHaveClass("bg-solar-100");
+
+    // Emissions Intensity → metric-pub: bg-transparent, not bg-rmipurple-100
+    const metricBadge = screen.getByText("Emissions Intensity");
+    expect(metricBadge).toHaveClass("bg-transparent");
+    expect(metricBadge).not.toHaveClass("bg-rmipurple-100");
+  });
+
   it("renders mapped country names on badges (not ISO2 codes)", () => {
     const pathway = {
       ...mockPathway,
@@ -334,10 +361,12 @@ describe("PathwayCard search highlighting", () => {
   const renderWithRouter = (searchTerm = "") => {
     return render(
       <MemoryRouter>
-        <PathwayCard
-          pathway={mockPathway}
-          searchTerm={searchTerm}
-        />
+        <ComparisonProvider>
+          <PathwayCard
+            pathway={mockPathway}
+            searchTerm={searchTerm}
+          />
+        </ComparisonProvider>
       </MemoryRouter>,
     );
   };
@@ -449,10 +478,12 @@ describe("tooltip functionality", () => {
     const renderWithRouter = (pathway: PathwayMetadataType, searchTerm = "") =>
       render(
         <MemoryRouter>
-          <PathwayCard
-            pathway={pathway}
-            searchTerm={searchTerm}
-          />
+          <ComparisonProvider>
+            <PathwayCard
+              pathway={pathway}
+              searchTerm={searchTerm}
+            />
+          </ComparisonProvider>
         </MemoryRouter>,
       );
 

@@ -21,13 +21,7 @@ export type GeographyCode = GeographyCountry[number];
 
 export type TemperatureTarget = number;
 export type YearTarget =
-  | "2030"
-  | "2040"
-  | "2050"
-  | "2060"
-  | "2070"
-  | "2100"
-  | "N/A";
+  "2030" | "2040" | "2050" | "2060" | "2070" | "2100" | "N/A";
 
 export interface SearchFilters {
   pathwayType?: string | string[] | null;
