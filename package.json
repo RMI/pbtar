@@ -48,6 +48,7 @@
   "devDependencies": {
     "@eslint-react/eslint-plugin": "^5.17.2",
     "@eslint/js": "^9.39.2",
+    "@favware/skip-dependency": "^1.2.2",
     "@jirutka/ajv-cli": "^6.0.0",
     "@semantic-release/exec": "^7.1.0",
     "@tailwindcss/postcss": "^4.3.3",
@@ -89,6 +90,9 @@
   },
   "engines": {
     "node": ">=20.19.0"
+  },
+  "overrides": {
+    "npm": "npm:@favware/skip-dependency@^1.2.2"
   },
   "release": {
     "branches": [
