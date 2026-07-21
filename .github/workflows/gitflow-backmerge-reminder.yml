@@ -51,7 +51,7 @@ jobs:
           AHEAD: ${{ steps.check.outputs.ahead }}
           REPO: ${{ github.repository }}
         run: |
-          EXISTING=$(gh issue list --label backmerge --state open --json number --jq '.[0].number')
+          EXISTING=$(gh issue list --label backmerge --state open --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
             echo "Reminder issue #$EXISTING already open; nothing to do."
             exit 0
@@ -65,8 +65,8 @@ jobs:
           \`production\` is **$AHEAD commit(s)** ahead of \`main\`. After a release, please
           backmerge so the branches don't drift.
 
-          - Review the diff: https://github.com/$REPO/compare/main...production
-          - Open the backmerge PR: https://github.com/$REPO/compare/main...production?expand=1
+          - Review the diff: $GITHUB_SERVER_URL/$REPO/compare/main...production
+          - Open the backmerge PR: $GITHUB_SERVER_URL/$REPO/compare/main...production?expand=1
 
           This issue closes automatically once \`main\` contains all of \`production\`.
           EOF
