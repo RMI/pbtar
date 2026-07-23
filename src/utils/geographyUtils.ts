@@ -81,6 +81,10 @@ export function geographyLabel(raw: string): string {
 }
 
 export function sortGeographiesForDetails(input: unknown[]): string[] {
+  // Callers are expected to flatten structured geography (via flattenGeography)
+  // before calling this. Guard defensively so a non-array input degrades to an
+  // empty result instead of throwing `input.map is not a function`.
+  if (!Array.isArray(input)) return [];
   const annotated = input
     .map((v, idx) => {
       const raw = normalizeGeography(v);

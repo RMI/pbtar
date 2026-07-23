@@ -89,6 +89,29 @@ describe("sortGeographiesForDetails", () => {
     const out = sortGeographiesForDetails(input);
     expect(out).toEqual(["Global", "Region B", "Region A", "DE", "DK"]);
   });
+
+  it("returns [] for non-array input instead of throwing", () => {
+    // Callers should flatten structured geography first, but guard defensively:
+    // a raw Geography object (or nullish) must degrade to [], not crash with
+    // `input.map is not a function`.
+    const structuredGeography = {
+      global: true,
+      regions: { Europe: [] },
+      country: ["US"],
+    };
+    expect(() =>
+      sortGeographiesForDetails(structuredGeography as unknown as unknown[]),
+    ).not.toThrow();
+    expect(
+      sortGeographiesForDetails(structuredGeography as unknown as unknown[]),
+    ).toEqual([]);
+    expect(
+      sortGeographiesForDetails(null as unknown as unknown[]),
+    ).toEqual([]);
+    expect(
+      sortGeographiesForDetails(undefined as unknown as unknown[]),
+    ).toEqual([]);
+  });
 });
 
 describe("assertKnownCountryISO2 (strict ISO2 validation)", () => {
