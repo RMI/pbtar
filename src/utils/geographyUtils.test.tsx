@@ -105,9 +105,7 @@ describe("sortGeographiesForDetails", () => {
     expect(
       sortGeographiesForDetails(structuredGeography as unknown as unknown[]),
     ).toEqual([]);
-    expect(
-      sortGeographiesForDetails(null as unknown as unknown[]),
-    ).toEqual([]);
+    expect(sortGeographiesForDetails(null as unknown as unknown[])).toEqual([]);
     expect(
       sortGeographiesForDetails(undefined as unknown as unknown[]),
     ).toEqual([]);

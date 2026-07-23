@@ -184,7 +184,7 @@ export function makeGeographyOptions(
 // - "download": pathway id exists in index.byPathway
 // - "link": has link to data set
 // - "unavailable": otherwise
-export type DataAvailability = "Download" | "Foo" | "Unavailable";
+export type DataAvailability = "Download" | "Link" | "Unavailable";
 
 function availabilityFor(pathway: PathwayMetadataType): DataAvailability {
   const hasDownload = Boolean(index?.byPathway?.[pathway.id]);

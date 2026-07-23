@@ -15,7 +15,7 @@ const fixtures = [
     description: "Pathway A description",
     pathwayType: "Net Zero",
     modelYearNetzero: 2050,
-    modelTempIncrease: "1.5°C",
+    modelTempIncrease: 1.5,
     publication: {
       publisher: { full: "Publisher A", short: "PubA" },
       title: { full: "Publication A", short: "PubTitleA" },
@@ -32,7 +32,7 @@ const fixtures = [
     description: "Pathway B description",
     pathwayType: "BAU",
     modelYearNetzero: 2040,
-    modelTempIncrease: "2°C",
+    modelTempIncrease: 2,
     publication: {
       publisher: { full: "Publisher B", short: "PubB" },
       title: { full: "Publication B", short: "PubTitleB" },

@@ -72,7 +72,7 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
       name: { full: "Pathway B", short: "Power, Europe, 2°C" },
       sectors: [{ name: "Power" }],
       geography: { regions: { Europe: [] } },
-      modelTempIncrease: "2°C",
+      modelTempIncrease: 2,
       pathwayType: "Net Zero",
       modelYearNetzero: 2050,
       metric: ["Capacity"],
@@ -83,7 +83,7 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
       name: { full: "Pathway C", short: "empty sectors[], empty geo[], 1.5°C" },
       sectors: [], // -> Sector "None"
       geography: {}, // -> Geography "None"
-      modelTempIncrease: "1.5°C",
+      modelTempIncrease: 1.5,
       pathwayType: "NZi2050",
       modelYearNetzero: 2040,
       metric: [],
@@ -105,7 +105,7 @@ describe("PathwaySearch integration: dropdowns render and filter with 'None'", (
       name: { full: "Pathway E", short: "Power, Europe+Asia, 2°C" },
       sectors: [{ name: "Power" }],
       geography: { regions: { Europe: [], Asia: [] } },
-      modelTempIncrease: "2°C",
+      modelTempIncrease: 2,
       pathwayType: "Net Zero",
       modelYearNetzero: 2050,
       metric: ["Generation"],
