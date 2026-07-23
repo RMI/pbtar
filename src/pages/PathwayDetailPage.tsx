@@ -118,7 +118,7 @@ const PathwayDetailPage: React.FC = () => {
   const sortedGeos = useMemo(
     () =>
       sortByAvailability(
-        sortGeographiesForDetails(pathway?.geography ?? []),
+        sortGeographiesForDetails(flattenGeography(pathway?.geography)),
         (geo) => availability.hasGeography(geo),
       ),
     [pathway, availability],

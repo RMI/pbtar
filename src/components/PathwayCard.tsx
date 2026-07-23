@@ -58,7 +58,7 @@ const PathwayCard: React.FC<PathwayCardProps> = ({
     () =>
       sortByAvailability(
         prioritizeGeographies(
-          sortGeographiesForDetails(pathway.geography),
+          sortGeographiesForDetails(flattenGeography(pathway.geography)),
           searchTerm,
         ),
         (geo) => availability.hasGeography(geo),
