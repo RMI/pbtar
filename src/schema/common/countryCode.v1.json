@@ -256,15 +256,10 @@
     "ZW"
   ],
   "minLength": 1,
-  "allOf": [
-    {
-      "pattern": "^(?!\\s*$).+"
-    },
-    {
-      "not": {
-        "pattern": "^[A-Za-z]{3}$"
-      }
-    }
-  ],
+  "pattern": "^(?!\\s*$).+",
+  "not": {
+    "type": "string",
+    "pattern": "^[A-Za-z]{3}$"
+  },
   "examples": ["US", "DE", "PH", "JP", "BR"]
 }

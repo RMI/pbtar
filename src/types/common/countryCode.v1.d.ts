@@ -7,9 +7,7 @@
 /**
  * A single ISO-3166-1 alpha-2 country code (e.g., US, DE). Only 2-letter codes are accepted; do not use full country names or 3-letter codes. 2-letter strings that do not map to a country (e.g., EU) will throw downstream errors.
  */
-export type CountryCodeV1 = {
-  [k: string]: unknown;
-} & (
+export type CountryCodeV1 =
   | "AD"
   | "AE"
   | "AF"
@@ -258,5 +256,4 @@ export type CountryCodeV1 = {
   | "YT"
   | "ZA"
   | "ZM"
-  | "ZW"
-);
+  | "ZW";
