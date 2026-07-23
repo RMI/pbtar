@@ -185,6 +185,46 @@ describe("pathway schema enforces expected limits", () => {
     );
   });
 
+  it("fails on a non-ISO-3166 country code", () => {
+    // "EU" is a valid 2-letter string but not a country → not in the enum.
+    fail(
+      {
+        name: "geography.json",
+        data: { ...basePathway, geography: { country: ["EU"] } },
+      },
+      /allowed values/,
+    );
+  });
+
+  it("fails on a 3-letter country code", () => {
+    // ISO-3166 alpha-3 (e.g. "USA") must be rejected; only alpha-2 is accepted.
+    fail(
+      {
+        name: "geography.json",
+        data: { ...basePathway, geography: { country: ["USA"] } },
+      },
+      /allowed values/,
+    );
+  });
+
+  it("fails on unknown geography keys (additionalProperties: false)", () => {
+    fail(
+      {
+        name: "geography.json",
+        data: { ...basePathway, geography: { global: true, foo: true } },
+      },
+      /must NOT have additional properties/,
+    );
+  });
+
+  it("fails on an empty region label", () => {
+    // Region keys must be non-empty, non-whitespace strings (propertyNames).
+    fail({
+      name: "geography.json",
+      data: { ...basePathway, geography: { regions: { "": ["US"] } } },
+    });
+  });
+
   it("fails when sectors item missing required fields", () => {
     fail(
       {

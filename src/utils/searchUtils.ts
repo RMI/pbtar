@@ -40,6 +40,11 @@ export function getGlobalFacetOptions(pathways: PathwayMetadataType[]) {
 
   // Geography (structured options via makeGeographyOptions)
   const geographyOptionsRaw: GeoOption[] = makeGeographyOptions(pathways);
+  // A pathway counts as "absent" geography (surfacing the "None" facet) when
+  // flattening yields no tokens — i.e. an empty/missing geography object. Note
+  // this is stricter than the old flat-array model, where an empty `[]` was
+  // treated as present (`[] != null`); an empty structured object now maps to
+  // `null` here and is reported as absent.
   const sawAbsentGeography = hasAbsent(
     pathways.map((d) => {
       const flat = flattenGeography(d.geography);
